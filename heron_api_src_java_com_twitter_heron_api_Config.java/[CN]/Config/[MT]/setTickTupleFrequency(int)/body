@@ -1,0 +1,3 @@
+{
+  setTickTupleFrequency(this,seconds);
+}

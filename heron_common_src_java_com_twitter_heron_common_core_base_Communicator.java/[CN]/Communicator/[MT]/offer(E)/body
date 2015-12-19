@@ -1,0 +1,7 @@
+{
+  buffer.offer(e);
+  if (consumer != null) {
+    consumer.wakeUp();
+  }
+  return true;
+}

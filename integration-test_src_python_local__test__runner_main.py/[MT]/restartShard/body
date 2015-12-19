@@ -1,0 +1,8 @@
+def restartShard(heronCliPath, heronLocalDirectory, topologyName, schedulerConfigPath, configLoaderClasspath, shardNum):
+    logging.info('Killing topology TMaster')
+    splitcmd = [('%s' % heronCliPath), 'restart', ('heron.local.working.directory=%s' % heronLocalDirectory), ('%s' % topologyName), ('%d' % shardNum), ('--config-file=%s' % schedulerConfigPath), ('--config-loader=%s' % configLoaderClasspath), '--heron-verbose']
+    logging.info('Killing TMaster command:')
+    logging.info(splitcmd)
+    if (subprocess.call(splitcmd) != 0):
+        raise RuntimeError('Unable to kill TMaster')
+    logging.info('Killed tmaster')

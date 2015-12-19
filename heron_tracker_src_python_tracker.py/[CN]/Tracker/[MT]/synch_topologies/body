@@ -1,0 +1,20 @@
+def synch_topologies(self, stateconf):
+    '\n    Syncs the topologies with the zookeeper.\n    '
+    self.state_managers = statemanagerfactory.get_all_state_managers(stateconf)
+
+    def on_topologies_watch(state_manager, topologies):
+        LOG.info('State watch triggered for topologies.')
+        LOG.debug(('Topologies: ' + str(topologies)))
+        existingTopologies = self.getTopologiesForStateLocation(state_manager.name)
+        existingTopNames = map((lambda t: t.name), existingTopologies)
+        LOG.debug(('Existing topologies: ' + str(existingTopNames)))
+        for name in existingTopNames:
+            if (name not in topologies):
+                LOG.info('Removing topology: {0} in rootpath: {1}'.format(name, state_manager.rootpath))
+                self.removeTopology(name, state_manager.name)
+        for name in topologies:
+            if (name not in existingTopNames):
+                self.addNewTopology(state_manager, name)
+    for state_manager in self.state_managers:
+        onTopologiesWatch = partial(on_topologies_watch, state_manager)
+        state_manager.get_topologies(onTopologiesWatch)

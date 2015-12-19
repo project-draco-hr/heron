@@ -1,0 +1,11 @@
+{
+  Runnable sinkTasks=new Runnable(){
+    @Override public void run(){
+      while (!metricsInSinkQueue.isEmpty()) {
+        metricsSink.processRecord(metricsInSinkQueue.poll());
+      }
+    }
+  }
+;
+  slaveLooper.addTasksOnWakeup(sinkTasks);
+}

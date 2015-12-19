@@ -1,0 +1,21 @@
+{
+  Runnable r=new Runnable(){
+    @Override public void run(){
+      globalVale=10;
+    }
+  }
+;
+  slaveLooper.addTasksOnWakeup(r);
+  try {
+    Method method=slaveLooper.getClass().getSuperclass().getDeclaredMethod("executeTasksOnWakeup");
+    method.setAccessible(true);
+    method.invoke(slaveLooper);
+  }
+ catch (  NoSuchMethodException e) {
+  }
+catch (  IllegalAccessException e) {
+  }
+catch (  InvocationTargetException e) {
+  }
+  Assert.assertEquals(10,globalVale);
+}

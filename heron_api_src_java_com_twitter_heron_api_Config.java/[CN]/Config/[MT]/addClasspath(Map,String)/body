@@ -1,0 +1,10 @@
+{
+  String cpKey=Config.TOPOLOGY_ADDITIONAL_CLASSPATH;
+  if (conf.containsKey(cpKey)) {
+    String newEntry=String.format("%s:%s",conf.get(cpKey),classpath);
+    conf.put(cpKey,newEntry);
+  }
+ else {
+    conf.put(cpKey,classpath);
+  }
+}

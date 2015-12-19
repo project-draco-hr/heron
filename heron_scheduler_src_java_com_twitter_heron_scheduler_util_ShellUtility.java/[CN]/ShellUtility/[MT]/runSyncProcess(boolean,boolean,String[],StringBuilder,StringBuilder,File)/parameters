@@ -1,0 +1,6 @@
+boolean verbose
+boolean isInheritIO
+String[] cmdline
+StringBuilder stdout
+StringBuilder stderr
+File workingDirectory

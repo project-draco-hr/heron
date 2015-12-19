@@ -1,0 +1,3 @@
+NIOLooper looper
+int port
+int maxRequests

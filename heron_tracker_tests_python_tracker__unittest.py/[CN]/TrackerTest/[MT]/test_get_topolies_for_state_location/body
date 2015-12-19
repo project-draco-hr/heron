@@ -1,0 +1,4 @@
+def test_get_topolies_for_state_location(self):
+    self.fill_tracker_topologies()
+    self.assertItemsEqual([self.topology1, self.topology2, self.topology3], self.tracker.getTopologiesForStateLocation('mock_name1'))
+    self.assertItemsEqual([self.topology4, self.topology5], self.tracker.getTopologiesForStateLocation('mock_name2'))

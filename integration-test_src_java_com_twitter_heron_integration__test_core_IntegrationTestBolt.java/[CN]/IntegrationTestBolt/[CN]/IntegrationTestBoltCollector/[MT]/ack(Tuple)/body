@@ -1,0 +1,7 @@
+{
+  LOG.fine("Try to do a ack. tuplesProcessed: " + tuplesProcessed + " ; tuplesReceived: "+ tuplesReceived);
+  if (tuplesProcessed < tuplesReceived) {
+    delegate.ack(tuple);
+    tuplesProcessed++;
+  }
+}

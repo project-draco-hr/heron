@@ -1,0 +1,11 @@
+{
+  if (keysBuilder_ == null) {
+    ensureKeysIsMutable();
+    keys_.add(builderForValue.build());
+    onChanged();
+  }
+ else {
+    keysBuilder_.addMessage(builderForValue.build());
+  }
+  return this;
+}

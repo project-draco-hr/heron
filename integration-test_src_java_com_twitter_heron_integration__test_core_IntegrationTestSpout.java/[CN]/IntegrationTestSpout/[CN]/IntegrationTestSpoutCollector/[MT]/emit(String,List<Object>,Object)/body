@@ -1,0 +1,9 @@
+{
+  tuplesToComplete++;
+  Object messageId=o;
+  if (o == null) {
+    LOG.fine("Add MessageId for tuple: " + objects);
+    messageId=Constants.INTEGRATION_TEST_MOCK_MESSAGE_ID;
+  }
+  return delegate.emit(s,objects,messageId);
+}

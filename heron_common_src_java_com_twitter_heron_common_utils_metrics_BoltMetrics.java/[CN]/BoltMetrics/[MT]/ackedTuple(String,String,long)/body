@@ -1,0 +1,7 @@
+{
+  ackCount.scope(streamId).incr();
+  processLatency.scope(streamId).update(latency);
+  String globalStreamId=new StringBuilder(sourceComponent).append("/").append(streamId).toString();
+  ackCount.scope(globalStreamId).incr();
+  processLatency.scope(globalStreamId).update(latency);
+}

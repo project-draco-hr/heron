@@ -1,0 +1,47 @@
+{
+  physicalPlan=UnitTestHelper.getPhysicalPlan(false,-1);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,boltInstanceId);
+  InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
+  inControlQueue.offer(instanceControlMsg);
+  SingletonRegistry.INSTANCE.registerSingleton(Constants.ACK_COUNT,ackCount);
+  SingletonRegistry.INSTANCE.registerSingleton(Constants.FAIL_COUNT,failCount);
+  SingletonRegistry.INSTANCE.registerSingleton("execute-count",tupleExecutedCount);
+  SingletonRegistry.INSTANCE.registerSingleton("received-string-list",receivedStrings);
+  HeronTuples.HeronTupleSet.Builder heronTupleSet=HeronTuples.HeronTupleSet.newBuilder();
+  HeronTuples.HeronDataTupleSet.Builder dataTupleSet=HeronTuples.HeronDataTupleSet.newBuilder();
+  TopologyAPI.StreamId.Builder streamId=TopologyAPI.StreamId.newBuilder();
+  streamId.setComponentName("test-spout");
+  streamId.setId("default");
+  dataTupleSet.setStream(streamId);
+  for (int i=0; i < 10; i++) {
+    HeronTuples.HeronDataTuple.Builder dataTuple=HeronTuples.HeronDataTuple.newBuilder();
+    dataTuple.setKey(19901017 + i);
+    HeronTuples.RootId.Builder rootId=HeronTuples.RootId.newBuilder();
+    rootId.setKey(19901017 + i);
+    rootId.setTaskid(0);
+    dataTuple.addRoots(rootId);
+    String s="";
+    if ((i & 1) == 0) {
+      s="A";
+    }
+ else {
+      s="B";
+    }
+    ByteString byteString=ByteString.copyFrom(serializer.serialize(s));
+    dataTuple.addValues(byteString);
+    dataTupleSet.addTuples(dataTuple);
+  }
+  heronTupleSet.setData(dataTupleSet);
+  inStreamQueue.offer(heronTupleSet.build());
+  for (int i=0; i < Constants.RETRY_TIMES; i++) {
+    if (tupleExecutedCount.intValue() == 10) {
+      break;
+    }
+    Utils.sleep(Constants.RETRY_INTERVAL_MS);
+  }
+  Utils.sleep(Constants.TEST_WAIT_TIME_MS);
+  Assert.assertEquals(10,tupleExecutedCount.intValue());
+  Assert.assertEquals(5,ackCount.intValue());
+  Assert.assertEquals(5,failCount.intValue());
+  Assert.assertEquals("ABABABABAB",receivedStrings.toString());
+}

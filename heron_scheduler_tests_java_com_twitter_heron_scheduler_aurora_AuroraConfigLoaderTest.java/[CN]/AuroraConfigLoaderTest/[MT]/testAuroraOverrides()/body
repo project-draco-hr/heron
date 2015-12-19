@@ -1,0 +1,10 @@
+{
+  String override="dc/role/environ";
+  AuroraConfigLoader configLoader=AuroraConfigLoader.class.newInstance();
+  configLoader.properties=new Properties();
+  configLoader.properties.setProperty(Constants.HERON_RELEASE_TAG,"test");
+  configLoader.applyConfigOverride(override);
+  Assert.assertEquals("dc",configLoader.properties.getProperty(Constants.DC));
+  Assert.assertEquals("role",configLoader.properties.getProperty(Constants.ROLE));
+  Assert.assertEquals("environ",configLoader.properties.getProperty(Constants.ENVIRON));
+}

@@ -1,0 +1,5 @@
+SlaveLooper slaveLooper
+Communicator<HeronTuples.HeronTupleSet> streamInCommunicator
+Communicator<HeronTuples.HeronTupleSet> streamOutCommunicator
+Communicator<InstanceControlMsg> inControlQueue
+Communicator<Metrics.MetricPublisherPublishMessage> metricsOutCommunicator

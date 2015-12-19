@@ -1,0 +1,12 @@
+def main():
+    global VERBOSE
+    configure(logging.WARN)
+    parser = create_parser()
+    (args, unknown_args) = parser.parse_known_args()
+    namespace = vars(args)
+    namespace['heron_unknown_args'] = unknown_args
+    namespace['heron_dir'] = get_heron_dir()
+    COMMAND = namespace['command']
+    VERBOSE = namespace['heron_verbose']
+    atexit.register(cleanup)
+    COMMANDS.get(COMMAND)(namespace)

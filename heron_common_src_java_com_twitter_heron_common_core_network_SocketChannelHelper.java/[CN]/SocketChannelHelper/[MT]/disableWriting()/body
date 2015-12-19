@@ -1,0 +1,5 @@
+{
+  if (looper.isWriteRegistered(socketChannel)) {
+    looper.unregisterWrite(socketChannel);
+  }
+}

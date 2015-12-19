@@ -1,0 +1,11 @@
+{
+  if (streamBuilder_ == null) {
+    stream_=builderForValue.build();
+    onChanged();
+  }
+ else {
+    streamBuilder_.setMessage(builderForValue.build());
+  }
+  bitField0_|=0x00000001;
+  return this;
+}

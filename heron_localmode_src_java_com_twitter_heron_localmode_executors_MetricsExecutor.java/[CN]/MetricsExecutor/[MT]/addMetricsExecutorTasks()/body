@@ -1,0 +1,14 @@
+{
+  Runnable metricsExecutorsTasks=new Runnable(){
+    @Override public void run(){
+      for (      InstanceExecutor instance : instanceExecutors) {
+        handleExecutorsMetrics(instance);
+      }
+      while (!metricsQueue.isEmpty()) {
+        handleMetricPublisherPublishMessage(executorId,metricsQueue.poll());
+      }
+    }
+  }
+;
+  looper.addTasksOnWakeup(metricsExecutorsTasks);
+}

@@ -1,0 +1,5 @@
+String executorName
+IMetricsSink metricsSink
+SlaveLooper slaveLooper
+Communicator<MetricsRecord> metricsInSinkQueue
+SinkContext sinkContext

@@ -1,0 +1,14 @@
+{
+  LOG.info(String.format("Waiting for process exit in %d ms...",timeoutInMs));
+  boolean ret=false;
+  try {
+    ret=exited.await(timeoutInMs,TimeUnit.MILLISECONDS);
+  }
+ catch (  InterruptedException e) {
+    LOG.log(Level.SEVERE,"ForceExitTask is interrupted:",e);
+  }
+  if (!ret) {
+    LOG.severe("Failed to complete in time. Forcing exiting the process...\n");
+    Runtime.getRuntime().halt(1);
+  }
+}

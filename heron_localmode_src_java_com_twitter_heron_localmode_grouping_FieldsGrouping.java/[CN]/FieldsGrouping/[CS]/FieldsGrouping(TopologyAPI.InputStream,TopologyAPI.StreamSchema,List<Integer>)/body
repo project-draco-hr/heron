@@ -1,0 +1,11 @@
+{
+  super(taskIds);
+  for (int i=0; i < schema.getKeysCount(); i++) {
+    for (int j=0; i < inputStream.getGroupingFields().getKeysCount(); j++) {
+      if (schema.getKeys(i).getKey().equals(inputStream.getGroupingFields().getKeys(j).getKey())) {
+        fieldsGroupingIndices.add(i);
+        break;
+      }
+    }
+  }
+}

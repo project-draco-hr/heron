@@ -1,0 +1,34 @@
+{
+  String typeName=incomingPacket.unpackString();
+  REQID rid=incomingPacket.unpackREQID();
+  Message.Builder bldr=requestMap.get(typeName);
+  boolean isRequest=false;
+  if (bldr != null) {
+    isRequest=true;
+  }
+ else {
+    bldr=messageMap.get(typeName);
+  }
+  if (bldr != null) {
+    bldr.clear();
+    incomingPacket.unpackMessage(bldr);
+    if (bldr.isInitialized()) {
+      Message msg=bldr.build();
+      if (isRequest) {
+        onRequest(rid,(SocketChannel)channel,msg);
+      }
+ else {
+        onMessage((SocketChannel)channel,msg);
+      }
+    }
+ else {
+      LOG.severe("Could not deserialize protobuf of type " + typeName);
+      handleError(channel);
+    }
+    return;
+  }
+ else {
+    LOG.severe("Unexpected protobuf type received " + typeName);
+    handleError(channel);
+  }
+}

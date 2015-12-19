@@ -1,0 +1,6 @@
+{
+  if (tuples == null) {
+    delegate.emitDirect(i,s,Arrays.asList(currentTupleProcessing),objects);
+  }
+  delegate.emitDirect(i,s,tuples,objects);
+}

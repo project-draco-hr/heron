@@ -1,0 +1,13 @@
+{
+  try {
+    byte[] topologyDefn=Files.readAllBytes(Paths.get(topologyDefnFile));
+    TopologyAPI.Topology topology=TopologyAPI.Topology.parseFrom(topologyDefn);
+    if (!TopologyUtility.verifyTopology(topology)) {
+      throw new RuntimeException("Topology object is Malformed");
+    }
+    return topology;
+  }
+ catch (  IOException e) {
+    throw new RuntimeException("Failed to read/parse content of " + topologyDefnFile);
+  }
+}

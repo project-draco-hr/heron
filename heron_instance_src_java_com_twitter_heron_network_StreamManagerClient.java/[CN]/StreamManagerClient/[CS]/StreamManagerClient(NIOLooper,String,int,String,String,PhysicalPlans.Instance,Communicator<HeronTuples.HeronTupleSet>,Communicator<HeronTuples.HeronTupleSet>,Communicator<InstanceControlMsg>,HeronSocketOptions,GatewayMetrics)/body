@@ -1,0 +1,12 @@
+{
+  super(s,streamManagerHost,streamManagerPort,options);
+  this.topologyName=topologyName;
+  this.topologyId=topologyId;
+  this.instance=instance;
+  this.inStreamQueue=inStreamQueue;
+  this.outStreamQueue=outStreamQueue;
+  this.inControlQueue=inControlQueue;
+  this.systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  this.gatewayMetrics=gatewayMetrics;
+  addStreamManagerClientTasksOnWakeUp();
+}

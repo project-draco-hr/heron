@@ -1,0 +1,21 @@
+{
+  ExponentialBackoffRetry retryPolicy=new ExponentialBackoffRetry(1000,3);
+  this.connectionString=connectionString;
+  client=CuratorFrameworkFactory.builder().connectString(connectionString).retryPolicy(retryPolicy).connectionTimeoutMs(connectionTimeoutMs).sessionTimeoutMs(sessionTimeoutMs).build();
+  client.start();
+  path=rootPath;
+  frameworkIdPath=path + "/frameworkId";
+  jobPath=path + "/jobs";
+  taskPath=path + "/tasks";
+  try {
+    if (client.checkExists().forPath(jobPath) == null) {
+      client.create().creatingParentsIfNeeded().forPath(jobPath);
+    }
+    if (client.checkExists().forPath(taskPath) == null) {
+      client.create().creatingParentsIfNeeded().forPath(taskPath);
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Unable to create the path for topology",e);
+  }
+}

@@ -1,0 +1,4 @@
+{
+  LOG.info("To activate topology: " + localConfig.getTopologyName());
+  return communicateTMaster("activate");
+}

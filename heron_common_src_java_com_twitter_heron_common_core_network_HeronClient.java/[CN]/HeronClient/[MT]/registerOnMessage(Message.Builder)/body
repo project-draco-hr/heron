@@ -1,0 +1,3 @@
+{
+  messageMap.put(builder.getDescriptorForType().getFullName(),builder);
+}

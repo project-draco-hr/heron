@@ -1,0 +1,4 @@
+{
+  gateway.close();
+  stop();
+}

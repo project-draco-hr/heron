@@ -1,0 +1,8 @@
+{
+  if (taskHooks.size() != 0) {
+    SpoutFailInfo failInfo=new SpoutFailInfo(messageId,getThisTaskId(),failLatencyNs / Constants.MILLISECONDS_TO_NANOSECONDS);
+    for (    ITaskHook taskHook : taskHooks) {
+      taskHook.spoutFail(failInfo);
+    }
+  }
+}

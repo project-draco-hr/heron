@@ -1,0 +1,10 @@
+{
+  String pattern=String.format("glob:%s/%s.defn",dir,filename);
+  PathMatcher matcher=FileSystems.getDefault().getPathMatcher(pattern);
+  for (  File file : new File(dir).listFiles()) {
+    if (matcher.matches(file.toPath())) {
+      return file.getPath();
+    }
+  }
+  throw new IllegalStateException("Failed to find topology defn file");
+}

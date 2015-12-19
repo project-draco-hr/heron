@@ -1,0 +1,27 @@
+{
+  submitterConfig=Factory.makeConfigLoader(submitterConfigLoader);
+  LOG.info("Config to override in Submitter: " + configOverride);
+  if (!submitterConfig.load(submitterConfigFile,configOverride)) {
+    throw new RuntimeException("Failed to load config. File: " + submitterConfigFile + " Override: "+ configOverride);
+  }
+  LaunchContext context=new LaunchContext(submitterConfig,topology);
+  context.start();
+  IPackingAlgorithm packingAlgorithm=Factory.makePackingAlgorithm(submitterConfig.getPackingAlgorithmClass());
+  IUploader uploader=Factory.makeUploader(submitterConfig.getUploaderClass());
+  UploadRunner uploadRunner=new UploadRunner(uploader,context,topologyPackage);
+  boolean result=uploadRunner.call();
+  if (!result) {
+    LOG.severe("Failed to upload package. Exitting");
+    return false;
+  }
+  ILauncher launcher=Factory.makeLauncher(submitterConfig.getLauncherClass());
+  LaunchRunner launchRunner=new LaunchRunner(launcher,context,packingAlgorithm);
+  result=launchRunner.call();
+  context.close();
+  if (!result) {
+    LOG.severe("Failed to launch topology. Attempting to roll back upload.");
+    uploader.undo();
+    return false;
+  }
+  return true;
+}

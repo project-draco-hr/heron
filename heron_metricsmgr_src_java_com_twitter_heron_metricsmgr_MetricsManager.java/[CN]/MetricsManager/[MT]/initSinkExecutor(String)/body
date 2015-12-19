@@ -1,0 +1,25 @@
+{
+  IMetricsSink sink;
+  String classname=(String)config.getConfigForSink(sinkId).get(MetricsSinksConfig.CONFIG_KEY_CLASSNAME);
+  try {
+    sink=(IMetricsSink)Class.forName(classname).newInstance();
+  }
+ catch (  InstantiationException e) {
+    throw new RuntimeException(e + " IMetricsSink class must have a no-arg constructor.");
+  }
+catch (  IllegalAccessException e) {
+    throw new RuntimeException(e + " IMetricsSink class must be concrete.");
+  }
+catch (  ClassNotFoundException e) {
+    throw new RuntimeException(e + " IMetricsSink class must be a class path.");
+  }
+  SlaveLooper sinkExecutorLoop=new SlaveLooper();
+  Communicator<MetricsRecord> executorInMetricsQueue=new Communicator<MetricsRecord>(null,sinkExecutorLoop);
+  MetricsCollector sinkMetricsCollector=new MetricsCollector(sinkExecutorLoop,metricsQueue);
+  MultiCountMetric internalCounters=new MultiCountMetric();
+  sinkMetricsCollector.registerMetric(sinkId,internalCounters,heronMetricsExportIntervalSec);
+  SinkContext sinkContext=new SinkContextImpl(topologyName,metricsmgrId,sinkId,internalCounters);
+  SinkExecutor sinkExecutor=new SinkExecutor(sinkId,sink,sinkExecutorLoop,executorInMetricsQueue,sinkContext);
+  sinkExecutor.setPropertyMap(config.getConfigForSink(sinkId));
+  return sinkExecutor;
+}

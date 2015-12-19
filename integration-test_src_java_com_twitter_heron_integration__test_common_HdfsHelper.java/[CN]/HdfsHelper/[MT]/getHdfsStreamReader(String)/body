@@ -1,0 +1,6 @@
+{
+  Path pt=new Path(path);
+  Configuration conf=new Configuration();
+  FileSystem fileSystem=FileSystem.get(conf);
+  return new InputStreamReader(fileSystem.open(pt),"UTF-8");
+}

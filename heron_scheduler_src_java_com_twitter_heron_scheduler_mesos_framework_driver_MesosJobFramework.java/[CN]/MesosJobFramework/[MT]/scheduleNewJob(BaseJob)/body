@@ -1,0 +1,10 @@
+{
+synchronized (this) {
+    if (jobNameMapping.containsKey(job.name)) {
+      LOG.severe("The job is still on-tracked, please kill it first:" + job.name);
+      return false;
+    }
+    jobNameMapping.put(job.name,job);
+    return scheduleNewTask(TaskUtils.getTaskId(job,System.currentTimeMillis(),0));
+  }
+}

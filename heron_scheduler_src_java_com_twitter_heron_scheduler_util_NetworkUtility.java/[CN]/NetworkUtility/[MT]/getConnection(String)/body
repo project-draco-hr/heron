@@ -1,0 +1,4 @@
+{
+  URL url=new URL(endpoint);
+  return (HttpURLConnection)url.openConnection();
+}

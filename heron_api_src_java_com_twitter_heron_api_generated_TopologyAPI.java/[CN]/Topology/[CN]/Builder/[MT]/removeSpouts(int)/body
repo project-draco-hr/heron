@@ -1,0 +1,11 @@
+{
+  if (spoutsBuilder_ == null) {
+    ensureSpoutsIsMutable();
+    spouts_.remove(index);
+    onChanged();
+  }
+ else {
+    spoutsBuilder_.remove(index);
+  }
+  return this;
+}

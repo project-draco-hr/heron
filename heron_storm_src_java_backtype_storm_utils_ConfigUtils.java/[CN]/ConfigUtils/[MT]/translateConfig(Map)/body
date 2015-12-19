@@ -1,0 +1,33 @@
+{
+  Config heronConfig=new Config(stormConfig);
+  doSerializationTranslation(heronConfig);
+  if (heronConfig.containsKey(backtype.storm.Config.TOPOLOGY_ENABLE_MESSAGE_TIMEOUTS)) {
+    heronConfig.put(backtype.storm.Config.TOPOLOGY_ENABLE_MESSAGE_TIMEOUTS,heronConfig.get(backtype.storm.Config.TOPOLOGY_ENABLE_MESSAGE_TIMEOUTS).toString());
+  }
+  if (heronConfig.containsKey(backtype.storm.Config.TOPOLOGY_WORKERS)) {
+    Integer nWorkers=(Integer)heronConfig.get(backtype.storm.Config.TOPOLOGY_WORKERS);
+    com.twitter.heron.api.Config.setNumStmgrs(heronConfig,nWorkers);
+  }
+  if (heronConfig.containsKey(backtype.storm.Config.TOPOLOGY_ACKER_EXECUTORS)) {
+    Integer nAckers=(Integer)heronConfig.get(backtype.storm.Config.TOPOLOGY_ACKER_EXECUTORS);
+    com.twitter.heron.api.Config.setEnableAcking(heronConfig,nAckers > 0);
+  }
+  if (heronConfig.containsKey(backtype.storm.Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS)) {
+    Integer nSecs=(Integer)heronConfig.get(backtype.storm.Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS);
+    com.twitter.heron.api.Config.setMessageTimeoutSecs(heronConfig,nSecs);
+  }
+  if (heronConfig.containsKey(backtype.storm.Config.TOPOLOGY_MAX_SPOUT_PENDING)) {
+    Integer nPending=Integer.parseInt(heronConfig.get(backtype.storm.Config.TOPOLOGY_MAX_SPOUT_PENDING).toString());
+    com.twitter.heron.api.Config.setMaxSpoutPending(heronConfig,nPending);
+  }
+  if (heronConfig.containsKey(backtype.storm.Config.TOPOLOGY_TICK_TUPLE_FREQ_SECS)) {
+    Integer tSecs=Integer.parseInt(heronConfig.get(backtype.storm.Config.TOPOLOGY_TICK_TUPLE_FREQ_SECS).toString());
+    com.twitter.heron.api.Config.setTickTupleFrequency(heronConfig,tSecs);
+  }
+  if (heronConfig.containsKey(backtype.storm.Config.TOPOLOGY_DEBUG)) {
+    Boolean dBg=Boolean.parseBoolean(heronConfig.get(backtype.storm.Config.TOPOLOGY_DEBUG).toString());
+    com.twitter.heron.api.Config.setDebug(heronConfig,dBg);
+  }
+  doTaskHooksTranslation(heronConfig);
+  return heronConfig;
+}

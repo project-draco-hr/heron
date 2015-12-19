@@ -1,0 +1,7 @@
+{
+  PowerMockito.mockStatic(Files.class);
+  PowerMockito.when(Files.isDirectory(Matchers.any(Path.class))).thenReturn(true);
+  Assert.assertTrue(FileUtility.isDirectoryExists(""));
+  PowerMockito.when(Files.isDirectory(Matchers.any(Path.class))).thenReturn(false);
+  Assert.assertFalse(FileUtility.isDirectoryExists(""));
+}

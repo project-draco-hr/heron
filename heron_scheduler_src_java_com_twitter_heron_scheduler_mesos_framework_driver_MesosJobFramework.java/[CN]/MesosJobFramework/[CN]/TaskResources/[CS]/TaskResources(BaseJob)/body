@@ -1,0 +1,6 @@
+{
+  this.cpu=job.cpu;
+  this.mem=job.mem;
+  this.disk=job.disk;
+  this.ports=getRequiredPorts(job.command);
+}

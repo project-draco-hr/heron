@@ -1,0 +1,5 @@
+def delete_topology_from_zk(self, topologyName):
+    '\n    Removes the topology entry from:\n    1. topologies list,\n    2. pplan,\n    3. execution_state, and\n    '
+    self.delete_pplan(topologyName)
+    self.delete_execution_state(topologyName)
+    self.delete_topology(topologyName)

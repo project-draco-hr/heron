@@ -1,0 +1,8 @@
+{
+  if (topologyConfigBuilder_ != null) {
+    return topologyConfigBuilder_.getMessageOrBuilder();
+  }
+ else {
+    return topologyConfig_;
+  }
+}

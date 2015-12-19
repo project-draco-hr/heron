@@ -1,0 +1,6 @@
+long networkWriteBatchSizeInBytes
+long networkWriteBatchTimeInMs
+long networkReadBatchSizeInBytes
+long networkReadBatchTimeInMs
+int socketSendBufferSizeInBytes
+int socketReceivedBufferSizeInBytes

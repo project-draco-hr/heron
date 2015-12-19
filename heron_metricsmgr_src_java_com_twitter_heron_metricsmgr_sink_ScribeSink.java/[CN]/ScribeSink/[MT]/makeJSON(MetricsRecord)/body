@@ -1,0 +1,33 @@
+{
+  String serviceName=String.format("%s/%s",config.get(KEY_SERVICE_NAMESPACE),topologyName);
+  String[] sources=record.getSource().split("/");
+  String source=String.format("/%s/%s",sources[1],sources[2]);
+  long timestamp=record.getTimestamp() / Constants.SECONDS_TO_MILLISECONDS;
+  Map<String,Object> json=new HashMap<String,Object>();
+  json.put("service",serviceName);
+  json.put("source",source);
+  json.put("timestamp",timestamp);
+  int metricsToWrite=0;
+  for (  MetricsInfo info : record.getMetrics()) {
+    Double val;
+    try {
+      val=Double.valueOf(info.getValue());
+    }
+ catch (    NumberFormatException ne) {
+      LOG.log(Level.SEVERE,"Could not parse illegal metric: " + info.toString());
+      sinkContext.exportCountMetric(ILLEGAL_METRICS_COUNT,1);
+      continue;
+    }
+    json.put(info.getName(),val);
+    metricsToWrite++;
+  }
+  LOG.info(metricsToWrite + " metrics added");
+  String result="";
+  try {
+    result=mapper.writeValueAsString(json);
+  }
+ catch (  JsonProcessingException e) {
+    LOG.log(Level.SEVERE,"Could not convert map to JSONString: " + json.toString(),e);
+  }
+  return result;
+}

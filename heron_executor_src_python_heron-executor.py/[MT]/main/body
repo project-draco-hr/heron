@@ -1,0 +1,7 @@
+def main():
+    if (len(sys.argv) != 26):
+        print_usage()
+        sys.exit(1)
+    executor = HeronExecutor(sys.argv)
+    executor.prepareLaunch()
+    executor.launch()

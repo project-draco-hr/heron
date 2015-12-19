@@ -1,0 +1,5 @@
+{
+  super(taskIds);
+  taskIdsSize=taskIds.size();
+  nextTaskIndex=new Random().nextInt(taskIds.size());
+}

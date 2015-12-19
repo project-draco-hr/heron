@@ -1,0 +1,16 @@
+{
+  com.twitter.heron.api.generated.TopologyAPI.StreamSchema result=new com.twitter.heron.api.generated.TopologyAPI.StreamSchema(this);
+  int from_bitField0_=bitField0_;
+  if (keysBuilder_ == null) {
+    if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      keys_=java.util.Collections.unmodifiableList(keys_);
+      bitField0_=(bitField0_ & ~0x00000001);
+    }
+    result.keys_=keys_;
+  }
+ else {
+    result.keys_=keysBuilder_.build();
+  }
+  onBuilt();
+  return result;
+}

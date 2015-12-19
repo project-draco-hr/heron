@@ -1,0 +1,10 @@
+{
+  String topologyTarfile=extractFilenameFromUri(context.getProperty(Constants.TOPOLOGY_PKG_URI));
+  String heronCoreFile=extractFilenameFromUri(context.getProperty(Constants.HERON_CORE_RELEASE_URI));
+  String cmd=String.format("ls -1 | grep -v std | xargs -I{} tar xvf {} && rm %s %s " + "&& mkdir log-files && ./heron-executor",topologyTarfile,heronCoreFile);
+  StringBuilder command=new StringBuilder(cmd);
+  String executorArgs=getHeronJobExecutorArguments(context);
+  command.append(" %d");
+  command.append(" " + executorArgs);
+  return command.toString();
+}

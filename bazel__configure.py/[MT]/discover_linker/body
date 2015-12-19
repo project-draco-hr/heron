@@ -1,0 +1,3 @@
+def discover_linker(environ):
+    BLDFLAG = ('-B' + os.path.dirname(environ['LD']))
+    return BLDFLAG

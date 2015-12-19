@@ -1,0 +1,6 @@
+def __init__(self, children):
+    if (len(children) != 1):
+        raise Exception('RATE expects exactly one argument.')
+    if isinstance(children[0], float):
+        raise Exception('RATE requires a timeseries, not constant.')
+    self.timeSeries = children[0]

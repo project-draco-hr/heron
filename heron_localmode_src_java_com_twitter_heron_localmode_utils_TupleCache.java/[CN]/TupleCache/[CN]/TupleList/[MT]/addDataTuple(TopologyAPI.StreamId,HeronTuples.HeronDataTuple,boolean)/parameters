@@ -1,0 +1,3 @@
+TopologyAPI.StreamId streamId
+HeronTuples.HeronDataTuple tuple
+boolean isAnchored

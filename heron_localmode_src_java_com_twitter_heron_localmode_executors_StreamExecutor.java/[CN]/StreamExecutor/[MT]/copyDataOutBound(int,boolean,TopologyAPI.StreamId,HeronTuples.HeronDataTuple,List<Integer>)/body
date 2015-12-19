@@ -1,0 +1,24 @@
+{
+  boolean firstIteration=true;
+  boolean isAnchored=tuple.getRootsCount() > 0;
+  for (  Integer outTask : outTasks) {
+    long tupleKey=tupleCache.addDataTuple(outTask,streamId,tuple,isAnchored);
+    if (isAnchored) {
+      if (isLocalSpout) {
+        if (firstIteration) {
+          xorManager.create(sourceTaskId,tuple.getRoots(0).getKey(),tupleKey);
+        }
+ else {
+          xorManager.anchor(sourceTaskId,tuple.getRoots(0).getKey(),tupleKey);
+        }
+      }
+ else {
+        for (        HeronTuples.RootId rootId : tuple.getRootsList()) {
+          HeronTuples.AckTuple t=HeronTuples.AckTuple.newBuilder().addRoots(rootId).setAckedtuple(tupleKey).build();
+          tupleCache.addEmitTuple(rootId.getTaskid(),t);
+        }
+      }
+    }
+    firstIteration=false;
+  }
+}

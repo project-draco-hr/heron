@@ -1,0 +1,10 @@
+{
+  super(s,host,port,options);
+  if (serverMetricsCounters == null) {
+    throw new IllegalArgumentException("Server Metrics Counters is needed.");
+  }
+  this.serverMetricsCounters=serverMetricsCounters;
+  this.metricsSinkCommunicators=new CopyOnWriteArrayList<Communicator<MetricsRecord>>();
+  this.publisherMap=new HashMap<SocketAddress,Metrics.MetricPublisher>();
+  registerInitialization();
+}

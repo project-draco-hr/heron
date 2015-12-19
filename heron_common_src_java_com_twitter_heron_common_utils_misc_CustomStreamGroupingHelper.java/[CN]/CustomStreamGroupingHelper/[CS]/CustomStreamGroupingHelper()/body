@@ -1,0 +1,3 @@
+{
+  targets=new HashMap<String,List<Target>>();
+}

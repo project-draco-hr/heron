@@ -1,0 +1,72 @@
+{
+switch (task.state) {
+case TO_SCHEDULE:
+    LOG.info(String.format("Received [%s] update for a task in TO_SCHEDULE state: [%s]",status,task));
+  break;
+case SCHEDULED:
+switch (status.getState()) {
+case TASK_STAGING:
+  LOG.info(String.format("Task with id '%s' STAGING",status.getTaskId().getValue()));
+LOG.severe("Framework status updates should not use");
+break;
+case TASK_STARTING:
+LOG.info(String.format("Task with id '%s' STARTING",status.getTaskId().getValue()));
+break;
+case TASK_RUNNING:
+LOG.info(String.format("Task with id '%s' RUNNING",status.getTaskId().getValue()));
+break;
+case TASK_FINISHED:
+LOG.info(String.format("Task with id '%s' FINISHED",status.getTaskId().getValue()));
+task.state=BaseTask.TaskState.FINISHED_SUCCESS;
+updateTrackingTask(TaskUtils.getJobNameForTaskId(task.taskId),task);
+break;
+case TASK_FAILED:
+LOG.info(String.format("Task with id '%s' FAILED",status.getTaskId().getValue()));
+handleMesosFailure(task);
+break;
+case TASK_KILLED:
+LOG.info("Task killed which is supported running. It could be triggered by manual restart command");
+handleMesosFailure(task);
+break;
+case TASK_LOST:
+LOG.info(String.format("Task with id '%s' LOST",status.getTaskId().getValue()));
+handleMesosFailure(task);
+break;
+case TASK_ERROR:
+LOG.info(String.format("Task with id '%s' ERROR",status.getTaskId().getValue()));
+handleMesosFailure(task);
+break;
+default :
+LOG.severe("Unknown TaskState:" + status.getState() + " for task: "+ status.getTaskId().getValue());
+break;
+}
+break;
+case TO_KILL:
+if (status.getState().equals(Protos.TaskState.TASK_STAGING) || status.getState().equals(Protos.TaskState.TASK_STARTING) || status.getState().equals(Protos.TaskState.TASK_RUNNING)) {
+LOG.info(String.format("The job is still running in status: %s",status.getState()));
+LOG.info("Do nothing and continue to wait for its NON_RUNNING");
+}
+ else {
+LOG.info(String.format("The job is NOT_RUNNING any more with status: %s",status.getState()));
+LOG.info("The job is supposed to kill. Clear all the states now");
+clearTaskState(task.taskId);
+}
+break;
+case TO_KILL_NOW:
+if (status.getState().equals(Protos.TaskState.TASK_STAGING) || status.getState().equals(Protos.TaskState.TASK_STARTING) || status.getState().equals(Protos.TaskState.TASK_RUNNING)) {
+LOG.info("The job is still running, kill it now....");
+driver.killTask(Protos.TaskID.newBuilder().setValue(status.getTaskId().getValue()).build());
+}
+ else {
+LOG.info("The job is requested to kill and now it has been killed already.");
+clearTaskState(task.taskId);
+}
+break;
+case FINISHED_SUCCESS:
+LOG.info(String.format("Received [%s] update for a task in terminated state: [%s]",status,task));
+case FINISHED_FAILURE:
+LOG.info(String.format("Received [%s] update for a task in terminated state: [%s]",status,task));
+default :
+LOG.info(String.format("Received [%s] update for task in unknown state: [%s]",status,task));
+}
+}

@@ -1,0 +1,26 @@
+@tornado.gen.coroutine
+def get(self):
+    dcs = self.get_arguments(constants.PARAM_DC)
+    environs = self.get_arguments(constants.PARAM_ENVIRON)
+    ret = {}
+    topologies = self.tracker.topologies
+    for topology in topologies:
+        dc = topology.dc
+        environ = topology.environ
+        if ((not dc) or (not environ)):
+            continue
+        if (dcs and (dc not in dcs)):
+            continue
+        if (environs and (environ not in environs)):
+            continue
+        if (dc not in ret):
+            ret[dc] = {}
+        if (environ not in ret[dc]):
+            ret[dc][environ] = {}
+        try:
+            topologyInfo = self.tracker.getTopologyInfo(topology.name, dc, environ)
+            if (topologyInfo and ('execution_state' in topologyInfo)):
+                ret[dc][environ][topology.name] = topologyInfo['execution_state']
+        except Exception as e:
+            pass
+    self.write_success_response(ret)

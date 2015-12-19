@@ -1,0 +1,4 @@
+{
+  this.expirationNs=expirationNs;
+  this.handler=handler;
+}

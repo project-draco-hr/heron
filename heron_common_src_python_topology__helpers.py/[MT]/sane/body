@@ -1,0 +1,49 @@
+def sane(topology):
+    if (topology.name == ''):
+        print 'Topology name cannot be empty'
+        return False
+    if (('.' in topology.name) or ('/' in topology.name)):
+        print 'Topology name cannot contain . or /'
+        return False
+    component_names = set()
+    for spout in topology.spouts:
+        component_name = spout.comp.name
+        if (component_name in component_names):
+            print (component_name + ' is duplicated twice')
+            return False
+        component_names.add(component_name)
+    for bolt in topology.bolts:
+        component_name = bolt.comp.name
+        if (component_name in component_names):
+            print (component_name + ' is duplicated twice')
+            return False
+        component_names.add(component_name)
+    ninstances = get_total_instances(topology)
+    nstmgrs = get_nstmgrs(topology)
+    if (nstmgrs > ninstances):
+        print 'Number of containers are greater than number of instances'
+        return False
+    for kv in topology.topology_config.kvs:
+        if (kv.key == constants.TOPOLOGY_COMPONENT_RAMMAP):
+            rammap = str(kv.value).split(',')
+            for component_ram in rammap:
+                component_and_ram = component_ram.split(':')
+                if (len(component_and_ram) != 2):
+                    print 'TOPOLOGY_COMPONENT_RAMMAP is set incorrectly'
+                    return False
+                if (not (component_and_ram[0] in component_names)):
+                    print 'TOPOLOGY_COMPONENT_RAMMAP is set incorrectly'
+                    return False
+    all_outputs = sets.Set()
+    for spout in topology.spouts:
+        for outputstream in spout.outputs:
+            all_outputs.add((outputstream.stream.id, outputstream.stream.component_name))
+    for bolt in topology.bolts:
+        for outputstream in bolt.outputs:
+            all_outputs.add((outputstream.stream.id, outputstream.stream.component_name))
+    for bolt in topology.bolts:
+        for inputstream in bolt.inputs:
+            if (not ((inputstream.stream.id, inputstream.stream.component_name) in all_outputs)):
+                print (('Bolt ' + bolt.comp.name) + ' has an input stream that no one emits')
+                return False
+    return True

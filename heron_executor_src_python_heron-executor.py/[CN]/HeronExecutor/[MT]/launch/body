@@ -1,0 +1,9 @@
+def launch(self):
+    commands = {}
+    if (self.shard == 0):
+        commands = self.get_tmaster_processes()
+    else:
+        self.untar_if_tar()
+        commands = self.get_regular_processes()
+    commands.update(self.get_daemon_processes())
+    self.do_run_and_wait(commands)

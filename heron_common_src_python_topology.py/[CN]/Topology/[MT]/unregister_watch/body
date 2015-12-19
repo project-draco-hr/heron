@@ -1,0 +1,4 @@
+def unregister_watch(self, uid):
+    '\n    Unregister the watch with the given UUID.\n    '
+    LOG.info(('Unregister a watch with uid: ' + str(uid)))
+    self.watches.pop(uid, None)

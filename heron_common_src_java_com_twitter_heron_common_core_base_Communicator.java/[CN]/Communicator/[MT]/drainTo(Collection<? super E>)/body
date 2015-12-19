@@ -1,0 +1,7 @@
+{
+  int result=buffer.drainTo(c);
+  if (producer != null) {
+    producer.wakeUp();
+  }
+  return result;
+}

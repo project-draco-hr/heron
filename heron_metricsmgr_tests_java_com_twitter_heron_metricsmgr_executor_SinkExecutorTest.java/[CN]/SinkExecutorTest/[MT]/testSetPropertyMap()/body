@@ -1,0 +1,11 @@
+{
+  String key="key";
+  String value="value";
+  Map<String,Object> propertyMap=new HashMap<String,Object>();
+  propertyMap.put(key,value);
+  sinkExecutor.setPropertyMap(propertyMap);
+  Field field=sinkExecutor.getClass().getDeclaredField("sinkConfig");
+  field.setAccessible(true);
+  Map<String,Object> map=(Map<String,Object>)field.get(sinkExecutor);
+  Assert.assertEquals(map.get(key),value);
+}

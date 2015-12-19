@@ -1,0 +1,28 @@
+{
+  Assert.assertEquals(topology,plan.getTopology());
+  Assert.assertEquals(1,plan.getStmgrsCount());
+  PhysicalPlans.StMgr stMgr=plan.getStmgrs(0);
+  Assert.assertEquals("",stMgr.getId());
+  Assert.assertEquals("",stMgr.getHostName());
+  Assert.assertEquals(-1,stMgr.getDataPort());
+  Assert.assertEquals("",stMgr.getLocalEndpoint());
+  Assert.assertEquals("",stMgr.getCwd());
+  Assert.assertEquals(4,plan.getInstancesCount());
+  ArrayList<String> componentsName=new ArrayList<>();
+  ArrayList<String> instancesId=new ArrayList<>();
+  ArrayList<Integer> componentsIndex=new ArrayList<>();
+  for (int i=0; i < plan.getInstancesCount(); i++) {
+    PhysicalPlans.Instance instance=plan.getInstances(i);
+    Assert.assertEquals("",instance.getStmgrId());
+    Assert.assertEquals(i + 1,instance.getInfo().getTaskId());
+    componentsName.add(instance.getInfo().getComponentName());
+    instancesId.add(instance.getInstanceId());
+    componentsIndex.add(instance.getInfo().getComponentIndex());
+  }
+  Collections.sort(componentsName);
+  Collections.sort(instancesId);
+  Collections.sort(componentsIndex);
+  Assert.assertEquals("[exclaim, exclaim, word, word]",componentsName.toString());
+  Assert.assertEquals("[exclaim_1, exclaim_2, word_1, word_2]",instancesId.toString());
+  Assert.assertEquals("[1, 1, 2, 2]",componentsIndex.toString());
+}

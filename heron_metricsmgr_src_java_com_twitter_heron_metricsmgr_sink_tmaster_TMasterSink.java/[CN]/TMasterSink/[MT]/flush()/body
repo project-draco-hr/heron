@@ -1,0 +1,3 @@
+{
+  sinkContext.exportCountMetric(TMASTER_RESTART_COUNT,tMasterClientService.startedAttempts.longValue());
+}

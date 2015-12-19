@@ -1,0 +1,4 @@
+{
+  this.start();
+  getNIOLooper().loop();
+}

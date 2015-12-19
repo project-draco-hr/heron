@@ -1,0 +1,3 @@
+{
+  return (IScheduler)Class.forName(schedulerClass).newInstance();
+}

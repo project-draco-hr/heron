@@ -1,0 +1,3 @@
+{
+  admitSpoutTuple(taskId,streamId,tuple,messageId);
+}

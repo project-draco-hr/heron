@@ -1,0 +1,4 @@
+{
+  StringBuilder customGroupingInfoInPrepare=(StringBuilder)SingletonRegistry.INSTANCE.getSingleton(customGroupingInfo);
+  customGroupingInfoInPrepare.append(context.getThisComponentId() + "+" + component+ "+"+ streamId+ "+"+ targetTasks.toString());
+}

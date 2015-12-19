@@ -1,0 +1,4 @@
+{
+  registerOnMessage(StreamManager.NewInstanceAssignmentMessage.newBuilder());
+  registerOnMessage(StreamManager.TupleMessage.newBuilder());
+}

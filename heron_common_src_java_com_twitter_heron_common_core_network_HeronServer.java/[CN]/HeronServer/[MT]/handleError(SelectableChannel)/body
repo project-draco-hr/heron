@@ -1,0 +1,20 @@
+{
+  SocketAddress channelAddress=((SocketChannel)channel).socket().getRemoteSocketAddress();
+  LOG.info("Handling error from channel: " + channelAddress);
+  SocketChannelHelper helper=activeConnections.get(channel);
+  if (helper == null) {
+    LOG.severe("Inactive channel had error?");
+    return;
+  }
+  helper.clear();
+  LOG.info("Removing all interest on channel: " + channelAddress);
+  nioLooper.removeAllInterest(channel);
+  try {
+    channel.close();
+  }
+ catch (  IOException e) {
+    LOG.severe("Error closing connection in handleError");
+  }
+  activeConnections.remove(channel);
+  onClose((SocketChannel)channel);
+}

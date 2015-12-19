@@ -1,0 +1,6 @@
+{
+  _collector=collector;
+  nItems=0;
+  startTime=System.currentTimeMillis();
+  context.addTaskHook(new TestTaskHook("This TestTaskHook is constructed by CountBolt"));
+}

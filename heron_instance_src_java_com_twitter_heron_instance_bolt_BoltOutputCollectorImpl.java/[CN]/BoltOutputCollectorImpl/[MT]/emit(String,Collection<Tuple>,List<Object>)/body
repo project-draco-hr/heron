@@ -1,0 +1,3 @@
+{
+  return admitBoltTuple(streamId,anchors,tuple);
+}

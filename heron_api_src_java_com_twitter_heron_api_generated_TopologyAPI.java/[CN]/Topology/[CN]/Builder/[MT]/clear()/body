@@ -1,0 +1,31 @@
+{
+  super.clear();
+  id_="";
+  bitField0_=(bitField0_ & ~0x00000001);
+  name_="";
+  bitField0_=(bitField0_ & ~0x00000002);
+  if (spoutsBuilder_ == null) {
+    spouts_=java.util.Collections.emptyList();
+    bitField0_=(bitField0_ & ~0x00000004);
+  }
+ else {
+    spoutsBuilder_.clear();
+  }
+  if (boltsBuilder_ == null) {
+    bolts_=java.util.Collections.emptyList();
+    bitField0_=(bitField0_ & ~0x00000008);
+  }
+ else {
+    boltsBuilder_.clear();
+  }
+  state_=com.twitter.heron.api.generated.TopologyAPI.TopologyState.RUNNING;
+  bitField0_=(bitField0_ & ~0x00000010);
+  if (topologyConfigBuilder_ == null) {
+    topologyConfig_=com.twitter.heron.api.generated.TopologyAPI.Config.getDefaultInstance();
+  }
+ else {
+    topologyConfigBuilder_.clear();
+  }
+  bitField0_=(bitField0_ & ~0x00000020);
+  return this;
+}

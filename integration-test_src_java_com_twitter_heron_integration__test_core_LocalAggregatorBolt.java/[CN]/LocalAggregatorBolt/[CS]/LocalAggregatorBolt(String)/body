@@ -1,0 +1,4 @@
+{
+  LOG.info("Local File Path : " + localFilePath);
+  this.localFilePath=localFilePath;
+}

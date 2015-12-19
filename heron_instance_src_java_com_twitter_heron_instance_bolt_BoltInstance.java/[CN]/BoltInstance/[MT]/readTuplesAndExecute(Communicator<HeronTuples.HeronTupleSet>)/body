@@ -1,0 +1,23 @@
+{
+  long startOfCycle=System.nanoTime();
+  long totalDataEmittedInBytesBeforeCycle=collector.getTotalDataEmittedInBytes();
+  long instanceExecuteBatchTime=systemConfig.getInstanceExecuteBatchTimeMs() * Constants.MILLISECONDS_TO_NANOSECONDS;
+  long instanceExecuteBatchSize=systemConfig.getInstanceExecuteBatchSizeBytes();
+  while (!inQueue.isEmpty()) {
+    HeronTuples.HeronTupleSet tuples=inQueue.poll();
+    TopologyContextImpl topologyContext=helper.getTopologyContext();
+    if (tuples.hasControl()) {
+      throw new RuntimeException("Bolt cannot get acks/fails from other components");
+    }
+    TopologyAPI.StreamId stream=tuples.getData().getStream();
+    for (    HeronTuples.HeronDataTuple dataTuple : tuples.getData().getTuplesList()) {
+      handleDataTuple(dataTuple,topologyContext,stream);
+    }
+    if (System.nanoTime() - startOfCycle - instanceExecuteBatchTime > 0) {
+      break;
+    }
+    if (collector.getTotalDataEmittedInBytes() - totalDataEmittedInBytesBeforeCycle > instanceExecuteBatchSize) {
+      break;
+    }
+  }
+}

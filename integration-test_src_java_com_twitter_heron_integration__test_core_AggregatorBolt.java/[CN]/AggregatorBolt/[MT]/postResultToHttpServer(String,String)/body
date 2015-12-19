@@ -1,0 +1,15 @@
+{
+  HttpClient client=HttpClientBuilder.create().build();
+  HttpPost post=new HttpPost(httpPostUrl);
+  StringEntity requestEntity=new StringEntity(resultJson,"application/json","UTF-8");
+  post.setEntity(requestEntity);
+  HttpResponse response=client.execute(post);
+  int responseCode=response.getStatusLine().getStatusCode();
+  if (responseCode == 200) {
+    LOG.info("Http post successful");
+  }
+ else {
+    LOG.severe(String.format("Http post failed, response code: %d, response: %s",responseCode,EntityUtils.toString(response.getEntity())));
+  }
+  return responseCode;
+}

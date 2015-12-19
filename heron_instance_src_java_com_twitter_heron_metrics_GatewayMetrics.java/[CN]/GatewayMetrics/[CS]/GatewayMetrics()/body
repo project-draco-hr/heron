@@ -1,0 +1,15 @@
+{
+  receivedPacketsCount=new CountMetric();
+  sentPacketsCount=new CountMetric();
+  receivedPacketsSize=new CountMetric();
+  sentPacketsSize=new CountMetric();
+  sentMetricsSize=new CountMetric();
+  sentMetricsPacketsCount=new CountMetric();
+  sentMetricsCount=new CountMetric();
+  sentExceptionsCount=new CountMetric();
+  inStreamQueueSize=new ReducedMetric(new MeanReducer());
+  outStreamQueueSize=new ReducedMetric(new MeanReducer());
+  inStreamQueueExpectedCapacity=new ReducedMetric(new MeanReducer());
+  outStreamQueueExpectedCapacity=new ReducedMetric(new MeanReducer());
+  inQueueFullCount=new CountMetric();
+}

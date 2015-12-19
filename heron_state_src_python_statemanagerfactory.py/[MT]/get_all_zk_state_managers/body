@@ -1,0 +1,19 @@
+def get_all_zk_state_managers(conf):
+    '\n  Connects to all the zookeeper state_managers and returns\n  the connected state_managers instances.\n  '
+    state_managers = []
+    state_locations = Config(conf).get_state_locations_of_type('zookeeper')
+    for location in state_locations:
+        name = location['name']
+        host = location['host']
+        port = location['port']
+        tunnelhost = location['tunnelhost']
+        rootpath = location['rootpath']
+        LOG.info(((((('Connecting to zk hostport: ' + host) + ':') + str(port)) + ' rootpath: ') + rootpath))
+        state_manager = ZkStateManager(name, host, port, rootpath, tunnelhost)
+        try:
+            state_manager.start()
+        except Exception as e:
+            LOG.error('Exception while connecting to state_manager.')
+            traceback.print_exc()
+        state_managers.append(state_manager)
+    return state_managers

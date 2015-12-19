@@ -1,0 +1,15 @@
+{
+  Map<String,String> ret=new HashMap<String,String>();
+  String commandOptions=System.getProperty("heron.options");
+  if (commandOptions != null) {
+    commandOptions=commandOptions.replaceAll("%%%%"," ");
+    String[] configs=commandOptions.split(",");
+    for (    String config : configs) {
+      String[] options=config.split("=");
+      if (options.length == 2) {
+        ret.put(options[0],options[1]);
+      }
+    }
+  }
+  return ret;
+}

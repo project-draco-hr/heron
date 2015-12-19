@@ -1,0 +1,48 @@
+{
+  if (lastAction == ACTION.NOOP) {
+    if (prevProgress == -1) {
+      doAction(ACTION.INCREASE,autoTuneFactor,progress);
+    }
+ else     if (moreThanNum(progress,prevProgress,progressBound)) {
+      doAction(ACTION.INCREASE,autoTuneFactor,progress);
+    }
+ else     if (lessThanNum(progress,prevProgress,progressBound)) {
+      doAction(ACTION.DECREASE,Math.max((prevProgress - progress) / (float)prevProgress,autoTuneFactor),progress);
+    }
+ else {
+      ++callsInNoop;
+      if (callsInNoop >= NOOP_THRESHOLD) {
+        doAction(speculativeAction,autoTuneFactor,progress);
+        speculativeAction=speculativeAction == ACTION.INCREASE ? ACTION.DECREASE : ACTION.INCREASE;
+      }
+    }
+  }
+ else   if (lastAction == ACTION.INCREASE) {
+    if (moreThanNum(progress,prevProgress,autoTuneFactor - progressBound)) {
+      doAction(ACTION.INCREASE,autoTuneFactor,progress);
+    }
+ else     if (lessThanNum(progress,prevProgress,progressBound)) {
+      float drop=Math.max((prevProgress - progress) / (float)prevProgress,autoTuneFactor);
+      if (drop > autoTuneFactor) {
+        doAction(ACTION.DECREASE,drop,progress);
+      }
+ else {
+        doAction(ACTION.RESTORE,autoTuneFactor,progress);
+      }
+    }
+ else {
+      doAction(ACTION.RESTORE,autoTuneFactor,progress);
+    }
+  }
+ else   if (lastAction == ACTION.DECREASE) {
+    if (moreThanNum(progress,prevProgress,progressBound)) {
+      doAction(ACTION.DECREASE,autoTuneFactor,progress);
+    }
+ else {
+      doAction(ACTION.NOOP,autoTuneFactor,progress);
+    }
+  }
+ else   if (lastAction == ACTION.RESTORE) {
+    doAction(ACTION.NOOP,autoTuneFactor,progress);
+  }
+}

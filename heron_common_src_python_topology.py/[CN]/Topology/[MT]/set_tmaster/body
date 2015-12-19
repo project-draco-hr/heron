@@ -1,0 +1,3 @@
+def set_tmaster(self, tmaster):
+    self.tmaster = tmaster
+    self.trigger_watches()

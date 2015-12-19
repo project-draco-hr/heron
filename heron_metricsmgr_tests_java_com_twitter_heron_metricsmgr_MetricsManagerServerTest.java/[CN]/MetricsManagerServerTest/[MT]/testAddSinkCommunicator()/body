@@ -1,0 +1,5 @@
+{
+  Communicator<MetricsRecord> sinkCommunicator=new Communicator<MetricsRecord>();
+  metricsManagerServer.addSinkCommunicator(sinkCommunicator);
+  Assert.assertTrue(metricsManagerServer.removeSinkCommunicator(sinkCommunicator));
+}

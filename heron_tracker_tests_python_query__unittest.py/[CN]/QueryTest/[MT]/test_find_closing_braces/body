@@ -1,0 +1,13 @@
+def test_find_closing_braces(self):
+    query = '(())'
+    self.assertEqual(3, self.query.find_closing_braces(query))
+    query = 'hello()'
+    with self.assertRaises(Exception):
+        self.query.find_closing_braces(query)
+    query = '(hello)'
+    self.assertEqual(6, self.query.find_closing_braces(query))
+    query = '(no closing braces'
+    with self.assertRaises(Exception):
+        self.query.find_closing_braces(query)
+    query = '()()'
+    self.assertEqual(1, self.query.find_closing_braces(query))

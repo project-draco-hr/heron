@@ -1,0 +1,10 @@
+{
+  if (response instanceof Tests.EchoServerResponse) {
+    Tests.EchoServerResponse r=(Tests.EchoServerResponse)response;
+    Assert.assertEquals(r.getEchoResponse(),"Dummy");
+    sendRequest();
+  }
+ else {
+    Assert.fail("Unknown type of response received");
+  }
+}

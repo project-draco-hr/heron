@@ -1,0 +1,61 @@
+{
+  ServerSocketChannel serverSocketChannel=ServerSocketChannel.open();
+  serverSocketChannel.socket().bind(new InetSocketAddress(HOST,serverPort));
+  SocketChannel socketChannel=null;
+  try {
+    runStreamManagerClient();
+    socketChannel=serverSocketChannel.accept();
+    configure(socketChannel);
+    socketChannel.configureBlocking(false);
+    close(serverSocketChannel);
+    IncomingPacket incomingPacket=new IncomingPacket();
+    while (incomingPacket.readFromChannel(socketChannel) != 0) {
+    }
+    String typeName=incomingPacket.unpackString();
+    REQID rid=incomingPacket.unpackREQID();
+    OutgoingPacket outgoingPacket=new OutgoingPacket(rid,UnitTestHelper.getRegisterInstanceResponse());
+    outgoingPacket.writeToChannel(socketChannel);
+    for (int i=0; i < Constants.RETRY_TIMES; i++) {
+      InstanceControlMsg instanceControlMsg=inControlQueue.poll();
+      if (instanceControlMsg != null) {
+        break;
+      }
+ else {
+        Utils.sleep(Constants.RETRY_INTERVAL_MS);
+      }
+    }
+    outgoingPacket=new OutgoingPacket(REQID.zeroREQID,constructMockMessage());
+    outgoingPacket.writeToChannel(socketChannel);
+    for (int i=0; i < Constants.RETRY_TIMES; i++) {
+      if (!inStreamQueue.isEmpty()) {
+        break;
+      }
+      Utils.sleep(Constants.RETRY_INTERVAL_MS);
+    }
+    nioLooper.exitLoop();
+    Assert.assertEquals(1,inStreamQueue.size());
+    HeronTuples.HeronTupleSet msg=inStreamQueue.poll();
+    HeronTuples.HeronTupleSet heronTupleSet=msg;
+    Assert.assertTrue(heronTupleSet.hasData());
+    Assert.assertFalse(heronTupleSet.hasControl());
+    HeronTuples.HeronDataTupleSet heronDataTupleSet=heronTupleSet.getData();
+    Assert.assertEquals("test-spout",heronDataTupleSet.getStream().getComponentName());
+    Assert.assertEquals("default",heronDataTupleSet.getStream().getId());
+    String res="";
+    for (    HeronTuples.HeronDataTuple heronDataTuple : heronDataTupleSet.getTuplesList()) {
+      res+=heronDataTuple.getValues(0).toStringUtf8();
+      Assert.assertEquals(1,heronDataTuple.getRootsCount());
+    }
+    Assert.assertEquals("ABABABABAB",res);
+  }
+ catch (  ClosedByInterruptException ignored) {
+  }
+catch (  ClosedChannelException ignored) {
+  }
+catch (  Exception e) {
+    e.printStackTrace();
+  }
+ finally {
+    close(socketChannel);
+  }
+}

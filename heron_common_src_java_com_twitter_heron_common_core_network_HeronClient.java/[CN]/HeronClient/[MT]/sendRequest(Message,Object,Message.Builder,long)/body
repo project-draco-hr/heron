@@ -1,0 +1,15 @@
+{
+  final REQID rid=REQID.generate();
+  contextMap.put(rid,context);
+  responseMessageMap.put(rid,responseBuilder);
+  if (timeoutInSeconds > 0) {
+    registerTimerEventInSeconds(timeoutInSeconds,new Runnable(){
+      @Override public void run(){
+        handleTimeout(rid);
+      }
+    }
+);
+  }
+  OutgoingPacket opk=new OutgoingPacket(rid,request);
+  socketChannelHelper.sendPacket(opk);
+}

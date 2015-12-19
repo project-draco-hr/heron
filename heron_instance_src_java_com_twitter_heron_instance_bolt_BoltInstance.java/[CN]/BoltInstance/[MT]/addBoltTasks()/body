@@ -1,0 +1,19 @@
+{
+  Runnable boltTasks=new Runnable(){
+    @Override public void run(){
+      if (collector.isOutQueuesAvailable()) {
+        readTuplesAndExecute(streamInQueue);
+        collector.sendOutTuples();
+      }
+ else {
+        boltMetrics.updateOutQueueFullCount();
+      }
+      if (collector.isOutQueuesAvailable() && !streamInQueue.isEmpty()) {
+        looper.wakeUp();
+      }
+    }
+  }
+;
+  looper.addTasksOnWakeup(boltTasks);
+  PrepareTickTupleTimer();
+}

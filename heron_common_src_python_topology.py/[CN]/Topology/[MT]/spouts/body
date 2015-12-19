@@ -1,0 +1,5 @@
+def spouts(self):
+    '\n    Returns a list of Spout (proto) messages\n    '
+    if self.physical_plan:
+        return list(self.physical_plan.topology.spouts)
+    return []

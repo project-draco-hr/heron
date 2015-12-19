@@ -1,0 +1,8 @@
+{
+  if (!isConnected()) {
+    connect();
+  }
+  if (isConnected()) {
+    writer.write(msg);
+  }
+}

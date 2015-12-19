@@ -1,0 +1,12 @@
+{
+  ++nItems;
+  if (nItems % 10000 == 0) {
+    long latency=System.currentTimeMillis() - startTime;
+    System.out.println("Done " + nItems + " in "+ latency);
+    GlobalMetrics.incr("selected_items");
+  }
+  if (emit) {
+    _collector.emit(tuple,new Values(tuple.getString(0) + "!!!"));
+  }
+  _collector.ack(tuple);
+}

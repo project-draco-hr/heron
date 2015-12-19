@@ -1,0 +1,8 @@
+{
+  String topologyFile=extractFilenameFromUri(topologyPath);
+  String heronCoreReleaseFile=extractFilenameFromUri(heronCoreReleasePath);
+  String mesosPacakgeFile=extractFilenameFromUri(mesosPackagePath);
+  String untarPackage=String.format("ls -1 | grep -v std | xargs -I{} tar xvf {} && rm %s %s %s ",topologyFile,heronCoreReleaseFile,mesosPacakgeFile);
+  String freePortWriter=String.format("printf '%%s\\n%%s\\n%%s\\n%%s\\n%%s\\n' %s:%s %s:%s %s:%s %s:%s %s:%s |  tee additional_config.conf",MesosConfig.TMASTER_MAIN_PORT,"{{task.ports[TMASTER_MAIN_PORT]}}",MesosConfig.TMASTER_STAT_PORT,"{{task.ports[TMASTER_STAT_PORT]}}",MesosConfig.TMASTER_CONTROLLER_PORT,"{{task.ports[TMASTER_CONTROLLER_PORT]}}",MesosConfig.TMASTER_SHELL_PORT,"{{task.ports[TMASTER_SHELL_PORT]}}",MesosConfig.TMASTER_METRICSMGR_PORT,"{{task.ports[TMASTER_METRICSMGR_PORT]}}");
+  return String.format("%s; %s",untarPackage,freePortWriter);
+}

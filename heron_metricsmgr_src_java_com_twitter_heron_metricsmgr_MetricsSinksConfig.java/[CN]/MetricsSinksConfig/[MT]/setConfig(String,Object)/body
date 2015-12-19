@@ -1,0 +1,5 @@
+{
+  for (  Map<String,Object> config : sinksConfigs.values()) {
+    config.put(key,value);
+  }
+}

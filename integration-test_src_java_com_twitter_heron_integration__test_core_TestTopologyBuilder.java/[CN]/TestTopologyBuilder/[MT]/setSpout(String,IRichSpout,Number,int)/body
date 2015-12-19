@@ -1,0 +1,4 @@
+{
+  IntegrationTestSpout itSpout=new IntegrationTestSpout(spout,maxExecutionCount);
+  return setSpout(id,itSpout,parallelismHint);
+}

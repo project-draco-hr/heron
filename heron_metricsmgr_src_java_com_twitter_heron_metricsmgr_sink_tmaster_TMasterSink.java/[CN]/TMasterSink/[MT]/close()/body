@@ -1,0 +1,4 @@
+{
+  tMasterClientService.close();
+  metricsCommunicator.clear();
+}

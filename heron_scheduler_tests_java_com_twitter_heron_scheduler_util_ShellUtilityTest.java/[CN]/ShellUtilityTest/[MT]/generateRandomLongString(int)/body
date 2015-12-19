@@ -1,0 +1,8 @@
+{
+  StringBuilder builder=new StringBuilder();
+  Random random=new Random();
+  for (int i=0; i < size; ++i) {
+    builder.append('a' + random.nextInt(26));
+  }
+  return builder.toString();
+}

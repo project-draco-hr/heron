@@ -1,0 +1,23 @@
+{
+  if (!userConfig.containsKey(Config.TOPOLOGY_DEBUG)) {
+    userConfig.put(Config.TOPOLOGY_DEBUG,"false");
+  }
+  if (!userConfig.containsKey(Config.TOPOLOGY_STMGRS)) {
+    userConfig.put(Config.TOPOLOGY_STMGRS,"1");
+  }
+  if (!userConfig.containsKey(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS)) {
+    userConfig.put(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS,"30");
+  }
+  if (!userConfig.containsKey(Config.TOPOLOGY_COMPONENT_PARALLELISM)) {
+    userConfig.put(Config.TOPOLOGY_COMPONENT_PARALLELISM,"1");
+  }
+  if (!userConfig.containsKey(Config.TOPOLOGY_MAX_SPOUT_PENDING)) {
+    userConfig.put(Config.TOPOLOGY_MAX_SPOUT_PENDING,"100");
+  }
+  if (!userConfig.containsKey(Config.TOPOLOGY_ENABLE_ACKING)) {
+    userConfig.put(Config.TOPOLOGY_ENABLE_ACKING,"false");
+  }
+  if (!userConfig.containsKey(Config.TOPOLOGY_ENABLE_MESSAGE_TIMEOUTS)) {
+    userConfig.put(Config.TOPOLOGY_ENABLE_MESSAGE_TIMEOUTS,"true");
+  }
+}

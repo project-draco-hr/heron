@@ -1,0 +1,7 @@
+{
+  if (streamBuilder_ == null) {
+    streamBuilder_=new com.google.protobuf.SingleFieldBuilder<com.twitter.heron.api.generated.TopologyAPI.StreamId,com.twitter.heron.api.generated.TopologyAPI.StreamId.Builder,com.twitter.heron.api.generated.TopologyAPI.StreamIdOrBuilder>(stream_,getParentForChildren(),isClean());
+    stream_=null;
+  }
+  return streamBuilder_;
+}

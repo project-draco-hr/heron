@@ -1,0 +1,7 @@
+{
+  Thread.currentThread().setName(executorName);
+  addSinkTasks();
+  flushSinkAtInterval();
+  metricsSink.init(Collections.unmodifiableMap(sinkConfig),sinkContext);
+  slaveLooper.loop();
+}

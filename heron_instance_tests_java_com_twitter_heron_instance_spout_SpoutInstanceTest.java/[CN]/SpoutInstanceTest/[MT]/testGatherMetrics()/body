@@ -1,0 +1,32 @@
+{
+  physicalPlan=UnitTestHelper.getPhysicalPlan(false,-1);
+  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  systemConfig.put(SystemConfig.HERON_METRICS_EXPORT_INTERVAL_SEC,1);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
+  inControlQueue.offer(instanceControlMsg);
+  Runnable task=new Runnable(){
+    @Override public void run(){
+      for (int i=0; i < Constants.RETRY_TIMES; i++) {
+        if (!slaveMetricsOut.isEmpty()) {
+          Metrics.MetricPublisherPublishMessage msg=slaveMetricsOut.poll();
+          Set<String> metricsName=new HashSet<String>();
+          for (          Metrics.MetricDatum metricDatum : msg.getMetricsList()) {
+            metricsName.add(metricDatum.getName());
+          }
+          Assert.assertTrue(metricsName.contains("__ack-count/default"));
+          Assert.assertTrue(metricsName.contains("__complete-latency/default"));
+          Assert.assertTrue(metricsName.contains("__emit-count/default"));
+          Assert.assertTrue(metricsName.contains("__next-tuple-latency"));
+          Assert.assertTrue(metricsName.contains("__next-tuple-count"));
+          testLooper.exitLoop();
+          break;
+        }
+        Utils.sleep(Constants.RETRY_INTERVAL_MS);
+      }
+    }
+  }
+;
+  testLooper.addTasksOnWakeup(task);
+  testLooper.loop();
+}

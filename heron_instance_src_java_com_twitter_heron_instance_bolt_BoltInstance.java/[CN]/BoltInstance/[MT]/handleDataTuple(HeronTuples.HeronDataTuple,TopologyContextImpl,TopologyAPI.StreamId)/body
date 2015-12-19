@@ -1,0 +1,14 @@
+{
+  long startTime=System.nanoTime();
+  List<Object> values=new ArrayList<Object>();
+  for (  ByteString b : dataTuple.getValuesList()) {
+    values.add(serializer.deserialize(b.toByteArray()));
+  }
+  TupleImpl t=new TupleImpl(topologyContext,stream,dataTuple.getKey(),dataTuple.getRootsList(),values);
+  long deserializedTime=System.nanoTime();
+  bolt.execute(t);
+  long executeLatency=System.nanoTime() - deserializedTime;
+  topologyContext.invokeHookBoltExecute(t,executeLatency);
+  boltMetrics.deserializeDataTuple(stream.getId(),stream.getComponentName(),deserializedTime - startTime);
+  boltMetrics.executeTuple(stream.getId(),stream.getComponentName(),executeLatency);
+}

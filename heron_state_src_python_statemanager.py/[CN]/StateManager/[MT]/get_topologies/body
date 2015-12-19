@@ -1,0 +1,4 @@
+@abc.abstractmethod
+def get_topologies(self, callback=None):
+    '\n    Gets the topologies for the rootpath.\n    If the callback is provided,\n    sets watch on the path and calls the callback\n    with the new list of children.\n    '
+    pass

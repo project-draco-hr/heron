@@ -1,0 +1,12 @@
+{
+  HashSet<String> upstreamComponents=new HashSet<String>();
+  for (  TopologyAPI.StreamId streamId : topologyContext.getThisSources().keySet()) {
+    upstreamComponents.add(streamId.getComponentName());
+  }
+  for (  String name : upstreamComponents) {
+    terminalsToReceive+=topologyContext.getComponentTasks(name).size();
+  }
+  LOG.fine("TerminalsToReceive: " + terminalsToReceive);
+  collector=new OutputCollector(new IntegrationTestBoltCollector(outputCollector));
+  delegateBolt.prepare(map,topologyContext,collector);
+}

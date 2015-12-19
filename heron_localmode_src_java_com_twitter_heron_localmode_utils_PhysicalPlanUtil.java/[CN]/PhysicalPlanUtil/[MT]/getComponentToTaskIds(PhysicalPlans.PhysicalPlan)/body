@@ -1,0 +1,12 @@
+{
+  Map<String,List<Integer>> componentToTaskIds=new HashMap<>();
+  for (  PhysicalPlans.Instance instance : physicalPlan.getInstancesList()) {
+    int taskId=instance.getInfo().getTaskId();
+    String componentName=instance.getInfo().getComponentName();
+    if (!componentToTaskIds.containsKey(componentName)) {
+      componentToTaskIds.put(componentName,new ArrayList<Integer>());
+    }
+    componentToTaskIds.get(componentName).add(taskId);
+  }
+  return componentToTaskIds;
+}

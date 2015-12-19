@@ -1,0 +1,17 @@
+{
+  long timeoutInSeconds=Utils.getLong(config.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS));
+  long timeoutInNs=timeoutInSeconds * Constants.SECONDS_TO_NANOSECONDS;
+  int nBucket=systemConfig.getInstanceAcknowledgementNbuckets();
+  List<RootTupleInfo> expiredObjects=collector.retireExpired(timeoutInNs);
+  for (  RootTupleInfo rootTupleInfo : expiredObjects) {
+    spoutMetrics.timeoutTuple(rootTupleInfo.getStreamId());
+    invokeFail(rootTupleInfo.getMessageId(),rootTupleInfo.getStreamId(),timeoutInNs);
+  }
+  Runnable lookForTimeoutsTask=new Runnable(){
+    @Override public void run(){
+      lookForTimeouts();
+    }
+  }
+;
+  looper.registerTimerEventInNanoSeconds(timeoutInNs / nBucket,lookForTimeoutsTask);
+}

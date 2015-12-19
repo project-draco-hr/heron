@@ -1,0 +1,11 @@
+{
+  if (spoutsBuilder_ == null) {
+    ensureSpoutsIsMutable();
+    spouts_.add(index,builderForValue.build());
+    onChanged();
+  }
+ else {
+    spoutsBuilder_.addMessage(index,builderForValue.build());
+  }
+  return this;
+}

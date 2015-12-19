@@ -1,0 +1,7 @@
+{
+  if (sc2 != null)   try {
+    sc2.close();
+  }
+ catch (  IOException ignored) {
+  }
+}

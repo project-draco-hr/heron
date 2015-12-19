@@ -1,0 +1,12 @@
+{
+  threadsPool.shutdownNow();
+  metricsManagerServer.stop();
+  metricsManagerServer=null;
+  if (simpleMetricsClient != null) {
+    simpleMetricsClient.stop();
+    simpleMetricsClient.getNIOLooper().exitLoop();
+  }
+  serverLooper.exitLoop();
+  serverLooper=null;
+  threadsPool=null;
+}

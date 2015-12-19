@@ -1,0 +1,4 @@
+@property
+def rootpath(self):
+    '\n    Getter for the path where the heron states are stored.\n    '
+    return self.__hostport

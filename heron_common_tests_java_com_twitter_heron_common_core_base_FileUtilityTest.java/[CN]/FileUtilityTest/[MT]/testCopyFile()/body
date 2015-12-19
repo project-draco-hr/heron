@@ -1,0 +1,4 @@
+{
+  PowerMockito.mockStatic(Files.class);
+  Assert.assertTrue(FileUtility.copyFile("",""));
+}

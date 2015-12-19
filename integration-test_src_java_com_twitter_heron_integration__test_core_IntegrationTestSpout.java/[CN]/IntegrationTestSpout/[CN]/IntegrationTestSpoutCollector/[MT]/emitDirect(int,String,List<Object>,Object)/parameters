@@ -1,0 +1,4 @@
+int i
+String s
+List<Object> objects
+Object o

@@ -1,0 +1,5 @@
+{
+  deserializationTimeNs.scope(streamId).incrBy(latency);
+  String globalStreamId=new StringBuilder(sourceComponent).append("/").append(streamId).toString();
+  deserializationTimeNs.scope(globalStreamId).incrBy(latency);
+}

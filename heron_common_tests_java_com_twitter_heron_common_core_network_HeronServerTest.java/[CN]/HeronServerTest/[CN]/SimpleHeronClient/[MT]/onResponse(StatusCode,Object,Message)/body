@@ -1,0 +1,16 @@
+{
+  if (response instanceof Tests.EchoServerResponse) {
+    Tests.EchoServerResponse r=(Tests.EchoServerResponse)response;
+    isClientReceivedResponse=true;
+    Assert.assertEquals(r.getEchoResponse(),"Dummy");
+    if (isMessageNeed) {
+      Tests.EchoServerResponse.Builder message=Tests.EchoServerResponse.newBuilder().setEchoResponse(MESSAGE);
+      for (int i=0; i < N; i++) {
+        sendMessage(message.build());
+      }
+    }
+  }
+ else {
+    Assert.fail("Unknown type of response received");
+  }
+}

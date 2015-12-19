@@ -1,0 +1,7 @@
+{
+  LOG.info("To deactivate topology: " + topologyName);
+  for (  InstanceExecutor executor : instanceExecutors) {
+    executor.deactivate();
+  }
+  LOG.info("Deactivated topology:" + topologyName);
+}

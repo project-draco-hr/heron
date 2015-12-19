@@ -1,0 +1,34 @@
+{
+  StreamManager.TupleMessage.Builder out=StreamManager.TupleMessage.newBuilder();
+  for (  HeronTuples.AckTuple emitTuple : controlTupleSet.getEmitsList()) {
+    for (    HeronTuples.RootId rootId : emitTuple.getRootsList()) {
+      xorManager.anchor(taskId,rootId.getKey(),emitTuple.getAckedtuple());
+    }
+  }
+  for (  HeronTuples.AckTuple ackTuple : controlTupleSet.getAcksList()) {
+    for (    HeronTuples.RootId rootId : ackTuple.getRootsList()) {
+      if (xorManager.anchor(taskId,rootId.getKey(),ackTuple.getAckedtuple())) {
+        HeronTuples.AckTuple.Builder a=out.getSetBuilder().getControlBuilder().addAcksBuilder();
+        HeronTuples.RootId.Builder r=a.addRootsBuilder();
+        r.setKey(rootId.getKey());
+        r.setTaskid(taskId);
+        a.setAckedtuple(0);
+        xorManager.remove(taskId,rootId.getKey());
+      }
+    }
+  }
+  for (  HeronTuples.AckTuple failTuple : controlTupleSet.getFailsList()) {
+    for (    HeronTuples.RootId rootId : failTuple.getRootsList()) {
+      if (xorManager.remove(taskId,rootId.getKey())) {
+        HeronTuples.AckTuple.Builder f=out.getSetBuilder().getControlBuilder().addFailsBuilder();
+        HeronTuples.RootId.Builder r=f.addRootsBuilder();
+        r.setKey(rootId.getKey());
+        r.setTaskid(taskId);
+        f.setAckedtuple(0);
+      }
+    }
+  }
+  if (out.hasSet()) {
+    sendMessageToInstance(taskId,out.build());
+  }
+}

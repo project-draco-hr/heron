@@ -1,0 +1,6 @@
+{
+  AtomicInteger deactivateCount=(AtomicInteger)SingletonRegistry.INSTANCE.getSingleton(Constants.DEACTIVATE_COUNT);
+  if (deactivateCount != null) {
+    deactivateCount.getAndIncrement();
+  }
+}

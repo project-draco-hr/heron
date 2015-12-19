@@ -1,0 +1,16 @@
+{
+  Metrics.MetricPublisher publisher=request.getPublisher();
+  LOG.info(String.format("Got a new register publisher from hostname: %s," + " component_name: %s, port: %d," + " instance_id: %s, instance_index: %d from %s",publisher.getHostname(),publisher.getComponentName(),publisher.getPort(),publisher.getInstanceId(),publisher.getInstanceIndex(),channel.socket().getRemoteSocketAddress()));
+  Common.StatusCode responseStatusCode=Common.StatusCode.NOTOK;
+  if (publisherMap.containsKey(channel.socket().getRemoteSocketAddress())) {
+    LOG.severe(String.format("Metrics publisher already exists for hostname: %s," + " component_name: %s, port: %d," + " instance_id: %s, instance_index: %d",publisher.getHostname(),publisher.getComponentName(),publisher.getPort(),publisher.getInstanceId(),publisher.getInstanceIndex()));
+  }
+ else {
+    publisherMap.put(channel.socket().getRemoteSocketAddress(),publisher);
+    responseStatusCode=Common.StatusCode.OK;
+  }
+  Common.Status responseStatus=Common.Status.newBuilder().setStatus(responseStatusCode).build();
+  Metrics.MetricPublisherRegisterResponse response=Metrics.MetricPublisherRegisterResponse.newBuilder().setStatus(responseStatus).build();
+  sendResponse(rid,channel,response);
+  serverMetricsCounters.scope(SERVER_NEW_REGISTER).incr();
+}

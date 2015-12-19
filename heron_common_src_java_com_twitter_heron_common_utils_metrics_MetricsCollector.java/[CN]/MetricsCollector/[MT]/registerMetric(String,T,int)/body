@@ -1,0 +1,21 @@
+{
+  if (metrics.containsKey(name)) {
+    throw new RuntimeException("Another metric has already been registered with name: " + name);
+  }
+  metrics.put(name,metric);
+  if (timeBucketToMetricNames.containsKey(timeBucketSizeInSecs)) {
+    timeBucketToMetricNames.get(timeBucketSizeInSecs).add(name);
+  }
+ else {
+    timeBucketToMetricNames.put(timeBucketSizeInSecs,new LinkedList<String>());
+    timeBucketToMetricNames.get(timeBucketSizeInSecs).add(name);
+    Runnable r=new Runnable(){
+      public void run(){
+        gatherMetrics(timeBucketSizeInSecs);
+      }
+    }
+;
+    runnableToGatherMetrics.registerTimerEventInSeconds(timeBucketSizeInSecs,r);
+  }
+  return metric;
+}

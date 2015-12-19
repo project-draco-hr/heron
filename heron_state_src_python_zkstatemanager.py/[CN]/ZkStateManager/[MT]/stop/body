@@ -1,0 +1,3 @@
+def stop(self):
+    self.client.stop()
+    self.terminate_ssh_tunnel()

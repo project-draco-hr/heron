@@ -1,0 +1,6 @@
+{
+  String tweet=tuple.getString(0);
+  if (isFiltered(tweet)) {
+    basicOutputCollector.emit(new Values(tweet));
+  }
+}

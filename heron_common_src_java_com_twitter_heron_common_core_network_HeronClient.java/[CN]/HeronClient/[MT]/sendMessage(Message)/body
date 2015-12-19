@@ -1,0 +1,4 @@
+{
+  OutgoingPacket opk=new OutgoingPacket(REQID.zeroREQID,message);
+  socketChannelHelper.sendPacket(opk);
+}

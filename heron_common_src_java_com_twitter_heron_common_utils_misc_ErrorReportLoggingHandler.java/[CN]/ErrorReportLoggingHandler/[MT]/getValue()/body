@@ -1,0 +1,5 @@
+{
+synchronized (ExceptionRepositoryAsMetrics.INSTANCE) {
+    return exceptionStore.values();
+  }
+}

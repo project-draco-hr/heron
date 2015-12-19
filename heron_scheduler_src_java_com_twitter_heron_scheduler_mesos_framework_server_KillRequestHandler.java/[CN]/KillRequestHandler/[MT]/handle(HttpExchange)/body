@@ -1,0 +1,20 @@
+{
+  LOG.info("Received a kill request from client");
+  byte[] requestBody=NetworkUtility.readHttpRequestBody(httpExchange);
+  String jobName=new String(requestBody);
+  LOG.info("To kill job: " + jobName);
+  boolean isSuccess=false;
+  try {
+    isSuccess=handleRequest(jobName);
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to kill job: " + jobName,e);
+  }
+  if (isSuccess) {
+    LOG.info("Kill done! Send OK response!");
+  }
+ else {
+    LOG.info("Failed to kill topology! Send NOT_AVAILABLE response!");
+  }
+  NetworkUtility.sendHttpResponse(isSuccess,httpExchange,new byte[0]);
+}

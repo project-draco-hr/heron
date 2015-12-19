@@ -1,0 +1,3 @@
+String topologyPath
+String heronCoreReleasePath
+String mesosPackagePath

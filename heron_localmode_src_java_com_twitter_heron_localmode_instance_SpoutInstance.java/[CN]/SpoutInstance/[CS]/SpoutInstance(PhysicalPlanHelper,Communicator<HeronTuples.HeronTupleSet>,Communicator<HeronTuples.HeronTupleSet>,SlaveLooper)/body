@@ -1,0 +1,40 @@
+{
+  this.helper=helper;
+  this.looper=looper;
+  this.streamInQueue=streamInQueue;
+  this.spoutMetrics=new SpoutMetrics();
+  this.spoutMetrics.initMultiCountMetrics(helper);
+  TopologyContextImpl topologyContext=helper.getTopologyContext();
+  config=topologyContext.getTopologyConfig();
+  systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(com.twitter.heron.common.utils.misc.Constants.HERON_SYSTEM_CONFIG);
+  this.ackEnabled=Boolean.parseBoolean((String)config.get(Config.TOPOLOGY_ENABLE_ACKING));
+  this.enableMessageTimeouts=Boolean.parseBoolean((String)config.get(Config.TOPOLOGY_ENABLE_MESSAGE_TIMEOUTS));
+  LOG.info("Enable Ack: " + this.ackEnabled);
+  LOG.info("EnableMessageTimeouts: " + this.enableMessageTimeouts);
+  if (helper.getMySpout() == null) {
+    throw new RuntimeException("HeronSpoutInstance has no spout in physical plan");
+  }
+  serializer=SerializeDeSerializeHelper.getSerializer(config);
+  if (helper.getMySpout().getComp().hasJavaObject()) {
+    spout=(ISpout)Utils.deserialize(helper.getMySpout().getComp().getJavaObject().toByteArray());
+  }
+ else   if (helper.getMySpout().getComp().hasJavaClassName()) {
+    String spoutClassName=helper.getMySpout().getComp().getJavaClassName();
+    try {
+      spout=(ISpout)Class.forName(spoutClassName).newInstance();
+    }
+ catch (    ClassNotFoundException ex) {
+      throw new RuntimeException(ex + " Spout class must be in class path.");
+    }
+catch (    InstantiationException ex) {
+      throw new RuntimeException(ex + " Spout class must be concrete.");
+    }
+catch (    IllegalAccessException ex) {
+      throw new RuntimeException(ex + " Spout class must have a no-arg constructor.");
+    }
+  }
+ else {
+    throw new RuntimeException("Neither java_object nor java_class_name set for spout");
+  }
+  collector=new SpoutOutputCollectorImpl(serializer,helper,streamOutQueue,spoutMetrics);
+}

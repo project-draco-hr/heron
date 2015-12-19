@@ -1,0 +1,12 @@
+{
+  if (isConnected()) {
+    for (    Communicator<Metrics.MetricPublisherPublishMessage> c : outMetricsQueues) {
+      while (!c.isEmpty()) {
+        Metrics.MetricPublisherPublishMessage m=c.poll();
+        gatewayMetrics.updateSentMetricsSize(m.getSerializedSize());
+        gatewayMetrics.updateSentMetrics(m.getMetricsCount(),m.getExceptionsCount());
+        sendMessage(m);
+      }
+    }
+  }
+}

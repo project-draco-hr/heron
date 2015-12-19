@@ -1,0 +1,4 @@
+def get_topologies_path(self):
+    '\n    Create the path using rootpath.\n    '
+    path = HERON_TOPOLOGIES_KEY.format(self.rootpath)
+    return path

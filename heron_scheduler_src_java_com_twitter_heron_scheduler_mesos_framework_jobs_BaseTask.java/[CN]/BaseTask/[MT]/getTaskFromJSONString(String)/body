@@ -1,0 +1,8 @@
+{
+  try {
+    return new ObjectMapper().readValue(taskInJSON,BaseTask.class);
+  }
+ catch (  IOException e) {
+    throw new IllegalArgumentException("Unable to parse the JSON string",e);
+  }
+}

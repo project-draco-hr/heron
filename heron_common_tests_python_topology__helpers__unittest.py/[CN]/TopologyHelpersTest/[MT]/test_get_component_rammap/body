@@ -1,0 +1,21 @@
+def test_get_component_rammap(self):
+    original_ram_for_stmgr = constants.RAM_FOR_STMGR
+    constants.RAM_FOR_STMGR = 2
+    topology = self.mock_proto.create_mock_simple_topology(4, 8)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_COMPONENT_RAMMAP, 'mock_spout:2,mock_bolt:3')
+    self.assertEqual({'mock_spout': 2, 'mock_bolt': 3, }, topology_helpers.get_component_rammap(topology))
+    topology = self.mock_proto.create_mock_simple_topology(4, 8)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_COMPONENT_RAMMAP, 'mock_spout:2')
+    expected_component_rammap = {'mock_spout': 2, 'mock_bolt': constants.DEFAULT_RAM_FOR_INSTANCE, }
+    self.assertEqual(expected_component_rammap, topology_helpers.get_component_rammap(topology))
+    topology = self.mock_proto.create_mock_simple_topology(4, 8)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_STMGRS, 4)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_CONTAINER_RAM_REQUESTED, 8)
+    expected_component_rammap = {'mock_spout': 2, 'mock_bolt': 2, }
+    component_rammap = topology_helpers.get_component_rammap(topology)
+    self.assertEqual(expected_component_rammap, component_rammap)
+    topology = self.mock_proto.create_mock_simple_topology(4, 8)
+    component_rammap = topology_helpers.get_component_rammap(topology)
+    expected_component_rammap = {'mock_spout': constants.DEFAULT_RAM_FOR_INSTANCE, 'mock_bolt': constants.DEFAULT_RAM_FOR_INSTANCE, }
+    self.assertEqual(expected_component_rammap, component_rammap)
+    constants.RAM_FOR_STMGR = original_ram_for_stmgr

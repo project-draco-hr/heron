@@ -1,0 +1,6 @@
+def validateInterval(self, startTime, endTime):
+    '\n    Helper function to validate interval.\n    An interval is valid if starttime and endtime are integrals,\n    and starttime is less than the endtime.\n    Raises exception if interval is not valid.\n    '
+    start = int(startTime)
+    end = int(endTime)
+    if (start > end):
+        raise Exception('starttime is greater than endtime.')

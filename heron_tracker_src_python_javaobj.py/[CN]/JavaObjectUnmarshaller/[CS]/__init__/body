@@ -1,0 +1,8 @@
+def __init__(self, stream=None):
+    self.opmap = {self.TC_NULL: self.do_null, self.TC_CLASSDESC: self.do_classdesc, self.TC_OBJECT: self.do_object, self.TC_STRING: self.do_string, self.TC_ARRAY: self.do_array, self.TC_CLASS: self.do_class, self.TC_BLOCKDATA: self.do_blockdata, self.TC_REFERENCE: self.do_reference, self.TC_ENUM: self.do_enum, self.TC_ENDBLOCKDATA: self.do_null, }
+    self.current_object = None
+    self.reference_counter = 0
+    self.references = []
+    self.object_stream = stream
+    self._readStreamHeader()
+    self.object_transformers = []

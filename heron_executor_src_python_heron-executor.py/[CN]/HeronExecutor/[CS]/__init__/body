@@ -1,0 +1,38 @@
+def __init__(self, args):
+    self.max_runs = 100
+    self.interval_between_runs = 10
+    self.shard = int(args[1])
+    self.topology_name = args[2]
+    self.topology_id = args[3]
+    self.topology_defn_file = args[4]
+    f1 = map((lambda z: (int(z[0]), ':'.join(z[1:]))), map((lambda x: x.split(':')), args[5].split(',')))
+    f2 = map((lambda x: {x[0]: extract_triplets(x[1]), }), f1)
+    self.instance_distribution = reduce((lambda x, y: dict((x.items() + y.items()))), f2)
+    self.zknode = args[6]
+    self.zkroot = args[7]
+    self.tmaster_binary = args[8]
+    self.stmgr_binary = args[9]
+    self.metricsmgr_classpath = args[10]
+    self.instance_jvm_opts = base64.b64decode(args[11].lstrip('"').rstrip('"').replace('&equals;', '='))
+    self.classpath = args[12]
+    self.port1 = args[13]
+    self.port2 = args[14]
+    self.port3 = args[15]
+    self.heron_internals_config_file = args[16]
+    self.component_rammap = map((lambda x: {x.split(':')[0]: int(x.split(':')[1]), }), args[17].split(','))
+    self.component_rammap = reduce((lambda x, y: dict((x.items() + y.items()))), self.component_rammap)
+    self.component_jvm_opts = {}
+    component_jvm_opts_in_json = base64.b64decode(args[18].lstrip('"').rstrip('"').replace('&equals;', '='))
+    if (component_jvm_opts_in_json != ''):
+        for (k, v) in json.loads(component_jvm_opts_in_json).items():
+            self.component_jvm_opts[base64.b64decode(k)] = base64.b64decode(v)
+    self.pkg_type = args[19]
+    self.topology_jar_file = args[20]
+    self.stmgr_ids = stmgr_list(len(self.instance_distribution))
+    self.metricsmgr_ids = metricsmgr_list(len(self.instance_distribution))
+    self.heron_java_home = args[21]
+    self.shell_port = args[22]
+    self.log_dir = args[23]
+    self.heron_shell_binary = args[24]
+    self.port4 = args[25]
+    log_pid_for_process(get_heron_executor_process_name(self.shard), os.getpid())

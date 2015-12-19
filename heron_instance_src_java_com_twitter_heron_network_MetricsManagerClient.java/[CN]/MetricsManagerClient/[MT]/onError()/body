@@ -1,0 +1,4 @@
+{
+  LOG.severe("Disconnected from Metrics Manager.");
+  onConnect(StatusCode.CONNECT_ERROR);
+}

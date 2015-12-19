@@ -1,0 +1,23 @@
+@tornado.gen.coroutine
+def execute(self, tracker, tmaster, start, end):
+    metrics = yield tracker.getMetricsTimeline(tmaster, self.component, [self.metricName], self.instances, (start - 60), (end + 60))
+    if (not metrics):
+        return
+    if ('message' in metrics):
+        raise Exception(metrics['message'])
+    if (('timeline' not in metrics) or (not metrics['timeline'])):
+        metrics['timeline'] = {self.metricName: {}, }
+    timelines = metrics['timeline'][self.metricName]
+    allMetrics = []
+    for (instance, timeline) in timelines.iteritems():
+        toBeDeletedKeys = []
+        for (key, value) in timeline.iteritems():
+            floatValue = float(value)
+            if math.isnan(floatValue):
+                toBeDeletedKeys.append(key)
+                continue
+            timeline[key] = floatValue
+        for key in toBeDeletedKeys:
+            timeline.pop(key)
+        allMetrics.append(Metrics(self.component, self.metricName, instance, start, end, timeline))
+    raise tornado.gen.Return(allMetrics)

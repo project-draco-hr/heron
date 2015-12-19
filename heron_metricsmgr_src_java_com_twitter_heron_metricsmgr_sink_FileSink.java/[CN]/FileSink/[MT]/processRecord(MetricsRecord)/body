@@ -1,0 +1,12 @@
+{
+  if (isFileStart) {
+    openNewFile(String.format("%s.%s",filenamePrefix,currentFileIndex));
+    writer.print("[");
+    isFileStart=false;
+  }
+ else {
+    writer.print(",");
+  }
+  writer.print(convertRecordToJSON(record));
+  sinkContext.exportCountMetric(RECORD_PROCESS_COUNT,1);
+}

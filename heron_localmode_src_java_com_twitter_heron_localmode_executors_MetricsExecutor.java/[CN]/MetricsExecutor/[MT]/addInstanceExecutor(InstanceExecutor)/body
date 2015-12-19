@@ -1,0 +1,4 @@
+{
+  instanceExecutor.getMetricsOutQueue().setConsumer(looper);
+  instanceExecutors.add(instanceExecutor);
+}

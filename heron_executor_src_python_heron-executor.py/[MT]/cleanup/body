@@ -1,0 +1,3 @@
+def cleanup():
+    do_print('Executor terminated; exiting all process in executor.')
+    os.killpg(0, signal.SIGTERM)

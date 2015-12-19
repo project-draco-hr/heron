@@ -1,0 +1,2 @@
+def get_process_pid_filename(process_name):
+    return ('%s.pid' % process_name)

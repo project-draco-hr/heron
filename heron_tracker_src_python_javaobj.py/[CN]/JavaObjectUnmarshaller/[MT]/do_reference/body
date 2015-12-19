@@ -1,0 +1,4 @@
+def do_reference(self, parent=None, ident=0):
+    (handle,) = self._readStruct('>L')
+    log_debug(('## Reference handle: 0x%x' % handle), ident)
+    return self.references[(handle - self.BASE_REFERENCE_IDX)]

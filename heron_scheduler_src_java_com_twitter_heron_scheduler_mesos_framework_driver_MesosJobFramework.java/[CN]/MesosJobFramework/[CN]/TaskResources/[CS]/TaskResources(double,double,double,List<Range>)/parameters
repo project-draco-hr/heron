@@ -1,0 +1,4 @@
+double cpu
+double mem
+double disk
+List<Range> portsResources

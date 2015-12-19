@@ -1,0 +1,12 @@
+{
+  Metrics.MetricPublisherPublishMessage.Builder builder=Metrics.MetricPublisherPublishMessage.newBuilder();
+  for (int j=0; j < N; j++) {
+    Metrics.MetricDatum metricDatum=Metrics.MetricDatum.newBuilder().setName(METRIC_NAME).setValue(METRIC_VALUE).build();
+    builder.addMetrics(metricDatum);
+  }
+  for (int j=0; j < N; j++) {
+    Metrics.ExceptionData exceptionData=Metrics.ExceptionData.newBuilder().setStacktrace(STACK_TRACE).setLasttime(LAST_TIME).setFirsttime(FIRST_TIME).setCount(EXCEPTION_COUNT).setLogging(LOGGING).build();
+    builder.addExceptions(exceptionData);
+  }
+  sendMessage(builder.build());
+}

@@ -1,0 +1,9 @@
+{
+  List<Integer> retval=new LinkedList<Integer>();
+  for (  PhysicalPlans.Instance instance : pplan.getInstancesList()) {
+    if (instance.getInfo().getComponentName().equals(comp)) {
+      retval.add(instance.getInfo().getTaskId());
+    }
+  }
+  return retval;
+}

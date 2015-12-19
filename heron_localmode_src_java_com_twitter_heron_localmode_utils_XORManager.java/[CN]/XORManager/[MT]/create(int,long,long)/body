@@ -1,0 +1,3 @@
+{
+  spoutTasksToRotatingMap.get(taskId).create(key,value);
+}

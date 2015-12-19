@@ -1,0 +1,23 @@
+{
+  if (args.length != 6) {
+    throw new RuntimeException("Invalid arguments; Usage: java com.twitter.heron.metricsmgr.MetricsManager <id> <port> <topname> <topid> <heron_internals_config_filename> <metrics_sinks_config_filename>");
+  }
+  String metricsmgrId=args[0];
+  int metricsPort=Integer.parseInt(args[1]);
+  String topologyName=args[2];
+  String topologyId=args[3];
+  String systemConfigFilename=args[4];
+  String metricsSinksConfigFilename=args[5];
+  SystemConfig systemConfig=new SystemConfig(systemConfigFilename,true);
+  SingletonRegistry.INSTANCE.registerSingleton(Constants.HERON_SYSTEM_CONFIG,systemConfig);
+  Level loggingLevel=Level.INFO;
+  String loggingDir=systemConfig.getHeronLoggingDirectory();
+  LoggingHelper.loggerInit(metricsmgrId,loggingLevel,loggingDir);
+  LOG.info(String.format("Starting Metrics Manager for topology %s with topologyId %s with " + "Metrics Manager Id %s, Merics Manager Port: %d.",topologyName,topologyId,metricsmgrId,metricsPort));
+  LOG.info("System Config: " + systemConfig);
+  MetricsSinksConfig sinksConfig=new MetricsSinksConfig(metricsSinksConfigFilename);
+  LOG.info("Sinks Config:" + sinksConfig.toString());
+  MetricsManager metricsManager=new MetricsManager(topologyName,METRICS_MANAGER_HOST,metricsPort,metricsmgrId,systemConfig,sinksConfig);
+  metricsManager.start();
+  LOG.info("Loops terminated. Metrics Manager exits.");
+}

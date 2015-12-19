@@ -1,0 +1,25 @@
+{
+  if (args.length < 10) {
+    throw new RuntimeException("Invalid arguments; Usage is java com.twitter.heron.instance.HeronInstance <topology_name> <topology_id> <instance_id> <component_name> <task_id> <component_index> <stmgr_id> <stmgr_port> <metricsmgr_port> <heron_internals_config_filename>");
+  }
+  String topologyName=args[0];
+  String topologyId=args[1];
+  String instanceId=args[2];
+  String componentName=args[3];
+  int taskId=Integer.parseInt(args[4]);
+  int componentIndex=Integer.parseInt(args[5]);
+  String streamId=args[6];
+  int streamPort=Integer.parseInt(args[7]);
+  int metricsPort=Integer.parseInt(args[8]);
+  SystemConfig systemConfig=new SystemConfig(args[9],true);
+  SingletonRegistry.INSTANCE.registerSingleton(Constants.HERON_SYSTEM_CONFIG,systemConfig);
+  PhysicalPlans.InstanceInfo instanceInfo=PhysicalPlans.InstanceInfo.newBuilder().setTaskId(taskId).setComponentIndex(componentIndex).setComponentName(componentName).build();
+  PhysicalPlans.Instance instance=PhysicalPlans.Instance.newBuilder().setInstanceId(instanceId).setStmgrId(streamId).setInfo(instanceInfo).build();
+  Level loggingLevel=Level.INFO;
+  String loggingDir=systemConfig.getHeronLoggingDirectory();
+  LoggingHelper.loggerInit(instanceId,loggingLevel,loggingDir);
+  LOG.info("\nStarting instance " + instanceId + " for topology "+ topologyName+ " and topologyId "+ topologyId+ " for component "+ componentName+ " with taskId "+ taskId+ " and componentIndex "+ componentIndex+ " and stmgrId "+ streamId+ " and stmgrPort "+ streamPort+ " and metricsManagerPort "+ metricsPort);
+  LOG.info("System Config: " + systemConfig);
+  HeronInstance heronInstance=new HeronInstance(topologyName,topologyId,instance,streamPort,metricsPort);
+  heronInstance.start();
+}

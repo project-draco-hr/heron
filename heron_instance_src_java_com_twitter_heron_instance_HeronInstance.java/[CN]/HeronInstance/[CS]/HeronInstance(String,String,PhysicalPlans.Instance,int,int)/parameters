@@ -1,0 +1,5 @@
+String topologyName
+String topologyId
+PhysicalPlans.Instance instance
+int streamPort
+int metricsPort

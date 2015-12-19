@@ -1,0 +1,11 @@
+{
+  LOG.info("Remove Job: " + jobName);
+  try {
+    Files.deleteIfExists(new File(jobPath + "/" + jobName).toPath());
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to delete file",e);
+    return false;
+  }
+  return true;
+}

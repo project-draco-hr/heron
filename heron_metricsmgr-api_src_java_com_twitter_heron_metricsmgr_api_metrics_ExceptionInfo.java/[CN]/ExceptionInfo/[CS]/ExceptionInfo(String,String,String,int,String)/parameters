@@ -1,0 +1,5 @@
+String stackTrace
+String lastTime
+String firstTime
+int count
+String logging

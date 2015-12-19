@@ -1,0 +1,7 @@
+{
+  this.source=source;
+  this.timestamp=timestamp;
+  this.context=context;
+  this.metrics=metrics;
+  this.exceptions=exceptions;
+}

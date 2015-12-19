@@ -1,0 +1,11 @@
+{
+  if (boltsBuilder_ == null) {
+    ensureBoltsIsMutable();
+    bolts_.add(index,builderForValue.build());
+    onChanged();
+  }
+ else {
+    boltsBuilder_.addMessage(index,builderForValue.build());
+  }
+  return this;
+}

@@ -1,0 +1,7 @@
+{
+  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
+  long defaultInstanceRam=Long.parseLong(context.getProperty(INSTANCE_RAM_DEFAULT,Long.toString(1 * Constants.GB)));
+  long stmgrRam=Long.parseLong(context.getProperty(STMGR_RAM_DEFAULT,Long.toString(1 * Constants.GB)));
+  long containerRamRequested=Long.parseLong(TopologyUtility.getConfigWithDefault(topologyConfig,Config.TOPOLOGY_CONTAINER_RAM_REQUESTED,"-1"));
+  return getDefaultInstanceRam(packing,topology,defaultInstanceRam,stmgrRam,containerRamRequested);
+}

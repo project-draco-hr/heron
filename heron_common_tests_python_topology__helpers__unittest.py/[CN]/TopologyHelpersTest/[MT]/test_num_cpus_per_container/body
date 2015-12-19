@@ -1,0 +1,7 @@
+def test_num_cpus_per_container(self):
+    topology = self.mock_proto.create_mock_simple_topology(2, 2)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_STMGRS, 4)
+    self.assertEqual(2, topology_helpers.get_cpus_per_container(topology))
+    topology = self.mock_proto.create_mock_simple_topology(2, 2)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_CONTAINER_CPU_REQUESTED, 42)
+    self.assertEqual(42, topology_helpers.get_cpus_per_container(topology))

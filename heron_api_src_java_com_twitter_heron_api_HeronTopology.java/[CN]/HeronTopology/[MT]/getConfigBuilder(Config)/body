@@ -1,0 +1,16 @@
+{
+  TopologyAPI.Config.Builder cBldr=TopologyAPI.Config.newBuilder();
+  Set<String> apiVars=config.getApiVars();
+  for (  Map.Entry<String,Object> entry : config.entrySet()) {
+    TopologyAPI.Config.KeyValue.Builder b=TopologyAPI.Config.KeyValue.newBuilder();
+    b.setKey(entry.getKey());
+    if (apiVars.contains(entry.getKey())) {
+      b.setValue(entry.getValue().toString());
+    }
+ else {
+      b.setJavaSerializedValue(ByteString.copyFrom(Utils.serialize(entry.getValue())));
+    }
+    cBldr.addKvs(b);
+  }
+  return cBldr;
+}

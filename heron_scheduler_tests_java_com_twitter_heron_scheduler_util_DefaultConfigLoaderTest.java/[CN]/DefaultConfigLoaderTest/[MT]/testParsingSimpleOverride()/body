@@ -1,0 +1,10 @@
+{
+  String override="key1= value1  key2 =value2    key3   =    \"value3\"";
+  DefaultConfigLoader configLoader=new DefaultConfigLoader();
+  configLoader.properties=new Properties();
+  configLoader.applyConfigOverride(override);
+  Assert.assertEquals("value1",configLoader.properties.getProperty("key1"));
+  Assert.assertEquals("value2",configLoader.properties.getProperty("key2"));
+  Assert.assertEquals("value3",configLoader.properties.getProperty("key3"));
+  Assert.assertEquals(3,configLoader.properties.entrySet().size());
+}

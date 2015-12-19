@@ -1,0 +1,3 @@
+{
+  registerTimerEventInNanoSeconds(timerInSeconds * Constants.SECONDS_TO_NANOSECONDS,task);
+}

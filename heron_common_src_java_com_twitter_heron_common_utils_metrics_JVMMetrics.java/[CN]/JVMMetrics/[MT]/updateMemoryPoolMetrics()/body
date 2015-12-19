@@ -1,0 +1,23 @@
+{
+  for (  MemoryPoolMXBean memoryPoolMXBean : memoryPoolMXBeanList) {
+    String normalizedKeyName=memoryPoolMXBean.getName().replaceAll("[^\\w]","-");
+    MemoryUsage peakUsage=memoryPoolMXBean.getPeakUsage();
+    if (peakUsage != null) {
+      jvmPeakUsagePerMemoryPool.safeScope(normalizedKeyName + "-used").setValue(peakUsage.getUsed() / Constants.MB_TO_BYTES);
+      jvmPeakUsagePerMemoryPool.safeScope(normalizedKeyName + "-committed").setValue(peakUsage.getCommitted() / Constants.MB_TO_BYTES);
+      jvmPeakUsagePerMemoryPool.safeScope(normalizedKeyName + "-max").setValue(peakUsage.getMax() / Constants.MB_TO_BYTES);
+    }
+    MemoryUsage collectionUsage=memoryPoolMXBean.getCollectionUsage();
+    if (collectionUsage != null) {
+      jvmCollectionUsagePerMemoryPool.safeScope(normalizedKeyName + "-used").setValue(collectionUsage.getUsed() / Constants.MB_TO_BYTES);
+      jvmCollectionUsagePerMemoryPool.safeScope(normalizedKeyName + "-committed").setValue(collectionUsage.getCommitted() / Constants.MB_TO_BYTES);
+      jvmCollectionUsagePerMemoryPool.safeScope(normalizedKeyName + "-max").setValue(collectionUsage.getMax() / Constants.MB_TO_BYTES);
+    }
+    MemoryUsage estimatedUsage=memoryPoolMXBean.getUsage();
+    if (estimatedUsage != null) {
+      jvmEstimatedUsagePerMemoryPool.safeScope(normalizedKeyName + "-used").setValue(estimatedUsage.getUsed() / Constants.MB_TO_BYTES);
+      jvmEstimatedUsagePerMemoryPool.safeScope(normalizedKeyName + "-committed").setValue(estimatedUsage.getCommitted() / Constants.MB_TO_BYTES);
+      jvmEstimatedUsagePerMemoryPool.safeScope(normalizedKeyName + "-max").setValue(estimatedUsage.getMax() / Constants.MB_TO_BYTES);
+    }
+  }
+}

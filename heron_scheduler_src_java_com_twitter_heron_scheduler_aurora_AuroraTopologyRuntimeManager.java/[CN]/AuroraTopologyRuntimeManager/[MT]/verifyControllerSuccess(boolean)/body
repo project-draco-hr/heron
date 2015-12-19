@@ -1,0 +1,19 @@
+{
+  TopologyAPI.Topology topology=null;
+  try {
+    SchedulerStateManagerAdaptor manager=context.getStateManagerAdaptor();
+    topology=manager.getTopology().get();
+  }
+ catch (  InterruptedException|ExecutionException e) {
+    LOG.log(Level.SEVERE,"Fetch topology failed." + " Confirm that topology is running",e);
+    return false;
+  }
+  if (activate) {
+    LOG.info("Topology End state: " + topology.getState());
+    return topology.getState().equals(TopologyAPI.TopologyState.RUNNING);
+  }
+ else {
+    LOG.info("Topology End state: " + topology.getState());
+    return topology.getState().equals(TopologyAPI.TopologyState.PAUSED);
+  }
+}

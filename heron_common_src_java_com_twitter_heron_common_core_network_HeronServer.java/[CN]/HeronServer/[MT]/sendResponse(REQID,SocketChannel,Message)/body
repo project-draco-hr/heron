@@ -1,0 +1,10 @@
+{
+  SocketChannelHelper helper=activeConnections.get(channel);
+  if (helper == null) {
+    LOG.severe("Trying to send a response on an unknown connection");
+    return false;
+  }
+  OutgoingPacket opk=new OutgoingPacket(rid,response);
+  helper.sendPacket(opk);
+  return true;
+}

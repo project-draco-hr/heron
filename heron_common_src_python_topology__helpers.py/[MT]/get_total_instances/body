@@ -1,0 +1,4 @@
+def get_total_instances(topology):
+    '\n  The argument is the proto object for topology.\n  Returns the total number of instances based on all parallelisms.\n  '
+    cmap = get_component_parallelism(topology)
+    return sum(cmap.values())

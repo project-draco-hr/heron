@@ -1,0 +1,10 @@
+def test_remove_topology(self):
+    self.fill_tracker_topologies()
+    self.tracker.removeTopology('top_name1', 'mock_name1')
+    self.assertItemsEqual([self.topology2, self.topology3, self.topology4, self.topology5], self.tracker.topologies)
+    self.tracker.removeTopology('top_name2', 'mock_name1')
+    self.assertItemsEqual([self.topology3, self.topology4, self.topology5], self.tracker.topologies)
+    self.tracker.removeTopology('top_name8', 'mock_name1')
+    self.assertItemsEqual([self.topology3, self.topology4, self.topology5], self.tracker.topologies)
+    self.tracker.removeTopology('top_name4', 'mock_name2')
+    self.assertItemsEqual([self.topology3, self.topology5], self.tracker.topologies)

@@ -1,0 +1,11 @@
+{
+  for (  HeronTuples.RootId rootId : control.getRootsList()) {
+    HeronTuples.AckTuple t=HeronTuples.AckTuple.newBuilder().addRoots(rootId).setAckedtuple(control.getAckedtuple()).build();
+    if (isSuccess) {
+      tupleCache.addAckTuple(rootId.getTaskid(),t);
+    }
+ else {
+      tupleCache.addFailTuple(rootId.getTaskid(),t);
+    }
+  }
+}

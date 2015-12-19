@@ -1,0 +1,3 @@
+String streamId
+String sourceComponent
+long latency

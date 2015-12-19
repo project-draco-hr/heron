@@ -1,0 +1,6 @@
+{
+  kryo=new Kryo();
+  kryo.setReferences(false);
+  kryoOut=new Output(2000,2000000000);
+  kryoIn=new Input(1);
+}

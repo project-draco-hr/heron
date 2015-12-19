@@ -1,0 +1,7 @@
+{
+  Protos.FrameworkID frameworkId=config.failoverTimeoutSeconds > 0 ? persistenceStore.getFrameworkID() : null;
+  if (frameworkId == null) {
+    LOG.info("No pre-existing FrameworkID. First time to start the scheduler.");
+  }
+  return SchedulerDriverBuilder.newBuilder().setFrameworkInfo(config,frameworkId).setScheduler(scheduler).setCredentials(config.authenticationPrincipal,config.authenticationSecretFile).build();
+}

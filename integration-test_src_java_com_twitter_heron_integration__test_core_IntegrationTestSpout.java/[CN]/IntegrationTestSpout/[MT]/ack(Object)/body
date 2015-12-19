@@ -1,0 +1,8 @@
+{
+  LOG.fine("Received a ack with MessageId: " + o);
+  tuplesToComplete--;
+  if (!o.equals(Constants.INTEGRATION_TEST_MOCK_MESSAGE_ID)) {
+    delegateSpout.ack(o);
+  }
+  emitTerminalIfNeeded();
+}

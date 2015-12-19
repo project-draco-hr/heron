@@ -1,0 +1,3 @@
+{
+  return shuffleGrouping(componentName,streamId);
+}

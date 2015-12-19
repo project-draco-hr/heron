@@ -1,0 +1,4 @@
+def terminate_ssh_tunnel(self):
+    '\n    Terminate the ssh tunnel if it was created.\n    '
+    if self.tunnel:
+        self.tunnel.terminate()

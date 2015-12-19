@@ -1,0 +1,80 @@
+{
+  final String AGGREGATOR_BOLT="__integration_test_aggregator_bolt";
+  BaseBatchBolt aggregatorBolt=null;
+  try {
+    aggregatorBolt=(BaseBatchBolt)Class.forName(terminalBoltClass).getConstructor(String.class).newInstance(this.outputLocation);
+  }
+ catch (  NoSuchMethodException e) {
+    throw new RuntimeException(e + " Terminal Bolt class must have a single String constructor.");
+  }
+catch (  InstantiationException e) {
+    throw new RuntimeException(e + " Terminal bolt class could not be instantiated.");
+  }
+catch (  IllegalAccessException e) {
+    throw new RuntimeException(e + " Terminal Bolt class constructor is not accessible.");
+  }
+catch (  InvocationTargetException e) {
+    throw new RuntimeException(e + " Terminal Bolt class constructor could not be invoked.");
+  }
+catch (  ClassNotFoundException e) {
+    throw new RuntimeException(e + " Terminal Bolt class must be a class path.");
+  }
+  setBolt(AGGREGATOR_BOLT,aggregatorBolt,1);
+  TopologyAPI.Topology.Builder topologyBlr=super.createTopology().setConfig(new Config()).setName("").setState(TopologyAPI.TopologyState.RUNNING).getTopology().toBuilder();
+  topologyBlr.clearTopologyConfig().clearName().clearState();
+  for (  TopologyAPI.Spout.Builder spout : topologyBlr.getSpoutsBuilderList()) {
+    String name=spout.getComp().getName();
+    spouts.put(name,spout);
+  }
+  for (  TopologyAPI.Bolt.Builder bolt : topologyBlr.getBoltsBuilderList()) {
+    String name=bolt.getComp().getName();
+    bolts.put(name,bolt);
+    if (name.equals(AGGREGATOR_BOLT)) {
+      continue;
+    }
+    for (    TopologyAPI.InputStream inputStream : bolt.getInputsList()) {
+      String parent=inputStream.getStream().getComponentName();
+      if (prev.containsKey(name)) {
+        prev.get(name).add(parent);
+      }
+ else {
+        HashSet<String> parents=new HashSet<String>();
+        parents.add(parent);
+        prev.put(name,parents);
+      }
+    }
+  }
+  HashSet<String> terminals=new HashSet<String>();
+  HashSet<String> nonTerminals=new HashSet<String>();
+  for (  HashSet<String> set : prev.values()) {
+    nonTerminals.addAll(set);
+  }
+  for (  String bolt : prev.keySet()) {
+    if (!nonTerminals.contains(bolt)) {
+      terminals.add(bolt);
+    }
+  }
+  for (  String spout : spouts.keySet()) {
+    if (!nonTerminals.contains(spout)) {
+      terminals.add(spout);
+    }
+  }
+  for (  String child : prev.keySet()) {
+    for (    String parent : prev.get(child)) {
+      addAllGrouping(child,parent,Constants.INTEGRATION_TEST_CONTROL_STREAM_ID);
+    }
+  }
+  for (  String t : terminals) {
+    List<TopologyAPI.OutputStream> osList;
+    if (bolts.get(t) != null) {
+      osList=bolts.get(t).getOutputsList();
+    }
+ else {
+      osList=spouts.get(t).getOutputsList();
+    }
+    for (    TopologyAPI.OutputStream os : osList) {
+      addAllGrouping(AGGREGATOR_BOLT,t,os.getStream().getId());
+    }
+  }
+  return new HeronTopology(topologyBlr);
+}

@@ -1,0 +1,5 @@
+self
+bolt_name
+input_streams
+output_streams
+bolt_parallelism

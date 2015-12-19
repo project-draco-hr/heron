@@ -1,0 +1,3 @@
+{
+  org.junit.Assert.fail("Expected message from client");
+}

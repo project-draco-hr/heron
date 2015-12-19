@@ -1,0 +1,26 @@
+{
+  sinkConfig.putAll(conf);
+  sinkContext=context;
+  Map<String,String> tmasterMetricsType=(Map<String,String>)sinkConfig.get(KEY_TMASTER_METRICS_TYPE);
+  if (tmasterMetricsType != null) {
+    for (    Map.Entry<String,String> metricToType : tmasterMetricsType.entrySet()) {
+      String value=metricToType.getValue();
+      MetricsFilter.MetricAggregationType type;
+      if (value.equals("SUM")) {
+        type=MetricsFilter.MetricAggregationType.SUM;
+      }
+ else       if (value.equals("AVG")) {
+        type=MetricsFilter.MetricAggregationType.AVG;
+      }
+ else       if (value.equals("LAST")) {
+        type=MetricsFilter.MetricAggregationType.LAST;
+      }
+ else {
+        type=MetricsFilter.MetricAggregationType.UNKNOWN;
+      }
+      tMasterMetricsFilter.setPrefixToType(metricToType.getKey(),type);
+    }
+  }
+  tMasterClientService=new TMasterClientService((Map<String,Object>)sinkConfig.get(KEY_TMASTER),metricsCommunicator);
+  startTMasterChecker();
+}

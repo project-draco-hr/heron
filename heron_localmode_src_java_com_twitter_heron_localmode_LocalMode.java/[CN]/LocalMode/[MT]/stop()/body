@@ -1,0 +1,10 @@
+{
+  for (  InstanceExecutor executor : instanceExecutors) {
+    executor.stop();
+  }
+  LOG.info("To stop Stream Executor");
+  streamExecutor.stop();
+  LOG.info("To stop Metrics Executor");
+  metricsExecutor.stop();
+  threadsPool.shutdown();
+}

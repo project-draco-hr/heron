@@ -1,0 +1,3 @@
+{
+  return createNode(getExecutionStatePath(topologyName),executionState.toByteArray(),false);
+}

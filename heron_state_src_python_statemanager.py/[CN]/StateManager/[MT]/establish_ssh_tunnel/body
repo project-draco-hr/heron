@@ -1,0 +1,5 @@
+def establish_ssh_tunnel(self):
+    '\n    Establish an ssh tunnel and return the local port\n    that can be used to communicate with the state host.\n    '
+    localport = self.pick_unused_port()
+    self.tunnel = subprocess.Popen(('ssh', self.tunnelhost, ('-NL%d:%s:%d' % (localport, self.host, self.port))))
+    return localport

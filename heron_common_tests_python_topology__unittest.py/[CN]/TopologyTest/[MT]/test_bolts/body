@@ -1,0 +1,7 @@
+def test_bolts(self):
+    self.assertEqual(0, len(self.topology.bolts()))
+    pplan = MockProto().create_mock_medium_physical_plan()
+    self.topology.set_physical_plan(pplan)
+    bolts = self.topology.bolts()
+    self.assertEqual(3, len(bolts))
+    self.assertEqual(['mock_bolt1', 'mock_bolt2', 'mock_bolt3'], self.topology.bolt_names())

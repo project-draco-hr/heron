@@ -1,0 +1,7 @@
+{
+  LOG.fine(String.format("isDone = %s, tuplesToComplete = %s",isDone,tuplesToComplete));
+  if (isDone && tuplesToComplete == 0) {
+    LOG.info("Emitting terminals to downstream.");
+    spoutOutputCollector.emit(Constants.INTEGRATION_TEST_CONTROL_STREAM_ID,new Values(Constants.INTEGRATION_TEST_TERMINAL));
+  }
+}

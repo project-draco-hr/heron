@@ -1,0 +1,31 @@
+{
+  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(com.twitter.heron.common.utils.misc.Constants.HERON_SYSTEM_CONFIG);
+  int interval=systemConfig.getHeronMetricsExportIntervalSec();
+  metricsCollector.registerMetric("__jvm-gc-collection-time-ms",jvmGCTimeMs,interval);
+  metricsCollector.registerMetric("__jvm-gc-collection-count",jvmGCCount,interval);
+  metricsCollector.registerMetric("__jvm-gc-time-ms",jvmGCTimeMsPerGCType,interval);
+  metricsCollector.registerMetric("__jvm-gc-count",jvmGCCountPerGCType,interval);
+  metricsCollector.registerMetric("__jvm-uptime-secs",jvmUpTimeSecs,interval);
+  metricsCollector.registerMetric("__jvm-thread-count",jvmThreadCount,interval);
+  metricsCollector.registerMetric("__jvm-daemon-thread-count",jvmDaemonThreadCount,interval);
+  metricsCollector.registerMetric("__jvm-process-cpu-time-nanos",processCPUTimeNs,interval);
+  metricsCollector.registerMetric("__jvm-threads-cpu-time-nanos",threadsCPUTimeNs,interval);
+  metricsCollector.registerMetric("__jvm-other-threads-cpu-time-nanos",otherThreadsCPUTimeNs,interval);
+  metricsCollector.registerMetric("__jvm-threads-user-cpu-time-nanos",threadsUserCPUTimeNs,interval);
+  metricsCollector.registerMetric("__jvm-other-threads-user-cpu-time-nanos",otherThreadsUserCPUTimeNs,interval);
+  metricsCollector.registerMetric("__jvm-process-cpu-load",processCPULoad,interval);
+  metricsCollector.registerMetric("__jvm-fd-count",fdCount,interval);
+  metricsCollector.registerMetric("__jvm-fd-limit",fdLimit,interval);
+  metricsCollector.registerMetric("__jvm-memory-free-mb",jvmMemoryFreeMB,interval);
+  metricsCollector.registerMetric("__jvm-memory-used-mb",jvmMemoryUsedMB,interval);
+  metricsCollector.registerMetric("__jvm-memory-mb-total",jvmMemoryTotalMB,interval);
+  metricsCollector.registerMetric("__jvm-memory-heap-mb-used",jvmMemoryHeapUsedMB,interval);
+  metricsCollector.registerMetric("__jvm-memory-heap-mb-committed",jvmMemoryHeapCommittedMB,interval);
+  metricsCollector.registerMetric("__jvm-memory-heap-mb-max",jvmMemoryHeapMaxMB,interval);
+  metricsCollector.registerMetric("__jvm-memory-non-heap-mb-used",jvmMemoryNonHeapUsedMB,interval);
+  metricsCollector.registerMetric("__jvm-memory-non-heap-mb-committed",jvmMemoryNonHeapCommittedMB,interval);
+  metricsCollector.registerMetric("__jvm-memory-non-heap-mb-max",jvmMemoryNonHeapMaxMB,interval);
+  metricsCollector.registerMetric("__jvm-peak-usage",jvmPeakUsagePerMemoryPool,interval);
+  metricsCollector.registerMetric("__jvm-collection-usage",jvmCollectionUsagePerMemoryPool,interval);
+  metricsCollector.registerMetric("__jvm-estimated-usage",jvmEstimatedUsagePerMemoryPool,interval);
+}

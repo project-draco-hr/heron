@@ -1,0 +1,15 @@
+def test_unregister_watch(self):
+    scope = {'is_called': False, }
+
+    def callback(something):
+        scope['is_called'] = True
+    uid = self.topology.register_watch(callback)
+    scope['is_called'] = False
+    self.assertFalse(scope['is_called'])
+    self.topology.set_physical_plan(None)
+    self.assertTrue(scope['is_called'])
+    self.topology.unregister_watch(uid)
+    scope['is_called'] = False
+    self.assertFalse(scope['is_called'])
+    self.topology.set_physical_plan(None)
+    self.assertFalse(scope['is_called'])

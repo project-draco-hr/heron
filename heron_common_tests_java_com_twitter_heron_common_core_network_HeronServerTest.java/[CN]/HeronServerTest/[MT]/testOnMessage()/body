@@ -1,0 +1,6 @@
+{
+  runBase();
+  Map<SocketChannel,SocketChannelHelper> activeConnections=heronServer.getActiveConnections();
+  heronServer.onMessage(activeConnections.keySet().iterator().next(),null);
+  Assert.assertTrue(isOnMessageInvoked);
+}

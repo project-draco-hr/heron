@@ -1,0 +1,8 @@
+@tornado.web.asynchronous
+def get(self, pid):
+    str_cmd(['rm', '-rf', '/tmp/heap.bin'])
+    body = str_cmd(['jmap', '-dump:format=b,file=/tmp/heap.bin', pid])
+    str_cmd(['chmod', '+r', '/tmp/heap.bin'])
+    self.content_type = 'application/json'
+    self.write(json.dumps(body))
+    self.finish()

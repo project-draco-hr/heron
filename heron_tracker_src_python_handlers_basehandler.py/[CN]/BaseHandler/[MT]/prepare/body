@@ -1,0 +1,3 @@
+def prepare(self):
+    '\n    Used for timing. Sets the basehandler_starttime to current time, and\n    is used when writing the response back.\n    Subclasses of BaseHandler must never use self.write, but instead use\n    self.write_error or self.write_result methods to correctly include\n    the timing.\n    '
+    self.basehandler_starttime = time.time()

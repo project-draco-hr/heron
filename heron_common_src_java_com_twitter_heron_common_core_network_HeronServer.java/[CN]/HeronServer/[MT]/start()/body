@@ -1,0 +1,13 @@
+{
+  try {
+    acceptChannel=ServerSocketChannel.open();
+    acceptChannel.configureBlocking(false);
+    acceptChannel.socket().bind(endpoint);
+    nioLooper.registerAccept(acceptChannel,this);
+    return true;
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to start server",e);
+    return false;
+  }
+}

@@ -1,0 +1,5 @@
+{
+  LOG.info("HttpPostUrl : " + httpPostUrl);
+  this.httpPostUrl=httpPostUrl;
+  this.result=new ArrayList<String>();
+}

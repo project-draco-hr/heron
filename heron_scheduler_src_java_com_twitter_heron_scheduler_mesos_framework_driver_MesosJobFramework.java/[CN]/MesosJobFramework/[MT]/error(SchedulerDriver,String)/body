@@ -1,0 +1,4 @@
+{
+  LOG.severe(message);
+  System.exit(1);
+}

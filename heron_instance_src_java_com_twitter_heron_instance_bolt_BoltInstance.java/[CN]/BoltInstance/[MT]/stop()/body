@@ -1,0 +1,7 @@
+{
+  helper.getTopologyContext().invokeHookCleanup();
+  bolt.cleanup();
+  looper.exitLoop();
+  streamInQueue.clear();
+  collector.clear();
+}

@@ -1,0 +1,6 @@
+{
+  metricsSink=null;
+  slaveLooper=null;
+  communicator=null;
+  sinkExecutor=null;
+}

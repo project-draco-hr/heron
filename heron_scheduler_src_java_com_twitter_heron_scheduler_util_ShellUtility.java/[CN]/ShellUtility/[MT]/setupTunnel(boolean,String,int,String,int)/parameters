@@ -1,0 +1,5 @@
+boolean verbose
+String tunnelHost
+int tunnelPort
+String destHost
+int destPort

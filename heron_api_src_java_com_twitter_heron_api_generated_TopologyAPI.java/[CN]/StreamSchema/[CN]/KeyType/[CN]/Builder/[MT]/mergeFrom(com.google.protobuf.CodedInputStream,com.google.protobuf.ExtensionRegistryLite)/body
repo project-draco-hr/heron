@@ -1,0 +1,16 @@
+{
+  com.twitter.heron.api.generated.TopologyAPI.StreamSchema.KeyType parsedMessage=null;
+  try {
+    parsedMessage=PARSER.parsePartialFrom(input,extensionRegistry);
+  }
+ catch (  com.google.protobuf.InvalidProtocolBufferException e) {
+    parsedMessage=(com.twitter.heron.api.generated.TopologyAPI.StreamSchema.KeyType)e.getUnfinishedMessage();
+    throw e;
+  }
+ finally {
+    if (parsedMessage != null) {
+      mergeFrom(parsedMessage);
+    }
+  }
+  return this;
+}

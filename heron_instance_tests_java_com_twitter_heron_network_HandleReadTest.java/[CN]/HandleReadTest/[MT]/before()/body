@@ -1,0 +1,13 @@
+{
+  UnitTestHelper.addSystemConfigToSingleton();
+  nioLooper=new NIOLooper();
+  slaveLooper=new SlaveLooper();
+  inStreamQueue=new Communicator<HeronTuples.HeronTupleSet>(nioLooper,slaveLooper);
+  inStreamQueue.init(Constants.QUEUE_BUFFER_SIZE,Constants.QUEUE_BUFFER_SIZE,0.5);
+  outStreamQueue=new Communicator<HeronTuples.HeronTupleSet>(slaveLooper,nioLooper);
+  outStreamQueue.init(Constants.QUEUE_BUFFER_SIZE,Constants.QUEUE_BUFFER_SIZE,0.5);
+  inControlQueue=new Communicator<InstanceControlMsg>(nioLooper,slaveLooper);
+  gatewayMetrics=new GatewayMetrics();
+  threadsPool=Executors.newSingleThreadExecutor();
+  serverPort=Utils.getFreePort();
+}

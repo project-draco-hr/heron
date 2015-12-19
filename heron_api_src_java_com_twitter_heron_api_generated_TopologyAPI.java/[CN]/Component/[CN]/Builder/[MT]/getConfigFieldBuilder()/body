@@ -1,0 +1,7 @@
+{
+  if (configBuilder_ == null) {
+    configBuilder_=new com.google.protobuf.SingleFieldBuilder<com.twitter.heron.api.generated.TopologyAPI.Config,com.twitter.heron.api.generated.TopologyAPI.Config.Builder,com.twitter.heron.api.generated.TopologyAPI.ConfigOrBuilder>(config_,getParentForChildren(),isClean());
+    config_=null;
+  }
+  return configBuilder_;
+}

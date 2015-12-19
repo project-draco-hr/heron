@@ -1,0 +1,20 @@
+{
+  LOG.info("Incarnating ourselves as " + newHelper.getMyComponent() + " with task id "+ newHelper.getMyTaskId());
+  newHelper.setTopologyContext(metricsCollector);
+  if (newHelper.getMySpout() != null) {
+    instance=new SpoutInstance(newHelper,streamInCommunicator,streamOutCommunicator,slaveLooper);
+    streamInCommunicator.init(systemConfig.getInstanceInternalSpoutReadQueueCapacity(),systemConfig.getInstanceTuningExpectedSpoutReadQueueSize(),systemConfig.getInstanceTuningCurrentSampleWeight());
+    streamOutCommunicator.init(systemConfig.getInstanceInternalSpoutWriteQueueCapacity(),systemConfig.getInstanceTuningExpectedSpoutWriteQueueSize(),systemConfig.getInstanceTuningCurrentSampleWeight());
+  }
+ else {
+    instance=new BoltInstance(newHelper,streamInCommunicator,streamOutCommunicator,slaveLooper);
+    streamInCommunicator.init(systemConfig.getInstanceInternalBoltReadQueueCapacity(),systemConfig.getInstanceTuningExpectedBoltReadQueueSize(),systemConfig.getInstanceTuningCurrentSampleWeight());
+    streamOutCommunicator.init(systemConfig.getInstanceInternalBoltWriteQueueCapacity(),systemConfig.getInstanceTuningExpectedBoltWriteQueueSize(),systemConfig.getInstanceTuningCurrentSampleWeight());
+  }
+  if (newHelper.getTopologyState().equals(TopologyAPI.TopologyState.RUNNING)) {
+    startInstance();
+  }
+ else {
+    LOG.info("The instance is deployed in deactivated state");
+  }
+}

@@ -1,0 +1,3 @@
+String name
+IRichBolt bolt
+Number taskParallelism

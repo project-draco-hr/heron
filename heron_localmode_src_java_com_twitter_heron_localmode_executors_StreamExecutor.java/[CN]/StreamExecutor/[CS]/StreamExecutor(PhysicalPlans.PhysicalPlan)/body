@@ -1,0 +1,9 @@
+{
+  this.taskIdToInstanceExecutor=new HashMap<>();
+  this.looper=createWakeableLooper();
+  this.spoutSets=createSpoutsSet(pPlan);
+  Map<String,List<Integer>> componentToTaskIds=PhysicalPlanUtil.getComponentToTaskIds(pPlan);
+  this.streamIdStreamConsumersMap=StreamConsumers.populateStreamConsumers(pPlan.getTopology(),componentToTaskIds);
+  this.xorManager=XORManager.populateXORManager(looper,pPlan.getTopology(),NUM_BUCKETS,componentToTaskIds);
+  this.tupleCache=new TupleCache();
+}

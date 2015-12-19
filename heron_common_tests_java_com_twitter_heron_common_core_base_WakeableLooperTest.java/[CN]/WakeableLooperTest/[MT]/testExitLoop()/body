@@ -1,0 +1,12 @@
+{
+  Runnable r=new Runnable(){
+    @Override public void run(){
+      slaveLooper.exitLoop();
+      globalVale=10;
+    }
+  }
+;
+  slaveLooper.addTasksOnWakeup(r);
+  slaveLooper.loop();
+  Assert.assertEquals(10,globalVale);
+}

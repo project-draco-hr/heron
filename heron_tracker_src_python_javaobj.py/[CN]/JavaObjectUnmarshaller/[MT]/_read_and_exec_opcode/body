@@ -1,0 +1,9 @@
+def _read_and_exec_opcode(self, ident=0, expect=None):
+    (opid,) = self._readStruct('>B')
+    log_debug(('OpCode: 0x%X' % opid), ident)
+    if (expect and (opid not in expect)):
+        raise IOError(('Unexpected opcode 0x%X' % opid))
+    handler = self.opmap.get(opid)
+    if (not handler):
+        raise RuntimeError(('Unknown OpCode in the stream: 0x%x' % opid))
+    return (opid, handler(ident=ident))

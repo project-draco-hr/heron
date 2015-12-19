@@ -1,0 +1,3 @@
+{
+  Assert.assertEquals(1,PhysicalPlanUtil.extractTopologyTimeout(topology));
+}

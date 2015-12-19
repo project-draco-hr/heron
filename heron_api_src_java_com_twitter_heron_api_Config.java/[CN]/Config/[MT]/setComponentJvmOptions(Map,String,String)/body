@@ -1,0 +1,21 @@
+{
+  String optsBase64;
+  String componentBase64;
+  try {
+    optsBase64=DatatypeConverter.printBase64Binary(jvmOptions.getBytes("UTF-8"));
+    componentBase64=DatatypeConverter.printBase64Binary(component.getBytes("UTF-8"));
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+  String oldEntry=(String)conf.get(Config.TOPOLOGY_COMPONENT_JVMOPTS);
+  String newEntry;
+  if (oldEntry == null) {
+    newEntry=String.format("{\"%s\":\"%s\"}",componentBase64,optsBase64);
+  }
+ else {
+    oldEntry=oldEntry.substring(1,oldEntry.length() - 1);
+    newEntry=String.format("{%s,\"%s\":\"%s\"}",oldEntry,componentBase64,optsBase64);
+  }
+  conf.put(Config.TOPOLOGY_COMPONENT_JVMOPTS,newEntry);
+}

@@ -1,0 +1,3 @@
+def convert_execution_state(execution_state):
+    '\n  For backward compatibility. Right now return as it is.\n  '
+    return execution_state

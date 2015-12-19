@@ -1,0 +1,7 @@
+{
+  if (osMbean instanceof com.sun.management.OperatingSystemMXBean) {
+    final com.sun.management.OperatingSystemMXBean sunOsMbean=(com.sun.management.OperatingSystemMXBean)osMbean;
+    return sunOsMbean.getProcessCpuLoad();
+  }
+  return -1;
+}

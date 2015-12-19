@@ -1,0 +1,11 @@
+{
+  LOG.severe("Got a connection close from remote socket address: " + channel.socket().getRemoteSocketAddress());
+  Metrics.MetricPublisher request=publisherMap.remove(channel.socket().getRemoteSocketAddress());
+  if (request == null) {
+    LOG.severe("Unknown connection closed");
+  }
+ else {
+    LOG.severe(String.format("Un-register publish from hostname: %s," + " component_name: %s, port: %d," + " instance_id: %s, instance_index: %d",request.getHostname(),request.getComponentName(),request.getPort(),request.getInstanceId(),request.getInstanceIndex()));
+  }
+  serverMetricsCounters.scope(SERVER_CLOSE_PUBLISHER).incr();
+}

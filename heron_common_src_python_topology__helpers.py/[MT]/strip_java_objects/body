@@ -1,0 +1,9 @@
+def strip_java_objects(topology):
+    '\n  The argument is the proto object for topology.\n  The java objects are huge objects and topology\n  is stripped off these objects so that it can be stored\n  in zookeeper.\n  '
+    stripped_topology = topology_pb2.Topology()
+    stripped_topology.CopyFrom(topology)
+    components = (list(stripped_topology.spouts) + list(stripped_topology.bolts))
+    for component in components:
+        if component.comp.HasField('java_object'):
+            component.comp.ClearField('java_object')
+    return stripped_topology

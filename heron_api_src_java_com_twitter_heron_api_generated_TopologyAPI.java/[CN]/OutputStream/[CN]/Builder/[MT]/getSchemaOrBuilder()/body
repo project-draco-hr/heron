@@ -1,0 +1,8 @@
+{
+  if (schemaBuilder_ != null) {
+    return schemaBuilder_.getMessageOrBuilder();
+  }
+ else {
+    return schema_;
+  }
+}

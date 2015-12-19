@@ -1,0 +1,4 @@
+{
+  resetFields();
+  localMode.shutdown();
+}

@@ -1,0 +1,17 @@
+{
+  if (status != StatusCode.OK) {
+    LOG.severe("Cannot connect to the TMaster port, Will Retry..");
+    if (reconnectIntervalSec > 0) {
+      Runnable r=new Runnable(){
+        public void run(){
+          start();
+        }
+      }
+;
+      getNIOLooper().registerTimerEventInSeconds(reconnectIntervalSec,r);
+    }
+    return;
+  }
+  addTMasterClientTasksOnWakeUp();
+  LOG.info("Connected to TMaster. Ready to send metrics");
+}

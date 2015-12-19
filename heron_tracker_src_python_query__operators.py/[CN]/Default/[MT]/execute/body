@@ -1,0 +1,8 @@
+@tornado.gen.coroutine
+def execute(self, tracker, tmaster, start, end):
+    allMetrics = yield self.timeseries.execute(tracker, tmaster, start, end)
+    if isinstance(allMetrics, basestring):
+        raise Exception(allMetrics)
+    for metric in allMetrics:
+        metric.setDefault(self.constant, start, end)
+    raise tornado.gen.Return(allMetrics)

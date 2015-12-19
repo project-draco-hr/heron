@@ -1,0 +1,11 @@
+{
+  if (status != StatusCode.OK) {
+    throw new RuntimeException("Response from Stream Manager not ok");
+  }
+  if (response instanceof StreamManager.RegisterInstanceResponse) {
+    handleRegisterResponse((StreamManager.RegisterInstanceResponse)response);
+  }
+ else {
+    throw new RuntimeException("Unknown kind of response received from Stream Manager");
+  }
+}

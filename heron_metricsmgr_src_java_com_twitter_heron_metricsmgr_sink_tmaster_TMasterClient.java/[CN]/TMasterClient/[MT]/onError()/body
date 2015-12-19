@@ -1,0 +1,4 @@
+{
+  LOG.severe("Disconnected from TMaster.");
+  throw new RuntimeException("Errors happened due to write or read failure from TMaster.");
+}

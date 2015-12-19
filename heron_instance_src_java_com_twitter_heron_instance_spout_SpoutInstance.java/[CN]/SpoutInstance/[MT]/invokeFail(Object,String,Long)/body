@@ -1,0 +1,5 @@
+{
+  spout.fail(messageId);
+  helper.getTopologyContext().invokeHookSpoutFail(messageId,failLatencyNs);
+  spoutMetrics.failedTuple(streamId,failLatencyNs);
+}

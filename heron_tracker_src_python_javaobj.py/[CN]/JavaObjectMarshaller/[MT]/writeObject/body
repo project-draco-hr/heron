@@ -1,0 +1,8 @@
+def writeObject(self, obj):
+    log_debug(('Writing object of type ' + str(type(obj))))
+    if (type(obj) is JavaObject):
+        self.write_object(obj)
+    elif (type(obj) is str):
+        self.write_blockdata(obj)
+    else:
+        raise RuntimeError(('Object serialization of type %s is not supported.' % str(type(obj))))

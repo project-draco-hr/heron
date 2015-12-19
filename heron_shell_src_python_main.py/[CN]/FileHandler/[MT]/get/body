@@ -1,0 +1,16 @@
+@tornado.web.asynchronous
+def get(self, path):
+    t = Template(get_asset('file.html'))
+    if (path is None):
+        self.set_status(404)
+        self.write('No such file')
+        self.finish()
+        return
+    if path.startswith('/'):
+        self.write('Only relative paths are allowed')
+        self.set_status(403)
+        self.finish()
+        return
+    args = dict(filename=path, jquery=get_asset('jquery.js'), pailer=get_asset('jquery.pailer.js'), css=get_asset('bootstrap.css'))
+    self.write(t.generate(**args))
+    self.finish()

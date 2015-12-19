@@ -1,0 +1,4 @@
+def __init__(self, children):
+    if (len(children) < 1):
+        raise Exception('MAX expects at least one operand.')
+    self.timeSeriesList = children

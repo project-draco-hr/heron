@@ -1,0 +1,5 @@
+{
+  this.id=id;
+  this.componentName=componentName;
+  this.resource=resource;
+}

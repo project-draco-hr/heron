@@ -1,0 +1,3 @@
+{
+  return String.format("<%s:%d>",config.get(KEY_SCRIBE_HOST),config.get(KEY_SCRIBE_PORT));
+}

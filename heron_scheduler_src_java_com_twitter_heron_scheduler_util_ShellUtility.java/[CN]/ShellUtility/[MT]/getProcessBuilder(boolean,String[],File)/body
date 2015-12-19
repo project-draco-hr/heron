@@ -1,0 +1,7 @@
+{
+  ProcessBuilder pb=new ProcessBuilder(command).directory(workingDirectory);
+  if (isInheritIO) {
+    pb.inheritIO();
+  }
+  return pb;
+}

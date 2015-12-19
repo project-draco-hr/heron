@@ -1,0 +1,32 @@
+{
+  int nBuckets=3;
+  RotatingMap g=new RotatingMap(nBuckets);
+  for (int i=0; i < 100; i++) {
+    g.create(i,1);
+  }
+  for (int i=0; i < 100; i++) {
+    Assert.assertTrue(g.remove(i));
+  }
+  for (int i=0; i < 100; i++) {
+    Assert.assertFalse(g.remove(i));
+  }
+  for (int i=0; i < 100; ++i) {
+    g.create(i,1);
+  }
+  g.rotate();
+  for (int i=0; i < 100; ++i) {
+    Assert.assertTrue(g.remove(i));
+  }
+  for (int i=0; i < 100; ++i) {
+    Assert.assertFalse(g.remove(i));
+  }
+  for (int i=0; i < 100; ++i) {
+    g.create(i,1);
+  }
+  for (int i=0; i < nBuckets; ++i) {
+    g.rotate();
+  }
+  for (int i=0; i < 100; ++i) {
+    Assert.assertFalse(g.remove(i));
+  }
+}

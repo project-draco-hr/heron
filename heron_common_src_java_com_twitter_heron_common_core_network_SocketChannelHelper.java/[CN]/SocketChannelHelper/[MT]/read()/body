@@ -1,0 +1,27 @@
+{
+  long startOfCycle=System.nanoTime();
+  long bytesRead=0;
+  long nPacketsRead=0;
+  List<IncomingPacket> ret=new ArrayList<IncomingPacket>();
+  while ((System.nanoTime() - startOfCycle - readReadBatchTimeInNs) < 0 && (bytesRead < readBatchSizeInBytes)) {
+    int readState=incomingPacket.readFromChannel(socketChannel);
+    if (readState > 0) {
+      break;
+    }
+ else     if (readState < 0) {
+      LOG.severe("Something bad happened while reading from channel: " + socketChannel.socket().getRemoteSocketAddress());
+      selectHandler.handleError(socketChannel);
+      ret.clear();
+      break;
+    }
+ else {
+      nPacketsRead++;
+      bytesRead+=incomingPacket.size();
+      ret.add(incomingPacket);
+      incomingPacket=new IncomingPacket();
+    }
+  }
+  totalPacketsRead+=nPacketsRead;
+  totalBytesRead+=bytesRead;
+  return ret;
+}

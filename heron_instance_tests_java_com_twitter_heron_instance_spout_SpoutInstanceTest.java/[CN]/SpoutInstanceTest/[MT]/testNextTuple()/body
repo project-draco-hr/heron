@@ -1,0 +1,44 @@
+{
+  physicalPlan=UnitTestHelper.getPhysicalPlan(false,-1);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
+  inControlQueue.offer(instanceControlMsg);
+  Runnable task=new Runnable(){
+    String streamId="";
+    String componentName="";
+    String receivedTupleStrings="";
+    @Override public void run(){
+      for (int i=0; i < Constants.RETRY_TIMES; i++) {
+        if (outStreamQueue.size() != 0) {
+          HeronTuples.HeronTupleSet set=outStreamQueue.poll();
+          Assert.assertTrue(set.isInitialized());
+          Assert.assertFalse(set.hasControl());
+          Assert.assertTrue(set.hasData());
+          HeronTuples.HeronDataTupleSet dataTupleSet=set.getData();
+          streamId=dataTupleSet.getStream().getId();
+          componentName=dataTupleSet.getStream().getComponentName();
+          Assert.assertEquals(streamId,"default");
+          Assert.assertEquals(componentName,"test-spout");
+          Assert.assertEquals(streamId,"default");
+          Assert.assertEquals(componentName,"test-spout");
+          for (          HeronTuples.HeronDataTuple dataTuple : dataTupleSet.getTuplesList()) {
+            for (            ByteString b : dataTuple.getValuesList()) {
+              receivedTupleStrings+=serializer.deserialize(b.toByteArray());
+            }
+          }
+          tupleReceived+=dataTupleSet.getTuplesCount();
+        }
+        if (tupleReceived == 10) {
+          Assert.assertEquals("ABABABABAB",receivedTupleStrings);
+          testLooper.exitLoop();
+          break;
+        }
+        Utils.sleep(Constants.RETRY_INTERVAL_MS);
+      }
+    }
+  }
+;
+  testLooper.addTasksOnWakeup(task);
+  testLooper.loop();
+  Assert.assertEquals(tupleReceived,10);
+}

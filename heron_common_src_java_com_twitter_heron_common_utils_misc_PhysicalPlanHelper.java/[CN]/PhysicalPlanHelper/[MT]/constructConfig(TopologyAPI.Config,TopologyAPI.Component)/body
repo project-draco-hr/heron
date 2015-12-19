@@ -1,0 +1,20 @@
+{
+  Map<String,Object> retval=new HashMap<String,Object>();
+  for (  TopologyAPI.Config.KeyValue kv : config.getKvsList()) {
+    if (kv.hasValue()) {
+      retval.put(kv.getKey(),kv.getValue());
+    }
+ else {
+      retval.put(kv.getKey(),Utils.deserialize(kv.getJavaSerializedValue().toByteArray()));
+    }
+  }
+  for (  TopologyAPI.Config.KeyValue kv : component.getConfig().getKvsList()) {
+    if (kv.hasValue()) {
+      retval.put(kv.getKey(),kv.getValue());
+    }
+ else {
+      retval.put(kv.getKey(),Utils.deserialize(kv.getJavaSerializedValue().toByteArray()));
+    }
+  }
+  return retval;
+}

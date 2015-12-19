@@ -1,0 +1,63 @@
+{
+  this.pplan=pplan;
+  for (int i=0; i < pplan.getInstancesCount(); ++i) {
+    if (pplan.getInstances(i).getInstanceId().equals(instanceId)) {
+      myInstance=pplan.getInstances(i);
+    }
+  }
+  if (myInstance == null) {
+    throw new RuntimeException("There was no instance that matched my id " + instanceId);
+  }
+  myComponent=myInstance.getInfo().getComponentName();
+  myTaskId=myInstance.getInfo().getTaskId();
+  myInstanceId=myInstance.getInstanceId();
+  TopologyAPI.Topology topo=pplan.getTopology();
+  for (int i=0; i < topo.getSpoutsCount(); ++i) {
+    if (topo.getSpouts(i).getComp().getName().equals(myComponent)) {
+      mySpout=topo.getSpouts(i);
+      break;
+    }
+  }
+  for (int i=0; i < topo.getBoltsCount(); ++i) {
+    if (topo.getBolts(i).getComp().getName().equals(myComponent)) {
+      myBolt=topo.getBolts(i);
+      break;
+    }
+  }
+  if (mySpout != null && myBolt != null) {
+    throw new RuntimeException("MyTaskId is both a bolt or a spout " + myTaskId);
+  }
+  if (mySpout == null && myBolt == null) {
+    throw new RuntimeException("MyTaskId is neither a bolt or a spout " + myTaskId);
+  }
+  outputSchema=new HashMap<String,Integer>();
+  List<TopologyAPI.OutputStream> outputs;
+  TopologyAPI.Component comp;
+  if (mySpout != null) {
+    outputs=mySpout.getOutputsList();
+    comp=mySpout.getComp();
+  }
+ else {
+    outputs=myBolt.getOutputsList();
+    comp=myBolt.getComp();
+  }
+  for (  TopologyAPI.OutputStream outputStream : outputs) {
+    outputSchema.put(outputStream.getStream().getId(),outputStream.getSchema().getKeysCount());
+  }
+  try {
+    this.hostname=InetAddress.getLocalHost().getHostName();
+  }
+ catch (  UnknownHostException e) {
+    throw new RuntimeException("GetHostName failed");
+  }
+  component=comp;
+  customGrouper=new CustomStreamGroupingHelper();
+  for (int i=0; i < topo.getBoltsCount(); ++i) {
+    for (    TopologyAPI.InputStream inputStream : topo.getBolts(i).getInputsList()) {
+      if (inputStream.getStream().getComponentName().equals(myComponent) && inputStream.getGtype() == TopologyAPI.Grouping.CUSTOM) {
+        CustomStreamGrouping customStreamGrouping=(CustomStreamGrouping)Utils.deserialize(inputStream.getCustomGroupingJavaObject().toByteArray());
+        customGrouper.add(inputStream.getStream().getId(),GetTaskIdsAsListForComponent(topo.getBolts(i).getComp().getName()),customStreamGrouping,myComponent);
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+WakeableLooper looper
+int timeoutSec
+List<Integer> taskIds
+int nBuckets

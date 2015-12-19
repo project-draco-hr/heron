@@ -1,0 +1,11 @@
+def start(self):
+    if self.is_host_port_reachable():
+        self.client = KazooClient(self.hostport)
+    else:
+        localport = self.establish_ssh_tunnel()
+        self.client = KazooClient(('localhost:' + str(localport)))
+    self.client.start()
+
+    def on_connection_change(state):
+        LOG.info(('Connection state changed to: ' + state))
+    self.client.add_listener(on_connection_change)

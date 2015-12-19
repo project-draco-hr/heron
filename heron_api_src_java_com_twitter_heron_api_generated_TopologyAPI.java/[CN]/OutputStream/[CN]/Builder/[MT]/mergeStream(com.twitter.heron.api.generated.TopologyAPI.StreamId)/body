@@ -1,0 +1,16 @@
+{
+  if (streamBuilder_ == null) {
+    if (((bitField0_ & 0x00000001) == 0x00000001) && stream_ != com.twitter.heron.api.generated.TopologyAPI.StreamId.getDefaultInstance()) {
+      stream_=com.twitter.heron.api.generated.TopologyAPI.StreamId.newBuilder(stream_).mergeFrom(value).buildPartial();
+    }
+ else {
+      stream_=value;
+    }
+    onChanged();
+  }
+ else {
+    streamBuilder_.mergeFrom(value);
+  }
+  bitField0_|=0x00000001;
+  return this;
+}

@@ -1,0 +1,5 @@
+{
+  this.uploader=uploader;
+  this.context=context;
+  this.topologyPackage=topologyPackage;
+}

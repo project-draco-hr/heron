@@ -1,0 +1,7 @@
+def floorTimestamps(self, start, end, timeline):
+    ret = {}
+    for (timestamp, value) in timeline.iteritems():
+        ts = ((timestamp / 60) * 60)
+        if (start <= ts <= end):
+            ret[ts] = value
+    return ret

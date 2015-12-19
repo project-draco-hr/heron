@@ -1,0 +1,4 @@
+@abc.abstractmethod
+def start(self):
+    '\n    If the state manager needs to connect to a remote host.\n    '
+    pass

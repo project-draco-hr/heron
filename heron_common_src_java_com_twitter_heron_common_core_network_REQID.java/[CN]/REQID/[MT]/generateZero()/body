@@ -1,0 +1,5 @@
+{
+  byte[] _bytes=new byte[REQIDSize];
+  Arrays.fill(_bytes,(byte)0);
+  return new REQID(_bytes);
+}

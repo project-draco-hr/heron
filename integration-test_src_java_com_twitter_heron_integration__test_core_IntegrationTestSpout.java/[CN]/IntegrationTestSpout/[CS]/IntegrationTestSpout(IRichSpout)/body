@@ -1,0 +1,3 @@
+{
+  this(delegateSpout,DEFAULT_EXECUTION_COUNT);
+}

@@ -1,0 +1,17 @@
+{
+  Runnable r=new Runnable(){
+    int i=3;
+    @Override public void run(){
+      globalVale+=10;
+      slaveLooper.wakeUp();
+      i--;
+      if (i == 0) {
+        slaveLooper.exitLoop();
+      }
+    }
+  }
+;
+  slaveLooper.addTasksOnWakeup(r);
+  slaveLooper.loop();
+  Assert.assertEquals(36,globalVale);
+}

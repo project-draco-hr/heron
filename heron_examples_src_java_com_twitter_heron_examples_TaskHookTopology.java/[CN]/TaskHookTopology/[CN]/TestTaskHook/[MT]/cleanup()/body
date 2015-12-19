@@ -1,0 +1,4 @@
+{
+  GlobalMetrics.incr("hook_cleanup");
+  System.out.println("clean() is invoked in hook");
+}

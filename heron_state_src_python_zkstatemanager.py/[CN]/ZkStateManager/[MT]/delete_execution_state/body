@@ -1,0 +1,14 @@
+def delete_execution_state(self, topologyName):
+    path = self.get_execution_state_path(topologyName)
+    LOG.info('Removing topology: {0} from path: {1}'.format(topologyName, path))
+    try:
+        self.client.delete(path)
+        return True
+    except NoNodeError as e:
+        raise StateException('NoNodeError while deleting execution state', StateException.EX_TYPE_NO_NODE_ERROR), None, sys.exc_info()[2]
+    except NotEmptyError as e:
+        raise StateException('NotEmptyError while deleting execution state', StateException.EX_TYPE_NOT_EMPTY_ERROR), None, sys.exc_info()[2]
+    except ZookeeperError as e:
+        raise StateException('Zookeeper while deleting execution state', StateException.EX_TYPE_ZOOKEEPER_ERROR), None, sys.exc_info()[2]
+    except Exception as e:
+        raise

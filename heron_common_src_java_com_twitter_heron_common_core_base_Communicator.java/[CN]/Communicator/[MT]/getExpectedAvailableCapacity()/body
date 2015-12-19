@@ -1,0 +1,3 @@
+{
+  return isExpectNoMoreItems ? -1 : expectedAvailableCapacity;
+}

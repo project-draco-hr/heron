@@ -1,0 +1,3 @@
+def run_blocking_process(self, cmd, is_shell):
+    do_print(('Running process as %s' % cmd))
+    return subprocess.call(cmd, shell=is_shell)

@@ -1,0 +1,3 @@
+{
+  return (physicalPlanHelper.getMySpout() != null) ? new SpoutInstance(physicalPlanHelper,streamInQueue,streamOutQueue,looper) : new BoltInstance(physicalPlanHelper,streamInQueue,streamOutQueue,looper);
+}

@@ -1,0 +1,4 @@
+{
+  TupleImpl i=(TupleImpl)input;
+  delegate.ack(i.getDelegate());
+}

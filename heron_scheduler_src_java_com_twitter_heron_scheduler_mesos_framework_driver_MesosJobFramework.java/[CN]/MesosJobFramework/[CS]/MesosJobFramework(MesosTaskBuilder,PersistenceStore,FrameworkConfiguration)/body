@@ -1,0 +1,5 @@
+{
+  this.taskBuilder=taskBuilder;
+  this.persistenceStore=persistenceStore;
+  this.config=config;
+}

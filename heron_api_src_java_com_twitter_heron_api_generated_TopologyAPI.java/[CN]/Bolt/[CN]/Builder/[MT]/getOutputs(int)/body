@@ -1,0 +1,8 @@
+{
+  if (outputsBuilder_ == null) {
+    return outputs_.get(index);
+  }
+ else {
+    return outputsBuilder_.getMessage(index);
+  }
+}

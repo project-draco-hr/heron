@@ -1,0 +1,21 @@
+{
+  List<Resource> reservedResources=new LinkedList<>();
+  for (  Resource resource : offer.getResourcesList()) {
+    if (resource.hasRole() && resource.getRole() != "*") {
+      reservedResources.add(resource);
+    }
+  }
+  String role="*";
+  for (  Resource resource : reservedResources) {
+    if (resource.getName() == name) {
+      Protos.Value.Ranges ranges=resource.getRanges();
+      for (      Protos.Value.Range range : ranges.getRangeList()) {
+        if (range.getBegin() <= begin && range.getEnd() >= end) {
+          role=resource.getRole();
+          break;
+        }
+      }
+    }
+  }
+  return Resource.newBuilder().setType(Protos.Value.Type.RANGES).setName(name).setRanges(Protos.Value.Ranges.newBuilder().addRange(Protos.Value.Range.newBuilder().setBegin(begin).setEnd(end)).build()).setRole(role).build();
+}

@@ -1,0 +1,50 @@
+{
+  String cluster=properties.getProperty(Constants.DC);
+  String releasePkgName=properties.getProperty(Constants.HERON_RELEASE_TAG,Constants.DEFAULT_RELEASE_PACKAGE);
+  String releasePkgVersion=properties.getProperty(Constants.HERON_RELEASE_VERSION,"live");
+  String heronDir=properties.getProperty(AuroraLauncher.HERON_DIR);
+  if (properties.containsKey(PackerUploader.HERON_PACKER_PKGVERSION)) {
+    return true;
+  }
+  if (!releasePkgName.equals(Constants.DEFAULT_RELEASE_PACKAGE)) {
+    properties.setProperty(PackerUploader.HERON_PACKER_PKGVERSION,releasePkgVersion);
+    return true;
+  }
+  String versionsFile=properties.getProperty(Constants.VERSIONS_FILENAME_PREFIX + "." + cluster,"versions.conf");
+  try {
+    String content=new String(Files.readAllBytes(Paths.get(heronDir,versionsFile)));
+    Map<String,Object> versionsMap=null;
+    try {
+      versionsMap=mapper.readValue(content,Map.class);
+    }
+ catch (    IOException e) {
+      LOG.log(Level.SEVERE,"Failed to parse the String into map: " + content,e);
+    }
+    if (releasePkgVersion == null || releasePkgVersion.isEmpty() || "live".equals(releasePkgVersion)) {
+      Integer maxVersion=1;
+      String maxVersionStr="live";
+      for (      Object versionStr : versionsMap.keySet()) {
+        int version=Integer.parseInt(versionsMap.get(versionStr).toString());
+        if (maxVersion < version) {
+          maxVersion=version;
+          maxVersionStr=versionStr.toString();
+        }
+      }
+      properties.setProperty(PackerUploader.HERON_PACKER_PKGVERSION,maxVersion.toString());
+      properties.setProperty(Constants.HERON_RELEASE_VERSION,maxVersionStr);
+    }
+ else {
+      if (!versionsMap.containsKey(releasePkgVersion)) {
+        LOG.severe("Requested version of heron-core release doesn't exist");
+        return false;
+      }
+      properties.setProperty(PackerUploader.HERON_PACKER_PKGVERSION,versionsMap.get(releasePkgVersion).toString());
+    }
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to find / parse versions file: " + versionsFile,e);
+    LOG.log(Level.SEVERE,"Continuing with live label");
+    properties.setProperty(PackerUploader.HERON_PACKER_PKGVERSION,"live");
+  }
+  return true;
+}

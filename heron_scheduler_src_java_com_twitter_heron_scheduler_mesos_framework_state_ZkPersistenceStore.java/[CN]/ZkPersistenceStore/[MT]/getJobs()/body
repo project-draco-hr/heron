@@ -1,0 +1,17 @@
+{
+  LOG.info("Get all Jobs");
+  List<BaseJob> jobs=new LinkedList<>();
+  try {
+    List<String> jobsName=client.getChildren().forPath(jobPath);
+    for (    String jobName : jobsName) {
+      byte[] res=client.getData().forPath(jobPath + "/" + jobName);
+      String jobDefinitionInJSON=new String(res);
+      LOG.info("Def: " + jobDefinitionInJSON);
+      jobs.add(BaseJob.getJobFromJSONString(jobDefinitionInJSON));
+    }
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Unable to get jobs: ",e);
+  }
+  return jobs;
+}

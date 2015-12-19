@@ -1,0 +1,6 @@
+{
+  if (adaptor == null) {
+    throw new IllegalStateException("StateManagerAdaptor not yet initialized.");
+  }
+  return adaptor;
+}

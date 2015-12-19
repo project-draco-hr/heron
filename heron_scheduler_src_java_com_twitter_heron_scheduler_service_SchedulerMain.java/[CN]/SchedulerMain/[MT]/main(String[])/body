@@ -1,0 +1,14 @@
+{
+  String topologyName=args[0];
+  String schedulerClass=args[1];
+  String schedulerConfigLoader=args[2];
+  String schedulerConfigOverrides=args[3].replace("&equals;","=");
+  int schedulerServerPort=Integer.parseInt(args[4]);
+  String schedulerConfigFile="";
+  if (args.length == 6) {
+    schedulerConfigFile=args[5];
+  }
+  String configOverride=new String(DatatypeConverter.parseBase64Binary(schedulerConfigOverrides),Charset.forName("UTF-8"));
+  String topologyDefnFile=TopologyUtility.lookUpTopologyDefnFile(".",topologyName);
+  runScheduler(schedulerClass,schedulerConfigLoader,schedulerConfigFile,schedulerServerPort,configOverride,Factory.getTopology(topologyDefnFile));
+}

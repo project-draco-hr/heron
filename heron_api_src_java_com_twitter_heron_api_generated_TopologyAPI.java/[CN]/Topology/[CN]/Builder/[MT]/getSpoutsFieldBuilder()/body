@@ -1,0 +1,7 @@
+{
+  if (spoutsBuilder_ == null) {
+    spoutsBuilder_=new com.google.protobuf.RepeatedFieldBuilder<com.twitter.heron.api.generated.TopologyAPI.Spout,com.twitter.heron.api.generated.TopologyAPI.Spout.Builder,com.twitter.heron.api.generated.TopologyAPI.SpoutOrBuilder>(spouts_,((bitField0_ & 0x00000004) == 0x00000004),getParentForChildren(),isClean());
+    spouts_=null;
+  }
+  return spoutsBuilder_;
+}

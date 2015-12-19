@@ -1,0 +1,6 @@
+{
+  runServer();
+  Thread.sleep(WAIT_TIME_MS);
+  runClient();
+  Thread.sleep(WAIT_TIME_MS);
+}

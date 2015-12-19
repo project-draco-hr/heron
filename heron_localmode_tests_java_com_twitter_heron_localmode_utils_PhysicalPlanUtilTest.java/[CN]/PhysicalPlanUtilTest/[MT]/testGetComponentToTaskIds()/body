@@ -1,0 +1,11 @@
+{
+  Map<String,List<Integer>> map=PhysicalPlanUtil.getComponentToTaskIds(plan);
+  Assert.assertEquals(2,map.size());
+  Assert.assertEquals(2,map.get("word").size());
+  Assert.assertEquals(2,map.get("exclaim").size());
+  List<Integer> taskIds=new LinkedList<>();
+  taskIds.addAll(map.get("word"));
+  taskIds.addAll(map.get("exclaim"));
+  Collections.sort(taskIds);
+  Assert.assertEquals("[1, 2, 3, 4]",taskIds.toString());
+}

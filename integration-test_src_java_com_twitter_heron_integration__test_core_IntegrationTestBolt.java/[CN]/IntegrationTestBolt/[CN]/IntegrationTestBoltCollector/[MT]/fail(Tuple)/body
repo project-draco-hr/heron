@@ -1,0 +1,7 @@
+{
+  LOG.fine("Try to do a fail. tuplesProcessed: " + tuplesProcessed + " ; tuplesReceived: "+ tuplesReceived);
+  if (tuplesProcessed < tuplesReceived) {
+    delegate.fail(tuple);
+    tuplesProcessed++;
+  }
+}

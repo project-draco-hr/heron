@@ -1,0 +1,12 @@
+{
+  for (  RotatingMap map : spoutTasksToRotatingMap.values()) {
+    map.rotate();
+  }
+  Runnable r=new Runnable(){
+    @Override public void run(){
+      rotate();
+    }
+  }
+;
+  looper.registerTimerEventInNanoSeconds(rotateIntervalNs,r);
+}

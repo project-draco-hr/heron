@@ -1,0 +1,4 @@
+TopologyAPI.Grouping grouping
+TopologyAPI.InputStream inputStream
+TopologyAPI.StreamSchema schema
+List<Integer> taskIds

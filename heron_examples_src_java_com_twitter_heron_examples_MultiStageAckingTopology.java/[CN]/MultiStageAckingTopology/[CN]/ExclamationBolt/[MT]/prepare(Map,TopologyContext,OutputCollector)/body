@@ -1,0 +1,5 @@
+{
+  _collector=collector;
+  nItems=0;
+  startTime=System.currentTimeMillis();
+}

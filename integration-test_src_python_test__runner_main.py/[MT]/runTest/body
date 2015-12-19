@@ -1,0 +1,37 @@
+def runTest(topologyName, classPath, expectedResultFilePath, params):
+    httpServerUrl = (((('http://' + params.resultsServerHostname) + ':') + params.resultsServerPort) + '/results')
+    try:
+        args = ((httpServerUrl + ' ') + topologyName)
+        submitTopology(params.heronCliPath, params.dataCenter, params.role, params.env, params.testsJarPath, classPath, params.releasePackageRole, params.releasePackageName, args)
+    except Exception as e:
+        logging.error(('Failed to submit %s topology: %s' % (topologyName, str(e))))
+        return 'fail'
+    logging.info(('Successfully submitted %s topology' % topologyName))
+    try:
+        try:
+            (httpResponseCode, actualResult) = fetchResultFromServer(params.resultsServerHostname, params.resultsServerPort, topologyName)
+        except Exception as e:
+            logging.error(('Fetching result failed for %s topology: %s' % (topologyName, str(e))))
+            return 'fail'
+    finally:
+        killTopology(params.heronCliPath, params.dataCenter, params.role, params.env, topologyName)
+    try:
+        if (not os.path.exists(expectedResultFilePath)):
+            raise RuntimeError((' %s does not exist' % expectedResultFilePath))
+        else:
+            with open(expectedResultFilePath, 'r') as expectedResultFile:
+                expectedResult = expectedResultFile.read().rstrip()
+    except Exception as e:
+        logging.error(('Failed to read expected result file %s: %s' % (expectedResultFilePath, str(e))))
+        return 'fail'
+    decoder = json.JSONDecoder(strict=False)
+    actualResult = sorted(decoder.decode(actualResult))
+    expectedResult = sorted(decoder.decode(expectedResult))
+    if (actualResult == expectedResult):
+        logging.info(('Topology %s result matches expected result' % topologyName))
+        return 'success'
+    else:
+        logging.error('Actual result did not match expected result')
+        logging.info(('Actual result ---------- \n' + actualResult))
+        logging.info(('Expected result ---------- \n' + expectedResult))
+        return 'fail'

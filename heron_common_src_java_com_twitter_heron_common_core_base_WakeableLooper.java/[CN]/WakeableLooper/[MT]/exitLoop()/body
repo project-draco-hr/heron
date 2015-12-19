@@ -1,0 +1,4 @@
+{
+  exitLoop=true;
+  wakeUp();
+}

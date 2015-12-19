@@ -1,0 +1,7 @@
+{
+  Set<String> spoutsSet=new HashSet<>();
+  for (  TopologyAPI.Spout spout : physicalPlan.getTopology().getSpoutsList()) {
+    spoutsSet.add(spout.getComp().getName());
+  }
+  return spoutsSet;
+}

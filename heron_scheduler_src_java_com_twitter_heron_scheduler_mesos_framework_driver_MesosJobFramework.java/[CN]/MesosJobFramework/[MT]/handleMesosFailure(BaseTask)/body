@@ -1,0 +1,16 @@
+{
+  String taskId=task.taskId;
+  String jobName=TaskUtils.getJobNameForTaskId(taskId);
+  int attempt=TaskUtils.getAttemptForTaskId(taskId);
+  BaseJob job=jobNameMapping.get(jobName);
+  boolean hasAttemptsLeft=attempt < job.retries;
+  if (hasAttemptsLeft) {
+    LOG.warning(String.format("Retrying job: %s, attempt: %d",jobName,attempt + 1));
+    scheduleNewTask(TaskUtils.getTaskId(job,System.currentTimeMillis(),attempt + 1));
+  }
+ else {
+    LOG.info("Would not restart the job since it is beyond retries: " + attempt);
+    task.state=BaseTask.TaskState.FINISHED_FAILURE;
+    updateTrackingTask(TaskUtils.getJobNameForTaskId(task.taskId),task);
+  }
+}

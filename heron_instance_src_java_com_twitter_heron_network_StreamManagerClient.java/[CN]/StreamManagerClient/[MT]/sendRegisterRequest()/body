@@ -1,0 +1,4 @@
+{
+  StreamManager.RegisterInstanceRequest request=StreamManager.RegisterInstanceRequest.newBuilder().setInstance(instance).setTopologyName(topologyName).setTopologyId(topologyId).build();
+  sendRequest(request,null,StreamManager.RegisterInstanceResponse.newBuilder(),systemConfig.getInstanceReconnectStreammgrIntervalSec());
+}

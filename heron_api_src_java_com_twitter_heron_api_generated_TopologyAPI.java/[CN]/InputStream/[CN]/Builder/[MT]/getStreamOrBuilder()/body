@@ -1,0 +1,8 @@
+{
+  if (streamBuilder_ != null) {
+    return streamBuilder_.getMessageOrBuilder();
+  }
+ else {
+    return stream_;
+  }
+}

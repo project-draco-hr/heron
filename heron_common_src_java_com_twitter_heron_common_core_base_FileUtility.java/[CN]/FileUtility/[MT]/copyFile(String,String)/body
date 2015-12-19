@@ -1,0 +1,12 @@
+{
+  Path sourcePath=new File(source).toPath();
+  Path targetPath=new File(target).toPath();
+  try {
+    Files.copy(sourcePath,targetPath,StandardCopyOption.REPLACE_EXISTING);
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to copy file from " + source + " to target: "+ target,e);
+    return false;
+  }
+  return true;
+}

@@ -1,0 +1,3 @@
+{
+  return getKeysFieldBuilder().addBuilder(com.twitter.heron.api.generated.TopologyAPI.StreamSchema.KeyType.getDefaultInstance());
+}

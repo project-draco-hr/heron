@@ -1,0 +1,17 @@
+{
+  TMasterSink tMasterSink=new TMasterSink();
+  Map<String,Object> serviceConfig=new HashMap<String,Object>();
+  serviceConfig.put("reconnect-interval-second",RECONNECT_INTERVAL_SECONDS);
+  serviceConfig.put("network-write-batch-size-bytes",1);
+  serviceConfig.put("network-write-batch-time-ms",1);
+  serviceConfig.put("network-read-batch-size-bytes",1);
+  serviceConfig.put("network-read-batch-time-ms",1);
+  serviceConfig.put("socket-send-buffer-size-bytes",1);
+  serviceConfig.put("socket-received-buffer-size-bytes",1);
+  tMasterSink.createSimpleTMasterClientService(serviceConfig);
+  TopologyMaster.TMasterLocation location=TopologyMaster.TMasterLocation.newBuilder().setTopologyName("topology-name").setTopologyId("topology-id").setHost("host").setControllerPort(0).setMasterPort(0).setStatsPort(0).build();
+  tMasterSink.startNewTMasterClient(location);
+  Thread.sleep(RESTART_WAIT_INTERVAL_SECONDS * 1000);
+  Assert.assertTrue(tMasterSink.getTMasterStartedAttempts() > (RESTART_WAIT_INTERVAL_SECONDS / RECONNECT_INTERVAL_SECONDS / 2));
+  tMasterSink.close();
+}

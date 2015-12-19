@@ -1,0 +1,11 @@
+{
+  if (outputsBuilder_ == null) {
+    ensureOutputsIsMutable();
+    super.addAll(values,outputs_);
+    onChanged();
+  }
+ else {
+    outputsBuilder_.addAllMessages(values);
+  }
+  return this;
+}

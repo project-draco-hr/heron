@@ -1,0 +1,7 @@
+{
+  if (osMbean instanceof com.sun.management.UnixOperatingSystemMXBean) {
+    final com.sun.management.UnixOperatingSystemMXBean unix=(com.sun.management.UnixOperatingSystemMXBean)osMbean;
+    fdCount.setValue(unix.getOpenFileDescriptorCount());
+    fdLimit.setValue(unix.getMaxFileDescriptorCount());
+  }
+}

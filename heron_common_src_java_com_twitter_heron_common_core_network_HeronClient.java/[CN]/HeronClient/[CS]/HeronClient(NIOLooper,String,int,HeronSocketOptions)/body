@@ -1,0 +1,9 @@
+{
+  nioLooper=s;
+  endpoint=new InetSocketAddress(host,port);
+  socketOptions=options;
+  isConnected=false;
+  contextMap=new HashMap<REQID,Object>();
+  responseMessageMap=new HashMap<REQID,Message.Builder>();
+  messageMap=new HashMap<String,Message.Builder>();
+}

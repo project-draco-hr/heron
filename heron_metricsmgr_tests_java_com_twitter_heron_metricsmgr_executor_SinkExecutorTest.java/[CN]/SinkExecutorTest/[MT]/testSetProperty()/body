@@ -1,0 +1,9 @@
+{
+  String key="key";
+  String value="value";
+  sinkExecutor.setProperty(key,value);
+  Field field=sinkExecutor.getClass().getDeclaredField("sinkConfig");
+  field.setAccessible(true);
+  Map<String,Object> map=(Map<String,Object>)field.get(sinkExecutor);
+  Assert.assertEquals(map.get(key),value);
+}

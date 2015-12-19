@@ -1,0 +1,6 @@
+{
+  AtomicInteger activateCount=(AtomicInteger)SingletonRegistry.INSTANCE.getSingleton(Constants.ACTIVATE_COUNT);
+  if (activateCount != null) {
+    activateCount.getAndIncrement();
+  }
+}

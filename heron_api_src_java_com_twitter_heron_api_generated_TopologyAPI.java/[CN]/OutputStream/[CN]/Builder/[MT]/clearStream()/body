@@ -1,0 +1,11 @@
+{
+  if (streamBuilder_ == null) {
+    stream_=com.twitter.heron.api.generated.TopologyAPI.StreamId.getDefaultInstance();
+    onChanged();
+  }
+ else {
+    streamBuilder_.clear();
+  }
+  bitField0_=(bitField0_ & ~0x00000001);
+  return this;
+}

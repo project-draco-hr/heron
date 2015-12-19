@@ -1,0 +1,7 @@
+{
+  GlobalMetrics.incr("hook_prepare");
+  System.out.println(constructString);
+  System.out.println("prepare() is invoked in hook");
+  System.out.println(conf);
+  System.out.print(context);
+}

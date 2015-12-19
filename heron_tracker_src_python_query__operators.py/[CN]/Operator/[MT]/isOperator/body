@@ -1,0 +1,3 @@
+def isOperator(self):
+    'Returns True. This is just usefule for checking that an object is an operator or not.'
+    return True

@@ -1,0 +1,12 @@
+{
+  HttpExchange exchange=Mockito.mock(HttpExchange.class);
+  Mockito.doNothing().when(exchange).sendResponseHeaders(Matchers.anyInt(),Matchers.anyLong());
+  OutputStream os=Mockito.mock(OutputStream.class);
+  Mockito.doReturn(os).when(exchange).getResponseBody();
+  Mockito.doNothing().when(os).write(Matchers.any(byte[].class));
+  Mockito.doNothing().when(os).close();
+  Assert.assertTrue(NetworkUtility.sendHttpResponse(exchange,new byte[0]));
+  Mockito.verify(exchange).getResponseBody();
+  Mockito.verify(os,Mockito.atLeastOnce()).write(Matchers.any(byte[].class));
+  Mockito.verify(os,Mockito.atLeastOnce()).close();
+}

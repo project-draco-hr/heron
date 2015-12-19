@@ -1,0 +1,9 @@
+{
+  int taskId=0;
+  int componentIndex=0;
+  String componentName="component_name";
+  String streamId="stream_id";
+  PhysicalPlans.InstanceInfo instanceInfo=PhysicalPlans.InstanceInfo.newBuilder().setTaskId(taskId).setComponentIndex(componentIndex).setComponentName(componentName).build();
+  PhysicalPlans.Instance instance=PhysicalPlans.Instance.newBuilder().setInstanceId(instanceId).setStmgrId(streamId).setInfo(instanceInfo).build();
+  return instance;
+}

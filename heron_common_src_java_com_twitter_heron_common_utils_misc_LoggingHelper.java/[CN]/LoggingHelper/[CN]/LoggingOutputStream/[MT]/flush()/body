@@ -1,0 +1,12 @@
+{
+  String record;
+synchronized (this) {
+    super.flush();
+    record=this.toString();
+    super.reset();
+    if (record.length() == 0 || record.equals(lineSeparator)) {
+      return;
+    }
+    logger.logp(level,"","",record);
+  }
+}

@@ -1,0 +1,6 @@
+{
+  super(name,bolt,taskParallelism);
+  inputs=new LinkedList<TopologyAPI.InputStream.Builder>();
+  output=new OutputFieldsGetter();
+  bolt.declareOutputFields(output);
+}

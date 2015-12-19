@@ -1,0 +1,13 @@
+{
+  isOnMessageInvoked=true;
+  if (message == null) {
+    return;
+  }
+  if (message instanceof Tests.EchoServerResponse) {
+    messagesReceieved++;
+    Assert.assertEquals(MESSAGE,((Tests.EchoServerResponse)message).getEchoResponse());
+  }
+ else {
+    Assert.fail("Unknown message received");
+  }
+}

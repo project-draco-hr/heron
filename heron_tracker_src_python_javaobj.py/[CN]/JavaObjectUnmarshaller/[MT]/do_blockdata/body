@@ -1,0 +1,5 @@
+def do_blockdata(self, parent=None, ident=0):
+    log_debug('[blockdata]', ident)
+    (length,) = self._readStruct('>B')
+    ba = self.object_stream.read(length)
+    return ba

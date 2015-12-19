@@ -1,0 +1,3 @@
+{
+  return getHeronExecutorArguments(context,"{{task.ports[STMGR_PORT]}}","{{task.ports[METRICMGR_PORT]}}","{{task.ports[BACK_UP]}}","{{task.ports[SHELL]}}","{{task.ports[BACK_UP_1]}}");
+}

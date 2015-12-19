@@ -1,0 +1,2 @@
+def get_stat(path, filename):
+    return os.stat(os.path.join(path, filename))

@@ -1,0 +1,14 @@
+{
+  if (isConnected()) {
+    if (isInQueuesAvailable() || helper == null) {
+      startReading();
+    }
+ else {
+      gatewayMetrics.updateInQueueFullCount();
+      stopReading();
+    }
+  }
+ else {
+    LOG.info("Stop reading due to not yet connected to Stream Manager.");
+  }
+}

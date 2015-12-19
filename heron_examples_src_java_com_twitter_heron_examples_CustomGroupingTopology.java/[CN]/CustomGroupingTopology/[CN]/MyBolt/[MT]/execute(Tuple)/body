@@ -1,0 +1,5 @@
+{
+  if (++nItems % 10000 == 0) {
+    System.out.println(tuple.getString(0));
+  }
+}

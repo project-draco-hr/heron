@@ -1,0 +1,18 @@
+{
+  if (args.length != 1) {
+    throw new RuntimeException("Specify topology name");
+  }
+  TopologyBuilder builder=new TopologyBuilder();
+  builder.setSpout("word",new AckingTestWordSpout(),2);
+  builder.setBolt("count",new CountBolt(),2).shuffleGrouping("word");
+  Config conf=new Config();
+  conf.setDebug(true);
+  conf.setMaxSpoutPending(1000 * 1000 * 1000);
+  conf.setEnableAcking(true);
+  conf.put(Config.TOPOLOGY_WORKER_CHILDOPTS,"-XX:+HeapDumpOnOutOfMemoryError");
+  List<String> taskHooks=new LinkedList<String>();
+  taskHooks.add("com.twitter.heron.examples.TaskHookTopology$TestTaskHook");
+  conf.setAutoTaskHooks(taskHooks);
+  conf.setNumStmgrs(1);
+  HeronSubmitter.submitTopology(args[0],conf,builder.createTopology());
+}

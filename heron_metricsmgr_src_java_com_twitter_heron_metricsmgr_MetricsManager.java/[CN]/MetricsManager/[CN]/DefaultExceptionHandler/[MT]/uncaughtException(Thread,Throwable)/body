@@ -1,0 +1,32 @@
+{
+  String threadName=thread.getName();
+  LOG.log(Level.SEVERE,"Exception caught in thread: " + threadName + " with thread id: "+ thread.getId(),exception);
+  String sinkId=threadName;
+  int thisSinkRetryAttempts=sinksRetryAttempts.remove(sinkId);
+  SinkExecutor oldSinkExecutor=sinkExecutors.remove(sinkId);
+  metricsManagerServer.removeSinkCommunicator(oldSinkExecutor.getCommunicator());
+  oldSinkExecutor.close();
+  if (oldSinkExecutor != null && thisSinkRetryAttempts != 0) {
+    LOG.info(String.format("Restarting IMetricsSink: %s with %d available retries",sinkId,thisSinkRetryAttempts));
+    SinkExecutor newSinkExecutor=initSinkExecutor(sinkId);
+    sinkExecutors.put(sinkId,newSinkExecutor);
+    if (thisSinkRetryAttempts > 0) {
+      thisSinkRetryAttempts--;
+    }
+    sinksRetryAttempts.put(sinkId,thisSinkRetryAttempts);
+    metricsManagerServer.addSinkCommunicator(newSinkExecutor.getCommunicator());
+    executors.execute(newSinkExecutor);
+  }
+ else   if (oldSinkExecutor != null && thisSinkRetryAttempts == 0 && sinkExecutors.size() > 0) {
+    LOG.severe("Could not recover from exceptions for IMetricsSink: " + sinkId);
+    LOG.info(sinkId + " would close and keep running rest sinks: " + sinkExecutors.keySet());
+  }
+ else {
+    LOG.info("Could not recover from exceptions; Metrics Manager Exiting");
+    for (    Handler handler : java.util.logging.Logger.getLogger("").getHandlers()) {
+      handler.close();
+    }
+    executors.shutdownNow();
+    Runtime.getRuntime().halt(1);
+  }
+}

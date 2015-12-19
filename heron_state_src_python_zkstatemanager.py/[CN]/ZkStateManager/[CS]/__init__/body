@@ -1,0 +1,6 @@
+def __init__(self, name, host, port, rootpath, tunnelhost):
+    self.name = name
+    self.host = host
+    self.port = port
+    self.tunnelhost = tunnelhost
+    self.rootpath = rootpath

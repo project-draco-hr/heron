@@ -1,0 +1,4 @@
+{
+  PhysicalPlanHelper physicalPlanHelper=instanceExecutor.createPhysicalPlanHelper(plan,instanceId,Mockito.mock(MetricsCollector.class));
+  Assert.assertNotNull(physicalPlanHelper.getTopologyContext());
+}

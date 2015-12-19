@@ -1,0 +1,11 @@
+def num_instances(self):
+    '\n    Number of spouts + bolts\n    '
+    num = 0
+    components = (self.spouts() + self.bolts())
+    for component in components:
+        config = component.comp.config
+        for kvs in config.kvs:
+            if (kvs.key == constants.TOPOLOGY_COMPONENT_PARALLELISM):
+                num += int(kvs.value)
+                break
+    return num

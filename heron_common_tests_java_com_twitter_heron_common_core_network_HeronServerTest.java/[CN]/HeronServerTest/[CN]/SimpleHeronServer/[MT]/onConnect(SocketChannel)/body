@@ -1,0 +1,10 @@
+{
+  LOG.info("Server got a new connection from host:port:" + socketChannel.socket().getRemoteSocketAddress());
+  isOnConnectedInvoked=true;
+  if (isRequestNeed) {
+    registerOnRequest(Tests.EchoServerRequest.newBuilder());
+  }
+  if (isMessageNeed) {
+    registerOnMessage(Tests.EchoServerResponse.newBuilder());
+  }
+}

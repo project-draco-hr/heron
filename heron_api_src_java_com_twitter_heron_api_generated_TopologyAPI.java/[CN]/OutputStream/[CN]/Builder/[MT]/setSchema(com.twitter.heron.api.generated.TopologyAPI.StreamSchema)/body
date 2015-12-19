@@ -1,0 +1,14 @@
+{
+  if (schemaBuilder_ == null) {
+    if (value == null) {
+      throw new NullPointerException();
+    }
+    schema_=value;
+    onChanged();
+  }
+ else {
+    schemaBuilder_.setMessage(value);
+  }
+  bitField0_|=0x00000002;
+  return this;
+}

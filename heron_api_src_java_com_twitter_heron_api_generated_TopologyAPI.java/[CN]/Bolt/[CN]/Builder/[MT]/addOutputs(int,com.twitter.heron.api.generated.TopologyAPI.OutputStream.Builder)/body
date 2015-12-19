@@ -1,0 +1,11 @@
+{
+  if (outputsBuilder_ == null) {
+    ensureOutputsIsMutable();
+    outputs_.add(index,builderForValue.build());
+    onChanged();
+  }
+ else {
+    outputsBuilder_.addMessage(index,builderForValue.build());
+  }
+  return this;
+}

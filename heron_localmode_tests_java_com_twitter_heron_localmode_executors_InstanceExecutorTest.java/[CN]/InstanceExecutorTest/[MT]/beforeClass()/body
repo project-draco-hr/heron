@@ -1,0 +1,7 @@
+{
+  topology=PhysicalPlanUtilTest.getTestTopology();
+  plan=PhysicalPlanUtil.getPhysicalPlan(topology);
+  instanceId=plan.getInstances(0).getInstanceId();
+  instanceExecutor=Mockito.spy(new InstanceExecutor(plan,instanceId));
+  Mockito.doReturn(Mockito.mock(IInstance.class)).when(instanceExecutor).createInstance();
+}

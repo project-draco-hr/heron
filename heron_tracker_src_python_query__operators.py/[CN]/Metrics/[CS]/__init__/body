@@ -1,0 +1,8 @@
+def __init__(self, componentName, metricName, instance, start, end, timeline):
+    'Takes (componentName, metricname, instance, timeline)'
+    self.componentName = componentName
+    self.metricName = metricName
+    self.instance = instance
+    self.start = start
+    self.end = end
+    self.timeline = self.floorTimestamps(start, end, timeline)

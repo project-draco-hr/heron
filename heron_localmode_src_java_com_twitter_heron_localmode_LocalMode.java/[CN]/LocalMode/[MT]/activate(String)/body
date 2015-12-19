@@ -1,0 +1,7 @@
+{
+  LOG.info("To activate topology: " + topologyName);
+  for (  InstanceExecutor executor : instanceExecutors) {
+    executor.activate();
+  }
+  LOG.info("Activated topology: " + topologyName);
+}

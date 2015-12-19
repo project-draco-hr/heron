@@ -1,0 +1,8 @@
+{
+  LOG.info("Closing the Gateway thread");
+  this.gatewayMetricsCollector.forceGatherAllMetrics();
+  this.metricsManagerClient.sendAllMessage();
+  this.streamManagerClient.sendAllMessage();
+  this.metricsManagerClient.stop();
+  this.streamManagerClient.stop();
+}

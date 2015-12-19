@@ -1,0 +1,12 @@
+def test_bad_watch(self):
+    scope = {'is_called': False, }
+
+    def callback(something):
+        scope['is_called'] = True
+        raise Exception('Test Bad Trigger Exception')
+    uid = self.topology.register_watch(callback)
+    self.assertTrue(scope['is_called'])
+    scope['is_called'] = False
+    self.assertFalse(scope['is_called'])
+    self.topology.set_physical_plan(None)
+    self.assertFalse(scope['is_called'])

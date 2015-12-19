@@ -1,0 +1,3 @@
+{
+  taskHooks.add(hook);
+}

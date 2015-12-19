@@ -1,0 +1,7 @@
+{
+  String override="";
+  DefaultConfigLoader configLoader=new DefaultConfigLoader();
+  configLoader.properties=new Properties();
+  configLoader.applyConfigOverride(override);
+  Assert.assertEquals(0,configLoader.properties.entrySet().size());
+}

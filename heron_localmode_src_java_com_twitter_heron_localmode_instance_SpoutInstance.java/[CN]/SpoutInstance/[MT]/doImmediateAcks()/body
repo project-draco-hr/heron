@@ -1,0 +1,7 @@
+{
+  int s=collector.getImmediateAcks().size();
+  for (int i=0; i < s; ++i) {
+    RootTupleInfo tupleInfo=collector.getImmediateAcks().poll();
+    invokeAck(tupleInfo.getMessageId(),tupleInfo.getStreamId(),0L);
+  }
+}

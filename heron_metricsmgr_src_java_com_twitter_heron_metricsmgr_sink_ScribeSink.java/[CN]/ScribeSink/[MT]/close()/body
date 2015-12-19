@@ -1,0 +1,5 @@
+{
+  LOG.info("Closing ScribeSink");
+  transport.close();
+  flushCounters();
+}

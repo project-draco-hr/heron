@@ -1,0 +1,17 @@
+{
+  try {
+    SocketChannel socketChannel=acceptChannel.accept();
+    if (socketChannel != null) {
+      socketChannel.configureBlocking(false);
+      socketChannel.socket().setSendBufferSize(socketOptions.getSocketSendBufferSizeInBytes());
+      socketChannel.socket().setReceiveBufferSize(socketOptions.getSocketReceivedBufferSizeInBytes());
+      socketChannel.socket().setTcpNoDelay(true);
+      SocketChannelHelper helper=new SocketChannelHelper(nioLooper,this,socketChannel,socketOptions);
+      activeConnections.put(socketChannel,helper);
+      onConnect(socketChannel);
+    }
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Error while accepting a new connection ",e);
+  }
+}

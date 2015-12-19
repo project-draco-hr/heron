@@ -1,0 +1,3 @@
+{
+  prefixToType.put(prefix,type);
+}

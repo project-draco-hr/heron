@@ -1,0 +1,19 @@
+{
+  Path file=new File(filename).toPath();
+  try {
+    Files.delete(file);
+  }
+ catch (  NoSuchFileException x) {
+    LOG.severe("file does not exist: " + file);
+    return false;
+  }
+catch (  DirectoryNotEmptyException x) {
+    LOG.severe("Path is an not empty directory: " + file);
+    return false;
+  }
+catch (  IOException x) {
+    LOG.log(Level.SEVERE,"Failed to delete file due to unexpected exception:",x);
+    return false;
+  }
+  return true;
+}

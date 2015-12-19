@@ -1,0 +1,31 @@
+@tornado.testing.gen_test
+def test_SUBTRACT_execute_with_multiple_ts_when_instances_do_not_match(self):
+    ts = Mock()
+    ts2 = Mock()
+    operator = Subtract([ts, ts2])
+    tmaster = Mock()
+    tracker = Mock()
+    start = 100
+    end = 300
+
+    @tornado.gen.coroutine
+    def ts_side_effect3(*args):
+        self.assertEqual((tracker, tmaster, 100, 300), args)
+        raise tornado.gen.Return([Metrics('component', 'metricName', 'instance', start, end, {120: 1.0, 180: 1.0, 240: 1.0, 300: 1.0, }), Metrics('component', 'metricName', 'instance2', start, end, {120: 2.0, 180: 2.0, 240: 2.0, 300: 2.0, }), Metrics('component', 'metricName', 'instance3', start, end, {120: 3.0, 180: 3.0, 240: 3.0, 300: 3.0, }), Metrics('component', 'metricName', 'instance4', start, end, {120: 4.0, 180: 4.0, 240: 4.0, 300: 4.0, }), Metrics('component', 'metricName', 'instance5', start, end, {120: 5.0, 180: 5.0, 240: 5.0, 300: 5.0, })])
+    ts.execute.side_effect = ts_side_effect3
+
+    @tornado.gen.coroutine
+    def ts_side_effect4(*args):
+        self.assertEqual((tracker, tmaster, 100, 300), args)
+        raise tornado.gen.Return([Metrics('component', 'metricName', 'instance', start, end, {120: 2.0, 180: 2.0, 240: 2.0, 300: 2.0, }), Metrics('component', 'metricName', 'instance2', start, end, {120: 4.0, 180: 4.0, 240: 4.0, 300: 4.0, })])
+    ts2.execute.side_effect = ts_side_effect4
+    metrics = yield operator.execute(tracker, tmaster, start, end)
+    self.assertEqual(2, len(metrics))
+    instances = []
+    for metric in metrics:
+        instances.append(metric.instance)
+        if (metric.instance == 'instance'):
+            self.assertDictEqual({120: (-1), 180: (-1), 240: (-1), 300: (-1), }, metric.timeline)
+        elif (metric.instance == 'instance2'):
+            self.assertDictEqual({120: (-2), 180: (-2), 240: (-2), 300: (-2), }, metric.timeline)
+    self.assertTrue((('instance' in instances) and ('instance2' in instances)))

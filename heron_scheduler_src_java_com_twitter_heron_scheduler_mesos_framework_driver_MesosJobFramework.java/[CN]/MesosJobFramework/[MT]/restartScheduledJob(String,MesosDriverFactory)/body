@@ -1,0 +1,10 @@
+{
+  LOG.info("Killing mesos job: " + jobName);
+  BaseTask task=trackingTasks.get(jobName);
+  if (task == null) {
+    LOG.info("The job is not running");
+    return false;
+  }
+  mesosDriver.get().killTask(Protos.TaskID.newBuilder().setValue(task.taskId).build());
+  return true;
+}

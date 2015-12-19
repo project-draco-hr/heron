@@ -1,0 +1,9 @@
+{
+  writer.print("]");
+  writer.flush();
+  writer.close();
+  new File(String.format("%s.%s",filenamePrefix,currentFileIndex)).setReadOnly();
+  currentFileIndex=(currentFileIndex + 1) % fileMaximum;
+  isFileStart=true;
+  sinkContext.exportCountMetric(FLUSH_COUNT,1);
+}

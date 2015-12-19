@@ -1,0 +1,2 @@
+def add_transformer(self, transformer):
+    self.object_transformers.append(transformer)

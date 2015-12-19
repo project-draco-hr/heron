@@ -1,0 +1,3 @@
+def bolt_names(self):
+    '\n    Returns a list of names of all the bolts\n    '
+    return map((lambda component: component.comp.name), self.bolts())

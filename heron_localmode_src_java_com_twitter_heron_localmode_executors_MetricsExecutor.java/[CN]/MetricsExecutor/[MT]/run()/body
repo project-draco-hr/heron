@@ -1,0 +1,7 @@
+{
+  Thread.currentThread().setName(executorId);
+  LOG.info("Metrics_Executor starts");
+  setupJVMMetrics();
+  addMetricsExecutorTasks();
+  looper.loop();
+}

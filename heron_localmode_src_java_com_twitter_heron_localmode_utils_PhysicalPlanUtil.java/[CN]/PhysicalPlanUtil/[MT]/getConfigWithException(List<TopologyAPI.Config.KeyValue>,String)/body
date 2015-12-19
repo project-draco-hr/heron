@@ -1,0 +1,8 @@
+{
+  for (  TopologyAPI.Config.KeyValue kv : config) {
+    if (kv.getKey().equals(key)) {
+      return kv.getValue();
+    }
+  }
+  throw new RuntimeException("Missing config for required key " + key);
+}

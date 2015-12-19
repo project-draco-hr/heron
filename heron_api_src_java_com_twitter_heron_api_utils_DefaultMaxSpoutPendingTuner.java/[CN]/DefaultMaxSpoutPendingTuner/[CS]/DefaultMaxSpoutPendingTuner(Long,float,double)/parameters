@@ -1,0 +1,3 @@
+Long maxSpoutPending
+float autoTuneFactor
+double progressBound

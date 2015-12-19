@@ -1,0 +1,7 @@
+{
+  if (schemaBuilder_ == null) {
+    schemaBuilder_=new com.google.protobuf.SingleFieldBuilder<com.twitter.heron.api.generated.TopologyAPI.StreamSchema,com.twitter.heron.api.generated.TopologyAPI.StreamSchema.Builder,com.twitter.heron.api.generated.TopologyAPI.StreamSchemaOrBuilder>(schema_,getParentForChildren(),isClean());
+    schema_=null;
+  }
+  return schemaBuilder_;
+}

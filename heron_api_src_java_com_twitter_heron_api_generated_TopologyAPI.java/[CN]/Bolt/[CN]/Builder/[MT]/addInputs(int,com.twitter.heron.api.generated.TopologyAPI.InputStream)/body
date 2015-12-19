@@ -1,0 +1,14 @@
+{
+  if (inputsBuilder_ == null) {
+    if (value == null) {
+      throw new NullPointerException();
+    }
+    ensureInputsIsMutable();
+    inputs_.add(index,value);
+    onChanged();
+  }
+ else {
+    inputsBuilder_.addMessage(index,value);
+  }
+  return this;
+}

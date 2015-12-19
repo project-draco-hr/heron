@@ -1,0 +1,4 @@
+{
+  LOG.info("Communicator is added: " + communicator);
+  this.metricsSinkCommunicators.add(communicator);
+}

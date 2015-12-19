@@ -1,0 +1,7 @@
+{
+  AssignableMetric val=_value.get(key);
+  if (val == null) {
+    _value.put(key,val=new AssignableMetric(0));
+  }
+  return val;
+}

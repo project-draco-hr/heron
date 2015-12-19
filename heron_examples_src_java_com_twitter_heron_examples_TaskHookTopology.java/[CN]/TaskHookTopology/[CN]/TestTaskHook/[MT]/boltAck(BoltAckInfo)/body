@@ -1,0 +1,10 @@
+{
+  GlobalMetrics.incr("hook_boltAck");
+  ++boltAcked;
+  if (boltAcked % N == 0) {
+    System.out.println("boltAck() is invoked in hook");
+    System.out.println(info.getAckingTaskId());
+    System.out.println(info.getProcessLatencyMs());
+    System.out.println(info.getTuple());
+  }
+}

@@ -1,0 +1,14 @@
+{
+  this.name=name;
+  this.component=comp;
+  this.componentConfiguration=comp.getComponentConfiguration();
+  if (this.componentConfiguration == null) {
+    this.componentConfiguration=new HashMap<String,Object>();
+  }
+  if (taskParallelism != null) {
+    this.componentConfiguration.put(Config.TOPOLOGY_COMPONENT_PARALLELISM,taskParallelism.toString());
+  }
+ else {
+    this.componentConfiguration.put(Config.TOPOLOGY_COMPONENT_PARALLELISM,"1");
+  }
+}

@@ -1,0 +1,11 @@
+{
+  UnitTestHelper.clearSingletonRegistry();
+  slaveLooper.exitLoop();
+  threadsPool.shutdownNow();
+  physicalPlan=null;
+  slaveLooper=null;
+  outStreamQueue=null;
+  inStreamQueue=null;
+  slave=null;
+  threadsPool=null;
+}

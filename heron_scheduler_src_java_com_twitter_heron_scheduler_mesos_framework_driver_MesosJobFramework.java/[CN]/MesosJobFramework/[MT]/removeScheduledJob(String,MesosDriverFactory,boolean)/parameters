@@ -1,0 +1,3 @@
+String jobName
+MesosDriverFactory mesosDriver
+boolean killJobNow

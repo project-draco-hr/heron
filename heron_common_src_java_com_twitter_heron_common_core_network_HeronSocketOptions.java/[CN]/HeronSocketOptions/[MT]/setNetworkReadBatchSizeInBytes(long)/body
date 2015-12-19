@@ -1,0 +1,3 @@
+{
+  this.networkReadBatchSizeInBytes=networkReadBatchSizeInBytes;
+}

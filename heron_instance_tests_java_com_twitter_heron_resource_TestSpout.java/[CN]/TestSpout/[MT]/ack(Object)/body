@@ -1,0 +1,6 @@
+{
+  AtomicInteger ackCount=(AtomicInteger)SingletonRegistry.INSTANCE.getSingleton(Constants.ACK_COUNT);
+  if (ackCount != null) {
+    ackCount.getAndIncrement();
+  }
+}

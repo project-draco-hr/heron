@@ -1,0 +1,9 @@
+def __init__(self, children):
+    if (len(children) < 1):
+        raise Exception('PERCENTILE expects at least two operands.')
+    if (not isinstance(children[0], float)):
+        raise Exception('First argument to PERCENTILE must be a constant')
+    if (not (0 <= children[0] <= 100)):
+        raise Exception('Quantile must be between 0 and 100 inclusive.')
+    self.quantile = children[0]
+    self.timeSeriesList = children[1:]

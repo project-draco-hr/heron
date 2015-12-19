@@ -1,0 +1,3 @@
+{
+  return (String)this.get(SystemConfig.HERON_LOGGING_DIRECTORY);
+}

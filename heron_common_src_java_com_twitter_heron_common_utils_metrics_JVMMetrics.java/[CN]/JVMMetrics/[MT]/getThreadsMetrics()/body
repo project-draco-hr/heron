@@ -1,0 +1,27 @@
+{
+  if (threadMXBean.isThreadCpuTimeSupported()) {
+    threadMXBean.setThreadCpuTimeEnabled(true);
+    long tmpOtherThreadsCpuTime=0;
+    long tmpOtherThreadsUserCpuTime=0;
+    for (    long id : threadMXBean.getAllThreadIds()) {
+      long cpuTime=threadMXBean.getThreadCpuTime(id);
+      long cpuUserTime=threadMXBean.getThreadUserTime(id);
+      ThreadInfo threadInfo=threadMXBean.getThreadInfo(id);
+      if (threadInfo != null) {
+        String threadName=threadInfo.getThreadName();
+        if (threadName.equals(com.twitter.heron.common.utils.misc.Constants.THREAD_GATEWAY_NAME) || threadName.equals(com.twitter.heron.common.utils.misc.Constants.THREAD_SLAVE_NAME)) {
+          threadsCPUTimeNs.scope(threadName).setValue(cpuTime);
+          threadsUserCPUTimeNs.scope(threadName).setValue(cpuUserTime);
+        }
+ else {
+          tmpOtherThreadsCpuTime+=cpuTime;
+          tmpOtherThreadsUserCpuTime+=cpuUserTime;
+        }
+      }
+    }
+    otherThreadsCPUTimeNs.setValue(tmpOtherThreadsCpuTime);
+    otherThreadsUserCPUTimeNs.setValue(tmpOtherThreadsUserCpuTime);
+    jvmThreadCount.setValue(threadMXBean.getThreadCount());
+    jvmDaemonThreadCount.setValue(threadMXBean.getDaemonThreadCount());
+  }
+}

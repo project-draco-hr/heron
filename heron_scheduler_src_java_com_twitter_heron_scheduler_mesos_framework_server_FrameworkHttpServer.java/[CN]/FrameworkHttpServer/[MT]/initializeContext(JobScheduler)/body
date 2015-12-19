@@ -1,0 +1,4 @@
+{
+  this.schedulerServer.createContext(KILL_REQUEST_CONTEXT,new KillRequestHandler(jobScheduler));
+  this.schedulerServer.createContext(SUBMIT_REQUEST_CONTEXT,new SubmitRequestHandler(jobScheduler));
+}

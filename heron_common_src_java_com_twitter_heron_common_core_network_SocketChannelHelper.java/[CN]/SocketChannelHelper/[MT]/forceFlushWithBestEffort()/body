@@ -1,0 +1,11 @@
+{
+  LOG.info("Forcing to flush data to socket with best effort.");
+  while (!outgoingPacketsToWrite.isEmpty()) {
+    int writeState=outgoingPacketsToWrite.poll().writeToChannel(socketChannel);
+    if (writeState != 0) {
+      LOG.info("Failed to write more to Socket. Clear and finish the flush.");
+      clear();
+      return;
+    }
+  }
+}

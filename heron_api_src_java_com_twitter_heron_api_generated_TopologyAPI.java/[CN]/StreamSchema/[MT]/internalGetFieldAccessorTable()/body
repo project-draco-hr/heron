@@ -1,0 +1,3 @@
+{
+  return com.twitter.heron.api.generated.TopologyAPI.internal_static_heron_proto_api_StreamSchema_fieldAccessorTable.ensureFieldAccessorsInitialized(com.twitter.heron.api.generated.TopologyAPI.StreamSchema.class,com.twitter.heron.api.generated.TopologyAPI.StreamSchema.Builder.class);
+}

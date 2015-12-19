@@ -1,0 +1,15 @@
+{
+  File f=new File(filename);
+  if (f.exists()) {
+    LOG.severe("File exists. Topology exists: " + filename);
+    return false;
+  }
+  try {
+    Files.write(new File(filename).toPath(),contents);
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to write content to file. ",e);
+    return false;
+  }
+  return true;
+}

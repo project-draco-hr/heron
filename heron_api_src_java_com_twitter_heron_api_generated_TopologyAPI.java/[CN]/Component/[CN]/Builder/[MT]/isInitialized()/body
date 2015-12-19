@@ -1,0 +1,12 @@
+{
+  if (!hasName()) {
+    return false;
+  }
+  if (!hasConfig()) {
+    return false;
+  }
+  if (!getConfig().isInitialized()) {
+    return false;
+  }
+  return true;
+}

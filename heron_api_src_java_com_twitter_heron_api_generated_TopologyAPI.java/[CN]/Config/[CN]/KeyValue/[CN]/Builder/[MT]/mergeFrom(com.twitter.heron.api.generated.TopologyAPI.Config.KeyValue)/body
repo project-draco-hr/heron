@@ -1,0 +1,18 @@
+{
+  if (other == com.twitter.heron.api.generated.TopologyAPI.Config.KeyValue.getDefaultInstance())   return this;
+  if (other.hasKey()) {
+    bitField0_|=0x00000001;
+    key_=other.key_;
+    onChanged();
+  }
+  if (other.hasValue()) {
+    bitField0_|=0x00000002;
+    value_=other.value_;
+    onChanged();
+  }
+  if (other.hasJavaSerializedValue()) {
+    setJavaSerializedValue(other.getJavaSerializedValue());
+  }
+  this.mergeUnknownFields(other.getUnknownFields());
+  return this;
+}

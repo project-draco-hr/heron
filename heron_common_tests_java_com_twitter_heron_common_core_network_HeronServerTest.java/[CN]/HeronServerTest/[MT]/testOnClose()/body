@@ -1,0 +1,6 @@
+{
+  runBase();
+  Map<SocketChannel,SocketChannelHelper> activeConnections=heronServer.getActiveConnections();
+  heronServer.onClose(activeConnections.keySet().iterator().next());
+  Assert.assertTrue(isOnCloseInvoked);
+}

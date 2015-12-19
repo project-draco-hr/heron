@@ -1,0 +1,13 @@
+@tornado.web.asynchronous
+def get(self, path):
+    if (not path):
+        path = '.'
+    if path.startswith('/'):
+        self.write('Only relative paths are allowed')
+        self.set_status(403)
+        self.finish()
+        return
+    t = Template(get_asset('browse.html'))
+    args = dict(path=path, listing=utils.get_listing(path), format_prefix=utils.format_prefix, stat=stat, get_stat=utils.get_stat, os=os, css=get_asset('bootstrap.css'))
+    self.write(t.generate(**args))
+    self.finish()

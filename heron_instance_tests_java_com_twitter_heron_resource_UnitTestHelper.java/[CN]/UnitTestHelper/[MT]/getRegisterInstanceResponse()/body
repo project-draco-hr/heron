@@ -1,0 +1,8 @@
+{
+  StreamManager.RegisterInstanceResponse.Builder registerInstanceResponse=StreamManager.RegisterInstanceResponse.newBuilder();
+  registerInstanceResponse.setPplan(getPhysicalPlan(false,-1));
+  Common.Status.Builder status=Common.Status.newBuilder();
+  status.setStatus(Common.StatusCode.OK);
+  registerInstanceResponse.setStatus(status);
+  return registerInstanceResponse.build();
+}

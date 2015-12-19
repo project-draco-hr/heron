@@ -1,0 +1,21 @@
+{
+  LOG.info(String.format("Send %s request to scheduler...",command.name()));
+  byte[] data;
+switch (command) {
+case ACTIVATE:
+    data=Scheduler.ActivateTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
+  break;
+case DEACTIVATE:
+data=Scheduler.DeactivateTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
+break;
+case RESTART:
+data=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(topologyName).setContainerIndex(context.getRestartShard()).build().toByteArray();
+break;
+case KILL:
+data=Scheduler.KillTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
+break;
+default :
+throw new IllegalArgumentException("Unknown command to manage topology");
+}
+return NetworkUtility.sendHttpPostRequest(connection,data);
+}

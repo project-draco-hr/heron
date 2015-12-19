@@ -1,0 +1,6 @@
+{
+  List<IncomingPacket> packets=socketChannelHelper.read();
+  for (  IncomingPacket ipt : packets) {
+    handlePacket(ipt);
+  }
+}

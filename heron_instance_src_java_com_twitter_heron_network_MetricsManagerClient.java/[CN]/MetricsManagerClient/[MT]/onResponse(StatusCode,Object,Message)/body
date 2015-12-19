@@ -1,0 +1,11 @@
+{
+  if (status != StatusCode.OK) {
+    throw new RuntimeException("Response from Metrics Manager not ok");
+  }
+  if (Metrics.MetricPublisherRegisterResponse.class.isInstance(response)) {
+    handleRegisterResponse((Metrics.MetricPublisherRegisterResponse)response);
+  }
+ else {
+    throw new RuntimeException("Unknown kind of response received from Metrics Manager");
+  }
+}

@@ -1,0 +1,6 @@
+{
+  if (response.getStatus().getStatus() != Common.StatusCode.OK) {
+    throw new RuntimeException("Metrics Manager returned a not ok response for register");
+  }
+  LOG.info("We registered ourselves to the Metrics Manager");
+}

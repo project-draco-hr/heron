@@ -1,0 +1,5 @@
+{
+  spout.ack(messageId);
+  helper.getTopologyContext().invokeHookSpoutAck(messageId,completeLatencyNs);
+  spoutMetrics.ackedTuple(streamId,completeLatencyNs);
+}

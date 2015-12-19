@@ -1,0 +1,5 @@
+{
+  super(looper,"localhost",port,new HeronSocketOptions(100 * 1024 * 1024,100,100 * 1024 * 1024,100,5 * 1024 * 1024,5 * 1024 * 1024));
+  nRequests=0;
+  this.maxRequests=maxRequests;
+}

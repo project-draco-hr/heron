@@ -1,0 +1,5 @@
+{
+  if (emit) {
+    declarer.declare(new Fields("word"));
+  }
+}

@@ -1,0 +1,4 @@
+{
+  delegate.globalGrouping(componentId,streamId);
+  return this;
+}

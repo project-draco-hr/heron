@@ -1,0 +1,4 @@
+{
+  IntegrationTestBolt itBolt=new IntegrationTestBolt(bolt);
+  return super.setBolt(id,itBolt,parallelismHint);
+}

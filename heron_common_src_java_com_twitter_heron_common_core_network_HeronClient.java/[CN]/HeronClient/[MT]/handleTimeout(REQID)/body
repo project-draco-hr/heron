@@ -1,0 +1,10 @@
+{
+  if (contextMap.containsKey(rid)) {
+    Object ctx=contextMap.get(rid);
+    contextMap.remove(rid);
+    responseMessageMap.remove(rid);
+    onResponse(StatusCode.TIMEOUT_ERROR,ctx,null);
+  }
+ else {
+  }
+}

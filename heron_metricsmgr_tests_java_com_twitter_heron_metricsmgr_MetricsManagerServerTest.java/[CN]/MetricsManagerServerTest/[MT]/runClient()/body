@@ -1,0 +1,17 @@
+{
+  Runnable runClient=new Runnable(){
+    @Override public void run(){
+      try {
+        NIOLooper looper=new NIOLooper();
+        simpleMetricsClient=new SimpleMetricsClient(looper,SERVER_HOST,serverPort,MESSAGE_SIZE);
+        simpleMetricsClient.start();
+        looper.loop();
+      }
+ catch (      Exception e) {
+        throw new RuntimeException("Some error instantiating client");
+      }
+    }
+  }
+;
+  threadsPool.execute(runClient);
+}

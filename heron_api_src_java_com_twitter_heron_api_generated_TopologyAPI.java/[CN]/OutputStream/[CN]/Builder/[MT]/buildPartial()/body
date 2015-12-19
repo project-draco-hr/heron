@@ -1,0 +1,26 @@
+{
+  com.twitter.heron.api.generated.TopologyAPI.OutputStream result=new com.twitter.heron.api.generated.TopologyAPI.OutputStream(this);
+  int from_bitField0_=bitField0_;
+  int to_bitField0_=0;
+  if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+    to_bitField0_|=0x00000001;
+  }
+  if (streamBuilder_ == null) {
+    result.stream_=stream_;
+  }
+ else {
+    result.stream_=streamBuilder_.build();
+  }
+  if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+    to_bitField0_|=0x00000002;
+  }
+  if (schemaBuilder_ == null) {
+    result.schema_=schema_;
+  }
+ else {
+    result.schema_=schemaBuilder_.build();
+  }
+  result.bitField0_=to_bitField0_;
+  onBuilt();
+  return result;
+}

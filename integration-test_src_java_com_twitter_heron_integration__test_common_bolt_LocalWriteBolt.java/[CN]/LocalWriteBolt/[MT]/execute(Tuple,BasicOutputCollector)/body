@@ -1,0 +1,20 @@
+{
+  try {
+    String data=input.getString(0);
+    bw.write(data);
+    bw.newLine();
+    bw.flush();
+  }
+ catch (  Exception e) {
+    try {
+      if (bw != null) {
+        bw.close();
+      }
+    }
+ catch (    Exception e1) {
+      throw new RuntimeException("Unable to close stream writer",e1);
+    }
+    throw new RuntimeException("Unable to write to file or emit tuples",e);
+  }
+  collector.emit(input.getValues());
+}

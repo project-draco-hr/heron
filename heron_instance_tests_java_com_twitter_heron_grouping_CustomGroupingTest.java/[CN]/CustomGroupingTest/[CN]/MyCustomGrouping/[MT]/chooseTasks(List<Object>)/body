@@ -1,0 +1,6 @@
+{
+  List<Integer> res=new ArrayList<Integer>();
+  res.add(emitted);
+  emitted++;
+  return res;
+}

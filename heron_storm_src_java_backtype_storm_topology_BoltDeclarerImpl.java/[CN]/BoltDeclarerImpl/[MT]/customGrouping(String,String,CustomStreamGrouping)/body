@@ -1,0 +1,4 @@
+{
+  delegate.customGrouping(componentId,streamId,new CustomStreamGroupingDelegate(grouping));
+  return this;
+}

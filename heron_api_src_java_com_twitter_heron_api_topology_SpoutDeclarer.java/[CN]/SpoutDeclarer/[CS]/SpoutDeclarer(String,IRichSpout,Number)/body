@@ -1,0 +1,5 @@
+{
+  super(name,spout,taskParallelism);
+  output=new OutputFieldsGetter();
+  spout.declareOutputFields(output);
+}

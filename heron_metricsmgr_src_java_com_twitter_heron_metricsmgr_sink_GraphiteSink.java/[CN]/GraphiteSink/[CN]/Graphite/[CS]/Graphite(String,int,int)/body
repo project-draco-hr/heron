@@ -1,0 +1,5 @@
+{
+  this.serverHost=serverHost;
+  this.serverPort=serverPort;
+  this.maxConnectionFailures=maxConnectionFailure;
+}

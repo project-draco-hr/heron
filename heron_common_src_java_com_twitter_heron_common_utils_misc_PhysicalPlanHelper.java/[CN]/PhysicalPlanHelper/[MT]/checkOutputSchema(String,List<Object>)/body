@@ -1,0 +1,9 @@
+{
+  Integer size=outputSchema.get(streamId);
+  if (size == null) {
+    throw new RuntimeException(myComponent + " emitting stream " + streamId+ " but was not declared in declareOutputFields");
+  }
+ else   if (!size.equals(tuple.size())) {
+    throw new RuntimeException("Number of fields emitted in stream " + streamId + " does not match whats expected. Expected "+ Integer.toString(size)+ " Observed "+ Integer.toString(tuple.size()));
+  }
+}

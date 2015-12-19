@@ -1,0 +1,16 @@
+{
+  if (helper.getMyBolt() == null) {
+    throw new RuntimeException(helper.getMyTaskId() + " is not a bolt ");
+  }
+  this.serializer=serializer;
+  this.helper=helper;
+  this.boltMetrics=boltMetrics;
+  Map<String,Object> config=helper.getTopologyContext().getTopologyConfig();
+  if (config.containsKey(Config.TOPOLOGY_ENABLE_ACKING) && config.get(Config.TOPOLOGY_ENABLE_ACKING) != null) {
+    this.ackEnabled=Boolean.parseBoolean(config.get(Config.TOPOLOGY_ENABLE_ACKING).toString());
+  }
+ else {
+    this.ackEnabled=false;
+  }
+  this.outputter=new OutgoingTupleCollection(helper,streamOutQueue);
+}

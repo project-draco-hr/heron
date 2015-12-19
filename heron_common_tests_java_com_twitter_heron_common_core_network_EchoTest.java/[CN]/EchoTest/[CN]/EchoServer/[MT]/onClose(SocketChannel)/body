@@ -1,0 +1,3 @@
+{
+  LOG.info("A client closed connection");
+}

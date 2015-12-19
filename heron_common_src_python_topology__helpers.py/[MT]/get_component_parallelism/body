@@ -1,0 +1,10 @@
+def get_component_parallelism(topology):
+    '\n  The argument is the proto object for topology.\n  Returns a map of components to their parallelism.\n  '
+    cmap = {}
+    components = (list(topology.spouts) + list(topology.bolts))
+    for component in components:
+        component_name = component.comp.name
+        for kv in component.comp.config.kvs:
+            if (kv.key == constants.TOPOLOGY_COMPONENT_PARALLELISM):
+                cmap[component_name] = int(kv.value)
+    return cmap

@@ -1,0 +1,18 @@
+def submittar(namespace):
+    'Syntax: heron-cli submittar <dc>/<role>/<environ> topology-tar-path class args\n\n  Extract and execute the java files inside the tar and then add topology\n  definition file created by running submitTopology\n  We use the packer to make a package for the tar and dump it\n  to a well-known location. We then run the main method of class\n  with the specified arguments. We pass arguments as heron.options.\n  This will run the jar file with the klass name. The HeronSubmitter\n  inside will write out the topology defn file to a location that\n  we specify. Then we write the topology defn file to a well known\n  packer location. We then write to appropriate places in zookeeper\n  and launch the aurora jobs\n  '
+    tar_name = namespace['filepath']
+    klass = namespace['classname']
+    args = tuple(namespace['heron_unknown_args'])
+    tmpdir = tempfile.mkdtemp()
+    set_config_opt('cmdline.topologydefn.tmpdirectory', tmpdir)
+    if namespace['deactivated']:
+        initial_state = topology_pb2.TopologyState.Name(topology_pb2.PAUSED)
+    else:
+        initial_state = topology_pb2.TopologyState.Name(topology_pb2.RUNNING)
+    set_config_opt('cmdline.topology.initial.state', initial_state)
+    exec_heron_tar(klass, tar_name, args, tmpdir)
+    try:
+        scheduler_overrides = ((namespace['config-overrides'] + ' ') + pass_cmdline_override(namespace))
+        launch_all_topologies_found(tar_name, tmpdir, namespace['config_loader'], namespace['config_file'], scheduler_overrides)
+    finally:
+        shutil.rmtree(tmpdir)

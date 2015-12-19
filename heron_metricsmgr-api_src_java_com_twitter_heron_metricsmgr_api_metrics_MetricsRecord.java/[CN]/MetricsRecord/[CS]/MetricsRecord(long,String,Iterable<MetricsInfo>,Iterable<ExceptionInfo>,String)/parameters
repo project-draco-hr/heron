@@ -1,0 +1,5 @@
+long timestamp
+String source
+Iterable<MetricsInfo> metrics
+Iterable<ExceptionInfo> exceptions
+String context

@@ -1,0 +1,5 @@
+NIOLooper s
+String host
+int port
+HeronSocketOptions options
+Communicator<TopologyMaster.PublishMetrics> publishMetricsCommunicator

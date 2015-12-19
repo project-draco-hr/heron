@@ -1,0 +1,4 @@
+{
+  ackCount.scope(streamId).incr();
+  completeLatency.scope(streamId).update(latency);
+}

@@ -1,0 +1,11 @@
+{
+  if (conf.containsKey(Config.TOPOLOGY_COMPONENT_RAMMAP)) {
+    String old_entry=(String)conf.get(Config.TOPOLOGY_COMPONENT_RAMMAP);
+    String new_entry=String.format("%s,%s:%d",old_entry,component,ramInBytes);
+    conf.put(Config.TOPOLOGY_COMPONENT_RAMMAP,new_entry);
+  }
+ else {
+    String new_entry=String.format("%s:%d",component,ramInBytes);
+    conf.put(Config.TOPOLOGY_COMPONENT_RAMMAP,new_entry);
+  }
+}

@@ -1,0 +1,4 @@
+{
+  LOG.info("Communicator is removed: " + communicator);
+  return this.metricsSinkCommunicators.remove(communicator);
+}

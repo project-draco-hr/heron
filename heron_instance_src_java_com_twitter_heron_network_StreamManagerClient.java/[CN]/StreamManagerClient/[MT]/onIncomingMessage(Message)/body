@@ -1,0 +1,15 @@
+{
+  gatewayMetrics.updateReceivedPacketsCount(1);
+  gatewayMetrics.updateReceivedPacketsSize(message.getSerializedSize());
+  if (message instanceof StreamManager.NewInstanceAssignmentMessage) {
+    StreamManager.NewInstanceAssignmentMessage m=(StreamManager.NewInstanceAssignmentMessage)message;
+    LOG.info("Handling assignment message from direct NewInstanceAssignmentMessage");
+    handleAssignmentMessage(m.getPplan());
+  }
+ else   if (message instanceof StreamManager.TupleMessage) {
+    handleNewTuples((StreamManager.TupleMessage)message);
+  }
+ else {
+    throw new RuntimeException("Unknown kind of message received from Stream Manager");
+  }
+}

@@ -1,0 +1,6 @@
+{
+  this.capacity=capacity;
+  this.expectedQueueSize=expectedQueueSize;
+  this.currentSampleWeight=currentSampleWeight;
+  this.expectedAvailableCapacity=capacity / 2;
+}

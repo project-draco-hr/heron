@@ -1,0 +1,3 @@
+def delete_topology(self, topologyName):
+    '\n    Delete path is currently not supported in file based state manager.\n    '
+    pass

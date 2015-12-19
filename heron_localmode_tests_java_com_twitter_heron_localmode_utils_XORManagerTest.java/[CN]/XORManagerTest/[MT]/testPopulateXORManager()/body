@@ -1,0 +1,9 @@
+{
+  Map<String,List<Integer>> componentToTaskIds=new HashMap<>();
+  WakeableLooper looper=Mockito.mock(WakeableLooper.class);
+  componentToTaskIds.put("word",task_ids);
+  XORManager manager=XORManager.populateXORManager(looper,topology,3,componentToTaskIds);
+  Map<Integer,RotatingMap> spoutTasksToRotatingMap=manager.getSpoutTasksToRotatingMap();
+  Assert.assertEquals(task_ids.size(),spoutTasksToRotatingMap.size());
+  Assert.assertEquals(new HashSet<>(task_ids),spoutTasksToRotatingMap.keySet());
+}

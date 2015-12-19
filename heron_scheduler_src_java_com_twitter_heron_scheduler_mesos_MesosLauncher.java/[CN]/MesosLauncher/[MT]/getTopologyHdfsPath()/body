@@ -1,0 +1,3 @@
+{
+  return context.getPropertyWithException(Constants.TOPOLOGY_PKG_URI);
+}

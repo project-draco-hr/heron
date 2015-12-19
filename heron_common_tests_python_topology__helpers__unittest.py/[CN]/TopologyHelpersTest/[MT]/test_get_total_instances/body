@@ -1,0 +1,4 @@
+def test_get_total_instances(self):
+    topology = self.mock_proto.create_mock_medium_topology(3, 4, 5, 6)
+    num_instances = topology_helpers.get_total_instances(topology)
+    self.assertEqual(18, num_instances)

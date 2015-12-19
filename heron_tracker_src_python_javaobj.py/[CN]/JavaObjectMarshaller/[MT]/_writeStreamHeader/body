@@ -1,0 +1,2 @@
+def _writeStreamHeader(self):
+    self._writeStruct('>HH', 4, (self.STREAM_MAGIC, self.STREAM_VERSION))

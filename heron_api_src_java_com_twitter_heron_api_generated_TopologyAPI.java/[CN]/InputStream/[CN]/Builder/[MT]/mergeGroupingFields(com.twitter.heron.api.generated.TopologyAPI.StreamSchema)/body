@@ -1,0 +1,16 @@
+{
+  if (groupingFieldsBuilder_ == null) {
+    if (((bitField0_ & 0x00000004) == 0x00000004) && groupingFields_ != com.twitter.heron.api.generated.TopologyAPI.StreamSchema.getDefaultInstance()) {
+      groupingFields_=com.twitter.heron.api.generated.TopologyAPI.StreamSchema.newBuilder(groupingFields_).mergeFrom(value).buildPartial();
+    }
+ else {
+      groupingFields_=value;
+    }
+    onChanged();
+  }
+ else {
+    groupingFieldsBuilder_.mergeFrom(value);
+  }
+  bitField0_|=0x00000004;
+  return this;
+}

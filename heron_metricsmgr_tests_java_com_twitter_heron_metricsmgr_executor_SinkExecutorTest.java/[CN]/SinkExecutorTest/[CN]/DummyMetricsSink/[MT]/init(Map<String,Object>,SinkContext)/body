@@ -1,0 +1,6 @@
+{
+  initInvoked++;
+  Assert.assertEquals(map.get(MetricsSinksConfig.CONFIG_KEY_FLUSH_FREQUENCY_MS),FLUSH_INTERVAL_MS);
+  Assert.assertEquals("topology-name",context.getTopologyName());
+  Assert.assertEquals("sink-id",context.getSinkId());
+}

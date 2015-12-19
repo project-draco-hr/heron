@@ -1,0 +1,21 @@
+{
+  String topologyName=topology.getName();
+  LOG.info("HSS received a submit request for topology: " + topologyName);
+  StringBuilder sb=new StringBuilder();
+  sb.append(this.context.getPropertyWithException("heron.java.home.path") + "/bin/java");
+  sb.append(" ");
+  sb.append("-cp " + "heron-mesos.jar:heron-scheduler.jar" + ":slf4j-api-1.7.7.jar:slf4j-jdk14-1.7.7.jar:log4j-over-slf4j-1.7.7.jar");
+  sb.append(" ");
+  sb.append("-Djava.library.path=.");
+  sb.append(" ");
+  sb.append("com.twitter.heron.scheduler.service.SchedulerMain ");
+  sb.append(topologyName + " ");
+  sb.append("com.twitter.heron.scheduler.mesos.MesosScheduler" + " ");
+  sb.append("com.twitter.heron.scheduler.util.DefaultConfigLoader" + " ");
+  sb.append(configOverride + " ");
+  sb.append("{{task.ports[SCHEDULER_SERVER_PORT]}}" + " ");
+  sb.append("additional_config.conf");
+  String startCommand=sb.toString();
+  LOG.info("Topology Scheduler start command: " + startCommand);
+  return startCommand;
+}

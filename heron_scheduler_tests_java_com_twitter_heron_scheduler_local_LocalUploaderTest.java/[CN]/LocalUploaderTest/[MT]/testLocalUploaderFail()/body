@@ -1,0 +1,16 @@
+{
+  String topologyPkg="someTopologyPkg.tar";
+  TopologyAPI.Topology topology=TopologyUtilityTest.createTopology("name",new Config(),new HashMap<String,Integer>(),new HashMap<String,Integer>());
+  LocalUploader uploader=Mockito.spy(LocalUploader.class.newInstance());
+  PowerMockito.mockStatic(FileUtility.class);
+  Mockito.when(FileUtility.isDirectoryExists(Matchers.anyString())).thenReturn(true);
+  Mockito.when(FileUtility.copyFile(Matchers.anyString(),Matchers.anyString())).thenReturn(false);
+  Mockito.when(FileUtility.getBaseName(topologyPkg)).thenReturn(topologyPkg);
+  DefaultConfigLoader configLoader=getDefaultConfigLoader();
+  LaunchContext context=new LaunchContext(configLoader,topology);
+  uploader.initialize(context);
+  Assert.assertFalse(uploader.uploadPackage(topologyPkg));
+  String expectedTarget=String.format("%s/%s",working_directory,topologyPkg);
+  PowerMockito.verifyStatic();
+  FileUtility.copyFile(topologyPkg,expectedTarget);
+}

@@ -1,0 +1,7 @@
+{
+  if (current != null) {
+    tuples.add(current.build());
+    current=null;
+  }
+  return tuples;
+}

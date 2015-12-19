@@ -1,0 +1,20 @@
+{
+  for (int i=0; i < N * REPEAT; i++) {
+    tupleCache.addDataTuple(destTaskIds.get(i % destTaskIds.size()),stream0,dataTuple,true);
+  }
+  for (int i=0; i < N * REPEAT; i++) {
+    tupleCache.addDataTuple(destTaskIds.get(i % destTaskIds.size()),stream1,dataTuple,true);
+  }
+  Map<Integer,List<HeronTuples.HeronTupleSet>> cache=tupleCache.getCache();
+  Assert.assertEquals(N,cache.size());
+  Assert.assertEquals(new HashSet<>(destTaskIds),cache.keySet());
+  for (  List<HeronTuples.HeronTupleSet> tuples : cache.values()) {
+    Assert.assertEquals(2,tuples.size());
+    for (    HeronTuples.HeronTupleSet tupleSet : tuples) {
+      Assert.assertEquals(REPEAT,tupleSet.getData().getTuplesCount());
+      for (      HeronTuples.HeronDataTuple tuple : tupleSet.getData().getTuplesList()) {
+        Assert.assertNotNull(tuple.getKey());
+      }
+    }
+  }
+}

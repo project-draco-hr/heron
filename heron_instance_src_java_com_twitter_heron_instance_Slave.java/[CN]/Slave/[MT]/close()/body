@@ -1,0 +1,6 @@
+{
+  LOG.info("Closing the Slave Thread");
+  this.metricsCollector.forceGatherAllMetrics();
+  LOG.info("Cleaning up the instance");
+  instance.stop();
+}

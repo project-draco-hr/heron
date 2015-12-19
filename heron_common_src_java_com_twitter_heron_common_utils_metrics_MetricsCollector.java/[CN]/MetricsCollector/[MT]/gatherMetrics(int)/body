@@ -1,0 +1,17 @@
+{
+  if (timeBucketToMetricNames.containsKey(timeBucketSizeInSecs)) {
+    Metrics.MetricPublisherPublishMessage.Builder builder=Metrics.MetricPublisherPublishMessage.newBuilder();
+    for (    String metricName : timeBucketToMetricNames.get(timeBucketSizeInSecs)) {
+      gatherOneMetric(metricName,builder);
+    }
+    Metrics.MetricPublisherPublishMessage msg=builder.build();
+    queue.offer(msg);
+    Runnable r=new Runnable(){
+      public void run(){
+        gatherMetrics(timeBucketSizeInSecs);
+      }
+    }
+;
+    runnableToGatherMetrics.registerTimerEventInSeconds(timeBucketSizeInSecs,r);
+  }
+}

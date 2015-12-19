@@ -1,0 +1,11 @@
+def create_mock_bolt(self, bolt_name, input_streams, output_streams, bolt_parallelism):
+    bolt = protoTopology.Bolt()
+    bolt.comp.name = bolt_name
+    kv = bolt.comp.config.kvs.add()
+    kv.key = constants.TOPOLOGY_COMPONENT_PARALLELISM
+    kv.value = str(bolt_parallelism)
+    for stream in input_streams:
+        bolt.inputs.add().stream.CopyFrom(stream)
+    for stream in output_streams:
+        bolt.outputs.add().stream.CopyFrom(stream)
+    return bolt

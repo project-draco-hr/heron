@@ -1,0 +1,2 @@
+def define_value(name, value):
+    return ('#define %s %s\n' % (name, value))

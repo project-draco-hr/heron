@@ -1,0 +1,18 @@
+def get_component_distribution(topology):
+    '\n  The argument is the proto object for topology.\n  Distribute components and their instances evenly across containers in a round robin fashion\n  Return value is a map from container id to a list.\n  Each element of a list is a tuple (component_name, global_task_id, component_index)\n  This is essentially the physical plan of the topology.\n  '
+    containers = {}
+    nstmgrs = get_nstmgrs(topology)
+    for i in range(1, (nstmgrs + 1)):
+        containers[i] = []
+    index = 1
+    global_task_id = 1
+    for (component_name, ninstances) in get_component_parallelism(topology).items():
+        component_index = 0
+        for i in range(ninstances):
+            containers[index].append((str(component_name), str(global_task_id), str(component_index)))
+            component_index = (component_index + 1)
+            global_task_id = (global_task_id + 1)
+            index = (index + 1)
+            if (index == (nstmgrs + 1)):
+                index = 1
+    return containers

@@ -1,0 +1,12 @@
+{
+  com.twitter.heron.api.Config heronConfig=ConfigUtils.translateConfig(stormConfig);
+  try {
+    HeronSubmitter.submitTopology(name,heronConfig,topology.getStormTopology());
+  }
+ catch (  com.twitter.heron.api.exception.AlreadyAliveException e) {
+    throw new AlreadyAliveException();
+  }
+catch (  com.twitter.heron.api.exception.InvalidTopologyException e) {
+    throw new InvalidTopologyException();
+  }
+}

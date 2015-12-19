@@ -1,0 +1,19 @@
+{
+  String[] sources=record.getSource().split("/");
+  String hostPort=sources[0];
+  String componentName=sources[1];
+  String instanceId=sources[2];
+  TopologyMaster.PublishMetrics.Builder publishMetrics=TopologyMaster.PublishMetrics.newBuilder();
+  for (  MetricsInfo metricsInfo : tMasterMetricsFilter.filter(record.getMetrics())) {
+    TopologyMaster.MetricDatum metricDatum=TopologyMaster.MetricDatum.newBuilder().setComponentName(componentName).setInstanceId(instanceId).setName(metricsInfo.getName()).setValue(metricsInfo.getValue()).setTimestamp(record.getTimestamp()).build();
+    publishMetrics.addMetrics(metricDatum);
+  }
+  for (  ExceptionInfo exceptionInfo : record.getExceptions()) {
+    TopologyMaster.TmasterExceptionLog exceptionLog=TopologyMaster.TmasterExceptionLog.newBuilder().setComponentName(componentName).setHostname(hostPort).setInstanceId(instanceId).setStacktrace(exceptionInfo.getStackTrace()).setLasttime(exceptionInfo.getLastTime()).setFirsttime(exceptionInfo.getFirstTime()).setCount(exceptionInfo.getCount()).setLogging(exceptionInfo.getLogging()).build();
+    publishMetrics.addExceptions(exceptionLog);
+  }
+  metricsCommunicator.offer(publishMetrics.build());
+  sinkContext.exportCountMetric(RECORD_PROCESS_COUNT,1);
+  sinkContext.exportCountMetric(METRICS_COUNT,publishMetrics.getMetricsCount());
+  sinkContext.exportCountMetric(EXCEPTIONS_COUNT,publishMetrics.getExceptionsCount());
+}

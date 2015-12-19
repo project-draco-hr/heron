@@ -1,0 +1,11 @@
+{
+  LOG.info("To deactivate topology: " + request.getTopologyName());
+  try {
+    communicateTMaster("deactivate");
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"We could not deactivate topology:",e);
+    return false;
+  }
+  return true;
+}

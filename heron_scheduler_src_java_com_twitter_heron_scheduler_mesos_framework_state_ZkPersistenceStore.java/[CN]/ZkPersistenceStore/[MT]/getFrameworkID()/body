@@ -1,0 +1,16 @@
+{
+  LOG.info("Get FrameworkID");
+  byte[] res;
+  try {
+    if (client.checkExists().forPath(frameworkIdPath) == null) {
+      LOG.info("No existing frameworkId");
+      return null;
+    }
+    res=client.getData().forPath(frameworkIdPath);
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Failed to read from frameworkId. ",e);
+  }
+  Protos.FrameworkID frameworkID=Protos.FrameworkID.newBuilder().setValue(new String(res)).build();
+  return frameworkID;
+}

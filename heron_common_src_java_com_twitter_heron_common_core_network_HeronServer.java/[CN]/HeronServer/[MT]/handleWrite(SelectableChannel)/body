@@ -1,0 +1,8 @@
+{
+  SocketChannelHelper helper=activeConnections.get(channel);
+  if (helper == null) {
+    LOG.severe("Unknown connection is ready for read");
+    return;
+  }
+  helper.write();
+}

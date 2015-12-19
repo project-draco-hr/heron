@@ -1,0 +1,4 @@
+{
+  this.tmasterClientConfig=tmasterClientConfig;
+  this.metricsCommunicator=metricsCommunicator;
+}

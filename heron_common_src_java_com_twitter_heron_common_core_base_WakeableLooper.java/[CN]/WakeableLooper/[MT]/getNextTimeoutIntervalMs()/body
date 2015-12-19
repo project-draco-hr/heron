@@ -1,0 +1,7 @@
+{
+  long nextTimeoutIntervalMs=INFINITE_FUTURE;
+  if (!timers.isEmpty()) {
+    nextTimeoutIntervalMs=(timers.peek().getExpirationNs() - System.nanoTime() + Constants.MILLISECONDS_TO_NANOSECONDS) / Constants.MILLISECONDS_TO_NANOSECONDS;
+  }
+  return nextTimeoutIntervalMs;
+}

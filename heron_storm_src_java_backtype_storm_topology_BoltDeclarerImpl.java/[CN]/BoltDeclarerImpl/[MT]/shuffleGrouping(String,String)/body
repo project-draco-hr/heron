@@ -1,0 +1,4 @@
+{
+  delegate.shuffleGrouping(componentId,streamId);
+  return this;
+}

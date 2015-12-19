@@ -1,0 +1,5 @@
+{
+  Metrics.MetricPublisher publisher=Metrics.MetricPublisher.newBuilder().setHostname("hostname").setPort(0).setComponentName("tmaster-location-publisher").setInstanceId("instance-id").setInstanceIndex(1).build();
+  Metrics.MetricPublisherRegisterRequest request=Metrics.MetricPublisherRegisterRequest.newBuilder().setPublisher(publisher).build();
+  sendRequest(request,Metrics.MetricPublisherRegisterResponse.newBuilder());
+}

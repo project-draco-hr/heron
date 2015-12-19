@@ -1,0 +1,4 @@
+{
+  this.heronConfig=heronConfig;
+  return this;
+}

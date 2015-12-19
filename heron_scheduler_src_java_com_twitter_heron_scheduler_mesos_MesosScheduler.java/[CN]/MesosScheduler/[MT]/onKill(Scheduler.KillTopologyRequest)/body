@@ -1,0 +1,18 @@
+{
+  for (  BaseJob job : executorShardToJob.values()) {
+    jobScheduler.deregisterJob(job.name,true);
+  }
+  CountDownLatch endLatch=new CountDownLatch(1);
+  mesosJobFramework.setEndNotification(endLatch);
+  LOG.info("Wait for the completeness of all mesos jobs");
+  try {
+    if (!endLatch.await(MAX_WAIT_TIMEOUT_MS,TimeUnit.MILLISECONDS)) {
+      throw new RuntimeException("Job Scheduler does not kill all jobs in expected time!");
+    }
+  }
+ catch (  InterruptedException e) {
+    throw new RuntimeException("Mesos Scheduler is interrupted:",e);
+  }
+  LOG.info("Mesos jobs killed; to clean up...");
+  return persistenceStore.removeFrameworkID() && persistenceStore.clean();
+}

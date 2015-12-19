@@ -1,0 +1,7 @@
+{
+  this.context=context;
+  this.topologyName=context.getTopologyName();
+  this.dc=this.context.getPropertyWithException(Constants.DC);
+  this.role=this.context.getPropertyWithException(Constants.ROLE);
+  this.environ=this.context.getPropertyWithException(Constants.ENVIRON);
+}

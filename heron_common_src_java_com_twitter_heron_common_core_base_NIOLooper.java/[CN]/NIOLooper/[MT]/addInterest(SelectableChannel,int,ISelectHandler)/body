@@ -1,0 +1,23 @@
+{
+  SelectionKey key=channel.keyFor(selector);
+  if (key == null) {
+    channel.register(selector,operation,callback);
+  }
+ else   if (!key.isValid()) {
+    throw new RuntimeException(String.format("Unable to add %d in %s due to key is invalid",operation,channel));
+  }
+ else {
+    if ((key.interestOps() & operation) != 0) {
+      throw new RuntimeException(String.format("%d has been registered in %s",operation,channel));
+    }
+    if (key.attachment() == null) {
+      key.attach(callback);
+    }
+ else {
+      if (callback != key.attachment()) {
+        throw new RuntimeException("Unmatched SelectHandler has already been attached" + " for other operation");
+      }
+    }
+    key.interestOps(key.interestOps() | operation);
+  }
+}

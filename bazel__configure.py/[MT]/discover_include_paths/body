@@ -1,0 +1,6 @@
+def discover_include_paths(program):
+    includes_command = ((((program + ' -E -x c++ - -v 2>&1 < /dev/null ') + "| sed -n '/search starts here:/,/End of search list/p' ") + "| sed '/#include.*/d' ") + "| sed '/End of search list./d' ")
+    includes = subprocess.Popen(includes_command, shell=True, stdout=subprocess.PIPE).communicate()[0]
+    include_paths = [real_path(path.strip()) for path in includes.split('\n')]
+    builtin_includes = '\n'.join([('  cxx_builtin_include_directory: "%s"' % item) for item in include_paths])
+    return builtin_includes

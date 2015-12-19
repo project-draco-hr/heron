@@ -1,0 +1,8 @@
+{
+  if (inputsBuilder_ == null) {
+    return inputs_.size();
+  }
+ else {
+    return inputsBuilder_.getCount();
+  }
+}

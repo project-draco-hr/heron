@@ -1,0 +1,6 @@
+{
+  LOG.severe("Disconnected from Stream Manager.");
+  LOG.info("Clean the old PhysicalPlanHelper in StreamManagerClient.");
+  helper=null;
+  onConnect(StatusCode.CONNECT_ERROR);
+}

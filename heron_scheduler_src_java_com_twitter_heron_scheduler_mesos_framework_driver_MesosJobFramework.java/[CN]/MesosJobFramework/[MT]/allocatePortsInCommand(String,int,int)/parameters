@@ -1,0 +1,3 @@
+String originalCommand
+int portRangeStart
+int portRangeEnd

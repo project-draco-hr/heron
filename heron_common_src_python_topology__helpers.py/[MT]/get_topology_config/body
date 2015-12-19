@@ -1,0 +1,6 @@
+def get_topology_config(topology, key):
+    '\n  Helper function to get the value of key in topology config.\n  Return None if the key is not present.\n  '
+    for kv in topology.topology_config.kvs:
+        if (kv.key == key):
+            return kv.value
+    return None

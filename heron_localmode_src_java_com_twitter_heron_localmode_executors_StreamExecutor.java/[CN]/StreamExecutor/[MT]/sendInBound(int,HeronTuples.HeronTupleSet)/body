@@ -1,0 +1,10 @@
+{
+  if (message.hasData()) {
+    StreamManager.TupleMessage.Builder out=StreamManager.TupleMessage.newBuilder();
+    out.getSetBuilder().setData(message.getData());
+    sendMessageToInstance(taskId,out.build());
+  }
+  if (message.hasControl()) {
+    processAcksAndFails(taskId,message.getControl());
+  }
+}

@@ -1,0 +1,18 @@
+{
+  LOG.info(String.format("Persist Task: %s with details: %s",name,task));
+  String path=taskPath + "/" + name;
+  byte[] data=BaseTask.getTaskInJSON(task).getBytes();
+  try {
+    if (client.checkExists().forPath(path) != null) {
+      LOG.info("Reset the task data");
+      client.setData().forPath(path,data);
+      return true;
+    }
+    client.create().creatingParentsIfNeeded().forPath(path,data);
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to persist task",e);
+    return false;
+  }
+  return true;
+}

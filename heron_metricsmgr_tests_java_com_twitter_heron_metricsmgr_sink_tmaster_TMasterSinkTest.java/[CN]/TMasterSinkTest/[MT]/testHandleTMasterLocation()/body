@@ -1,0 +1,33 @@
+{
+  TMasterSink tMasterSink=new TMasterSink();
+  Map<String,Object> sinkConfig=new HashMap<String,Object>();
+  sinkConfig.put("tmaster-location-check-interval-sec",TMASTER_LOCATION_CHECK_INTERVAL_SECONDS);
+  Map<String,Object> serviceConfig=new HashMap<String,Object>();
+  serviceConfig.put("reconnect-interval-second",RECONNECT_INTERVAL_SECONDS);
+  serviceConfig.put("network-write-batch-size-bytes",1);
+  serviceConfig.put("network-write-batch-time-ms",1);
+  serviceConfig.put("network-read-batch-size-bytes",1);
+  serviceConfig.put("network-read-batch-time-ms",1);
+  serviceConfig.put("socket-send-buffer-size-bytes",1);
+  serviceConfig.put("socket-received-buffer-size-bytes",1);
+  sinkConfig.put("tmaster-client",serviceConfig);
+  Assert.assertNull(tMasterSink.getCurrentTMasterLocation());
+  SinkContext sinkContext=new SinkContextImpl("topology-name","metricsmgr-id","sink-id",new MultiCountMetric());
+  tMasterSink.init(sinkConfig,sinkContext);
+  TopologyMaster.TMasterLocation oldLoc=TopologyMaster.TMasterLocation.newBuilder().setTopologyName("topology-name").setTopologyId("topology-id").setHost("host").setControllerPort(0).setMasterPort(0).build();
+  SingletonRegistry.INSTANCE.registerSingleton(TMASTER_LOCATION_BEAN_NAME,oldLoc);
+  Thread.sleep(WAIT_SECONDS * 1000);
+  Assert.assertTrue(tMasterSink.getTMasterStartedAttempts() > 0);
+  Assert.assertEquals(oldLoc,tMasterSink.getCurrentTMasterLocation());
+  Assert.assertEquals(oldLoc,tMasterSink.getCurrentTMasterLocationInService());
+  TopologyMaster.TMasterLocation newLoc=TopologyMaster.TMasterLocation.newBuilder().setTopologyName("topology-name").setTopologyId("topology-id").setHost("host").setControllerPort(0).setMasterPort(1).build();
+  SingletonRegistry.INSTANCE.updateSingleton(TMASTER_LOCATION_BEAN_NAME,newLoc);
+  int lastTMasterStartedAttempts=tMasterSink.getTMasterStartedAttempts();
+  Thread.sleep(WAIT_SECONDS * 1000);
+  Assert.assertTrue(tMasterSink.getTMasterStartedAttempts() > lastTMasterStartedAttempts);
+  Assert.assertNotSame(oldLoc,tMasterSink.getCurrentTMasterLocation());
+  Assert.assertNotSame(oldLoc,tMasterSink.getCurrentTMasterLocationInService());
+  Assert.assertEquals(newLoc,tMasterSink.getCurrentTMasterLocation());
+  Assert.assertEquals(newLoc,tMasterSink.getCurrentTMasterLocationInService());
+  tMasterSink.close();
+}

@@ -1,0 +1,3 @@
+{
+  admitBoltTuple(taskId,streamId,anchors,tuple);
+}

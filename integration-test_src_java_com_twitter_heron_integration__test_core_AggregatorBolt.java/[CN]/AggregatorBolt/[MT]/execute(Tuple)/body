@@ -1,0 +1,10 @@
+{
+  String tupleInJSON="";
+  try {
+    tupleInJSON=mapper.writeValueAsString(tuple.getValue(0));
+  }
+ catch (  JsonProcessingException e) {
+    LOG.log(Level.SEVERE,"Could not convert map to JSONString: " + tuple.getValue(0).toString(),e);
+  }
+  result.add(tupleInJSON);
+}

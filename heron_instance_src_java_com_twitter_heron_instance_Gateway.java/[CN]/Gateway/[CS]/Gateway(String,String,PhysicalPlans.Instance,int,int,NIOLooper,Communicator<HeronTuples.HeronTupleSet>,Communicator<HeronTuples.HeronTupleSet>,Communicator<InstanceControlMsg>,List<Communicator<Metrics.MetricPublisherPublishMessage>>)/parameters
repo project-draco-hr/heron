@@ -1,0 +1,10 @@
+String topologyName
+String topologyId
+PhysicalPlans.Instance instance
+int streamPort
+int metricsPort
+NIOLooper gatewayLooper
+Communicator<HeronTuples.HeronTupleSet> inStreamQueue
+Communicator<HeronTuples.HeronTupleSet> outStreamQueue
+Communicator<InstanceControlMsg> inControlQueue
+List<Communicator<Metrics.MetricPublisherPublishMessage>> outMetricsQueues

@@ -1,0 +1,20 @@
+{
+  PhysicalPlans.PhysicalPlan.Builder pPlanBuilder=PhysicalPlans.PhysicalPlan.newBuilder();
+  pPlanBuilder.setTopology(topology);
+  PhysicalPlans.StMgr stMgr=PhysicalPlans.StMgr.newBuilder().setId("").setHostName("").setDataPort(-1).setLocalEndpoint("").setCwd("").build();
+  pPlanBuilder.addStmgrs(stMgr);
+  int globalTaskIndex=1;
+  for (  Map.Entry<String,Integer> componentParallelism : getComponentParallelism(topology).entrySet()) {
+    String componentName=componentParallelism.getKey();
+    int parallelism=componentParallelism.getValue();
+    int componentIndex=1;
+    for (int i=0; i < parallelism; i++) {
+      PhysicalPlans.InstanceInfo instanceInfo=PhysicalPlans.InstanceInfo.newBuilder().setComponentName(componentName).setTaskId(globalTaskIndex).setComponentIndex(componentIndex).build();
+      PhysicalPlans.Instance instance=PhysicalPlans.Instance.newBuilder().setStmgrId("").setInstanceId(String.format("%s_%s",componentName,componentIndex)).setInfo(instanceInfo).build();
+      pPlanBuilder.addInstances(instance);
+      componentIndex++;
+      globalTaskIndex++;
+    }
+  }
+  return pPlanBuilder.build();
+}

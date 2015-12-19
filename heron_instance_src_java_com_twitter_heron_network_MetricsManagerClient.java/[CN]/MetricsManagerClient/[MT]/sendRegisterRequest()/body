@@ -1,0 +1,12 @@
+{
+  String hostname;
+  try {
+    hostname=InetAddress.getLocalHost().getHostName();
+  }
+ catch (  UnknownHostException e) {
+    throw new RuntimeException("GetHostName failed");
+  }
+  Metrics.MetricPublisher publisher=Metrics.MetricPublisher.newBuilder().setHostname(hostname).setPort(instance.getInfo().getTaskId()).setComponentName(instance.getInfo().getComponentName()).setInstanceId(instance.getInstanceId()).setInstanceIndex(instance.getInfo().getComponentIndex()).build();
+  Metrics.MetricPublisherRegisterRequest request=Metrics.MetricPublisherRegisterRequest.newBuilder().setPublisher(publisher).build();
+  sendRequest(request,null,Metrics.MetricPublisherRegisterResponse.newBuilder(),systemConfig.getInstanceReconnectMetricsmgrIntervalSec());
+}

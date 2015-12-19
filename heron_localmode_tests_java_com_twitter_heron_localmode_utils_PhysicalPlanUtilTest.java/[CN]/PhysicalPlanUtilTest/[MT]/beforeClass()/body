@@ -1,0 +1,4 @@
+{
+  topology=PhysicalPlanUtilTest.getTestTopology();
+  plan=PhysicalPlanUtil.getPhysicalPlan(topology);
+}

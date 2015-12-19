@@ -1,0 +1,8 @@
+{
+  TopologyBuilder builder=new TopologyBuilder();
+  builder.setSpout("word",new TestWordSpout(),2);
+  builder.setBolt("mybolt",new MyBolt(),2).customGrouping("word",new MyCustomStreamGrouping());
+  Config conf=new Config();
+  conf.setNumStmgrs(1);
+  HeronSubmitter.submitTopology(args[0],conf,builder.createTopology());
+}

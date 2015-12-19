@@ -1,0 +1,11 @@
+{
+  try {
+    LOG.info("Persist Job: " + BaseJob.getJobDefinitionInJSON(baseJob));
+    Files.write(new File(jobPath + "/" + baseJob.name).toPath(),BaseJob.getJobDefinitionInJSON(baseJob).getBytes());
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to write file",e);
+    return false;
+  }
+  return true;
+}

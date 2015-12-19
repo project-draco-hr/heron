@@ -1,0 +1,6 @@
+{
+  this.rootPath=rootPath;
+  this.frameworkIdPath=rootPath + "/frameworkId";
+  this.jobPath=rootPath + "/jobs";
+  this.taskPath=rootPath + "/tasks";
+}

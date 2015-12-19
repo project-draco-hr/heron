@@ -1,0 +1,3 @@
+{
+  conf.put(Config.TOPOLOGY_TICK_TUPLE_FREQ_SECS,Integer.toString(seconds));
+}

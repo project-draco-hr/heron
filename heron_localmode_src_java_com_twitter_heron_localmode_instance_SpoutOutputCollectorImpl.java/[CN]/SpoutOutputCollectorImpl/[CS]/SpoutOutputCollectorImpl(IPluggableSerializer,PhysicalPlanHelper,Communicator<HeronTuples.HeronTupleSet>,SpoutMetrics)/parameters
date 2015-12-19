@@ -1,0 +1,4 @@
+IPluggableSerializer serializer
+PhysicalPlanHelper helper
+Communicator<HeronTuples.HeronTupleSet> streamOutQueue
+SpoutMetrics spoutMetrics

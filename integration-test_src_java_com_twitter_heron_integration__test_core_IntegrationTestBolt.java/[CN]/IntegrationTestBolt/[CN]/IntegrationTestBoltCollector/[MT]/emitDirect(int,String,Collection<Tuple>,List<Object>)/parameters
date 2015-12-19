@@ -1,0 +1,4 @@
+int i
+String s
+Collection<Tuple> tuples
+List<Object> objects

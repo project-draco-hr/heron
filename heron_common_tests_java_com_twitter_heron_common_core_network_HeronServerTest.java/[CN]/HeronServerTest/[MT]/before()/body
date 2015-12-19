@@ -1,0 +1,8 @@
+{
+  serverPort=Utils.getFreePort();
+  serverLooper=new NIOLooper();
+  heronServer=new SimpleHeronServer(serverLooper,SERVER_HOST,serverPort);
+  clientLooper=new NIOLooper();
+  heronClient=new SimpleHeronClient(clientLooper,SERVER_HOST,serverPort);
+  threadsPool=Executors.newFixedThreadPool(2);
+}

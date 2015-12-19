@@ -1,0 +1,4 @@
+{
+  this.spoutOutputCollector=outputCollector;
+  delegateSpout.open(map,topologyContext,new SpoutOutputCollector(new IntegrationTestSpoutCollector(outputCollector)));
+}

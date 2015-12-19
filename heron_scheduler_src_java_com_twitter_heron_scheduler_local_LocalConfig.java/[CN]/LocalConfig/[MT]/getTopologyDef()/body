@@ -1,0 +1,3 @@
+{
+  return properties.getProperty(Constants.TOPOLOGY_DEFINITION_FILE);
+}

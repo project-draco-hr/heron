@@ -1,0 +1,6 @@
+def getTopologyByDcEnvironAndName(self, dc, environ, topName):
+    '\n    Find and return the topology given its dc, environ and topology name.\n    Raises exception if topology is not found, or more than one are found.\n    '
+    topologies = filter((lambda t: ((t.name == topName) and (t.dc == dc) and (t.environ == environ))), self.topologies)
+    if ((not topologies) or (len(topologies) > 1)):
+        raise Exception('Topology not found for {0}, {1}, {2}'.format(dc, environ, topName))
+    return topologies[0]

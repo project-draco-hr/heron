@@ -1,0 +1,7 @@
+{
+  records.clear();
+  for (int i=0; i < N; i++) {
+    MetricsRecord record=new MetricsRecord(i,SOURCE + i,new ArrayList<MetricsInfo>(),new ArrayList<ExceptionInfo>(),CONTEXT + i);
+    records.add(record);
+  }
+}

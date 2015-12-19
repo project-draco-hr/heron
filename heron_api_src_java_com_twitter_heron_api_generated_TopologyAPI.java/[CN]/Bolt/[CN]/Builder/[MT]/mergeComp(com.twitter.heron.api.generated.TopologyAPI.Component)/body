@@ -1,0 +1,16 @@
+{
+  if (compBuilder_ == null) {
+    if (((bitField0_ & 0x00000001) == 0x00000001) && comp_ != com.twitter.heron.api.generated.TopologyAPI.Component.getDefaultInstance()) {
+      comp_=com.twitter.heron.api.generated.TopologyAPI.Component.newBuilder(comp_).mergeFrom(value).buildPartial();
+    }
+ else {
+      comp_=value;
+    }
+    onChanged();
+  }
+ else {
+    compBuilder_.mergeFrom(value);
+  }
+  bitField0_|=0x00000001;
+  return this;
+}

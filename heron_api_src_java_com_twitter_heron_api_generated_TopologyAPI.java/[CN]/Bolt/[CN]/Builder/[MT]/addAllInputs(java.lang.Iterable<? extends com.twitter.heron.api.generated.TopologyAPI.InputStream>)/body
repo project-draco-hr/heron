@@ -1,0 +1,11 @@
+{
+  if (inputsBuilder_ == null) {
+    ensureInputsIsMutable();
+    super.addAll(values,inputs_);
+    onChanged();
+  }
+ else {
+    inputsBuilder_.addAllMessages(values);
+  }
+  return this;
+}

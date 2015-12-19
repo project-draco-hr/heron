@@ -1,0 +1,11 @@
+{
+  while (!timers.isEmpty()) {
+    long nextExpiredTime=timers.peek().getExpirationNs();
+    if (nextExpiredTime - currentTime <= 0) {
+      timers.poll().handler.run();
+    }
+ else {
+      return;
+    }
+  }
+}

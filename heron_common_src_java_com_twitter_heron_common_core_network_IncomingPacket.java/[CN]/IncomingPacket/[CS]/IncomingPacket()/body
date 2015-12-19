@@ -1,0 +1,4 @@
+{
+  header=ByteBuffer.allocate(4);
+  headerRead=false;
+}

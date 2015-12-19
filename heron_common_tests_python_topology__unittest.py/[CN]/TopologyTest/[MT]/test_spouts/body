@@ -1,0 +1,8 @@
+def test_spouts(self):
+    self.assertEqual(0, len(self.topology.spouts()))
+    pplan = MockProto().create_mock_simple_physical_plan()
+    self.topology.set_physical_plan(pplan)
+    spouts = self.topology.spouts()
+    self.assertEqual(1, len(spouts))
+    self.assertEqual('mock_spout', spouts[0].comp.name)
+    self.assertEqual(['mock_spout'], self.topology.spout_names())

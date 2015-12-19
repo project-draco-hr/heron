@@ -1,0 +1,5 @@
+{
+  topologyContextImpl=new TopologyContext(context);
+  spoutOutputCollectorImpl=new SpoutOutputCollectorImpl(collector);
+  delegate.open(conf,topologyContextImpl,spoutOutputCollectorImpl);
+}

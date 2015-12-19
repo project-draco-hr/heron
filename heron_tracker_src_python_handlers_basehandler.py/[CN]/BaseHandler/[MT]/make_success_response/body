@@ -1,0 +1,5 @@
+def make_success_response(self, result):
+    '\n    Makes the python dict corresponding to the\n    JSON that needs to be sent for a successful\n    response. Result is the actual payload\n    that gets sent.\n    '
+    response = self.make_response(constants.RESPONSE_STATUS_SUCCESS)
+    response[constants.RESPONSE_KEY_RESULT] = result
+    return response

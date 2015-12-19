@@ -1,0 +1,24 @@
+{
+  if (acceptChannel == null || !acceptChannel.isOpen()) {
+    LOG.info("Fail to stop server; not yet open.");
+    return;
+  }
+  for (  Map.Entry<SocketChannel,SocketChannelHelper> connections : activeConnections.entrySet()) {
+    SocketChannel channel=connections.getKey();
+    SocketAddress channelAddress=channel.socket().getRemoteSocketAddress();
+    LOG.info("Closing connected channel from client: " + channelAddress);
+    LOG.info("Removing all interest on channel: " + channelAddress);
+    nioLooper.removeAllInterest(channel);
+    onClose(channel);
+    connections.getValue().clear();
+  }
+  activeConnections.clear();
+  requestMap.clear();
+  messageMap.clear();
+  try {
+    acceptChannel.close();
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to close server",e);
+  }
+}

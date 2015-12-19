@@ -1,0 +1,7 @@
+{
+  isRequestNeed=true;
+  runBase();
+  Assert.assertTrue(isOnRequestInvoked);
+  Assert.assertTrue(isClientReceivedResponse);
+  isRequestNeed=false;
+}

@@ -1,0 +1,8 @@
+{
+  if (configBuilder_ == null) {
+    return config_;
+  }
+ else {
+    return configBuilder_.getMessage();
+  }
+}

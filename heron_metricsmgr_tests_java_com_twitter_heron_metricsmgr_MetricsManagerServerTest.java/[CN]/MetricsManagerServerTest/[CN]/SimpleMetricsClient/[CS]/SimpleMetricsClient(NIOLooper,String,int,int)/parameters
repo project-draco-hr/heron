@@ -1,0 +1,4 @@
+NIOLooper looper
+String host
+int port
+int maxMessages

@@ -1,0 +1,3 @@
+{
+  return Resource.newBuilder().setName(name).setType(Value.Type.SCALAR).setScalar(Value.Scalar.newBuilder().setValue(value)).setRole("*").build();
+}

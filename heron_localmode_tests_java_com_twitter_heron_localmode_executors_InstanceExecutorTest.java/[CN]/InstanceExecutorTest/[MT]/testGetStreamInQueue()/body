@@ -1,0 +1,4 @@
+{
+  Assert.assertNotNull(instanceExecutor.getStreamInQueue());
+  Assert.assertEquals(0,instanceExecutor.getStreamInQueue().size());
+}

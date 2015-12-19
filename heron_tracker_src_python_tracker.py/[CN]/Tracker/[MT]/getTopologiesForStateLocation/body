@@ -1,0 +1,3 @@
+def getTopologiesForStateLocation(self, name):
+    '\n    Returns all the topologies for a given state manager.\n    '
+    return filter((lambda t: (t.state_manager_name == name)), self.topologies)

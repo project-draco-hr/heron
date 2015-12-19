@@ -1,0 +1,16 @@
+{
+  if (schemaBuilder_ == null) {
+    if (((bitField0_ & 0x00000002) == 0x00000002) && schema_ != com.twitter.heron.api.generated.TopologyAPI.StreamSchema.getDefaultInstance()) {
+      schema_=com.twitter.heron.api.generated.TopologyAPI.StreamSchema.newBuilder(schema_).mergeFrom(value).buildPartial();
+    }
+ else {
+      schema_=value;
+    }
+    onChanged();
+  }
+ else {
+    schemaBuilder_.mergeFrom(value);
+  }
+  bitField0_|=0x00000002;
+  return this;
+}

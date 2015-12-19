@@ -1,0 +1,10 @@
+{
+  boolean throwException=false;
+  try {
+    heronServer.handleConnect(null);
+  }
+ catch (  RuntimeException re) {
+    throwException=true;
+  }
+  Assert.assertTrue(throwException);
+}

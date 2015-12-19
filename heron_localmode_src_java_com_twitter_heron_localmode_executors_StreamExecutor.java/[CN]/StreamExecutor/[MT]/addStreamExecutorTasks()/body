@@ -1,0 +1,12 @@
+{
+  Runnable streamExecutorsTasks=new Runnable(){
+    @Override public void run(){
+      if (tupleCache.isEmpty()) {
+        handleInstanceExecutor();
+      }
+      drainCache();
+    }
+  }
+;
+  looper.addTasksOnWakeup(streamExecutorsTasks);
+}

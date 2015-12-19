@@ -1,0 +1,6 @@
+{
+  LOG.info("No need to set SchedulerLocation: " + topologyName);
+  SettableFuture<Boolean> future=SettableFuture.create();
+  future.set(true);
+  return future;
+}

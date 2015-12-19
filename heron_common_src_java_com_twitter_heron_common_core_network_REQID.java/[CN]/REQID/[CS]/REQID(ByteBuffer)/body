@@ -1,0 +1,4 @@
+{
+  bytes=new byte[REQID.REQIDSize];
+  buffer.get(bytes);
+}

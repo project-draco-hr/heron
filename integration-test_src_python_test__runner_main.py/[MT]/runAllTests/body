@@ -1,0 +1,13 @@
+def runAllTests(conf, args):
+    successes = []
+    failures = []
+    timestamp = str(int(time.time()))
+    for topologyConf in conf['topologies']:
+        topologyName = ('%s_%s_%s' % (timestamp, topologyConf['topologyName'], str(uuid.uuid4())))
+        classPath = (conf['topologyClasspathPrefix'] + topologyConf['classPath'])
+        expectedResultFilePath = ((args.topologiesPath + '/') + topologyConf['expectedResultRelativePath'])
+        if (runTest(topologyName, classPath, expectedResultFilePath, args) == 'success'):
+            successes += [topologyName]
+        else:
+            failures += [topologyName]
+    return (successes, failures)

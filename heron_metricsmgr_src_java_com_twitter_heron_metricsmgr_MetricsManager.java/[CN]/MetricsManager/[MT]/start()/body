@@ -1,0 +1,9 @@
+{
+  LOG.info("Starting the Executors.");
+  for (  SinkExecutor executor : sinkExecutors.values()) {
+    executors.execute(executor);
+  }
+  LOG.info("Starting Metrics Manager Server");
+  metricsManagerServer.start();
+  metricsManagerServerLoop.loop();
+}

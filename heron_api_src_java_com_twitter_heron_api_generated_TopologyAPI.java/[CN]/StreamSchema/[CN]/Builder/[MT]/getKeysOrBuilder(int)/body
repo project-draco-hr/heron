@@ -1,0 +1,8 @@
+{
+  if (keysBuilder_ == null) {
+    return keys_.get(index);
+  }
+ else {
+    return keysBuilder_.getMessageOrBuilder(index);
+  }
+}

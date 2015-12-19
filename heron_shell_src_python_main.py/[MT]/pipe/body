@@ -1,0 +1,4 @@
+def pipe(in_stream, to_cmd):
+    '\n  Pipes in_stream from output of previous pipe into to_cmd.\n  Returns stdout stream of to_cmd\n  '
+    p = subprocess.Popen(to_cmd, stdout=subprocess.PIPE, stdin=in_stream)
+    return p.stdout

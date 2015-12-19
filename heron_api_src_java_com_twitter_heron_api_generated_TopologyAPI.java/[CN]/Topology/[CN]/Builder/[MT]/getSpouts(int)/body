@@ -1,0 +1,8 @@
+{
+  if (spoutsBuilder_ == null) {
+    return spouts_.get(index);
+  }
+ else {
+    return spoutsBuilder_.getMessage(index);
+  }
+}

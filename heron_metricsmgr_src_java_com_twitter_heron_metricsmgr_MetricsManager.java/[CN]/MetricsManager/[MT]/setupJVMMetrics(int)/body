@@ -1,0 +1,4 @@
+{
+  this.jvmMetrics.registerMetrics(metricsCollector);
+  this.metricsCollector.registerMetricSampleRunnable(jvmMetrics.getJVMSampleRunnable(),systemMetricsSampleIntervalSec);
+}

@@ -1,0 +1,26 @@
+{
+  final Runnable sampleRunnable=new Runnable(){
+    @Override public void run(){
+      updateGcMetrics();
+      jvmUpTimeSecs.setValue(runtimeMXBean.getUptime() / Constants.SECONDS_TO_MILLISECONDS);
+      processCPUTimeNs.setValue(getProcessCPUTimeNs());
+      getThreadsMetrics();
+      processCPULoad.update(getProcessCPULoad() * runtime.availableProcessors());
+      updateFdMetrics();
+      updateMemoryPoolMetrics();
+      long freeMemory=runtime.freeMemory();
+      long totalMemory=runtime.totalMemory();
+      jvmMemoryFreeMB.update(freeMemory / Constants.MB_TO_BYTES);
+      jvmMemoryTotalMB.update(totalMemory / Constants.MB_TO_BYTES);
+      jvmMemoryUsedMB.update((totalMemory - freeMemory) / Constants.MB_TO_BYTES);
+      jvmMemoryHeapUsedMB.update(memoryBean.getHeapMemoryUsage().getUsed() / Constants.MB_TO_BYTES);
+      jvmMemoryHeapCommittedMB.update(memoryBean.getHeapMemoryUsage().getCommitted() / Constants.MB_TO_BYTES);
+      jvmMemoryHeapMaxMB.update(memoryBean.getHeapMemoryUsage().getMax() / Constants.MB_TO_BYTES);
+      jvmMemoryNonHeapUsedMB.update(memoryBean.getNonHeapMemoryUsage().getUsed() / Constants.MB_TO_BYTES);
+      jvmMemoryNonHeapCommittedMB.update(memoryBean.getNonHeapMemoryUsage().getCommitted() / Constants.MB_TO_BYTES);
+      jvmMemoryNonHeapMaxMB.update(memoryBean.getNonHeapMemoryUsage().getMax() / Constants.MB_TO_BYTES);
+    }
+  }
+;
+  return sampleRunnable;
+}

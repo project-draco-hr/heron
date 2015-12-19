@@ -1,0 +1,8 @@
+{
+  Message.Builder r=Tests.EchoServerRequest.newBuilder();
+  heronServer.registerOnRequest(r);
+  for (  Map.Entry<String,Message.Builder> request : heronServer.getRequestMap().entrySet()) {
+    Assert.assertEquals("heron.proto.testing.EchoServerRequest",request.getKey());
+    Assert.assertEquals(r,request.getValue());
+  }
+}

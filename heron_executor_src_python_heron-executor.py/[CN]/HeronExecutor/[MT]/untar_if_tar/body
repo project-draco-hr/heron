@@ -1,0 +1,3 @@
+def untar_if_tar(self):
+    if (self.pkg_type == 'tar'):
+        os.system(('tar -xvf %s' % self.topology_jar_file))

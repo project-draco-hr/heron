@@ -1,0 +1,4 @@
+{
+  SelectionKey key=channel.keyFor(selector);
+  return key != null && key.isValid();
+}

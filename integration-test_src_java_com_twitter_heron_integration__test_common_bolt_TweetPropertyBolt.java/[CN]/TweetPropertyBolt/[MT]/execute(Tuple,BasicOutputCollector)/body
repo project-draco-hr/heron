@@ -1,0 +1,6 @@
+{
+  Object prop=extract(tuple.getString(0),propName);
+  if (prop != null) {
+    basicOutputCollector.emit(new Values(prop));
+  }
+}

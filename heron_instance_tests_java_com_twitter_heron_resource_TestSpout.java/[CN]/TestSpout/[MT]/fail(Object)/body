@@ -1,0 +1,6 @@
+{
+  AtomicInteger failCount=(AtomicInteger)SingletonRegistry.INSTANCE.getSingleton(Constants.FAIL_COUNT);
+  if (failCount != null) {
+    failCount.getAndIncrement();
+  }
+}

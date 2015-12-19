@@ -1,0 +1,24 @@
+{
+  for (  HeronTuples.RootId rt : ackTuple.getRootsList()) {
+    if (rt.getTaskid() != helper.getMyTaskId()) {
+      throw new RuntimeException(String.format("Receiving tuple for task %d in task %d",rt.getTaskid(),helper.getMyTaskId()));
+    }
+ else {
+      long rootId=rt.getKey();
+      RootTupleInfo rootTupleInfo=collector.retireInFlight(rootId);
+      if (rootTupleInfo == null) {
+        return;
+      }
+      Object messageId=rootTupleInfo.getMessageId();
+      if (messageId != null) {
+        long latency=System.nanoTime() - rootTupleInfo.getInsertionTime();
+        if (isSuccess) {
+          invokeAck(messageId,rootTupleInfo.getStreamId(),latency);
+        }
+ else {
+          invokeFail(messageId,rootTupleInfo.getStreamId(),latency);
+        }
+      }
+    }
+  }
+}

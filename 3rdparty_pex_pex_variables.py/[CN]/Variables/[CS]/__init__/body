@@ -1,0 +1,3 @@
+def __init__(self, environ=None, use_defaults=True):
+    self._environ = (environ.copy() if (environ is not None) else os.environ)
+    self._use_defaults = use_defaults

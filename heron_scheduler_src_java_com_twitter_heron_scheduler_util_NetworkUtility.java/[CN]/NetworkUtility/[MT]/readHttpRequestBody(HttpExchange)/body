@@ -1,0 +1,30 @@
+{
+  int contentLength=Integer.parseInt(exchange.getRequestHeaders().getFirst(CONTENT_LENGTH));
+  if (contentLength <= 0) {
+    LOG.log(Level.SEVERE,"Failed to read content length http request body: " + contentLength);
+    return new byte[0];
+  }
+  byte[] requestBody=new byte[contentLength];
+  InputStream is=exchange.getRequestBody();
+  try {
+    int off=0;
+    int bRead=0;
+    while (off != (contentLength - 1) && (bRead=is.read(requestBody,off,contentLength - off)) != -1) {
+      off+=bRead;
+    }
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to read http request body: ",e);
+    return new byte[0];
+  }
+ finally {
+    try {
+      is.close();
+    }
+ catch (    IOException e) {
+      LOG.log(Level.SEVERE,"Failed to close InputStream: ",e);
+      return new byte[0];
+    }
+  }
+  return requestBody;
+}

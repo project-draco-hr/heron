@@ -1,0 +1,18 @@
+{
+  Runnable server=new Runnable(){
+    @Override public void run(){
+      NIOLooper looper;
+      try {
+        looper=new NIOLooper();
+        EchoServer s=new EchoServer(looper,serverPort,1000);
+        s.start();
+      }
+ catch (      Exception e) {
+        throw new RuntimeException("Some error instantiating server");
+      }
+      looper.loop();
+    }
+  }
+;
+  threadsPool.execute(server);
+}

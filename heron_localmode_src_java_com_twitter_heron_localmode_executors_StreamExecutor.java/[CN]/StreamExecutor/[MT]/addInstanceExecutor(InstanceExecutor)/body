@@ -1,0 +1,5 @@
+{
+  instanceExecutor.getStreamOutQueue().setConsumer(looper);
+  instanceExecutor.getStreamInQueue().setProducer(looper);
+  taskIdToInstanceExecutor.put(instanceExecutor.getTaskId(),instanceExecutor);
+}

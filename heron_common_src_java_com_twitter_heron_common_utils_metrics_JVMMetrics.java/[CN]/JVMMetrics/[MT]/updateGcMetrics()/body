@@ -1,0 +1,4 @@
+{
+  updateGcTimes();
+  updateGcCounts();
+}

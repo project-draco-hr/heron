@@ -1,0 +1,3 @@
+def set_config_opt(k, v):
+    global CONFIG_OPTS
+    CONFIG_OPTS[k] = v

@@ -1,0 +1,40 @@
+{
+  for (  InstanceExecutor executor : taskIdToInstanceExecutor.values()) {
+    boolean isLocalSpout=spoutSets.contains(executor.getComponentName());
+    int taskId=executor.getTaskId();
+    int items=executor.getStreamOutQueue().size();
+    for (int i=0; i < items; i++) {
+      HeronTuples.HeronTupleSet tupleSet=executor.getStreamOutQueue().poll();
+      if (tupleSet == null) {
+        break;
+      }
+      if (tupleSet.hasData()) {
+        HeronTuples.HeronDataTupleSet d=tupleSet.getData();
+        TopologyAPI.StreamId streamId=d.getStream();
+        StreamConsumers consumers=streamIdStreamConsumersMap.get(streamId);
+        if (consumers != null) {
+          for (          HeronTuples.HeronDataTuple tuple : d.getTuplesList()) {
+            List<Integer> outTasks=consumers.getListToSend(tuple);
+            outTasks.addAll(tuple.getDestTaskIdsList());
+            if (outTasks.isEmpty()) {
+              LOG.severe("Nobody to sent the tuple to");
+            }
+            copyDataOutBound(taskId,isLocalSpout,streamId,tuple,outTasks);
+          }
+        }
+ else {
+          LOG.severe("Nobody consumes stream: " + streamId);
+        }
+      }
+      if (tupleSet.hasControl()) {
+        HeronTuples.HeronControlTupleSet c=tupleSet.getControl();
+        for (        HeronTuples.AckTuple ack : c.getAcksList()) {
+          copyControlOutBound(ack,true);
+        }
+        for (        HeronTuples.AckTuple fail : c.getFailsList()) {
+          copyControlOutBound(fail,false);
+        }
+      }
+    }
+  }
+}

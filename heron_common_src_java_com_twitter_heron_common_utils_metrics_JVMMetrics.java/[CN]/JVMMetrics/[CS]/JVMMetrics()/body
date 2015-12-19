@@ -1,0 +1,29 @@
+{
+  jvmGCTimeMs=new AssignableMetric(0);
+  jvmGCCount=new AssignableMetric(0);
+  jvmGCCountPerGCType=new MultiAssignableMetric();
+  jvmGCTimeMsPerGCType=new MultiAssignableMetric();
+  jvmUpTimeSecs=new AssignableMetric(0);
+  jvmThreadCount=new AssignableMetric(0);
+  jvmDaemonThreadCount=new AssignableMetric(0);
+  processCPUTimeNs=new AssignableMetric(0);
+  threadsCPUTimeNs=new MultiAssignableMetric();
+  otherThreadsCPUTimeNs=new AssignableMetric(0);
+  threadsUserCPUTimeNs=new MultiAssignableMetric();
+  otherThreadsUserCPUTimeNs=new AssignableMetric(0);
+  processCPULoad=new ReducedMetric(new MeanReducer());
+  fdCount=new AssignableMetric(0);
+  fdLimit=new AssignableMetric(0);
+  jvmMemoryFreeMB=new ReducedMetric(new MeanReducer());
+  jvmMemoryUsedMB=new ReducedMetric(new MeanReducer());
+  jvmMemoryTotalMB=new ReducedMetric(new MeanReducer());
+  jvmMemoryHeapUsedMB=new ReducedMetric(new MeanReducer());
+  jvmMemoryHeapCommittedMB=new ReducedMetric(new MeanReducer());
+  jvmMemoryHeapMaxMB=new ReducedMetric(new MeanReducer());
+  jvmMemoryNonHeapUsedMB=new ReducedMetric(new MeanReducer());
+  jvmMemoryNonHeapCommittedMB=new ReducedMetric(new MeanReducer());
+  jvmMemoryNonHeapMaxMB=new ReducedMetric(new MeanReducer());
+  jvmPeakUsagePerMemoryPool=new MultiAssignableMetric();
+  jvmCollectionUsagePerMemoryPool=new MultiAssignableMetric();
+  jvmEstimatedUsagePerMemoryPool=new MultiAssignableMetric();
+}

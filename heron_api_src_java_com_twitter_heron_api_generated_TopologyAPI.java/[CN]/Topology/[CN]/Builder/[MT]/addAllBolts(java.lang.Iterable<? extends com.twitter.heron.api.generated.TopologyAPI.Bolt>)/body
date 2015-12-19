@@ -1,0 +1,11 @@
+{
+  if (boltsBuilder_ == null) {
+    ensureBoltsIsMutable();
+    super.addAll(values,bolts_);
+    onChanged();
+  }
+ else {
+    boltsBuilder_.addAllMessages(values);
+  }
+  return this;
+}

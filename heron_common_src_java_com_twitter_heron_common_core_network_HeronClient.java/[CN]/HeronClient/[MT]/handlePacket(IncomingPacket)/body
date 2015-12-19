@@ -1,0 +1,36 @@
+{
+  String typeName=incomingPacket.unpackString();
+  REQID rid=incomingPacket.unpackREQID();
+  if (contextMap.containsKey(rid)) {
+    Object ctx=contextMap.get(rid);
+    Message.Builder bldr=responseMessageMap.get(rid);
+    contextMap.remove(rid);
+    responseMessageMap.remove(rid);
+    incomingPacket.unpackMessage(bldr);
+    if (bldr.isInitialized()) {
+      Message response=bldr.build();
+      onResponse(StatusCode.OK,ctx,response);
+      return;
+    }
+ else {
+      onResponse(StatusCode.INVALID_PACKET,ctx,null);
+      return;
+    }
+  }
+ else   if (rid.equals(REQID.zeroREQID)) {
+    Message.Builder bldr=messageMap.get(typeName);
+    if (bldr != null) {
+      bldr.clear();
+      incomingPacket.unpackMessage(bldr);
+      if (bldr.isInitialized()) {
+        onIncomingMessage(bldr.build());
+      }
+ else {
+      }
+    }
+ else {
+    }
+  }
+ else {
+  }
+}

@@ -1,0 +1,3 @@
+{
+  inStreamQueue.offer(message.getSet());
+}

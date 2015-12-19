@@ -1,0 +1,8 @@
+{
+  this.context=context;
+  this.dc=context.getPropertyWithException(Constants.DC);
+  this.environ=context.getPropertyWithException(Constants.ENVIRON);
+  this.role=context.getPropertyWithException(Constants.ROLE);
+  this.topology=context.getTopology();
+  writeAuroraFile();
+}

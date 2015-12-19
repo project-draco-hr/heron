@@ -1,0 +1,4 @@
+@property
+def host(self):
+    '\n    Getter for the host if the state is available on a\n    different host.\n    '
+    return self.__host

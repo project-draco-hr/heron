@@ -1,0 +1,16 @@
+{
+  if (topologyConfigBuilder_ == null) {
+    if (((bitField0_ & 0x00000020) == 0x00000020) && topologyConfig_ != com.twitter.heron.api.generated.TopologyAPI.Config.getDefaultInstance()) {
+      topologyConfig_=com.twitter.heron.api.generated.TopologyAPI.Config.newBuilder(topologyConfig_).mergeFrom(value).buildPartial();
+    }
+ else {
+      topologyConfig_=value;
+    }
+    onChanged();
+  }
+ else {
+    topologyConfigBuilder_.mergeFrom(value);
+  }
+  bitField0_|=0x00000020;
+  return this;
+}

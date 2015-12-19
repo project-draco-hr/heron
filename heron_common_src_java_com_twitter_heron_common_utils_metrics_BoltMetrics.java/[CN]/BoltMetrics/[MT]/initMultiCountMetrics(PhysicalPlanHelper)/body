@@ -1,0 +1,18 @@
+{
+  List<TopologyAPI.InputStream> inputs=helper.getMyBolt().getInputsList();
+  for (  TopologyAPI.InputStream inputStream : inputs) {
+    String streamId=inputStream.getStream().getId();
+    String globalStreamId=new StringBuilder(inputStream.getStream().getComponentName()).append("/").append(streamId).toString();
+    ackCount.scope(streamId);
+    failCount.scope(streamId);
+    executeCount.scope(streamId);
+    ackCount.scope(globalStreamId);
+    failCount.scope(globalStreamId);
+    executeCount.scope(globalStreamId);
+  }
+  List<TopologyAPI.OutputStream> outputs=helper.getMyBolt().getOutputsList();
+  for (  TopologyAPI.OutputStream outputStream : outputs) {
+    String streamId=outputStream.getStream().getId();
+    emitCount.scope(streamId);
+  }
+}

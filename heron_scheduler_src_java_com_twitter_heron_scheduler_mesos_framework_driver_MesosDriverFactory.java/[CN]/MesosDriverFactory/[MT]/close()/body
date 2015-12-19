@@ -1,0 +1,8 @@
+{
+  if (mesosDriver == null) {
+    LOG.severe("Attempted to close a non-initialed driver");
+    System.exit(1);
+  }
+  mesosDriver.stop(true);
+  mesosDriver=null;
+}

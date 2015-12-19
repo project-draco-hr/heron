@@ -1,0 +1,4 @@
+{
+  stream_=com.twitter.heron.api.generated.TopologyAPI.StreamId.getDefaultInstance();
+  schema_=com.twitter.heron.api.generated.TopologyAPI.StreamSchema.getDefaultInstance();
+}

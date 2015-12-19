@@ -1,0 +1,4 @@
+{
+  delegate.setDebug(debug);
+  return this;
+}

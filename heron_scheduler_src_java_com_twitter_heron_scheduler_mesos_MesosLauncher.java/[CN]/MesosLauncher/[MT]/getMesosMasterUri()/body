@@ -1,0 +1,4 @@
+{
+  String key=String.format("%s.%s.%s",MesosConfig.MESOS_MASTER_URI_PREFIX,dc,environ);
+  return context.getPropertyWithException(key);
+}

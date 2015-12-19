@@ -1,0 +1,4 @@
+{
+  super(topology,stormConf,taskToComponent,componentToSortedTasks,componentToStreamToFields,stormId);
+  throw new RuntimeException("WorkerTopologyContext should never be init this way");
+}

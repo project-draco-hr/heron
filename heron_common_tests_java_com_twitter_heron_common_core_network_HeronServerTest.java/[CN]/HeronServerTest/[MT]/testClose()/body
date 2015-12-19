@@ -1,0 +1,10 @@
+{
+  runBase();
+  heronServer.stop();
+  Map<SocketChannel,SocketChannelHelper> activeConnections=heronServer.getActiveConnections();
+  ServerSocketChannel acceptChannel=heronServer.getAcceptChannel();
+  Assert.assertNotNull(acceptChannel);
+  Assert.assertTrue(!acceptChannel.isOpen());
+  Assert.assertNotNull(activeConnections);
+  Assert.assertEquals(0,activeConnections.size());
+}

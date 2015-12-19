@@ -1,0 +1,78 @@
+@tornado.gen.coroutine
+def execute(self, tracker, tmaster, start, end):
+    futureMetrics = []
+    if (not isinstance(self.timeSeries1, float)):
+        futureMetrics.append(self.timeSeries1.execute(tracker, tmaster, start, end))
+    if (not isinstance(self.timeSeries2, float)):
+        futureMetrics.append(self.timeSeries2.execute(tracker, tmaster, start, end))
+    futureResolvedMetrics = yield futureMetrics
+    metrics = {}
+    if isinstance(self.timeSeries1, float):
+        met = Metrics(None, None, None, start, end, {})
+        met.setDefault(self.timeSeries1, start, end)
+        metrics[''] = met
+    else:
+        met = futureResolvedMetrics.pop(0)
+        if (not met):
+            raise Exception('No metrics found')
+        if (len(met) == 1):
+            metrics[''] = met[0]
+        else:
+            for m in met:
+                if (not m.instance):
+                    raise Exception('DIVIDE with multivariate requires instance based timeseries')
+                metrics[m.instance] = m
+    metrics2 = {}
+    if isinstance(self.timeSeries2, float):
+        if (self.timeSeries2 == 0):
+            raise Exception('Divide by zero not allowed')
+        met = Metrics(None, None, None, start, end, {})
+        met.setDefault(self.timeSeries2, start, end)
+        metrics2[''] = met
+    else:
+        met = futureResolvedMetrics.pop(0)
+        if (not met):
+            raise Exception('No metrics found')
+        if (len(met) == 1):
+            metrics2[''] = met[0]
+        else:
+            for m in met:
+                if (not m.instance):
+                    raise Exception('DIVIDE with multivariate requires instance based timeseries')
+                metrics2[m.instance] = m
+    if ((len(metrics) > 1) and (len(metrics2) > 1)):
+        allMetrics = []
+        for key in metrics:
+            if (key not in metrics2):
+                continue
+            met = Metrics(None, None, key, start, end, {})
+            for timestamp in metrics[key].timeline.keys():
+                if ((timestamp not in metrics2[key].timeline) or (metrics2[key].timeline[timestamp] == 0)):
+                    metrics[key].timeline.pop(timestamp)
+                else:
+                    met.timeline[timestamp] = (metrics[key].timeline[timestamp] / metrics2[key].timeline[timestamp])
+            allMetrics.append(met)
+        raise tornado.gen.Return(allMetrics)
+    elif (len(metrics) == 1):
+        allMetrics = []
+        for (key, metric) in metrics2.iteritems():
+            met = Metrics(None, None, metric.instance, start, end, dict(metrics[''].timeline))
+            for timestamp in met.timeline.keys():
+                if ((timestamp not in metric.timeline) or (metric.timeline[timestamp] == 0)):
+                    met.timeline.pop(timestamp)
+                else:
+                    met.timeline[timestamp] /= metric.timeline[timestamp]
+            allMetrics.append(met)
+        raise tornado.gen.Return(allMetrics)
+    else:
+        allMetrics = []
+        for (key, metric) in metrics.iteritems():
+            met = Metrics(None, None, metric.instance, start, end, dict(metric.timeline))
+            for timestamp in met.timeline.keys():
+                if ((timestamp not in metrics2[''].timeline) or (metrics2[''].timeline[timestamp] == 0)):
+                    met.timeline.pop(timestamp)
+                else:
+                    met.timeline[timestamp] /= metrics2[''].timeline[timestamp]
+            allMetrics.append(met)
+        raise tornado.gen.Return(allMetrics)
+    raise Exception('This should not be generated.')

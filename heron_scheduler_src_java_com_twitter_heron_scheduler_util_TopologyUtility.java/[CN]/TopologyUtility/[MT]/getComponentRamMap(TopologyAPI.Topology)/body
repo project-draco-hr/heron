@@ -1,0 +1,3 @@
+{
+  return getComponentRamMap(topology,DEFAULT_INSTANCE_RAM);
+}

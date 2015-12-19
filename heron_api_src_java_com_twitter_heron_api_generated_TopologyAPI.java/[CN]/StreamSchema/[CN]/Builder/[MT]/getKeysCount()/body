@@ -1,0 +1,8 @@
+{
+  if (keysBuilder_ == null) {
+    return keys_.size();
+  }
+ else {
+    return keysBuilder_.getCount();
+  }
+}

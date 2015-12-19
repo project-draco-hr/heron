@@ -1,0 +1,15 @@
+@tornado.testing.gen_test
+def test_TS_execute_when_no_timeline(self):
+    ts = TS(['a', 'b', 'c'])
+    tmaster = Mock()
+    tracker = Mock()
+    start = 100
+    end = 300
+
+    @tornado.gen.coroutine
+    def tracker_side_effect2(*args):
+        self.assertEqual((tmaster, 'a', ['c'], ['b'], 40, 360), args)
+        raise tornado.gen.Return({'message': 'some_exception', })
+    tracker.getMetricsTimeline.side_effect = tracker_side_effect2
+    with self.assertRaises(Exception):
+        metrics = yield ts.execute(tracker, tmaster, start, end)

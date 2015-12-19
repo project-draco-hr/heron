@@ -1,0 +1,4 @@
+{
+  tasksOnWakeup.add(task);
+  wakeUp();
+}

@@ -1,0 +1,14 @@
+{
+  if (keysBuilder_ == null) {
+    if (value == null) {
+      throw new NullPointerException();
+    }
+    ensureKeysIsMutable();
+    keys_.add(index,value);
+    onChanged();
+  }
+ else {
+    keysBuilder_.addMessage(index,value);
+  }
+  return this;
+}

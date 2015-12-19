@@ -1,0 +1,6 @@
+String schedulerClass
+String schedulerConfigLoader
+String schedulerConfigFile
+int schedulerServerPort
+String schedulerConfigOverrides
+TopologyAPI.Topology topology

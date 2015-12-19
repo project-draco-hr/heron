@@ -1,0 +1,4 @@
+@abc.abstractmethod
+def create_pplan(self, topologyName, pplan):
+    '\n    Adds the topology entry to pplan.\n    '
+    pass

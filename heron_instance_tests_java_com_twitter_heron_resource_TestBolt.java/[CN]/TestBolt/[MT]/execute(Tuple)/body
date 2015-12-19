@@ -1,0 +1,26 @@
+{
+  AtomicInteger ackCount=(AtomicInteger)SingletonRegistry.INSTANCE.getSingleton(Constants.ACK_COUNT);
+  AtomicInteger failCount=(AtomicInteger)SingletonRegistry.INSTANCE.getSingleton(Constants.FAIL_COUNT);
+  AtomicInteger tupleExecutedCount=(AtomicInteger)SingletonRegistry.INSTANCE.getSingleton("execute-count");
+  StringBuilder receivedStrings=(StringBuilder)SingletonRegistry.INSTANCE.getSingleton("received-string-list");
+  if (receivedStrings != null) {
+    receivedStrings.append(tuple.getString(0));
+  }
+  if (tupleExecutedCount != null) {
+    tupleExecutedCount.getAndIncrement();
+  }
+  if ((tupleExecuted & 1) == 0) {
+    outputCollector.ack(tuple);
+    if (ackCount != null) {
+      ackCount.getAndIncrement();
+    }
+  }
+ else {
+    outputCollector.fail(tuple);
+    if (failCount != null) {
+      failCount.getAndIncrement();
+    }
+  }
+  tupleExecuted++;
+  outputCollector.emit(new Values(tuple.getString(0)));
+}

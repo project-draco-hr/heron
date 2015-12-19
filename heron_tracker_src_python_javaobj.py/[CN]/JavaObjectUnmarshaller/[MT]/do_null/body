@@ -1,0 +1,2 @@
+def do_null(self, parent=None, ident=0):
+    return None

@@ -1,0 +1,8 @@
+{
+  if (outputsBuilder_ == null) {
+    return java.util.Collections.unmodifiableList(outputs_);
+  }
+ else {
+    return outputsBuilder_.getMessageList();
+  }
+}

@@ -1,0 +1,7 @@
+def test_get_component_parallelism(self):
+    topology = self.mock_proto.create_mock_medium_topology(1, 2, 3, 4)
+    cmap = topology_helpers.get_component_parallelism(topology)
+    self.assertEqual(1, cmap['mock_spout1'])
+    self.assertEqual(2, cmap['mock_bolt1'])
+    self.assertEqual(3, cmap['mock_bolt2'])
+    self.assertEqual(4, cmap['mock_bolt3'])

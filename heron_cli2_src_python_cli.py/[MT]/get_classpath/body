@@ -1,0 +1,2 @@
+def get_classpath(jars):
+    return ':'.join(map(normclasspath, jars))

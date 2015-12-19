@@ -1,0 +1,12 @@
+{
+  NIOLooper looper;
+  try {
+    looper=new NIOLooper();
+    EchoClient c=new EchoClient(looper,serverPort,1000);
+    c.start();
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Some error instantiating client");
+  }
+  looper.loop();
+}

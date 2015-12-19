@@ -1,0 +1,8 @@
+{
+  this.networkWriteBatchSizeInBytes=networkWriteBatchSizeInBytes;
+  this.networkWriteBatchTimeInMs=networkWriteBatchTimeInMs;
+  this.networkReadBatchSizeInBytes=networkReadBatchSizeInBytes;
+  this.networkReadBatchTimeInMs=networkReadBatchTimeInMs;
+  this.socketSendBufferSizeInBytes=socketSendBufferSizeInBytes;
+  this.socketReceivedBufferSizeInBytes=socketReceivedBufferSizeInBytes;
+}

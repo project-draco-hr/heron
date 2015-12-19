@@ -1,0 +1,4 @@
+def get_additional_classpath(topology):
+    '\n  The argument is the proto object for topology.\n  Returns an empty string if no additional classpath specified\n  '
+    additional_classpath = str((get_topology_config(topology, constants.TOPOLOGY_ADDITIONAL_CLASSPATH) or ''))
+    return additional_classpath

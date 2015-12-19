@@ -1,0 +1,11 @@
+{
+  LOG.info("Remove frameworkId: " + frameworkIdPath);
+  try {
+    client.delete().forPath(frameworkIdPath);
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to remove frameworkId",e);
+    return false;
+  }
+  return true;
+}

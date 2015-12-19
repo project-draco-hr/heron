@@ -1,0 +1,11 @@
+{
+  GlobalMetrics.incr("hook_emit");
+  ++emitted;
+  if (emitted % N == 0) {
+    System.out.println("emit() is invoked in hook");
+    System.out.println(info.getValues());
+    System.out.println(info.getTaskId());
+    System.out.println(info.getStream());
+    System.out.println(info.getOutTasks());
+  }
+}

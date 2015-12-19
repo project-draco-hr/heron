@@ -1,0 +1,20 @@
+{
+  String dc="local-dc";
+  String role="local-heron";
+  String env="local-environment";
+  String release="local-live-release";
+  ExecutionEnvironment.ExecutionState.Builder builder=ExecutionEnvironment.ExecutionState.newBuilder().mergeFrom(executionState);
+  builder.setDc(dc).setRole(role).setEnviron(env);
+  ExecutionEnvironment.HeronReleaseState.Builder releaseBuilder=ExecutionEnvironment.HeronReleaseState.newBuilder();
+  releaseBuilder.setReleaseUsername(role);
+  releaseBuilder.setReleaseTag(release);
+  releaseBuilder.setReleaseVersion(release);
+  releaseBuilder.setUploaderVersion(release);
+  builder.setReleaseState(releaseBuilder);
+  if (builder.isInitialized()) {
+    return builder.build();
+  }
+ else {
+    throw new RuntimeException("Failed to create execution state");
+  }
+}

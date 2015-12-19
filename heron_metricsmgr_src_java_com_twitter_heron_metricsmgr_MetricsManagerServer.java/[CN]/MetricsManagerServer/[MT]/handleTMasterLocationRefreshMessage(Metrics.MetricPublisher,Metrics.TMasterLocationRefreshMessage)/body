@@ -1,0 +1,20 @@
+{
+  TopologyMaster.TMasterLocation oldLocation=(TopologyMaster.TMasterLocation)SingletonRegistry.INSTANCE.getSingleton(TMASTER_LOCATION_BEAN_NAME);
+  TopologyMaster.TMasterLocation newLocation=tMasterLocationRefreshMessage.getTmaster();
+  if (oldLocation == null) {
+    LOG.info("We received a new TMasterLocation. Register it into SingletonRegistry");
+    SingletonRegistry.INSTANCE.registerSingleton(TMASTER_LOCATION_BEAN_NAME,newLocation);
+    serverMetricsCounters.scope(SERVER_NEW_TMASTER_LOCATION).incr();
+  }
+ else   if (oldLocation.equals(newLocation)) {
+    LOG.info("We received a new TMasterLocation the same as the old one. Do nothing.");
+  }
+ else {
+    LOG.info("We received a new TMasterLocation. Replace the old one.");
+    LOG.info("Old TMasterLocation: " + oldLocation);
+    SingletonRegistry.INSTANCE.updateSingleton(TMASTER_LOCATION_BEAN_NAME,newLocation);
+    serverMetricsCounters.scope(SERVER_NEW_TMASTER_LOCATION).incr();
+  }
+  LOG.info("Current TMaster location: " + newLocation);
+  serverMetricsCounters.scope(SERVER_TMASTER_LOCATION_RECEIVED).incr();
+}

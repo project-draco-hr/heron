@@ -1,0 +1,5 @@
+{
+  Tests.EchoServerRequest.Builder r=Tests.EchoServerRequest.newBuilder();
+  r.setEchoRequest("Dummy");
+  sendRequest(r.build(),Tests.EchoServerResponse.newBuilder());
+}

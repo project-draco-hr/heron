@@ -1,0 +1,15 @@
+{
+  Throwable throwable=record.getThrown();
+  if (throwable != null) {
+    StringWriter sink=new StringWriter();
+    throwable.printStackTrace(new PrintWriter(sink,true));
+    String trace=sink.toString();
+synchronized (ExceptionRepositoryAsMetrics.INSTANCE) {
+      Metrics.ExceptionData.Builder exceptionDataBuilder=ExceptionRepositoryAsMetrics.INSTANCE.getExceptionInfo(trace);
+      exceptionDataBuilder.setCount(exceptionDataBuilder.getCount() + 1);
+      exceptionDataBuilder.setLasttime(new Date().toString());
+      exceptionDataBuilder.setStacktrace(trace);
+      exceptionDataBuilder.setLogging("" + record.getMessage());
+    }
+  }
+}

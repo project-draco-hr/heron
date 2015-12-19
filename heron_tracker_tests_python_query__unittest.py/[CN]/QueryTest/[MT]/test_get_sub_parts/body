@@ -1,0 +1,9 @@
+def test_get_sub_parts(self):
+    query = 'abc, def, xyz'
+    self.assertEqual(['abc', 'def', 'xyz'], self.query.get_sub_parts(query))
+    query = '(abc, xyz)'
+    self.assertEqual(['(abc, xyz)'], self.query.get_sub_parts(query))
+    query = 'a(x, y), b(p, q)'
+    self.assertEqual(['a(x, y)', 'b(p, q)'], self.query.get_sub_parts(query))
+    query = ',,'
+    self.assertEqual(['', '', ''], self.query.get_sub_parts(query))

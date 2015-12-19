@@ -1,0 +1,8 @@
+{
+  flushRemaining();
+  TopologyAPI.StreamId.Builder sbldr=TopologyAPI.StreamId.newBuilder();
+  sbldr.setId(streamId);
+  sbldr.setComponentName(helper.getMyComponent());
+  currentDataTuple=HeronTuples.HeronDataTupleSet.newBuilder();
+  currentDataTuple.setStream(sbldr);
+}

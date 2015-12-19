@@ -1,0 +1,17 @@
+{
+  ArrayList<String> auroraCmd=new ArrayList<>(Arrays.asList("aurora","job","create","--wait-until","FINISHED"));
+  for (  String binding : args.keySet()) {
+    auroraCmd.add("--bind");
+    auroraCmd.add(String.format("%s=%s",binding,args.get(binding)));
+  }
+  auroraCmd.add(String.format("%s/%s/%s/%s",dc,role,"devel",args.get("JOB_NAME")));
+  auroraCmd.add("heron_controller.aurora");
+  if (context.isVerbose()) {
+    auroraCmd.add("--verbose");
+  }
+  if (0 != ShellUtility.runProcess(true,auroraCmd.toArray(new String[auroraCmd.size()]),new StringBuilder(),new StringBuilder())) {
+    LOG.severe("Launching Aurora controller failed");
+    return false;
+  }
+  return true;
+}

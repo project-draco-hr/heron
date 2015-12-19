@@ -1,0 +1,4 @@
+{
+  uploader.initialize(context);
+  return uploader.uploadPackage(topologyPackage);
+}

@@ -1,0 +1,3 @@
+{
+  return runSyncProcess(verbose,isInheritIO,splitTokens(cmdline),stdout,stderr,workingDirectory);
+}

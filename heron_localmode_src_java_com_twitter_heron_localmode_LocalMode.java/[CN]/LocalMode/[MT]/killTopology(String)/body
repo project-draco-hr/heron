@@ -1,0 +1,5 @@
+{
+  LOG.info("To kill topology: " + topologyName);
+  stop();
+  LOG.info("Topology killed successfully");
+}

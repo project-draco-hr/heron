@@ -1,0 +1,3 @@
+def get_heron_dir():
+    '\n  This will extract heron directory from .pex file.\n  :return: root location for heron-cli.\n  '
+    return normclasspath('/'.join(os.path.realpath(__file__).split('/')[:(-7)]))

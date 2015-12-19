@@ -1,0 +1,36 @@
+{
+  int metricsCount=0;
+  int exceptionsCount=0;
+  Map<String,String> metrics=new HashMap<String,String>();
+  for (  MetricsInfo metricsInfo : record.getMetrics()) {
+    metrics.put(metricsInfo.getName(),metricsInfo.getValue());
+    metricsCount++;
+  }
+  LinkedList<Object> exceptions=new LinkedList<Object>();
+  for (  ExceptionInfo exceptionInfo : record.getExceptions()) {
+    Map<String,Object> exception=new HashMap<String,Object>();
+    exception.put("firstTime",exceptionInfo.getFirstTime());
+    exception.put("lastTime",exceptionInfo.getLastTime());
+    exception.put("logging",exceptionInfo.getLogging());
+    exception.put("stackTrace",exceptionInfo.getStackTrace());
+    exception.put("count",exceptionInfo.getCount());
+    exceptions.add(exception);
+    exceptionsCount++;
+  }
+  Map<String,Object> jsonToWrite=new HashMap<String,Object>();
+  jsonToWrite.put("timestamp",record.getTimestamp());
+  jsonToWrite.put("source",record.getSource());
+  jsonToWrite.put("context",record.getContext());
+  jsonToWrite.put("metrics",metrics);
+  jsonToWrite.put("exceptions",exceptions);
+  sinkContext.exportCountMetric(METRICS_COUNT,metricsCount);
+  sinkContext.exportCountMetric(EXCEPTIONS_COUNT,exceptionsCount);
+  String result="";
+  try {
+    result=mapper.writeValueAsString(jsonToWrite);
+  }
+ catch (  JsonProcessingException e) {
+    LOG.log(Level.SEVERE,"Could not convert map to JSONString: " + jsonToWrite.toString(),e);
+  }
+  return result;
+}

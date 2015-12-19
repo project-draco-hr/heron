@@ -1,0 +1,6 @@
+{
+  for (int i=0; i < nBuckets; i++) {
+    Map<Long,Long> head=new HashMap<>();
+    buckets.addLast(head);
+  }
+}

@@ -1,0 +1,5 @@
+{
+  IRichBoltDelegate boltImpl=new IRichBoltDelegate(bolt);
+  com.twitter.heron.api.topology.BoltDeclarer declarer=delegate.setBolt(id,boltImpl,parallelism_hint);
+  return new BoltDeclarerImpl(declarer);
+}

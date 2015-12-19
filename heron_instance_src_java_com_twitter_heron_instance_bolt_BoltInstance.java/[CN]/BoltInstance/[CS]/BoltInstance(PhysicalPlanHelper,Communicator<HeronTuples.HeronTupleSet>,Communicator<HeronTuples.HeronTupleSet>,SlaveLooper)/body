@@ -1,0 +1,35 @@
+{
+  this.helper=helper;
+  this.looper=looper;
+  this.streamInQueue=streamInQueue;
+  this.boltMetrics=new BoltMetrics();
+  this.boltMetrics.initMultiCountMetrics(helper);
+  if (helper.getMyBolt() == null) {
+    throw new RuntimeException("HeronBoltInstance has no bolt in physical plan.");
+  }
+  TopologyContextImpl topologyContext=helper.getTopologyContext();
+  serializer=SerializeDeSerializeHelper.getSerializer(topologyContext.getTopologyConfig());
+  systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(com.twitter.heron.common.utils.misc.Constants.HERON_SYSTEM_CONFIG);
+  if (helper.getMyBolt().getComp().hasJavaObject()) {
+    bolt=(IBolt)Utils.deserialize(helper.getMyBolt().getComp().getJavaObject().toByteArray());
+  }
+ else   if (helper.getMyBolt().getComp().hasJavaClassName()) {
+    try {
+      String boltClassName=helper.getMyBolt().getComp().getJavaClassName();
+      bolt=(IBolt)Class.forName(boltClassName).newInstance();
+    }
+ catch (    ClassNotFoundException ex) {
+      throw new RuntimeException(ex + " Bolt class must be in class path.");
+    }
+catch (    InstantiationException ex) {
+      throw new RuntimeException(ex + " Bolt class must be concrete.");
+    }
+catch (    IllegalAccessException ex) {
+      throw new RuntimeException(ex + " Bolt class must have a no-arg constructor.");
+    }
+  }
+ else {
+    throw new RuntimeException("Neither java_object nor java_class_name set for bolt");
+  }
+  collector=new BoltOutputCollectorImpl(serializer,helper,streamOutQueue,boltMetrics);
+}

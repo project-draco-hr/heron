@@ -1,0 +1,9 @@
+{
+  LOG.info("Flushing all pending data in StreamManagerClient");
+  int size=outStreamQueue.size();
+  for (int i=0; i < size; i++) {
+    HeronTuples.HeronTupleSet tupleSet=outStreamQueue.poll();
+    StreamManager.TupleMessage msg=StreamManager.TupleMessage.newBuilder().setSet(tupleSet).build();
+    sendMessage(msg);
+  }
+}

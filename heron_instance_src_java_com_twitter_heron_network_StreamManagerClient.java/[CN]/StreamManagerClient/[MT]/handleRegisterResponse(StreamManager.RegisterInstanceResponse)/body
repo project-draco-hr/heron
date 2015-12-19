@@ -1,0 +1,10 @@
+{
+  if (response.getStatus().getStatus() != Common.StatusCode.OK) {
+    throw new RuntimeException("Stream Manager returned a not ok response for register");
+  }
+  LOG.info("We registered ourselves to the Stream Manager");
+  if (response.hasPplan()) {
+    LOG.info("Handling assignment message from response");
+    handleAssignmentMessage(response.getPplan());
+  }
+}

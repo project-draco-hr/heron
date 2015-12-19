@@ -1,0 +1,11 @@
+def get(self, fileName):
+    jsonFilePath = (((RESULTS_DIRECTORY + '/') + fileName) + '.json')
+    if (not os.path.exists(jsonFilePath)):
+        self.clear()
+        self.set_status(404)
+        self.finish(('%s does not exist' % (fileName + '.json')))
+    else:
+        with open(jsonFilePath, 'r') as jsonFile:
+            data = jsonFile.read()
+        self.set_header('Content-Type', 'application/json; charset="utf-8"')
+        self.write(data)

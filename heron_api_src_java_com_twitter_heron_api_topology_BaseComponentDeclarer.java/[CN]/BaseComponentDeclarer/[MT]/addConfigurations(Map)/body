@@ -1,0 +1,4 @@
+{
+  componentConfiguration.putAll(conf);
+  return returnThis();
+}

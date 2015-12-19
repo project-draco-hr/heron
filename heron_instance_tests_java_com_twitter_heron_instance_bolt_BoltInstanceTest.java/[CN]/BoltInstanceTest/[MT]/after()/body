@@ -1,0 +1,17 @@
+{
+  UnitTestHelper.clearSingletonRegistry();
+  ackCount=new AtomicInteger(0);
+  failCount=new AtomicInteger(0);
+  tupleExecutedCount=new AtomicInteger(0);
+  receivedStrings=null;
+  testLooper.exitLoop();
+  slaveLooper.exitLoop();
+  threadsPool.shutdownNow();
+  physicalPlan=null;
+  testLooper=null;
+  slaveLooper=null;
+  outStreamQueue=null;
+  inStreamQueue=null;
+  slave=null;
+  threadsPool=null;
+}

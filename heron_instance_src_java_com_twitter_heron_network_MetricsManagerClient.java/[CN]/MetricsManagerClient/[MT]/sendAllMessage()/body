@@ -1,0 +1,10 @@
+{
+  LOG.info("Flushing all pending data in MetricsManagerClient");
+  for (  Communicator<Metrics.MetricPublisherPublishMessage> c : outMetricsQueues) {
+    int size=c.size();
+    for (int i=0; i < size; i++) {
+      Metrics.MetricPublisherPublishMessage m=c.poll();
+      sendMessage(m);
+    }
+  }
+}

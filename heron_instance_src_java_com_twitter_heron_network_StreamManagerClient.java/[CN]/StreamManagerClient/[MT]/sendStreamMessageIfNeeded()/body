@@ -1,0 +1,19 @@
+{
+  if (isStreamMgrReadyReceiveTuples()) {
+    if (getOutstandingPackets() == 0) {
+      while (!outStreamQueue.isEmpty()) {
+        HeronTuples.HeronTupleSet tupleSet=outStreamQueue.poll();
+        StreamManager.TupleMessage msg=StreamManager.TupleMessage.newBuilder().setSet(tupleSet).build();
+        gatewayMetrics.updateSentPacketsCount(1);
+        gatewayMetrics.updateSentPacketsSize(msg.getSerializedSize());
+        sendMessage(msg);
+      }
+    }
+    if (!outStreamQueue.isEmpty()) {
+      startWriting();
+    }
+  }
+ else {
+    LOG.info("Stop writing due to not yet connected to Stream Manager.");
+  }
+}

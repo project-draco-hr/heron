@@ -1,0 +1,31 @@
+{
+synchronized (this) {
+    LOG.info(String.format("Received status update [%s]",status));
+    if (!remaining.isEmpty()) {
+      String taskId=status.getTaskId().getValue();
+      double timestamp=status.getTimestamp();
+      if (remaining.containsKey(taskId) && timestamp > startTime) {
+        remaining.remove(taskId);
+      }
+    }
+    if (!isRecovered && remaining.isEmpty()) {
+      LOG.info("All tasks are reconciled! Release the flag!");
+      isRecovered=true;
+      if (startLatch != null) {
+        startLatch.countDown();
+      }
+    }
+    String taskId=status.getTaskId().getValue();
+    String jobName=TaskUtils.getJobNameForTaskId(taskId);
+    if (jobNameMapping.get(jobName) == null) {
+      LOG.info("Job no longer registered (might be killed earlier): " + jobName);
+    }
+    BaseTask task=trackingTasks.get(jobName);
+    if (task == null) {
+      LOG.info("Received a status update from unknown task. Possibly client requested a kill and let it finish rather than kill now.");
+    }
+ else {
+      handleMesosStatusUpdate(driver,task,status);
+    }
+  }
+}

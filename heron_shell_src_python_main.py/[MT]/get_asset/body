@@ -1,0 +1,2 @@
+def get_asset(asset_name):
+    return pkgutil.get_data('heron.shell', os.path.join('assets', asset_name))

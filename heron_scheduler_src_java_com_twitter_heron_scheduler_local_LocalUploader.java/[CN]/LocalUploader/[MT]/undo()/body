@@ -1,0 +1,4 @@
+{
+  LOG.info("Clean uploaded jar");
+  FileUtility.deleteFile(targetTopologyPackage);
+}

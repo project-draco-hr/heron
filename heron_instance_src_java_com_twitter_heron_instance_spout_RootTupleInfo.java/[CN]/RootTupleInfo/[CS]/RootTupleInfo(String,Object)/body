@@ -1,0 +1,5 @@
+{
+  this.streamId=streamId;
+  this.messageId=messageId;
+  this.insertionTime=System.nanoTime();
+}

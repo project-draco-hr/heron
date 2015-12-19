@@ -1,0 +1,5 @@
+def __repr__(self):
+    name = 'UNKNOWN'
+    if self.classdesc:
+        name = self.classdesc.name
+    return ('<javaobj:%s>' % name)

@@ -1,0 +1,3 @@
+def get_topology_state_string(topology):
+    '\n  The argument is the proto object for topology.\n  Returns the topology state as one of:\n      1. RUNNING\n      2. PAUSED\n      3. KILLED\n  '
+    return topology_pb2.TopologyState.Name(topology.state)

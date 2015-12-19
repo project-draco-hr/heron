@@ -1,0 +1,9 @@
+{
+  List<MetricsInfo> metricsFiltered=new ArrayList<MetricsInfo>();
+  for (  MetricsInfo metricsInfo : metricsInfos) {
+    if (contains(metricsInfo.getName())) {
+      metricsFiltered.add(metricsInfo);
+    }
+  }
+  return metricsFiltered;
+}

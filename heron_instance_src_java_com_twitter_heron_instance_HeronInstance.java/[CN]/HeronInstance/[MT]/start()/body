@@ -1,0 +1,5 @@
+{
+  Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
+  threadsPool.execute(gateway);
+  threadsPool.execute(slave);
+}

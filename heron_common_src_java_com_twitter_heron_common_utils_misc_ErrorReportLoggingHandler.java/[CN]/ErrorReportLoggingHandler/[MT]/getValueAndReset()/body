@@ -1,0 +1,7 @@
+{
+synchronized (ExceptionRepositoryAsMetrics.INSTANCE) {
+    Collection<Metrics.ExceptionData.Builder> metricsValue=exceptionStore.values();
+    exceptionStore=new HashMap<String,Metrics.ExceptionData.Builder>();
+    return metricsValue;
+  }
+}

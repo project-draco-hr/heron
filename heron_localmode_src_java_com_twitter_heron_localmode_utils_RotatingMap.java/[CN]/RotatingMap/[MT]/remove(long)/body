@@ -1,0 +1,8 @@
+{
+  for (  Map<Long,Long> m : buckets) {
+    if (m.remove(key) != null) {
+      return true;
+    }
+  }
+  return false;
+}

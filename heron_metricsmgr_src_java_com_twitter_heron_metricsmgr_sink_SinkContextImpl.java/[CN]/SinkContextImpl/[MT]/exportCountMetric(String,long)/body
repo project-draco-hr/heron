@@ -1,0 +1,3 @@
+{
+  internalMultiCountMetrics.scope(metricName).incrBy(delta);
+}

@@ -1,0 +1,13 @@
+{
+  ackCount=new MultiCountMetric();
+  completeLatency=new MultiReducedMetric(new MeanReducer());
+  failLatency=new MultiReducedMetric(new MeanReducer());
+  failCount=new MultiCountMetric();
+  timeoutCount=new MultiCountMetric();
+  emitCount=new MultiCountMetric();
+  nextTupleLatency=new ReducedMetric(new MeanReducer());
+  nextTupleCount=new CountMetric();
+  outQueueFullCount=new CountMetric();
+  pendingTuplesCount=new ReducedMetric(new MeanReducer());
+  serializationTimeNs=new MultiCountMetric();
+}

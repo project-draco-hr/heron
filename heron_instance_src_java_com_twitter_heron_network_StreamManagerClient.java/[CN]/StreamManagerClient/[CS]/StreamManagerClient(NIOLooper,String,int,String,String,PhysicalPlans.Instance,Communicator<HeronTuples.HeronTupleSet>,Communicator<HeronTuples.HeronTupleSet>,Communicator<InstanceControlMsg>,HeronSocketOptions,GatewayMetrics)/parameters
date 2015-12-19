@@ -1,0 +1,11 @@
+NIOLooper s
+String streamManagerHost
+int streamManagerPort
+String topologyName
+String topologyId
+PhysicalPlans.Instance instance
+Communicator<HeronTuples.HeronTupleSet> inStreamQueue
+Communicator<HeronTuples.HeronTupleSet> outStreamQueue
+Communicator<InstanceControlMsg> inControlQueue
+HeronSocketOptions options
+GatewayMetrics gatewayMetrics

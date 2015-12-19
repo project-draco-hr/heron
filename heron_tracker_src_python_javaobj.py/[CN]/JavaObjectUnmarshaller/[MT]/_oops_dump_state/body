@@ -1,0 +1,10 @@
+def _oops_dump_state(self):
+    log_error(('==Oops state dump' + ('=' * (30 - 17))))
+    log_error(('References: %s' % str(self.references)))
+    log_error('Stream seeking back at -16 byte (2nd line is an actual position!):')
+    self.object_stream.seek((-16), mode=1)
+    the_rest = self.object_stream.read()
+    if len(the_rest):
+        log_error(('Warning!!!!: Stream still has %s bytes left.' % len(the_rest)))
+        log_error(self._create_hexdump(the_rest))
+    log_error(('=' * 30))

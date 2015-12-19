@@ -1,0 +1,8 @@
+{
+  if (taskHooks.size() != 0) {
+    BoltExecuteInfo executeInfo=new BoltExecuteInfo(tuple,getThisTaskId(),executeLatencyNs / Constants.MILLISECONDS_TO_NANOSECONDS);
+    for (    ITaskHook taskHook : taskHooks) {
+      taskHook.boltExecute(executeInfo);
+    }
+  }
+}

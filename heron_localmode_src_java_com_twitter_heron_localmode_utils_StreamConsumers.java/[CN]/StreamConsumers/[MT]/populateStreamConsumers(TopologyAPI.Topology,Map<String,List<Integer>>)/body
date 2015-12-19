@@ -1,0 +1,26 @@
+{
+  Map<TopologyAPI.StreamId,TopologyAPI.StreamSchema> streamToSchema=new HashMap<>();
+  for (  TopologyAPI.Spout spout : topology.getSpoutsList()) {
+    for (    TopologyAPI.OutputStream outputStream : spout.getOutputsList()) {
+      streamToSchema.put(outputStream.getStream(),outputStream.getSchema());
+    }
+  }
+  for (  TopologyAPI.Bolt bolt : topology.getBoltsList()) {
+    for (    TopologyAPI.OutputStream outputStream : bolt.getOutputsList()) {
+      streamToSchema.put(outputStream.getStream(),outputStream.getSchema());
+    }
+  }
+  Map<TopologyAPI.StreamId,StreamConsumers> populatedStreamConsumers=new HashMap<>();
+  for (  TopologyAPI.Bolt bolt : topology.getBoltsList()) {
+    for (    TopologyAPI.InputStream inputStream : bolt.getInputsList()) {
+      TopologyAPI.StreamSchema schema=streamToSchema.get(inputStream.getStream());
+      String componentName=bolt.getComp().getName();
+      List<Integer> taskIds=componentToTaskIds.get(componentName);
+      if (!populatedStreamConsumers.containsKey(inputStream.getStream())) {
+        populatedStreamConsumers.put(inputStream.getStream(),new StreamConsumers());
+      }
+      populatedStreamConsumers.get(inputStream.getStream()).newConsumer(inputStream,schema,taskIds);
+    }
+  }
+  return populatedStreamConsumers;
+}

@@ -1,0 +1,6 @@
+{
+  super();
+  this.logger=logger;
+  this.level=level;
+  lineSeparator=System.getProperty("line.separator");
+}

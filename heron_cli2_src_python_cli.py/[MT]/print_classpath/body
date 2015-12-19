@@ -1,0 +1,3 @@
+def print_classpath(namespace):
+    'Syntax: heron-cli classpath\n\n  Prints the classpath used by the heron client when running commands.\n  '
+    print get_classpath([])

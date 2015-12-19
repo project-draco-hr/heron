@@ -1,0 +1,8 @@
+{
+  if (inputsBuilder_ != null) {
+    return inputsBuilder_.getMessageOrBuilderList();
+  }
+ else {
+    return java.util.Collections.unmodifiableList(inputs_);
+  }
+}

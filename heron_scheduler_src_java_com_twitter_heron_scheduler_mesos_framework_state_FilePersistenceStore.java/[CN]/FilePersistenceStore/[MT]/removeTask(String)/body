@@ -1,0 +1,11 @@
+{
+  LOG.info("Remove Task: " + taskId);
+  try {
+    Files.deleteIfExists(new File(taskPath + "/" + TaskUtils.getJobNameForTaskId(taskId)).toPath());
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to delete file",e);
+    return false;
+  }
+  return true;
+}

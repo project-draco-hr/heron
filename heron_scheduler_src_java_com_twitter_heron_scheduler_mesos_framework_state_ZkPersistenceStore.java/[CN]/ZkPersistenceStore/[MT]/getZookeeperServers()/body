@@ -1,0 +1,6 @@
+{
+  if (connectionString.startsWith("zk://")) {
+    return connectionString.replace("zk://","").replaceAll("/.*","");
+  }
+  return connectionString;
+}

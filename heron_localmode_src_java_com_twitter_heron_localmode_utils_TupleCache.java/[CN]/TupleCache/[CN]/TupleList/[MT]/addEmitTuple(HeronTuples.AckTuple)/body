@@ -1,0 +1,9 @@
+{
+  if (current == null || current.hasData() || current.getControlBuilder().getAcksCount() > 0 || current.getControlBuilder().getFailsCount() > 0) {
+    if (current != null) {
+      tuples.add(current.build());
+    }
+    current=HeronTuples.HeronTupleSet.newBuilder();
+  }
+  current.getControlBuilder().addEmits(tuple);
+}

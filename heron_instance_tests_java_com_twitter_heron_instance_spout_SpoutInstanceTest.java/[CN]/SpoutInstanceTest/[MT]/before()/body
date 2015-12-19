@@ -1,0 +1,19 @@
+{
+  UnitTestHelper.addSystemConfigToSingleton();
+  tupleReceived=0;
+  heronDataTupleList=new ArrayList<HeronTuples.HeronDataTuple>();
+  ackCount=new AtomicInteger(0);
+  failCount=new AtomicInteger(0);
+  testLooper=new SlaveLooper();
+  slaveLooper=new SlaveLooper();
+  outStreamQueue=new Communicator<HeronTuples.HeronTupleSet>(slaveLooper,testLooper);
+  outStreamQueue.init(Constants.QUEUE_BUFFER_SIZE,Constants.QUEUE_BUFFER_SIZE,0.5);
+  inStreamQueue=new Communicator<HeronTuples.HeronTupleSet>(testLooper,slaveLooper);
+  inStreamQueue.init(Constants.QUEUE_BUFFER_SIZE,Constants.QUEUE_BUFFER_SIZE,0.5);
+  slaveMetricsOut=new Communicator<Metrics.MetricPublisherPublishMessage>(slaveLooper,testLooper);
+  slaveMetricsOut.init(Constants.QUEUE_BUFFER_SIZE,Constants.QUEUE_BUFFER_SIZE,0.5);
+  inControlQueue=new Communicator<InstanceControlMsg>(testLooper,slaveLooper);
+  slave=new Slave(slaveLooper,inStreamQueue,outStreamQueue,inControlQueue,slaveMetricsOut);
+  threadsPool=Executors.newSingleThreadExecutor();
+  threadsPool.execute(slave);
+}

@@ -1,0 +1,5 @@
+{
+  this.producer=producer;
+  this.consumer=consumer;
+  this.buffer=new LinkedTransferQueue<E>();
+}

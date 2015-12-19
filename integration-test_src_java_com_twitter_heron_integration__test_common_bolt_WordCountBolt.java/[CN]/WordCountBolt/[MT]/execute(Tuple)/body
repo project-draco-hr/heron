@@ -1,0 +1,12 @@
+{
+  String word=tuple.getString(0);
+  Integer count=cache.get(word);
+  if (count == null) {
+    count=1;
+  }
+ else {
+    count++;
+  }
+  LOG.info("Counter Value = " + count);
+  cache.put(word,count);
+}

@@ -1,0 +1,15 @@
+@tornado.testing.gen_test
+def test_MULTIPLY_execute_when_exception(self):
+    ts = Mock()
+    operator = Multiply([float(100), ts])
+    tmaster = Mock()
+    tracker = Mock()
+    start = 100
+    end = 300
+
+    @tornado.gen.coroutine
+    def ts_side_effect2(*args):
+        raise Exception('some_exception')
+    ts.execute.side_effect = ts_side_effect2
+    with self.assertRaises(Exception):
+        metrics = yield operator.execute(tracker, tmaster, start, end)

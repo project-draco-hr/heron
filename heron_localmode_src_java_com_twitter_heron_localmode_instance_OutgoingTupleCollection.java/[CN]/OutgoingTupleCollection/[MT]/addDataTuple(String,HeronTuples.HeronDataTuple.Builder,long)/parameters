@@ -1,0 +1,3 @@
+String streamId
+HeronTuples.HeronDataTuple.Builder newTuple
+long tupleSizeInBytes

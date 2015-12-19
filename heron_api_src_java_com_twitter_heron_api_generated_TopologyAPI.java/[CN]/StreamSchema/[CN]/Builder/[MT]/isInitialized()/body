@@ -1,0 +1,8 @@
+{
+  for (int i=0; i < getKeysCount(); i++) {
+    if (!getKeys(i).isInitialized()) {
+      return false;
+    }
+  }
+  return true;
+}

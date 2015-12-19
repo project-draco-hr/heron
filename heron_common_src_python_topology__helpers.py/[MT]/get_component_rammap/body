@@ -1,0 +1,27 @@
+def get_component_rammap(topology):
+    '\n  The argument is the proto object for topology.\n  It is calculated based on the following priority:\n      1. Form the user specified component rammap. If the rammap\n         is complete, return it.\n      2. If only some component rams are specified, assign them\n         the default RAM, and return it.\n      3. If no component RAM is specified, take the container ram requested\n         and divide it equally among the max possible instances.\n      4. If container RAM was not requested, assign the default RAM\n         to all components.\n  Returns a map from component name to ram in bytes\n  '
+    component_distribution = get_component_distribution(topology)
+    components = (list(topology.spouts) + list(topology.bolts))
+    rammap = (get_user_rammap(topology) or {})
+    if (len(rammap.keys()) > 0):
+        for component in components:
+            component_name = component.comp.name
+            if (component_name not in rammap):
+                rammap[component_name] = constants.DEFAULT_RAM_FOR_INSTANCE
+        return rammap
+    max_instances_in_a_container = max(map((lambda x: len(x[1])), component_distribution.items()))
+    requested_ram_per_container = get_container_ram_requested(topology)
+    if (requested_ram_per_container != None):
+        ram_for_jvms = (requested_ram_per_container - constants.RAM_FOR_STMGR)
+        ram_per_instance = int((ram_for_jvms / max_instances_in_a_container))
+        rammap = {}
+        for component in components:
+            component_name = component.comp.name
+            rammap[component_name] = ram_per_instance
+        return rammap
+    ram_per_instance = int(constants.DEFAULT_RAM_FOR_INSTANCE)
+    rammap = {}
+    for component in components:
+        component_name = component.comp.name
+        rammap[component_name] = ram_per_instance
+    return rammap

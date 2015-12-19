@@ -1,0 +1,4 @@
+{
+  delegate.addConfiguration(config,value);
+  return this;
+}

@@ -1,0 +1,20 @@
+{
+  PhysicalPlans.InstanceInfo.Builder spoutInstanceInfo=PhysicalPlans.InstanceInfo.newBuilder();
+  spoutInstanceInfo.setComponentName("test-spout");
+  spoutInstanceInfo.setTaskId(0);
+  spoutInstanceInfo.setComponentIndex(0);
+  PhysicalPlans.Instance.Builder spoutInstance=PhysicalPlans.Instance.newBuilder();
+  spoutInstance.setInstanceId("spout-id");
+  spoutInstance.setStmgrId("stream-manager-id");
+  spoutInstance.setInfo(spoutInstanceInfo);
+  PhysicalPlans.InstanceInfo.Builder boltInstanceInfo=PhysicalPlans.InstanceInfo.newBuilder();
+  boltInstanceInfo.setComponentName("test-bolt");
+  boltInstanceInfo.setTaskId(1);
+  boltInstanceInfo.setComponentIndex(0);
+  PhysicalPlans.Instance.Builder boltInstance=PhysicalPlans.Instance.newBuilder();
+  boltInstance.setInstanceId("bolt-id");
+  boltInstance.setStmgrId("stream-manager-id");
+  boltInstance.setInfo(boltInstanceInfo);
+  pPlan.addInstances(spoutInstance);
+  pPlan.addInstances(boltInstance);
+}

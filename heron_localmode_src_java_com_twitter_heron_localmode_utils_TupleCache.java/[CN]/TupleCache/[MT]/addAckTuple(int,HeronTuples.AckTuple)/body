@@ -1,0 +1,3 @@
+{
+  get(taskId).addAckTuple(tuple);
+}

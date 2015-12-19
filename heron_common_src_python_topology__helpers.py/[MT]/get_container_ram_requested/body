@@ -1,0 +1,4 @@
+def get_container_ram_requested(topology):
+    '\n  The argument is the proto object for topology.\n  Returns the container ram as requested by the user.\n  Returns None if not specified.\n  '
+    ram = get_topology_config(topology, constants.TOPOLOGY_CONTAINER_RAM_REQUESTED)
+    return (int(ram) if ram else None)

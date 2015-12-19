@@ -1,0 +1,19 @@
+{
+  if (!isConnected()) {
+    return;
+  }
+  forceFlushWithBestEffort();
+  LOG.info("To stop the HeronClient.");
+  contextMap.clear();
+  responseMessageMap.clear();
+  messageMap.clear();
+  socketChannelHelper.clear();
+  nioLooper.removeAllInterest(socketChannel);
+  try {
+    socketChannel.close();
+    onClose();
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to stop Client",e);
+  }
+}

@@ -1,0 +1,20 @@
+{
+  TopologyAPI.Bolt.Builder boltBldr=TopologyAPI.Bolt.newBuilder();
+  TopologyAPI.Component.Builder cbldr=TopologyAPI.Component.newBuilder();
+  super.dump(cbldr);
+  boltBldr.setComp(cbldr);
+  for (  TopologyAPI.InputStream.Builder iter : inputs) {
+    boltBldr.addInputs(iter);
+  }
+  Map<String,TopologyAPI.StreamSchema.Builder> outs=output.getFieldsDeclaration();
+  for (  Map.Entry<String,TopologyAPI.StreamSchema.Builder> entry : outs.entrySet()) {
+    TopologyAPI.OutputStream.Builder obldr=TopologyAPI.OutputStream.newBuilder();
+    TopologyAPI.StreamId.Builder sbldr=TopologyAPI.StreamId.newBuilder();
+    sbldr.setId(entry.getKey());
+    sbldr.setComponentName(getName());
+    obldr.setStream(sbldr);
+    obldr.setSchema(entry.getValue());
+    boltBldr.addOutputs(obldr);
+  }
+  bldr.addBolts(boltBldr);
+}

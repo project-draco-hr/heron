@@ -1,0 +1,14 @@
+def __init__(self, children):
+    if (len(children) != 3):
+        raise Exception('TS format error, expects 3 arguments')
+    self.component = children[0]
+    if (not isinstance(self.component, basestring)):
+        raise Exception('TS expects component name as first argument')
+    self.instances = []
+    if (children[1] != '*'):
+        if (not isinstance(children[1], basestring)):
+            raise Exception('Second argument of TS must be * or instance name')
+        self.instances.append(children[1])
+    self.metricName = children[2]
+    if (not isinstance(self.metricName, basestring)):
+        raise Exception('TS expects metric name as third argument')

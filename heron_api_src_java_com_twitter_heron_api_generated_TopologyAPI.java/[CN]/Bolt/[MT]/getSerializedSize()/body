@@ -1,0 +1,17 @@
+{
+  int size=memoizedSerializedSize;
+  if (size != -1)   return size;
+  size=0;
+  if (((bitField0_ & 0x00000001) == 0x00000001)) {
+    size+=com.google.protobuf.CodedOutputStream.computeMessageSize(1,comp_);
+  }
+  for (int i=0; i < inputs_.size(); i++) {
+    size+=com.google.protobuf.CodedOutputStream.computeMessageSize(2,inputs_.get(i));
+  }
+  for (int i=0; i < outputs_.size(); i++) {
+    size+=com.google.protobuf.CodedOutputStream.computeMessageSize(3,outputs_.get(i));
+  }
+  size+=getUnknownFields().getSerializedSize();
+  memoizedSerializedSize=size;
+  return size;
+}

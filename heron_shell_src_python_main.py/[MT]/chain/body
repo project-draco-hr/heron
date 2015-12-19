@@ -1,0 +1,3 @@
+def chain(cmd_list):
+    '\n  Feed output of one command to the next and return final output\n  Returns string output of chained application of commands.\n  '
+    return {'command': ' | '.join(map((lambda x: ' '.join(x)), cmd_list)), 'stdout': stream_to_string(reduce(pipe, ([None] + cmd_list))), }

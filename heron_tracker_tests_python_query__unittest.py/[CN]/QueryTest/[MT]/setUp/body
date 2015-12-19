@@ -1,0 +1,3 @@
+def setUp(self):
+    self.tracker = Mock()
+    self.query = Query(self.tracker)

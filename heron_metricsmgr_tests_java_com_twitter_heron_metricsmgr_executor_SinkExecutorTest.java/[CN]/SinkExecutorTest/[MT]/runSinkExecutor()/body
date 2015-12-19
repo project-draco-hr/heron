@@ -1,0 +1,4 @@
+{
+  sinkExecutor.setProperty(MetricsSinksConfig.CONFIG_KEY_FLUSH_FREQUENCY_MS,FLUSH_INTERVAL_MS);
+  threadsPool.execute(sinkExecutor);
+}

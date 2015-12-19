@@ -1,0 +1,3 @@
+{
+  setDebug(this,isOn);
+}

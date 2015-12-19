@@ -1,0 +1,6 @@
+{
+  if (!hasKey()) {
+    return false;
+  }
+  return true;
+}

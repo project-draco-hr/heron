@@ -1,0 +1,11 @@
+def getProcesses():
+    processes = subprocess.check_output(['ps', '-o', 'pid,args'])
+    processes = processes.split('\n')
+    processes = processes[1:]
+    processList = []
+    for process in processes:
+        if (process == ''):
+            continue
+        pretuple = process.split(' ', 1)
+        processList.append(ProcessTuple(pretuple[0], pretuple[1]))
+    return processList

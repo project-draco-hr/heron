@@ -1,0 +1,6 @@
+{
+  if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+    inputs_=new java.util.ArrayList<com.twitter.heron.api.generated.TopologyAPI.InputStream>(inputs_);
+    bitField0_|=0x00000002;
+  }
+}

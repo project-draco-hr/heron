@@ -1,0 +1,60 @@
+{
+  ServerSocketChannel serverSocketChannel=ServerSocketChannel.open();
+  serverSocketChannel.socket().bind(new InetSocketAddress(HOST,serverPort));
+  SocketChannel socketChannel=null;
+  try {
+    runStreamManagerClient();
+    socketChannel=serverSocketChannel.accept();
+    configure(socketChannel);
+    socketChannel.configureBlocking(false);
+    close(serverSocketChannel);
+    IncomingPacket incomingPacket=new IncomingPacket();
+    while (incomingPacket.readFromChannel(socketChannel) != 0) {
+    }
+    String typeName=incomingPacket.unpackString();
+    REQID rid=incomingPacket.unpackREQID();
+    OutgoingPacket outgoingPacket=new OutgoingPacket(rid,UnitTestHelper.getRegisterInstanceResponse());
+    outgoingPacket.writeToChannel(socketChannel);
+    for (int i=0; i < Constants.RETRY_TIMES; i++) {
+      InstanceControlMsg instanceControlMsg=inControlQueue.poll();
+      if (instanceControlMsg != null) {
+        break;
+      }
+ else {
+        Utils.sleep(Constants.RETRY_INTERVAL_MS);
+      }
+    }
+    for (int i=0; i < 10; i++) {
+      streamManagerClient.sendMessage(UnitTestHelper.getRegisterInstanceResponse());
+    }
+    for (int i=0; i < 10; i++) {
+      incomingPacket=new IncomingPacket();
+      while (incomingPacket.readFromChannel(socketChannel) != 0) {
+      }
+      typeName=incomingPacket.unpackString();
+      rid=incomingPacket.unpackREQID();
+      StreamManager.RegisterInstanceResponse.Builder builder=StreamManager.RegisterInstanceResponse.newBuilder();
+      incomingPacket.unpackMessage(builder);
+      StreamManager.RegisterInstanceResponse response=builder.build();
+      Assert.assertNotNull(response);
+      Assert.assertTrue(response.isInitialized());
+      Assert.assertEquals(Common.StatusCode.OK,response.getStatus().getStatus());
+      Assert.assertEquals(1,response.getPplan().getStmgrsCount());
+      Assert.assertEquals(2,response.getPplan().getInstancesCount());
+      Assert.assertEquals(1,response.getPplan().getTopology().getBoltsCount());
+      Assert.assertEquals(1,response.getPplan().getTopology().getSpoutsCount());
+      Assert.assertEquals(TopologyAPI.TopologyState.RUNNING,response.getPplan().getTopology().getState());
+    }
+    nioLooper.exitLoop();
+  }
+ catch (  ClosedByInterruptException ignored) {
+  }
+catch (  ClosedChannelException ignored) {
+  }
+catch (  Exception e) {
+    e.printStackTrace();
+  }
+ finally {
+    close(socketChannel);
+  }
+}

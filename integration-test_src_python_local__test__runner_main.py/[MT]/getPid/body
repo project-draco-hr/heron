@@ -1,0 +1,9 @@
+def getPid(processName, heronWorkingDirectory):
+    processPidFile = ((heronWorkingDirectory + processName) + '.pid')
+    try:
+        with open(processPidFile, 'r') as f:
+            pid = f.readline()
+            return pid
+    except Exception as e:
+        logging.error(('Unable to open file %s' % processPidFile))
+        return (-1)

@@ -1,0 +1,3 @@
+{
+  Assert.assertEquals(QUEUE_BUFFER_SIZE,communicator.getCapacity());
+}

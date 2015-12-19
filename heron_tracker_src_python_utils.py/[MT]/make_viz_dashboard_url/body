@@ -1,0 +1,3 @@
+def make_viz_dashboard_url(name, dc, environ):
+    '\n  Link to the dashboard. Must override to return a valid url.\n  '
+    return ''

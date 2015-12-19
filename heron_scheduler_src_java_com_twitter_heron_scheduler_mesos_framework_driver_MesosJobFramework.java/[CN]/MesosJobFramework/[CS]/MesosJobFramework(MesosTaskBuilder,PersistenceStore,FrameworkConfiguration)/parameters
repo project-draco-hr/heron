@@ -1,0 +1,3 @@
+MesosTaskBuilder taskBuilder
+PersistenceStore persistenceStore
+FrameworkConfiguration config

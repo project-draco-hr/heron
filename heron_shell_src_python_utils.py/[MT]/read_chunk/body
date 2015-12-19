@@ -1,0 +1,28 @@
+def read_chunk(filename, offset=None, length=None):
+    '\n  Read a chunk of a file from an offset upto the length.\n  '
+    offset = (offset or (-1))
+    length = (length or (-1))
+    try:
+        length = long(length)
+        offset = long(offset)
+    except ValueError:
+        return {}
+    if (not os.path.isfile(filename)):
+        return {}
+    try:
+        fstat = os.stat(filename)
+    except Exception as e:
+        return {}
+    if (offset == (-1)):
+        offset = fstat.st_size
+    if (length == (-1)):
+        length = (fstat.st_size - offset)
+    with open(filename, 'r') as fp:
+        fp.seek(offset)
+        try:
+            data = fp.read(length)
+        except IOError as e:
+            return {}
+    if data:
+        return dict(offset=offset, length=len(data), data=escape(data.decode('utf8', 'replace')))
+    return dict(offset=offset, length=0)

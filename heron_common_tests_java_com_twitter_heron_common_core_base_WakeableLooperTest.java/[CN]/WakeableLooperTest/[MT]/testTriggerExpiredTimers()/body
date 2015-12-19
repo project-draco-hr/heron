@@ -1,0 +1,23 @@
+{
+  Runnable r=new Runnable(){
+    @Override public void run(){
+      globalVale=10;
+    }
+  }
+;
+  int intervalNs=1;
+  slaveLooper.registerTimerEventInNanoSeconds(intervalNs,r);
+  try {
+    Method method=slaveLooper.getClass().getSuperclass().getDeclaredMethod("triggerExpiredTimers",long.class);
+    long current=System.nanoTime();
+    method.setAccessible(true);
+    method.invoke(slaveLooper,current);
+  }
+ catch (  NoSuchMethodException e) {
+  }
+catch (  IllegalAccessException e) {
+  }
+catch (  InvocationTargetException e) {
+  }
+  Assert.assertEquals(10,globalVale);
+}

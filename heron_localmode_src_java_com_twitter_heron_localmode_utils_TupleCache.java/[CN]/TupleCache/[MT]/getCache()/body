@@ -1,0 +1,7 @@
+{
+  Map<Integer,List<HeronTuples.HeronTupleSet>> res=new HashMap<>();
+  for (  Map.Entry<Integer,TupleList> entry : cache.entrySet()) {
+    res.put(entry.getKey(),entry.getValue().getTuplesList());
+  }
+  return res;
+}

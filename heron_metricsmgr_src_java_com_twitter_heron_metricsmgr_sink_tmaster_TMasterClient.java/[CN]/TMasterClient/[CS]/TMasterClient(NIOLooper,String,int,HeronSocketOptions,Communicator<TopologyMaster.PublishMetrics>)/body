@@ -1,0 +1,4 @@
+{
+  super(s,host,port,options);
+  this.publishMetricsCommunicator=publishMetricsCommunicator;
+}

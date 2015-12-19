@@ -1,0 +1,30 @@
+{
+  long startOfCycle=System.nanoTime();
+  long bytesWritten=0;
+  long nPacketsWritten=0;
+  while ((System.nanoTime() - startOfCycle - writeBatchTimeInNs) < 0 && (bytesWritten < writeBatchSizeInBytes)) {
+    OutgoingPacket outgoingPacket=outgoingPacketsToWrite.peek();
+    if (outgoingPacket == null) {
+      break;
+    }
+    int writeState=outgoingPacket.writeToChannel(socketChannel);
+    if (writeState > 0) {
+      break;
+    }
+ else     if (writeState < 0) {
+      LOG.severe("Something bad happened while writing to channel");
+      selectHandler.handleError(socketChannel);
+      return;
+    }
+ else {
+      bytesWritten+=outgoingPacket.size();
+      nPacketsWritten++;
+      outgoingPacketsToWrite.remove();
+    }
+  }
+  totalPacketsWritten+=nPacketsWritten;
+  totalBytesWritten+=bytesWritten;
+  if (getOutstandingPackets() == 0) {
+    disableWriting();
+  }
+}

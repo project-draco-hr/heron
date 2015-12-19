@@ -1,0 +1,3 @@
+{
+  return getOutputsFieldBuilder().addBuilder(index,com.twitter.heron.api.generated.TopologyAPI.OutputStream.getDefaultInstance());
+}

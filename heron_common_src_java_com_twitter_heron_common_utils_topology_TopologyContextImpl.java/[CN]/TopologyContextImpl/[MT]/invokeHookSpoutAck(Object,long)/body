@@ -1,0 +1,8 @@
+{
+  if (taskHooks.size() != 0) {
+    SpoutAckInfo ackInfo=new SpoutAckInfo(messageId,getThisTaskId(),completeLatencyNs / Constants.MILLISECONDS_TO_NANOSECONDS);
+    for (    ITaskHook taskHook : taskHooks) {
+      taskHook.spoutAck(ackInfo);
+    }
+  }
+}

@@ -1,0 +1,4 @@
+WakeableLooper looper
+TopologyAPI.Topology topology
+int nBuckets
+Map<String,List<Integer>> componentToTaskIds

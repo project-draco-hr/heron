@@ -1,0 +1,6 @@
+{
+  if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+    kvs_=new java.util.ArrayList<com.twitter.heron.api.generated.TopologyAPI.Config.KeyValue>(kvs_);
+    bitField0_|=0x00000001;
+  }
+}

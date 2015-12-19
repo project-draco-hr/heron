@@ -1,0 +1,8 @@
+{
+  if (taskToComponentMap.containsKey(taskId)) {
+    return taskToComponentMap.get(taskId);
+  }
+ else {
+    return null;
+  }
+}

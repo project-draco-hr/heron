@@ -1,0 +1,12 @@
+{
+  File f=new File(filename);
+  if (f.exists() && !f.isDirectory()) {
+    f.setWritable(true);
+  }
+  try {
+    writer=filename == null ? System.out : new PrintStream(new FileOutputStream(filename,false),true,"UTF-8");
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Error creating " + filename,e);
+  }
+}

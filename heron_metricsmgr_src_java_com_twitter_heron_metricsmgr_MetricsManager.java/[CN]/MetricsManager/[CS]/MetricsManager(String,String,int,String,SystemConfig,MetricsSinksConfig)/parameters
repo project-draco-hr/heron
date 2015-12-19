@@ -1,0 +1,6 @@
+String topologyName
+String serverHost
+int serverPort
+String metricsmgrId
+SystemConfig systemConfig
+MetricsSinksConfig config

@@ -1,0 +1,14 @@
+{
+  if (boltsBuilder_ == null) {
+    if (value == null) {
+      throw new NullPointerException();
+    }
+    ensureBoltsIsMutable();
+    bolts_.add(index,value);
+    onChanged();
+  }
+ else {
+    boltsBuilder_.addMessage(index,value);
+  }
+  return this;
+}

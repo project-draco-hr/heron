@@ -1,0 +1,16 @@
+{
+  if (status != StatusCode.OK) {
+    LOG.severe(String.format("Error connecting to Stream Manager with status: %s, Retrying...",status));
+    Runnable r=new Runnable(){
+      public void run(){
+        start();
+      }
+    }
+;
+    getNIOLooper().registerTimerEventInSeconds(systemConfig.getInstanceReconnectStreammgrIntervalSec(),r);
+    return;
+  }
+  registerMessagesToHandle();
+  LOG.info("Connected to Stream Manager. Ready to send register request");
+  sendRegisterRequest();
+}

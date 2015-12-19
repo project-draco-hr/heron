@@ -1,0 +1,3 @@
+def write_object(self, obj, parent=None):
+    self._writeStruct('>B', 1, (self.TC_OBJECT,))
+    self._writeStruct('>B', 1, (self.TC_CLASSDESC,))

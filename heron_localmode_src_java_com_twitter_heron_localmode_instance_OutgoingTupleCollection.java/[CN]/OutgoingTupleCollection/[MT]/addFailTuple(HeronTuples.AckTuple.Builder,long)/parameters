@@ -1,0 +1,2 @@
+HeronTuples.AckTuple.Builder newTuple
+long tupleSizeInBytes

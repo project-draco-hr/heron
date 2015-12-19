@@ -1,0 +1,15 @@
+{
+  UnitTestHelper.clearSingletonRegistry();
+  tupleReceived=0;
+  customGroupingInfoInPrepare=null;
+  testLooper.exitLoop();
+  slaveLooper.exitLoop();
+  threadsPool.shutdownNow();
+  physicalPlan=null;
+  testLooper=null;
+  slaveLooper=null;
+  outStreamQueue=null;
+  inStreamQueue=null;
+  slave=null;
+  threadsPool=null;
+}

@@ -1,0 +1,7 @@
+{
+  runBase();
+  Map<SocketChannel,SocketChannelHelper> activeConnections=heronServer.getActiveConnections();
+  SelectableChannel channel=activeConnections.keySet().iterator().next();
+  heronServer.handleError(channel);
+  Assert.assertEquals(0,activeConnections.size());
+}

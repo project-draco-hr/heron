@@ -1,0 +1,17 @@
+def create_execution_state(self, topologyName, executionState):
+    if ((not executionState) or (not executionState.IsInitialized())):
+        raise StateException('Execution State protobuf not init properly', StateException.EX_TYPE_PROTOBUF_ERROR), None, sys.exc_info()[2]
+    path = self.get_execution_state_path(topologyName)
+    LOG.info('Adding topology: {0} to path: {1}'.format(topologyName, path))
+    executionStateString = executionState.SerializeToString()
+    try:
+        self.client.create(path, value=executionStateString, makepath=True)
+        return True
+    except NoNodeError as e:
+        raise StateException('NoNodeError while creating execution state', StateException.EX_TYPE_NO_NODE_ERROR), None, sys.exc_info()[2]
+    except NodeExistsError as e:
+        raise StateException('NodeExistsError while creating execution state', StateException.EX_TYPE_NODE_EXISTS_ERROR), None, sys.exc_info()[2]
+    except ZookeeperError as e:
+        raise StateException('Zookeeper while creating execution state', StateException.EX_TYPE_ZOOKEEPER_ERROR), None, sys.exc_info()[2]
+    except Exception as e:
+        raise

@@ -1,0 +1,14 @@
+{
+  SettableFuture<TopologyMaster.TMasterLocation> future=SettableFuture.create();
+  String path=getTMasterLocationPath(topologyName);
+  byte[] data=FileUtility.readFromFile(path);
+  TopologyMaster.TMasterLocation location;
+  try {
+    location=TopologyMaster.TMasterLocation.parseFrom(data);
+    future.set(location);
+  }
+ catch (  InvalidProtocolBufferException e) {
+    future.setException(new RuntimeException("Could not parse TMasterLocation",e));
+  }
+  return future;
+}

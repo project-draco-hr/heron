@@ -1,0 +1,6 @@
+def __init__(self, conf_name):
+    conf_module = 'heron.state'
+    conf_file = os.path.join('conf', (conf_name + '.yaml'))
+    confString = pkgutil.get_data('heron.state', conf_file)
+    self.locations = yaml.load(confString)
+    self.validate_state_locations()

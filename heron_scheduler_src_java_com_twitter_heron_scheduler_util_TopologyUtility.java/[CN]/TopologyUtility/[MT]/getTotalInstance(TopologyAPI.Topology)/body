@@ -1,0 +1,8 @@
+{
+  Map<String,Integer> parallelismMap=getComponentParallelism(topology);
+  int numInstances=0;
+  for (  int parallelism : parallelismMap.values()) {
+    numInstances+=parallelism;
+  }
+  return numInstances;
+}

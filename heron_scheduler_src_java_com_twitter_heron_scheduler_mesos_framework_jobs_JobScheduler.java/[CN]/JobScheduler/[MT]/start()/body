@@ -1,0 +1,13 @@
+{
+  LOG.info("Starting the Job Scheduler!");
+  Iterable<BaseJob> jobs=persistenceStore.getJobs();
+  mesosJobFramework.loadJobs(jobs);
+  LOG.info("Loaded all jobs from last failure");
+  Map<String,BaseTask> tasks=persistenceStore.getTasks();
+  mesosJobFramework.loadTasks(tasks);
+  LOG.info("Loaded all tasks from last failure");
+  mesosJobFramework.loadPendingScheduleTasks();
+  LOG.info("Loaded all pendingSchedule tasks");
+  LOG.info("To start the MesosDriver");
+  mesosDriver.start();
+}

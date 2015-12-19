@@ -1,0 +1,10 @@
+{
+  List<Integer> allSpoutTasks=new LinkedList<>();
+  for (  TopologyAPI.Spout spout : topology.getSpoutsList()) {
+    for (    TopologyAPI.OutputStream outputStream : spout.getOutputsList()) {
+      List<Integer> spoutTaskIds=componentToTaskIds.get(outputStream.getStream().getComponentName());
+      allSpoutTasks.addAll(spoutTaskIds);
+    }
+  }
+  return new XORManager(looper,PhysicalPlanUtil.extractTopologyTimeout(topology),allSpoutTasks,nBuckets);
+}

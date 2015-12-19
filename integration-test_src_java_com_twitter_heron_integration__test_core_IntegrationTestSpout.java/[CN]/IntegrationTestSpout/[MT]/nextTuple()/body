@@ -1,0 +1,13 @@
+{
+  if (maxExecutions <= 0) {
+    return;
+  }
+  maxExecutions--;
+  LOG.fine("maxExecutions = " + maxExecutions);
+  delegateSpout.nextTuple();
+  if (maxExecutions <= 0) {
+    isDone=true;
+    emitTerminalIfNeeded();
+    LOG.fine("The topology is done.");
+  }
+}

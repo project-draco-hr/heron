@@ -1,0 +1,3 @@
+{
+  return collector.isOutQueuesAvailable() && topologyState.equals(TopologyAPI.TopologyState.RUNNING);
+}

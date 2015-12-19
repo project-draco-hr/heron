@@ -1,0 +1,8 @@
+{
+  TupleList list=cache.get(destTaskId);
+  if (list == null) {
+    list=new TupleList();
+    cache.put(destTaskId,list);
+  }
+  return list;
+}

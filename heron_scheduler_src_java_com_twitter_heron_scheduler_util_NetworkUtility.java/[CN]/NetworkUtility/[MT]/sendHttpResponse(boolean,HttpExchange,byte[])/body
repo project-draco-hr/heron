@@ -1,0 +1,28 @@
+{
+  int returnCode=isSuccess ? HttpURLConnection.HTTP_OK : HttpURLConnection.HTTP_UNAVAILABLE;
+  try {
+    exchange.sendResponseHeaders(returnCode,response.length);
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to send response headers: ",e);
+    return false;
+  }
+  OutputStream os=exchange.getResponseBody();
+  try {
+    os.write(response);
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to send http response: ",e);
+    return false;
+  }
+ finally {
+    try {
+      os.close();
+    }
+ catch (    IOException e) {
+      LOG.log(Level.SEVERE,"Failed to close OutputStream: ",e);
+      return false;
+    }
+  }
+  return true;
+}

@@ -1,0 +1,13 @@
+@tornado.gen.coroutine
+def execute(self, tracker, tmaster, start, end):
+    metrics = yield self.timeSeries.execute(tracker, tmaster, (start - 60), end)
+    for metric in metrics:
+        timeline = {}
+        allTimestamps = sorted(metric.timeline.keys())
+        for i in range(1, len(allTimestamps)):
+            timestamp = allTimestamps[i]
+            prev = allTimestamps[(i - 1)]
+            if ((start <= timestamp <= end) and ((timestamp - prev) == 60)):
+                timeline[timestamp] = (metric.timeline[timestamp] - metric.timeline[prev])
+        metric.timeline = timeline
+    raise tornado.gen.Return(metrics)

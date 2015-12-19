@@ -1,0 +1,4 @@
+{
+  this.proceedLock=new Object();
+  isToProceed=false;
+}

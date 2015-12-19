@@ -1,0 +1,28 @@
+@tornado.gen.coroutine
+def execute(self, tracker, tmaster, start, end):
+    constants = filter((lambda ts: isinstance(ts, float)), self.timeSeriesList)
+    leftOverTimeSeries = filter((lambda ts: (not isinstance(ts, float))), self.timeSeriesList)
+    futureMetrics = []
+    for timeseries in leftOverTimeSeries:
+        futureMetrics.append(timeseries.execute(tracker, tmaster, start, end))
+    metrics = yield futureMetrics
+    allMetrics = []
+    for met in metrics:
+        if isinstance(met, basestring):
+            raise Exception(met)
+        allMetrics.extend(met)
+    timeline = {}
+    for metric in allMetrics:
+        for (timestamp, value) in metric.timeline.iteritems():
+            if (start <= timestamp <= end):
+                if (timestamp not in timeline):
+                    timeline[timestamp] = []
+                timeline[timestamp].append(value)
+    retTimeline = {}
+    for (timestamp, values) in timeline.iteritems():
+        if (not values):
+            continue
+        index = int((((self.quantile * 1.0) * (len(values) - 1)) / 100.0))
+        retTimeline[timestamp] = sorted(values)[index]
+    retMetrics = Metrics(None, None, None, start, end, retTimeline)
+    raise tornado.gen.Return([retMetrics])

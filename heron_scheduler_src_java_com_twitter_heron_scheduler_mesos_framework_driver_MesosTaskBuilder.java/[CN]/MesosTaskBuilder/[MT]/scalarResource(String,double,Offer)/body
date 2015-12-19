@@ -1,0 +1,16 @@
+{
+  List<Resource> reservedResources=new LinkedList<>();
+  for (  Resource resource : offer.getResourcesList()) {
+    if (resource.hasRole() && resource.getRole() != "*") {
+      reservedResources.add(resource);
+    }
+  }
+  String role="*";
+  for (  Resource resource : reservedResources) {
+    if (resource.getName() == name && resource.getScalar().getValue() >= value) {
+      role=resource.getRole();
+      break;
+    }
+  }
+  return Resource.newBuilder().setName(name).setType(Value.Type.SCALAR).setScalar(Value.Scalar.newBuilder().setValue(value)).setRole(role).build();
+}

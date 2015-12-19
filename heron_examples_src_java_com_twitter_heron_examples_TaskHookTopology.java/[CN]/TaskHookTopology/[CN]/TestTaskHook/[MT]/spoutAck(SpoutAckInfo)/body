@@ -1,0 +1,10 @@
+{
+  GlobalMetrics.incr("hook_spoutAck");
+  ++spoutAcked;
+  if (spoutAcked % N == 0) {
+    System.out.println("spoutAck() is invoked in hook");
+    System.out.println(info.getCompleteLatencyMs());
+    System.out.println(info.getMessageId());
+    System.out.println(info.getSpoutTaskId());
+  }
+}

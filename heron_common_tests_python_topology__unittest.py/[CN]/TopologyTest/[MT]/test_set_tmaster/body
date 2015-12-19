@@ -1,0 +1,6 @@
+def test_set_tmaster(self):
+    self.topology.set_tmaster(None)
+    self.assertIsNone(self.topology.tmaster)
+    tmaster = MockProto().create_mock_tmaster()
+    self.topology.set_tmaster(tmaster)
+    self.assertEqual(tmaster, self.topology.tmaster)

@@ -1,0 +1,82 @@
+def runTest(test, topologyName, params):
+    try:
+        submitTopology(params.heronCliPath, params.heronWorkingDirectory, params.heronCorePath, params.testJarPath, params.topologyPath, topologyName, params.schedulerConfigPath, params.configLoaderClasspath)
+    except Exception as e:
+        logging.error(('Failed to submit %s topology: %s' % (topologyName, str(e))))
+        return False
+    logging.info(('Successfully submitted %s topology' % topologyName))
+    processList = getProcesses()
+    while (not processExists(processList, './heron-stmgr')):
+        processList = getProcesses()
+    outputFile = params.outputFile
+    try:
+        with open('temp.txt', 'w') as f:
+            for line in TEST_INPUT:
+                f.write(line)
+    except Exception as e:
+        logging.error('Failed to write to temp.txt file')
+        return False
+    time.sleep(2)
+    if (test == 'KILL_TMASTER'):
+        restartShard(params.heronCliPath, params.heronWorkingDirectory, topologyName, params.schedulerConfigPath, params.configLoaderClasspath, TMASTER_SHARD)
+    elif (test == 'KILL_STMGR'):
+        stmgrPid = getPid(('%s-%d' % (HERON_STMGR, NON_TMASTER_SHARD)), params.heronWorkingDirectory)
+        killProcess(stmgrPid)
+    elif (test == 'KILL_METRICSMGR'):
+        metricsmgrPid = getPid(('%s-%d' % (HERON_METRICSMGR, NON_TMASTER_SHARD)), params.heronWorkingDirectory)
+        killProcess(metricsmgrPid)
+    elif (test == 'KILL_STMGR_METRICSMGR'):
+        stmgrPid = getPid(('%s-%d' % (HERON_STMGR, NON_TMASTER_SHARD)), params.heronWorkingDirectory)
+        killProcess(stmgrPid)
+        metricsmgrPid = getPid(('%s-%d' % (HERON_METRICSMGR, NON_TMASTER_SHARD)), params.heronWorkingDirectory)
+        killProcess(metricsmgrPid)
+    elif (test == 'KILL_BOLT'):
+        boltPid = getPid(('container_%d_%s' % (NON_TMASTER_SHARD, HERON_BOLT)), params.heronWorkingDirectory)
+        killProcess(boltPid)
+    processList = getProcesses()
+    while (not processExists(processList, './heron-stmgr')):
+        processList = getProcesses()
+    os.rename('temp.txt', params.readFile)
+    time.sleep(15)
+    expectedResult = ''
+    actualResult = ''
+    retriesLeft = RETRY_COUNT
+    while (retriesLeft > 0):
+        retriesLeft -= 1
+        expectedResult = ''
+        actualResult = ''
+        try:
+            with open(params.readFile, 'r') as f:
+                expectedResult = f.read()
+            with open(outputFile, 'r') as g:
+                actualResult = g.read()
+        except Exception as e:
+            logging.error('Failed to get expected and actual results')
+            return False
+        if (expectedResult == actualResult):
+            break
+        if (retriesLeft > 0):
+            logging.info('Failed to get proper results, retrying')
+            time.sleep(RETRY_INTERVAL)
+    try:
+        killTopology(params.heronCliPath, params.heronWorkingDirectory, topologyName, params.schedulerConfigPath, params.configLoaderClasspath)
+    except Exception as e:
+        logging.error(('Failed to kill %s topology: %s' % (topologyName, str(e))))
+        return False
+    logging.info(('Successfully killed %s topology' % topologyName))
+    try:
+        os.remove(params.readFile)
+        os.remove(params.outputFile)
+    except Exception as e:
+        logging.error('Failed to delete test files')
+        return False
+    if (actualResult == expectedResult):
+        logging.info('Actual result matched expected result')
+        logging.info(('Actual result ---------- \n' + actualResult))
+        logging.info(('Expected result ---------- \n' + expectedResult))
+        return True
+    else:
+        logging.error('Actual result did not match expected result')
+        logging.info(('Actual result ---------- \n' + actualResult))
+        logging.info(('Expected result ---------- \n' + expectedResult))
+        return False

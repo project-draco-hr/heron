@@ -1,0 +1,2 @@
+def discover_host():
+    return subprocess.check_output('uname -n', shell=True).strip('\n')

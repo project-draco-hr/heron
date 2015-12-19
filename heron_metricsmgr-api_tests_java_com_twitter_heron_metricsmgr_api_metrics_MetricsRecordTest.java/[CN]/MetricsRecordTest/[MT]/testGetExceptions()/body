@@ -1,0 +1,9 @@
+{
+  int items=0;
+  for (int i=0; i < N; i++) {
+    for (    ExceptionInfo info : records.get(i).getExceptions()) {
+      items++;
+    }
+  }
+  Assert.assertTrue(items == 0);
+}

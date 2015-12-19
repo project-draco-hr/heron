@@ -1,0 +1,11 @@
+{
+  String hostName;
+  try {
+    hostName=InetAddress.getLocalHost().getHostName();
+  }
+ catch (  UnknownHostException e) {
+    LOG.severe("Unknown host.");
+    hostName=METRICS_MANAGER_HOST;
+  }
+  return hostName;
+}

@@ -1,0 +1,3 @@
+def get_component_jvmopts(topology):
+    '\n  The argument is the proto object for topology.\n  Returns the jvm options if specified by user.\n  '
+    return str((get_topology_config(topology, constants.TOPOLOGY_COMPONENT_JVMOPTS) or ''))

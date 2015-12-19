@@ -1,0 +1,4 @@
+def __init__(self):
+    self.topologies = []
+    self.state_managers = []
+    self.topologyInfos = {}

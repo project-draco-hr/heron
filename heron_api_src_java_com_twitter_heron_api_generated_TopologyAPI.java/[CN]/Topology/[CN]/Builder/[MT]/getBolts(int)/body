@@ -1,0 +1,8 @@
+{
+  if (boltsBuilder_ == null) {
+    return bolts_.get(index);
+  }
+ else {
+    return boltsBuilder_.getMessage(index);
+  }
+}

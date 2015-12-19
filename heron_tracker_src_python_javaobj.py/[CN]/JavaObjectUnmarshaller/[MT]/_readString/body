@@ -1,0 +1,4 @@
+def _readString(self):
+    (length,) = self._readStruct('>H')
+    ba = self.object_stream.read(length)
+    return ba

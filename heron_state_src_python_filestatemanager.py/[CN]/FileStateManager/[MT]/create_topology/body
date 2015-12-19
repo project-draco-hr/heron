@@ -1,0 +1,3 @@
+def create_topology(self, topologyName, topology):
+    '\n    Create path is currently not supported in file based state manager.\n    '
+    pass

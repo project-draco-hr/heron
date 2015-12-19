@@ -1,0 +1,4 @@
+{
+  this.propName=propName;
+  this.propValue=propValue;
+}

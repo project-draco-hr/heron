@@ -1,0 +1,18 @@
+{
+  int remaining=buffer.remaining();
+  int wrote=0;
+  try {
+    wrote=channel.read(buffer);
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Error in channel.read ",e);
+    return -1;
+  }
+  if (wrote < 0) {
+    LOG.severe("channel.read returned negative " + wrote);
+    return wrote;
+  }
+ else {
+    return remaining - wrote;
+  }
+}

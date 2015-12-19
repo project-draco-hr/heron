@@ -1,0 +1,4 @@
+def get_topology_path(self, topologyName):
+    '\n    Create the path using rootpath and topology name.\n    '
+    path = ((HERON_TOPOLOGIES_KEY.format(self.rootpath) + '/') + topologyName)
+    return path

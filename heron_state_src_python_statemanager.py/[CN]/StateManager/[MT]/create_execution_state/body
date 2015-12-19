@@ -1,0 +1,4 @@
+@abc.abstractmethod
+def create_execution_state(self, topologyName, executionState):
+    '\n    Adds the topology entry to execution_state.\n    '
+    pass

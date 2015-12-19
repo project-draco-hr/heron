@@ -1,0 +1,19 @@
+{
+  counters.put(MESSAGE,counters.get(MESSAGE) + 1);
+  if (!transport.isOpen() && !open()) {
+    counters.put(FAILED,counters.get(FAILED) + 1);
+    LOG.severe("Failed due to TTransport is not open");
+    if (counters.get(FAILED) >= connectRetryAttempts) {
+      throw new RuntimeException("The scribe sink failed to connect to server; exceeds " + connectRetryAttempts + " attempts");
+    }
+    return;
+  }
+  LogEntry logEntry=new LogEntry();
+  logEntry.category=(String)config.get(KEY_CATEGORY);
+  logEntry.message=makeJSON(record);
+  LOG.fine("Metrics to log to Scribe" + logEntry.message);
+  List<LogEntry> pendingEntries=new LinkedList<LogEntry>();
+  pendingEntries.add(logEntry);
+  logToScribe(pendingEntries);
+  sinkContext.exportCountMetric(RECORD_PROCESS_COUNT,1);
+}

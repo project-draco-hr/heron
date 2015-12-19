@@ -1,0 +1,4 @@
+{
+  comp_=com.twitter.heron.api.generated.TopologyAPI.Component.getDefaultInstance();
+  outputs_=java.util.Collections.emptyList();
+}

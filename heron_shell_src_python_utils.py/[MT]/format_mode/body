@@ -1,0 +1,18 @@
+def format_mode(sres):
+    "\n  Format a line in the directory list based on the file's type and other attributes.\n  "
+    mode = sres.st_mode
+    root = ((mode & 448) >> 6)
+    group = ((mode & 56) >> 3)
+    user = (mode & 7)
+
+    def stat_type(md):
+        if stat.S_ISDIR(md):
+            return 'd'
+        elif stat.S_ISSOCK(md):
+            return 's'
+        else:
+            return '-'
+
+    def triple(md):
+        return ('%c%c%c' % (('r' if (md & 4) else '-'), ('w' if (md & 2) else '-'), ('x' if (md & 1) else '-')))
+    return ''.join([stat_type(mode), triple(root), triple(group), triple(user)])

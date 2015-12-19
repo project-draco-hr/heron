@@ -1,0 +1,13 @@
+{
+  if (args.length < 2) {
+    throw new RuntimeException("HttpServerUrl and TopologyName are needed as command line arguments");
+  }
+  URL httpServerUrl=new URL(args[0]);
+  String topologyName=args[1];
+  TestTopologyBuilder builder=new TestTopologyBuilder(topologyName,httpServerUrl.toString());
+  builder.setSpout("ab-spout",new ABSpout(),1,400);
+  builder.setBolt("count-bolt",new WordCountBolt(),2).fieldsGrouping("ab-spout",new Fields("word"));
+  builder.setBolt("sum-bolt",new CountAggregatorBolt(),1).noneGrouping("count-bolt");
+  Config conf=new BasicConfig();
+  HeronSubmitter.submitTopology(topologyName,conf,builder.createTopology());
+}

@@ -1,0 +1,28 @@
+{
+  Runnable spoutTasks=new Runnable(){
+    @Override public void run(){
+      if (isProduceTuple()) {
+        produceTuple();
+        collector.sendOutTuples();
+      }
+ else {
+        spoutMetrics.updateOutQueueFullCount();
+      }
+      if (ackEnabled) {
+        readTuplesAndExecute(streamInQueue);
+        spoutMetrics.updatePendingTuplesCount(collector.numInFlight());
+      }
+ else {
+        doImmediateAcks();
+      }
+      if (isContinueWork()) {
+        looper.wakeUp();
+      }
+    }
+  }
+;
+  looper.addTasksOnWakeup(spoutTasks);
+  if (enableMessageTimeouts) {
+    lookForTimeouts();
+  }
+}

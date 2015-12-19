@@ -1,0 +1,9 @@
+{
+  LOG.severe("Local Mode Process exiting.");
+  LOG.log(Level.SEVERE,"Exception caught in thread: " + thread.getName() + " with id: "+ thread.getId(),exception);
+  for (  Handler handler : java.util.logging.Logger.getLogger("").getHandlers()) {
+    handler.close();
+  }
+  threadsPool.shutdownNow();
+  Runtime.getRuntime().halt(1);
+}

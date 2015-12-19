@@ -1,0 +1,6 @@
+{
+  producer=new SlaveLooper();
+  consumer=new SlaveLooper();
+  communicator=new Communicator<Integer>(producer,consumer);
+  communicator.init(QUEUE_BUFFER_SIZE,QUEUE_BUFFER_SIZE,0.5);
+}

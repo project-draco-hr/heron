@@ -1,0 +1,19 @@
+{
+  Map ret=null;
+  try {
+    FileInputStream fin=new FileInputStream(new File(name));
+    Yaml yaml=new Yaml();
+    ret=(Map)yaml.load(fin);
+  }
+ catch (  IOException ioe) {
+    if (mustExist) {
+      throw new RuntimeException(ioe);
+    }
+  }
+  if (ret == null) {
+    return new HashMap();
+  }
+ else {
+    return new HashMap(ret);
+  }
+}

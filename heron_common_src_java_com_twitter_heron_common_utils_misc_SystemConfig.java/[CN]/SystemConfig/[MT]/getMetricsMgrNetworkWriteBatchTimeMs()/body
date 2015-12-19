@@ -1,0 +1,3 @@
+{
+  return Utils.getLong(this.get(SystemConfig.METRICSMGR_NETWORK_WRITE_BATCH_TIME_MS));
+}

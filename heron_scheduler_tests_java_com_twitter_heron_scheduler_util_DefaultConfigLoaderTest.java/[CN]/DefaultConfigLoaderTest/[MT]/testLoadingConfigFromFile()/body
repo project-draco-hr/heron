@@ -1,0 +1,18 @@
+{
+  final File temp=File.createTempFile("temp",Long.toString(System.nanoTime()));
+  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(temp)));
+  int numLines=10;
+  for (int i=0; i < numLines; ++i) {
+    writer.write(String.format("key%d=value%d",i,i));
+    writer.newLine();
+  }
+  writer.flush();
+  writer.close();
+  temp.deleteOnExit();
+  DefaultConfigLoader configLoader=DefaultConfigLoader.class.newInstance();
+  Assert.assertTrue(configLoader.load(temp.getAbsolutePath(),""));
+  for (int i=0; i < numLines; ++i) {
+    Assert.assertEquals("value" + i,configLoader.properties.getProperty("key" + i));
+  }
+  Assert.assertTrue(configLoader.properties.containsKey(Constants.HERON_VERBOSE));
+}

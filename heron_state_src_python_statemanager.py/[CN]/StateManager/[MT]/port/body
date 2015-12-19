@@ -1,0 +1,4 @@
+@property
+def port(self):
+    '\n    Getter for the port if the state is available on a\n    different host.\n    '
+    return self.__port

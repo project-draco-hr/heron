@@ -1,0 +1,4 @@
+{
+  String word=toSend[(emitted++) % toSend.length];
+  collector.emit(new Values(word));
+}

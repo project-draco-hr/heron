@@ -1,0 +1,2 @@
+def discover_timestamp():
+    return subprocess.check_output('date', shell=True).strip('\n')

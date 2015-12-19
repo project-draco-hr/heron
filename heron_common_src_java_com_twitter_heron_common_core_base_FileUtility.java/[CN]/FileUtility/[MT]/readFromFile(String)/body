@@ -1,0 +1,12 @@
+{
+  Path path=new File(filename).toPath();
+  byte[] res;
+  try {
+    res=Files.readAllBytes(path);
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to read from file. ",e);
+    res=new byte[0];
+  }
+  return res;
+}

@@ -1,0 +1,4 @@
+String streamId
+List<Integer> taskIds
+CustomStreamGrouping grouping
+String sourceComponentName

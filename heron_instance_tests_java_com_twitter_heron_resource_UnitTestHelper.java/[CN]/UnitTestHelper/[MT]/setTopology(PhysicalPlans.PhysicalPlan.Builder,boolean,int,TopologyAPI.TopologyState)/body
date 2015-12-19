@@ -1,0 +1,23 @@
+{
+  TopologyBuilder topologyBuilder=new TopologyBuilder();
+  topologyBuilder.setSpout("test-spout",new TestSpout(),1);
+  topologyBuilder.setBolt("test-bolt",new TestBolt(),1).shuffleGrouping("test-spout");
+  Config conf=new Config();
+  conf.setTeamEmail("streaming-compute@twitter.com");
+  conf.setTeamName("stream-computing");
+  conf.setTopologyProjectName("heron-integration-test");
+  conf.setNumStmgrs(1);
+  conf.setMaxSpoutPending(100);
+  if (ackEnabled) {
+    conf.setEnableAcking(true);
+  }
+ else {
+    conf.setEnableAcking(false);
+  }
+  if (messageTimeout != -1) {
+    conf.setMessageTimeoutSecs(messageTimeout);
+    conf.put("topology.enable.message.timeouts","true");
+  }
+  TopologyAPI.Topology fTopology=topologyBuilder.createTopology().setName("topology-name").setConfig(conf).setState(topologyState).getTopology();
+  pPlan.setTopology(fTopology);
+}

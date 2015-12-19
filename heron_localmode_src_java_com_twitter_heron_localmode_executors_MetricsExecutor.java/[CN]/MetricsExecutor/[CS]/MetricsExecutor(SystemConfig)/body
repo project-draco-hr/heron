@@ -1,0 +1,7 @@
+{
+  instanceExecutors=new LinkedList<>();
+  looper=createWakeableLooper();
+  this.metricsQueue=new Communicator<Metrics.MetricPublisherPublishMessage>(null,this.looper);
+  this.metricsCollector=new MetricsCollector(this.looper,metricsQueue);
+  this.systemConfig=systemConfig;
+}

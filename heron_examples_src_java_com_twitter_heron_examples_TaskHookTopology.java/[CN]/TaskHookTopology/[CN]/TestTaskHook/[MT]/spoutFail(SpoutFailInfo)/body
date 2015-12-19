@@ -1,0 +1,10 @@
+{
+  GlobalMetrics.incr("hook_spoutFail");
+  ++spoutFailed;
+  if (spoutFailed % N == 0) {
+    System.out.println("spoutFail() is invoked in hook");
+    System.out.println(info.getFailLatencyMs());
+    System.out.println(info.getMessageId());
+    System.out.println(info.getSpoutTaskId());
+  }
+}

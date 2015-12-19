@@ -1,0 +1,18 @@
+{
+  if (current == null || current.hasControl() || !current.getDataBuilder().getStream().getComponentName().equals(streamId.getComponentName()) || !current.getDataBuilder().getStream().getId().equals(streamId.getId())) {
+    if (current != null) {
+      tuples.add(current.build());
+    }
+    current=HeronTuples.HeronTupleSet.newBuilder();
+    current.getDataBuilder().setStream(streamId);
+  }
+  long tupleKey=-1;
+  if (isAnchored) {
+    tupleKey=random.nextLong();
+    current.getDataBuilder().addTuples(HeronTuples.HeronDataTuple.newBuilder().mergeFrom(tuple).setKey(tupleKey));
+  }
+ else {
+    current.getDataBuilder().addTuples(tuple);
+  }
+  return tupleKey;
+}

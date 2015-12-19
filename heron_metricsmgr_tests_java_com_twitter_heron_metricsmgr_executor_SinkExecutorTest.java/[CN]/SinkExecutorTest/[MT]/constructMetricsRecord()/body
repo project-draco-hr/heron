@@ -1,0 +1,18 @@
+{
+  List<MetricsInfo> metricsInfos=new ArrayList<MetricsInfo>();
+  for (int i=0; i < N; i++) {
+    MetricsInfo metricsInfo=new MetricsInfo(METRICS_NAME + i,METRICS_VALUE + i);
+    metricsInfos.add(metricsInfo);
+  }
+  List<ExceptionInfo> exceptionInfos=new ArrayList<ExceptionInfo>();
+  for (int i=0; i < N; i++) {
+    String stackTrace=EXCEPTION_STACK_TRACE + i;
+    String lastTime=EXCEPTION_LAST_TIME + i;
+    String firstTime=EXCEPTION_FIRST_TIME + i;
+    int count=i;
+    String logging=EXCEPTION_LOGGING + i;
+    ExceptionInfo info=new ExceptionInfo(stackTrace,lastTime,firstTime,count,logging);
+    exceptionInfos.add(info);
+  }
+  return new MetricsRecord(RECORD_SOURCE,metricsInfos,exceptionInfos,RECORD_CONTEXT);
+}

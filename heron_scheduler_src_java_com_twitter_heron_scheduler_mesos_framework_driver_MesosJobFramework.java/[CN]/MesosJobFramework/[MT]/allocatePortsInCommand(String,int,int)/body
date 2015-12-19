@@ -1,0 +1,18 @@
+{
+  String result=originalCommand;
+  Matcher matcher=portVariablePattern.matcher(result);
+  Set<String> matchedPortNames=new HashSet<>();
+  while (matcher.find()) {
+    matchedPortNames.add(matcher.group(0));
+  }
+  LOG.info("The matchedPortNames: \n" + matchedPortNames);
+  LOG.info("The port range: " + portRangeStart + " ~ "+ portRangeEnd);
+  for (  String name : matchedPortNames) {
+    if (portRangeStart > portRangeEnd) {
+      throw new RuntimeException("The command requires more ports than expected: " + originalCommand);
+    }
+    result=result.replace(name,"" + portRangeStart);
+    portRangeStart++;
+  }
+  return result;
+}

@@ -1,0 +1,15 @@
+{
+  TopologyContextImpl topologyContext=helper.getTopologyContext();
+  try {
+    GlobalMetrics.init(topologyContext,systemConfig.getHeronMetricsExportIntervalSec());
+  }
+ catch (  RuntimeException e) {
+    LOG.log(Level.SEVERE,"Failed to initialize GlobalMetrics. Global Metrics will be lost." + "Check the version of heron-api used.",e);
+  }
+  spoutMetrics.registerMetrics(topologyContext);
+  spout.open(topologyContext.getTopologyConfig(),topologyContext,new SpoutOutputCollector(collector));
+  topologyContext.invokeHookPrepare();
+  helper.prepareForCustomStreamGrouping(topologyContext);
+  addSpoutsTasks();
+  topologyState=TopologyAPI.TopologyState.RUNNING;
+}

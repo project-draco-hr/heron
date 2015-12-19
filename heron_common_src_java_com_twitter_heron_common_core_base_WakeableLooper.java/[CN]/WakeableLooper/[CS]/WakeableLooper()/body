@@ -1,0 +1,6 @@
+{
+  exitLoop=false;
+  tasksOnWakeup=new ArrayList<Runnable>();
+  timers=new PriorityQueue<TimerTask>();
+  exitTasks=new ArrayList<>();
+}

@@ -1,0 +1,7 @@
+{
+  Assert.assertTrue(communicator.isEmpty());
+  communicator.offer(1);
+  Assert.assertFalse(communicator.isEmpty());
+  communicator.poll();
+  Assert.assertTrue(communicator.isEmpty());
+}

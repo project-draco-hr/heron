@@ -1,0 +1,17 @@
+{
+  PackingPlan.Resource resource=new PackingPlan.Resource(1.0,1 * Constants.GB,10 * Constants.GB);
+  Map<String,PackingPlan.ContainerPlan> containerPlanMap=new HashMap<>();
+  for (  Map.Entry<String,List<String>> entry : basePacking.entrySet()) {
+    String containerId=entry.getKey();
+    List<String> instanceList=entry.getValue();
+    Map<String,PackingPlan.InstancePlan> instancePlanMap=new HashMap<>();
+    for (    String instanceId : instanceList) {
+      String componentName=instanceId.split(":")[1];
+      PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,componentName,resource);
+      instancePlanMap.put(instanceId,instancePlan);
+    }
+    PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlanMap,resource);
+    containerPlanMap.put(containerId,containerPlan);
+  }
+  return new PackingPlan("",containerPlanMap,resource);
+}

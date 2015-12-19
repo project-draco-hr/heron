@@ -1,0 +1,10 @@
+{
+  GlobalMetrics.incr("hook_boltFail");
+  ++boltFailed;
+  if (boltFailed % N == 0) {
+    System.out.println("boltFail() is invoked in hook");
+    System.out.println(info.getFailingTaskId());
+    System.out.println(info.getFailLatencyMs());
+    System.out.println(info.getTuple());
+  }
+}

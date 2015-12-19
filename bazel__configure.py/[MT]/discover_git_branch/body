@@ -1,0 +1,2 @@
+def discover_git_branch():
+    return subprocess.check_output('git rev-parse --abbrev-ref HEAD', shell=True).strip('\n')

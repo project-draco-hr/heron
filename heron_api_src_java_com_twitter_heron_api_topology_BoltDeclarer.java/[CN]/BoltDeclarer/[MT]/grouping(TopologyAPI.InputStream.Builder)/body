@@ -1,0 +1,4 @@
+{
+  inputs.add(stream);
+  return this;
+}

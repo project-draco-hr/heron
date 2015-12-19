@@ -1,0 +1,17 @@
+{
+  UnitTestHelper.clearSingletonRegistry();
+  slaveLooper.exitLoop();
+  testLooper.exitLoop();
+  tupleReceived=0;
+  heronDataTupleList=new ArrayList<HeronTuples.HeronDataTuple>();
+  ackCount=new AtomicInteger(0);
+  failCount=new AtomicInteger(0);
+  threadsPool.shutdownNow();
+  physicalPlan=null;
+  testLooper=null;
+  slaveLooper=null;
+  outStreamQueue=null;
+  inStreamQueue=null;
+  slave=null;
+  threadsPool=null;
+}

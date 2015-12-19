@@ -1,0 +1,5 @@
+{
+  registerOnRequest(Metrics.MetricPublisherRegisterRequest.newBuilder());
+  registerOnMessage(Metrics.MetricPublisherPublishMessage.newBuilder());
+  registerOnMessage(Metrics.TMasterLocationRefreshMessage.newBuilder());
+}

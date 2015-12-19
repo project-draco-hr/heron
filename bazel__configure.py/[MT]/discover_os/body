@@ -1,0 +1,2 @@
+def discover_os():
+    return subprocess.check_output('uname -s', shell=True).strip('\n')

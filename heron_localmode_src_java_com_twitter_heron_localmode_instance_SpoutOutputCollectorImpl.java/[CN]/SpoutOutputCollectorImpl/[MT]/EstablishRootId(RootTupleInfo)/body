@@ -1,0 +1,8 @@
+{
+  long rootId=keyGenerator.next();
+  HeronTuples.RootId.Builder rtbldr=HeronTuples.RootId.newBuilder();
+  rtbldr.setTaskid(helper.getMyTaskId());
+  rtbldr.setKey(rootId);
+  inFlightTuples.put(rootId,tupleInfo);
+  return rtbldr;
+}

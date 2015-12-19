@@ -1,0 +1,22 @@
+{
+  HeronTuples.HeronTupleSet.Builder bldr=HeronTuples.HeronTupleSet.newBuilder();
+  HeronTuples.HeronControlTupleSet.Builder controlTupleSet=HeronTuples.HeronControlTupleSet.newBuilder();
+  for (int i=0; i < heronDataTupleList.size() / 2; i++) {
+    HeronTuples.AckTuple.Builder ackBuilder=HeronTuples.AckTuple.newBuilder();
+    ackBuilder.setAckedtuple(heronDataTupleList.get(i).getKey());
+    for (    HeronTuples.RootId rt : heronDataTupleList.get(i).getRootsList()) {
+      ackBuilder.addRoots(rt);
+    }
+    controlTupleSet.addAcks(ackBuilder);
+  }
+  for (int i=heronDataTupleList.size() / 2; i < heronDataTupleList.size(); i++) {
+    HeronTuples.AckTuple.Builder ackBuilder=HeronTuples.AckTuple.newBuilder();
+    ackBuilder.setAckedtuple(heronDataTupleList.get(i).getKey());
+    for (    HeronTuples.RootId rt : heronDataTupleList.get(i).getRootsList()) {
+      ackBuilder.addRoots(rt);
+    }
+    controlTupleSet.addFails(ackBuilder);
+  }
+  bldr.setControl(controlTupleSet);
+  inStreamQueue.offer(bldr.build());
+}

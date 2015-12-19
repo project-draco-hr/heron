@@ -1,0 +1,4 @@
+{
+  isExpectNoMoreItems=true;
+  informProducer();
+}

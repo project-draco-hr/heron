@@ -1,0 +1,3 @@
+{
+  setComponentJvmOptions(this,component,jvmOptions);
+}

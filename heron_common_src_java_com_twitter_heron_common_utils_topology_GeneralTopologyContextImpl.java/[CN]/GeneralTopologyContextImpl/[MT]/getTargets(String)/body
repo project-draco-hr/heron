@@ -1,0 +1,19 @@
+{
+  Map<String,Map<String,TopologyAPI.Grouping>> retVal=new HashMap<String,Map<String,TopologyAPI.Grouping>>();
+  if (!outputs.containsKey(componentId)) {
+    return retVal;
+  }
+  for (  TopologyAPI.OutputStream ostream : outputs.get(componentId)) {
+    Map<String,TopologyAPI.Grouping> targetMap=new HashMap<String,TopologyAPI.Grouping>();
+    for (    Map.Entry<String,List<TopologyAPI.InputStream>> e : inputs.entrySet()) {
+      String targetComponentId=e.getKey();
+      for (      TopologyAPI.InputStream is : e.getValue()) {
+        if (areStreamsEqual(ostream.getStream(),is.getStream())) {
+          targetMap.put(targetComponentId,is.getGtype());
+        }
+      }
+    }
+    retVal.put(ostream.getStream().getId(),targetMap);
+  }
+  return retVal;
+}

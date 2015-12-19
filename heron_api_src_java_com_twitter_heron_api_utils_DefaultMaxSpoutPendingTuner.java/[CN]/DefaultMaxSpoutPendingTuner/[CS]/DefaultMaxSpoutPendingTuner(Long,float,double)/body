@@ -1,0 +1,17 @@
+{
+  if (maxSpoutPending == null) {
+    adjustedMaxSpoutPending=CONSERVATIVE_MAX_SPOUT_PENDING;
+  }
+ else {
+    adjustedMaxSpoutPending=maxSpoutPending;
+  }
+  initialMaxSpoutPending=adjustedMaxSpoutPending;
+  prevProgress=new Long(-1);
+  restoreAdjustedMaxSpoutPending=adjustedMaxSpoutPending;
+  restoreProgress=new Long(-1);
+  lastAction=ACTION.NOOP;
+  callsInNoop=0;
+  this.autoTuneFactor=autoTuneFactor;
+  this.progressBound=progressBound;
+  speculativeAction=ACTION.INCREASE;
+}

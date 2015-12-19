@@ -1,0 +1,4 @@
+{
+  serializer=new KryoSerializer();
+  serializer.initialize(null);
+}

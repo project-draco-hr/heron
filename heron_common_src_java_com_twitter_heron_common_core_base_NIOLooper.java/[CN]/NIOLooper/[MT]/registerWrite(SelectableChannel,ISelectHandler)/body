@@ -1,0 +1,3 @@
+{
+  addInterest(channel,SelectionKey.OP_WRITE,callback);
+}

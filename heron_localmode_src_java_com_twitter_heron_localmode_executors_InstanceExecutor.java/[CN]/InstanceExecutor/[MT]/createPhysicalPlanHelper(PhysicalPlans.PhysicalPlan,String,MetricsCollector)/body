@@ -1,0 +1,5 @@
+{
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,instanceId);
+  physicalPlanHelper.setTopologyContext(metricsCollector);
+  return physicalPlanHelper;
+}

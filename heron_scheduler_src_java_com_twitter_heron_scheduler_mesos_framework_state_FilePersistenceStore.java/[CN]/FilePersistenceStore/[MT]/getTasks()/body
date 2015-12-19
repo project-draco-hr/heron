@@ -1,0 +1,19 @@
+{
+  LOG.info("Get all Tasks");
+  File[] files=getFilesInDir(taskPath);
+  Map<String,BaseTask> tasks=new HashMap<>();
+  for (  File file : files) {
+    byte[] res;
+    try {
+      res=Files.readAllBytes(file.toPath());
+    }
+ catch (    IOException e) {
+      throw new RuntimeException("Failed to read from file. ",e);
+    }
+    String taskDefinitionInJSON=new String(res);
+    LOG.info("Def: " + taskDefinitionInJSON);
+    BaseTask task=BaseTask.getTaskFromJSONString(taskDefinitionInJSON);
+    tasks.put(TaskUtils.getJobNameForTaskId(task.taskId),task);
+  }
+  return tasks;
+}

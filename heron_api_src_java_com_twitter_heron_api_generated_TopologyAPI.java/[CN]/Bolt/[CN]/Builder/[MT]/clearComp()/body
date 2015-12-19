@@ -1,0 +1,11 @@
+{
+  if (compBuilder_ == null) {
+    comp_=com.twitter.heron.api.generated.TopologyAPI.Component.getDefaultInstance();
+    onChanged();
+  }
+ else {
+    compBuilder_.clear();
+  }
+  bitField0_=(bitField0_ & ~0x00000001);
+  return this;
+}

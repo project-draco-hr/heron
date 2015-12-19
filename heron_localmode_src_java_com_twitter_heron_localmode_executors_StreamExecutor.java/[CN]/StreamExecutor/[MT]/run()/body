@@ -1,0 +1,6 @@
+{
+  Thread.currentThread().setName("LocalMode_Stream_Executor");
+  LOG.info("Stream_Executor starts");
+  addStreamExecutorTasks();
+  looper.loop();
+}

@@ -1,0 +1,3 @@
+boolean ackEnabled
+int messageTimeout
+TopologyAPI.TopologyState topologyState

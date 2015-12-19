@@ -1,0 +1,21 @@
+{
+  try {
+    if (socketChannel.finishConnect()) {
+      nioLooper.unregisterConnect(channel);
+    }
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to FinishConnect to endpoint: " + endpoint,e);
+    Runnable r=new Runnable(){
+      public void run(){
+        onConnect(StatusCode.CONNECT_ERROR);
+      }
+    }
+;
+    nioLooper.registerTimerEventInSeconds(0,r);
+    return;
+  }
+  socketChannelHelper=new SocketChannelHelper(nioLooper,this,socketChannel,socketOptions);
+  isConnected=true;
+  onConnect(StatusCode.OK);
+}

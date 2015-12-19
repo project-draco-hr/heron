@@ -1,0 +1,11 @@
+{
+  if (schemaBuilder_ == null) {
+    schema_=builderForValue.build();
+    onChanged();
+  }
+ else {
+    schemaBuilder_.setMessage(builderForValue.build());
+  }
+  bitField0_|=0x00000002;
+  return this;
+}

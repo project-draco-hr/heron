@@ -1,0 +1,5 @@
+{
+  LOG.info("Spout is deactivated");
+  spout.deactivate();
+  topologyState=TopologyAPI.TopologyState.PAUSED;
+}

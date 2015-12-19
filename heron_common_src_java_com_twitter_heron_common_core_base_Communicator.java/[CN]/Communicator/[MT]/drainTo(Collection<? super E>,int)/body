@@ -1,0 +1,7 @@
+{
+  int result=buffer.drainTo(c,maxElements);
+  if (producer != null) {
+    producer.wakeUp();
+  }
+  return result;
+}

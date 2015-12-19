@@ -1,0 +1,3 @@
+{
+  return getSpoutsFieldBuilder().addBuilder(com.twitter.heron.api.generated.TopologyAPI.Spout.getDefaultInstance());
+}

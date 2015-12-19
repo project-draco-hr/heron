@@ -1,0 +1,9 @@
+def create_mock_spout(self, spout_name, output_streams, spout_parallelism):
+    spout = protoTopology.Spout()
+    spout.comp.name = spout_name
+    kv = spout.comp.config.kvs.add()
+    kv.key = constants.TOPOLOGY_COMPONENT_PARALLELISM
+    kv.value = str(spout_parallelism)
+    for stream in output_streams:
+        spout.outputs.add().stream.CopyFrom(stream)
+    return spout

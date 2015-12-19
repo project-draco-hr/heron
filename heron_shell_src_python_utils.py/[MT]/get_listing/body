@@ -1,0 +1,7 @@
+def get_listing(path):
+    '\n  Returns the list of files and directories in a path.\n  Prepents a ".." (parent directory link) if path is not current dir.\n  '
+    if (path != '.'):
+        listing = sorted((['..'] + os.listdir(path)))
+    else:
+        listing = sorted(os.listdir(path))
+    return listing

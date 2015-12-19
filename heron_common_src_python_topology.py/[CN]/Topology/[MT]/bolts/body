@@ -1,0 +1,5 @@
+def bolts(self):
+    '\n    Returns a list of Bolt (proto) messages\n    '
+    if self.physical_plan:
+        return list(self.physical_plan.topology.bolts)
+    return []

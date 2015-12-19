@@ -1,0 +1,24 @@
+def _read_value(self, field_type, ident, name=''):
+    if (len(field_type) > 1):
+        field_type = field_type[0]
+    if (field_type == self.TYPE_BOOLEAN):
+        (val,) = self._readStruct('>B')
+        res = bool(val)
+    elif (field_type == self.TYPE_BYTE):
+        (res,) = self._readStruct('>b')
+    elif (field_type == self.TYPE_SHORT):
+        (res,) = self._readStruct('>h')
+    elif (field_type == self.TYPE_INTEGER):
+        (res,) = self._readStruct('>i')
+    elif (field_type == self.TYPE_LONG):
+        (res,) = self._readStruct('>q')
+    elif (field_type == self.TYPE_FLOAT):
+        (res,) = self._readStruct('>f')
+    elif (field_type == self.TYPE_DOUBLE):
+        (res,) = self._readStruct('>d')
+    elif ((field_type == self.TYPE_OBJECT) or (field_type == self.TYPE_ARRAY)):
+        (opcode, res) = self._read_and_exec_opcode(ident=(ident + 1))
+    else:
+        raise RuntimeError(('Unknown typecode: %s' % field_type))
+    log_debug((('* %s %s: ' % (field_type, name)) + str(res)), ident)
+    return res

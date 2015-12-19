@@ -1,0 +1,29 @@
+from __future__ import print_function
+import os
+import sys
+import json
+import shutil
+import tempfile
+import optparse
+import zipfile
+if (not zipfile.is_zipfile(sys.argv[0])):
+    sys.modules.pop('twitter', None)
+    sys.modules.pop('twitter.common', None)
+    sys.modules.pop('twitter.common.python', None)
+    root = os.path.join(os.sep.join(__file__.split(os.sep)[:(-6)]), '3rdparty/pex/_pex.runfiles/3rdparty')
+    sys.path.insert(0, os.path.join(root, 'pex'))
+    sys.path.insert(0, os.path.join(root, 'setuptools'))
+    setuptools_py = os.path.join(root, 'setuptools')
+    pkg_resources_py = os.path.join(root, 'setuptools/pkg_resources.py')
+else:
+    with open(os.path.join(tempfile.mkdtemp(dir='/tmp'), 'abc.txt'), 'w') as foo:
+        foo.write(sys.argv[0])
+        foo.write(zipfile.is_zipfile(sys.argv[0]))
+    import pkg_resources
+    pkg_resources_py_tmp = tempfile.NamedTemporaryFile(prefix='pkg_resources.py')
+    pkg_resources_py_tmp.write(pkg_resources.resource_string(__name__, 'pkg_resources.py'))
+    pkg_resources_py_tmp.flush()
+    pkg_resources_py = pkg_resources_py_tmp.name
+from pex.pex_builder import PEXBuilder
+from pex.interpreter import PythonInterpreter
+sys.exit(main())

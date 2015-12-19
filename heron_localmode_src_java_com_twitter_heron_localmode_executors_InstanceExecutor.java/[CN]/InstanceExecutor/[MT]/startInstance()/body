@@ -1,0 +1,5 @@
+{
+  instance.start();
+  isInstanceStarted=true;
+  LOG.info("Started instance.");
+}

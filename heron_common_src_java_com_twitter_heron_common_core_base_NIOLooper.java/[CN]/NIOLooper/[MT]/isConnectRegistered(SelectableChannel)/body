@@ -1,0 +1,3 @@
+{
+  return isInterestRegistered(channel,SelectionKey.OP_CONNECT);
+}

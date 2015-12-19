@@ -1,0 +1,8 @@
+{
+  if (taskHooks.size() != 0) {
+    BoltFailInfo failInfo=new BoltFailInfo(tuple,getThisTaskId(),failLatencyNs / Constants.MILLISECONDS_TO_NANOSECONDS);
+    for (    ITaskHook taskHook : taskHooks) {
+      taskHook.boltFail(failInfo);
+    }
+  }
+}

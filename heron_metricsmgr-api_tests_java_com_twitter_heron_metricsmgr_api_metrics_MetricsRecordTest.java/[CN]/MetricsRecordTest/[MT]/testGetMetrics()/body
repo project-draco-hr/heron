@@ -1,0 +1,9 @@
+{
+  int items=0;
+  for (int i=0; i < N; i++) {
+    for (    MetricsInfo info : records.get(i).getMetrics()) {
+      items++;
+    }
+  }
+  Assert.assertTrue(items == 0);
+}

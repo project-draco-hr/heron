@@ -1,0 +1,16 @@
+{
+  if (args.length != 1) {
+    throw new RuntimeException("Please specify the name of the topology");
+  }
+  TopologyBuilder builder=new TopologyBuilder();
+  builder.setSpout("word",new AckingTestWordSpout(),2);
+  builder.setBolt("exclaim1",new ExclamationBolt(true),2).shuffleGrouping("word");
+  builder.setBolt("exclaim2",new ExclamationBolt(false),2).shuffleGrouping("exclaim1");
+  Config conf=new Config();
+  conf.setDebug(true);
+  conf.setMaxSpoutPending(1000 * 1000 * 1000);
+  conf.setEnableAcking(true);
+  conf.put(Config.TOPOLOGY_WORKER_CHILDOPTS,"-XX:+HeapDumpOnOutOfMemoryError");
+  conf.setNumStmgrs(1);
+  HeronSubmitter.submitTopology(args[0],conf,builder.createTopology());
+}

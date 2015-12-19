@@ -1,0 +1,3 @@
+{
+  return ExecutionEnvironment.ExecutionState.newBuilder().setRole(role).setDc(dc).setEnviron(environ).setTopologyId(topologyName).setTopologyName(topologyName).build();
+}

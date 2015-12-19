@@ -1,0 +1,29 @@
+def extract_logical_plan(self, topology):
+    '\n    Returns the representation of logical plan that will\n    be returned from Tracker.\n    '
+    logicalPlan = {'spouts': {}, 'bolts': {}, }
+    for spout in topology.spouts():
+        spoutName = spout.comp.name
+        spoutType = 'default'
+        spoutSource = 'NA'
+        spoutVersion = 'NA'
+        spoutConfigs = spout.comp.config.kvs
+        for kvs in spoutConfigs:
+            if (kvs.key == 'spout.type'):
+                spoutType = kvs.value
+            elif (kvs.key == 'spout.source'):
+                spoutSource = kvs.value
+            elif (kvs.key == 'spout.version'):
+                spoutVersion = kvs.value
+        spoutPlan = {'type': spoutType, 'source': spoutSource, 'version': spoutVersion, 'outputs': [], }
+        for outputStream in list(spout.outputs):
+            spoutPlan['outputs'].append({'stream_name': outputStream.stream.id, })
+        logicalPlan['spouts'][spoutName] = spoutPlan
+    for bolt in topology.bolts():
+        boltName = bolt.comp.name
+        boltPlan = {'outputs': [], 'inputs': [], }
+        for outputStream in list(bolt.outputs):
+            boltPlan['outputs'].append({'stream_name': outputStream.stream.id, })
+        for inputStream in list(bolt.inputs):
+            boltPlan['inputs'].append({'stream_name': inputStream.stream.id, 'component_name': inputStream.stream.component_name, 'grouping': topology_pb2.Grouping.Name(inputStream.gtype), })
+        logicalPlan['bolts'][boltName] = boltPlan
+    return logicalPlan

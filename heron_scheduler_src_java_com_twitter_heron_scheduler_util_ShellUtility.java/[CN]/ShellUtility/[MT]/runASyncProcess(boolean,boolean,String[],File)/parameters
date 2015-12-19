@@ -1,0 +1,4 @@
+boolean verbose
+boolean isInheritIO
+String[] command
+File workingDirectory

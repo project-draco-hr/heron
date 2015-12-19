@@ -1,0 +1,11 @@
+{
+  LOG.info("Remove frameworkId: " + frameworkIdPath);
+  try {
+    Files.deleteIfExists(new File(frameworkIdPath).toPath());
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to remove frameworkID",e);
+    return false;
+  }
+  return true;
+}

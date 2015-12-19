@@ -1,0 +1,21 @@
+{
+  tuplesReceived++;
+  String streamID=tuple.getSourceStreamId();
+  LOG.fine("Received a tuple: " + tuple + " ; from: "+ streamID);
+  if (streamID.equals(Constants.INTEGRATION_TEST_CONTROL_STREAM_ID)) {
+    terminalsToReceive--;
+    if (terminalsToReceive == 0) {
+      if (IBatchBolt.class.isInstance(delegateBolt)) {
+        LOG.fine("Invoke bolt to do finishBatch!");
+        ((IBatchBolt)delegateBolt).finishBatch();
+      }
+      LOG.info("Populating the terminals to downstream");
+      collector.emit(Constants.INTEGRATION_TEST_CONTROL_STREAM_ID,tuple,new Values(Constants.INTEGRATION_TEST_TERMINAL));
+    }
+  }
+ else {
+    currentTupleProcessing=tuple;
+    delegateBolt.execute(tuple);
+    collector.ack(tuple);
+  }
+}

@@ -1,0 +1,6 @@
+{
+  _collector=collector;
+  words=new String[]{"nathan","mike","jackson","golda","bertels"};
+  rand=new Random();
+  context.addTaskHook(new TestTaskHook("This TestTaskHook is constructed by AckingTestWordSpout"));
+}

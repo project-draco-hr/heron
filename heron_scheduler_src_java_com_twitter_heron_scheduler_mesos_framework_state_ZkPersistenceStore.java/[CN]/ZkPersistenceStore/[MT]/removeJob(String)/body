@@ -1,0 +1,11 @@
+{
+  LOG.info("Remove Job: " + jobName);
+  try {
+    client.delete().forPath(jobPath + "/" + jobName);
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to delete job",e);
+    return false;
+  }
+  return true;
+}

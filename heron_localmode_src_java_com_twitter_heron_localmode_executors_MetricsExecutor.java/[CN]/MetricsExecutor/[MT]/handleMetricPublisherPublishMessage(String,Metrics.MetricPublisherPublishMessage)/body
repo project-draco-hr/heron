@@ -1,0 +1,3 @@
+{
+  LOG.info(String.format("Metrics from %s at time %s:\n%s",instanceId,System.currentTimeMillis(),message.toString()));
+}

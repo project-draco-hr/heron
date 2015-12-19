@@ -1,0 +1,14 @@
+{
+  UnitTestHelper.addSystemConfigToSingleton();
+  slaveLooper=new SlaveLooper();
+  outStreamQueue=new Communicator<HeronTuples.HeronTupleSet>(slaveLooper,null);
+  outStreamQueue.init(Constants.QUEUE_BUFFER_SIZE,Constants.QUEUE_BUFFER_SIZE,0.5);
+  inStreamQueue=new Communicator<HeronTuples.HeronTupleSet>(null,slaveLooper);
+  inStreamQueue.init(Constants.QUEUE_BUFFER_SIZE,Constants.QUEUE_BUFFER_SIZE,0.5);
+  slaveMetricsOut=new Communicator<Metrics.MetricPublisherPublishMessage>(slaveLooper,null);
+  slaveMetricsOut.init(Constants.QUEUE_BUFFER_SIZE,Constants.QUEUE_BUFFER_SIZE,0.5);
+  inControlQueue=new Communicator<InstanceControlMsg>(null,slaveLooper);
+  slave=new Slave(slaveLooper,inStreamQueue,outStreamQueue,inControlQueue,slaveMetricsOut);
+  threadsPool=Executors.newSingleThreadExecutor();
+  threadsPool.execute(slave);
+}

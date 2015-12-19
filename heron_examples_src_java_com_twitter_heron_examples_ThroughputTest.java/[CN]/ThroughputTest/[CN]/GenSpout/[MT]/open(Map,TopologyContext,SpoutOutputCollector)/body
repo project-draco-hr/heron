@@ -1,0 +1,6 @@
+{
+  _collector=collector;
+  _rand=new Random();
+  _id=randString(5);
+  _val=randString(_size);
+}

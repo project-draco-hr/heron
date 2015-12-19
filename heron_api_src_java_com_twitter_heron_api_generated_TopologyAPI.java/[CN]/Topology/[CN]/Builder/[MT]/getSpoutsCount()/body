@@ -1,0 +1,8 @@
+{
+  if (spoutsBuilder_ == null) {
+    return spouts_.size();
+  }
+ else {
+    return spoutsBuilder_.getCount();
+  }
+}

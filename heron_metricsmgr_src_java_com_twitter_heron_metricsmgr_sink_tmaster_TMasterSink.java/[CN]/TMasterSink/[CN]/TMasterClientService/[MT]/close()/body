@@ -1,0 +1,4 @@
+{
+  tMasterClient.getNIOLooper().exitLoop();
+  tmasterClientExecutor.shutdownNow();
+}

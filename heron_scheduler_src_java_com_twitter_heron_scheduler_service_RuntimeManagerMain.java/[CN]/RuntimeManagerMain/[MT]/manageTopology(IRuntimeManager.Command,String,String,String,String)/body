@@ -1,0 +1,14 @@
+{
+  IConfigLoader commandConfig=Factory.makeConfigLoader(commandConfigLoader);
+  LOG.info("Config to override in RuntimeManager: " + configOverride);
+  if (!commandConfig.load(commandConfigFile,configOverride)) {
+    throw new RuntimeException("Failed to load config. File: " + commandConfigFile + " Override: "+ configOverride);
+  }
+  RuntimeManagerContext context=new RuntimeManagerContext(commandConfig,topologyName);
+  context.start();
+  IRuntimeManager runtimeManager=Factory.makeRuntimeManager(commandConfig.getRuntimeManagerClass());
+  RuntimeManagerRunner runtimeManagerRunner=new RuntimeManagerRunner(command,runtimeManager,context);
+  boolean ret=runtimeManagerRunner.call();
+  context.close();
+  return ret;
+}

@@ -1,0 +1,13 @@
+{
+  if (name == null || state == null || heronConfig == null) {
+    throw new IllegalArgumentException("Failed to build topology; missing necessary info.");
+  }
+  String topologyId=name + UUID.randomUUID().toString();
+  topologyBuilder.setId(topologyId);
+  topologyBuilder.setName(name);
+  topologyBuilder.setState(state);
+  addDefaultTopologyConfig(heronConfig);
+  heronConfig.put(Config.TOPOLOGY_NAME,name);
+  topologyBuilder.setTopologyConfig(getConfigBuilder(heronConfig));
+  return topologyBuilder.build();
+}

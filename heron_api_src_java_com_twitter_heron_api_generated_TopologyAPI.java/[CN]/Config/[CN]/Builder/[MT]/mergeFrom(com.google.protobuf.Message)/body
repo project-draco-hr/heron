@@ -1,0 +1,9 @@
+{
+  if (other instanceof com.twitter.heron.api.generated.TopologyAPI.Config) {
+    return mergeFrom((com.twitter.heron.api.generated.TopologyAPI.Config)other);
+  }
+ else {
+    super.mergeFrom(other);
+    return this;
+  }
+}

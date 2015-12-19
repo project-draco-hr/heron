@@ -1,0 +1,7 @@
+def submitTopology(heronCliPath, heronWorkingDirectory, heronCorePath, testJarPath, topologyPath, topologyName, schedulerConfigPath, configLoaderClasspath):
+    logging.info('Submitting topology')
+    splitcmd = [('%s' % heronCliPath), 'submit', ('heron.local.working.directory=%s heron.core.release.package=%s' % (heronWorkingDirectory, heronCorePath)), ('%s' % testJarPath), ('%s' % topologyPath), ('%s' % topologyName), ('%d' % len(TEST_INPUT)), ('--config-file=%s' % schedulerConfigPath), ('--config-loader=%s' % configLoaderClasspath), '--heron-verbose']
+    logging.info('Submitting topology: ')
+    logging.info(splitcmd)
+    subprocess.Popen(splitcmd)
+    logging.info('Submitted topology')

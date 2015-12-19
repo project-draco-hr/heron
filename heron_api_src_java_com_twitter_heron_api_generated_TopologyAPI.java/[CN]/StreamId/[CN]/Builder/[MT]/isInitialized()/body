@@ -1,0 +1,9 @@
+{
+  if (!hasId()) {
+    return false;
+  }
+  if (!hasComponentName()) {
+    return false;
+  }
+  return true;
+}

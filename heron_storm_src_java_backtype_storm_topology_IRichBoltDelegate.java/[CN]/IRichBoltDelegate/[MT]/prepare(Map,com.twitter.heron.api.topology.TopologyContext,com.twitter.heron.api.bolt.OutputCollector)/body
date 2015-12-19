@@ -1,0 +1,5 @@
+{
+  topologyContextImpl=new TopologyContext(context);
+  outputCollectorImpl=new OutputCollectorImpl(collector);
+  delegate.prepare(conf,topologyContextImpl,outputCollectorImpl);
+}

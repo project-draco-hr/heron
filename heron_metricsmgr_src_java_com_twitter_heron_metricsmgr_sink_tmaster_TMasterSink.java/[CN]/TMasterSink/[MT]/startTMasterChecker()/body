@@ -1,0 +1,20 @@
+{
+  final int checkIntervalSec=Utils.getInt(sinkConfig.get(KEY_TMASTER_LOCATION_CHECK_INTERVAL_SEC));
+  Runnable runnable=new Runnable(){
+    @Override public void run(){
+      TopologyMaster.TMasterLocation location=(TopologyMaster.TMasterLocation)SingletonRegistry.INSTANCE.getSingleton(TMASTER_LOCATION_BEAN_NAME);
+      if (location != null) {
+        if (currentTMasterLocation == null || !location.equals(currentTMasterLocation)) {
+          LOG.info("Update current TMasterLocation to: " + location);
+          currentTMasterLocation=location;
+          tMasterClientService.updateTMasterLocation(currentTMasterLocation);
+          tMasterClientService.startNewMasterClient();
+          sinkContext.exportCountMetric(TMASTER_LOCATION_UPDATE_COUNT,1);
+        }
+      }
+      tMasterLocationStarter.schedule(this,checkIntervalSec,TimeUnit.SECONDS);
+    }
+  }
+;
+  tMasterLocationStarter.schedule(runnable,checkIntervalSec,TimeUnit.SECONDS);
+}

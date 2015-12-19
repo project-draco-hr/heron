@@ -1,0 +1,4 @@
+{
+  metricsCollector.registerMetric(name,metric,timeBucketSizeInSecs);
+  return metric;
+}

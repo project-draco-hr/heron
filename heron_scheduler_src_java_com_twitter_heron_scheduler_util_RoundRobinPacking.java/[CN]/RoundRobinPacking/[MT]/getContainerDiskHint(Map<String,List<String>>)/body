@@ -1,0 +1,6 @@
+{
+  long defaultInstanceDisk=Long.parseLong(context.getProperty(INSTANCE_DISK_DEFAULT,Long.toString(1 * Constants.GB)));
+  long defaultContainerDisk=defaultInstanceDisk * getLargestContainerSize(packing) + DEFAULT_DISK_PADDING;
+  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
+  return Long.parseLong(TopologyUtility.getConfigWithDefault(topologyConfig,Config.TOPOLOGY_CONTAINER_DISK_REQUESTED,defaultContainerDisk + ""));
+}

@@ -1,0 +1,37 @@
+{
+  TopologyAPI.Topology topology=null;
+  ExecutionEnvironment.ExecutionState executionState=null;
+  TopologyMaster.TMasterLocation tMasterLocation=null;
+  try {
+    SchedulerStateManagerAdaptor manager=context.getStateManagerAdaptor();
+    topology=manager.getTopology().get();
+    executionState=manager.getExecutionState().get();
+    tMasterLocation=manager.getTMasterLocation().get();
+  }
+ catch (  InterruptedException|ExecutionException e) {
+    LOG.log(Level.SEVERE,"Fetch topology or execution state failed." + " Confirm that topology is running",e);
+    return false;
+  }
+  if (!verifyState(activate,executionState,topology,tMasterLocation)) {
+    LOG.severe("Check topology is running and you have permission to change it's state");
+  }
+  String controlJobName="heron-controller-" + topology.getName();
+  Map<String,String> args=new HashMap<>();
+  args.put("HERON_CONTROLLER_BINARY","heron-controller");
+  args.put("TMASTER_HOSTNAME",tMasterLocation.getHost());
+  args.put("TMASTER_CONTROLLER_PORT","" + tMasterLocation.getControllerPort());
+  args.put("TOPOLOGY_ID",topology.getId());
+  args.put("JOB_NAME",controlJobName);
+  args.put("DC",dc);
+  args.put("RUN_ROLE",role);
+  args.put("HERON_PACKAGE",context.getProperty(Constants.HERON_RELEASE_TAG,"heron-core-package"));
+  args.put("RELEASE_ROLE",context.getProperty(Constants.HERON_RELEASE_USER_NAME,"heron"));
+  args.put("VERSION",context.getProperty(Constants.HERON_RELEASE_VERSION,"live"));
+  if (activate) {
+    args.put("CONTROLLERCMD","/activate");
+  }
+ else {
+    args.put("CONTROLLERCMD","/deactivate");
+  }
+  return launchAuroraJob(args);
+}

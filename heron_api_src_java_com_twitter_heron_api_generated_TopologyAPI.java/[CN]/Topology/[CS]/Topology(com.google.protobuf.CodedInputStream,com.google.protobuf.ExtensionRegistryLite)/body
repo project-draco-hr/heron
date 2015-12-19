@@ -1,0 +1,96 @@
+{
+  initFields();
+  int mutable_bitField0_=0;
+  com.google.protobuf.UnknownFieldSet.Builder unknownFields=com.google.protobuf.UnknownFieldSet.newBuilder();
+  try {
+    boolean done=false;
+    while (!done) {
+      int tag=input.readTag();
+switch (tag) {
+case 0:
+        done=true;
+      break;
+default :
+{
+      if (!parseUnknownField(input,unknownFields,extensionRegistry,tag)) {
+        done=true;
+      }
+      break;
+    }
+case 10:
+{
+    bitField0_|=0x00000001;
+    id_=input.readBytes();
+    break;
+  }
+case 18:
+{
+  bitField0_|=0x00000002;
+  name_=input.readBytes();
+  break;
+}
+case 26:
+{
+if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+  spouts_=new java.util.ArrayList<com.twitter.heron.api.generated.TopologyAPI.Spout>();
+  mutable_bitField0_|=0x00000004;
+}
+spouts_.add(input.readMessage(com.twitter.heron.api.generated.TopologyAPI.Spout.PARSER,extensionRegistry));
+break;
+}
+case 34:
+{
+if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+bolts_=new java.util.ArrayList<com.twitter.heron.api.generated.TopologyAPI.Bolt>();
+mutable_bitField0_|=0x00000008;
+}
+bolts_.add(input.readMessage(com.twitter.heron.api.generated.TopologyAPI.Bolt.PARSER,extensionRegistry));
+break;
+}
+case 40:
+{
+int rawValue=input.readEnum();
+com.twitter.heron.api.generated.TopologyAPI.TopologyState value=com.twitter.heron.api.generated.TopologyAPI.TopologyState.valueOf(rawValue);
+if (value == null) {
+unknownFields.mergeVarintField(5,rawValue);
+}
+ else {
+bitField0_|=0x00000004;
+state_=value;
+}
+break;
+}
+case 50:
+{
+com.twitter.heron.api.generated.TopologyAPI.Config.Builder subBuilder=null;
+if (((bitField0_ & 0x00000008) == 0x00000008)) {
+subBuilder=topologyConfig_.toBuilder();
+}
+topologyConfig_=input.readMessage(com.twitter.heron.api.generated.TopologyAPI.Config.PARSER,extensionRegistry);
+if (subBuilder != null) {
+subBuilder.mergeFrom(topologyConfig_);
+topologyConfig_=subBuilder.buildPartial();
+}
+bitField0_|=0x00000008;
+break;
+}
+}
+}
+}
+ catch (com.google.protobuf.InvalidProtocolBufferException e) {
+throw e.setUnfinishedMessage(this);
+}
+catch (java.io.IOException e) {
+throw new com.google.protobuf.InvalidProtocolBufferException(e.getMessage()).setUnfinishedMessage(this);
+}
+ finally {
+if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+spouts_=java.util.Collections.unmodifiableList(spouts_);
+}
+if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+bolts_=java.util.Collections.unmodifiableList(bolts_);
+}
+this.unknownFields=unknownFields.build();
+makeExtensionsImmutable();
+}
+}

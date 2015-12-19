@@ -1,0 +1,3 @@
+{
+  LOG.info("Offer rescinded for offer:" + offerId.getValue());
+}

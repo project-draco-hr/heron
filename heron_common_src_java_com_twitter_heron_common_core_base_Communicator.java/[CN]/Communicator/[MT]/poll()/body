@@ -1,0 +1,7 @@
+{
+  E result=buffer.poll();
+  if (producer != null) {
+    producer.wakeUp();
+  }
+  return result;
+}

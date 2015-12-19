@@ -1,0 +1,3 @@
+@tornado.gen.coroutine
+def execute(self, tracker, tmaster, start, end):
+    raise Exception('Not implemented exception')

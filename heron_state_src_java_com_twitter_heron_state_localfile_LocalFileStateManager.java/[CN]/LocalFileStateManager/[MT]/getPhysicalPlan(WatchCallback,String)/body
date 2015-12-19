@@ -1,0 +1,14 @@
+{
+  SettableFuture<PhysicalPlans.PhysicalPlan> future=SettableFuture.create();
+  String path=getPhysicalPlanPath(topologyName);
+  byte[] data=FileUtility.readFromFile(path);
+  PhysicalPlans.PhysicalPlan physicalPlan;
+  try {
+    physicalPlan=PhysicalPlans.PhysicalPlan.parseFrom(data);
+    future.set(physicalPlan);
+  }
+ catch (  InvalidProtocolBufferException e) {
+    future.setException(new RuntimeException("Could not parse SchedulerLocation",e));
+  }
+  return future;
+}

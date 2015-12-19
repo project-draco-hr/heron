@@ -1,0 +1,4 @@
+{
+  tMasterClientService.updateTMasterLocation(location);
+  tMasterClientService.startNewMasterClient();
+}

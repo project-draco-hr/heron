@@ -1,0 +1,21 @@
+{
+  if (toActivate) {
+    if (!isInstanceStarted) {
+      startInstance();
+    }
+    instance.activate();
+    LOG.info("Activated instance: " + physicalPlanHelper.getMyInstanceId());
+    toActivate=false;
+  }
+  if (toDeactivate) {
+    instance.deactivate();
+    LOG.info("Deactivated instance: " + physicalPlanHelper.getMyInstanceId());
+    toDeactivate=false;
+  }
+  if (toStop) {
+    instance.stop();
+    LOG.info("Stopped instance: " + physicalPlanHelper.getMyInstanceId());
+    toStop=false;
+    return;
+  }
+}

@@ -1,0 +1,22 @@
+def test_trigger_watches(self):
+    scope = {'is_called': False, }
+
+    def callback(something):
+        scope['is_called'] = True
+    uid = self.topology.register_watch(callback)
+    self.assertTrue(scope['is_called'])
+    scope['is_called'] = False
+    self.assertFalse(scope['is_called'])
+    print scope
+    self.topology.set_physical_plan(None)
+    print scope
+    self.assertTrue(scope['is_called'])
+    print scope
+    scope['is_called'] = False
+    self.assertFalse(scope['is_called'])
+    self.topology.set_execution_state(None)
+    self.assertTrue(scope['is_called'])
+    scope['is_called'] = False
+    self.assertFalse(scope['is_called'])
+    self.topology.set_tmaster(None)
+    self.assertTrue(scope['is_called'])

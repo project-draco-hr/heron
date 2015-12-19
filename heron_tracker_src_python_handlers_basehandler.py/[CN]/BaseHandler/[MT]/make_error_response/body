@@ -1,0 +1,5 @@
+def make_error_response(self, message):
+    '\n    Makes the python dict corresponding to the\n    JSON that needs to be sent for a failed\n    response. Message is the message that is\n    sent as the reason for failure.\n    '
+    response = self.make_response(constants.RESPONSE_STATUS_FAILURE)
+    response[constants.RESPONSE_KEY_MESSAGE] = message
+    return response

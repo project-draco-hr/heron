@@ -1,0 +1,5 @@
+{
+  String testString=generateRandomLongString(1024 * 1024);
+  ByteArrayInputStream is=new ByteArrayInputStream(testString.getBytes());
+  Assert.assertEquals(testString,ShellUtility.inputstreamToString(is));
+}

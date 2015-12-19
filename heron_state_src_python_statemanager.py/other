@@ -1,0 +1,7 @@
+import abc
+import socket
+import subprocess
+HERON_EXECUTION_STATE_PREFIX = '{0}/executionstate/'
+HERON_PPLANS_PREFIX = '{0}/pplans/'
+HERON_TMASTER_PREFIX = '{0}/tmasters/'
+HERON_TOPOLOGIES_KEY = '{0}/topologies'

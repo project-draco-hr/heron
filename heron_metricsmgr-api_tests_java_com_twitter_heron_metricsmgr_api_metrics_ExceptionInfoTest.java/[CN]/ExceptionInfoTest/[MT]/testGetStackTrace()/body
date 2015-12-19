@@ -1,0 +1,5 @@
+{
+  for (int i=0; i < N; i++) {
+    Assert.assertTrue(exceptionInfos.get(i).getStackTrace().equals(STACK_TRACE + i));
+  }
+}

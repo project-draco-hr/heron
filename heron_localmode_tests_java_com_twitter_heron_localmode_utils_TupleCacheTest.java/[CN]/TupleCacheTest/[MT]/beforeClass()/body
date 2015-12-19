@@ -1,0 +1,10 @@
+{
+  destTaskIds=new ArrayList<>();
+  for (int i=0; i < N; i++) {
+    destTaskIds.add(i);
+  }
+  dataTuple=HeronTuples.HeronDataTuple.getDefaultInstance();
+  ackTuple=HeronTuples.AckTuple.newBuilder().setAckedtuple(0).build();
+  stream0=TopologyAPI.StreamId.newBuilder().setComponentName("0").setId("0").build();
+  stream1=TopologyAPI.StreamId.newBuilder().setComponentName("1").setId("1").build();
+}

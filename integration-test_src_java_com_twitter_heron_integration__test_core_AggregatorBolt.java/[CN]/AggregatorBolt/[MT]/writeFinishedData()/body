@@ -1,0 +1,17 @@
+{
+  String resultJson=result.toString();
+  LOG.info("Actual result: " + resultJson);
+  LOG.info("Posting actual result to " + httpPostUrl);
+  try {
+    int responseCode=postResultToHttpServer(httpPostUrl,resultJson);
+    if (responseCode != 200) {
+      responseCode=postResultToHttpServer(httpPostUrl,resultJson);
+      if (responseCode != 200) {
+        throw new RuntimeException(" ResponseCode " + responseCode);
+      }
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Posting result to server failed with : " + e.getMessage(),e);
+  }
+}

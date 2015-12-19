@@ -1,0 +1,12 @@
+{
+  this.cpu-=needed.cpu;
+  this.mem-=needed.mem;
+  this.disk-=needed.disk;
+  for (  Range portRange : portsHold) {
+    if (portRange.rangeEnd - portRange.rangeStart + 1 > needed.ports) {
+      needed.portsHold.add(new Range(portRange.rangeStart,portRange.rangeStart + needed.ports - 1));
+      portRange.rangeStart=portRange.rangeStart + needed.ports;
+      break;
+    }
+  }
+}

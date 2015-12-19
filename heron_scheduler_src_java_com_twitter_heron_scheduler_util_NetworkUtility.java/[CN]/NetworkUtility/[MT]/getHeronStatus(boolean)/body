@@ -1,0 +1,10 @@
+{
+  Common.Status.Builder status=Common.Status.newBuilder();
+  if (isOK) {
+    status.setStatus(Common.StatusCode.OK);
+  }
+ else {
+    status.setStatus(Common.StatusCode.NOTOK);
+  }
+  return status.build();
+}

@@ -1,0 +1,7 @@
+{
+  Map<String,Fields> componentFields=componentsOutputFields.get(componentId);
+  if (componentFields != null) {
+    return componentFields.get(streamId);
+  }
+  return null;
+}

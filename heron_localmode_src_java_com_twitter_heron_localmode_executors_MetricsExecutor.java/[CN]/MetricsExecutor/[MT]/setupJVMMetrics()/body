@@ -1,0 +1,5 @@
+{
+  JVMMetrics jvmMetrics=new JVMMetrics();
+  jvmMetrics.registerMetrics(metricsCollector);
+  this.metricsCollector.registerMetricSampleRunnable(jvmMetrics.getJVMSampleRunnable(),systemConfig.getHeronMetricsExportIntervalSec() / 2);
+}

@@ -1,0 +1,7 @@
+{
+  if (emitted < EMIT_COUNT) {
+    String word=toSend[emitted % toSend.length];
+    outputCollector.emit(new Values(word),MESSAGE_ID);
+    emitted++;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  int inAvgSize=(int)((1 - currentSampleWeight) * averageSize + currentSampleWeight * size());
+  int availableCapacity=expectedAvailableCapacity;
+  if (inAvgSize < expectedQueueSize && availableCapacity < capacity) {
+    expectedAvailableCapacity=availableCapacity + 1;
+  }
+  if (inAvgSize > expectedQueueSize && availableCapacity > 0) {
+    expectedAvailableCapacity=availableCapacity / 2;
+  }
+  averageSize=inAvgSize;
+}

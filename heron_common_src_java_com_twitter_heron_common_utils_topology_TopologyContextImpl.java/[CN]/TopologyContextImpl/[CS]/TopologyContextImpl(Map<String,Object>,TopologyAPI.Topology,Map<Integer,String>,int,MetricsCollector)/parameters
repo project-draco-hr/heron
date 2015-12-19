@@ -1,0 +1,5 @@
+Map<String,Object> clusterConfig
+TopologyAPI.Topology topology
+Map<Integer,String> taskToComponentMap
+int _myTaskId
+MetricsCollector metricsCollector

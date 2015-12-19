@@ -1,0 +1,5 @@
+def test_num_instances(self):
+    self.assertEqual(0, self.topology.num_instances())
+    pplan = MockProto().create_mock_medium_physical_plan(1, 2, 3, 4)
+    self.topology.set_physical_plan(pplan)
+    self.assertEqual(10, self.topology.num_instances())

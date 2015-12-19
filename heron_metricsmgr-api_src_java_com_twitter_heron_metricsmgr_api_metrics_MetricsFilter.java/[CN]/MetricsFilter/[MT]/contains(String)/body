@@ -1,0 +1,8 @@
+{
+  for (  String prefix : prefixToType.keySet()) {
+    if (metricName.contains(prefix)) {
+      return true;
+    }
+  }
+  return false;
+}

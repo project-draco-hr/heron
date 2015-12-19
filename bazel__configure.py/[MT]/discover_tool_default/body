@@ -1,0 +1,8 @@
+def discover_tool_default(program, msg, envvar, defvalue):
+    VALUE = discover_program(program, envvar)
+    if (not VALUE):
+        VALUE = defvalue
+        print ('%s : \t\t\t not found, but ok' % program)
+    else:
+        print ('Using %s : \t\t\t "%s"' % (msg, VALUE))
+    return VALUE

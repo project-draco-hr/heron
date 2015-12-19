@@ -1,0 +1,8 @@
+def test_get_disk_per_container(self):
+    topology = self.mock_proto.create_mock_medium_topology(1, 2, 3, 4)
+    default_disk = topology_helpers.get_disk_per_container(topology)
+    self.assertEqual((22 * constants.GB), default_disk)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_STMGRS, 4)
+    self.assertEqual((15 * constants.GB), topology_helpers.get_disk_per_container(topology))
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_CONTAINER_DISK_REQUESTED, 950109)
+    self.assertEqual(str(950109), topology_helpers.get_disk_per_container(topology))

@@ -1,0 +1,24 @@
+{
+  if (helper.getMySpout() == null) {
+    throw new RuntimeException(helper.getMyTaskId() + " is not a spout ");
+  }
+  this.serializer=serializer;
+  this.helper=helper;
+  this.spoutMetrics=spoutMetrics;
+  this.keyGenerator=new TupleKeyGenerator();
+  inFlightTuples=new LinkedHashMap<Long,RootTupleInfo>();
+  Map<String,Object> config=helper.getTopologyContext().getTopologyConfig();
+  if (config.containsKey(Config.TOPOLOGY_ENABLE_ACKING) && config.get(Config.TOPOLOGY_ENABLE_ACKING) != null) {
+    this.ackingEnabled=Boolean.parseBoolean(config.get(Config.TOPOLOGY_ENABLE_ACKING).toString());
+  }
+ else {
+    this.ackingEnabled=false;
+  }
+  if (!ackingEnabled) {
+    immediateAcks=new ArrayDeque<RootTupleInfo>();
+  }
+ else {
+    immediateAcks=null;
+  }
+  this.outputter=new OutgoingTupleCollection(helper,streamOutQueue);
+}

@@ -1,0 +1,6 @@
+def test_get_component_distribution(self):
+    topology = self.mock_proto.create_mock_simple_topology(4, 8)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_STMGRS, 4)
+    component_distribution = topology_helpers.get_component_distribution(topology)
+    expected_component_distribution = {1: [('mock_bolt', '1', '0'), ('mock_bolt', '5', '4'), ('mock_spout', '9', '0')], 2: [('mock_bolt', '2', '1'), ('mock_bolt', '6', '5'), ('mock_spout', '10', '1')], 3: [('mock_bolt', '3', '2'), ('mock_bolt', '7', '6'), ('mock_spout', '11', '2')], 4: [('mock_bolt', '4', '3'), ('mock_bolt', '8', '7'), ('mock_spout', '12', '3')], }
+    self.assertEqual(expected_component_distribution, component_distribution)

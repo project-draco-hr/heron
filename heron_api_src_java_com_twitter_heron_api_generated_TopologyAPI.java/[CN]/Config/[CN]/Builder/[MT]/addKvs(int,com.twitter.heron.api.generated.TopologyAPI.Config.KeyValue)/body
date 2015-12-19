@@ -1,0 +1,14 @@
+{
+  if (kvsBuilder_ == null) {
+    if (value == null) {
+      throw new NullPointerException();
+    }
+    ensureKvsIsMutable();
+    kvs_.add(index,value);
+    onChanged();
+  }
+ else {
+    kvsBuilder_.addMessage(index,value);
+  }
+  return this;
+}

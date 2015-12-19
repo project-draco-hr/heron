@@ -1,0 +1,6 @@
+{
+  this.isExpectNoMoreItems=false;
+  this.producer=null;
+  this.consumer=null;
+  this.buffer=new LinkedTransferQueue<E>();
+}

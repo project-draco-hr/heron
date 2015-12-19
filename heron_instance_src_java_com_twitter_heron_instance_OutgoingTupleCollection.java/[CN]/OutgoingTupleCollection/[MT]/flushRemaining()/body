@@ -1,0 +1,14 @@
+{
+  if (currentDataTuple != null) {
+    HeronTuples.HeronTupleSet.Builder bldr=HeronTuples.HeronTupleSet.newBuilder();
+    bldr.setData(currentDataTuple);
+    pushTupleToQueue(bldr,outQueue);
+    currentDataTuple=null;
+  }
+  if (currentControlTuple != null) {
+    HeronTuples.HeronTupleSet.Builder bldr=HeronTuples.HeronTupleSet.newBuilder();
+    bldr.setControl(currentControlTuple);
+    pushTupleToQueue(bldr,outQueue);
+    currentControlTuple=null;
+  }
+}

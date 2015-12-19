@@ -1,0 +1,10 @@
+{
+  long totalCount=0;
+  for (  GarbageCollectorMXBean bean : ManagementFactory.getGarbageCollectorMXBeans()) {
+    long collectionCount=bean.getCollectionCount();
+    totalCount+=collectionCount;
+    String normalizedKeyName=bean.getName().replaceAll("[^\\w]","-");
+    jvmGCCountPerGCType.safeScope(normalizedKeyName).setValue(collectionCount);
+  }
+  jvmGCCount.setValue(totalCount);
+}

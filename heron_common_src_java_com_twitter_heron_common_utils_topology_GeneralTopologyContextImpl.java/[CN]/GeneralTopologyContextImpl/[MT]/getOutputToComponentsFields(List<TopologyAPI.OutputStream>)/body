@@ -1,0 +1,18 @@
+{
+  Map<String,Map<String,Fields>> outputFields=new HashMap<String,Map<String,Fields>>();
+  for (  TopologyAPI.OutputStream outputStream : outputs) {
+    String componentName=outputStream.getStream().getComponentName();
+    String streamId=outputStream.getStream().getId();
+    Map<String,Fields> componentFields=outputFields.get(componentName);
+    if (componentFields == null) {
+      componentFields=new HashMap<String,Fields>();
+    }
+    List<String> retval=new ArrayList<String>();
+    for (    TopologyAPI.StreamSchema.KeyType kt : outputStream.getSchema().getKeysList()) {
+      retval.add(kt.getKey());
+    }
+    componentFields.put(streamId,new Fields(retval));
+    outputFields.put(componentName,componentFields);
+  }
+  return outputFields;
+}

@@ -1,0 +1,41 @@
+{
+  byte[] res;
+  try {
+    if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+      LOG.log(Level.SEVERE,"Http Response not OK: " + connection.getResponseCode());
+      return new byte[0];
+    }
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to get response code",e);
+    return new byte[0];
+  }
+  int responseLength=connection.getContentLength();
+  if (responseLength <= 0) {
+    LOG.log(Level.SEVERE,"Response length abnormal: " + responseLength);
+    return new byte[0];
+  }
+  try {
+    res=new byte[responseLength];
+    InputStream is=connection.getInputStream();
+    int off=0;
+    int bRead=0;
+    while (off != (responseLength - 1) && (bRead=is.read(res,off,responseLength - off)) != -1) {
+      off+=bRead;
+    }
+    return res;
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to read response: ",e);
+    return new byte[0];
+  }
+ finally {
+    try {
+      connection.getInputStream().close();
+    }
+ catch (    IOException e) {
+      LOG.log(Level.SEVERE,"Failed to close InputStream: ",e);
+      return new byte[0];
+    }
+  }
+}

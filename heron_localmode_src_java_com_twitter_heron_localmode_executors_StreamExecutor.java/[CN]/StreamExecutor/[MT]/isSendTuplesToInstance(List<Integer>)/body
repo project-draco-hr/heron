@@ -1,0 +1,8 @@
+{
+  for (  Integer taskId : taskIds) {
+    if (taskIdToInstanceExecutor.get(taskId).getStreamInQueue().remainingCapacity() <= 0) {
+      return false;
+    }
+  }
+  return true;
+}

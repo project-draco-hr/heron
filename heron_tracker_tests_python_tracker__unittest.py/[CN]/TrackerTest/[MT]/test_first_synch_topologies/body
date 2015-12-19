@@ -1,0 +1,25 @@
+@patch.object(Tracker, 'getTopologiesForStateLocation')
+@patch.object(Tracker, 'removeTopology')
+@patch.object(Tracker, 'addNewTopology')
+@patch.object(statemanagerfactory, 'get_all_state_managers')
+def test_first_synch_topologies(self, mock_get_all_state_managers, mock_add_new_topology, mock_remove_topology, mock_get_topologies_for_state_location):
+    mock_state_manager_1 = Mock()
+    mock_state_manager_1.name = 'mock_name1'
+    mock_state_manager_2 = Mock()
+    mock_state_manager_2.name = 'mock_name2'
+    watches = {}
+    mock_get_all_state_managers.return_value = [mock_state_manager_1, mock_state_manager_2]
+    mock_get_topologies_for_state_location.return_value = []
+
+    def side_effect1(on_topologies_watch):
+        watches['1'] = on_topologies_watch
+        on_topologies_watch(['top_name1', 'top_name2'])
+    mock_state_manager_1.get_topologies = side_effect1
+
+    def side_effect2(on_topologies_watch):
+        watches['2'] = on_topologies_watch
+        on_topologies_watch(['top_name3', 'top_name4'])
+    mock_state_manager_2.get_topologies = side_effect2
+    self.tracker.synch_topologies('test_conf')
+    mock_get_topologies_for_state_location.assert_has_calls([call('mock_name2'), call('mock_name1')], any_order=True)
+    mock_add_new_topology.assert_has_calls([call(mock_state_manager_1, 'top_name1'), call(mock_state_manager_1, 'top_name2'), call(mock_state_manager_2, 'top_name3'), call(mock_state_manager_2, 'top_name4')], any_order=True)

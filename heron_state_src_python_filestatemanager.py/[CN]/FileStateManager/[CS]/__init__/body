@@ -1,0 +1,13 @@
+def __init__(self, name, rootpath):
+    self.name = name
+    self.rootpath = rootpath
+    self.topologies_directory = {}
+    self.execution_state_directory = {}
+    self.pplan_directory = {}
+    self.tmaster_directory = {}
+    self.topologies_watchers = []
+    self.topology_watchers = defaultdict((lambda : []))
+    self.execution_state_watchers = defaultdict((lambda : []))
+    self.pplan_watchers = defaultdict((lambda : []))
+    self.tmaster_watchers = defaultdict((lambda : []))
+    self.monitoring_thread = threading.Thread(target=self.monitor)

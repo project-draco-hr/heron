@@ -1,0 +1,4 @@
+{
+  outputFieldsDeclarer.declareStream(Constants.INTEGRATION_TEST_CONTROL_STREAM_ID,new Fields(Constants.INTEGRATION_TEST_TERMINAL));
+  delegateSpout.declareOutputFields(outputFieldsDeclarer);
+}

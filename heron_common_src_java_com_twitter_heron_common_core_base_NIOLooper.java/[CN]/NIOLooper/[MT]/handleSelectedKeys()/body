@@ -1,0 +1,25 @@
+{
+  Set<SelectionKey> selectedKeys=selector.selectedKeys();
+  Iterator<SelectionKey> keyIterator=selectedKeys.iterator();
+  while (keyIterator.hasNext()) {
+    SelectionKey key=keyIterator.next();
+    keyIterator.remove();
+    ISelectHandler callback=(ISelectHandler)key.attachment();
+    if (!key.isValid()) {
+      callback.handleError(key.channel());
+      continue;
+    }
+    if (key.isValid() && key.isWritable()) {
+      callback.handleWrite(key.channel());
+    }
+    if (key.isValid() && key.isReadable()) {
+      callback.handleRead(key.channel());
+    }
+    if (key.isValid() && key.isConnectable()) {
+      callback.handleConnect(key.channel());
+    }
+    if (key.isValid() && key.isAcceptable()) {
+      callback.handleAccept(key.channel());
+    }
+  }
+}

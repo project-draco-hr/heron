@@ -1,0 +1,11 @@
+{
+  LOG.info("Forcing to gather all metrics and flush out.");
+  Metrics.MetricPublisherPublishMessage.Builder builder=Metrics.MetricPublisherPublishMessage.newBuilder();
+  for (  List<String> metricNames : timeBucketToMetricNames.values()) {
+    for (    String metricName : metricNames) {
+      gatherOneMetric(metricName,builder);
+    }
+    Metrics.MetricPublisherPublishMessage msg=builder.build();
+    queue.offer(msg);
+  }
+}

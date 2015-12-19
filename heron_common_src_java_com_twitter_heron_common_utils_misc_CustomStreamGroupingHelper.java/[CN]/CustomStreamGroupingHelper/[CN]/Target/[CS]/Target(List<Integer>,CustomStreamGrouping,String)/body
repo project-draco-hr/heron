@@ -1,0 +1,5 @@
+{
+  this.taskIds=taskIds;
+  this.grouping=grouping;
+  this.componentName=componentName;
+}

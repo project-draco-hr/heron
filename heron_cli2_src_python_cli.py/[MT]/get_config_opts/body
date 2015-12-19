@@ -1,0 +1,5 @@
+def get_config_opts():
+    opt_list = []
+    for (k, v) in CONFIG_OPTS.items():
+        opt_list.append(('%s=%s' % (k, v)))
+    return ('-Dheron.options=' + ','.join(opt_list).replace(' ', '%%%%'))

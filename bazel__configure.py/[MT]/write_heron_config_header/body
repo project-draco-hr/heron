@@ -1,0 +1,15 @@
+def write_heron_config_header(config_file):
+    if os.path.exists(config_file):
+        os.unlink(config_file)
+    out_file = open(config_file, 'w')
+    out_file.write(define_string('PACKAGE', 'heron'))
+    out_file.write(define_string('PACKAGE_NAME', 'heron'))
+    out_file.write(define_string('PACKAGE_VERSION', 'unversioned'))
+    out_file.write(define_string('PACKAGE_COMPILE_USER', discover_user()))
+    out_file.write(define_string('PACKAGE_COMPILE_HOST', discover_host()))
+    out_file.write(define_string('PACKAGE_COMPILE_TIME', discover_timestamp()))
+    out_file.write(define_string('GIT_SHA', discover_git_sha()))
+    out_file.write(define_string('GIT_BRANCH', discover_git_branch()))
+    out_file.write(generate_system_defines())
+    out_file.close()
+    print ('Wrote the heron config header file: \t"%s"' % config_file)

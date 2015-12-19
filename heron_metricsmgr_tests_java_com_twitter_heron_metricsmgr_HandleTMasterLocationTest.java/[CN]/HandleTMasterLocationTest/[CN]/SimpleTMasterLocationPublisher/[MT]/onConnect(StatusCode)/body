@@ -1,0 +1,9 @@
+{
+  if (status != StatusCode.OK) {
+    org.junit.Assert.fail("Connection with server failed");
+  }
+ else {
+    LOG.info("Connected with Metrics Manager Server");
+    sendRequest();
+  }
+}

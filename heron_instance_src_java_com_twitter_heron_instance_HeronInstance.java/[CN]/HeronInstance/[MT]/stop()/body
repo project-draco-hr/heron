@@ -1,0 +1,10 @@
+{
+synchronized (this) {
+    LOG.severe("Instance Process exiting.\n");
+    for (    Handler handler : java.util.logging.Logger.getLogger("").getHandlers()) {
+      handler.close();
+    }
+    threadsPool.shutdownNow();
+    Runtime.getRuntime().halt(1);
+  }
+}

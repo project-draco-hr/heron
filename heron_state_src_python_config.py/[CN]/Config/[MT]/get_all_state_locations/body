@@ -1,0 +1,3 @@
+def get_all_state_locations(self):
+    '\n    Returns all the state locations.\n    '
+    return self.locations

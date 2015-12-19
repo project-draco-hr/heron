@@ -1,0 +1,3 @@
+def run_process(self, name, cmd):
+    do_print(('Running %s process as %s' % (name, ' '.join(cmd))))
+    return subprocess.Popen(cmd)

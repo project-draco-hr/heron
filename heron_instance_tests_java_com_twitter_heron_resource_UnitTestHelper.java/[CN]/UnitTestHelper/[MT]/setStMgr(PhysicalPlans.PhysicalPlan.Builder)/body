@@ -1,0 +1,8 @@
+{
+  PhysicalPlans.StMgr.Builder stmgr=PhysicalPlans.StMgr.newBuilder();
+  stmgr.setId("stream-manager-id");
+  stmgr.setHostName("127.0.0.1");
+  stmgr.setDataPort(8888);
+  stmgr.setLocalEndpoint("endpoint");
+  pPlan.addStmgrs(stmgr);
+}

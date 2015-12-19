@@ -1,0 +1,15 @@
+{
+  long nextTimeoutIntervalMs=getNextTimeoutIntervalMs();
+  try {
+    if (nextTimeoutIntervalMs > 0) {
+      selector.select(nextTimeoutIntervalMs);
+    }
+ else {
+      selector.selectNow();
+    }
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+    throw new RuntimeException(e);
+  }
+}

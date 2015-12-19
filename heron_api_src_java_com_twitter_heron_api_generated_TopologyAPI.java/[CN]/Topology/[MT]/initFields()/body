@@ -1,0 +1,8 @@
+{
+  id_="";
+  name_="";
+  spouts_=java.util.Collections.emptyList();
+  bolts_=java.util.Collections.emptyList();
+  state_=com.twitter.heron.api.generated.TopologyAPI.TopologyState.RUNNING;
+  topologyConfig_=com.twitter.heron.api.generated.TopologyAPI.Config.getDefaultInstance();
+}

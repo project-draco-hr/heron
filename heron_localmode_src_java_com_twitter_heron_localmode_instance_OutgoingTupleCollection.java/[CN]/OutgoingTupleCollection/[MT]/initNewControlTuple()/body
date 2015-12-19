@@ -1,0 +1,4 @@
+{
+  flushRemaining();
+  currentControlTuple=HeronTuples.HeronControlTupleSet.newBuilder();
+}

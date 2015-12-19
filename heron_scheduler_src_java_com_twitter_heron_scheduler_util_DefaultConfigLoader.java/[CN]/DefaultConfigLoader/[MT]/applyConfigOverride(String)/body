@@ -1,0 +1,23 @@
+{
+  if (configOverride == null || configOverride.isEmpty()) {
+    return true;
+  }
+  Properties overrides=new Properties();
+  try {
+    overrides.load(new ByteArrayInputStream(convertSpaceToEOL(configOverride).getBytes()));
+    for (Enumeration e=overrides.propertyNames(); e.hasMoreElements(); ) {
+      String key=(String)e.nextElement();
+      if (overrides.getProperty(key).startsWith("\"") && overrides.getProperty(key).endsWith("\"")) {
+        properties.setProperty(key,overrides.getProperty(key).replaceAll("^\"|\"$",""));
+      }
+ else {
+        properties.setProperty(key,overrides.getProperty(key));
+      }
+    }
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to apply config override " + configOverride,e);
+    return false;
+  }
+  return true;
+}

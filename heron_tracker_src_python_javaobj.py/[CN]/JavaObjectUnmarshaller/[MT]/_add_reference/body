@@ -1,0 +1,2 @@
+def _add_reference(self, obj):
+    self.references.append(obj)

@@ -1,0 +1,9 @@
+def get_disk_per_container(topology):
+    '\n  The argument is the proto object for topology.\n  Calculate and return the disk per container.\n  It can be calculated in two ways:\n      1. It is passed in config.\n      2. Allocate 1 GB per instance in a container, and 12 GB extra for the rest.\n  '
+    disk = get_topology_config(topology, constants.TOPOLOGY_CONTAINER_DISK_REQUESTED)
+    if (not disk):
+        ninstances = get_total_instances(topology)
+        nstmgrs = get_nstmgrs(topology)
+        maxInstanceInOneContainer = (((ninstances + nstmgrs) - 1) / nstmgrs)
+        disk = ((maxInstanceInOneContainer * constants.GB) + constants.DEFAULT_DISK_PADDING_PER_CONTAINER)
+    return disk

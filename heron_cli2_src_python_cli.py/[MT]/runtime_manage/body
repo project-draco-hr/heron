@@ -1,0 +1,12 @@
+def runtime_manage(namespace):
+    'Syntax: heron-cli command <dc>/<role>/<environ> topologyname <optionally arguments>\n\n  Commands supported are: kill, activate, deactivate and restart\n\n  1. Kill\n  Syntax: heron-cli kill <dc>/<role>/<environ> <topologyname>\n\n  Kills the topology\n  1) We kill the jobs representing that topology\n  2) We cleanup the state associated with the topology\n\n  2. Activate\n  Syntax: heron-cli activate <dc>/<role>/<environ> topologyname\n\n  Activates a topology. Essentially the topology starts emitting tuples again.\n\n  3. Deactivate\n  Syntax: heron-cli deactivate <dc>/<role>/<environ> topologyname\n\n  DeActivates a topology. Essentially the topology stops emitting tuples"\n\n  4. Restart\n  Syntax: heron-cli restart <dc>/<role>/<environ> topologyname <optionally container id>\n\n  Just restarts the topology. This is faster than a submit because the topology\n  jar/tar need not be uploaded.\n  '
+    topology_name = namespace['topology']
+    command = namespace['command']
+    try:
+        config_overrides = ((namespace['config-overrides'] + ' ') + pass_cmdline_override(namespace))
+        exec_heron_class('com.twitter.heron.scheduler.service.RuntimeManagerMain', get_heron_libs(SCHEDULER_RUN_JARS), extrajars=[], args=[command, topology_name, namespace['config_loader'], base64.b64encode(config_overrides), namespace['config_file']])
+    except Exception as ex:
+        print ('Failed to %s topology' % command)
+        sys.exit(1)
+    print ('Successfully %s topology' % command)
+    sys.exit(0)

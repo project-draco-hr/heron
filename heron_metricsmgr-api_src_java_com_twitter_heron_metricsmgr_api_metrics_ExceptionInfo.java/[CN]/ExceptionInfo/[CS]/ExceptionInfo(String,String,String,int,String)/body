@@ -1,0 +1,7 @@
+{
+  this.stackTrace=stackTrace;
+  this.lastTime=lastTime;
+  this.firstTime=firstTime;
+  this.count=count;
+  this.logging=logging;
+}

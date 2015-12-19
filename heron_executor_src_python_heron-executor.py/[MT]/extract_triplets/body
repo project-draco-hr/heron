@@ -1,0 +1,8 @@
+def extract_triplets(s):
+    t = s.split(':')
+    assert ((len(t) % 3) == 0)
+    result = []
+    while (len(t) > 0):
+        result.append((t[0], t[1], t[2]))
+        t = t[3:]
+    return result

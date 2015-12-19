@@ -1,0 +1,8 @@
+{
+  try {
+    graphite.close();
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Error closing connection to Graphite",e);
+  }
+}

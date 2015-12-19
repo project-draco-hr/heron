@@ -1,0 +1,4 @@
+MesosJobFramework mesosJobFramework
+PersistenceStore persistenceStore
+MesosDriverFactory mesosDriver
+FrameworkConfiguration config

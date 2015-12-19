@@ -1,0 +1,3 @@
+{
+  return isZkUsedForStateManager() ? properties.getPropertyWithException(Constants.ZK_CONNECTION_STRING) : "LOCALMODE";
+}

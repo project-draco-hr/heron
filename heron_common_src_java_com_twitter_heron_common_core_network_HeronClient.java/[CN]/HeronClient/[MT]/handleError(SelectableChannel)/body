@@ -1,0 +1,17 @@
+{
+  LOG.info("Handling Error. Cleaning states in HeronClient.");
+  contextMap.clear();
+  responseMessageMap.clear();
+  messageMap.clear();
+  socketChannelHelper.clear();
+  nioLooper.removeAllInterest(channel);
+  try {
+    channel.close();
+    LOG.info("Successfully closed the channel: " + channel);
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to close connection in handleError",e);
+  }
+  isConnected=false;
+  onError();
+}

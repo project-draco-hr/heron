@@ -1,0 +1,11 @@
+{
+  try {
+    connection.setRequestMethod("GET");
+    connection.setDoOutput(true);
+  }
+ catch (  ProtocolException e) {
+    LOG.log(Level.SEVERE,"Failed to send http get request: " + connection);
+    return false;
+  }
+  return true;
+}

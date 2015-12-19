@@ -1,0 +1,5 @@
+{
+  byte[] _bytes=new byte[REQIDSize];
+  randomGenerator.nextBytes(_bytes);
+  return new REQID(_bytes);
+}

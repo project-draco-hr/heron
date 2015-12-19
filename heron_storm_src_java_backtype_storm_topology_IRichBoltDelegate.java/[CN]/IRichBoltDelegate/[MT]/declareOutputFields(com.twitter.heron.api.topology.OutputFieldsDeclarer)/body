@@ -1,0 +1,4 @@
+{
+  OutputFieldsGetter getter=new OutputFieldsGetter(declarer);
+  delegate.declareOutputFields(getter);
+}

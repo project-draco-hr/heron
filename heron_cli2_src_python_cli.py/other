@@ -1,0 +1,26 @@
+import argparse
+import atexit
+import base64
+import contextlib
+import glob
+import logging
+import logging.handlers
+import os
+import shutil
+import sys
+import subprocess
+import tarfile
+import tempfile
+from heron.proto import topology_pb2
+CONFIG_OPTS = {}
+VERBOSE = False
+TOPOLOGY_RUN_JARS = ['lib/protobuf-java-2.5.0.jar', 'lib/log4j-over-slf4j-1.7.7.jar', 'lib/slf4j-api-1.7.7.jar', 'lib/slf4j-jdk14-1.7.7.jar']
+SCHEDULER_RUN_JARS = ['lib/heron-scheduler.jar']
+Log = logging.getLogger('heron_cli2')
+if (sys.platform == 'cygwin'):
+    normclasspath = cygpath
+else:
+    normclasspath = identity
+COMMANDS = {'submit': submit, 'classpath': print_classpath, 'version': print_version, 'kill': runtime_manage, 'activate': runtime_manage, 'deactivate': runtime_manage, 'restart': runtime_manage, }
+if (__name__ == '__main__'):
+    main()

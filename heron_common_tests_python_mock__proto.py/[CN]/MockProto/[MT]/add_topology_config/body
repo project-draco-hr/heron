@@ -1,0 +1,4 @@
+def add_topology_config(self, topology, key, value):
+    kv = topology.topology_config.kvs.add()
+    kv.key = key
+    kv.value = str(value)

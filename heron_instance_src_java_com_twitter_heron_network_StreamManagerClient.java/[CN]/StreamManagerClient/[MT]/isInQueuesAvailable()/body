@@ -1,0 +1,3 @@
+{
+  return inStreamQueue.size() < inStreamQueue.getExpectedAvailableCapacity();
+}

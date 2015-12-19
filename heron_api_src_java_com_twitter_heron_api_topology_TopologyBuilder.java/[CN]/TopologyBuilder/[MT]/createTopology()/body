@@ -1,0 +1,10 @@
+{
+  TopologyAPI.Topology.Builder bldr=TopologyAPI.Topology.newBuilder();
+  for (  Map.Entry<String,SpoutDeclarer> spout : _spouts.entrySet()) {
+    spout.getValue().dump(bldr);
+  }
+  for (  Map.Entry<String,BoltDeclarer> bolt : _bolts.entrySet()) {
+    bolt.getValue().dump(bldr);
+  }
+  return new HeronTopology(bldr);
+}

@@ -1,0 +1,13 @@
+def create_mock_simple_topology(self, spout_parallelism=1, bolt_parallelism=1):
+    '\n    Simple topology contains one spout and one bolt.\n    '
+    topology = protoTopology.Topology()
+    topology.id = MockProto.topology_id
+    topology.name = MockProto.topology_name
+    stream1 = protoTopology.StreamId()
+    stream1.id = 'mock_stream1'
+    stream1.component_name = 'mock_spout'
+    spout = self.create_mock_spout('mock_spout', [stream1], spout_parallelism)
+    topology.spouts.extend([spout])
+    bolt = self.create_mock_bolt('mock_bolt', [stream1], [], bolt_parallelism)
+    topology.bolts.extend([bolt])
+    return topology

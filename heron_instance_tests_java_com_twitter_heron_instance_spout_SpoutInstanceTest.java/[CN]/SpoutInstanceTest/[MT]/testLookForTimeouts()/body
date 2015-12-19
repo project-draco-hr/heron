@@ -1,0 +1,23 @@
+{
+  physicalPlan=UnitTestHelper.getPhysicalPlan(true,1);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
+  inControlQueue.offer(instanceControlMsg);
+  SingletonRegistry.INSTANCE.registerSingleton(Constants.FAIL_COUNT,failCount);
+  Runnable task=new Runnable(){
+    @Override public void run(){
+      for (int i=0; i < Constants.RETRY_TIMES; i++) {
+        if (failCount.intValue() != 0) {
+          break;
+        }
+        Utils.sleep(Constants.RETRY_INTERVAL_MS);
+      }
+      Utils.sleep(Constants.TEST_WAIT_TIME_MS);
+      Assert.assertEquals(10,failCount.intValue());
+      testLooper.exitLoop();
+    }
+  }
+;
+  testLooper.addTasksOnWakeup(task);
+  testLooper.loop();
+}

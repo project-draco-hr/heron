@@ -1,0 +1,4 @@
+def test_get_user_rammap(self):
+    topology = self.mock_proto.create_mock_simple_topology()
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_COMPONENT_RAMMAP, 'mock_spout:2,mock_bolt:3')
+    self.assertEqual({'mock_spout': 2, 'mock_bolt': 3, }, topology_helpers.get_user_rammap(topology))

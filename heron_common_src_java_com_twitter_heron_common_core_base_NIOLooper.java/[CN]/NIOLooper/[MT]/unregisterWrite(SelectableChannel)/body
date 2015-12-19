@@ -1,0 +1,3 @@
+{
+  removeInterest(channel,SelectionKey.OP_WRITE);
+}

@@ -1,0 +1,3 @@
+{
+  return properties.getProperty(COMPONENT_JVM_OPTS_IN_BASE64);
+}

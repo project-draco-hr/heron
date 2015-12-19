@@ -1,0 +1,3 @@
+{
+  setComponentRamMap(this,ramMap);
+}

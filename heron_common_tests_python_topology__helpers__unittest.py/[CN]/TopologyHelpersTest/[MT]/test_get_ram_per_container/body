@@ -1,0 +1,24 @@
+def test_get_ram_per_container(self):
+    original_ram_for_stmgr = constants.RAM_FOR_STMGR
+    constants.RAM_FOR_STMGR = 2
+    original_default_ram_for_instance = constants.DEFAULT_RAM_FOR_INSTANCE
+    constants.DEFAULT_RAM_FOR_INSTANCE = 1
+    topology = self.mock_proto.create_mock_simple_topology(4, 8)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_COMPONENT_RAMMAP, 'mock_spout:2,mock_bolt:3')
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_STMGRS, 4)
+    self.assertEqual(10, topology_helpers.get_ram_per_container(topology))
+    topology = self.mock_proto.create_mock_simple_topology(4, 8)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_COMPONENT_RAMMAP, 'mock_spout:2')
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_STMGRS, 4)
+    expected_ram_per_container = 6
+    self.assertEqual(expected_ram_per_container, topology_helpers.get_ram_per_container(topology))
+    topology = self.mock_proto.create_mock_simple_topology(4, 8)
+    requested_ram = 15000
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_CONTAINER_RAM_REQUESTED, str(requested_ram))
+    self.assertLess(abs((topology_helpers.get_ram_per_container(topology) - requested_ram)), 12)
+    topology = self.mock_proto.create_mock_simple_topology(4, 8)
+    self.mock_proto.add_topology_config(topology, constants.TOPOLOGY_STMGRS, 4)
+    expected_ram_per_container = 5
+    self.assertEqual(expected_ram_per_container, topology_helpers.get_ram_per_container(topology))
+    constants.RAM_FOR_STMGR = original_ram_for_stmgr
+    constants.DEFAULT_RAM_FOR_INSTANCE = original_default_ram_for_instance

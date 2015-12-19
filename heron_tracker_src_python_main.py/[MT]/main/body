@@ -1,0 +1,8 @@
+def main():
+    log.configure(log.logging.DEBUG)
+    options.parse_command_line()
+    port = options.port
+    LOG.info(('Running on port: ' + str(port)))
+    http_server = tornado.httpserver.HTTPServer(Application())
+    http_server.listen(port)
+    tornado.ioloop.IOLoop.instance().start()

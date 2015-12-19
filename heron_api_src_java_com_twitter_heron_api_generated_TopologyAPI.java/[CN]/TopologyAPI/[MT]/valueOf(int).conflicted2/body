@@ -1,0 +1,12 @@
+{
+switch (value) {
+case 1:
+    return RUNNING;
+case 2:
+  return PAUSED;
+case 3:
+return KILLED;
+default :
+return null;
+}
+}

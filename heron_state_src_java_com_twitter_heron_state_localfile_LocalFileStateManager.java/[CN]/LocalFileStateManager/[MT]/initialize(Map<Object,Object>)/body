@@ -1,0 +1,16 @@
+{
+  String rootAddress=(String)conf.get(ROOT_ADDRESS);
+  if (rootAddress == null) {
+    Object workingDir=conf.get(WORKING_DIRECTORY);
+    if (workingDir == null) {
+      throw new IllegalArgumentException("Misses required config: " + WORKING_DIRECTORY);
+    }
+    rootAddress=String.format("%s/%s",workingDir,"state");
+    conf.put(ROOT_ADDRESS,rootAddress);
+  }
+  super.initialize(conf);
+  boolean isInitLocalFileTree=conf.get(IS_INITIALIZE_FILE_TREE) == null ? true : (Boolean)conf.get(IS_INITIALIZE_FILE_TREE);
+  if (isInitLocalFileTree && !initTree()) {
+    throw new IllegalArgumentException("Failed to initialize Local State manager. " + "Check rootAddress: " + rootAddress);
+  }
+}

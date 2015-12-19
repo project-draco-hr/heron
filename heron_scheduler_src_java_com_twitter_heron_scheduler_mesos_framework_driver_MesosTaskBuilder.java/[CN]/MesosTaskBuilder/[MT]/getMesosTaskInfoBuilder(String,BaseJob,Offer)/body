@@ -1,0 +1,24 @@
+{
+  TaskID taskId=TaskID.newBuilder().setValue(taskIdStr).build();
+  TaskInfo.Builder taskInfo=TaskInfo.newBuilder().setName(String.format(taskNameTemplate,baseJob.name)).setTaskId(taskId);
+  Environment.Builder environment=Environment.newBuilder();
+  Set<String> builtinEnvNames=new HashSet<>();
+  for (  Environment.Variable variable : environment.getVariablesList()) {
+    builtinEnvNames.add(variable.getName());
+  }
+  for (  BaseJob.EnvironmentVariable ev : baseJob.environmentVariables) {
+    environment.addVariables(Environment.Variable.newBuilder().setName(ev.name).setValue(ev.value));
+  }
+  CommandInfo.Builder command=CommandInfo.newBuilder();
+  List<CommandInfo.URI> uriProtos=new ArrayList<>();
+  for (  String uri : baseJob.uris) {
+    uriProtos.add(CommandInfo.URI.newBuilder().setValue(uri).build());
+  }
+  command.setValue(baseJob.command).setShell(baseJob.shell).setEnvironment(environment).addAllArguments(baseJob.arguments).addAllUris(uriProtos);
+  if (!baseJob.runAsUser.isEmpty()) {
+    command.setUser(baseJob.runAsUser);
+  }
+  taskInfo.setCommand(command);
+  taskInfo.addResources(scalarResource(cpusResourceName,baseJob.cpu,offer)).addResources(scalarResource(memResourceName,baseJob.mem,offer)).addResources(scalarResource(diskResourceName,baseJob.disk,offer));
+  return taskInfo;
+}

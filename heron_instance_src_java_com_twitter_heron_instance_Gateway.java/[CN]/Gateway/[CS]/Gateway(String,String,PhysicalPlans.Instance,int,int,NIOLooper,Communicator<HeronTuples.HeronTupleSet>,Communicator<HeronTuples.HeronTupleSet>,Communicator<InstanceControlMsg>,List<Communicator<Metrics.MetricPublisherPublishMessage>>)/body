@@ -1,0 +1,34 @@
+{
+  systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  this.gatewayLooper=gatewayLooper;
+  this.gatewayMetricsCollector=new MetricsCollector(gatewayLooper,outMetricsQueues.get(0));
+  jvmMetrics=new JVMMetrics();
+  jvmMetrics.registerMetrics(gatewayMetricsCollector);
+  gatewayMetrics=new GatewayMetrics();
+  gatewayMetrics.registerMetrics(gatewayMetricsCollector);
+  ErrorReportLoggingHandler.init(instance.getInstanceId(),gatewayMetricsCollector,systemConfig.getHeronMetricsExportIntervalSec());
+  HeronSocketOptions socketOptions=new HeronSocketOptions(systemConfig.getInstanceNetworkWriteBatchSizeBytes(),systemConfig.getInstanceNetworkWriteBatchTimeMs(),systemConfig.getInstanceNetworkReadBatchSizeBytes(),systemConfig.getInstanceNetworkReadBatchTimeMs(),systemConfig.getInstanceNetworkOptionsSocketSendBufferSizeBytes(),systemConfig.getInstanceNetworkOptionsSocketReceivedBufferSizeBytes());
+  this.streamManagerClient=new StreamManagerClient(gatewayLooper,streamMgrHost,streamPort,topologyName,topologyId,instance,inStreamQueue,outStreamQueue,inControlQueue,socketOptions,gatewayMetrics);
+  this.metricsManagerClient=new MetricsManagerClient(gatewayLooper,metricsMgrHost,metricsPort,instance,outMetricsQueues,socketOptions,gatewayMetrics);
+  gatewayMetricsCollector.registerMetricSampleRunnable(jvmMetrics.getJVMSampleRunnable(),systemConfig.getInstanceMetricsSystemSampleIntervalSec());
+  Runnable sampleStreamQueuesSize=new Runnable(){
+    @Override public void run(){
+      gatewayMetrics.setInStreamQueueSize(inStreamQueue.size());
+      gatewayMetrics.setOutStreamQueueSize(outStreamQueue.size());
+      gatewayMetrics.setInStreamQueueExpectedCapacity(inStreamQueue.getExpectedAvailableCapacity());
+      gatewayMetrics.setOutStreamQueueExpectedCapacity(outStreamQueue.getExpectedAvailableCapacity());
+    }
+  }
+;
+  gatewayMetricsCollector.registerMetricSampleRunnable(sampleStreamQueuesSize,systemConfig.getInstanceMetricsSystemSampleIntervalSec());
+  final long instanceTuningIntervalMs=systemConfig.getInstanceTuningIntervalMs() * com.twitter.heron.common.core.base.Constants.MILLISECONDS_TO_NANOSECONDS;
+  Runnable tuningStreamQueueSize=new Runnable(){
+    @Override public void run(){
+      inStreamQueue.updateExpectedAvailableCapacity();
+      outStreamQueue.updateExpectedAvailableCapacity();
+      gatewayLooper.registerTimerEventInNanoSeconds(instanceTuningIntervalMs,this);
+    }
+  }
+;
+  gatewayLooper.registerTimerEventInSeconds(systemConfig.getInstanceMetricsSystemSampleIntervalSec(),tuningStreamQueueSize);
+}

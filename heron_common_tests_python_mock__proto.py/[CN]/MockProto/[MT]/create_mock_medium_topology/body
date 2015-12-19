@@ -1,0 +1,24 @@
+def create_mock_medium_topology(self, spout_parallelism=1, bolt1_parallelism=1, bolt2_parallelism=1, bolt3_parallelism=1):
+    '\n    Medium topology is a three stage topology\n    with one spout, two mid stage bolts, and one\n    last stage bolt.\n    S -str1-> B1 -str3-> B3\n    S -str2-> B2 -str4-> B3\n    '
+    topology = protoTopology.Topology()
+    topology.id = 'mock_topology_id'
+    topology.name = 'mock_topology_name'
+    stream1 = protoTopology.StreamId()
+    stream1.id = 'mock_stream1'
+    stream1.component_name = 'mock_spout1'
+    stream2 = protoTopology.StreamId()
+    stream2.id = 'mock_stream2'
+    stream2.component_name = 'mock_spout1'
+    stream3 = protoTopology.StreamId()
+    stream3.id = 'mock_stream3'
+    stream3.component_name = 'mock_bolt1'
+    stream4 = protoTopology.StreamId()
+    stream4.id = 'mock_stream4'
+    stream4.component_name = 'mock_bolt2'
+    spout1 = self.create_mock_spout('mock_spout1', [stream1, stream2], spout_parallelism)
+    topology.spouts.extend([spout1])
+    bolt1 = self.create_mock_bolt('mock_bolt1', [stream1], [stream3], bolt1_parallelism)
+    bolt2 = self.create_mock_bolt('mock_bolt2', [stream2], [stream4], bolt2_parallelism)
+    bolt3 = self.create_mock_bolt('mock_bolt3', [stream3, stream4], [], bolt3_parallelism)
+    topology.bolts.extend([bolt1, bolt2, bolt3])
+    return topology

@@ -1,0 +1,2 @@
+IRichSpout delegateSpout
+int maxExecutions

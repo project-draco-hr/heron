@@ -1,0 +1,5 @@
+{
+  final Thread thread=new Thread(r);
+  thread.setUncaughtExceptionHandler(new TMasterClientExceptionHandler());
+  return thread;
+}

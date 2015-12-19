@@ -1,0 +1,5 @@
+def do_string(self, parent=None, ident=0):
+    log_debug('[string]', ident)
+    ba = self._readString()
+    self._add_reference(str(ba))
+    return str(ba)

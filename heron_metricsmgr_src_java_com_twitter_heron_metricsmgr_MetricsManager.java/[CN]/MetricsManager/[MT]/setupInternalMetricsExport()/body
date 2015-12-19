@@ -1,0 +1,13 @@
+{
+  Runnable gatherInternalMetrics=new Runnable(){
+    @Override public void run(){
+      while (!metricsQueue.isEmpty()) {
+        Metrics.MetricPublisherPublishMessage message=metricsQueue.poll();
+        metricsManagerServer.onInternalMessage(metricsManagerPublisher,message);
+      }
+      metricsManagerServerLoop.registerTimerEventInSeconds(heronMetricsExportIntervalSec,this);
+    }
+  }
+;
+  metricsManagerServerLoop.registerTimerEventInSeconds(heronMetricsExportIntervalSec,gatherInternalMetrics);
+}

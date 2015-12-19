@@ -1,0 +1,12 @@
+{
+  exceptionInfos.clear();
+  for (int i=0; i < N; i++) {
+    String stackTrace=STACK_TRACE + i;
+    String lastTime=LAST_TIME + i;
+    String firstTime=FIRST_TIME + i;
+    int count=i;
+    String logging=LOGGING + i;
+    ExceptionInfo info=new ExceptionInfo(stackTrace,lastTime,firstTime,count,logging);
+    exceptionInfos.add(info);
+  }
+}

@@ -1,0 +1,6 @@
+{
+  if (!initialized) {
+    context.registerMetric("exception_info",ExceptionRepositoryAsMetrics.INSTANCE,interval);
+  }
+  initialized=true;
+}

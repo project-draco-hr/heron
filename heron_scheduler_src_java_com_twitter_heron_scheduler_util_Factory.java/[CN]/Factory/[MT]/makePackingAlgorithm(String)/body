@@ -1,0 +1,3 @@
+{
+  return (IPackingAlgorithm)Class.forName(packingAlgorithmClass).newInstance();
+}

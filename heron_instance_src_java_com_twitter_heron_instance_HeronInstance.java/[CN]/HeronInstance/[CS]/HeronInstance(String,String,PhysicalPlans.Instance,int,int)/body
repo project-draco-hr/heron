@@ -1,0 +1,20 @@
+{
+  systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  gatewayLooper=new NIOLooper();
+  slaveLooper=new SlaveLooper();
+  gatewayLooper.addTasksOnExit(new GatewayExitTask());
+  slaveLooper.addTasksOnExit(new SlaveExitTask());
+  inStreamQueue=new Communicator<HeronTuples.HeronTupleSet>(gatewayLooper,slaveLooper);
+  outStreamQueue=new Communicator<HeronTuples.HeronTupleSet>(slaveLooper,gatewayLooper);
+  inControlQueue=new Communicator<InstanceControlMsg>(gatewayLooper,slaveLooper);
+  outMetricsQueues=new ArrayList<Communicator<Metrics.MetricPublisherPublishMessage>>(2);
+  Communicator<Metrics.MetricPublisherPublishMessage> gatewayMetricsOut=new Communicator<Metrics.MetricPublisherPublishMessage>(gatewayLooper,gatewayLooper);
+  gatewayMetricsOut.init(systemConfig.getInstanceInternalMetricsWriteQueueCapacity(),systemConfig.getInstanceTuningExpectedMetricsWriteQueueSize(),systemConfig.getInstanceTuningCurrentSampleWeight());
+  Communicator<Metrics.MetricPublisherPublishMessage> slaveMetricsOut=new Communicator<Metrics.MetricPublisherPublishMessage>(slaveLooper,gatewayLooper);
+  slaveMetricsOut.init(systemConfig.getInstanceInternalMetricsWriteQueueCapacity(),systemConfig.getInstanceTuningExpectedMetricsWriteQueueSize(),systemConfig.getInstanceTuningCurrentSampleWeight());
+  outMetricsQueues.add(gatewayMetricsOut);
+  outMetricsQueues.add(slaveMetricsOut);
+  this.gateway=new Gateway(topologyName,topologyId,instance,streamPort,metricsPort,gatewayLooper,inStreamQueue,outStreamQueue,inControlQueue,outMetricsQueues);
+  this.slave=new Slave(slaveLooper,inStreamQueue,outStreamQueue,inControlQueue,slaveMetricsOut);
+  threadsPool=Executors.newFixedThreadPool(NUM_THREADS);
+}

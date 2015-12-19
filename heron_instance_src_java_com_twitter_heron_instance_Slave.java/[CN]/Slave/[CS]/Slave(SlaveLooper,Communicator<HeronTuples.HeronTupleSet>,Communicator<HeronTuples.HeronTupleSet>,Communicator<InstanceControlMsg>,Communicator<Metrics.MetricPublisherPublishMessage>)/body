@@ -1,0 +1,9 @@
+{
+  this.slaveLooper=slaveLooper;
+  this.streamInCommunicator=streamInCommunicator;
+  this.streamOutCommunicator=streamOutCommunicator;
+  this.inControlQueue=inControlQueue;
+  this.systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  this.metricsCollector=new MetricsCollector(slaveLooper,metricsOutCommunicator);
+  handleControlMessage();
+}

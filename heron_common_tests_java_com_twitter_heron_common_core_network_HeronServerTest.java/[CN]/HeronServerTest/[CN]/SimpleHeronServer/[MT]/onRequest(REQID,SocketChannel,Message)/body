@@ -1,0 +1,18 @@
+{
+  isOnRequestInvoked=true;
+  if (request == null) {
+    return;
+  }
+  if (request instanceof Tests.EchoServerRequest) {
+    Tests.EchoServerResponse.Builder response=Tests.EchoServerResponse.newBuilder();
+    Tests.EchoServerRequest req=(Tests.EchoServerRequest)request;
+    response.setEchoResponse(req.getEchoRequest());
+    if (isRequestNeed) {
+      sendResponse(rid,channel,response.build());
+    }
+  }
+ else {
+    LOG.info("Type of request: " + request);
+    throw new RuntimeException("Unknown type of request received");
+  }
+}

@@ -1,0 +1,6 @@
+{
+  this.topologyName=topologyName;
+  this.metricsmgrId=metricsmgrId;
+  this.sinkId=sinkId;
+  this.internalMultiCountMetrics=internalMultiCountMetrics;
+}

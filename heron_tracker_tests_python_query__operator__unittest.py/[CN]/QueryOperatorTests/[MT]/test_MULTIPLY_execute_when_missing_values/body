@@ -1,0 +1,18 @@
+@tornado.testing.gen_test
+def test_MULTIPLY_execute_when_missing_values(self):
+    ts = Mock()
+    operator = Multiply([float(100), ts])
+    tmaster = Mock()
+    tracker = Mock()
+    start = 100
+    end = 300
+
+    @tornado.gen.coroutine
+    def ts_side_effect3(*args):
+        self.assertEqual((tracker, tmaster, 100, 300), args)
+        raise tornado.gen.Return([Metrics('component', 'metricName', 'instance', start, end, {180: 2.0, 240: 4.0, 300: 5.0, })])
+    ts.execute.side_effect = ts_side_effect3
+    metrics = yield operator.execute(tracker, tmaster, start, end)
+    self.assertEqual(1, len(metrics))
+    self.assertEqual('instance', metrics[0].instance)
+    self.assertDictEqual({180: 200.0, 240: 400.0, 300: 500.0, }, metrics[0].timeline)

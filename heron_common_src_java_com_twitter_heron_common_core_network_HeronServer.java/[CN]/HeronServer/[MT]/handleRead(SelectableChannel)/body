@@ -1,0 +1,11 @@
+{
+  SocketChannelHelper helper=activeConnections.get(channel);
+  if (helper == null) {
+    LOG.severe("Unknown connection is ready for read");
+    return;
+  }
+  List<IncomingPacket> packets=helper.read();
+  for (  IncomingPacket ipt : packets) {
+    handlePacket(channel,ipt);
+  }
+}

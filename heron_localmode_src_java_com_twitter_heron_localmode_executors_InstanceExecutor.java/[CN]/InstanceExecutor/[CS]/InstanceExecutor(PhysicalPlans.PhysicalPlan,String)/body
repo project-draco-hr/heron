@@ -1,0 +1,10 @@
+{
+  streamInQueue=new Communicator<>();
+  streamOutQueue=new Communicator<>();
+  metricsOutQueue=new Communicator<>();
+  looper=new SlaveLooper();
+  MetricsCollector metricsCollector=new MetricsCollector(looper,metricsOutQueue);
+  physicalPlanHelper=createPhysicalPlanHelper(physicalPlan,instanceId,metricsCollector);
+  initInstanceManager();
+  LOG.info("Incarnating ourselves as " + physicalPlanHelper.getMyComponent() + " with task id "+ physicalPlanHelper.getMyTaskId());
+}

@@ -1,0 +1,36 @@
+{
+  physicalPlan=UnitTestHelper.getPhysicalPlan(true,-1);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
+  inControlQueue.offer(instanceControlMsg);
+  SingletonRegistry.INSTANCE.registerSingleton(Constants.ACK_COUNT,ackCount);
+  SingletonRegistry.INSTANCE.registerSingleton(Constants.FAIL_COUNT,failCount);
+  Runnable task=new Runnable(){
+    @Override public void run(){
+      while (outStreamQueue.size() != 0) {
+        HeronTuples.HeronTupleSet set=outStreamQueue.poll();
+        Assert.assertTrue(set.isInitialized());
+        Assert.assertTrue(set.hasData());
+        HeronTuples.HeronDataTupleSet dataTupleSet=set.getData();
+        tupleReceived+=dataTupleSet.getTuplesCount();
+        heronDataTupleList.addAll(dataTupleSet.getTuplesList());
+      }
+      if (tupleReceived == 10) {
+        constructAndSendAcks();
+        for (int i=0; i < Constants.RETRY_TIMES; i++) {
+          if (ackCount.intValue() != 0 || failCount.intValue() != 0) {
+            break;
+          }
+          Utils.sleep(Constants.RETRY_INTERVAL_MS);
+        }
+        Utils.sleep(Constants.TEST_WAIT_TIME_MS);
+        Assert.assertEquals(5,ackCount.intValue());
+        Assert.assertEquals(5,failCount.intValue());
+        testLooper.exitLoop();
+      }
+    }
+  }
+;
+  testLooper.addTasksOnWakeup(task);
+  testLooper.loop();
+}

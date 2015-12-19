@@ -1,0 +1,9 @@
+{
+  this.localConfig=new LocalConfig(context);
+  if (this.localConfig.getWorkingDirectory() == null) {
+    throw new RuntimeException("The working is not set");
+  }
+  if (this.localConfig.getHeronCoreReleasePackage() == null) {
+    LOG.info("The heron core release package is not set; " + "supposing it is already in working directory");
+  }
+}

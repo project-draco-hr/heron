@@ -1,0 +1,27 @@
+{
+  int componentParallelism=2;
+  float cpuRequested=8.0f;
+  DefaultConfigLoader config=createRequiredConfig();
+  RoundRobinPacking packing=new RoundRobinPacking();
+  Config topologyConfig=new Config();
+  topologyConfig.setNumStmgrs(2);
+  topologyConfig.setContainerCpuRequested(cpuRequested);
+  Map<String,Integer> spouts=new HashMap<>();
+  spouts.put("spout",componentParallelism);
+  Map<String,Integer> bolts=new HashMap<>();
+  bolts.put("bolt",componentParallelism);
+  TopologyAPI.Topology topology=TopologyUtilityTest.createTopology("test",topologyConfig,spouts,bolts);
+  LocalLauncher launcher=Mockito.spy(LocalLauncher.class.newInstance());
+  LaunchContext context=new LaunchContext(config,topology);
+  launcher.initialize(context);
+  PowerMockito.doReturn(true).when(launcher).localSetup(new LocalConfig(context));
+  PowerMockito.mockStatic(ShellUtility.class);
+  Mockito.when(ShellUtility.runSyncProcess(Matchers.anyBoolean(),Matchers.anyBoolean(),Matchers.anyString(),Matchers.any(StringBuilder.class),Matchers.any(StringBuilder.class),Matchers.any(File.class))).thenReturn(0);
+  PowerMockito.spy(TopologyUtility.class);
+  PowerMockito.doReturn("").when(TopologyUtility.class,"makeClasspath",Matchers.any(TopologyAPI.Topology.class));
+  PowerMockito.mockStatic(FileUtility.class);
+  PowerMockito.when(FileUtility.getBaseName(Matchers.anyString())).thenReturn("");
+  Assert.assertTrue(launcher.launchTopology(packing.pack(context)));
+  PowerMockito.verifyStatic();
+  ShellUtility.runSyncProcess(Matchers.anyBoolean(),Matchers.anyBoolean(),Matchers.startsWith("java -cp"),Matchers.any(StringBuilder.class),Matchers.any(StringBuilder.class),Matchers.any(File.class));
+}

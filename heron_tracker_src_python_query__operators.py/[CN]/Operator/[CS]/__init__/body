@@ -1,0 +1,2 @@
+def __init__(self, children):
+    raise Exception('Not implemented exception')

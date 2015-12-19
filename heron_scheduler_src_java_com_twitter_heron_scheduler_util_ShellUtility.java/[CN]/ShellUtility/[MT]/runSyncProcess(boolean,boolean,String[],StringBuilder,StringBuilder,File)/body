@@ -1,0 +1,26 @@
+{
+  try {
+    if (verbose) {
+      LOG.info("$> " + Arrays.toString(cmdline));
+    }
+    Process process=getProcessBuilder(isInheritIO,cmdline,workingDirectory).start();
+    int exitValue=process.waitFor();
+    if (stdout == null) {
+      stdout=new StringBuilder();
+    }
+    if (stderr == null) {
+      stderr=new StringBuilder();
+    }
+    stdout.append(inputstreamToString(process.getInputStream()));
+    stderr.append(inputstreamToString(process.getErrorStream()));
+    if (verbose) {
+      LOG.info(stdout.toString());
+      LOG.info(stderr.toString());
+    }
+    return exitValue;
+  }
+ catch (  IOException|InterruptedException e) {
+    LOG.severe("Failed to check status of packer " + e);
+  }
+  return -1;
+}

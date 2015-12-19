@@ -1,0 +1,14 @@
+{
+  LOG.log(Level.SEVERE,"Exception caught in thread: " + thread.getName() + " with id: "+ thread.getId(),exception);
+  final CountDownLatch exited=new CountDownLatch(1);
+  final ExecutorService exitExecutor=Executors.newSingleThreadExecutor();
+  exitExecutor.execute(new ForceExitTask(exited,systemConfig.getInstanceForceExitTimeoutMs()));
+  if (thread.getName().equals(Constants.THREAD_SLAVE_NAME)) {
+    new SlaveExitTask().run();
+    gatewayLooper.exitLoop();
+  }
+ else {
+    new GatewayExitTask().run();
+  }
+  exited.countDown();
+}

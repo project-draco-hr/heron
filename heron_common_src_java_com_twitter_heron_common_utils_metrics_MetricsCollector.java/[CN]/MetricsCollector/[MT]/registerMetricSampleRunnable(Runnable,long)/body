@@ -1,0 +1,10 @@
+{
+  Runnable sampleTimer=new Runnable(){
+    @Override public void run(){
+      sampleRunnable.run();
+      runnableToGatherMetrics.registerTimerEventInSeconds(sampleInterval,this);
+    }
+  }
+;
+  runnableToGatherMetrics.registerTimerEventInSeconds(sampleInterval,sampleTimer);
+}

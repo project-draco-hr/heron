@@ -1,0 +1,33 @@
+{
+  final Communicator<MetricsRecord> sinkCommunicator=new Communicator<MetricsRecord>();
+  metricsManagerServer.addSinkCommunicator(sinkCommunicator);
+  runServer();
+  Thread.sleep(3 * 1000);
+  runClient();
+  Thread.sleep(10 * 1000);
+  int messages=0;
+  while (!sinkCommunicator.isEmpty()) {
+    int exceptions=0;
+    int metrics=0;
+    MetricsRecord record=sinkCommunicator.poll();
+    Assert.assertEquals("hostname:0/component/instance-id",record.getSource());
+    Assert.assertEquals("default",record.getContext());
+    for (    MetricsInfo info : record.getMetrics()) {
+      Assert.assertEquals(METRIC_NAME,info.getName());
+      Assert.assertEquals(METRIC_VALUE,info.getValue());
+      metrics++;
+    }
+    Assert.assertEquals(N,metrics);
+    for (    ExceptionInfo info : record.getExceptions()) {
+      Assert.assertEquals(STACK_TRACE,info.getStackTrace());
+      Assert.assertEquals(LAST_TIME,info.getLastTime());
+      Assert.assertEquals(FIRST_TIME,info.getFirstTime());
+      Assert.assertEquals(LOGGING,info.getLogging());
+      Assert.assertEquals(EXCEPTION_COUNT,info.getCount());
+      exceptions++;
+    }
+    Assert.assertEquals(N,exceptions);
+    messages++;
+  }
+  Assert.assertEquals(MESSAGE_SIZE,messages);
+}

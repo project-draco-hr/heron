@@ -1,0 +1,6 @@
+{
+  TopologyAPI.InputStream.Builder bldr=TopologyAPI.InputStream.newBuilder();
+  bldr.setStream(TopologyAPI.StreamId.newBuilder().setId(streamId).setComponentName(componentName));
+  bldr.setGtype(TopologyAPI.Grouping.LOWEST);
+  return grouping(bldr);
+}

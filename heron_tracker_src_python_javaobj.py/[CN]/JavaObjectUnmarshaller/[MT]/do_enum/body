@@ -1,0 +1,6 @@
+def do_enum(self, parent=None, ident=0):
+    enum = JavaObject()
+    (opcode, classdesc) = self._read_and_exec_opcode(ident=(ident + 1), expect=[self.TC_CLASSDESC, self.TC_PROXYCLASSDESC, self.TC_NULL, self.TC_REFERENCE])
+    self._add_reference(enum)
+    (opcode, enumConstantName) = self._read_and_exec_opcode(ident=(ident + 1), expect=[self.TC_STRING, self.TC_REFERENCE])
+    return enumConstantName

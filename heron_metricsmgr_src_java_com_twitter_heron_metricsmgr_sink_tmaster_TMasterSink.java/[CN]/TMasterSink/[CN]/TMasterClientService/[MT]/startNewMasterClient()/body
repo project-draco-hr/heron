@@ -1,0 +1,19 @@
+{
+  if (tMasterClient != null) {
+    tMasterClient.stop();
+    tMasterClient.getNIOLooper().exitLoop();
+  }
+  final NIOLooper looper;
+  try {
+    looper=new NIOLooper();
+  }
+ catch (  IOException e) {
+    throw new RuntimeException("Could not create the NIOLooper",e);
+  }
+  HeronSocketOptions socketOptions=new HeronSocketOptions(Utils.getLong(tmasterClientConfig.get(KEY_NETWORK_WRITE_BATCH_SIZE_BYTES)),Utils.getLong(tmasterClientConfig.get(KEY_NETWORK_WRITE_BATCH_TIME_MS)),Utils.getLong(tmasterClientConfig.get(KEY_NETWORK_READ_BATCH_SIZE_BYTES)),Utils.getLong(tmasterClientConfig.get(KEY_NETWORK_READ_BATCH_TIME_MS)),Utils.getInt(tmasterClientConfig.get(KEY_SOCKET_SEND_BUFFER_BYTES)),Utils.getInt(tmasterClientConfig.get(KEY_SOCKET_RECEIVED_BUFFER_BYTES)));
+  metricsCommunicator.setConsumer(looper);
+  tMasterClient=new TMasterClient(looper,currentTMasterLocation.getHost(),currentTMasterLocation.getMasterPort(),socketOptions,metricsCommunicator);
+  tMasterClient.setReconnectIntervalSec(Utils.getLong(tmasterClientConfig.get(KEY_TMASTER_RECONNECT_INTERVAL_SEC)));
+  LOG.severe(String.format("Starting TMasterClient for the %d time.",startedAttempts.incrementAndGet()));
+  tmasterClientExecutor.execute(tMasterClient);
+}

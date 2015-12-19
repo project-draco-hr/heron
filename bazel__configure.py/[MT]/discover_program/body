@@ -1,0 +1,8 @@
+def discover_program(program_name, env_variable=''):
+    env_value = program_name
+    if (len(env_variable) > 0):
+        try:
+            env_value = os.environ[env_variable]
+        except KeyError:
+            pass
+    return real_program_path(env_value)

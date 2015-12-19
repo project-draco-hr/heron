@@ -1,0 +1,85 @@
+def test_parse_query_string(self):
+    query = 'TS(a, b, c)'
+    root = self.query.parse_query_string(query)
+    self.assertEqual('a', root.component)
+    self.assertEqual(['b'], root.instances)
+    self.assertEqual('c', root.metricName)
+    query = 'TS(a, *, m)'
+    root = self.query.parse_query_string(query)
+    self.assertEqual('a', root.component)
+    self.assertEqual([], root.instances)
+    self.assertEqual('m', root.metricName)
+    query = 'DEFAULT(0, TS(a, b, c))'
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Default)
+    self.assertIsInstance(root.constant, float)
+    self.assertEqual(root.constant, 0)
+    self.assertIsInstance(root.timeseries, TS)
+    query = 'DEFAULT(0, SUM(TS(a, a, a), TS(b, b, b)))'
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Default)
+    self.assertIsInstance(root.constant, float)
+    self.assertIsInstance(root.timeseries, Sum)
+    self.assertEqual(2, len(root.timeseries.timeSeriesList))
+    self.assertIsInstance(root.timeseries.timeSeriesList[0], TS)
+    self.assertIsInstance(root.timeseries.timeSeriesList[1], TS)
+    query = 'MAX(1, TS(a, a, a))'
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Max)
+    self.assertIsInstance(root.timeSeriesList[0], float)
+    self.assertIsInstance(root.timeSeriesList[1], TS)
+    query = 'PERCENTILE(90, TS(a, a, a))'
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Percentile)
+    self.assertIsInstance(root.quantile, float)
+    self.assertIsInstance(root.timeSeriesList[0], TS)
+    query = 'PERCENTILE(TS(a, a, a), 90)'
+    with self.assertRaises(Exception):
+        self.query.parse_query_string(query)
+    query = 'DIVIDE(TS(a, a, a), TS(b, b, b))'
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Divide)
+    self.assertIsInstance(root.timeSeries1, TS)
+    self.assertIsInstance(root.timeSeries2, TS)
+    query = 'DIVIDE(TS(a, a, a), 90)'
+    self.query.parse_query_string(query)
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Divide)
+    self.assertIsInstance(root.timeSeries1, TS)
+    self.assertIsInstance(root.timeSeries2, float)
+    query = 'DIVIDE(TS(a, a, a))'
+    with self.assertRaises(Exception):
+        self.query.parse_query_string(query)
+    query = 'MULTIPLY(TS(a, a, a), TS(b, b, b))'
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Multiply)
+    self.assertIsInstance(root.timeSeries1, TS)
+    self.assertIsInstance(root.timeSeries2, TS)
+    query = 'MULTIPLY(TS(a, a, a), 10)'
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Multiply)
+    self.assertIsInstance(root.timeSeries1, TS)
+    self.assertIsInstance(root.timeSeries2, float)
+    query = 'MULTIPLY(TS(a, a, a))'
+    with self.assertRaises(Exception):
+        self.query.parse_query_string(query)
+    query = 'SUBTRACT(TS(a, a, a), TS(b, b, b))'
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Subtract)
+    self.assertIsInstance(root.timeSeries1, TS)
+    self.assertIsInstance(root.timeSeries2, TS)
+    query = 'SUBTRACT(TS(a, a, a), 10)'
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Subtract)
+    self.assertIsInstance(root.timeSeries1, TS)
+    self.assertIsInstance(root.timeSeries2, float)
+    query = 'SUBTRACT(TS(a, a, a))'
+    with self.assertRaises(Exception):
+        self.query.parse_query_string(query)
+    query = 'RATE(TS(a, a, a))'
+    root = self.query.parse_query_string(query)
+    self.assertIsInstance(root, Rate)
+    self.assertIsInstance(root.timeSeries, TS)
+    query = 'RATE(TS(a, a, a), TS(b, b, b))'
+    with self.assertRaises(Exception):
+        self.query.parse_query_string(query)

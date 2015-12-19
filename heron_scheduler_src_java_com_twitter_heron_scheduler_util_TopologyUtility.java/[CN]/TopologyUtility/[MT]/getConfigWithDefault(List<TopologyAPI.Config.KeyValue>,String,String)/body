@@ -1,0 +1,8 @@
+{
+  for (  TopologyAPI.Config.KeyValue kv : config) {
+    if (kv.getKey().equals(key)) {
+      return kv.getValue();
+    }
+  }
+  return defaultValue;
+}

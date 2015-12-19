@@ -1,0 +1,17 @@
+{
+  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  int interval=systemConfig.getHeronMetricsExportIntervalSec();
+  metricsCollector.registerMetric("__gateway-received-packets-size",receivedPacketsSize,interval);
+  metricsCollector.registerMetric("__gateway-sent-packets-size",sentPacketsSize,interval);
+  metricsCollector.registerMetric("__gateway-received-packets-count",receivedPacketsCount,interval);
+  metricsCollector.registerMetric("__gateway-sent-packets-count",sentPacketsCount,interval);
+  metricsCollector.registerMetric("__gateway-sent-metrics-size",sentMetricsSize,interval);
+  metricsCollector.registerMetric("__gateway-sent-metrics-packets-count",sentMetricsPacketsCount,interval);
+  metricsCollector.registerMetric("__gateway-sent-metrics-count",sentMetricsCount,interval);
+  metricsCollector.registerMetric("__gateway-sent-exceptions-count",sentExceptionsCount,interval);
+  metricsCollector.registerMetric("__gateway-in-stream-queue-size",inStreamQueueSize,interval);
+  metricsCollector.registerMetric("__gateway-out-stream-queue-size",outStreamQueueSize,interval);
+  metricsCollector.registerMetric("__gateway-in-stream-queue-expected-capacity",inStreamQueueExpectedCapacity,interval);
+  metricsCollector.registerMetric("__gateway-out-stream-queue-expected-capacity",outStreamQueueExpectedCapacity,interval);
+  metricsCollector.registerMetric("__gateway-in-queue-full-count",inQueueFullCount,interval);
+}

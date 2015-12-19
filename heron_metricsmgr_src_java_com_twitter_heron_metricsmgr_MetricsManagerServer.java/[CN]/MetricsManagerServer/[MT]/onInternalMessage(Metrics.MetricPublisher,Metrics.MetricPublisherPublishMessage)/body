@@ -1,0 +1,3 @@
+{
+  handlePublisherPublishMessage(request,message);
+}

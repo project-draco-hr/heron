@@ -1,0 +1,37 @@
+{
+  helper.checkOutputSchema(streamId,tuple);
+  List<Integer> customGroupingTargetTaskIds=helper.chooseTasksForCustomStreamGrouping(streamId,tuple);
+  helper.getTopologyContext().invokeHookEmit(tuple,streamId,customGroupingTargetTaskIds);
+  HeronTuples.HeronDataTuple.Builder bldr=HeronTuples.HeronDataTuple.newBuilder();
+  bldr.setKey(0);
+  if (customGroupingTargetTaskIds != null) {
+    for (    Integer taskId : customGroupingTargetTaskIds) {
+      bldr.addDestTaskIds(taskId);
+    }
+  }
+  if (anchors != null) {
+    Set<HeronTuples.RootId> mergedRoots=new HashSet<HeronTuples.RootId>();
+    for (    Tuple tpl : anchors) {
+      if (tpl instanceof TupleImpl) {
+        TupleImpl t=(TupleImpl)tpl;
+        mergedRoots.addAll(t.getRoots());
+      }
+    }
+    for (    HeronTuples.RootId rt : mergedRoots) {
+      bldr.addRoots(rt);
+    }
+  }
+  long tupleSizeInBytes=0;
+  long startTime=System.nanoTime();
+  for (  Object obj : tuple) {
+    byte[] b=serializer.serialize(obj);
+    ByteString bstr=ByteString.copyFrom(b);
+    bldr.addValues(bstr);
+    tupleSizeInBytes+=b.length;
+  }
+  long latency=System.nanoTime() - startTime;
+  boltMetrics.serializeDataTuple(streamId,latency);
+  outputter.addDataTuple(streamId,bldr,tupleSizeInBytes);
+  boltMetrics.emittedTuple(streamId);
+  return null;
+}

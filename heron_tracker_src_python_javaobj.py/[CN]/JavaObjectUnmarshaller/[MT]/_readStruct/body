@@ -1,0 +1,6 @@
+def _readStruct(self, unpack):
+    length = struct.calcsize(unpack)
+    ba = self.object_stream.read(length)
+    if (len(ba) != length):
+        raise RuntimeError('Stream has been ended unexpectedly while unmarshaling.')
+    return struct.unpack(unpack, ba)

@@ -1,0 +1,5 @@
+def real_program_path(program_name):
+    which_path = which(program_name)
+    if which_path:
+        return os.path.realpath(which_path)
+    return None

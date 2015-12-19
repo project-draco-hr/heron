@@ -1,0 +1,18 @@
+{
+  threadsPool.shutdownNow();
+  heronServer.stop();
+  heronServer=null;
+  heronClient.stop();
+  heronClient=null;
+  serverLooper.exitLoop();
+  serverLooper=null;
+  clientLooper.exitLoop();
+  clientLooper=null;
+  threadsPool=null;
+  isOnConnectedInvoked=false;
+  isOnRequestInvoked=false;
+  isOnMessageInvoked=false;
+  isOnCloseInvoked=false;
+  isTimerEventInvoked=false;
+  isClientReceivedResponse=false;
+}

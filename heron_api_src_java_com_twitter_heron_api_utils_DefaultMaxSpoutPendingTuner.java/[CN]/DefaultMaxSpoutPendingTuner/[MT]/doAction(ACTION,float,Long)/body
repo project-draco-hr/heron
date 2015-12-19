@@ -1,0 +1,26 @@
+{
+  if (action == ACTION.INCREASE) {
+    restoreAdjustedMaxSpoutPending=adjustedMaxSpoutPending;
+    restoreProgress=prevProgress;
+    adjustedMaxSpoutPending+=Math.max(1,Math.round((Float)(factor * adjustedMaxSpoutPending)));
+    callsInNoop=0;
+    prevProgress=currentProgress;
+  }
+ else   if (action == ACTION.DECREASE) {
+    restoreAdjustedMaxSpoutPending=adjustedMaxSpoutPending;
+    restoreProgress=prevProgress;
+    adjustedMaxSpoutPending-=Math.max(1,Math.round((Float)(factor * adjustedMaxSpoutPending)));
+    adjustedMaxSpoutPending=Math.max(Math.min(CONSERVATIVE_MAX_SPOUT_PENDING,initialMaxSpoutPending),adjustedMaxSpoutPending);
+    callsInNoop=0;
+    prevProgress=currentProgress;
+  }
+ else   if (action == ACTION.RESTORE) {
+    adjustedMaxSpoutPending=restoreAdjustedMaxSpoutPending;
+    prevProgress=restoreProgress;
+    callsInNoop=0;
+  }
+ else   if (action == ACTION.NOOP) {
+    prevProgress=currentProgress;
+  }
+  lastAction=action;
+}

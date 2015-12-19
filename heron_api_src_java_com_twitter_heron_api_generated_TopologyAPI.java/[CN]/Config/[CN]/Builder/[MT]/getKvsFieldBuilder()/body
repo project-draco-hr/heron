@@ -1,0 +1,7 @@
+{
+  if (kvsBuilder_ == null) {
+    kvsBuilder_=new com.google.protobuf.RepeatedFieldBuilder<com.twitter.heron.api.generated.TopologyAPI.Config.KeyValue,com.twitter.heron.api.generated.TopologyAPI.Config.KeyValue.Builder,com.twitter.heron.api.generated.TopologyAPI.Config.KeyValueOrBuilder>(kvs_,((bitField0_ & 0x00000001) == 0x00000001),getParentForChildren(),isClean());
+    kvs_=null;
+  }
+  return kvsBuilder_;
+}

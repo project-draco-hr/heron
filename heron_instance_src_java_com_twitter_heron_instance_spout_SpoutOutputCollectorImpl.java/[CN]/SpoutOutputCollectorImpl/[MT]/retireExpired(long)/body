@@ -1,0 +1,16 @@
+{
+  List<RootTupleInfo> retval=new ArrayList<RootTupleInfo>();
+  long curTime=System.nanoTime();
+  Iterator<RootTupleInfo> iterator=inFlightTuples.values().iterator();
+  while (iterator.hasNext()) {
+    RootTupleInfo rootTupleInfo=iterator.next();
+    if (rootTupleInfo.isExpired(curTime,timeout)) {
+      retval.add(rootTupleInfo);
+      iterator.remove();
+    }
+ else {
+      break;
+    }
+  }
+  return retval;
+}

@@ -1,0 +1,6 @@
+{
+  if (!targets.containsKey(streamId)) {
+    targets.put(streamId,new ArrayList<Target>());
+  }
+  targets.get(streamId).add(new Target(taskIds,grouping,sourceComponentName));
+}

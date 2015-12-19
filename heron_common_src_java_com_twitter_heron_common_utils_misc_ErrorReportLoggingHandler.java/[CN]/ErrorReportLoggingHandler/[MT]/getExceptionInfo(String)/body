@@ -1,0 +1,11 @@
+{
+  Metrics.ExceptionData.Builder exceptionDataBuilder=exceptionStore.get(getExceptionLocation(trace));
+  if (exceptionDataBuilder == null) {
+    exceptionDataBuilder=Metrics.ExceptionData.newBuilder();
+    exceptionDataBuilder.setFirsttime(new Date().toString());
+    exceptionDataBuilder.setCount(0);
+    exceptionDataBuilder.setStacktrace(NO_TRACE);
+    exceptionStore.put(getExceptionLocation(trace),exceptionDataBuilder);
+  }
+  return exceptionDataBuilder;
+}

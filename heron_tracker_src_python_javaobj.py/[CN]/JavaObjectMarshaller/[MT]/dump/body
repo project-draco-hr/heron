@@ -1,0 +1,6 @@
+def dump(self, obj):
+    self.object_obj = obj
+    self.object_stream = StringIO.StringIO()
+    self._writeStreamHeader()
+    self.writeObject(obj)
+    return self.object_stream.getvalue()

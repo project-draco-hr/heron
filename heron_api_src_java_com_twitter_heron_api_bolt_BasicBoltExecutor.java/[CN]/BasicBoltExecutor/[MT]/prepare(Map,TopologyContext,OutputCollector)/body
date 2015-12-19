@@ -1,0 +1,4 @@
+{
+  _bolt.prepare(heronConf,context);
+  _collector=new BasicOutputCollector(collector);
+}

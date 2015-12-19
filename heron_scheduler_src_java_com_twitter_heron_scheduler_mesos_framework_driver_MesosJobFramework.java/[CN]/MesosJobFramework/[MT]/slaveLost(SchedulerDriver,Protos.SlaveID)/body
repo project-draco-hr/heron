@@ -1,0 +1,3 @@
+{
+  LOG.info(String.format("Slave %s lost",slaveId));
+}

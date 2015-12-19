@@ -1,0 +1,14 @@
+{
+  threadsPool.shutdownNow();
+  metricsManagerServer.stop();
+  metricsManagerServer=null;
+  simpleLocationPublisher.stop();
+  simpleLocationPublisher.getNIOLooper().exitLoop();
+  serverLooper.exitLoop();
+  serverLooper=null;
+  threadsPool=null;
+  Field field=SingletonRegistry.INSTANCE.getClass().getDeclaredField("singletonObjects");
+  field.setAccessible(true);
+  Map<String,Object> singletonObjects=(Map<String,Object>)field.get(SingletonRegistry.INSTANCE);
+  singletonObjects.clear();
+}

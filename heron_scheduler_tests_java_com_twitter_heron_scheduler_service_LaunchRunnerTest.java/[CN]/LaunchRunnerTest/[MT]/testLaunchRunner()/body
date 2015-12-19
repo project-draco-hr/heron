@@ -1,0 +1,7 @@
+{
+  assertTrue(launchRunner.call());
+  verify(launcher).initialize(eq(context));
+  verify(launcher).updateExecutionState(notNull(ExecutionEnvironment.ExecutionState.class));
+  verify(packingAlgorithm).pack(eq(context));
+  verify(launcher).launchTopology(eq(packingAlgorithm.pack(context)));
+}

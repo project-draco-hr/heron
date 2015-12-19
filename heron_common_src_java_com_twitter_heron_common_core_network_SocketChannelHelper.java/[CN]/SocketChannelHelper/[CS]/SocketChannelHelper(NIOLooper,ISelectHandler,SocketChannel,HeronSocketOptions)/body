@@ -1,0 +1,12 @@
+{
+  this.looper=looper;
+  this.selectHandler=selectHandler;
+  this.socketChannel=socketChannel;
+  this.outgoingPacketsToWrite=new LinkedList<OutgoingPacket>();
+  this.incomingPacket=new IncomingPacket();
+  this.writeBatchSizeInBytes=options.getNetworkWriteBatchSizeInBytes();
+  this.writeBatchTimeInNs=options.getNetworkWriteBatchTimeInMs() * Constants.MILLISECONDS_TO_NANOSECONDS;
+  this.readBatchSizeInBytes=options.getNetworkReadBatchSizeInBytes();
+  this.readReadBatchTimeInNs=options.getNetworkReadBatchTimeInMs() * Constants.MILLISECONDS_TO_NANOSECONDS;
+  this.enableReading();
+}

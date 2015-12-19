@@ -1,0 +1,8 @@
+{
+  this.executorName=executorName;
+  this.metricsSink=metricsSink;
+  this.slaveLooper=slaveLooper;
+  this.metricsInSinkQueue=metricsInSinkQueue;
+  this.sinkContext=sinkContext;
+  this.sinkConfig=new HashMap<String,Object>();
+}

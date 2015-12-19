@@ -1,0 +1,5 @@
+{
+  currentControlTuple=null;
+  currentDataTuple=null;
+  outQueue.clear();
+}

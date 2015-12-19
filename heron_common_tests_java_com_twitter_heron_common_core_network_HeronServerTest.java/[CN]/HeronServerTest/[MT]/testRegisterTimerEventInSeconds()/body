@@ -1,0 +1,11 @@
+{
+  Runnable r=new Runnable(){
+    @Override public void run(){
+      isTimerEventInvoked=true;
+    }
+  }
+;
+  heronServer.registerTimerEventInSeconds(0,r);
+  runBase();
+  Assert.assertTrue(isTimerEventInvoked);
+}

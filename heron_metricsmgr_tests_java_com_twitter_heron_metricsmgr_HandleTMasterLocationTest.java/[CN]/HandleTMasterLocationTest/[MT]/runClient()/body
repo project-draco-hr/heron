@@ -1,0 +1,17 @@
+{
+  Runnable runClient=new Runnable(){
+    @Override public void run(){
+      try {
+        NIOLooper looper=new NIOLooper();
+        simpleLocationPublisher=new SimpleTMasterLocationPublisher(looper,SERVER_HOST,serverPort);
+        simpleLocationPublisher.start();
+        looper.loop();
+      }
+ catch (      Exception e) {
+        throw new RuntimeException("Some error instantiating client");
+      }
+    }
+  }
+;
+  threadsPool.execute(runClient);
+}

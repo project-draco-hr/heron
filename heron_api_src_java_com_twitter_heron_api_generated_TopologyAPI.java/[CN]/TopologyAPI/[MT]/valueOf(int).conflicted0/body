@@ -1,0 +1,20 @@
+{
+switch (value) {
+case 1:
+    return SHUFFLE;
+case 2:
+  return FIELDS;
+case 3:
+return ALL;
+case 4:
+return LOWEST;
+case 5:
+return NONE;
+case 6:
+return DIRECT;
+case 7:
+return CUSTOM;
+default :
+return null;
+}
+}

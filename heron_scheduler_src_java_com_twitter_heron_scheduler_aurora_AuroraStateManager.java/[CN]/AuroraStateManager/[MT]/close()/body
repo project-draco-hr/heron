@@ -1,0 +1,7 @@
+{
+  for (  Process p : processHandles) {
+    p.destroy();
+  }
+  processHandles.clear();
+  super.close();
+}

@@ -1,0 +1,19 @@
+{
+  int componentParallelism=2;
+  Config topologyConfig=new Config();
+  topologyConfig.setNumStmgrs(3);
+  Map<String,Integer> spouts=new HashMap<>();
+  spouts.put("spout",componentParallelism);
+  Map<String,Integer> bolts=new HashMap<>();
+  bolts.put("bolt",componentParallelism);
+  TopologyAPI.Topology topology=TopologyUtilityTest.createTopology("test",topologyConfig,spouts,bolts);
+  DefaultConfigLoader config=createRequiredConfig();
+  RoundRobinPacking packing=new RoundRobinPacking();
+  AuroraLauncher launcher=AuroraLauncher.class.newInstance();
+  LaunchContext context=new LaunchContext(config,topology);
+  packing.context=context;
+  packing.topology=topology;
+  launcher.initialize(context);
+  Assert.assertEquals(1 * Constants.GB,packing.getDefaultInstanceRam(packing.getBasePacking()));
+  Assert.assertEquals(1 * Constants.GB + 2 * Constants.GB,packing.getContainerRamHint(packing.getBasePacking()));
+}

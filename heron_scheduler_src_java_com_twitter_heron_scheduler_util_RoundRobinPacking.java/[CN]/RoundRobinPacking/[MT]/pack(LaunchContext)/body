@@ -1,0 +1,6 @@
+{
+  this.topology=context.getTopology();
+  this.context=context;
+  Map<String,List<String>> containerInstancesMap=getBasePacking();
+  return fillInResource(containerInstancesMap);
+}

@@ -1,0 +1,10 @@
+{
+  isRequestNeed=true;
+  isMessageNeed=true;
+  runBase();
+  Assert.assertTrue(isOnMessageInvoked);
+  Assert.assertEquals(N,messagesReceieved);
+  isRequestNeed=false;
+  isMessageNeed=false;
+  messagesReceieved=0;
+}

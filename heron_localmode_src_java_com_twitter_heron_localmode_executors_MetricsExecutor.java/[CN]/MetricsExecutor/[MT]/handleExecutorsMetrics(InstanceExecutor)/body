@@ -1,0 +1,5 @@
+{
+  while (!instance.getMetricsOutQueue().isEmpty()) {
+    handleMetricPublisherPublishMessage(instance.getInstanceId(),instance.getMetricsOutQueue().poll());
+  }
+}

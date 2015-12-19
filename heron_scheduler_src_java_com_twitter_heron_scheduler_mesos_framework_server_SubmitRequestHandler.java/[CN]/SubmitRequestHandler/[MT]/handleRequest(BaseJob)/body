@@ -1,0 +1,11 @@
+{
+  LOG.info("Received request for job: " + newJob.toString());
+  if (jobScheduler.registerJob(newJob)) {
+    LOG.info("Added job:: " + newJob.name);
+    return true;
+  }
+ else {
+    LOG.info("Failed to add job: " + newJob.name);
+    return false;
+  }
+}

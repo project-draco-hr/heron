@@ -1,0 +1,5 @@
+import os
+from contextlib import contextmanager
+from .common import die
+__all__ = ('ENV', 'Variables')
+ENV = Variables()

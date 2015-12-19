@@ -1,0 +1,8 @@
+{
+  if (boltsBuilder_ == null) {
+    return bolts_.size();
+  }
+ else {
+    return boltsBuilder_.getCount();
+  }
+}

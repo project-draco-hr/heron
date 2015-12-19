@@ -1,0 +1,5 @@
+{
+  this.cpu=cpu;
+  this.ram=ram;
+  this.disk=disk;
+}

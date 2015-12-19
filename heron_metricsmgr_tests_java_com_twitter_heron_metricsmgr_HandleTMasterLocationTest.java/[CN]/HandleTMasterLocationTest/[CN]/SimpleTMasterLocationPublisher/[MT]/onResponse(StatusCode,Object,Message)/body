@@ -1,0 +1,9 @@
+{
+  if (response instanceof Metrics.MetricPublisherRegisterResponse) {
+    Assert.assertEquals(Common.StatusCode.OK,((Metrics.MetricPublisherRegisterResponse)response).getStatus().getStatus());
+    sendMessage();
+  }
+ else {
+    org.junit.Assert.fail("Unknown type of response received");
+  }
+}

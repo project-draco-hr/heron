@@ -1,0 +1,7 @@
+{
+  if (currentControlTuple == null || currentControlTuple.getFailsCount() > 0 || currentControlTuple.getAcksCount() > controlTupleSetCapacity) {
+    initNewControlTuple();
+  }
+  currentControlTuple.addAcks(newTuple);
+  totalDataEmittedInBytes+=tupleSizeInBytes;
+}

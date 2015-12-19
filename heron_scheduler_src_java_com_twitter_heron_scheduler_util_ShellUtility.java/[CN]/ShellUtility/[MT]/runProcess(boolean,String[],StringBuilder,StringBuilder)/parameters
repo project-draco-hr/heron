@@ -1,0 +1,4 @@
+boolean verbose
+String[] cmdline
+StringBuilder stdout
+StringBuilder stderr

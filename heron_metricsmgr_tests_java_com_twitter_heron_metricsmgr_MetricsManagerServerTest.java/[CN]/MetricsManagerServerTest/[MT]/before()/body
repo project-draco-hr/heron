@@ -1,0 +1,7 @@
+{
+  serverPort=Utils.getFreePort();
+  threadsPool=Executors.newFixedThreadPool(2);
+  HeronSocketOptions serverSocketOptions=new HeronSocketOptions(100 * 1024 * 1024,100,100 * 1024 * 1024,100,5 * 1024 * 1024,5 * 1024 * 1024);
+  serverLooper=new NIOLooper();
+  metricsManagerServer=new MetricsManagerServer(serverLooper,SERVER_HOST,serverPort,serverSocketOptions,new MultiCountMetric());
+}

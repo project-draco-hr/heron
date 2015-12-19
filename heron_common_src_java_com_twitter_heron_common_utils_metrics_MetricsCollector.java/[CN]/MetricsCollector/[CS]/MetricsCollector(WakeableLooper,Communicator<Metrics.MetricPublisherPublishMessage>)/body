@@ -1,0 +1,6 @@
+{
+  metrics=new HashMap<String,IMetric>();
+  timeBucketToMetricNames=new HashMap<Integer,List<String>>();
+  this.queue=queue;
+  this.runnableToGatherMetrics=runnableToGatherMetrics;
+}

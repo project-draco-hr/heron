@@ -1,0 +1,3 @@
+{
+  return (ILauncher)Class.forName(launcherClass).newInstance();
+}

@@ -1,0 +1,7 @@
+{
+  streamInQueue.setConsumer(looper);
+  streamInQueue.init(CAPACITY,CAPACITY,CURRENT_SAMPLE_WEIGHT);
+  streamOutQueue.setProducer(looper);
+  streamOutQueue.init(CAPACITY,CAPACITY,CURRENT_SAMPLE_WEIGHT);
+  metricsOutQueue.setProducer(looper);
+}

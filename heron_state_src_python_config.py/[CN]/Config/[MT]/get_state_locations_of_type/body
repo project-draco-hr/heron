@@ -1,0 +1,3 @@
+def get_state_locations_of_type(self, location_type):
+    '\n    Return a list of state locations of a particular type.\n    '
+    return filter((lambda location: (location['type'] == location_type)), self.locations)

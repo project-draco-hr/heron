@@ -1,0 +1,37 @@
+{
+  Runnable handleControlMessageTask=new Runnable(){
+    @Override public void run(){
+      while (!inControlQueue.isEmpty()) {
+        InstanceControlMsg instanceControlMsg=inControlQueue.poll();
+        if (instanceControlMsg.isNewPhysicalPlanHelper()) {
+          PhysicalPlanHelper newHelper=instanceControlMsg.getNewPhysicalPlanHelper();
+          if (helper == null) {
+            handleNewAssignment(newHelper);
+          }
+ else {
+            if (!helper.getTopologyState().equals(newHelper.getTopologyState())) {
+              if (newHelper.getTopologyState().equals(TopologyAPI.TopologyState.RUNNING)) {
+                if (!isInstanceStarted) {
+                  startInstance();
+                }
+                instance.activate();
+              }
+ else               if (newHelper.getTopologyState().equals(TopologyAPI.TopologyState.PAUSED)) {
+                instance.deactivate();
+              }
+ else {
+                throw new RuntimeException("Unexpected TopologyState is updated for spout: " + newHelper.getTopologyState());
+              }
+            }
+ else {
+              LOG.info("Topology state remains the same in Slave.");
+            }
+          }
+          helper=newHelper;
+        }
+      }
+    }
+  }
+;
+  slaveLooper.addTasksOnWakeup(handleControlMessageTask);
+}

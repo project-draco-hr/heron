@@ -1,0 +1,4 @@
+@abc.abstractmethod
+def create_topology(self, topologyName, topology):
+    '\n    Adds the topology entry to topologies list.\n    '
+    pass

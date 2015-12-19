@@ -1,0 +1,8 @@
+{
+  if (kvsBuilder_ == null) {
+    return kvs_.get(index);
+  }
+ else {
+    return kvsBuilder_.getMessageOrBuilder(index);
+  }
+}

@@ -1,0 +1,15 @@
+{
+  if (status != StatusCode.OK) {
+    LOG.severe(String.format("Cannot connect to the metrics port with status: %s, Will Retry..",status));
+    Runnable r=new Runnable(){
+      public void run(){
+        start();
+      }
+    }
+;
+    getNIOLooper().registerTimerEventInSeconds(systemConfig.getInstanceReconnectMetricsmgrIntervalSec(),r);
+    return;
+  }
+  LOG.info("Connected to Metrics Manager. Ready to send register request");
+  sendRegisterRequest();
+}

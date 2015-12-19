@@ -1,0 +1,4 @@
+{
+  collector.emit(input.getValues());
+  collector.emit(input.getValues());
+}

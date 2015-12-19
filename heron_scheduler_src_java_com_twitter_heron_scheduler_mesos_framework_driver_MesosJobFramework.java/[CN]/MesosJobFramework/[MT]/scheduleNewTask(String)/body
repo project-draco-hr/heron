@@ -1,0 +1,8 @@
+{
+  LOG.info(String.format("We are to schedule task: [%s], set it TO_SCHEDULE. WAL",taskId));
+  BaseTask task=new BaseTask(taskId,"not-yet-scheduled",BaseTask.TaskState.TO_SCHEDULE);
+  updateTrackingTask(TaskUtils.getJobNameForTaskId(taskId),task);
+  pendingScheduleTasks.add(taskId);
+  LOG.info(String.format("Added task: %s into the pending-to-start-queue: ",taskId));
+  return true;
+}

@@ -1,0 +1,5 @@
+{
+  for (  ITaskHook taskHook : taskHooks) {
+    taskHook.prepare(getTopologyConfig(),this);
+  }
+}

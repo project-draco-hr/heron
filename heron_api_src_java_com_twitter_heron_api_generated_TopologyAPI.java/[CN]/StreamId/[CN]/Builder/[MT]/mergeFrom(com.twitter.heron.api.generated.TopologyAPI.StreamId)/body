@@ -1,0 +1,15 @@
+{
+  if (other == com.twitter.heron.api.generated.TopologyAPI.StreamId.getDefaultInstance())   return this;
+  if (other.hasId()) {
+    bitField0_|=0x00000001;
+    id_=other.id_;
+    onChanged();
+  }
+  if (other.hasComponentName()) {
+    bitField0_|=0x00000002;
+    componentName_=other.componentName_;
+    onChanged();
+  }
+  this.mergeUnknownFields(other.getUnknownFields());
+  return this;
+}

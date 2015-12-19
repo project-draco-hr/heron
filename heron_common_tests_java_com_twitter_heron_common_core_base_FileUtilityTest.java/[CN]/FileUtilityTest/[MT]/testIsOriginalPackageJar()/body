@@ -1,0 +1,6 @@
+{
+  String jarFile="a.jar";
+  Assert.assertTrue(FileUtility.isOriginalPackageJar(jarFile));
+  String notJarFile="b.tar";
+  Assert.assertFalse(FileUtility.isOriginalPackageJar(notJarFile));
+}

@@ -1,0 +1,10 @@
+{
+  ByteArrayInputStream bis=new ByteArrayInputStream(_input);
+  try {
+    ObjectInputStream ois=new ObjectInputStream(bis);
+    return ois.readObject();
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

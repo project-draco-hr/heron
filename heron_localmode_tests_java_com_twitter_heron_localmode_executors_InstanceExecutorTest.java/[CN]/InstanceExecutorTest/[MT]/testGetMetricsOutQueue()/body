@@ -1,0 +1,4 @@
+{
+  Assert.assertNotNull(instanceExecutor.getMetricsOutQueue());
+  Assert.assertEquals(0,instanceExecutor.getMetricsOutQueue().size());
+}

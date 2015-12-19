@@ -1,0 +1,4 @@
+PhysicalPlanHelper helper
+Communicator<HeronTuples.HeronTupleSet> streamInQueue
+Communicator<HeronTuples.HeronTupleSet> streamOutQueue
+SlaveLooper looper

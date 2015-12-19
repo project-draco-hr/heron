@@ -1,0 +1,4 @@
+{
+  this.exited=exited;
+  this.timeoutInMs=timeoutInMs;
+}

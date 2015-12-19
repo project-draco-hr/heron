@@ -1,0 +1,8 @@
+def get_cpus_per_container(topology):
+    '\n  The argument is the proto object for topology.\n  Calculate and return the CPUs per container.\n  It can be calculated in two ways:\n      1. It is passed in config.\n      2. Allocate 1 CPU per instance in a container, and 1 extra for stmrs.\n  '
+    cpus = get_topology_config(topology, constants.TOPOLOGY_CONTAINER_CPU_REQUESTED)
+    if (not cpus):
+        ninstances = get_total_instances(topology)
+        nstmgrs = get_nstmgrs(topology)
+        cpus = ((float(ninstances) / nstmgrs) + 1)
+    return float(cpus)

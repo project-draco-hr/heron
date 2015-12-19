@@ -1,0 +1,11 @@
+def test_add_new_topology(self):
+    self.assertItemsEqual([], self.tracker.topologies)
+    mock_state_manager_1 = Mock()
+    mock_state_manager_1.name = 'mock_name1'
+    self.tracker.addNewTopology(mock_state_manager_1, 'top_name1')
+    self.assertItemsEqual(['top_name1'], map((lambda t: t.name), self.tracker.topologies))
+    self.tracker.addNewTopology(mock_state_manager_1, 'top_name2')
+    self.assertItemsEqual(['top_name1', 'top_name2'], map((lambda t: t.name), self.tracker.topologies))
+    self.assertEqual(2, mock_state_manager_1.get_pplan.call_count)
+    self.assertEqual(2, mock_state_manager_1.get_execution_state.call_count)
+    self.assertEqual(2, mock_state_manager_1.get_tmaster.call_count)

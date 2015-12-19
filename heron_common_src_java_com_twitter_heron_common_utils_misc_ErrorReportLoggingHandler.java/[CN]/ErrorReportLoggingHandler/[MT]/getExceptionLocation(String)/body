@@ -1,0 +1,15 @@
+{
+  if (trace == null) {
+    return NO_TRACE;
+  }
+  String[] firstLine=trace.split("\n");
+  if (firstLine.length == 0) {
+    return NO_TRACE;
+  }
+ else   if (firstLine.length == 1) {
+    return firstLine[0];
+  }
+ else {
+    return firstLine[0] + "\n" + firstLine[1];
+  }
+}

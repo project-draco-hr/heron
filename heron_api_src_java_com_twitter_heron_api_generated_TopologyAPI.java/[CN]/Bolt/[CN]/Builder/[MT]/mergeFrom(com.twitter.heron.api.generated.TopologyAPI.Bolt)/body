@@ -1,0 +1,62 @@
+{
+  if (other == com.twitter.heron.api.generated.TopologyAPI.Bolt.getDefaultInstance())   return this;
+  if (other.hasComp()) {
+    mergeComp(other.getComp());
+  }
+  if (inputsBuilder_ == null) {
+    if (!other.inputs_.isEmpty()) {
+      if (inputs_.isEmpty()) {
+        inputs_=other.inputs_;
+        bitField0_=(bitField0_ & ~0x00000002);
+      }
+ else {
+        ensureInputsIsMutable();
+        inputs_.addAll(other.inputs_);
+      }
+      onChanged();
+    }
+  }
+ else {
+    if (!other.inputs_.isEmpty()) {
+      if (inputsBuilder_.isEmpty()) {
+        inputsBuilder_.dispose();
+        inputsBuilder_=null;
+        inputs_=other.inputs_;
+        bitField0_=(bitField0_ & ~0x00000002);
+        inputsBuilder_=com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ? getInputsFieldBuilder() : null;
+      }
+ else {
+        inputsBuilder_.addAllMessages(other.inputs_);
+      }
+    }
+  }
+  if (outputsBuilder_ == null) {
+    if (!other.outputs_.isEmpty()) {
+      if (outputs_.isEmpty()) {
+        outputs_=other.outputs_;
+        bitField0_=(bitField0_ & ~0x00000004);
+      }
+ else {
+        ensureOutputsIsMutable();
+        outputs_.addAll(other.outputs_);
+      }
+      onChanged();
+    }
+  }
+ else {
+    if (!other.outputs_.isEmpty()) {
+      if (outputsBuilder_.isEmpty()) {
+        outputsBuilder_.dispose();
+        outputsBuilder_=null;
+        outputs_=other.outputs_;
+        bitField0_=(bitField0_ & ~0x00000004);
+        outputsBuilder_=com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ? getOutputsFieldBuilder() : null;
+      }
+ else {
+        outputsBuilder_.addAllMessages(other.outputs_);
+      }
+    }
+  }
+  this.mergeUnknownFields(other.getUnknownFields());
+  return this;
+}

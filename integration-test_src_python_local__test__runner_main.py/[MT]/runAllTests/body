@@ -1,0 +1,9 @@
+def runAllTests(conf, args):
+    successes = []
+    failures = []
+    for test in TEST_CASES:
+        if (runTest(test, test, args) == True):
+            successes += [test]
+        else:
+            failures += [test]
+    return (successes, failures)

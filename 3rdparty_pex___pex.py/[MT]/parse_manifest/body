@@ -1,0 +1,14 @@
+def parse_manifest(manifest_text):
+    lines = manifest_text.split('\n')
+    manifest = {}
+    curr_key = ''
+    for line in lines:
+        tokens = line.split(':')
+        if (len(tokens) != 2):
+            continue
+        elif (not line.startswith('\t')):
+            manifest[tokens[0]] = {}
+            curr_key = tokens[0]
+        else:
+            manifest[curr_key][tokens[0][1:]] = tokens[1]
+    return manifest

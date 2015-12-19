@@ -1,0 +1,19 @@
+{
+  if (o instanceof Long) {
+    return ((Long)o).intValue();
+  }
+ else   if (o instanceof Integer) {
+    return (Integer)o;
+  }
+ else   if (o instanceof Short) {
+    return ((Short)o).intValue();
+  }
+ else {
+    try {
+      return Integer.parseInt(o.toString());
+    }
+ catch (    NumberFormatException nfe) {
+      throw new IllegalArgumentException("Don't know how to convert " + o + " + to int");
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  buffer.putAll((Map<String,Integer>)tuple.getValue(0));
+}

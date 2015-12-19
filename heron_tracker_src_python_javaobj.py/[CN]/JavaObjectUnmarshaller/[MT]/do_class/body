@@ -1,0 +1,6 @@
+def do_class(self, parent=None, ident=0):
+    log_debug('[class]', ident)
+    (opcode, classdesc) = self._read_and_exec_opcode(ident=(ident + 1), expect=[self.TC_CLASSDESC, self.TC_PROXYCLASSDESC, self.TC_NULL, self.TC_REFERENCE])
+    log_debug(('Classdesc: %s' % classdesc), ident)
+    self._add_reference(classdesc)
+    return classdesc

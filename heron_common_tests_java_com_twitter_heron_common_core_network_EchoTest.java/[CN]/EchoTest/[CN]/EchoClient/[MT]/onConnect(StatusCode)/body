@@ -1,0 +1,9 @@
+{
+  if (status != StatusCode.OK) {
+    Assert.fail("Connection with server failed");
+  }
+ else {
+    LOG.info("Connected with server");
+    sendRequest();
+  }
+}

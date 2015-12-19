@@ -1,0 +1,8 @@
+{
+  String testString="testString";
+  StringBuilder stdout=new StringBuilder();
+  StringBuilder stderr=new StringBuilder();
+  Assert.assertEquals(0,ShellUtility.runProcess(true,"echo " + testString,stdout,stderr));
+  Assert.assertEquals(testString,stdout.toString().trim());
+  Assert.assertTrue(stderr.toString().trim().isEmpty());
+}

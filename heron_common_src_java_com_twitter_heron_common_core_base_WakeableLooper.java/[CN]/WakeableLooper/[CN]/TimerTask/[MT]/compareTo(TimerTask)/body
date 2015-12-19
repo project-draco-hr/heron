@@ -1,0 +1,5 @@
+{
+  if (this.expirationNs - other.expirationNs < 0)   return -1;
+  if (this.expirationNs - other.expirationNs > 0)   return 1;
+  return 0;
+}

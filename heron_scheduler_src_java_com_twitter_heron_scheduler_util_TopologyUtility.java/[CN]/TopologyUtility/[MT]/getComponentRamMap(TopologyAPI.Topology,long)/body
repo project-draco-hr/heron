@@ -1,0 +1,30 @@
+{
+  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
+  Map<String,Long> ramMap=new HashMap<>();
+  Set<String> componentNames=getComponentParallelism(topology).keySet();
+  for (  String componentName : componentNames) {
+    ramMap.put(componentName,defaultRam);
+  }
+  String ramMapStr=getConfigWithDefault(topologyConfig,Config.TOPOLOGY_COMPONENT_RAMMAP,null);
+  if (ramMapStr != null) {
+    String[] ramMapTokens=ramMapStr.split(",");
+    for (    String token : ramMapTokens) {
+      if (token.trim().isEmpty()) {
+        continue;
+      }
+      String[] componentAndRam=token.split(":");
+      if (componentAndRam.length != 2) {
+        throw new RuntimeException("Malformed component rammap");
+      }
+      if (!ramMap.containsKey(componentAndRam[0])) {
+        throw new RuntimeException("Invalid component. " + componentAndRam[0] + " not found");
+      }
+      long requiredRam=Long.parseLong(componentAndRam[1]);
+      if (requiredRam < 300L * Constants.MB && requiredRam > 0) {
+        throw new RuntimeException(String.format("Component %s require atleast 300MB ram. Given on %d MB",componentAndRam[0],requiredRam / Constants.MB));
+      }
+      ramMap.put(componentAndRam[0],requiredRam);
+    }
+  }
+  return ramMap;
+}

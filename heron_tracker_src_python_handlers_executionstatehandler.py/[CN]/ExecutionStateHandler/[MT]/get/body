@@ -1,0 +1,11 @@
+@tornado.gen.coroutine
+def get(self):
+    try:
+        dc = self.get_argument_dc()
+        environ = self.get_argument_environ()
+        topName = self.get_argument_topology()
+        topologyInfo = self.tracker.getTopologyInfo(topName, dc, environ)
+        executionState = topologyInfo['execution_state']
+        self.write_success_response(executionState)
+    except Exception as e:
+        self.write_error_response(e)

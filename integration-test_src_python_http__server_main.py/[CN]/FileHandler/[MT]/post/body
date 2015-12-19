@@ -1,0 +1,12 @@
+def post(self, fileName):
+    jsonFilePath = (((RESULTS_DIRECTORY + '/') + fileName) + '.json')
+    with open(jsonFilePath, 'w') as jsonFile:
+        try:
+            data = tornado.escape.json_decode(self.request.body)
+            jsonFile.write(tornado.escape.json_encode(data))
+            self.write((('Results written to ' + jsonFilePath) + ' successfully'))
+        except ValueError as e:
+            logging.error(('ValueError: ' + str(e)))
+            self.clear()
+            self.set_status(400)
+            self.finish('Invalid Json')

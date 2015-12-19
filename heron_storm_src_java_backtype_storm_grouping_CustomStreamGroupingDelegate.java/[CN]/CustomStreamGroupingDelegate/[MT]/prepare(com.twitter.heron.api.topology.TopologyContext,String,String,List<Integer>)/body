@@ -1,0 +1,5 @@
+{
+  TopologyContext c=new TopologyContext(context);
+  GlobalStreamId g=new GlobalStreamId(component,streamId);
+  delegate.prepare(c,g,targetTasks);
+}

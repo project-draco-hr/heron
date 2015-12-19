@@ -1,0 +1,19 @@
+{
+  if (isConnected()) {
+    throw new RuntimeException("Already connected to Graphite");
+  }
+  if (tooManyConnectionFailures()) {
+    throw new RuntimeException(String.format("Too many connection failures to %s:%d, would not try to connect again.",serverHost,serverPort));
+  }
+  try {
+    socket=new Socket(serverHost,serverPort);
+    writer=new OutputStreamWriter(socket.getOutputStream(),StandardCharsets.UTF_8);
+  }
+ catch (  Exception e) {
+    connectionFailures++;
+    if (tooManyConnectionFailures()) {
+      LOG.severe("Too many connection failures, would not try to connect again.");
+    }
+    LOG.log(Level.SEVERE,"Error creating connection, " + serverHost + ":"+ serverPort,e);
+  }
+}

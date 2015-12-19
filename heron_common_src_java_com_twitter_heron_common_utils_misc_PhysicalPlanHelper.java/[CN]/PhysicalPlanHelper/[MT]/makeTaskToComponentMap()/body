@@ -1,0 +1,7 @@
+{
+  Map<Integer,String> retval=new HashMap<Integer,String>();
+  for (  PhysicalPlans.Instance instance : pplan.getInstancesList()) {
+    retval.put(instance.getInfo().getTaskId(),instance.getInfo().getComponentName());
+  }
+  return retval;
+}

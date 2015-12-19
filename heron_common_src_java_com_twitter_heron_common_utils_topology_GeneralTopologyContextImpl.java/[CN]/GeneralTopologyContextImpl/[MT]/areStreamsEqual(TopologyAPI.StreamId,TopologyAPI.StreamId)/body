@@ -1,0 +1,3 @@
+{
+  return a.getId().equals(b.getId()) && a.getComponentName().equals(b.getComponentName());
+}

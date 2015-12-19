@@ -1,0 +1,6 @@
+{
+  Map<Object,Object> conf=new HashMap<>();
+  conf.put(FileSystemStateManager.ROOT_ADDRESS,rootAddr);
+  conf.put(LocalFileStateManager.IS_INITIALIZE_FILE_TREE,false);
+  return conf;
+}

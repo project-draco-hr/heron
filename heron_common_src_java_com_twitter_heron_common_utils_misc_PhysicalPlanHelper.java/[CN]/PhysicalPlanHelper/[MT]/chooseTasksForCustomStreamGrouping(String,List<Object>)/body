@@ -1,0 +1,3 @@
+{
+  return customGrouper.chooseTasks(streamId,values);
+}

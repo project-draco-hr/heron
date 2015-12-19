@@ -1,0 +1,19 @@
+{
+synchronized (lock.proceedLock) {
+    while (!lock.isToProceed) {
+      long nextTimeoutIntervalMs=getNextTimeoutIntervalMs();
+      if (nextTimeoutIntervalMs > 0) {
+        try {
+          lock.proceedLock.wait(nextTimeoutIntervalMs);
+        }
+ catch (        InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+ else {
+        break;
+      }
+    }
+    lock.isToProceed=false;
+  }
+}

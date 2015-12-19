@@ -1,0 +1,31 @@
+{
+  String myVersion="myVerison";
+  String packerVersion="1";
+  String forcedVersion="2";
+  StringBuilder override=new StringBuilder("dc/role/environ");
+  addConfig(override,Constants.HERON_RELEASE_TAG,Constants.DEFAULT_RELEASE_PACKAGE);
+  addConfig(override,Constants.HERON_RELEASE_USER_NAME,"heron");
+  addConfig(override,Constants.HERON_RELEASE_VERSION,myVersion);
+  addConfig(override,PackerUploader.HERON_PACKER_PKGVERSION,forcedVersion);
+  final File temp=File.createTempFile("temp",Long.toString(System.nanoTime()));
+  BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(temp)));
+  Map<String,Object> versionMap=new HashMap<>();
+  versionMap.put(myVersion,packerVersion);
+  String versionMapInJSON="";
+  try {
+    versionMapInJSON=mapper.writeValueAsString(versionMap);
+  }
+ catch (  JsonProcessingException e) {
+    LOG.log(Level.SEVERE,"Could not convert map to JSONString: " + versionMap.toString(),e);
+  }
+  writer.write(versionMapInJSON);
+  writer.flush();
+  writer.close();
+  temp.deleteOnExit();
+  addConfig(override,Constants.VERSIONS_FILENAME_PREFIX + ".dc",temp.getName());
+  addConfig(override,AuroraLauncher.HERON_DIR,temp.getParent());
+  AuroraConfigLoader configLoader=AuroraConfigLoader.class.newInstance();
+  configLoader.properties=new Properties();
+  configLoader.applyConfigOverride(override.toString());
+  Assert.assertEquals(forcedVersion,configLoader.properties.getProperty(PackerUploader.HERON_PACKER_PKGVERSION));
+}

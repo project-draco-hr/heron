@@ -1,0 +1,4 @@
+{
+  toStop=true;
+  looper.wakeUp();
+}

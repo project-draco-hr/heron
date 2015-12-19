@@ -1,0 +1,20 @@
+{
+  int shardId=request.getContainerIndex();
+  if (shardId == -1) {
+    LOG.info("To restart all containers.");
+    List<Process> tmpProcessList=new LinkedList<>(processToShard.keySet());
+    for (    Process process : tmpProcessList) {
+      process.destroy();
+    }
+  }
+ else {
+    LOG.info("To restart shard: " + shardId);
+    for (    Process p : processToShard.keySet()) {
+      if (shardId == processToShard.get(p)) {
+        p.destroy();
+      }
+    }
+  }
+  stateManager.clearTMasterLocation();
+  return true;
+}

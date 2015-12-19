@@ -1,0 +1,10 @@
+{
+  long totalTimeMs=0;
+  for (  GarbageCollectorMXBean bean : ManagementFactory.getGarbageCollectorMXBeans()) {
+    long collectionTimeMs=bean.getCollectionTime();
+    totalTimeMs+=collectionTimeMs;
+    String normalizedKeyName=bean.getName().replaceAll("[^\\w]","-");
+    jvmGCTimeMsPerGCType.safeScope(normalizedKeyName).setValue(collectionTimeMs);
+  }
+  jvmGCTimeMs.setValue(totalTimeMs);
+}

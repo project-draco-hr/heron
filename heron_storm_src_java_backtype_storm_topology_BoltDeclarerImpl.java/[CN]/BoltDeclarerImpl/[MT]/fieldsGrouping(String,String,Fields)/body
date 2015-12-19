@@ -1,0 +1,4 @@
+{
+  delegate.fieldsGrouping(componentId,streamId,fields.getDelegate());
+  return this;
+}

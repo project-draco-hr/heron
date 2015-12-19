@@ -1,0 +1,26 @@
+{
+  long defaultInstanceRam=instanceRamDefaultValue;
+  if (containerRamRequested != -1) {
+    Map<String,Long> ramMap=TopologyUtility.getComponentRamMap(topology,-1);
+    long minInstanceRam=Long.MAX_VALUE;
+    for (    List<String> instances : packing.values()) {
+      Long ramRemaining=containerRamRequested - stmgrRam;
+      int defaultInstance=0;
+      for (      String id : instances) {
+        if (-1 != ramMap.get(getComponentName(id))) {
+          ramRemaining-=ramMap.get(getComponentName(id));
+        }
+ else {
+          defaultInstance++;
+        }
+      }
+      if (defaultInstance != 0 && minInstanceRam > (ramRemaining / defaultInstance)) {
+        minInstanceRam=(ramRemaining / defaultInstance);
+      }
+    }
+    if (minInstanceRam != Integer.MAX_VALUE) {
+      defaultInstanceRam=minInstanceRam;
+    }
+  }
+  return defaultInstanceRam;
+}

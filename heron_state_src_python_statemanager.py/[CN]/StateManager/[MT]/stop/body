@@ -1,0 +1,4 @@
+@abc.abstractmethod
+def stop(self):
+    '\n    If the state manager had connected to a remote server,\n    it would need to stop as well.\n    '
+    pass

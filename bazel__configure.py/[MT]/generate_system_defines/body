@@ -1,0 +1,11 @@
+def generate_system_defines():
+    key = (discover_processor(), discover_os(), discover_os_version())
+    if (key in ARCH_AND_SYS):
+        defines = ARCH_AND_SYS[key]
+    else:
+        key = (discover_processor(), discover_os())
+        defines = ARCH_AND_SYS[key]
+    strings = []
+    for define in defines:
+        strings.append(define_value(define, '1'))
+    return ''.join(strings)

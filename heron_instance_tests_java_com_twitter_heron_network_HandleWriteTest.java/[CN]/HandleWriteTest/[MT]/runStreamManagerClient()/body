@@ -1,0 +1,17 @@
+{
+  Runnable r=new Runnable(){
+    @Override public void run(){
+      try {
+        SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(com.twitter.heron.common.utils.misc.Constants.HERON_SYSTEM_CONFIG);
+        HeronSocketOptions socketOptions=new HeronSocketOptions(systemConfig.getInstanceNetworkWriteBatchSizeBytes(),systemConfig.getInstanceNetworkWriteBatchTimeMs(),systemConfig.getInstanceNetworkReadBatchSizeBytes(),systemConfig.getInstanceNetworkReadBatchTimeMs(),systemConfig.getInstanceNetworkOptionsSocketSendBufferSizeBytes(),systemConfig.getInstanceNetworkOptionsSocketReceivedBufferSizeBytes());
+        streamManagerClient=new StreamManagerClient(nioLooper,HOST,serverPort,"topology-name","topologyId",UnitTestHelper.getInstance("bolt-id"),inStreamQueue,outStreamQueue,inControlQueue,socketOptions,gatewayMetrics);
+        streamManagerClient.start();
+        nioLooper.loop();
+      }
+ catch (      Exception ignored) {
+      }
+    }
+  }
+;
+  threadsPool.execute(r);
+}

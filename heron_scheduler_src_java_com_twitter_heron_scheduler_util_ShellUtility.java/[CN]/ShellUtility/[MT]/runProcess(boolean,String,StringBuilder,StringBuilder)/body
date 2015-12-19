@@ -1,0 +1,3 @@
+{
+  return runSyncProcess(verbose,false,splitTokens(cmdline),stdout,stderr,null);
+}

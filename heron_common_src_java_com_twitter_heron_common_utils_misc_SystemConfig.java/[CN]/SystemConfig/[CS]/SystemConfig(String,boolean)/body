@@ -1,0 +1,5 @@
+{
+  super();
+  Map config=findAndReadLocalFile(configFile,mustExist);
+  this.putAll(config);
+}

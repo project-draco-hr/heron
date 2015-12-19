@@ -1,0 +1,3 @@
+{
+  consumers.add(Grouping.create(inputStream.getGtype(),inputStream,schema,taskIds));
+}

@@ -1,0 +1,5 @@
+def __init__(self, children):
+    if (len(children) != 2):
+        raise Exception('DIVIDE expects exactly two arguments.')
+    self.timeSeries1 = children[0]
+    self.timeSeries2 = children[1]

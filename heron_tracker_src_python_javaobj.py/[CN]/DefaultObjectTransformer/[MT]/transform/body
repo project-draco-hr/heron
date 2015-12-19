@@ -1,0 +1,18 @@
+def transform(self, object):
+    if (object.get_class().name == 'java.util.ArrayList'):
+        new_object = self.JavaList()
+        object.copy(new_object)
+        new_object.extend(object.annotations[1:])
+        return new_object
+    if (object.get_class().name == 'java.util.LinkedList'):
+        new_object = self.JavaList()
+        object.copy(new_object)
+        new_object.extend(object.annotations[1:])
+        return new_object
+    if (object.get_class().name == 'java.util.HashMap'):
+        new_object = self.JavaMap()
+        object.copy(new_object)
+        for i in range(((len(object.annotations) - 1) / 2)):
+            new_object[object.annotations[((i * 2) + 1)]] = object.annotations[((i * 2) + 2)]
+        return new_object
+    return object

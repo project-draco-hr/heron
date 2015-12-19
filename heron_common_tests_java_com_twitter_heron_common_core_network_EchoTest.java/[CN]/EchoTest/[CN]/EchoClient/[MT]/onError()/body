@@ -1,0 +1,3 @@
+{
+  Assert.fail("Error in client while talking to server");
+}

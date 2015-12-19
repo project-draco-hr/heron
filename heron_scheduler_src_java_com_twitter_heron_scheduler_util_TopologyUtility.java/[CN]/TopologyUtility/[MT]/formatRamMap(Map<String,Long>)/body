@@ -1,0 +1,8 @@
+{
+  StringBuilder ramMapBuilder=new StringBuilder();
+  for (  String component : ramMap.keySet()) {
+    ramMapBuilder.append(String.format("%s:%d,",component,ramMap.get(component)));
+  }
+  ramMapBuilder.deleteCharAt(ramMapBuilder.length() - 1);
+  return ramMapBuilder.toString();
+}

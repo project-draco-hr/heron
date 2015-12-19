@@ -1,0 +1,5 @@
+int sourceTaskId
+boolean isLocalSpout
+TopologyAPI.StreamId streamId
+HeronTuples.HeronDataTuple tuple
+List<Integer> outTasks

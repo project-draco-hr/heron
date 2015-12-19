@@ -1,0 +1,13 @@
+{
+  UnitTestHelper.clearSingletonRegistry();
+  streamManagerClient.stop();
+  streamManagerClient=null;
+  nioLooper.exitLoop();
+  nioLooper=null;
+  slaveLooper=null;
+  inStreamQueue=null;
+  outStreamQueue=null;
+  gatewayMetrics=null;
+  threadsPool.shutdownNow();
+  threadsPool=null;
+}

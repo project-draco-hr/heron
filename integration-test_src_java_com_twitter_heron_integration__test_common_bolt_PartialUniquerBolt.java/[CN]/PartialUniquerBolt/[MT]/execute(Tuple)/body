@@ -1,0 +1,11 @@
+{
+  String lang=tuple.getString(0);
+  Integer count=cache.get(lang);
+  if (count == null) {
+    count=1;
+  }
+ else {
+    count++;
+  }
+  cache.put(lang,count);
+}

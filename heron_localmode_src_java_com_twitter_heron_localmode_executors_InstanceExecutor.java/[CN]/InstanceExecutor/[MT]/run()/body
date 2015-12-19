@@ -1,0 +1,15 @@
+{
+  Thread.currentThread().setName(String.format("%s_%s",physicalPlanHelper.getMyComponent(),physicalPlanHelper.getMyInstanceId()));
+  instance=createInstance();
+  if (physicalPlanHelper.getTopologyState().equals(TopologyAPI.TopologyState.RUNNING)) {
+    startInstance();
+  }
+  Runnable handleControlTask=new Runnable(){
+    @Override public void run(){
+      handleControlSignal();
+    }
+  }
+;
+  looper.addTasksOnWakeup(handleControlTask);
+  looper.loop();
+}

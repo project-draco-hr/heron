@@ -1,0 +1,39 @@
+{
+  final MyCustomGrouping myCustomGrouping=new MyCustomGrouping();
+  final String expectedCustomGroupingStringInPrepare="test-spout+test-spout+default+[1]";
+  physicalPlan=constructPhysicalPlan(myCustomGrouping);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
+  inControlQueue.offer(instanceControlMsg);
+  SingletonRegistry.INSTANCE.registerSingleton(customGroupingInfo,customGroupingInfoInPrepare);
+  Runnable task=new Runnable(){
+    @Override public void run(){
+      for (int i=0; i < Constants.RETRY_TIMES; i++) {
+        if (outStreamQueue.size() != 0) {
+          HeronTuples.HeronTupleSet set=outStreamQueue.poll();
+          Assert.assertTrue(set.isInitialized());
+          Assert.assertFalse(set.hasControl());
+          Assert.assertTrue(set.hasData());
+          HeronTuples.HeronDataTupleSet dataTupleSet=set.getData();
+          Assert.assertEquals(dataTupleSet.getStream().getId(),"default");
+          Assert.assertEquals(dataTupleSet.getStream().getComponentName(),"test-spout");
+          for (          HeronTuples.HeronDataTuple dataTuple : dataTupleSet.getTuplesList()) {
+            List<Integer> destTaskIds=dataTuple.getDestTaskIdsList();
+            Assert.assertEquals(destTaskIds.size(),1);
+            Assert.assertEquals(destTaskIds.get(0),(Integer)tupleReceived);
+            tupleReceived++;
+          }
+        }
+        if (tupleReceived == 10) {
+          Assert.assertEquals(expectedCustomGroupingStringInPrepare,customGroupingInfoInPrepare.toString());
+          testLooper.exitLoop();
+          break;
+        }
+        Utils.sleep(Constants.RETRY_INTERVAL_MS);
+      }
+    }
+  }
+;
+  testLooper.addTasksOnWakeup(task);
+  testLooper.loop();
+}

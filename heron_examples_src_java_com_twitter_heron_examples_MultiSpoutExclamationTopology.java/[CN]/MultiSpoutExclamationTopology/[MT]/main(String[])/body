@@ -1,0 +1,23 @@
+{
+  TopologyBuilder builder=new TopologyBuilder();
+  builder.setSpout("word0",new TestWordSpout(),2);
+  builder.setSpout("word1",new TestWordSpout(),2);
+  builder.setSpout("word2",new TestWordSpout(),2);
+  builder.setBolt("exclaim1",new ExclamationBolt(),2).shuffleGrouping("word0").shuffleGrouping("word1").shuffleGrouping("word2");
+  Config conf=new Config();
+  conf.setDebug(true);
+  conf.setMaxSpoutPending(10);
+  conf.put(Config.TOPOLOGY_WORKER_CHILDOPTS,"-XX:+HeapDumpOnOutOfMemoryError");
+  conf.setComponentRam("word0",500 * 1024 * 1024);
+  conf.setComponentRam("word1",500 * 1024 * 1024);
+  conf.setComponentRam("word2",500 * 1024 * 1024);
+  conf.setComponentRam("exclaim1",1024 * 1024 * 1024);
+  if (args != null && args.length > 0) {
+    conf.setNumStmgrs(1);
+    HeronSubmitter.submitTopology(args[0],conf,builder.createTopology());
+  }
+ else {
+    System.out.println("Local mode not yet supported");
+    System.exit(1);
+  }
+}

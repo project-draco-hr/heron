@@ -1,0 +1,9 @@
+{
+  if (name.contains(",")) {
+    throw new IllegalArgumentException("Component name should not contain comma(,)");
+  }
+  if (name.contains(":")) {
+    throw new IllegalArgumentException("Component name should not contain colon(:)");
+  }
+  validateUnusedName(name);
+}

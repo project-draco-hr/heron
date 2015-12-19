@@ -1,0 +1,4 @@
+{
+  threadsPool.shutdownNow();
+  threadsPool=null;
+}

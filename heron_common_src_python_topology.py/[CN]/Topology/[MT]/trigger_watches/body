@@ -1,0 +1,12 @@
+def trigger_watches(self):
+    '\n    Call all the callbacks.\n    If any callback raises an Exception,\n    unregister the corresponding watch.\n    '
+    to_remove = []
+    for (uid, callback) in self.watches.iteritems():
+        try:
+            callback(self)
+        except Exception as e:
+            LOG.error(('Caught exception while triggering callback: ' + str(e)))
+            traceback.print_exc()
+            to_remove.append(uid)
+    for uid in to_remove:
+        self.unregister_watch(uid)

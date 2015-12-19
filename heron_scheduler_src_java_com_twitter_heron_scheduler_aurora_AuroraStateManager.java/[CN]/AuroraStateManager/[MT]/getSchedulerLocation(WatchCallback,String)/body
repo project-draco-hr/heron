@@ -1,0 +1,6 @@
+{
+  LOG.info("Topology does not have a scheduler: " + topologyName);
+  SettableFuture<Scheduler.SchedulerLocation> future=SettableFuture.create();
+  future.set(Scheduler.SchedulerLocation.newBuilder().setHttpEndpoint(NO_SCHEDULER_REST_ENDPOINT).setTopologyName(topologyName).build());
+  return future;
+}

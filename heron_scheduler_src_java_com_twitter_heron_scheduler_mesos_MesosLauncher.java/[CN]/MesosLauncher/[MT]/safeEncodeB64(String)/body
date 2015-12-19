@@ -1,0 +1,4 @@
+{
+  String javaOptsBase64=DatatypeConverter.printBase64Binary(javaOpts.getBytes(Charset.forName("UTF-8")));
+  return String.format("\"%s\"",javaOptsBase64.replace("=",MesosConfig.BASE64_EQUALS));
+}

@@ -1,0 +1,6 @@
+{
+  SettableFuture<Boolean> future=SettableFuture.create();
+  boolean ret=FileUtility.deleteFile(getTopologyPath(topologyName));
+  future.set(ret);
+  return future;
+}

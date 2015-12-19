@@ -1,0 +1,9 @@
+{
+  if (!mesosJobFramework.isReady()) {
+    LOG.info("The Scheduler is not ready; recovering from last failure. Please wait.");
+    return false;
+  }
+  LOG.info("Persist Job. WAL the job: " + job.name);
+  persistenceStore.persistJob(job);
+  return mesosJobFramework.scheduleNewJob(job);
+}

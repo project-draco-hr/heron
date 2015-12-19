@@ -1,0 +1,5 @@
+{
+  LOG.info("Re-registered");
+  LOG.info("Start to reconcile all tasks under monitoring");
+  reconcileTasks(driver);
+}

@@ -1,0 +1,4 @@
+{
+  SelectionKey key=channel.keyFor(selector);
+  key.interestOps(key.interestOps() & (~operation));
+}

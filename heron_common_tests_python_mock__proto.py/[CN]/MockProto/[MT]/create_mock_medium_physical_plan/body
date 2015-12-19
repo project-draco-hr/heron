@@ -1,0 +1,4 @@
+def create_mock_medium_physical_plan(self, spout_parallelism=1, bolt1_parallelism=1, bolt2_parallelism=1, bolt3_parallelism=1):
+    pplan = protoPPlan.PhysicalPlan()
+    pplan.topology.CopyFrom(self.create_mock_medium_topology(spout_parallelism, bolt1_parallelism, bolt2_parallelism, bolt3_parallelism))
+    return pplan

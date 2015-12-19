@@ -1,0 +1,8 @@
+{
+  tuplesToComplete++;
+  Object messageId=o;
+  if (o == null) {
+    messageId=Constants.INTEGRATION_TEST_MOCK_MESSAGE_ID;
+  }
+  delegate.emitDirect(i,s,objects,messageId);
+}

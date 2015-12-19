@@ -1,0 +1,3 @@
+{
+  return (IUploader)Class.forName(uploaderClass).newInstance();
+}

@@ -1,0 +1,32 @@
+{
+  if (other == com.twitter.heron.api.generated.TopologyAPI.Config.getDefaultInstance())   return this;
+  if (kvsBuilder_ == null) {
+    if (!other.kvs_.isEmpty()) {
+      if (kvs_.isEmpty()) {
+        kvs_=other.kvs_;
+        bitField0_=(bitField0_ & ~0x00000001);
+      }
+ else {
+        ensureKvsIsMutable();
+        kvs_.addAll(other.kvs_);
+      }
+      onChanged();
+    }
+  }
+ else {
+    if (!other.kvs_.isEmpty()) {
+      if (kvsBuilder_.isEmpty()) {
+        kvsBuilder_.dispose();
+        kvsBuilder_=null;
+        kvs_=other.kvs_;
+        bitField0_=(bitField0_ & ~0x00000001);
+        kvsBuilder_=com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ? getKvsFieldBuilder() : null;
+      }
+ else {
+        kvsBuilder_.addAllMessages(other.kvs_);
+      }
+    }
+  }
+  this.mergeUnknownFields(other.getUnknownFields());
+  return this;
+}

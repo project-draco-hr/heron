@@ -1,0 +1,17 @@
+@tornado.testing.gen_test
+def test_SUM_execute_when_missing_value(self):
+    ts = Mock()
+    operator = Sum([float(10), ts])
+    tmaster = Mock()
+    tracker = Mock()
+    start = 100
+    end = 300
+
+    @tornado.gen.coroutine
+    def ts_side_effect3(*args):
+        self.assertEqual((tracker, tmaster, 100, 300), args)
+        raise tornado.gen.Return([Metrics('component', 'metricName', 'instance', start, end, {180: 1.0, 240: 1.0, 300: 1.0, })])
+    ts.execute.side_effect = ts_side_effect3
+    metrics = yield operator.execute(tracker, tmaster, start, end)
+    self.assertEqual(1, len(metrics))
+    self.assertDictEqual({120: 10, 180: 11.0, 240: 11.0, 300: 11.0, }, metrics[0].timeline)

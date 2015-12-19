@@ -1,0 +1,4 @@
+{
+  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
+  return getConfigWithDefault(topologyConfig,Config.TOPOLOGY_ADDITIONAL_CLASSPATH,"");
+}

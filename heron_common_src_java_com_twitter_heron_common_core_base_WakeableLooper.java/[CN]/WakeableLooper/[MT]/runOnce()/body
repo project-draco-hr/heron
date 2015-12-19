@@ -1,0 +1,5 @@
+{
+  doWait();
+  executeTasksOnWakeup();
+  triggerExpiredTimers(System.nanoTime());
+}

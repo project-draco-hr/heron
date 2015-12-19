@@ -1,0 +1,7 @@
+{
+  StringBuilder bldr=new StringBuilder();
+  for (int j=0; j < bytes.length; j++) {
+    bldr.append(String.format("%02X ",bytes[j]));
+  }
+  return bldr.toString();
+}

@@ -1,0 +1,8 @@
+{
+  if (taskHooks.size() != 0) {
+    EmitInfo emitInfo=new EmitInfo(values,stream,getThisTaskId(),outTasks);
+    for (    ITaskHook taskHook : taskHooks) {
+      taskHook.emit(emitInfo);
+    }
+  }
+}

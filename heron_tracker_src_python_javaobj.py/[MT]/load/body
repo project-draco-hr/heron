@@ -1,0 +1,5 @@
+def load(file_object):
+    '\n    Deserializes Java primitive data and objects serialized by ObjectOutputStream\n    from a file-like object.\n    '
+    marshaller = JavaObjectUnmarshaller(file_object)
+    marshaller.add_transformer(DefaultObjectTransformer())
+    return marshaller.readObject()

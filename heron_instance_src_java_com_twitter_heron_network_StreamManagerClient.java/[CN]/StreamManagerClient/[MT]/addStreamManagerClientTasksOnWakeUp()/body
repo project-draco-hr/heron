@@ -1,0 +1,10 @@
+{
+  Runnable task=new Runnable(){
+    @Override public void run(){
+      sendStreamMessageIfNeeded();
+      readStreamMessageIfNeeded();
+    }
+  }
+;
+  getNIOLooper().addTasksOnWakeup(task);
+}

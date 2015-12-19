@@ -1,0 +1,3 @@
+{
+  LOG.info("Metrics Manager got a new connection from host:port " + channel.socket().getRemoteSocketAddress());
+}

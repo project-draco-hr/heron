@@ -1,0 +1,19 @@
+def do_run_and_wait(self, commands):
+    process_dict = {}
+    for (name, cmd) in commands.items():
+        p = self.run_process(name, cmd)
+        process_dict[p.pid] = (p, name, 1)
+        log_pid_for_process(name, p.pid)
+    while True:
+        (pid, status) = os.wait()
+        (old_p, name, nattempts) = process_dict[pid]
+        do_print(('%s exited with status %d' % (name, status)))
+        os.system(('chmod a+r core.%d' % pid))
+        if (nattempts > self.max_runs):
+            do_print(('%s exited too many times' % name))
+            sys.exit(1)
+        time.sleep(self.interval_between_runs)
+        p = self.run_process(name, commands[name])
+        del process_dict[pid]
+        process_dict[p.pid] = (p, name, (nattempts + 1))
+        log_pid_for_process(name, p.pid)

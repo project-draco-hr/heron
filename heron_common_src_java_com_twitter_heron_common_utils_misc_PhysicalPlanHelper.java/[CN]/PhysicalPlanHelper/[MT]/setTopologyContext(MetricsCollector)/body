@@ -1,0 +1,3 @@
+{
+  topologyContext=new TopologyContextImpl(constructConfig(pplan.getTopology().getTopologyConfig(),component),pplan.getTopology(),makeTaskToComponentMap(),myTaskId,metricsCollector);
+}

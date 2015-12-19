@@ -1,0 +1,5 @@
+{
+  runBase();
+  Map<SocketChannel,SocketChannelHelper> activeConnections=heronServer.getActiveConnections();
+  heronServer.handleWrite(activeConnections.keySet().iterator().next());
+}

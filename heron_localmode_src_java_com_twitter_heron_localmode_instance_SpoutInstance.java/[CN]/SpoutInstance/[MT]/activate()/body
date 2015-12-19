@@ -1,0 +1,5 @@
+{
+  LOG.info("Spout is activated");
+  spout.activate();
+  topologyState=TopologyAPI.TopologyState.RUNNING;
+}

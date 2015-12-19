@@ -1,0 +1,22 @@
+{
+  StringBuilder lines=new StringBuilder();
+  StringBuilder metricsPathPrefix=new StringBuilder();
+  metricsPathPrefix.append(metricsPrefix).append(".").append(topologyName).append(".").append(record.getSource());
+  long timestamp=record.getTimestamp() / 1000L;
+  for (  MetricsInfo metricsInfo : record.getMetrics()) {
+    lines.append(metricsPathPrefix.toString() + "." + metricsInfo.getName().replace(' ','.')).append(" ").append(metricsInfo.getValue()).append(" ").append(timestamp).append("\n");
+  }
+  try {
+    graphite.write(lines.toString());
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Error sending metrics to Graphite",e);
+    LOG.severe("Dropping messages.");
+    try {
+      graphite.close();
+    }
+ catch (    IOException e1) {
+      LOG.log(Level.SEVERE,"Error closing connection to Graphite",e1);
+    }
+  }
+}

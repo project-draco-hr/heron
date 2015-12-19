@@ -1,0 +1,3 @@
+{
+  grouping.prepare(context,componentName,streamId,taskIds);
+}

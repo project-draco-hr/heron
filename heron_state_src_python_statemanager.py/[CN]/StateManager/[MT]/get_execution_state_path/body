@@ -1,0 +1,4 @@
+def get_execution_state_path(self, topologyName):
+    '\n    Create the path using rootpath and topology name.\n    '
+    path = (HERON_EXECUTION_STATE_PREFIX.format(self.rootpath) + topologyName)
+    return path

@@ -1,0 +1,26 @@
+{
+  try {
+    socketChannel=SocketChannel.open();
+    socketChannel.configureBlocking(false);
+    socketChannel.socket().setSendBufferSize(socketOptions.getSocketSendBufferSizeInBytes());
+    socketChannel.socket().setReceiveBufferSize(socketOptions.getSocketReceivedBufferSizeInBytes());
+    socketChannel.socket().setTcpNoDelay(true);
+    LOG.info("Connecting to endpoint: " + endpoint);
+    if (socketChannel.connect(endpoint)) {
+      handleConnect(socketChannel);
+    }
+ else {
+      nioLooper.registerConnect(socketChannel,this);
+    }
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Error connecting to remote endpoint: " + endpoint,e);
+    Runnable r=new Runnable(){
+      public void run(){
+        onConnect(StatusCode.CONNECT_ERROR);
+      }
+    }
+;
+    nioLooper.registerTimerEventInSeconds(0,r);
+  }
+}

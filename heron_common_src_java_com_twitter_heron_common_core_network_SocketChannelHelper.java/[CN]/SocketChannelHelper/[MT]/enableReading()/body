@@ -1,0 +1,10 @@
+{
+  if (!looper.isReadRegistered(socketChannel)) {
+    try {
+      looper.registerRead(socketChannel,selectHandler);
+    }
+ catch (    ClosedChannelException e) {
+      selectHandler.handleError(socketChannel);
+    }
+  }
+}

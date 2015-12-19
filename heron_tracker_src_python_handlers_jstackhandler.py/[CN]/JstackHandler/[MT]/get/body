@@ -1,0 +1,12 @@
+@tornado.gen.coroutine
+def get(self):
+    try:
+        dc = self.get_argument_dc()
+        environ = self.get_argument_environ()
+        topology = self.get_argument_topology()
+        instance = self.get_argument_instance()
+        topologyInfo = self.tracker.getTopologyInfo(topology, dc, environ)
+        ret = yield self.getInstanceJstack(topologyInfo, instance)
+        self.write_success_response(ret)
+    except Exception as e:
+        self.write_error_response(e)

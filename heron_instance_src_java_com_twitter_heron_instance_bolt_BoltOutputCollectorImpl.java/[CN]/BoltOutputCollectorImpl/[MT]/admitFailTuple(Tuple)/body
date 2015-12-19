@@ -1,0 +1,18 @@
+{
+  if (tuple instanceof TupleImpl) {
+    TupleImpl tuplImpl=(TupleImpl)tuple;
+    if (ackEnabled) {
+      HeronTuples.AckTuple.Builder bldr=HeronTuples.AckTuple.newBuilder();
+      bldr.setAckedtuple(tuplImpl.getTupleKey());
+      long tupleSizeInBytes=0;
+      for (      HeronTuples.RootId rt : tuplImpl.getRoots()) {
+        bldr.addRoots(rt);
+        tupleSizeInBytes+=rt.getSerializedSize();
+      }
+      outputter.addFailTuple(bldr,tupleSizeInBytes);
+    }
+    long latency=System.nanoTime() - tuplImpl.getCreationTime();
+    helper.getTopologyContext().invokeHookBoltFail(tuple,latency);
+    boltMetrics.failedTuple(tuple.getSourceStreamId(),tuple.getSourceComponent(),latency);
+  }
+}

@@ -1,0 +1,44 @@
+@patch.object(Tracker, 'getTopologiesForStateLocation')
+@patch.object(Tracker, 'removeTopology')
+@patch.object(Tracker, 'addNewTopology')
+@patch.object(statemanagerfactory, 'get_all_state_managers')
+def test_synch_topologies_leading_with_add_and_remove_topologies(self, mock_get_all_state_managers, mock_add_new_topology, mock_remove_topology, mock_get_topologies_for_state_location):
+    mock_state_manager_1 = Mock()
+    mock_state_manager_1.name = 'mock_name1'
+    mock_state_manager_2 = Mock()
+    mock_state_manager_2.name = 'mock_name2'
+    watches = {}
+    mock_get_all_state_managers.return_value = [mock_state_manager_1, mock_state_manager_2]
+    mock_get_topologies_for_state_location.return_value = []
+
+    def side_effect1(on_topologies_watch):
+        watches['1'] = on_topologies_watch
+        on_topologies_watch(['top_name1', 'top_name2'])
+    mock_state_manager_1.get_topologies = side_effect1
+
+    def side_effect2(on_topologies_watch):
+        watches['2'] = on_topologies_watch
+        on_topologies_watch(['top_name3', 'top_name4'])
+    mock_state_manager_2.get_topologies = side_effect2
+    self.tracker.synch_topologies('test_conf')
+    mock_get_topologies_for_state_location.assert_has_calls([call('mock_name2'), call('mock_name1')], any_order=True)
+    mock_add_new_topology.assert_has_calls([call(mock_state_manager_1, 'top_name1'), call(mock_state_manager_1, 'top_name2'), call(mock_state_manager_2, 'top_name3'), call(mock_state_manager_2, 'top_name4')], any_order=True)
+    self.assertEqual(4, mock_add_new_topology.call_count)
+    self.assertEqual(0, mock_remove_topology.call_count)
+    mock_get_topologies_for_state_location.reset_mock()
+    mock_add_new_topology.reset_mock()
+    mock_remove_topology.reset_mock()
+
+    def get_topologies_for_state_location_side_effect(name):
+        if (name == 'mock_name1'):
+            return [Topology('top_name1', 'mock_name1'), Topology('top_name2', 'mock_name1')]
+        if (name == 'mock_name2'):
+            return [Topology('top_name3', 'mock_name2'), Topology('top_name4', 'mock_name2')]
+        return []
+    mock_get_topologies_for_state_location.side_effect = get_topologies_for_state_location_side_effect
+    watches['1'](['top_name1', 'top_name3'])
+    watches['2'](['top_name5', 'top_name6'])
+    mock_add_new_topology.assert_has_calls([call(mock_state_manager_1, 'top_name3'), call(mock_state_manager_2, 'top_name5'), call(mock_state_manager_2, 'top_name6')], any_order=True)
+    mock_remove_topology.assert_has_calls([call('top_name2', 'mock_name1'), call('top_name3', 'mock_name2'), call('top_name4', 'mock_name2')], any_order=False)
+    self.assertEqual(3, mock_add_new_topology.call_count)
+    self.assertEqual(3, mock_remove_topology.call_count)

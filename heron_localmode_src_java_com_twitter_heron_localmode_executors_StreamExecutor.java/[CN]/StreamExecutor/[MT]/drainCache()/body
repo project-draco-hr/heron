@@ -1,0 +1,13 @@
+{
+  Map<Integer,List<HeronTuples.HeronTupleSet>> cache=tupleCache.getCache();
+  if (!isSendTuplesToInstance(new LinkedList<Integer>(cache.keySet()))) {
+    return;
+  }
+  for (  Map.Entry<Integer,List<HeronTuples.HeronTupleSet>> entry : cache.entrySet()) {
+    int taskId=entry.getKey();
+    for (    HeronTuples.HeronTupleSet message : entry.getValue()) {
+      sendInBound(taskId,message);
+    }
+  }
+  tupleCache.clear();
+}

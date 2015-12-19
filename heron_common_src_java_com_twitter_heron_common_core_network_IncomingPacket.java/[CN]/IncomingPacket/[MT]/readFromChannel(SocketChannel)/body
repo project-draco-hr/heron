@@ -1,0 +1,16 @@
+{
+  if (!headerRead) {
+    int retval=readFromChannel(channel,header);
+    if (retval != 0) {
+      return retval;
+    }
+    headerRead=true;
+    header.flip();
+    data=ByteBuffer.allocate(header.getInt());
+  }
+  int retval=readFromChannel(channel,data);
+  if (retval == 0) {
+    data.flip();
+  }
+  return retval;
+}

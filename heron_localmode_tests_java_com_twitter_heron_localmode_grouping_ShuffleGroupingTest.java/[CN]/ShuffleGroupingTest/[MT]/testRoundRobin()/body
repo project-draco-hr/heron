@@ -1,0 +1,28 @@
+{
+  List<Integer> task_ids=new LinkedList<>();
+  task_ids.add(0);
+  task_ids.add(2);
+  task_ids.add(4);
+  task_ids.add(8);
+  ShuffleGrouping g=new ShuffleGrouping(task_ids);
+  HeronTuples.HeronDataTuple dummy=HeronTuples.HeronDataTuple.getDefaultInstance();
+  List<Integer> dest=g.getListToSend(dummy);
+  Assert.assertEquals(dest.size(),1);
+  int first=dest.get(0);
+  int index=-1;
+  for (int i=0; i < task_ids.size(); ++i) {
+    if (task_ids.get(i) == first) {
+      index=i;
+      break;
+    }
+  }
+  dest.clear();
+  for (int i=0; i < 100; ++i) {
+    dest=g.getListToSend(dummy);
+    Assert.assertEquals(dest.size(),1);
+    int d=dest.get(0);
+    index=(index + 1) % task_ids.size();
+    Assert.assertEquals((Integer)d,task_ids.get(index));
+    dest.clear();
+  }
+}

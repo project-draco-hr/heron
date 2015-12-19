@@ -1,0 +1,6 @@
+{
+  List<Integer> res=new ArrayList<>(1);
+  res.add(taskIds.get(nextTaskIndex));
+  nextTaskIndex=getNextTaskIndex(nextTaskIndex);
+  return res;
+}

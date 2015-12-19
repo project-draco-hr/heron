@@ -1,0 +1,2 @@
+PhysicalPlanHelper helper
+Communicator<HeronTuples.HeronTupleSet> outQueue

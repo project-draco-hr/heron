@@ -1,0 +1,6 @@
+{
+  SelectionKey key=channel.keyFor(selector);
+  if (key != null) {
+    key.cancel();
+  }
+}

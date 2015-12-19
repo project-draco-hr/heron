@@ -1,0 +1,5 @@
+{
+  sentMetricsPacketsCount.incr();
+  sentMetricsCount.incrBy(metricsCount);
+  sentExceptionsCount.incrBy(exceptionsCount);
+}

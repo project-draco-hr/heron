@@ -1,0 +1,6 @@
+{
+  validateComponentName(id);
+  SpoutDeclarer s=new SpoutDeclarer(id,spout,parallelism_hint);
+  _spouts.put(id,s);
+  return s;
+}

@@ -1,0 +1,18 @@
+{
+  super.clear();
+  if (compBuilder_ == null) {
+    comp_=com.twitter.heron.api.generated.TopologyAPI.Component.getDefaultInstance();
+  }
+ else {
+    compBuilder_.clear();
+  }
+  bitField0_=(bitField0_ & ~0x00000001);
+  if (outputsBuilder_ == null) {
+    outputs_=java.util.Collections.emptyList();
+    bitField0_=(bitField0_ & ~0x00000002);
+  }
+ else {
+    outputsBuilder_.clear();
+  }
+  return this;
+}

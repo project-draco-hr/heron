@@ -1,0 +1,7 @@
+def __init__(self):
+    self.name = None
+    self.serialVersionUID = None
+    self.flags = None
+    self.fields_names = []
+    self.fields_types = []
+    self.superclass = None

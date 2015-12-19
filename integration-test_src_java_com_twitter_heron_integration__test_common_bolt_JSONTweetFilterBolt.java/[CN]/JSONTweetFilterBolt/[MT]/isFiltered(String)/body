@@ -1,0 +1,22 @@
+{
+  Map<String,Object> tweetJson=null;
+  try {
+    tweetJson=mapper.readValue(tweet,Map.class);
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to parse the String into map: " + tweet,e);
+  }
+  Object propVal=null;
+  if (tweetJson == null) {
+    propVal="";
+  }
+ else {
+    if (tweetJson.containsKey("id") && tweetJson.containsKey("created_at") && tweetJson.containsKey("text")&& tweetJson.containsKey("user")) {
+      propVal=tweetJson.get(this.propName);
+      if (propVal.equals(this.propValue)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}

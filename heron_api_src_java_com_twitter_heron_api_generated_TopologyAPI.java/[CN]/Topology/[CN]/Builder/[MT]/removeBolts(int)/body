@@ -1,0 +1,11 @@
+{
+  if (boltsBuilder_ == null) {
+    ensureBoltsIsMutable();
+    bolts_.remove(index);
+    onChanged();
+  }
+ else {
+    boltsBuilder_.remove(index);
+  }
+  return this;
+}

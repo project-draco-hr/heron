@@ -1,0 +1,9 @@
+def setDefault(self, constant, start, end):
+    starttime = ((start / 60) * 60)
+    if (starttime < start):
+        starttime += 60
+    endtime = ((end / 60) * 60)
+    while (starttime <= endtime):
+        if ((starttime not in self.timeline) or (self.timeline[starttime] == 0)):
+            self.timeline[starttime] = constant
+        starttime += 60

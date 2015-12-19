@@ -1,0 +1,5 @@
+{
+  for (  BaseJob job : jobs) {
+    jobNameMapping.put(job.name,job);
+  }
+}

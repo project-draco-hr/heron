@@ -1,0 +1,8 @@
+{
+  if (taskHooks.size() != 0) {
+    BoltAckInfo ackInfo=new BoltAckInfo(tuple,getThisTaskId(),processLatencyNs / Constants.MILLISECONDS_TO_NANOSECONDS);
+    for (    ITaskHook taskHook : taskHooks) {
+      taskHook.boltAck(ackInfo);
+    }
+  }
+}

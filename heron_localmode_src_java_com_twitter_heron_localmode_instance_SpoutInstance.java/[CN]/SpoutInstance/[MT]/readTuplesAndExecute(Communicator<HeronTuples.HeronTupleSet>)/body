@@ -1,0 +1,21 @@
+{
+  long startOfCycle=System.nanoTime();
+  long spoutAckBatchTime=systemConfig.getInstanceAckBatchTimeMs() * Constants.MILLISECONDS_TO_NANOSECONDS;
+  while (!inQueue.isEmpty()) {
+    HeronTuples.HeronTupleSet tuples=inQueue.poll();
+    if (tuples.hasData()) {
+      throw new RuntimeException("Spout cannot get incoming data tuples from other components");
+    }
+    if (tuples.hasControl()) {
+      for (      HeronTuples.AckTuple aT : tuples.getControl().getAcksList()) {
+        handleAckTuple(aT,true);
+      }
+      for (      HeronTuples.AckTuple aT : tuples.getControl().getFailsList()) {
+        handleAckTuple(aT,false);
+      }
+    }
+    if (System.nanoTime() - startOfCycle - spoutAckBatchTime > 0) {
+      break;
+    }
+  }
+}

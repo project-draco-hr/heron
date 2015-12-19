@@ -1,0 +1,7 @@
+{
+  PhysicalPlans.PhysicalPlan.Builder pPlan=PhysicalPlans.PhysicalPlan.newBuilder();
+  setTopology(pPlan,ackEnabled,messageTimeout,topologyState);
+  setInstances(pPlan);
+  setStMgr(pPlan);
+  return pPlan.build();
+}

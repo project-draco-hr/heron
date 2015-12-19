@@ -1,0 +1,3 @@
+{
+  tMasterClientService=new TMasterClientService(serviceConfig,metricsCommunicator);
+}

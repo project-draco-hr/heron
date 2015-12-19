@@ -1,0 +1,2 @@
+def __init__(self, stream=None):
+    self.object_stream = stream

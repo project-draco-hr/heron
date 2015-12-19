@@ -1,0 +1,10 @@
+def get_user_rammap(topology):
+    '\n  The argument is the proto object for topology.\n  Returns a dict of component to ram as specified by user.\n  Expected user input is "comp1:42,comp2:24,..."\n  where 42 and 24 represents the ram requested in bytes.\n  Returns None if nothing is specified.\n  '
+    rammap = get_topology_config(topology, constants.TOPOLOGY_COMPONENT_RAMMAP)
+    if rammap:
+        rmap = {}
+        for component_ram in rammap.split(','):
+            (component, ram) = component_ram.split(':')
+            rmap[component] = int(ram)
+        return rmap
+    return None

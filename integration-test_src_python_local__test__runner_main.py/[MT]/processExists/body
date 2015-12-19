@@ -1,0 +1,5 @@
+def processExists(processList, processCmd):
+    for process in processList:
+        if (processCmd in process.cmd):
+            return True
+    return False

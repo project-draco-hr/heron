@@ -1,0 +1,16 @@
+def register_watch(self, callback):
+    "\n    Returns the UUID with which the watch is\n    registered. This UUID can be used to unregister\n    the watch.\n    Returns None if watch could not be registered.\n\n    The argument 'callback' must be a function that takes\n    exactly one argument, the topology on which\n    the watch was triggered.\n    Note that the watch will be unregistered in case\n    it raises any Exception the first time.\n\n    This callback is also called at the time\n    of registration.\n    "
+    RETRY_COUNT = 5
+    for i in range(RETRY_COUNT):
+        uid = uuid.uuid4()
+        if (uid not in self.watches):
+            LOG.info(('Registering a watch with uid: ' + str(uid)))
+            try:
+                callback(self)
+            except Exception as e:
+                LOG.error(('Caught exception while triggering callback: ' + str(e)))
+                traceback.print_exc()
+                return None
+            self.watches[uid] = callback
+            return uid
+    return None

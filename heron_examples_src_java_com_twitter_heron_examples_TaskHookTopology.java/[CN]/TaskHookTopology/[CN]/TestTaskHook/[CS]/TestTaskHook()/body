@@ -1,0 +1,3 @@
+{
+  this.constructString="This TestTaskHook is constructed with no parameters";
+}

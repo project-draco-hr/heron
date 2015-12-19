@@ -1,0 +1,3 @@
+{
+  buckets.getFirst().put(key,value);
+}
