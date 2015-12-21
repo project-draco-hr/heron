@@ -22,3 +22,4 @@ def main():
     env_map['OBJCOPY'] = discover_tool_default('objcopy', 'objcopy', 'OBJCOPY', '/usr/bin/objcopy')
     env_map['OBJDUMP'] = discover_tool_default('objdump', 'objdump', 'OBJDUMP', '/usr/bin/objdump')
     env_map['STRIP'] = discover_tool_default('strip', 'strip', 'STRIP', '/usr/bin/strip')
+    write_env_exec_file(platform, env_map)

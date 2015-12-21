@@ -1,0 +1,25 @@
+def write_env_exec_file(platform, environ):
+    env_exec_file = 'scripts/env_exec.sh'
+    out_file = open(env_exec_file, 'w')
+    out_file.write('#!/bin/bash\n\n')
+    out_file.write('set -eu \n\n')
+    if ('CC' in os.environ):
+        out_file.write((('export CC=' + os.environ['CC']) + '\n'))
+    if ('CPP' in os.environ):
+        out_file.write((('export CPP=' + os.environ['CPP']) + '\n'))
+    if ('CFLAGS' in os.environ):
+        out_file.write((('export CFLAGS=' + os.environ['CFLAGS']) + '\n'))
+    if ('CXX' in os.environ):
+        out_file.write((('export CXX=' + os.environ['CXX']) + '\n'))
+    if ('CXXCPP' in os.environ):
+        out_file.write((('export CXXCPP=' + os.environ['CXXCPP']) + '\n'))
+    if ('CXXFLAGS' in os.environ):
+        out_file.write((('export CXXFLAGS=' + os.environ['CXXFLAGS']) + '\n'))
+    if ('LDFLAGS' in os.environ):
+        out_file.write((('export LDFLAGS=' + os.environ['LDFLAGS']) + '\n'))
+    if ('LIBS' in os.environ):
+        out_file.write((('export LIBS=' + os.environ['LIBS']) + '\n'))
+    out_file.write('# Execute the input programs\n')
+    out_file.write('$*')
+    make_executable(env_exec_file)
+    print ('Wrote the environment exec file:  \t"%s"' % env_exec_file)
