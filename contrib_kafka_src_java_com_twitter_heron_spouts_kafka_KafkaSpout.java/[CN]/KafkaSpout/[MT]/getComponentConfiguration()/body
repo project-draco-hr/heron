@@ -1,0 +1,7 @@
+{
+  Map<String,Object> conf=new HashMap();
+  conf.put("spout.type","kafka");
+  conf.put("spout.source",spoutConfig.topic);
+  conf.put("spout.version","Jul 07, 2015");
+  return conf;
+}

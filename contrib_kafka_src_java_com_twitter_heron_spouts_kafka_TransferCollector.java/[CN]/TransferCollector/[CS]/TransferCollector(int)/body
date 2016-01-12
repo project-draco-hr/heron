@@ -1,0 +1,7 @@
+{
+  super(emitQueueMaxSize);
+  getEmitItemsTimeoutCounter=new CountMetric();
+  getEmitItemsCallCounter=new CountMetric();
+  getEmitCallCounter=new CountMetric();
+  exceptionCounter=new CountMetric();
+}

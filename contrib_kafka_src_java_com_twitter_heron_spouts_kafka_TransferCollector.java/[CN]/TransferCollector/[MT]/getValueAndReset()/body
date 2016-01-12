@@ -1,0 +1,9 @@
+{
+  HashMap<String,Object> metrics=new HashMap<String,Object>();
+  metrics.put("pendingEmits",size());
+  metrics.put("getEmitItemsTimeoutCounter",getEmitItemsTimeoutCounter.getValueAndReset());
+  metrics.put("getEmitItemsCallCounter",getEmitItemsCallCounter.getValueAndReset());
+  metrics.put("getEmitCallCounter",getEmitCallCounter.getValueAndReset());
+  metrics.put("exceptionCounter",exceptionCounter.getValueAndReset());
+  return metrics;
+}

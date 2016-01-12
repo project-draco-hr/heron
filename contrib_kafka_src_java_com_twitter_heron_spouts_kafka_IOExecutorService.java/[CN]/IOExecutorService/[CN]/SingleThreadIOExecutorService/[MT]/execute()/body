@@ -1,0 +1,10 @@
+{
+synchronized (lock) {
+    if (isActive) {
+      return false;
+    }
+    isActive=true;
+  }
+  threadPool.execute(runnable);
+  return true;
+}

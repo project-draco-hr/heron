@@ -1,0 +1,14 @@
+{
+  getEmitItemsCallCounter.incr();
+  try {
+    EmitData item=poll(timeout,unit);
+    if (item == null) {
+      getEmitItemsTimeoutCounter.incr();
+    }
+    return item;
+  }
+ catch (  InterruptedException ie) {
+    exceptionCounter.incr();
+    return null;
+  }
+}

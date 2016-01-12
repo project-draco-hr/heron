@@ -1,0 +1,30 @@
+{
+  this.partition=id;
+  this.spoutConfig=spoutConfig;
+  this.topologyInstanceId=topologyInstanceId;
+  this.consumer=new SimpleConsumer(partition.host,partition.port,spoutConfig.socketTimeoutMs,spoutConfig.bufferSizeBytes);
+  this.stormConf=stormConf;
+  this.storage=storage;
+  this.fetchAPILatencyMax=new CombinedMetric(new KafkaMetric.MaxMetric());
+  this.fetchAPILatencyMean=new ReducedMetric(new MeanReducer());
+  this.fetchAPICallCount=new CountMetric();
+  this.fetchAPIMessageCount=new CountMetric();
+  this.zeroEmits=new CountMetric();
+  this.blobsFiltered=new CountMetric();
+  this.tuplesFiltered=new CountMetric();
+  this.tuplesAdded=new CountMetric();
+  this.fetchExceptions=new CountMetric();
+  this.tuplesInThePast=new CountMetric();
+  this.deserializeEmpty=new CountMetric();
+  this.deserializeNotEmpty=new CountMetric();
+  this.deserializeException=new CountMetric();
+  this.deserializeNullFiltered=new CountMetric();
+  this.committedToStore=new CountMetric();
+  this.nsInNext=new CountMetric();
+  this.nsInFail=new CountMetric();
+  this.committedTo=setCommitedToOffsetFromStore();
+  this.currentKafkaOffset=new AtomicLong(committedTo);
+  this.kafkaOffsetMetric=kafkaOffsetMetric;
+  this.pendingOffsets=TreeMultiset.create();
+  this.failedTuples=new LinkedList<Map.Entry<Long,List<Object>>>();
+}

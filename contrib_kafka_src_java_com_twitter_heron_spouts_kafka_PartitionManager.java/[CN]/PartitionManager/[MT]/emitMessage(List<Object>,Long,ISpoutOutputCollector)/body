@@ -1,0 +1,14 @@
+{
+  KafkaMessageId msgId=new KafkaMessageId(partition,offset);
+synchronized (pendingOffsets) {
+    pendingOffsets.add(offset);
+  }
+  if (spoutConfig.shouldAnchorEmits) {
+    collector.emit(Utils.DEFAULT_STREAM_ID,tuple,msgId);
+  }
+ else {
+    collector.emit(Utils.DEFAULT_STREAM_ID,tuple,null);
+  }
+  tuplesAdded.incr();
+  return msgId;
+}

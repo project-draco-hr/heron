@@ -1,0 +1,13 @@
+{
+  double rate=0;
+  if (kafkaLag == null) {
+    return false;
+  }
+  if (minLag != maxLag) {
+    rate=(kafkaLag - minLag) / (double)(maxLag - minLag);
+  }
+ else {
+    rate=1.0;
+  }
+  return (kafkaLag > minLag) && (random.nextDouble() < rate);
+}

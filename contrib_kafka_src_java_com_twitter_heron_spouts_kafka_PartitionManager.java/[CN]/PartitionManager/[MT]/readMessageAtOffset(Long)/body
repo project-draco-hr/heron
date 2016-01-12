@@ -1,0 +1,10 @@
+{
+  ByteBufferMessageSet msgs=fetchMessageFromKafka(offset);
+  Long currOffset=offset;
+  for (  MessageAndOffset msg : msgs) {
+    if (msg.offset() > currOffset) {
+      return msg.message();
+    }
+  }
+  return null;
+}

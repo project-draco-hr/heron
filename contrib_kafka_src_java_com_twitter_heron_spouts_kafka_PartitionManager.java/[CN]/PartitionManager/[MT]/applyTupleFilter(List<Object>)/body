@@ -1,0 +1,9 @@
+{
+  if (spoutConfig.filterOperator != null) {
+    if (spoutConfig.filterOperator.filter(tuple,kafkaOffsetMetric.getLastCalculatedTotalSpoutLag())) {
+      tuplesFiltered.incr();
+      return true;
+    }
+  }
+  return false;
+}

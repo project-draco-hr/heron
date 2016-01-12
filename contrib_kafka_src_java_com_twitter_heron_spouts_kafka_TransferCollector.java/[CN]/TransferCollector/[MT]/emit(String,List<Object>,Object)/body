@@ -1,0 +1,10 @@
+{
+  getEmitCallCounter.incr();
+  try {
+    put(new EmitData(streamId,tuple,messageId));
+  }
+ catch (  InterruptedException ie) {
+    exceptionCounter.incr();
+  }
+  return new ArrayList<Integer>();
+}

@@ -1,0 +1,8 @@
+{
+  scheduleWhen("scheduleEmpty",millis,new FnParam<Boolean,T,X>(){
+    public Boolean apply(    BlockingQueue<T> s,    X x){
+      return s.isEmpty();
+    }
+  }
+);
+}

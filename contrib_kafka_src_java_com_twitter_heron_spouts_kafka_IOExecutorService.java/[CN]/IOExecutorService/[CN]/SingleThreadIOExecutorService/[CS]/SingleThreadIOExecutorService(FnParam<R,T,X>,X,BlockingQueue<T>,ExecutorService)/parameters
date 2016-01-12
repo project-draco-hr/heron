@@ -1,0 +1,4 @@
+FnParam<R,T,X> readFn
+X ctx
+BlockingQueue<T> stream
+ExecutorService threadpool

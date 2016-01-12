@@ -1,0 +1,16 @@
+{
+  String topicBrokersPath=zkPath + "/topics/" + topic;
+  String brokerInfoPath=zkPath + "/ids";
+  Set<GlobalPartitionId> partitionIds=new TreeSet<GlobalPartitionId>();
+  List<String> children=curator.getChildren().forPath(topicBrokersPath);
+  for (  String c : children) {
+    String[] brokerData=readStringFromZk(brokerInfoPath + "/" + c).split(":");
+    String host=brokerData[brokerData.length - 2];
+    int port=Integer.parseInt(brokerData[brokerData.length - 1]);
+    int numPartitions=Integer.parseInt(readStringFromZk(topicBrokersPath + "/" + c));
+    for (int i=0; i < numPartitions; ++i) {
+      partitionIds.add(new GlobalPartitionId(host,port,i));
+    }
+  }
+  return partitionIds;
+}

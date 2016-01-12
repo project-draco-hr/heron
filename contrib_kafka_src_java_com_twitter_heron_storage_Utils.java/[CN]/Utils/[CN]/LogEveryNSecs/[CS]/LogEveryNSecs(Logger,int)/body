@@ -1,0 +1,9 @@
+{
+  logger=paramLogger;
+  new Timer().schedule(new TimerTask(){
+    @Override public void run(){
+      isLogged=true;
+    }
+  }
+,0,n * 1000);
+}
