@@ -1,0 +1,17 @@
+{
+  int updateMsec=getWithDefault(-conf,SpoutConfig.TOPOLOGY_STORE_UPDATE_MSEC,spoutConfig.storeUpdateMsec);
+  storage.initialize("offset_" + spoutConfig.id,conf.get(Config.TOPOLOGY_NAME).toString(),topologyContext.getThisComponentId().toString(),new StormStoreSerializer.DefaultSerializer<Map<Object,Object>>());
+  Runnable refreshTask=new Runnable(){
+    @Override public void run(){
+      try {
+        commit();
+      }
+ catch (      Exception e) {
+        LOG.error("Failed to commit offsets to store ",e);
+      }
+    }
+  }
+;
+  Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(refreshTask,0,updateMsec,TimeUnit.MILLISECONDS);
+  LOG.info("Added metadata store");
+}

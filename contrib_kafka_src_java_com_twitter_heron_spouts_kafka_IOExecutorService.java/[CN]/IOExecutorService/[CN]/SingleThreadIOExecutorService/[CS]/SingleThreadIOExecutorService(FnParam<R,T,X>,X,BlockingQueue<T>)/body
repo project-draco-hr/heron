@@ -1,0 +1,3 @@
+{
+  this(readFn,ctx,stream,Executors.newSingleThreadExecutor());
+}

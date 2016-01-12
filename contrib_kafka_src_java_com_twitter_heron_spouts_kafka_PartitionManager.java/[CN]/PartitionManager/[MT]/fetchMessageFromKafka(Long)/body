@@ -1,0 +1,35 @@
+{
+  ByteBufferMessageSet msgs=new ByteBufferMessageSet(new ArrayList<Message>());
+  if (spoutConfig.fixedLagBytes > 0) {
+    long latestOffset=getOffsetForTimestamp(OffsetRequest.LatestTime());
+    long lag=latestOffset - fromOffset;
+    if (lag <= spoutConfig.fixedLagBytes) {
+      return msgs;
+    }
+  }
+  long start=System.nanoTime();
+  FetchRequest request=new FetchRequest(spoutConfig.topic,partition.partition,fromOffset,spoutConfig.fetchSizeBytes);
+  try {
+synchronized (PartitionManager.class) {
+      msgs=consumer.fetch(request);
+    }
+  }
+ catch (  OffsetOutOfRangeException e) {
+    throw new RuntimeException("Restart to recover from offset out of range exception");
+  }
+catch (  Exception e) {
+    LOG.error("Caught exception when trying to read from kafka ",e);
+    fetchExceptions.incr();
+  }
+  long end=System.nanoTime();
+  long millis=(end - start) / 1000000;
+  int numMessages=msgs.underlying().size();
+  fetchAPILatencyMax.update(millis);
+  fetchAPILatencyMean.update(millis);
+  fetchAPICallCount.incr();
+  fetchAPIMessageCount.incrBy(numMessages);
+  if (numMessages == 0) {
+    timestampOfLatestEmittedTuple=-1L;
+  }
+  return msgs;
+}

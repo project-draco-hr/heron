@@ -1,0 +1,4 @@
+{
+  startOffsetTime=earliestEventTimestamp;
+  forceFromStart=true;
+}

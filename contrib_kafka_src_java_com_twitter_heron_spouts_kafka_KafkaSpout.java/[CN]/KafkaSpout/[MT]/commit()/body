@@ -1,0 +1,9 @@
+{
+  if (coordinator != null) {
+    for (    PartitionManager manager : coordinator.getMyManagedPartitions()) {
+      if (manager != null) {
+        manager.commit();
+      }
+    }
+  }
+}

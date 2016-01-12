@@ -1,0 +1,16 @@
+{
+  this.collector=outputCollector;
+  int totalTasks=context.getComponentTasks(context.getThisComponentId()).size();
+  applyStormConf(conf);
+  initializeStorage(conf,context);
+  addFilterOperator(conf,context.getThisComponentId(),spoutConfig.topic);
+  KafkaMetric.OffsetMetric kafkaOffsetMetric=new KafkaMetric.OffsetMetric();
+  this.coordinator=new PartitionCoordinator(conf,spoutConfig,context.getThisTaskIndex(),totalTasks,uuid,storage,kafkaOffsetMetric);
+  spoutMetrics=new MultiCountMetric();
+  transferCollector=new TransferCollector(spoutConfig.emitQueueMaxSize);
+  context.registerMetric("kafkaSpout",spoutMetrics,60);
+  context.registerMetric("kafkaOffset",kafkaOffsetMetric,60);
+  context.registerMetric("kafkaPartition",new KafkaMetric.PartitionMetric(coordinator),60);
+  context.registerMetric("transferCollector",transferCollector,60);
+  startIOExecutor();
+}

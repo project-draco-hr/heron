@@ -1,0 +1,6 @@
+{
+  if (other == null) {
+    return false;
+  }
+  return toString().equals(other.toString());
+}

@@ -1,0 +1,14 @@
+{
+  Map ret=new HashMap();
+  try {
+    List<PartitionManager> pms=coordinator.getMyManagedPartitions();
+    for (    PartitionManager pm : pms) {
+      ret.putAll(pm.getMetricsDataMap());
+    }
+  }
+ catch (  Exception e) {
+    LOG.warn("Metrics Tick: Exception when computing partition metric.",e);
+    ret.put(String.format("metricException/%s",e.getClass().getSimpleName()),1);
+  }
+  return ret;
+}

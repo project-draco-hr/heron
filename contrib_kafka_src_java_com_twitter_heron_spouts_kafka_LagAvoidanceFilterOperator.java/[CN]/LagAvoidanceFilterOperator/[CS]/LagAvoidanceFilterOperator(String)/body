@@ -1,0 +1,7 @@
+{
+  super(parameter);
+  JSONObject json=(JSONObject)JSONValue.parse(parameter);
+  this.maxLag=Integer.parseInt(json.get("maxLag").toString());
+  this.minLag=Integer.parseInt(json.get("minLag").toString());
+  random=new Random();
+}

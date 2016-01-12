@@ -1,0 +1,8 @@
+{
+  JSONObject object=new JSONObject();
+  object.put("classname",classname);
+  object.put("spoutname",spoutname);
+  object.put("parameter",parameter);
+  object.put("topic",topic);
+  return object.toJSONString();
+}

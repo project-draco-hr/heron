@@ -1,0 +1,9 @@
+{
+  if (spoutConfig.filterOperator != null) {
+    if (spoutConfig.filterOperator.filter(payload,kafkaOffsetMetric.getLastCalculatedTotalSpoutLag())) {
+      blobsFiltered.incr();
+      return true;
+    }
+  }
+  return false;
+}
