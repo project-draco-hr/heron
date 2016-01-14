@@ -5,5 +5,4 @@
     this.zkRoot=zkRoot;
   }
   this.id=id;
-  zkServers.add("newstormzookeeper.local.twitter.com");
 }
