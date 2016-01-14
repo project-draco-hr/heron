@@ -5,6 +5,6 @@
   keyPrefix=String.format("%s_%s_%s",topologyName,uId,componentId);
   System.out.println("@@@@ " + keyPrefix);
   keyPrefix.replace(" ","");
-  serializer=paramSerializer != null ? paramSerializer : new StormStoreSerializer.DefaultSerializer();
+  serializer=paramSerializer != null ? paramSerializer : new StoreSerializer.DefaultSerializer();
   return true;
 }
