@@ -4,9 +4,17 @@ def main():
     parser = create_parser()
     (args, unknown_args) = parser.parse_known_args()
     namespace = vars(args)
-    namespace['heron_unknown_args'] = unknown_args
-    namespace['heron_dir'] = get_heron_dir()
     COMMAND = namespace['command']
     VERBOSE = namespace['heron_verbose']
+    if ((COMMAND != 'version') and (COMMAND != 'classpath')):
+        namespace['heron_dir'] = get_heron_dir()
+        namespace['heron_config_path'] = namespace['config_path']
+        namespace['heron_config_loader'] = namespace['config_loader']
+        if os.path.isfile(namespace['config_path']):
+            namespace['config_file'] = namespace['config_path']
+            namespace['heron_config_file'] = namespace['config_path']
+        namespace['heron_unknown_args'] = unknown_args
+        if (namespace.get('config_property') != None):
+            namespace['config_property'] = ' '.join(namespace['config_property'])
     atexit.register(cleanup)
     COMMANDS.get(COMMAND)(namespace)

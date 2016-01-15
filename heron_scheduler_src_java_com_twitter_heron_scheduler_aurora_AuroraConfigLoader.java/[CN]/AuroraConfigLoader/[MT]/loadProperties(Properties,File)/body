@@ -1,0 +1,16 @@
+{
+  if (file != null && file.exists() && file.isFile()) {
+    try {
+      p.load(new FileInputStream(file));
+    }
+ catch (    IOException e) {
+      LOG.log(Level.SEVERE,"Failed to load properties file: " + file,e);
+      return false;
+    }
+    return true;
+  }
+ else {
+    LOG.log(Level.SEVERE,"Failed to load properties file: " + file);
+    return false;
+  }
+}

@@ -1,0 +1,4 @@
+{
+  String configDir=context.getConfig().get(Constants.HERON_CONFIG_PATH).toString();
+  return Paths.get(configDir,HERON_AURORA).toString();
+}
