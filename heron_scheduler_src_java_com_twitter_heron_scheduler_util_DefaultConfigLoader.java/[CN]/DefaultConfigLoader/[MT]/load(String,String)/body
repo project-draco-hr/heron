@@ -18,7 +18,7 @@
     return false;
   }
   addDefaultProperties();
-  if (Boolean.parseBoolean(properties.getProperty(Constants.HERON_VERBOSE).toString())) {
+  if (Boolean.parseBoolean(properties.getProperty(Constants.HERON_VERBOSE))) {
     LOG.info("Config parsed: \n" + properties);
   }
   return true;
