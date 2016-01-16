@@ -1,6 +1,6 @@
 {
   int updateMsec=getWithDefault(-conf,SpoutConfig.TOPOLOGY_STORE_UPDATE_MSEC,spoutConfig.storeUpdateMsec);
-  storage.initialize("offset_" + spoutConfig.id,conf.get(Config.TOPOLOGY_NAME).toString(),topologyContext.getThisComponentId().toString(),new StormStoreSerializer.DefaultSerializer<Map<Object,Object>>());
+  storage.initialize("offset_" + spoutConfig.id,conf.get(Config.TOPOLOGY_NAME).toString(),topologyContext.getThisComponentId().toString(),new StoreSerializer.DefaultSerializer<Map<Object,Object>>());
   Runnable refreshTask=new Runnable(){
     @Override public void run(){
       try {

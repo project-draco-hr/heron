@@ -3,5 +3,5 @@ SpoutConfig spoutConfig
 int taskIndex
 int totalTasks
 String topologyInstanceId
-StormMetadataStore storage
+MetadataStore storage
 KafkaMetric.OffsetMetric kafkaOffsetMetric
