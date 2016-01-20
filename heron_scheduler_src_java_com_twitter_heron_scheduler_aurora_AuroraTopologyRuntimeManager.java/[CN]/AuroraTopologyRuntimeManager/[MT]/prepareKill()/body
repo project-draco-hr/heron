@@ -11,15 +11,8 @@
   String[] auroraCmd={"aurora","job","killall","--batch-size",batchSize,String.format("%s/%s/%s/%s",dc,role,environ,topologyName),context.isVerbose() ? "--verbose" : ""};
   LOG.info("auroraCmd=" + Arrays.toString(auroraCmd));
   if (0 == ShellUtility.runProcess(context.isVerbose(),auroraCmd,null,null)) {
-    try {
-      ExecutionEnvironment.ExecutionState executionState=context.getStateManagerAdaptor().getExecutionState().get();
-      String packageName=String.format("heron-topology-%s_%s",topologyName,executionState.getReleaseState().getReleaseTag());
-      return 0 == ShellUtility.runProcess(context.isVerbose(),new String[]{"packer","unset_live","--cluster=" + dc,role,packageName},null,null);
-    }
- catch (    ExecutionException|InterruptedException e) {
-      LOG.log(Level.SEVERE,"Successfully killed aurora job but failed to clear package.",e);
-      return false;
-    }
+    LOG.info("Killed topology");
+    return true;
   }
  else {
     LOG.severe("Failed to kill topology.");
