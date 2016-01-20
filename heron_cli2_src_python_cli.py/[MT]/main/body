@@ -5,7 +5,9 @@ def main():
     (args, unknown_args) = parser.parse_known_args()
     namespace = vars(args)
     COMMAND = namespace['command']
-    VERBOSE = namespace['heron_verbose']
+    VERBOSE = namespace['verbose']
+    namespace['heron_verbose'] = namespace['verbose']
+    del namespace['verbose']
     if ((COMMAND != 'version') and (COMMAND != 'classpath')):
         namespace['heron_dir'] = get_heron_dir()
         namespace['heron_config_path'] = namespace['config_path']
