@@ -1,6 +1,6 @@
 def killTopology(heronCliPath, heronLocalDirectory, topologyName, schedulerConfigPath, configLoaderClasspath):
     logging.info('Killing topology')
-    splitcmd = [('%s' % heronCliPath), 'kill', ('heron.local.working.directory=%s' % heronLocalDirectory), ('%s' % topologyName), ('--config-file=%s' % schedulerConfigPath), ('--config-loader=%s' % configLoaderClasspath), '--heron-verbose']
+    splitcmd = [('%s' % heronCliPath), 'kill', ('heron.local.working.directory=%s' % heronLocalDirectory), ('%s' % topologyName), ('--config-file=%s' % schedulerConfigPath), ('--config-loader=%s' % configLoaderClasspath), '--verbose']
     logging.info('Killing topology:')
     logging.info(splitcmd)
     if (subprocess.call(splitcmd) != 0):

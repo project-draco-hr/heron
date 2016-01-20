@@ -1,6 +1,6 @@
 def submitTopology(heronCliPath, dc, role, env, jarPath, classPath, pkgRole, pkgName, args=None):
     logging.info('Submitting topology')
-    cmd = ('%s submit %s/%s/%s --heron-release-pkgrole=%s --heron-release-pkgname=%s %s %s %s --heron-verbose' % (heronCliPath, dc, role, env, pkgRole, pkgName, jarPath, classPath, args))
+    cmd = ('%s submit %s/%s/%s --heron-release-pkgrole=%s --heron-release-pkgname=%s %s %s %s --verbose' % (heronCliPath, dc, role, env, pkgRole, pkgName, jarPath, classPath, args))
     logging.info(('Submitting command: %s' % cmd))
     for i in range(0, RETRY_ATTEMPTS):
         if (os.system(cmd) == 0):

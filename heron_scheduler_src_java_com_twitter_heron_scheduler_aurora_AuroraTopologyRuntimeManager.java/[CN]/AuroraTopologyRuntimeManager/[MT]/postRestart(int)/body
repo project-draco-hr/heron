@@ -6,7 +6,10 @@
  catch (  InterruptedException|ExecutionException e) {
     LOG.log(Level.SEVERE,"Fetch topology failed. Check if topology is running",e);
   }
-  String batchSize=context.getProperty(HERON_BATCH_SIZE,(1 + TopologyUtility.getNumContainer(topology)) + "");
-  String[] auroraCmd=new String[]{"aurora","job","restart","--batch-size",batchSize,restartShardId == -1 ? String.format("%s/%s/%s/%s",dc,role,environ,topologyName) : String.format("%s/%s/%s/%s/%s",dc,role,environ,topologyName,restartShardId),context.isVerbose() ? "--verbose" : ""};
-  return 0 == ShellUtility.runProcess(context.isVerbose(),auroraCmd,null,null);
+  String batchSize=context.getProperty(HERON_AURORA_BATCH_SIZE,(1 + TopologyUtility.getNumContainer(topology)) + "");
+  ArrayList<String> auroraCmd=new ArrayList<>(Arrays.asList("aurora","job","restart","--batch-size",batchSize,restartShardId == -1 ? String.format("%s/%s/%s/%s",dc,role,environ,topologyName) : String.format("%s/%s/%s/%s/%s",dc,role,environ,topologyName,restartShardId)));
+  if (context.isVerbose()) {
+    auroraCmd.add("--verbose");
+  }
+  return 0 == ShellUtility.runProcess(context.isVerbose(),auroraCmd.toArray(new String[auroraCmd.size()]),null,null);
 }
