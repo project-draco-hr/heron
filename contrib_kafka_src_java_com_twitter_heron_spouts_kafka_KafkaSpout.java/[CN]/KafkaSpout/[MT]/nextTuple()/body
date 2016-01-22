@@ -1,0 +1,17 @@
+{
+  long startTime=System.nanoTime();
+  spoutMetrics.scope("nextTupleCalls").incr();
+  TransferCollector.EmitData emitData=transferCollector.getEmitItems(1,TimeUnit.MILLISECONDS);
+  if (emitData != null) {
+    collector.emit(emitData.streamId,emitData.tuple,emitData.messageId);
+    if (!spoutConfig.shouldAnchorEmits) {
+      ack(emitData.messageId);
+    }
+    spoutMetrics.scope("nextTupleEmitIdCount").incr();
+  }
+ else {
+    spoutMetrics.scope("nextTupleZeroEmits").incr();
+  }
+  long endTime=System.nanoTime();
+  spoutMetrics.scope("nextTupleTime").incrBy(endTime - startTime);
+}

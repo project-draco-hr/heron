@@ -1,5 +1,5 @@
 {
-  String zkHost=context.getPropertyWithException(CuratorStateManager.ZKHOST_PREFIX + "." + dc);
-  String zkPort=context.getPropertyWithException(CuratorStateManager.ZKPORT_PREFIX + "." + dc);
+  String zkHost=context.getPropertyWithException(Constants.ZKHOST);
+  String zkPort=context.getPropertyWithException(Constants.ZKPORT);
   return zkHost + ":" + zkPort;
 }

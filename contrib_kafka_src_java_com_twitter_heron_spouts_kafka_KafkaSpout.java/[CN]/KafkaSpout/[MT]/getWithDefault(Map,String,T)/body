@@ -1,0 +1,6 @@
+{
+  if (conf.get(key) != null) {
+    return (T)(conf.get(key));
+  }
+  return value;
+}

@@ -1,0 +1,7 @@
+{
+  byte[] data=curator.getData().forPath(path);
+  if (data == null) {
+    LOG.error("Read null data for path: " + path + " Task index: "+ taskIndex);
+  }
+  return new String(data,"UTF-8");
+}

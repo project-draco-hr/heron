@@ -24,9 +24,9 @@
   args.put("JOB_NAME",controlJobName);
   args.put("DC",dc);
   args.put("RUN_ROLE",role);
-  args.put("HERON_PACKAGE",context.getProperty(Constants.HERON_RELEASE_TAG,"heron-core-package"));
-  args.put("RELEASE_ROLE",context.getProperty(Constants.HERON_RELEASE_USER_NAME,"heron"));
-  args.put("VERSION",context.getProperty(Constants.HERON_RELEASE_VERSION,"live"));
+  args.put("HERON_PACKAGE",context.getProperty(Constants.HERON_RELEASE_PACKAGE_NAME,"heron-core-package"));
+  args.put("RELEASE_ROLE",context.getProperty(Constants.HERON_RELEASE_PACKAGE_ROLE,"heron"));
+  args.put("VERSION",context.getProperty(Constants.HERON_RELEASE_PACKAGE_VERSION,"live"));
   if (activate) {
     args.put("CONTROLLERCMD","/activate");
   }

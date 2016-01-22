@@ -1,0 +1,11 @@
+{
+  if (spoutConfig.timestampExtractor != null) {
+    long timestamp=spoutConfig.timestampExtractor.getTimestamp(tuple);
+    if (timestamp > timestampOfLatestEmittedTuple) {
+      timestampOfLatestEmittedTuple=timestamp;
+    }
+ else     if (timestamp < timestampOfLatestEmittedTuple - spoutConfig.tupleInThePastThreshold) {
+      tuplesInThePast.incr();
+    }
+  }
+}

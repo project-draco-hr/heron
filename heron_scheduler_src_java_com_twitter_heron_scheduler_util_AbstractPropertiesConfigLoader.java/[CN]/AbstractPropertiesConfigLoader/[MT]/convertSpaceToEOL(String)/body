@@ -1,0 +1,45 @@
+{
+  StringBuilder token=new StringBuilder();
+  ArrayList<String> tokens=new ArrayList<String>();
+  boolean escaped=false;
+  boolean inQuotes=false;
+  for (  char ch : propertyOverride.toCharArray()) {
+    if (!escaped && ch == '\\') {
+      escaped=true;
+    }
+ else     if (escaped) {
+      escaped=false;
+      token.append(ch);
+    }
+ else {
+switch (ch) {
+case '=':
+case ' ':
+{
+          if (!inQuotes) {
+            tokens.add(token.toString());
+            token=new StringBuilder();
+          }
+ else {
+            token.append(ch);
+          }
+          break;
+        }
+case '\"':
+      inQuotes=!inQuotes;
+default :
+    token.append(ch);
+}
+}
+}
+tokens.add(token.toString());
+boolean inKey=true;
+StringBuilder formattedString=new StringBuilder();
+for (String s : tokens) {
+if (!s.trim().isEmpty()) {
+formattedString.append(String.format(inKey ? "%s=" : "%s\r\n",s));
+inKey=!inKey;
+}
+}
+return formattedString.toString();
+}

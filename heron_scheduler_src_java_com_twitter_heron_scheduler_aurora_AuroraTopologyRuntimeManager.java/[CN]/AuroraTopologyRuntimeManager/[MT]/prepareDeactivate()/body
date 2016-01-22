@@ -1,4 +1,3 @@
 {
-  writeAuroraFile();
   return controlTopology(false) && verifyControllerSuccess(false);
 }

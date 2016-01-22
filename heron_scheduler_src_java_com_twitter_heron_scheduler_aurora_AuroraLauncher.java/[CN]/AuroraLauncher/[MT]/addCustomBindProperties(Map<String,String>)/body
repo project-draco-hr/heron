@@ -1,0 +1,11 @@
+{
+  String keyPrefix=Constants.HERON_AURORA_BIND_PREFIX;
+  for (  Object key : context.getConfig().keySet()) {
+    String strKey=key.toString();
+    if (strKey.startsWith(keyPrefix)) {
+      String bindKey=strKey.substring(keyPrefix.length());
+      String bindValue=context.getConfig().get(key).toString();
+      auroraProperties.put(bindKey,bindValue);
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  return properties.getProperty(Constants.HERON_CONFIG_PATH);
+}

@@ -1,0 +1,6 @@
+String topologyInstanceId
+Map stormConf
+SpoutConfig spoutConfig
+GlobalPartitionId id
+MetadataStore storage
+KafkaMetric.OffsetMetric kafkaOffsetMetric

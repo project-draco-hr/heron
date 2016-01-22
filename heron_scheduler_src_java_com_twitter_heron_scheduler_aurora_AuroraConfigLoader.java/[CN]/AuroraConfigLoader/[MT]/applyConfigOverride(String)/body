@@ -18,5 +18,5 @@
       return false;
     }
   }
-  return translatePackageVersion();
+  return true;
 }

@@ -1,0 +1,8 @@
+{
+  scheduleWhen("scheduleFixed",millis,new FnParam<Boolean,T,X>(){
+    public Boolean apply(    BlockingQueue<T> s,    X x){
+      return true;
+    }
+  }
+);
+}

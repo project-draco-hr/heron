@@ -1,0 +1,8 @@
+{
+  long[] offsets=consumer.getOffsetsBefore(spoutConfig.topic,partition.partition,timestamp,1);
+  if ((offsets == null) || (offsets.length == 0)) {
+    LOG.error("Failed to fetch offsets from Kafka for timestamp " + timestamp + " Topic = "+ spoutConfig.topic+ " Partition = "+ partition);
+    offsets=consumer.getOffsetsBefore(spoutConfig.topic,partition.partition,OffsetRequest.EarliestTime(),1);
+  }
+  return offsets[0];
+}

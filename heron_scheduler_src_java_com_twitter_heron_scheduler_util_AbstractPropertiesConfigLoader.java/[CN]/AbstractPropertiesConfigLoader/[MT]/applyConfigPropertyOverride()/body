@@ -1,0 +1,7 @@
+{
+  if (properties.containsKey(Constants.CONFIG_PROPERTY)) {
+    String configOverride=properties.getProperty(Constants.CONFIG_PROPERTY);
+    return applyOverride(properties,configOverride);
+  }
+  return true;
+}

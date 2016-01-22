@@ -1,7 +1,12 @@
 {
   LOG.info("Cleaning up Heron State");
-  if (!NetworkUtility.awaitResult(stateManager.clearPhysicalPlan(),5,TimeUnit.SECONDS)) {
-    LOG.severe("Failed to clear physical plan. Check whether TMaster set it correctly.");
+  try {
+    if (!NetworkUtility.awaitResult(stateManager.clearPhysicalPlan(),5,TimeUnit.SECONDS)) {
+      LOG.severe("Failed to clear physical plan. Check whether TMaster set it correctly.");
+    }
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to clear physical plan",e);
   }
   if (!NetworkUtility.awaitResult(stateManager.clearExecutionState(),5,TimeUnit.SECONDS)) {
     LOG.severe("Failed to clear execution state");

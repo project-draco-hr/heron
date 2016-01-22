@@ -1,0 +1,4 @@
+{
+  getEmitItemsCallCounter.incr();
+  return poll();
+}

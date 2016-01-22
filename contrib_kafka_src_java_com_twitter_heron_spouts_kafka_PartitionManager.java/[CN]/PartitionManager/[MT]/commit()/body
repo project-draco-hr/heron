@@ -1,0 +1,12 @@
+{
+  long committedOffset;
+synchronized (pendingOffsets) {
+    committedOffset=pendingOffsets.isEmpty() ? currentKafkaOffset.get() : pendingOffsets.firstEntry().getElement();
+  }
+  if (committedOffset != committedTo) {
+    ImmutableMap data=ImmutableMap.builder().put("topic",spoutConfig.topic).put("topology",ImmutableMap.of("id",topologyInstanceId,"name",stormConf.get(Config.TOPOLOGY_NAME))).put("offset",committedOffset).build();
+    storage.setPKey(partition.toString(),data);
+    committedTo=committedOffset;
+    committedToStore.incr();
+  }
+}

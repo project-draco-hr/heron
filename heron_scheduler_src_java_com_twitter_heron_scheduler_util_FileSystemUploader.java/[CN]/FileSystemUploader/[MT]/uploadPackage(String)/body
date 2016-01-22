@@ -1,0 +1,8 @@
+{
+  String fileName=Paths.get(topologyPackage).getFileName().toString();
+  Path filePath=Paths.get(getUserTopologyFilePath(),fileName);
+  File parent=filePath.getParent().toFile();
+  if (!parent.exists())   parent.mkdirs();
+  String copyCmdline=String.format("cp %s %s",topologyPackage,filePath);
+  return 0 == ShellUtility.runProcess(context.isVerbose(),copyCmdline,null,null);
+}
