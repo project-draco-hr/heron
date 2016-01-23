@@ -1,7 +1,6 @@
 {
   String override="dc/role/environ";
   AuroraConfigLoader configLoader=AuroraConfigLoader.class.newInstance();
-  configLoader.properties=new Properties();
   configLoader.properties.setProperty(Constants.HERON_RELEASE_PACKAGE_NAME,"test");
   configLoader.applyConfigOverride(override);
   Assert.assertEquals("dc",configLoader.properties.getProperty(Constants.DC));

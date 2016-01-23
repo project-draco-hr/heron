@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(Constants.RUNTIME_MANAGER_CLASS);
-}

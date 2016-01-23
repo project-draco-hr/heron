@@ -4,7 +4,6 @@
   addConfig(override,Constants.HERON_RELEASE_PACKAGE_ROLE,"test");
   addConfig(override,Constants.HERON_RELEASE_PACKAGE_VERSION,"live");
   AuroraConfigLoader configLoader=AuroraConfigLoader.class.newInstance();
-  configLoader.properties=new Properties();
   configLoader.applyConfigOverride(override.toString());
   Assert.assertEquals("live",configLoader.properties.getProperty(Constants.HERON_RELEASE_PACKAGE_VERSION));
 }

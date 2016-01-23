@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(Constants.PACKING_ALGORITHM_CLASS);
-}
