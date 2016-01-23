@@ -1,5 +1,5 @@
 {
-  String[] parts=configOverride.trim().split(" ",2);
+  String[] parts=configOverride.trim().split("\\s+",2);
   if (parts.length == 0) {
     LOG.severe("dc/role/environ is required.");
     return false;
@@ -10,13 +10,22 @@
     LOG.severe("Cluster parts must be dc/role/environ (without spaces)");
     return false;
   }
-  properties.setProperty(Constants.DC,clusterParts[0]);
-  properties.setProperty(Constants.ROLE,clusterParts[1]);
-  properties.setProperty(Constants.ENVIRON,clusterParts[2]);
-  if (parts.length == 2 && !parts[1].isEmpty()) {
-    if (!super.applyConfigOverride(parts[1])) {
-      return false;
-    }
+  String propertyOverride="";
+  if (parts.length == 2) {
+    propertyOverride=parts[1];
   }
-  return true;
+  String dc=clusterParts[0];
+  String role=clusterParts[1];
+  String environ=clusterParts[2];
+  Properties p=new Properties();
+  if (ConfigLoaderUtils.applyPropertyOverride(p,propertyOverride)) {
+    properties.putAll(p);
+    properties.setProperty(Constants.DC,dc);
+    properties.setProperty(Constants.ROLE,role);
+    properties.setProperty(Constants.ENVIRON,environ);
+    return true;
+  }
+ else {
+    return false;
+  }
 }

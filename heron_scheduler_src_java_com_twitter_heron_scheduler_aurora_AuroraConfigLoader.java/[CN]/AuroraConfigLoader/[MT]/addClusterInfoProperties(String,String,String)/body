@@ -1,0 +1,5 @@
+{
+  properties.setProperty(Constants.DC,dc);
+  properties.setProperty(Constants.ROLE,role);
+  properties.setProperty(Constants.ENVIRON,environ);
+}

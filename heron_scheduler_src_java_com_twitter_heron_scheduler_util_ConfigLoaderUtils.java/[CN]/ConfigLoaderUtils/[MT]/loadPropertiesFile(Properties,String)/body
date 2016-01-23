@@ -1,0 +1,15 @@
+{
+  if (propertiesFile == null || propertiesFile.isEmpty()) {
+    LOG.info("Properties file not found: " + propertiesFile);
+  }
+ else {
+    try {
+      p.load(new FileInputStream(propertiesFile));
+    }
+ catch (    IOException e) {
+      LOG.log(Level.SEVERE,"Failed to load properties file: " + propertiesFile,e);
+      return false;
+    }
+  }
+  return true;
+}

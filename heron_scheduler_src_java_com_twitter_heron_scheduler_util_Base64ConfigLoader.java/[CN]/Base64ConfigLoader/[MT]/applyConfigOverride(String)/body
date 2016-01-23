@@ -1,4 +1,0 @@
-{
-  String decodedConfigOverride=new String(DatatypeConverter.parseBase64Binary(configOverride),Charset.forName("UTF-8"));
-  return super.applyConfigOverride(decodedConfigOverride);
-}

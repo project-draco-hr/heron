@@ -1,0 +1,3 @@
+{
+  return ConfigLoaderUtils.applyPropertyOverride(properties,preparePropertyOverride(configOverride));
+}

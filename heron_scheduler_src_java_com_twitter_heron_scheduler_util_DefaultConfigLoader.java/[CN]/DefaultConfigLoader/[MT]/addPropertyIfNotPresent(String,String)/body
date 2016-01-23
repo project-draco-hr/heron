@@ -1,5 +1,0 @@
-{
-  if (!properties.containsKey(key)) {
-    properties.setProperty(key,value);
-  }
-}

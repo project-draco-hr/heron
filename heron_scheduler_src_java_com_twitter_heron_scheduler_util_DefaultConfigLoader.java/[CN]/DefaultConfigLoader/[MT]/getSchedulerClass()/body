@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(Constants.SCHEDULER_CLASS);
-}

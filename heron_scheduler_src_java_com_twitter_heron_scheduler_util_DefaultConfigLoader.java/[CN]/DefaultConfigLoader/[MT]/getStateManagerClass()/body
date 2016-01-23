@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(Constants.STATE_MANAGER_CLASS);
-}
