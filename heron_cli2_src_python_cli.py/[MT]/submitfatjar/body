@@ -13,7 +13,7 @@ def submitfatjar(namespace):
     set_config_opt('cmdline.topology.initial.state', initial_state)
     exec_heron_class(klass, get_heron_libs(TOPOLOGY_RUN_JARS), extrajars=[jarfile], args=args)
     try:
-        scheduler_overrides = ((namespace['config-overrides'] + ' ') + pass_cmdline_override(namespace))
+        scheduler_overrides = ((pass_config_overrides(namespace) + ' ') + pass_cmdline_override(namespace))
         launch_all_topologies_found(jarfile, tmpdir, namespace['config_loader'], namespace['config_path'], scheduler_overrides)
     finally:
         shutil.rmtree(tmpdir)
