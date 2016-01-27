@@ -1,3 +1,10 @@
 {
-  return ConfigLoaderUtils.applyPropertyOverride(properties,preparePropertyOverride(configOverride));
+  Properties p=new Properties();
+  if (ConfigLoaderUtils.applyPropertyOverride(p,preparePropertyOverride(configOverride))) {
+    properties.putAll(p);
+    return true;
+  }
+ else {
+    return false;
+  }
 }

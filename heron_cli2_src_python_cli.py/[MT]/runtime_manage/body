@@ -3,7 +3,7 @@ def runtime_manage(namespace):
     topology_name = namespace['topology']
     command = namespace['command']
     try:
-        config_overrides = ((namespace['config-overrides'] + ' ') + pass_cmdline_override(namespace))
+        config_overrides = ((pass_config_overrides(namespace) + ' ') + pass_cmdline_override(namespace))
         exec_heron_class('com.twitter.heron.scheduler.service.RuntimeManagerMain', get_heron_libs(SCHEDULER_RUN_JARS), extrajars=[], args=[command, topology_name, namespace['config_loader'], base64.b64encode(config_overrides), namespace['config_path']])
     except Exception as ex:
         print ('Failed to %s topology' % command)
