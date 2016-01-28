@@ -1,6 +1,6 @@
 self
 tmaster
 queryString
-startTime
-endTime
+start_time
+end_time
 callback

@@ -1,11 +1,11 @@
 @tornado.gen.coroutine
-def executeMetricsQuery(self, tmaster, queryString, startTime, endTime, callback=None):
+def executeMetricsQuery(self, tmaster, queryString, start_time, end_time, callback=None):
     '\n    Get the specified metrics for the given query in this topology.\n    Returns the following dict on success:\n    {\n      "timeline": [{\n        "instance": <instance>,\n        "data": {\n          <start_time> : <numeric value>,\n          <start_time> : <numeric value>,\n          ...\n        }\n      }, {\n        ...\n      }, ...\n      "starttime": <numeric value>,\n      "endtime": <numeric value>,\n    },\n\n    Returns the following dict on failure:\n    {\n      "message": "..."\n    }\n    '
     query = Query(self.tracker)
-    metrics = yield query.execute_query(tmaster, queryString, startTime, endTime)
+    metrics = yield query.execute_query(tmaster, queryString, start_time, end_time)
     ret = {}
-    ret['starttime'] = startTime
-    ret['endtime'] = endTime
+    ret['starttime'] = start_time
+    ret['endtime'] = end_time
     ret['timeline'] = []
     if (not metrics):
         raise Exception('No metrics found')

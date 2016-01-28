@@ -1,6 +1,8 @@
 def get_execution_state_dc_environ(self, execution_state):
-    '\n    Helper function to extract dc and environ from execution_state.\n    Returns a tuple (dc, environ).\n    '
+    '\n    Helper function to extract dc and environ from execution_state.\n    Returns a tuple (cluster, environ).\n    '
     if execution_state.HasField('aurora'):
         return (execution_state.aurora.jobs[0].dc, execution_state.aurora.jobs[0].environ)
+    elif execution_state.HasField('cluster'):
+        return (execution_state.cluster, execution_state.environ)
     else:
         return (execution_state.dc, execution_state.environ)

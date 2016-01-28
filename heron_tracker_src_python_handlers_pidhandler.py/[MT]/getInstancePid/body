@@ -1,9 +1,9 @@
 @tornado.gen.coroutine
-def getInstancePid(topologyInfo, instance_id):
+def getInstancePid(topology_info, instance_id):
     '\n  This method is used by other modules, and so it\n  is not a part of the class.\n  Fetches Instance pid from heron-shell.\n  '
     try:
         http_client = tornado.httpclient.AsyncHTTPClient()
-        endpoint = utils.make_shell_endpoint(topologyInfo, instance_id)
+        endpoint = utils.make_shell_endpoint(topology_info, instance_id)
         url = ('%s/pid/%s' % (endpoint, instance_id))
         LOG.debug(('HTTP call for url: %s' % url))
         response = yield http_client.fetch(url)
