@@ -1,17 +1,17 @@
 @tornado.gen.coroutine
 def get(self):
     try:
-        dc = self.get_argument_dc()
+        cluster = self.get_argument_cluster()
         environ = self.get_argument_environ()
-        topName = self.get_argument_topology()
+        topology_name = self.get_argument_topology()
         component = self.get_argument_component()
-        metricNames = self.get_required_arguments_metricnames()
-        startTime = self.get_argument_starttime()
-        endTime = self.get_argument_endtime()
-        self.validateInterval(startTime, endTime)
+        metric_names = self.get_required_arguments_metricnames()
+        start_time = self.get_argument_starttime()
+        end_time = self.get_argument_endtime()
+        self.validateInterval(start_time, end_time)
         instances = self.get_arguments(constants.PARAM_INSTANCE)
-        topology = self.tracker.getTopologyByDcEnvironAndName(dc, environ, topName)
-        metrics = yield tornado.gen.Task(self.getMetricsTimeline, topology.tmaster, component, metricNames, instances, int(startTime), int(endTime))
+        topology = self.tracker.getTopologyByDcEnvironAndName(cluster, environ, topology_name)
+        metrics = yield tornado.gen.Task(self.getMetricsTimeline, topology.tmaster, component, metric_names, instances, int(start_time), int(end_time))
         self.write_success_response(metrics)
     except Exception as e:
         self.write_error_response(e)
