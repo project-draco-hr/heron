@@ -2,6 +2,6 @@ def create_mock_execution_state(self):
     estate = protoEState.ExecutionState()
     estate.topology_name = MockProto.topology_name
     estate.topology_id = MockProto.topology_id
-    estate.dc = MockProto.dc
+    estate.cluster = MockProto.cluster
     estate.environ = MockProto.environ
     return estate
