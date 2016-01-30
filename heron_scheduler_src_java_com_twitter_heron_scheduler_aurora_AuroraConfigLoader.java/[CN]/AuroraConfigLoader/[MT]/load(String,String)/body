@@ -1,11 +1,15 @@
 {
   File schedulerConfFile=Paths.get(configPath,AURORA_SCHEDULER_CONF).toFile();
   File bindConfFile=Paths.get(configPath,AURORA_BIND_CONF).toFile();
-  if (super.load(schedulerConfFile.toString(),configOverride) && loadProperties(properties,getClusterConfFile(configPath)) && applyConfigPropertyOverride()) {
-    Properties bindProperties=loadProperties(bindConfFile);
-    return addAuroraBindProperties(bindProperties);
+  PropertiesFileConfigLoader baseLoader=new PropertiesFileConfigLoader();
+  if (baseLoader.load(schedulerConfFile.toString(),configOverride)) {
+    Properties baseProperties=baseLoader.getProperties();
+    Properties bindProperties=new Properties();
+    String dc=baseProperties.getProperty(Constants.DC);
+    if (ConfigLoaderUtils.loadPropertiesFile(baseProperties,getClusterConfFile(configPath,dc).toString()) && ConfigLoaderUtils.applyConfigPropertyOverride(baseProperties) && ConfigLoaderUtils.loadPropertiesFile(bindProperties,bindConfFile.toString())&& addAuroraBindProperties(baseProperties,bindProperties)) {
+      properties.putAll(baseProperties);
+      return true;
+    }
   }
- else {
-    return false;
-  }
+  return false;
 }

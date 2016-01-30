@@ -1,8 +1,8 @@
 self
 tmaster
-componentName
-metricNames
+component_name
+metric_names
 instances
-startTime
-endTime
+start_time
+end_time
 callback

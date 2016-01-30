@@ -1,4 +1,0 @@
-{
-  String cluster=properties.get(Constants.DC).toString();
-  return Paths.get(configPath,"cluster",String.format("%s.conf",cluster)).toFile();
-}

@@ -1,25 +1,11 @@
 {
-  Properties oldProperties=this.properties;
-  properties=new Properties();
-  if (configFile == null || configFile.isEmpty()) {
-    LOG.info("Config file is not provided. Load config from override cmd arguments.");
+  PropertiesFileConfigLoader baseLoader=new PropertiesFileConfigLoader();
+  String propertyOverride=preparePropertyOverride(configOverride);
+  if (baseLoader.load(configFile,propertyOverride)) {
+    properties.putAll(baseLoader.getProperties());
+    return true;
   }
  else {
-    try {
-      properties.load(new FileInputStream(configFile));
-    }
- catch (    IOException e) {
-      properties=oldProperties;
-      LOG.log(Level.SEVERE,"Failed to load properties config file",e);
-      return false;
-    }
-  }
-  if (!applyConfigOverride(configOverride)) {
     return false;
   }
-  addDefaultProperties();
-  if (Boolean.parseBoolean(properties.getProperty(Constants.HERON_VERBOSE))) {
-    LOG.info("Config parsed: \n" + properties);
-  }
-  return true;
 }

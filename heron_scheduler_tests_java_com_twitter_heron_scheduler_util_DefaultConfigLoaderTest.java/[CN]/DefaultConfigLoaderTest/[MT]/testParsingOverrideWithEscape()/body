@@ -1,7 +1,6 @@
 {
   String override="key1=foo\\:\"subkey1 = value1\"  key2=subkey2\\=value2";
   DefaultConfigLoader configLoader=new DefaultConfigLoader();
-  configLoader.properties=new Properties();
   configLoader.applyConfigOverride(override);
   Assert.assertEquals("foo:\"subkey1 = value1\"",configLoader.properties.getProperty("key1"));
   Assert.assertEquals("subkey2=value2",configLoader.properties.getProperty("key2"));

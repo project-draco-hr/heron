@@ -1,10 +1,9 @@
 {
-  StringBuilder override=new StringBuilder("dc/role/environ");
+  StringBuilder override=new StringBuilder("dc=dc role=role environ=environ");
   addConfig(override,Constants.HERON_RELEASE_PACKAGE_NAME,"testPackage");
   addConfig(override,Constants.HERON_RELEASE_PACKAGE_ROLE,"test");
   addConfig(override,Constants.HERON_RELEASE_PACKAGE_VERSION,"live");
   AuroraConfigLoader configLoader=AuroraConfigLoader.class.newInstance();
-  configLoader.properties=new Properties();
   configLoader.applyConfigOverride(override.toString());
   Assert.assertEquals("live",configLoader.properties.getProperty(Constants.HERON_RELEASE_PACKAGE_VERSION));
 }
