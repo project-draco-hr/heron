@@ -1,0 +1,3 @@
+def clear_config():
+    global config_opts
+    config_opts = dict()

@@ -1,0 +1,10 @@
+def main():
+    parser = create_parser()
+    if (len(sys.argv[1:]) == 0):
+        parser.print_help()
+        parser.exit()
+    (args, unknown_args) = parser.parse_known_args()
+    namespace = vars(args)
+    atexit.register(cleanup)
+    command = namespace['subcommand']
+    return execute(command, parser, namespace, unknown_args)

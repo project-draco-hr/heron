@@ -1,0 +1,9 @@
+def execute(parser, args, unknown_args):
+    command_help = args['command']
+    if (command_help == 'help'):
+        parser.print_help()
+        parser.exit()
+    subparser = utils.get_subparser(parser, command_help)
+    if subparser:
+        print subparser.format_help()
+        parser.exit()
