@@ -22,4 +22,4 @@ def submit_fatjar(command, parser, cl_args, unknown_args):
         config_overrides = ((args.parse_cluster_role_env(cluster_role_env) + ' ') + args.parse_cmdline_override(cl_args))
         launch_topologies(topology_file, tmp_dir, config_loader, config_path, config_overrides)
     finally:
-        shutil.rmtree(tmpdir)
+        shutil.rmtree(tmp_dir)
