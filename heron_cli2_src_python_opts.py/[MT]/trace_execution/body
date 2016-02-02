@@ -1,0 +1,3 @@
+def trace_execution():
+    global trace_execution_flag
+    return trace_execution_flag

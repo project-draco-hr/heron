@@ -1,8 +1,0 @@
-def execute(command, parser, args, unknown_args):
-    if (command == 'submit'):
-        return submit.execute(parser, args, unknown_args)
-    elif (command == 'kill'):
-        return kill.execute(parser, args, unknown_args)
-    elif (command == 'help'):
-        return help.execute(parser, args, unknown_args)
-    return 1

@@ -3,8 +3,17 @@ def main():
     if (len(sys.argv[1:]) == 0):
         parser.print_help()
         parser.exit()
+    sys.argv = parse.insert_bool_values(sys.argv)
     (args, unknown_args) = parser.parse_known_args()
     namespace = vars(args)
+    print namespace
+    try:
+        if namespace['verbose']:
+            opts.set_verbose()
+        if namespace['trace_execution']:
+            opts.set_trace_execution()
+    except:
+        pass
     atexit.register(cleanup)
     command = namespace['subcommand']
-    return execute(command, parser, namespace, unknown_args)
+    return run(command, parser, namespace, unknown_args)

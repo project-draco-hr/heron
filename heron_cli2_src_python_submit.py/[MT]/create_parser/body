@@ -1,7 +1,7 @@
 def create_parser(subparsers):
-    parser = subparsers.add_parser('submit', help='Submit a topology', usage='%(prog)s [options] config-overrides topology-file-name topology-class-name [topology-args]', add_help=False)
+    parser = subparsers.add_parser('submit', help='Submit a topology', usage='%(prog)s [options] cluster/[role]/[environ] topology-file-name topology-class-name [topology-args]', add_help=False)
     args.add_titles(parser)
-    args.add_config_overrides(parser)
+    args.add_cluster_role_env(parser)
     args.add_topology_file(parser)
     args.add_topology_class(parser)
     args.add_config(parser)

@@ -1,3 +1,0 @@
-def add_config_overrides(parser):
-    parser.add_argument('cluster/[role]/[env]', help='Cluster, role, and environ to run topology')
-    return parser
