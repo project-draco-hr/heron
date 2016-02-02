@@ -11,11 +11,11 @@ def submit_fatjar(command, parser, cl_args, unknown_args):
         print subparser.format_help()
         parser.exit()
     tmp_dir = tempfile.mkdtemp()
-    opts.set_config('cmdline.topologydefn.tmpdirectory', tmp_dir)
     if cl_args['deploy_deactivated']:
         initial_state = topology_pb2.TopologyState.Name(topology_pb2.PAUSED)
     else:
         initial_state = topology_pb2.TopologyState.Name(topology_pb2.RUNNING)
+    opts.set_config('cmdline.topologydefn.tmpdirectory', tmp_dir)
     opts.set_config('cmdline.topology.initial.state', initial_state)
     execute.heron_class(topology_class_name, utils.get_heron_libs(jars.topology_jars()), extra_jars=[topology_file], args=topology_args)
     try:
