@@ -1,6 +1,6 @@
 {
-  int retryAttempts=Utils.getInt(config.get(KEY_SCRIBE_RETRY_ATTEMPTS));
-  long retryIntervalMs=Utils.getLong(config.get(KEY_SCRIBE_RETRY_INTERVAL_MS));
+  int retryAttempts=TypeUtils.getInt(config.get(KEY_SCRIBE_RETRY_ATTEMPTS));
+  long retryIntervalMs=TypeUtils.getLong(config.get(KEY_SCRIBE_RETRY_INTERVAL_MS));
   try {
     for (int attempt=0; attempt < retryAttempts; attempt++) {
       ResultCode result=client.Log(pendingEntries);

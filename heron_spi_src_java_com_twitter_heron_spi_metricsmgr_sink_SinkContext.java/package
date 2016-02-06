@@ -1,1 +1,1 @@
-com.twitter.heron.metricsmgr.api.sink
+com.twitter.heron.spi.metricsmgr.sink
