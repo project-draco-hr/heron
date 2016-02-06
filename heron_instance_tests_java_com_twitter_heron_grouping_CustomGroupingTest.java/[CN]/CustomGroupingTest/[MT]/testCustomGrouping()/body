@@ -29,7 +29,7 @@
           testLooper.exitLoop();
           break;
         }
-        Utils.sleep(Constants.RETRY_INTERVAL_MS);
+        SysUtils.sleep(Constants.RETRY_INTERVAL_MS);
       }
     }
   }

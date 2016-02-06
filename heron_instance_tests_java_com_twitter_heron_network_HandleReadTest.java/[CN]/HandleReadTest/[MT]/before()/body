@@ -9,5 +9,5 @@
   inControlQueue=new Communicator<InstanceControlMsg>(nioLooper,slaveLooper);
   gatewayMetrics=new GatewayMetrics();
   threadsPool=Executors.newSingleThreadExecutor();
-  serverPort=Utils.getFreePort();
+  serverPort=SysUtils.getFreePort();
 }

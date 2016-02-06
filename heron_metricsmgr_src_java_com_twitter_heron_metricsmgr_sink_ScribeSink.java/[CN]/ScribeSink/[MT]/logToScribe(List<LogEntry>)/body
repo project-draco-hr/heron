@@ -11,7 +11,7 @@
       if (result.equals(ResultCode.TRY_LATER)) {
         counters.put(TRY_AGAIN,counters.get(TRY_AGAIN) + 1);
       }
-      Utils.sleep(retryIntervalMs);
+      SysUtils.sleep(retryIntervalMs);
     }
   }
  catch (  TException te) {
