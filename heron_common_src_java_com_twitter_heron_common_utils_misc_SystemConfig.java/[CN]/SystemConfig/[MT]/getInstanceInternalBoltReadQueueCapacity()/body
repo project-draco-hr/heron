@@ -1,3 +1,0 @@
-{
-  return Utils.getInt(this.get(SystemConfig.INSTANCE_INTERNAL_BOLT_READ_QUEUE_CAPACITY));
-}

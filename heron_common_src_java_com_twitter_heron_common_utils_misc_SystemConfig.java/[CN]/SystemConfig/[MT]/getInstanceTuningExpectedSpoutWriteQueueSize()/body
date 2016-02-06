@@ -1,3 +1,0 @@
-{
-  return Utils.getInt(this.get(SystemConfig.INSTANCE_TUNING_EXPECTED_SPOUT_WRITE_QUEUE_SIZE));
-}

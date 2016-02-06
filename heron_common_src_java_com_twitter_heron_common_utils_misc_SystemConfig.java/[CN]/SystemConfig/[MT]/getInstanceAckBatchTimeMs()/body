@@ -1,3 +1,0 @@
-{
-  return Utils.getLong(this.get(SystemConfig.INSTANCE_ACK_BATCH_TIME_MS));
-}

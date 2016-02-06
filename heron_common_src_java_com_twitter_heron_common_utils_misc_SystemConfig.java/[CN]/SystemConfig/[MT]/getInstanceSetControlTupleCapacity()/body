@@ -1,3 +1,0 @@
-{
-  return Utils.getInt(this.get(SystemConfig.INSTANCE_SET_CONTROL_TUPLE_CAPACITY));
-}

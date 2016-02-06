@@ -1,0 +1,11 @@
+{
+  try {
+    FileInputStream fin=new FileInputStream(new File(name));
+  }
+ catch (  IOException ioe) {
+    if (mustExist) {
+      throw new RuntimeException(ioe);
+    }
+  }
+  return ConfigReader.loadFile(name);
+}

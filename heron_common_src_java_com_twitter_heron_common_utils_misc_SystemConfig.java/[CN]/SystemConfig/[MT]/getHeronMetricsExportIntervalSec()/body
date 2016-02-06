@@ -1,3 +1,0 @@
-{
-  return Utils.getInt(this.get(SystemConfig.HERON_METRICS_EXPORT_INTERVAL_SEC));
-}
