@@ -1,7 +1,7 @@
 {
   HeronConfigReader configReader=HeronConfigReader.class.newInstance();
   String configPath=Paths.get(System.getenv("JAVA_RUNFILES"),Constants.TEST_DATA_PATH).toString();
-  Assert.assertTrue(configReader.load("cluster",configPath,"defaults1.conf"));
+  Assert.assertTrue(configReader.load("cluster",configPath,"defaults1.yaml"));
   Map props=configReader.getConfig();
   Assert.assertEquals("role",props.get(Constants.ROLE_KEY));
   Assert.assertEquals("environ",props.get(Constants.ENVIRON_KEY));
