@@ -1,3 +1,0 @@
-{
-  return Utils.getInt(this.get(SystemConfig.INSTANCE_SLAVE_FETCH_PPLAN_INTERVAL_SEC));
-}

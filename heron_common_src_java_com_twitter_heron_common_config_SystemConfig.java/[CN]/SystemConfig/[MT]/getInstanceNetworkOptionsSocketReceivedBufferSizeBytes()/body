@@ -1,0 +1,3 @@
+{
+  return TypeUtils.getInt(this.config.get(SystemConfig.INSTANCE_NETWORK_OPTIONS_SOCKET_RECEIVED_BUFFER_SIZE_BYTES));
+}

@@ -1,0 +1,3 @@
+{
+  return TypeUtils.getInt(this.config.get(SystemConfig.INSTANCE_TUNING_EXPECTED_METRICS_WRITE_QUEUE_SIZE));
+}

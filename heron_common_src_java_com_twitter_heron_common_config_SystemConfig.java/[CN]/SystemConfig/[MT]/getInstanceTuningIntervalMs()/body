@@ -1,0 +1,3 @@
+{
+  return TypeUtils.getLong(this.config.get(SystemConfig.INSTANCE_TUNING_INTERVAL_MS));
+}
