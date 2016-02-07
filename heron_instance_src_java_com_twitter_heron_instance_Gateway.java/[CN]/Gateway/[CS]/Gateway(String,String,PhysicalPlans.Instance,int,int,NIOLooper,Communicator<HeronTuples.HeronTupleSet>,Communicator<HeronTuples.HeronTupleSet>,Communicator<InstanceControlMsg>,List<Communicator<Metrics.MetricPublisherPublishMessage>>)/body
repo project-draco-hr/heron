@@ -21,7 +21,7 @@
   }
 ;
   gatewayMetricsCollector.registerMetricSampleRunnable(sampleStreamQueuesSize,systemConfig.getInstanceMetricsSystemSampleIntervalSec());
-  final long instanceTuningIntervalMs=systemConfig.getInstanceTuningIntervalMs() * com.twitter.heron.common.core.base.Constants.MILLISECONDS_TO_NANOSECONDS;
+  final long instanceTuningIntervalMs=systemConfig.getInstanceTuningIntervalMs() * com.twitter.heron.common.basics.Constants.MILLISECONDS_TO_NANOSECONDS;
   Runnable tuningStreamQueueSize=new Runnable(){
     @Override public void run(){
       inStreamQueue.updateExpectedAvailableCapacity();

@@ -1,8 +1,0 @@
-{
-  if (kvsBuilder_ == null) {
-    return java.util.Collections.unmodifiableList(kvs_);
-  }
- else {
-    return kvsBuilder_.getMessageList();
-  }
-}

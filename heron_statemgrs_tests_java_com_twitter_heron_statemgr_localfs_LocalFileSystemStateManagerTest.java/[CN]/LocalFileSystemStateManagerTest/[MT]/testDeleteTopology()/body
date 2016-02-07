@@ -1,0 +1,10 @@
+{
+  LocalFileSystemStateManager manager=Mockito.spy(new LocalFileSystemStateManager());
+  manager.initialize(getConf());
+  PowerMockito.spy(FileUtility.class);
+  PowerMockito.doReturn(true).when(FileUtility.class,"createDirectory",Matchers.anyString());
+  Assert.assertTrue(manager.initTree());
+  PowerMockito.doReturn(true).when(FileUtility.class,"deleteFile",Matchers.anyString());
+  Assert.assertTrue(manager.deleteTopology(topologyName).get());
+  FileUtility.deleteFile(Matchers.eq(String.format("%s/%s/%s",rootAddr,"topologies",topologyName)));
+}

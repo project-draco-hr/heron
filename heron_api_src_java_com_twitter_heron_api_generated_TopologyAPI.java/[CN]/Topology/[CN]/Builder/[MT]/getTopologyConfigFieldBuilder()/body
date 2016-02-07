@@ -1,7 +1,0 @@
-{
-  if (topologyConfigBuilder_ == null) {
-    topologyConfigBuilder_=new com.google.protobuf.SingleFieldBuilder<com.twitter.heron.api.generated.TopologyAPI.Config,com.twitter.heron.api.generated.TopologyAPI.Config.Builder,com.twitter.heron.api.generated.TopologyAPI.ConfigOrBuilder>(topologyConfig_,getParentForChildren(),isClean());
-    topologyConfig_=null;
-  }
-  return topologyConfigBuilder_;
-}

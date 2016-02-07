@@ -4,7 +4,7 @@
   when(config.getLauncherClass()).thenReturn(Nullity.NullLauncher.class.getName());
   when(config.getSchedulerClass()).thenReturn(Nullity.NullScheduler.class.getName());
   when(config.getPackingAlgorithmClass()).thenReturn(Nullity.EmptyPacking.class.getName());
-  when(config.getStateManagerClass()).thenReturn(DummySchedulerStateManager.class.getName());
+  when(config.getStateManagerClass()).thenReturn(DummyStateManager.class.getName());
   when(config.load(anyString(),anyString())).thenReturn(true);
   return config;
 }

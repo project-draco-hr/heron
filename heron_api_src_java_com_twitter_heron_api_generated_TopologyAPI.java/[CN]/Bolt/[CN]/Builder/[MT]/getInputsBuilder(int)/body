@@ -1,3 +1,0 @@
-{
-  return getInputsFieldBuilder().getBuilder(index);
-}

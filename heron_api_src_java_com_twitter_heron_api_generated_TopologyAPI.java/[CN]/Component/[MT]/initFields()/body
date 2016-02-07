@@ -1,6 +1,0 @@
-{
-  name_="";
-  javaClassName_="";
-  javaObject_=com.google.protobuf.ByteString.EMPTY;
-  config_=com.twitter.heron.api.generated.TopologyAPI.Config.getDefaultInstance();
-}

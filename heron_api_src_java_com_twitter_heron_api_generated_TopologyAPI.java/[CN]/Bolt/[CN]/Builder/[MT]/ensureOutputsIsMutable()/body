@@ -1,6 +1,0 @@
-{
-  if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-    outputs_=new java.util.ArrayList<com.twitter.heron.api.generated.TopologyAPI.OutputStream>(outputs_);
-    bitField0_|=0x00000004;
-  }
-}

@@ -6,7 +6,7 @@
   String configOverride="";
   IUploader mockUploader=spy(new Nullity.NullUploader());
   ILauncher failLauncher=spy(new Nullity.NullLauncher());
-  IStateManager dummyStateManager=spy(new DummySchedulerStateManager());
+  IStateManager dummyStateManager=spy(new DummyStateManager());
   when(failLauncher.launchTopology(any(PackingPlan.class))).thenReturn(false);
   PowerMockito.spy(SubmitterMain.class);
   PowerMockito.spy(Factory.class);

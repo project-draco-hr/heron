@@ -1,8 +1,0 @@
-{
-switch (value) {
-case 1:
-    return OBJECT;
-default :
-  return null;
-}
-}
