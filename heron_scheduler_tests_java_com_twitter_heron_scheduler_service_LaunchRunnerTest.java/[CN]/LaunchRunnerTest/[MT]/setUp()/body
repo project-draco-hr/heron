@@ -16,7 +16,7 @@
   when(stateManager.setTopology(any(TopologyAPI.Topology.class))).thenReturn(trueFuture);
   when(stateManager.setTopology(eq(topology))).thenReturn(trueFuture);
   when(context.getStateManagerAdaptor()).thenReturn(stateManager);
-  when(config.getSchedulerClass()).thenReturn(Nullity.NullScheduler.class.getName());
+  when(config.getSchedulerClass()).thenReturn(NullScheduler.class.getName());
   when(launcher.launchTopology(any(PackingPlan.class))).thenReturn(true);
   when(launcher.prepareLaunch(any(PackingPlan.class))).thenReturn(true);
   when(launcher.postLaunch(any(PackingPlan.class))).thenReturn(true);

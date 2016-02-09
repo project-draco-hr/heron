@@ -4,9 +4,9 @@
   String configLoader=config.getClass().getName();
   String submitterConfigFile="";
   String configOverride="";
-  IUploader mockUploader=spy(new Nullity.NullUploader());
-  ILauncher failLauncher=spy(new Nullity.NullLauncher());
-  IStateManager dummyStateManager=spy(new DummyStateManager());
+  IUploader mockUploader=spy(new NullUploader());
+  ILauncher failLauncher=spy(new NullLauncher());
+  IStateManager dummyStateManager=spy(new NullStateManager());
   when(failLauncher.launchTopology(any(PackingPlan.class))).thenReturn(false);
   PowerMockito.spy(SubmitterMain.class);
   PowerMockito.spy(Factory.class);

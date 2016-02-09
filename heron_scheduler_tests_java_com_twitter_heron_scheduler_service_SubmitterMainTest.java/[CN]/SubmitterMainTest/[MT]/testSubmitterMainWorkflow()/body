@@ -7,6 +7,6 @@
   PowerMockito.spy(SubmitterMain.class);
   PowerMockito.spy(Factory.class);
   PowerMockito.doReturn(config).when(Factory.class,"makeConfigLoader",eq(configLoader));
-  PowerMockito.doReturn(new DummyStateManager()).when(Factory.class,"makeStateManager",anyString());
+  PowerMockito.doReturn(new NullStateManager()).when(Factory.class,"makeStateManager",anyString());
   assertTrue(SubmitterMain.submitTopology(topologyPkg,configLoader,submitterConfigFile,configOverride,createTopology(new Config())));
 }
