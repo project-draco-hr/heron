@@ -10,5 +10,5 @@
   }
   String configOverride=new String(DatatypeConverter.parseBase64Binary(schedulerConfigOverrides),Charset.forName("UTF-8"));
   String topologyDefnFile=TopologyUtility.lookUpTopologyDefnFile(".",topologyName);
-  runScheduler(schedulerClass,schedulerConfigLoader,schedulerConfigFile,schedulerServerPort,configOverride,Factory.getTopology(topologyDefnFile));
+  runScheduler(schedulerClass,schedulerConfigLoader,schedulerConfigFile,schedulerServerPort,configOverride,TopologyUtility.getTopology(topologyDefnFile));
 }

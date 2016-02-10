@@ -1,7 +1,7 @@
 {
   Object flushIntervalObj=sinkConfig.get(MetricsSinksConfig.CONFIG_KEY_FLUSH_FREQUENCY_MS);
   if (flushIntervalObj != null) {
-    final long flushIntervalNs=Utils.getLong(flushIntervalObj) * Constants.MILLISECONDS_TO_NANOSECONDS;
+    final long flushIntervalNs=TypeUtils.getLong(flushIntervalObj) * Constants.MILLISECONDS_TO_NANOSECONDS;
     Runnable flushSink=new Runnable(){
       @Override public void run(){
         metricsSink.flush();

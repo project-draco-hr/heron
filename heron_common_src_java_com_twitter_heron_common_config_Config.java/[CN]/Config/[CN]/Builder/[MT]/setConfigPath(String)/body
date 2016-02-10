@@ -1,0 +1,4 @@
+{
+  this.mConfigPath=configPath;
+  return this;
+}

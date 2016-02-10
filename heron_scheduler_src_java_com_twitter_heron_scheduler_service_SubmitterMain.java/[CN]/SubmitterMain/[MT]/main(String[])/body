@@ -7,7 +7,7 @@
   heronInternalsFile=args[5];
   originalPackageFile=args[6];
   String configOverride=new String(DatatypeConverter.parseBase64Binary(submitterConfigOverrideEncoded),Charset.forName("UTF-8"));
-  if (!submitTopology(topologyPackage,submitterConfigLoader,submitterConfigFile,configOverride,Factory.getTopology(topologyDefnFile))) {
+  if (!submitTopology(topologyPackage,submitterConfigLoader,submitterConfigFile,configOverride,TopologyUtility.getTopology(topologyDefnFile))) {
     Runtime.getRuntime().exit(1);
   }
 }
