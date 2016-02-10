@@ -1,0 +1,18 @@
+{
+  Map props=new HashMap();
+  if (propFileName == null || propFileName.isEmpty()) {
+    LOG.warning("Config file " + propFileName + " not found\n");
+    return props;
+  }
+ else {
+    try {
+      FileInputStream fin=new FileInputStream(new File(propFileName));
+      Yaml yaml=new Yaml();
+      props=(Map)yaml.load(fin);
+    }
+ catch (    IOException e) {
+      LOG.log(Level.SEVERE,"Failed to load config file: " + propFileName,e);
+    }
+  }
+  return props;
+}

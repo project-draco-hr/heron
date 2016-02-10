@@ -1,3 +1,0 @@
-{
-  return Utils.getInt(this.get(SystemConfig.INSTANCE_INTERNAL_METRICS_WRITE_QUEUE_CAPACITY));
-}

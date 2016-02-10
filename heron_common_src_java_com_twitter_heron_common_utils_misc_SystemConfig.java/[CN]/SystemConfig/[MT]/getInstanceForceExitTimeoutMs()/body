@@ -1,3 +1,0 @@
-{
-  return Utils.getLong(this.get(SystemConfig.INSTANCE_FORCE_EXIT_TIMEOUT_MS));
-}
