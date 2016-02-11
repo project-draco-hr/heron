@@ -1,6 +1,6 @@
 {
   ExecutionEnvironment.ExecutionState.Builder builder=ExecutionEnvironment.ExecutionState.newBuilder().mergeFrom(executionState);
-  builder.setDc(dc).setRole(role).setEnviron(environ);
+  builder.setDc(cluster).setRole(role).setEnviron(environ);
   ExecutionEnvironment.HeronReleaseState.Builder releaseBuilder=ExecutionEnvironment.HeronReleaseState.newBuilder();
   releaseBuilder.setReleaseUsername(context.getPropertyWithException(Constants.HERON_RELEASE_PACKAGE_ROLE));
   releaseBuilder.setReleaseTag(context.getPropertyWithException(Constants.HERON_RELEASE_PACKAGE_NAME));

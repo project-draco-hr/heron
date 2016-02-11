@@ -8,7 +8,7 @@
     return false;
   }
   String batchSize=context.getProperty(HERON_AURORA_BATCH_SIZE,(1 + TopologyUtility.getNumContainer(topology)) + "");
-  ArrayList<String> auroraCmd=new ArrayList<>(Arrays.asList("aurora","job","killall","--batch-size",batchSize,String.format("%s/%s/%s/%s",dc,role,environ,topologyName)));
+  ArrayList<String> auroraCmd=new ArrayList<>(Arrays.asList("aurora","job","killall","--batch-size",batchSize,String.format("%s/%s/%s/%s",cluster,role,environ,topologyName)));
   if (context.isVerbose()) {
     auroraCmd.add("--verbose");
   }

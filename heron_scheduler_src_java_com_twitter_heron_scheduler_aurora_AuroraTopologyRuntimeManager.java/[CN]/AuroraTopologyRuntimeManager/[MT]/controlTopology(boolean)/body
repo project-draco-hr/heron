@@ -22,7 +22,7 @@
   args.put("TMASTER_CONTROLLER_PORT","" + tMasterLocation.getControllerPort());
   args.put("TOPOLOGY_ID",topology.getId());
   args.put("JOB_NAME",controlJobName);
-  args.put("DC",dc);
+  args.put("CLUSTER",cluster);
   args.put("RUN_ROLE",role);
   args.put("HERON_PACKAGE",context.getProperty(Constants.HERON_RELEASE_PACKAGE_NAME,"heron-core-package"));
   args.put("RELEASE_ROLE",context.getProperty(Constants.HERON_RELEASE_PACKAGE_ROLE,"heron"));

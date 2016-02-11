@@ -1,0 +1,6 @@
+def test_two_opts(self):
+    opts.clear_config()
+    opts.set_config('XX', 'xx')
+    opts.set_config('YY', 'yy')
+    self.assertEqual('xx', opts.get_config('XX'))
+    self.assertEqual('yy', opts.get_config('YY'))
