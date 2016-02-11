@@ -8,5 +8,6 @@
   schedulerConfig.properties.getProperty(Constants.HERON_RELEASE_PACKAGE_NAME,"some-pkg");
   schedulerConfig.properties.getProperty(Constants.HERON_RELEASE_PACKAGE_VERSION,"live");
   schedulerConfig.properties.setProperty(Constants.HERON_UPLOADER_VERSION,"1");
+  schedulerConfig.properties.setProperty(Constants.STATE_MANAGER_CLASS,stateMgrClass);
   return schedulerConfig;
 }

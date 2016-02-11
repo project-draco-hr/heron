@@ -1,6 +1,6 @@
 {
   uploader=mock(IUploader.class);
-  config=mock(IConfigLoader.class);
+  config=createConfig();
   packingAlgorithm=mock(IPackingAlgorithm.class);
   launcher=mock(ILauncher.class);
   stateManager=mock(SchedulerStateManagerAdaptor.class);
