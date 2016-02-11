@@ -1,0 +1,5 @@
+def create_parser(subparsers):
+    parser = subparsers.add_parser('classpath', help='Print class path of heron-cli', usage='%(prog)s', add_help=False)
+    args.add_titles(parser)
+    parser.set_defaults(subcommand='classpath')
+    return parser

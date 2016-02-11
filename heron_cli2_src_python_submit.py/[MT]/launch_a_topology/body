@@ -1,0 +1,7 @@
+def launch_a_topology(tmp_dir, topology_file, topology_defn_file, heron_internals_file, config_loader, config_path, config_overrides):
+    pkg_path = utils.normalized_class_path(os.path.join(tmp_dir, 'topology.tar.gz'))
+    heron_internals_config_path = os.path.join(utils.get_heron_dir(), heron_internals_file)
+    tar_pkg_files = [topology_file, topology_defn_file, heron_internals_config_path]
+    utils.create_tar(pkg_path, tar_pkg_files)
+    args = [pkg_path, config_loader, config_path, base64.b64encode(config_overrides), defn_file, heron_internals_config_path, topology_file]
+    execute.heron_class('com.twitter.heron.scheduler.service.SubmitterMain', utils.get_heron_libs(jars.scheduler_jars()), extra_jars=[], args=args)

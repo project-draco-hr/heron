@@ -5,8 +5,8 @@
   if (baseLoader.load(schedulerConfFile.toString(),configOverride)) {
     Properties baseProperties=baseLoader.getProperties();
     Properties bindProperties=new Properties();
-    String dc=baseProperties.getProperty(Constants.DC);
-    if (ConfigLoaderUtils.loadPropertiesFile(baseProperties,getClusterConfFile(configPath,dc).toString()) && ConfigLoaderUtils.applyConfigPropertyOverride(baseProperties) && ConfigLoaderUtils.loadPropertiesFile(bindProperties,bindConfFile.toString())&& addAuroraBindProperties(baseProperties,bindProperties)) {
+    String cluster=baseProperties.getProperty(Constants.CLUSTER);
+    if (ConfigLoaderUtils.loadPropertiesFile(baseProperties,getClusterConfFile(configPath,cluster).toString()) && ConfigLoaderUtils.applyConfigPropertyOverride(baseProperties) && ConfigLoaderUtils.loadPropertiesFile(bindProperties,bindConfFile.toString())&& addAuroraBindProperties(baseProperties,bindProperties)) {
       properties.putAll(baseProperties);
       return true;
     }
