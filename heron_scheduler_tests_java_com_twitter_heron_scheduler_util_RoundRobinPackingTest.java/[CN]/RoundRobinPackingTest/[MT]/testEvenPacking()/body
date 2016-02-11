@@ -12,7 +12,9 @@
   int numInstance=TopologyUtility.getTotalInstance(topology);
   Assert.assertEquals((spouts.size() + bolts.size()) * componentParallelism,numInstance);
   DefaultConfigLoader configLoader=DefaultConfigLoader.class.newInstance();
-  configLoader.load("","");
+  String stateMgrClass="com.twitter.heron.spi.statemgr.NullStateManager";
+  String overrides=String.format("%s=%s",Constants.STATE_MANAGER_CLASS,stateMgrClass);
+  configLoader.load("",overrides);
   LaunchContext context=new LaunchContext(configLoader,topology);
   PackingPlan output=packing.pack(context);
   Assert.assertEquals(numContainer,output.containers.size());
