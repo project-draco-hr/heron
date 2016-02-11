@@ -1,3 +1,0 @@
-{
-  return getBoltsFieldBuilder().addBuilder(index,com.twitter.heron.api.generated.TopologyAPI.Bolt.getDefaultInstance());
-}

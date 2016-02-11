@@ -1,8 +1,0 @@
-{
-  if (inputsBuilder_ == null) {
-    return inputs_.get(index);
-  }
- else {
-    return inputsBuilder_.getMessage(index);
-  }
-}

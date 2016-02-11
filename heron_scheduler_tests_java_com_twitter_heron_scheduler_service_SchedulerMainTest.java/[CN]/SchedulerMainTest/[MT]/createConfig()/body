@@ -1,9 +1,9 @@
 {
   IConfigLoader config=mock(DefaultConfigLoader.class);
-  when(config.getUploaderClass()).thenReturn(Nullity.NullUploader.class.getName());
-  when(config.getLauncherClass()).thenReturn(Nullity.NullLauncher.class.getName());
-  when(config.getSchedulerClass()).thenReturn(Nullity.NullScheduler.class.getName());
-  when(config.getPackingAlgorithmClass()).thenReturn(Nullity.EmptyPacking.class.getName());
+  when(config.getUploaderClass()).thenReturn(NullUploader.class.getName());
+  when(config.getLauncherClass()).thenReturn(NullLauncher.class.getName());
+  when(config.getSchedulerClass()).thenReturn(NullScheduler.class.getName());
+  when(config.getPackingAlgorithmClass()).thenReturn(NullPackingAlgorithm.class.getName());
   when(config.load(anyString(),anyString())).thenReturn(true);
   return config;
 }

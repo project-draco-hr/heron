@@ -1,3 +1,0 @@
-{
-  return com.twitter.heron.api.generated.TopologyAPI.internal_static_heron_proto_api_Spout_fieldAccessorTable.ensureFieldAccessorsInitialized(com.twitter.heron.api.generated.TopologyAPI.Spout.class,com.twitter.heron.api.generated.TopologyAPI.Spout.Builder.class);
-}

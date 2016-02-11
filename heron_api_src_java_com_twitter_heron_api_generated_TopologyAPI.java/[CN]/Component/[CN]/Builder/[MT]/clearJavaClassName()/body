@@ -1,6 +1,0 @@
-{
-  bitField0_=(bitField0_ & ~0x00000002);
-  javaClassName_=getDefaultInstance().getJavaClassName();
-  onChanged();
-  return this;
-}

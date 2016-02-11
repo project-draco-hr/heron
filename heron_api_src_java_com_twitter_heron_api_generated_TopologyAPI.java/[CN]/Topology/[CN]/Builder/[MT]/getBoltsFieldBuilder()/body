@@ -1,7 +1,0 @@
-{
-  if (boltsBuilder_ == null) {
-    boltsBuilder_=new com.google.protobuf.RepeatedFieldBuilder<com.twitter.heron.api.generated.TopologyAPI.Bolt,com.twitter.heron.api.generated.TopologyAPI.Bolt.Builder,com.twitter.heron.api.generated.TopologyAPI.BoltOrBuilder>(bolts_,((bitField0_ & 0x00000008) == 0x00000008),getParentForChildren(),isClean());
-    bolts_=null;
-  }
-  return boltsBuilder_;
-}

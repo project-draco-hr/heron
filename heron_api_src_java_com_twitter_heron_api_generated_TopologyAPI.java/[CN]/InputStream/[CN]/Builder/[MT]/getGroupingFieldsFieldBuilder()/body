@@ -1,7 +1,0 @@
-{
-  if (groupingFieldsBuilder_ == null) {
-    groupingFieldsBuilder_=new com.google.protobuf.SingleFieldBuilder<com.twitter.heron.api.generated.TopologyAPI.StreamSchema,com.twitter.heron.api.generated.TopologyAPI.StreamSchema.Builder,com.twitter.heron.api.generated.TopologyAPI.StreamSchemaOrBuilder>(groupingFields_,getParentForChildren(),isClean());
-    groupingFields_=null;
-  }
-  return groupingFieldsBuilder_;
-}
