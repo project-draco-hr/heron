@@ -1,0 +1,8 @@
+def heron_tar(class_name, topology_tar, arguments, tmpdir_root):
+    tmpdir = tempfile.mkdtemp(dir=tmpdir_root, prefix='tmp')
+    with contextlib.closing(tarfile.open(topology_tar)) as tar:
+        tar.extractall(path=tmpdir)
+    topology_jar = (os.path.basename(topology_tar).replace('.tar.gz', '').replace('.tar', '') + '.jar')
+    extra_jars = [os.path.join(tmpdir, 'heron-instance.jar'), os.path.join(tmpdir, topology_jar), os.path.join(tmpdir, '*'), os.path.join(tmpdir, 'libs/*')]
+    lib_jars = utils.get_heron_libs(jars.topology_jars())
+    heron_class(class_name, lib_jars, extra_jars, arguments)

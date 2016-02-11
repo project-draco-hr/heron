@@ -1,0 +1,3 @@
+def add_trace_execution(parser):
+    parser.add_argument('--trace-execution', metavar='(a boolean; default: "false")', default=False)
+    return parser

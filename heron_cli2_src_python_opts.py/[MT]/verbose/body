@@ -1,0 +1,3 @@
+def verbose():
+    global verbose_flag
+    return verbose_flag
