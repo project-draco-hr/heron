@@ -1,5 +1,5 @@
 '\nFactory function that instantiates and connects to the requested\nstate managers based on a conf file.\nReturns these state managers.\n'
-from heron.state.src.python.config import Config
-from heron.state.src.python.filestatemanager import FileStateManager
-from heron.state.src.python.log import Log as LOG
-from heron.state.src.python.zkstatemanager import ZkStateManager
+from heron.statemgrs.src.python.config import Config
+from heron.statemgrs.src.python.filestatemanager import FileStateManager
+from heron.statemgrs.src.python.log import Log as LOG
+from heron.statemgrs.src.python.zkstatemanager import ZkStateManager
