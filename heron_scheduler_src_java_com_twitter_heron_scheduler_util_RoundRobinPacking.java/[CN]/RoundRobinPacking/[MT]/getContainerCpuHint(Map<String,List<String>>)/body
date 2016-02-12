@@ -1,7 +1,0 @@
-{
-  double defaultInstanceCpu=Double.parseDouble(context.getProperty(INSTANCE_CPU_DEFAULT,"1.0"));
-  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
-  double totalInstanceCpu=defaultInstanceCpu * TopologyUtility.getTotalInstance(topology);
-  float defaultContainerCpu=(float)(1 + totalInstanceCpu / TopologyUtility.getNumContainer(topology));
-  return Double.parseDouble(TopologyUtility.getConfigWithDefault(topologyConfig,Config.TOPOLOGY_CONTAINER_CPU_REQUESTED,defaultContainerCpu + ""));
-}
