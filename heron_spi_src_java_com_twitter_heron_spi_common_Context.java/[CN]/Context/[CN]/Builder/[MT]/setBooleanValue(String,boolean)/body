@@ -1,0 +1,5 @@
+{
+  if (value == true)   this.keyValues.put(key,"yes");
+ else   this.keyValues.put(key,"no");
+  return this;
+}

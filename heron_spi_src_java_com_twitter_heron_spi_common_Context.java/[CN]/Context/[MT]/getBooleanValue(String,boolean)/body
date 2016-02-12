@@ -1,0 +1,5 @@
+{
+  String value=(String)get(key);
+  if (value != null)   return value == "yes" ? true : false;
+  return defaultValue;
+}

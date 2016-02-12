@@ -1,0 +1,4 @@
+{
+  String value=getStringValue(key);
+  return value == "yes" ? true : false;
+}
