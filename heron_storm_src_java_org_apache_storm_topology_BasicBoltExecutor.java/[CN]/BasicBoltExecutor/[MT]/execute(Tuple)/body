@@ -1,0 +1,13 @@
+{
+  this.collector.setContext(input);
+  try {
+    delegate.execute(input,collector);
+    this.collector.getOutputter().ack(input);
+  }
+ catch (  FailedException e) {
+    if (e instanceof ReportedFailedException) {
+      this.collector.reportError(e);
+    }
+    this.collector.getOutputter().fail(input);
+  }
+}

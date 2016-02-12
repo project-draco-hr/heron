@@ -1,0 +1,4 @@
+{
+  assertAlive(topologyName);
+  localMode.activate(topologyName);
+}

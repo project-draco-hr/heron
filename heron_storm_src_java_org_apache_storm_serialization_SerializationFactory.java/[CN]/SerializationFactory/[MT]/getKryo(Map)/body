@@ -1,0 +1,63 @@
+{
+  IKryoFactory kryoFactory=(IKryoFactory)Utils.newInstance((String)conf.get(Config.TOPOLOGY_KRYO_FACTORY));
+  Kryo k=kryoFactory.getKryo(conf);
+  k.register(byte[].class);
+  k.register(ListDelegate.class);
+  k.register(ArrayList.class,new ArrayListSerializer());
+  k.register(HashMap.class,new HashMapSerializer());
+  k.register(HashSet.class,new HashSetSerializer());
+  k.register(BigInteger.class,new BigIntegerSerializer());
+  k.register(Values.class);
+  Map<String,String> registrations=normalizeKryoRegister(conf);
+  kryoFactory.preRegister(k,conf);
+  boolean skipMissing=(Boolean)conf.get(Config.TOPOLOGY_SKIP_MISSING_KRYO_REGISTRATIONS);
+  for (  String klassName : registrations.keySet()) {
+    String serializerClassName=registrations.get(klassName);
+    try {
+      Class klass=Class.forName(klassName);
+      Class serializerClass=null;
+      if (serializerClassName != null)       serializerClass=Class.forName(serializerClassName);
+      LOG.info("Doing kryo.register for class " + klass);
+      if (serializerClass == null) {
+        k.register(klass);
+      }
+ else {
+        k.register(klass,resolveSerializerInstance(k,klass,serializerClass));
+      }
+    }
+ catch (    ClassNotFoundException e) {
+      if (skipMissing) {
+        LOG.info("Could not find serialization or class for " + serializerClassName + ". Skipping registration...");
+      }
+ else {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+  kryoFactory.postRegister(k,conf);
+  if (conf.get(Config.TOPOLOGY_KRYO_DECORATORS) != null) {
+    for (    String klassName : (List<String>)conf.get(Config.TOPOLOGY_KRYO_DECORATORS)) {
+      try {
+        Class klass=Class.forName(klassName);
+        IKryoDecorator decorator=(IKryoDecorator)klass.newInstance();
+        decorator.decorate(k);
+      }
+ catch (      ClassNotFoundException e) {
+        if (skipMissing) {
+          LOG.info("Could not find kryo decorator named " + klassName + ". Skipping registration...");
+        }
+ else {
+          throw new RuntimeException(e);
+        }
+      }
+catch (      InstantiationException e) {
+        throw new RuntimeException(e);
+      }
+catch (      IllegalAccessException e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+  kryoFactory.postDecorate(k,conf);
+  return k;
+}

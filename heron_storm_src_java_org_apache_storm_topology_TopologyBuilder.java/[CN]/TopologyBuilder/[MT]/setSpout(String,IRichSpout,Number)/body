@@ -1,0 +1,5 @@
+{
+  IRichSpoutDelegate spoutImpl=new IRichSpoutDelegate(spout);
+  com.twitter.heron.api.topology.SpoutDeclarer declarer=delegate.setSpout(id,spoutImpl,parallelism_hint);
+  return new SpoutDeclarerImpl(declarer);
+}

@@ -1,0 +1,18 @@
+{
+  Collection<com.twitter.heron.api.hooks.ITaskHook> hooks=delegate.getHooks();
+  if (hooks == null) {
+    ITaskHookDelegate delegateHook=new ITaskHookDelegate();
+    delegateHook.addHook(newHook);
+    delegate.addTaskHook(delegateHook);
+  }
+ else {
+    for (    com.twitter.heron.api.hooks.ITaskHook hook : hooks) {
+      if (hook instanceof ITaskHookDelegate) {
+        ITaskHookDelegate delegateHook=(ITaskHookDelegate)hook;
+        delegateHook.addHook(newHook);
+        return;
+      }
+    }
+    throw new RuntimeException("StormCompat taskHooks not setup properly");
+  }
+}

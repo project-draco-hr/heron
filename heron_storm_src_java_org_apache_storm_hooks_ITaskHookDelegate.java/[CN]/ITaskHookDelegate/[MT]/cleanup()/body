@@ -1,0 +1,5 @@
+{
+  for (  ITaskHook hook : hooks_) {
+    hook.cleanup();
+  }
+}

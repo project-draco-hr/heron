@@ -1,0 +1,10 @@
+{
+  try {
+    kryoOut.clear();
+    kryo.writeClassAndObject(kryoOut,object);
+    return kryoOut.toBytes();
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

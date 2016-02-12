@@ -1,0 +1,6 @@
+{
+  BoltAckInfo ack=new BoltAckInfo(info);
+  for (  ITaskHook hook : hooks_) {
+    hook.boltAck(ack);
+  }
+}

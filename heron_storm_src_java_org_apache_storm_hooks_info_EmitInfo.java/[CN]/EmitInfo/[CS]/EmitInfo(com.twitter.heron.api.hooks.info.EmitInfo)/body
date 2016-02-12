@@ -1,0 +1,6 @@
+{
+  this.values=info.getValues();
+  this.stream=info.getStream();
+  this.taskId=info.getTaskId();
+  this.outTasks=null;
+}

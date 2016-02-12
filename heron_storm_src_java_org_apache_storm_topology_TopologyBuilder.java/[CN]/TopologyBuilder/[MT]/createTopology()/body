@@ -1,0 +1,4 @@
+{
+  HeronTopology topology=delegate.createTopology();
+  return new StormTopology(topology);
+}

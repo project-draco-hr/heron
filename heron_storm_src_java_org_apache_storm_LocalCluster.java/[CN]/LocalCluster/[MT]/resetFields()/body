@@ -1,0 +1,5 @@
+{
+  this.topologyName=null;
+  this.topology=null;
+  this.conf=null;
+}

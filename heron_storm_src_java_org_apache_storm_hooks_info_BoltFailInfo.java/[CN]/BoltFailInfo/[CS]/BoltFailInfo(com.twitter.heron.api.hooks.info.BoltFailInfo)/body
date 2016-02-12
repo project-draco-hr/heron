@@ -1,0 +1,5 @@
+{
+  this.tuple=new org.apache.storm.tuple.TupleImpl(info.getTuple());
+  this.failingTaskId=info.getFailingTaskId();
+  this.failLatencyMs=info.getFailLatencyMs();
+}

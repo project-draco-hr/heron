@@ -1,0 +1,13 @@
+{
+  if (anchors != null) {
+    ArrayList<com.twitter.heron.api.tuple.Tuple> l=new ArrayList<com.twitter.heron.api.tuple.Tuple>();
+    for (    Tuple t : anchors) {
+      TupleImpl i=(TupleImpl)t;
+      l.add(i.getDelegate());
+    }
+    return delegate.emit(streamId,l,tuple);
+  }
+ else {
+    return delegate.emit(streamId,(Collection<com.twitter.heron.api.tuple.Tuple>)null,tuple);
+  }
+}

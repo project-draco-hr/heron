@@ -1,0 +1,9 @@
+{
+  try {
+    assertAlive(topologyName);
+    return this.topologyName;
+  }
+ catch (  NotAliveException ex) {
+    return null;
+  }
+}

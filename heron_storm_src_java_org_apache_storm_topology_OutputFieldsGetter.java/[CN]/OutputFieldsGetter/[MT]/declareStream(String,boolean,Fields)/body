@@ -1,0 +1,3 @@
+{
+  delegate.declareStream(streamId,direct,fields.getDelegate());
+}

@@ -1,0 +1,3 @@
+{
+  conf.put(Config.TOPOLOGY_TEAM_EMAIL,team_email);
+}

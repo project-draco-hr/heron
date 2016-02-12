@@ -1,0 +1,11 @@
+{
+  Collection<com.twitter.heron.api.hooks.ITaskHook> hooks=delegate.getHooks();
+  if (hooks != null) {
+    for (    com.twitter.heron.api.hooks.ITaskHook hook : hooks) {
+      if (hook instanceof ITaskHookDelegate) {
+        return ((ITaskHookDelegate)hook).getHooks();
+      }
+    }
+  }
+  return null;
+}
