@@ -1,8 +1,4 @@
 {
-  Object value=get(key);
-  if (value != null) {
-    Double dvalue=(Double)value;
-    return dvalue.doubleValue();
-  }
-  return defaultValue;
+  Double value=getDoubleValue(key);
+  return value != null ? value : defaultValue;
 }

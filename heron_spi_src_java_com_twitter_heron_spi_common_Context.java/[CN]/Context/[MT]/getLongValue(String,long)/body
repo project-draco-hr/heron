@@ -1,8 +1,4 @@
 {
-  Object value=get(key);
-  if (value != null) {
-    Long lvalue=(Long)value;
-    return lvalue.longValue();
-  }
-  return defaultValue;
+  Long value=getLongValue(key);
+  return value != null ? value : defaultValue;
 }
