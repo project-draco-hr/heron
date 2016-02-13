@@ -1,4 +1,3 @@
 {
-  String value=getStringValue(key);
-  return value == "yes" ? true : false;
+  return (Boolean)keyValues.get(key);
 }
