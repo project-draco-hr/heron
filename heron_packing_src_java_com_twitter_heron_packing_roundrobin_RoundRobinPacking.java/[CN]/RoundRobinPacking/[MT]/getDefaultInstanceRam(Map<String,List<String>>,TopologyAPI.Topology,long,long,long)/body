@@ -1,7 +1,7 @@
 {
   long defaultInstanceRam=instanceRamDefaultValue;
   if (containerRamRequested != -1) {
-    Map<String,Long> ramMap=TopologyUtility.getComponentRamMap(topology,-1);
+    Map<String,Long> ramMap=TopologyUtils.getComponentRamMap(topology,-1);
     long minInstanceRam=Long.MAX_VALUE;
     for (    List<String> instances : packing.values()) {
       Long ramRemaining=containerRamRequested - stmgrRam;
