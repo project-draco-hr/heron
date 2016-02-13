@@ -1,0 +1,23 @@
+{
+  int numContainer=2;
+  int componentParallelism=4;
+  Config topologyConfig=new Config();
+  topologyConfig.put(Config.TOPOLOGY_STMGRS,numContainer);
+  Map<String,Integer> spouts=new HashMap<>();
+  spouts.put("spout",componentParallelism);
+  Map<String,Integer> bolts=new HashMap<>();
+  bolts.put("bolt",componentParallelism);
+  TopologyAPI.Topology topology=TopologyTests.createTopology("testTopology",topologyConfig,spouts,bolts);
+  int numInstance=TopologyUtils.getTotalInstance(topology);
+  Assert.assertEquals((spouts.size() + bolts.size()) * componentParallelism,numInstance);
+  Context context=Context.newBuilder().put(Keys.Runtime.TOPOLOGY_PHYSICAL_PLAN,topology).build();
+  RoundRobinPacking packing=RoundRobinPacking.class.newInstance();
+  packing.initialize(context);
+  PackingPlan output=packing.pack();
+  Assert.assertEquals(numContainer,output.containers.size());
+  for (  PackingPlan.ContainerPlan container : output.containers.values()) {
+    Assert.assertEquals(numInstance / numContainer,container.instances.size());
+    Assert.assertEquals(2,countCompoment("spout",container.instances,packing));
+    Assert.assertEquals(2,countCompoment("bolt",container.instances,packing));
+  }
+}

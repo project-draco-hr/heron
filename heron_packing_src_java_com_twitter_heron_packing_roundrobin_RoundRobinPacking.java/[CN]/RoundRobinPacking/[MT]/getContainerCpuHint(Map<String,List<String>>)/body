@@ -1,7 +1,7 @@
 {
   List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
-  double totalInstanceCpu=instanceCpuDefault * TopologyUtility.getTotalInstance(topology);
-  double defaultContainerCpu=(float)(1 + totalInstanceCpu / TopologyUtility.getNumContainers(topology));
-  String cpuHint=TopologyUtility.getConfigWithDefault(topologyConfig,Config.TOPOLOGY_CONTAINER_CPU_REQUESTED,Double.toString(defaultContainerCpu));
+  double totalInstanceCpu=instanceCpuDefault * TopologyUtils.getTotalInstance(topology);
+  double defaultContainerCpu=(float)(1 + totalInstanceCpu / TopologyUtils.getNumContainers(topology));
+  String cpuHint=TopologyUtils.getConfigWithDefault(topologyConfig,Config.TOPOLOGY_CONTAINER_CPU_REQUESTED,Double.toString(defaultContainerCpu));
   return Double.parseDouble(cpuHint);
 }

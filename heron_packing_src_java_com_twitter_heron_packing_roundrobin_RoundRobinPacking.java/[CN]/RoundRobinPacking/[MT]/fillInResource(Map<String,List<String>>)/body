@@ -1,5 +1,5 @@
 {
-  Map<String,Long> ramMap=TopologyUtility.getComponentRamMap(topology,getDefaultInstanceRam(basePacking));
+  Map<String,Long> ramMap=TopologyUtils.getComponentRamMap(topology,getDefaultInstanceRam(basePacking));
   Map<String,PackingPlan.ContainerPlan> containerPlanMap=new HashMap<>();
   long containerRam=getContainerRamHint(basePacking);
   long containerDisk=getContainerDiskHint(basePacking);

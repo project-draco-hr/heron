@@ -1,3 +1,0 @@
-{
-  return createTopologyWithConnection(topologyName,heronConfig,spouts,bolts,new HashMap<String,String>());
-}

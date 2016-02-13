@@ -1,0 +1,15 @@
+{
+  int componentParallelism=2;
+  Config topologyConfig=new Config();
+  Map<String,Integer> spouts=new HashMap<>();
+  spouts.put("spout",componentParallelism);
+  Map<String,Integer> bolts=new HashMap<>();
+  bolts.put("bolt",componentParallelism);
+  long boltRam=1 * Constants.GB;
+  long spoutRam=2 * Constants.GB;
+  topologyConfig.setComponentRam("spout",spoutRam);
+  topologyConfig.setComponentRam("bolt",boltRam);
+  Map<String,Long> ramMap=new TreeMap<>(TopologyUtils.getComponentRamMap(TopologyTests.createTopology("test",topologyConfig,spouts,bolts),0));
+  Assert.assertArrayEquals(new String[]{"bolt","spout"},ramMap.keySet().toArray());
+  Assert.assertArrayEquals(new Long[]{boltRam,spoutRam},ramMap.values().toArray());
+}
