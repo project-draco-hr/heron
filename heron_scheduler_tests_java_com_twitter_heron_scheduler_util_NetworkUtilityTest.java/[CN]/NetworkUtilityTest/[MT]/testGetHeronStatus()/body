@@ -1,6 +1,0 @@
-{
-  Common.Status okStatus=Common.Status.newBuilder().setStatus(Common.StatusCode.OK).build();
-  Assert.assertEquals(okStatus,NetworkUtility.getHeronStatus(true));
-  Common.Status notOKStatus=Common.Status.newBuilder().setStatus(Common.StatusCode.NOTOK).build();
-  Assert.assertEquals(notOKStatus,NetworkUtility.getHeronStatus(false));
-}

@@ -1,0 +1,7 @@
+{
+  URL url=new URL("http://");
+  HttpURLConnection connection=Mockito.spy((HttpURLConnection)url.openConnection());
+  Mockito.doThrow(new IOException("Designed IO exception for testing")).when(connection).getOutputStream();
+  Assert.assertFalse(HttpUtils.sendHttpPostRequest(connection,new byte[0]));
+  connection.disconnect();
+}

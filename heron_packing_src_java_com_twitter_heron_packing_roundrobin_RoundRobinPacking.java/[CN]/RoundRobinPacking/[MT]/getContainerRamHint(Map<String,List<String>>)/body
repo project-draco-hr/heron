@@ -1,0 +1,21 @@
+{
+  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
+  Map<String,Long> ramMap=TopologyUtility.getComponentRamMap(topology,getDefaultInstanceRam(packing));
+  long maxRamRequired=0;
+  for (  List<String> instances : packing.values()) {
+    long ramRequired=0;
+    for (    String instanceId : instances) {
+      String componentName=getComponentName(instanceId);
+      ramRequired+=ramMap.get(componentName);
+    }
+    if (ramRequired > maxRamRequired) {
+      maxRamRequired=ramRequired;
+    }
+  }
+  long defaultRequest=maxRamRequired + stmgrRamDefault;
+  long containerRamRequested=Long.parseLong(TopologyUtility.getConfigWithDefault(topologyConfig,Config.TOPOLOGY_CONTAINER_RAM_REQUESTED,"" + defaultRequest));
+  if (defaultRequest > containerRamRequested) {
+    LOG.severe("Container is set to value lower than computed defaults. This could be due" + "to incorrect RAM map provided for components.");
+  }
+  return containerRamRequested;
+}

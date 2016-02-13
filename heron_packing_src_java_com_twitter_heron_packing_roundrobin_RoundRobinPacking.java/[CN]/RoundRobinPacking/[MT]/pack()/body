@@ -1,0 +1,4 @@
+{
+  Map<String,List<String>> containerInstancesMap=getBasePacking();
+  return fillInResource(containerInstancesMap);
+}
