@@ -1,4 +1,4 @@
 {
-  Object value=keyValues.get(key);
+  Object value=ctxMap.get(key);
   return getLong(value);
 }
