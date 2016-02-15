@@ -1,5 +1,5 @@
 {
-  IRuntimeManager.Command command=Factory.makeCommand(args[0]);
+  IRuntimeManager.Command command=makeCommand(args[0]);
   String topologyName=args[1];
   String commandConfigLoader=args[2];
   String commandConfigOverrideEncoded=args[3];

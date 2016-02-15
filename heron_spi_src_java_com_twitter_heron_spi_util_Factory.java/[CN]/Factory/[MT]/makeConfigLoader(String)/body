@@ -1,3 +1,0 @@
-{
-  return (IConfigLoader)Class.forName(configLoaderClass).newInstance();
-}
