@@ -1,12 +1,12 @@
 {
   if (o instanceof Long) {
-    return ((Long)o).longValue();
+    return ((Long)o);
   }
  else   if (o instanceof Integer) {
-    return ((Integer)o).longValue();
+    return new Long(((Integer)o).longValue());
   }
  else   if (o instanceof Short) {
-    return ((Short)o).longValue();
+    return new Long(((Short)o).longValue());
   }
  else {
     try {

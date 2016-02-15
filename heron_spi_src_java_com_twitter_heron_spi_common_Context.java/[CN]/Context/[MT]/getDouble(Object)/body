@@ -1,18 +1,18 @@
 {
   if (o instanceof Double) {
-    return ((Double)o).doubleValue();
+    return ((Double)o);
   }
  else   if (o instanceof Float) {
-    return ((Float)o).doubleValue();
+    return new Double(((Float)o).doubleValue());
   }
  else   if (o instanceof Long) {
-    return ((Long)o).doubleValue();
+    return new Double(((Long)o).doubleValue());
   }
  else   if (o instanceof Integer) {
-    return ((Integer)o).doubleValue();
+    return new Double(((Integer)o).doubleValue());
   }
  else   if (o instanceof Short) {
-    return ((Short)o).doubleValue();
+    return new Double(((Short)o).doubleValue());
   }
  else {
     try {
