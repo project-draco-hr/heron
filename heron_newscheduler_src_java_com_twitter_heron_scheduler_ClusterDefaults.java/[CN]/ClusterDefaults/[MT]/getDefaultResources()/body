@@ -1,0 +1,4 @@
+{
+  Context resContext=Context.newBuilder().put(Keys.Config.STMGR_RAM,Long.valueOf(Defaults.Config.STMGR_RAM)).put(Keys.Config.INSTANCE_CPU,Long.valueOf(Defaults.Config.INSTANCE_CPU)).put(Keys.Config.INSTANCE_RAM,Long.valueOf(Defaults.Config.INSTANCE_RAM)).put(Keys.Config.INSTANCE_DISK,Long.valueOf(Defaults.Config.INSTANCE_DISK)).build();
+  return resContext;
+}

@@ -1,0 +1,4 @@
+{
+  Context jarContext=Context.newBuilder().put(Keys.Config.SCHEDULER_JAR,Defaults.Config.SCHEDULER_JAR).build();
+  return jarContext;
+}

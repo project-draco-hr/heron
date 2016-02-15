@@ -1,0 +1,11 @@
+{
+  String cluster=args[0];
+  String role=args[1];
+  String environ=args[2];
+  String configPath=args[3];
+  String configOverrideEncoded=args[4];
+  String topologyPackage=args[5];
+  String topologyDefnFile=args[6];
+  String heronInternalsFile=args[7];
+  String originalPackageFile=args[8];
+}

@@ -1,0 +1,5 @@
+{
+  String configPath=Paths.get(System.getenv("JAVA_RUNFILES"),TestConstants.TEST_DATA_PATH).toString();
+  Context props=ClusterConfig.loadPackingConfig("local",configPath);
+  Assert.assertEquals(0,props.size());
+}

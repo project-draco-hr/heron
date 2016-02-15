@@ -1,0 +1,4 @@
+{
+  Context binContext=Context.newBuilder().put(Keys.Config.EXECUTOR_BINARY,Defaults.Config.EXECUTOR_BINARY).put(Keys.Config.STMGR_BINARY,Defaults.Config.STMGR_BINARY).put(Keys.Config.TMASTER_BINARY,Defaults.Config.TMASTER_BINARY).put(Keys.Config.SHELL_BINARY,Defaults.Config.SHELL_BINARY).build();
+  return binContext;
+}
