@@ -1,3 +1,0 @@
-{
-  return new PackingPlan("",new HashMap<String,PackingPlan.ContainerPlan>(),new PackingPlan.Resource(0.0,0L,0L));
-}
