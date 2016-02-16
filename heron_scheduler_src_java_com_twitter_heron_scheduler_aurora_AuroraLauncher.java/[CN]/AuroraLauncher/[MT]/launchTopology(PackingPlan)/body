@@ -14,7 +14,7 @@
   auroraProperties.put("DISK_PER_CONTAINER",containerResource.disk + "");
   auroraProperties.put("ENVIRON",environ);
   auroraProperties.put("HERON_EXECUTOR_BINARY","heron-executor");
-  auroraProperties.put("HERON_INTERNALS_CONFIG_FILENAME",FileUtility.getBaseName(SubmitterMain.getHeronInternalsConfigFile()));
+  auroraProperties.put("HERON_INTERNALS_CONFIG_FILENAME",FileUtils.getBaseName(SubmitterMain.getHeronInternalsConfigFile()));
   auroraProperties.put("HERON_JAVA_HOME",context.getProperty("heron.java.home.path",""));
   auroraProperties.put("INSTANCE_DISTRIBUTION",TopologyUtility.packingToString(packing));
   auroraProperties.put("INSTANCE_JVM_OPTS_IN_BASE64",formatJavaOpts(TopologyUtility.getInstanceJvmOptions(topology)));
@@ -23,7 +23,7 @@
   auroraProperties.put("LOG_DIR",context.getProperty("heron.logging.directory","log-files"));
   auroraProperties.put("METRICS_MGR_CLASSPATH","metrics-mgr-classpath/*");
   auroraProperties.put("NUM_SHARDS","" + (1 + TopologyUtility.getNumContainer(topology)));
-  auroraProperties.put("PKG_TYPE",(FileUtility.isOriginalPackageJar(FileUtility.getBaseName(SubmitterMain.getOriginalPackageFile())) ? "jar" : "tar"));
+  auroraProperties.put("PKG_TYPE",(FileUtils.isOriginalPackageJar(FileUtils.getBaseName(SubmitterMain.getOriginalPackageFile())) ? "jar" : "tar"));
   auroraProperties.put("RAM_PER_CONTAINER",containerResource.ram + "");
   auroraProperties.put("RUN_ROLE",role);
   auroraProperties.put("STMGR_BINARY","heron-stmgr");
@@ -31,7 +31,7 @@
   auroraProperties.put("SHELL_BINARY","heron-shell");
   auroraProperties.put("TOPOLOGY_DEFN",topology.getName() + ".defn");
   auroraProperties.put("TOPOLOGY_ID",topology.getId());
-  auroraProperties.put("TOPOLOGY_JAR_FILE",FileUtility.getBaseName(SubmitterMain.getOriginalPackageFile()));
+  auroraProperties.put("TOPOLOGY_JAR_FILE",FileUtils.getBaseName(SubmitterMain.getOriginalPackageFile()));
   auroraProperties.put("TOPOLOGY_NAME",topology.getName());
   auroraProperties.put("TOPOLOGY_PKG",PackerUtility.getTopologyPackageName(topology.getName(),context.getProperty(Constants.HERON_RELEASE_PACKAGE_NAME,"live")));
   auroraProperties.put("ZK_NODE",getZkHostPort());

@@ -2,11 +2,11 @@
   TopologyAPI.Topology topology=TopologyAPI.Topology.getDefaultInstance();
   LocalFileSystemStateManager manager=Mockito.spy(new LocalFileSystemStateManager());
   manager.initialize(getConf());
-  PowerMockito.spy(FileUtility.class);
-  PowerMockito.doReturn(true).when(FileUtility.class,"createDirectory",Matchers.anyString());
+  PowerMockito.spy(FileUtils.class);
+  PowerMockito.doReturn(true).when(FileUtils.class,"createDirectory",Matchers.anyString());
   Assert.assertTrue(manager.initTree());
-  PowerMockito.doReturn(true).when(FileUtility.class,"writeToFile",Matchers.anyString(),Matchers.any(byte[].class));
+  PowerMockito.doReturn(true).when(FileUtils.class,"writeToFile",Matchers.anyString(),Matchers.any(byte[].class));
   Assert.assertTrue(manager.setTopology(topology,topologyName).get());
   PowerMockito.verifyStatic();
-  FileUtility.writeToFile(Matchers.eq(String.format("%s/%s/%s",rootAddr,"topologies",topologyName)),Matchers.eq(topology.toByteArray()));
+  FileUtils.writeToFile(Matchers.eq(String.format("%s/%s/%s",rootAddr,"topologies",topologyName)),Matchers.eq(topology.toByteArray()));
 }

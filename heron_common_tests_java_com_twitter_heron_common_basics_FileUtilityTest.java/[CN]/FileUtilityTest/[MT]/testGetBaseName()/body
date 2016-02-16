@@ -1,6 +1,0 @@
-{
-  String filename="a/b";
-  Assert.assertEquals("b",FileUtility.getBaseName(filename));
-  filename="b";
-  Assert.assertEquals("b",FileUtility.getBaseName(filename));
-}

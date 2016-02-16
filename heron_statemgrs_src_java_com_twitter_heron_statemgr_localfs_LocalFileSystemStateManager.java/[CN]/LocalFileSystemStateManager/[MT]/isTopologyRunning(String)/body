@@ -1,6 +1,6 @@
 {
   SettableFuture<Boolean> future=SettableFuture.create();
-  boolean ret=FileUtility.isFileExists(getTopologyPath(topologyName));
+  boolean ret=FileUtils.isFileExists(getTopologyPath(topologyName));
   future.set(ret);
   return future;
 }

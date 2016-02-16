@@ -1,4 +1,4 @@
 {
-  Context.Builder cb=Context.newBuilder().putAll(getDefaultBinaries()).putAll(getDefaultJars()).putAll(getDefaultResources());
+  Context.Builder cb=Context.newBuilder().putAll(getDefaultBinaries()).putAll(getDefaultJars()).putAll(getDefaultPaths()).putAll(getDefaultResources());
   return cb.build();
 }

@@ -1,5 +1,5 @@
 {
-  if (FileUtility.isDirectoryExists(getTopologyDir()) || FileUtility.createDirectory(getTopologyDir()) && FileUtility.isDirectoryExists(getTMasterLocationDir()) || FileUtility.createDirectory(getTMasterLocationDir()) && FileUtility.isDirectoryExists(getPhysicalPlanDir()) || FileUtility.createDirectory(getPhysicalPlanDir()) && FileUtility.isDirectoryExists(getExecutionStateDir()) || FileUtility.createDirectory(getExecutionStateDir()) && FileUtility.isDirectoryExists(getSchedulerLocationDir()) || FileUtility.createDirectory(getSchedulerLocationDir())) {
+  if (FileUtils.isDirectoryExists(getTopologyDir()) || FileUtils.createDirectory(getTopologyDir()) && FileUtils.isDirectoryExists(getTMasterLocationDir()) || FileUtils.createDirectory(getTMasterLocationDir()) && FileUtils.isDirectoryExists(getPhysicalPlanDir()) || FileUtils.createDirectory(getPhysicalPlanDir()) && FileUtils.isDirectoryExists(getExecutionStateDir()) || FileUtils.createDirectory(getExecutionStateDir()) && FileUtils.isDirectoryExists(getSchedulerLocationDir()) || FileUtils.createDirectory(getSchedulerLocationDir())) {
     return true;
   }
   return false;

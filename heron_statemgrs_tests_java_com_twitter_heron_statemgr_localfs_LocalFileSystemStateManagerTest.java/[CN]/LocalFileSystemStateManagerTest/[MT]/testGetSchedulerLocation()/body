@@ -2,8 +2,8 @@
   LocalFileSystemStateManager manager=Mockito.spy(new LocalFileSystemStateManager());
   manager.initialize(getConf());
   Scheduler.SchedulerLocation location=Scheduler.SchedulerLocation.newBuilder().setHttpEndpoint("host:1").setTopologyName(topologyName).build();
-  PowerMockito.spy(FileUtility.class);
-  PowerMockito.doReturn(location.toByteArray()).when(FileUtility.class,"readFromFile",Matchers.anyString());
+  PowerMockito.spy(FileUtils.class);
+  PowerMockito.doReturn(location.toByteArray()).when(FileUtils.class,"readFromFile",Matchers.anyString());
   Scheduler.SchedulerLocation locationFetched=manager.getSchedulerLocation(null,topologyName).get();
   Assert.assertEquals(location,locationFetched);
 }

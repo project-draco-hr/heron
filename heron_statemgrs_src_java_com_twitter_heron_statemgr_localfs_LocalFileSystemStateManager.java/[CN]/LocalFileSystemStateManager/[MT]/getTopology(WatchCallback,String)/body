@@ -1,7 +1,7 @@
 {
   SettableFuture<TopologyAPI.Topology> future=SettableFuture.create();
   String path=getTopologyPath(topologyName);
-  byte[] data=FileUtility.readFromFile(path);
+  byte[] data=FileUtils.readFromFile(path);
   TopologyAPI.Topology topology;
   try {
     topology=TopologyAPI.Topology.parseFrom(data);

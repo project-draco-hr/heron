@@ -1,4 +1,0 @@
-{
-  PowerMockito.mockStatic(Files.class);
-  Assert.assertTrue(FileUtility.deleteFile(""));
-}

@@ -1,11 +1,11 @@
 {
   LocalFileSystemStateManager manager=Mockito.spy(new LocalFileSystemStateManager());
   manager.initialize(getConf());
-  PowerMockito.spy(FileUtility.class);
-  PowerMockito.doReturn(true).when(FileUtility.class,"createDirectory",Matchers.anyString());
+  PowerMockito.spy(FileUtils.class);
+  PowerMockito.doReturn(true).when(FileUtils.class,"createDirectory",Matchers.anyString());
   Assert.assertTrue(manager.initTree());
-  PowerMockito.doReturn(true).when(FileUtility.class,"deleteFile",Matchers.anyString());
+  PowerMockito.doReturn(true).when(FileUtils.class,"deleteFile",Matchers.anyString());
   Assert.assertTrue(manager.deleteExecutionState(topologyName).get());
   PowerMockito.verifyStatic();
-  FileUtility.deleteFile(Matchers.eq(String.format("%s/%s/%s",rootAddr,"executionstate",topologyName)));
+  FileUtils.deleteFile(Matchers.eq(String.format("%s/%s/%s",rootAddr,"executionstate",topologyName)));
 }
