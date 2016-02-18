@@ -1,8 +1,0 @@
-{
-  if (outputsBuilder_ != null) {
-    return outputsBuilder_.getMessageOrBuilderList();
-  }
- else {
-    return java.util.Collections.unmodifiableList(outputs_);
-  }
-}

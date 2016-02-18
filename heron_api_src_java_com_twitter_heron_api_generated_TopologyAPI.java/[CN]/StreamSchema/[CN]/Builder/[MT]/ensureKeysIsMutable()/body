@@ -1,6 +1,0 @@
-{
-  if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-    keys_=new java.util.ArrayList<com.twitter.heron.api.generated.TopologyAPI.StreamSchema.KeyType>(keys_);
-    bitField0_|=0x00000001;
-  }
-}

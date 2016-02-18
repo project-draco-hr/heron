@@ -21,7 +21,7 @@
         break;
       }
  else {
-        Utils.sleep(Constants.RETRY_INTERVAL_MS);
+        SysUtils.sleep(Constants.RETRY_INTERVAL_MS);
       }
     }
     outgoingPacket=new OutgoingPacket(REQID.zeroREQID,constructMockMessage());
@@ -30,7 +30,7 @@
       if (!inStreamQueue.isEmpty()) {
         break;
       }
-      Utils.sleep(Constants.RETRY_INTERVAL_MS);
+      SysUtils.sleep(Constants.RETRY_INTERVAL_MS);
     }
     nioLooper.exitLoop();
     Assert.assertEquals(1,inStreamQueue.size());

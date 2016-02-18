@@ -1,0 +1,3 @@
+{
+  return TypeUtils.getInt(this.config.get(SystemConfig.INSTANCE_INTERNAL_SPOUT_WRITE_QUEUE_CAPACITY));
+}

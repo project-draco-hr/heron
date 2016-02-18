@@ -1,0 +1,3 @@
+{
+  return TypeUtils.getInt(this.config.get(SystemConfig.INSTANCE_RECONNECT_METRICSMGR_INTERVAL_SEC));
+}

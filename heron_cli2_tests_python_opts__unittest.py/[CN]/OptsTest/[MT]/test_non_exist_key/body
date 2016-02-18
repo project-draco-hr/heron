@@ -1,0 +1,4 @@
+def test_non_exist_key(self):
+    opts.clear_config()
+    opts.set_config('XX', 'xx')
+    self.assertEqual(None, opts.get_config('YY'))

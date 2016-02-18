@@ -1,5 +1,5 @@
 {
-  final int checkIntervalSec=Utils.getInt(sinkConfig.get(KEY_TMASTER_LOCATION_CHECK_INTERVAL_SEC));
+  final int checkIntervalSec=TypeUtils.getInt(sinkConfig.get(KEY_TMASTER_LOCATION_CHECK_INTERVAL_SEC));
   Runnable runnable=new Runnable(){
     @Override public void run(){
       TopologyMaster.TMasterLocation location=(TopologyMaster.TMasterLocation)SingletonRegistry.INSTANCE.getSingleton(TMASTER_LOCATION_BEAN_NAME);

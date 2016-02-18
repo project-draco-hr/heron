@@ -1,6 +1,0 @@
-{
-  if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-    bolts_=new java.util.ArrayList<com.twitter.heron.api.generated.TopologyAPI.Bolt>(bolts_);
-    bitField0_|=0x00000008;
-  }
-}

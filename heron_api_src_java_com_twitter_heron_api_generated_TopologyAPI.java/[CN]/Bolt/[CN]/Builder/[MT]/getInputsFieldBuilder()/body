@@ -1,7 +1,0 @@
-{
-  if (inputsBuilder_ == null) {
-    inputsBuilder_=new com.google.protobuf.RepeatedFieldBuilder<com.twitter.heron.api.generated.TopologyAPI.InputStream,com.twitter.heron.api.generated.TopologyAPI.InputStream.Builder,com.twitter.heron.api.generated.TopologyAPI.InputStreamOrBuilder>(inputs_,((bitField0_ & 0x00000002) == 0x00000002),getParentForChildren(),isClean());
-    inputs_=null;
-  }
-  return inputsBuilder_;
-}

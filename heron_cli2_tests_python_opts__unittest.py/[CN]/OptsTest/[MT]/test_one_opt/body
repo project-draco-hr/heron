@@ -1,0 +1,4 @@
+def test_one_opt(self):
+    opts.clear_config()
+    opts.set_config('XX', 'xx')
+    self.assertEqual('xx', opts.get_config('XX'))

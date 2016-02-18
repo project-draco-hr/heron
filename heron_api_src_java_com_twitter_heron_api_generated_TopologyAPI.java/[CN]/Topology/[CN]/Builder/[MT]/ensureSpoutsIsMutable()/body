@@ -1,6 +1,0 @@
-{
-  if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-    spouts_=new java.util.ArrayList<com.twitter.heron.api.generated.TopologyAPI.Spout>(spouts_);
-    bitField0_|=0x00000004;
-  }
-}

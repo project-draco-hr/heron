@@ -1,8 +1,0 @@
-{
-  if (kvsBuilder_ == null) {
-    return kvs_.size();
-  }
- else {
-    return kvsBuilder_.getCount();
-  }
-}

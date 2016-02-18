@@ -1,7 +1,0 @@
-{
-  com.twitter.heron.api.generated.TopologyAPI.StreamSchema result=buildPartial();
-  if (!result.isInitialized()) {
-    throw newUninitializedMessageException(result);
-  }
-  return result;
-}

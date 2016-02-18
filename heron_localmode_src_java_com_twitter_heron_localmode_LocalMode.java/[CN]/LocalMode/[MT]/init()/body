@@ -1,0 +1,13 @@
+{
+  this.systemConfig=getSystemConfig();
+synchronized (SingletonRegistry.INSTANCE) {
+    if (!isSystemConfigExisted()) {
+      LOG.info("System config not existed. Registering...");
+      registerSystemConfig(systemConfig);
+      LOG.info("System config registered.");
+    }
+ else {
+      LOG.info("System config already existed.");
+    }
+  }
+}

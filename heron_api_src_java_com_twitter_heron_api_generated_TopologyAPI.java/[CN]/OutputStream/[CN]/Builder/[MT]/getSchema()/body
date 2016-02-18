@@ -1,8 +1,0 @@
-{
-  if (schemaBuilder_ == null) {
-    return schema_;
-  }
- else {
-    return schemaBuilder_.getMessage();
-  }
-}

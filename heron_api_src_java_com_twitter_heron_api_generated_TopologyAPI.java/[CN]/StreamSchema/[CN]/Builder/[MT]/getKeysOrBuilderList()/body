@@ -1,8 +1,0 @@
-{
-  if (keysBuilder_ != null) {
-    return keysBuilder_.getMessageOrBuilderList();
-  }
- else {
-    return java.util.Collections.unmodifiableList(keys_);
-  }
-}

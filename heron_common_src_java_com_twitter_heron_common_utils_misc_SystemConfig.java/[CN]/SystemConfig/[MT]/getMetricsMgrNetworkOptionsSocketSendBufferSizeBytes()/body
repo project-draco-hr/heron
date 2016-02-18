@@ -1,3 +1,0 @@
-{
-  return Utils.getInt(this.get(SystemConfig.METRICSMGR_NETWORK_OPTIONS_SOCKET_SEND_BUFFER_SIZE_BYTES));
-}

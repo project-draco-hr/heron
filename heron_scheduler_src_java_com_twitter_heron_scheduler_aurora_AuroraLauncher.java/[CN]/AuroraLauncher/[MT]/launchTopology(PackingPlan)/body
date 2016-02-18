@@ -10,7 +10,7 @@
   auroraProperties.put("COMPONENT_JVM_OPTS_IN_BASE64",formatJavaOpts(TopologyUtility.getComponentJvmOptions(topology)));
   auroraProperties.put("COMPONENT_RAMMAP",TopologyUtility.formatRamMap(TopologyUtility.getComponentRamMap(topology)));
   auroraProperties.put("CPUS_PER_CONTAINER",containerResource.cpu + "");
-  auroraProperties.put("DC",dc);
+  auroraProperties.put("CLUSTER",cluster);
   auroraProperties.put("DISK_PER_CONTAINER",containerResource.disk + "");
   auroraProperties.put("ENVIRON",environ);
   auroraProperties.put("HERON_EXECUTOR_BINARY","heron-executor");
@@ -42,7 +42,7 @@
     auroraCmd.add("--bind");
     auroraCmd.add(String.format("%s=%s",binding,auroraProperties.get(binding)));
   }
-  auroraCmd.add(String.format("%s/%s/%s/%s",auroraProperties.get("DC"),auroraProperties.get("RUN_ROLE"),auroraProperties.get("ENVIRON"),auroraProperties.get("JOB_NAME")));
+  auroraCmd.add(String.format("%s/%s/%s/%s",auroraProperties.get("CLUSTER"),auroraProperties.get("RUN_ROLE"),auroraProperties.get("ENVIRON"),auroraProperties.get("JOB_NAME")));
   auroraCmd.add(getHeronAuroraPath());
   String[] cmdline=auroraCmd.toArray(new String[auroraCmd.size()]);
   LOG.info("cmdline=" + Arrays.toString(cmdline));

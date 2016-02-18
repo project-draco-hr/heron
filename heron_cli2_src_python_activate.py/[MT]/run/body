@@ -1,0 +1,18 @@
+def run(command, parser, cl_args, unknown_args):
+    try:
+        cluster_role_env = cl_args['cluster/[role]/[env]']
+        topology_name = cl_args['topology-name']
+    except KeyError:
+        subparser = utils.get_subparser(parser, command)
+        print subparser.format_help()
+        parser.exit()
+    try:
+        config_overrides = ((args.parse_cluster_role_env(cluster_role_env) + ' ') + args.parse_cmdline_override(cl_args))
+        new_args = [command, topology_name, cl_args['config_loader'], base64.b64encode(config_overrides), cl_args['config_path']]
+        execute.heron_class('com.twitter.heron.scheduler.service.RuntimeManagerMain', utils.get_heron_libs(jars.scheduler_jars()), extra_jars=[], args=new_args)
+    except Exception as ex:
+        print ('Error: %s' % str(ex))
+        print ("Failed to activate topology '%s'" % topology_name)
+        sys.exit(1)
+    print ("Successfully activated topology '%s'" % topology_name)
+    sys.exit(0)

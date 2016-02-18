@@ -10,9 +10,9 @@
         if (failCount.intValue() != 0) {
           break;
         }
-        Utils.sleep(Constants.RETRY_INTERVAL_MS);
+        SysUtils.sleep(Constants.RETRY_INTERVAL_MS);
       }
-      Utils.sleep(Constants.TEST_WAIT_TIME_MS);
+      SysUtils.sleep(Constants.TEST_WAIT_TIME_MS);
       Assert.assertEquals(10,failCount.intValue());
       testLooper.exitLoop();
     }
