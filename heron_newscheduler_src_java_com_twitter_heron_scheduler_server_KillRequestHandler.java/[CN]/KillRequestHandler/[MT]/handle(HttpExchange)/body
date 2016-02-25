@@ -1,0 +1,9 @@
+{
+  byte[] requestBody=HttpUtils.readHttpRequestBody(exchange);
+  Scheduler.KillTopologyRequest killTopologyRequest=Scheduler.KillTopologyRequest.newBuilder().mergeFrom(requestBody).build();
+  boolean isKillSuccessfully=scheduler.onKill(killTopologyRequest);
+  Scheduler.KillTopologyResponse response=Scheduler.KillTopologyResponse.newBuilder().setStatus(NetworkUtils.getHeronStatus(isKillSuccessfully)).build();
+  HttpUtils.sendHttpResponse(exchange,response.toByteArray());
+  Runtime.stateManager(runtime).close();
+  System.exit(0);
+}

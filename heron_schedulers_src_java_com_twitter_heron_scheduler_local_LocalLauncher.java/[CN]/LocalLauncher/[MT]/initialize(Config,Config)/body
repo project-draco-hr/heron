@@ -1,0 +1,6 @@
+{
+  this.config=config;
+  this.runtime=runtime;
+  this.topologyWorkingDirectory=LocalContext.workingDirectory(config);
+  this.coreReleasePackage=LocalContext.corePackageUri(config);
+}

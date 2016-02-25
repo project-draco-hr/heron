@@ -1,0 +1,20 @@
+{
+  String topologyName=Context.topologyName(config);
+  LOG.info("Command to kill topology: " + topologyName);
+  topologyKilled=true;
+  for (  Process p : processToContainer.keySet()) {
+    int index=processToContainer.get(p);
+    LOG.info("Killing executor for container: " + index);
+    p.destroy();
+    LOG.info("Killed executor for container: " + index);
+  }
+  processToContainer.clear();
+  IStateManager stateManager=Runtime.stateManager(runtime);
+  LOG.info("Removing scheduler location for topology: " + topologyName);
+  stateManager.deleteSchedulerLocation(topologyName);
+  LOG.info("Cleared scheduler location for topology: " + topologyName);
+  LOG.info("Removing TMaster location for topology: " + topologyName);
+  stateManager.deleteTMasterLocation(topologyName);
+  LOG.info("Cleared TMaster location for topology: " + topologyName);
+  return true;
+}

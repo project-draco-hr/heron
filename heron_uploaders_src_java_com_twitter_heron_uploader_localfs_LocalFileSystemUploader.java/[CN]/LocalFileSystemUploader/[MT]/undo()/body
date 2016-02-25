@@ -1,0 +1,5 @@
+{
+  LOG.info("Clean uploaded jar");
+  File file=new File(destTopologyFile);
+  return file.delete();
+}

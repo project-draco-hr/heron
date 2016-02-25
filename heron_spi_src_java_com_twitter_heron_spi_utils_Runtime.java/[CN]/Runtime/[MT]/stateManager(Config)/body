@@ -1,0 +1,3 @@
+{
+  return (IStateManager)runtime.get(Keys.STATE_MANAGER);
+}

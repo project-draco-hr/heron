@@ -1,0 +1,4 @@
+{
+  Map config=ClusterConfigReader.load(cluster,configPath,Defaults.STATEMGR_YAML);
+  return Config.newBuilder().putAll(config).build();
+}

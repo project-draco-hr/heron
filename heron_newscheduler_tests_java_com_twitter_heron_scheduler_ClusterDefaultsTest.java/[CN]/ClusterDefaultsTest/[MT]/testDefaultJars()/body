@@ -1,4 +1,0 @@
-{
-  Context props=ClusterDefaults.getDefaultJars();
-  Assert.assertEquals(Defaults.Config.SCHEDULER_JAR,props.getStringValue(Keys.Config.SCHEDULER_JAR));
-}

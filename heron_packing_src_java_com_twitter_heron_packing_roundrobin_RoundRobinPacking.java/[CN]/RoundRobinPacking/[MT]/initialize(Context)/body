@@ -1,7 +1,0 @@
-{
-  this.stmgrRamDefault=context.getLongValue(RoundRobinKeys.Config.STMGR_RAM_DEFAULT,1 * Constants.GB);
-  this.instanceRamDefault=context.getLongValue(RoundRobinKeys.Config.INSTANCE_RAM_DEFAULT,1 * Constants.GB);
-  this.instanceCpuDefault=context.getDoubleValue(RoundRobinKeys.Config.INSTANCE_CPU_DEFAULT,1.0);
-  this.instanceDiskDefault=context.getLongValue(RoundRobinKeys.Config.INSTANCE_DISK_DEFAULT,1 * Constants.GB);
-  this.topology=(TopologyAPI.Topology)context.get(Keys.Runtime.TOPOLOGY_PHYSICAL_PLAN);
-}

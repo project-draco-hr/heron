@@ -1,0 +1,3 @@
+{
+  return cfg.getLongValue(Keys.STMGR_RAM);
+}

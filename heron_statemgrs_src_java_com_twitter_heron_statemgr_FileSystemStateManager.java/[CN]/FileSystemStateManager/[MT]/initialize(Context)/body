@@ -1,3 +1,0 @@
-{
-  this.rootAddress=cxt.getStringValue(ROOT_ADDRESS);
-}

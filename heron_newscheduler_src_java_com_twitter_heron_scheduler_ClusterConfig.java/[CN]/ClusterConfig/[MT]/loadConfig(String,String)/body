@@ -1,4 +1,0 @@
-{
-  Context.Builder cb=Context.newBuilder().putAll(loadClusterConfig(cluster,configPath)).putAll(loadDefaultsConfig(cluster,configPath)).putAll(loadPackingConfig(cluster,configPath)).putAll(loadSchedulerConfig(cluster,configPath)).putAll(loadStateManagerConfig(cluster,configPath)).putAll(loadUploaderConfig(cluster,configPath));
-  return cb.build();
-}

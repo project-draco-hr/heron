@@ -1,0 +1,7 @@
+{
+  this.config=config;
+  this.destTopologyDirectory=LocalFileSystemContext.fileSystemDirectory(config);
+  String fileName="topology." + Context.topologyPackageType(config);
+  this.destTopologyFile=Paths.get(destTopologyDirectory,fileName).toString();
+  this.topologyPackageLocation=Context.topologyPackageUri(config);
+}

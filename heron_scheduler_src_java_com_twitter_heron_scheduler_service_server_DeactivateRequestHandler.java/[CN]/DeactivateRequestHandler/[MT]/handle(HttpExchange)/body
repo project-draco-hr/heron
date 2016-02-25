@@ -1,7 +1,0 @@
-{
-  byte[] requestBody=NetworkUtility.readHttpRequestBody(exchange);
-  Scheduler.DeactivateTopologyRequest deactivateTopologyRequest=Scheduler.DeactivateTopologyRequest.newBuilder().mergeFrom(requestBody).build();
-  boolean isDeactivatedSuccessfully=scheduler.onDeactivate(deactivateTopologyRequest);
-  Scheduler.DeactivateTopologyResponse response=Scheduler.DeactivateTopologyResponse.newBuilder().setStatus(NetworkUtility.getHeronStatus(isDeactivatedSuccessfully)).build();
-  NetworkUtility.sendHttpResponse(exchange,response.toByteArray());
-}

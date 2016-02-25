@@ -1,3 +1,0 @@
-{
-  return IRuntimeManager.Command.valueOf(commandString.toUpperCase());
-}

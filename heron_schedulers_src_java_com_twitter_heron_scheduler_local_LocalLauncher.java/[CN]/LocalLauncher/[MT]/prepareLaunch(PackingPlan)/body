@@ -1,0 +1,11 @@
+{
+  LOG.info("Checking whether the topology has been launched already!");
+  String topologyName=Context.topologyName(config);
+  IStateManager stateManager=Runtime.stateManager(runtime);
+  ListenableFuture<Boolean> boolFuture=stateManager.isTopologyRunning(topologyName);
+  if (NetworkUtils.awaitResult(boolFuture,1000,TimeUnit.MILLISECONDS)) {
+    LOG.severe("Topology is already running: " + topologyName);
+    return false;
+  }
+  return true;
+}

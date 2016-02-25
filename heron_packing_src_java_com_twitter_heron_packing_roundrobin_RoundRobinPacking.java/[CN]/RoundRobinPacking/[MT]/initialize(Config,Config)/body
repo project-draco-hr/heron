@@ -1,0 +1,7 @@
+{
+  this.stmgrRamDefault=Context.stmgrRam(config);
+  this.instanceRamDefault=Context.instanceRam(config);
+  this.instanceCpuDefault=Context.instanceCpu(config).doubleValue();
+  this.instanceDiskDefault=Context.instanceDisk(config);
+  this.topology=Runtime.topology(runtime);
+}

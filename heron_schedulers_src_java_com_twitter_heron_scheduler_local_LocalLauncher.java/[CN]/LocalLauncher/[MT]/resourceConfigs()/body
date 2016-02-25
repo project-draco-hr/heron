@@ -1,0 +1,6 @@
+{
+  TopologyAPI.Topology topology=Runtime.topology(runtime);
+  int numShards=1 + TopologyUtils.getNumContainers(topology);
+  Config.Builder builder=Config.newBuilder().put(LocalSchedulerKeys.NUM_SHARDS,String.valueOf(numShards));
+  return builder.build();
+}

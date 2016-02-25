@@ -1,0 +1,4 @@
+{
+  String packageUri=cfg.getStringValue(LocalSchedulerKeys.CORE_PACKAGE_URI,LocalSchedulerDefaults.CORE_PACKAGE_URI);
+  return Misc.substitute(cfg,packageUri);
+}

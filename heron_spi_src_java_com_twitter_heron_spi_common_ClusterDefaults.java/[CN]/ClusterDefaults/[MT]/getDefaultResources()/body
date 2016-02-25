@@ -1,0 +1,8 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.STMGR_RAM,Long.valueOf(Defaults.STMGR_RAM));
+  cb.put(Keys.INSTANCE_CPU,Long.valueOf(Defaults.INSTANCE_CPU));
+  cb.put(Keys.INSTANCE_RAM,Long.valueOf(Defaults.INSTANCE_RAM));
+  cb.put(Keys.INSTANCE_DISK,Long.valueOf(Defaults.INSTANCE_DISK));
+  return cb.build();
+}

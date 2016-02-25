@@ -1,4 +1,0 @@
-{
-  keyValues.putAll(ctx.ctxMap);
-  return this;
-}

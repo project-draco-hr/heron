@@ -1,4 +1,0 @@
-{
-  this.scheduler=scheduler;
-  this.context=context;
-}

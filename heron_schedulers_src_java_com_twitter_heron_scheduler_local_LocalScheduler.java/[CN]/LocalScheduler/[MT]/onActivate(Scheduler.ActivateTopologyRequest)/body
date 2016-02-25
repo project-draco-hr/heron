@@ -1,0 +1,4 @@
+{
+  LOG.info("Command to activate topology: " + Context.topologyName(config));
+  return sendToTMaster("activate");
+}

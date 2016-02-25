@@ -1,0 +1,26 @@
+{
+  LOG.info("Cleaning up Heron State");
+  IStateManager statemgr=Runtime.stateManager(runtime);
+  ListenableFuture<Boolean> booleanFuture;
+  try {
+    booleanFuture=statemgr.deletePhysicalPlan(topologyName);
+    if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
+      LOG.severe("Failed to clear physical plan. Check whether TMaster set it correctly.");
+    }
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to clear physical plan",e);
+  }
+  booleanFuture=statemgr.deleteExecutionState(topologyName);
+  if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
+    LOG.severe("Failed to clear execution state");
+    return false;
+  }
+  booleanFuture=statemgr.deleteTopology(topologyName);
+  if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
+    LOG.severe("Failed to clear topology state");
+    return false;
+  }
+  LOG.info("Cleaned up Heron State");
+  return true;
+}

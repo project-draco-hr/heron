@@ -1,5 +1,0 @@
-IRuntimeManager.Command command
-String topologyName
-String commandConfigLoader
-String commandConfigFile
-String configOverride

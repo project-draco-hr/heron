@@ -1,0 +1,9 @@
+{
+  Config homeConfig=getDefaultHome();
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.EXECUTOR_BINARY,Misc.substitute(homeConfig,Defaults.EXECUTOR_BINARY));
+  cb.put(Keys.STMGR_BINARY,Misc.substitute(homeConfig,Defaults.STMGR_BINARY));
+  cb.put(Keys.TMASTER_BINARY,Misc.substitute(homeConfig,Defaults.TMASTER_BINARY));
+  cb.put(Keys.SHELL_BINARY,Misc.substitute(homeConfig,Defaults.SHELL_BINARY));
+  return cb.build();
+}

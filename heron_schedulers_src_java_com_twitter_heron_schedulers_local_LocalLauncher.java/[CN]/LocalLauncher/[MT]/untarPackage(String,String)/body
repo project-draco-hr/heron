@@ -1,5 +1,0 @@
-{
-  String cmd=String.format("tar -xvf %s",packageName);
-  int ret=ShellUtility.runSyncProcess(false,true,cmd,new StringBuilder(),new StringBuilder(),new File(targetFolder));
-  return ret == 0 ? true : false;
-}

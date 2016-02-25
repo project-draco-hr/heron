@@ -1,0 +1,6 @@
+{
+  Config homeConfig=getDefaultHome();
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.SCHEDULER_JAR,Misc.substitute(homeConfig,Defaults.SCHEDULER_JAR));
+  return cb.build();
+}

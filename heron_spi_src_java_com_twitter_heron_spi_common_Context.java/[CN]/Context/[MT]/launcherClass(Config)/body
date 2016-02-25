@@ -1,0 +1,3 @@
+{
+  return cfg.getStringValue(Keys.LAUNCHER_CLASS);
+}

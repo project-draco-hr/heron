@@ -1,0 +1,4 @@
+{
+  String configPath=Misc.substitute(heronHome,Defaults.HERON_CONF);
+  return loadConfig(heronHome,cluster,configPath);
+}

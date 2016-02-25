@@ -1,0 +1,3 @@
+{
+  this.rootAddress=config.getStringValue(ROOT_ADDRESS);
+}

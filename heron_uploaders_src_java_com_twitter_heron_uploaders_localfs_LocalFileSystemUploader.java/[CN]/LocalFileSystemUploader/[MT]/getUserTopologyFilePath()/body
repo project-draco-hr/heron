@@ -1,3 +1,0 @@
-{
-  return String.format("%s/%s/%s/%s/%s",getUploaderFileSystemPath(),cluster,role,environ,topologyName);
-}

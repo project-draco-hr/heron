@@ -1,7 +1,0 @@
-{
-  Context props=ClusterDefaults.getDefaultBinaries();
-  Assert.assertEquals(Defaults.Config.EXECUTOR_BINARY,props.getStringValue(Keys.Config.EXECUTOR_BINARY));
-  Assert.assertEquals(Defaults.Config.STMGR_BINARY,props.getStringValue(Keys.Config.STMGR_BINARY));
-  Assert.assertEquals(Defaults.Config.TMASTER_BINARY,props.getStringValue(Keys.Config.TMASTER_BINARY));
-  Assert.assertEquals(Defaults.Config.SHELL_BINARY,props.getStringValue(Keys.Config.SHELL_BINARY));
-}

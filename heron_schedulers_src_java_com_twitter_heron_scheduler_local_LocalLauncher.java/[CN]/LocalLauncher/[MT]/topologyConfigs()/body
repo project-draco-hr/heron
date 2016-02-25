@@ -1,0 +1,5 @@
+{
+  TopologyAPI.Topology topology=Runtime.topology(runtime);
+  Config.Builder builder=Config.newBuilder().put(Keys.TOPOLOGY_ID,topology.getId()).put(Keys.TOPOLOGY_NAME,topology.getName()).put(Keys.TOPOLOGY_DEFINITION_FILE,Context.topologyDefinitionFile(config)).put(Keys.TOPOLOGY_PACKAGE_URI,Context.topologyPackageUri(config)).put(Keys.TOPOLOGY_JAR_FILE,Context.topologyJarFile(config)).put(Keys.TOPOLOGY_PACKAGE_TYPE,Context.topologyPackageType(config));
+  return builder.build();
+}

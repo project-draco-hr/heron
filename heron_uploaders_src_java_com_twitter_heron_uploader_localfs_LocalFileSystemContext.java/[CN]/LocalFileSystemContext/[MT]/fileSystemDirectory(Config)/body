@@ -1,0 +1,4 @@
+{
+  String directory=cfg.getStringValue(LocalFileSystemKeys.FILE_SYSTEM_DIRECTORY,LocalFileSystemDefaults.FILE_SYSTEM_DIRECTORY);
+  return Misc.substitute(cfg,directory);
+}

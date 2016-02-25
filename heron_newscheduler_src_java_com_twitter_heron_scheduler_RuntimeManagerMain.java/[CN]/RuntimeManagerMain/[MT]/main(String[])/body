@@ -1,0 +1,18 @@
+{
+  String cluster=args[0];
+  String role=args[1];
+  String environ=args[2];
+  String heronHome=args[3];
+  String topologyName=args[4];
+  String command=args[5];
+  Config.Builder defaultConfigs=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,cluster));
+  Config.Builder commandLineConfigs=Config.newBuilder().put(Keys.CLUSTER,cluster).put(Keys.ROLE,role).put(Keys.ENVIRON,environ);
+  Config.Builder topologyConfigs=Config.newBuilder().put(Keys.TOPOLOGY_NAME,topologyName);
+  Config config=Config.newBuilder().putAll(defaultConfigs.build()).putAll(commandLineConfigs.build()).putAll(topologyConfigs.build()).build();
+  boolean rt=manageTopology(config,topologyName,command);
+  if (!rt) {
+    LOG.severe("Failed to " + command + " topology "+ topologyName);
+    Runtime.getRuntime().exit(1);
+  }
+  LOG.info("Topology " + topologyName + " "+ command+ " successfully");
+}

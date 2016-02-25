@@ -1,0 +1,4 @@
+{
+  LOG.info("Command to deactivate topology: " + Context.topologyName(config));
+  return sendToTMaster("deactivate");
+}

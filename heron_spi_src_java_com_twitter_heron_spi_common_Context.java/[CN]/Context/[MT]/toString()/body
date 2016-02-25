@@ -1,9 +1,0 @@
-{
-  StringBuilder sb=new StringBuilder();
-  for (  Object obj : ctxMap.entrySet()) {
-    Map.Entry<String,Object> entry=(Map.Entry)obj;
-    sb.append("(\"" + entry.getKey() + "\"");
-    sb.append(", " + entry.getValue() + ")\n");
-  }
-  return sb.toString();
-}

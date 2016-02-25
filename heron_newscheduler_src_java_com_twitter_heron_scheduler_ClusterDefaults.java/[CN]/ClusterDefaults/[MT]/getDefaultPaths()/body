@@ -1,4 +1,0 @@
-{
-  Context.Builder cb=Context.newBuilder().put(Keys.Config.METRICS_MANAGER_CLASSPATH,Defaults.Config.METRICS_MANAGER_CLASSPATH);
-  return cb.build();
-}

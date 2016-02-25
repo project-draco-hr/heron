@@ -1,5 +1,0 @@
-{
-  this.context=context;
-  this.topology=context.getTopology();
-  this.localConfig=new LocalConfig(context);
-}

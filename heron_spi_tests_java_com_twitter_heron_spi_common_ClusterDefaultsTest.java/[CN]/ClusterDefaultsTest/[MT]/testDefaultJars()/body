@@ -1,0 +1,5 @@
+{
+  Config home=ClusterDefaults.getDefaultHome();
+  Config props=ClusterDefaults.getDefaultJars();
+  Assert.assertEquals(Misc.substitute(home,Defaults.SCHEDULER_JAR),Context.schedulerJar(props));
+}

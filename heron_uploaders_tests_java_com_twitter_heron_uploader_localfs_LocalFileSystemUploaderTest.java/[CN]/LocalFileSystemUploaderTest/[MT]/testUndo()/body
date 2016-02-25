@@ -1,0 +1,11 @@
+{
+  String topologyPackage=Paths.get(testTopologyDirectory,"some-topology.tar").toString();
+  Config newconfig=Config.newBuilder().putAll(config).put(Keys.TOPOLOGY_PACKAGE_URI,topologyPackage).build();
+  LocalFileSystemUploader uploader=new LocalFileSystemUploader();
+  uploader.initialize(newconfig);
+  Assert.assertTrue(uploader.uploadPackage());
+  String destFile=uploader.getTopologyFile();
+  Assert.assertTrue(new File(destFile).isFile());
+  uploader.undo();
+  Assert.assertFalse(new File(destFile).isFile());
+}

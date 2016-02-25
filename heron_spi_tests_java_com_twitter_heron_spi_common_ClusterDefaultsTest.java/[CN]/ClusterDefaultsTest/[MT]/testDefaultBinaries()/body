@@ -1,0 +1,8 @@
+{
+  Config home=ClusterDefaults.getDefaultHome();
+  Config props=ClusterDefaults.getDefaultBinaries();
+  Assert.assertEquals(Misc.substitute(home,Defaults.EXECUTOR_BINARY),Context.executorBinary(props));
+  Assert.assertEquals(Misc.substitute(home,Defaults.STMGR_BINARY),Context.stmgrBinary(props));
+  Assert.assertEquals(Misc.substitute(home,Defaults.TMASTER_BINARY),Context.tmasterBinary(props));
+  Assert.assertEquals(Misc.substitute(home,Defaults.SHELL_BINARY),Context.shellBinary(props));
+}

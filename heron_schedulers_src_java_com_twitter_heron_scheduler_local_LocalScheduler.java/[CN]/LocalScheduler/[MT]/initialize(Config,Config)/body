@@ -1,0 +1,14 @@
+{
+  this.config=config;
+  this.runtime=runtime;
+  this.localConfig=new LocalConfig(context);
+  LOG.info("Starting to deploy topology: " + Context.topologyName(config));
+  LOG.info("# of containers: " + this.localConfig.getNumContainers());
+  startExecutor(0);
+  LOG.info("TMaster is started.");
+  int numContainers=Integer.parseInt(this.localConfig.getNumContainers());
+  for (int i=1; i < numContainers; i++) {
+    startExecutor(i);
+  }
+  LOG.info("Executor for each container have been started.");
+}

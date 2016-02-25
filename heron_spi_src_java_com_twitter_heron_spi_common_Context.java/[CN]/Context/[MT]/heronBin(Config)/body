@@ -1,0 +1,3 @@
+{
+  return cfg.getStringValue(Keys.HERON_BINS);
+}

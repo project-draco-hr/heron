@@ -1,0 +1,15 @@
+{
+  String configPath=Paths.get(System.getenv("JAVA_RUNFILES"),TestConstants.TEST_DATA_PATH).toString();
+  Context props=ClusterConfig.loadDefaultsConfig("local",configPath);
+  Assert.assertEquals(10,props.size());
+  Assert.assertEquals("heron-executor",props.getStringValue(Keys.EXECUTOR_BINARY));
+  Assert.assertEquals("heron-stmgr",props.getStringValue(Keys.STMGR_BINARY));
+  Assert.assertEquals("heron-tmaster",props.getStringValue(Keys.TMASTER_BINARY));
+  Assert.assertEquals("heron-shell",props.getStringValue(Keys.SHELL_BINARY));
+  Assert.assertEquals("heron-scheduler.jar",props.getStringValue(Keys.SCHEDULER_JAR));
+  Assert.assertEquals("heron-scheduler.jar",props.getStringValue(Keys.SCHEDULER_JAR));
+  Assert.assertEquals(Long.valueOf(1),props.getLongValue(Keys.INSTANCE_CPU));
+  Assert.assertEquals(Long.valueOf(128 * Constants.MB),props.getLongValue(Keys.INSTANCE_RAM));
+  Assert.assertEquals(Long.valueOf(256 * Constants.MB),props.getLongValue(Keys.INSTANCE_DISK));
+  Assert.assertEquals(Long.valueOf(512 * Constants.MB),props.getLongValue(Keys.STMGR_RAM));
+}

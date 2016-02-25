@@ -1,0 +1,15 @@
+{
+  String statemgrClass=Context.stateManagerClass(config);
+  IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
+  Config runtime=Config.newBuilder().put(Keys.TOPOLOGY_ID,topology.getId()).put(Keys.TOPOLOGY_NAME,topology.getName()).put(Keys.TOPOLOGY_DEFINITION,topology).put(Keys.STATE_MANAGER,statemgr).build();
+  String schedulerClass=Context.schedulerClass(config);
+  IScheduler scheduler=(IScheduler)Class.forName(schedulerClass).newInstance();
+  scheduler.initialize(config,runtime);
+  SchedulerServer server=runServer(runtime,scheduler,schedulerServerPort);
+  setSchedulerLocation(runtime,server);
+  String packingClass=Context.packingClass(config);
+  IPacking packing=(IPacking)Class.forName(packingClass).newInstance();
+  packing.initialize(config,runtime);
+  PackingPlan packedPlan=packing.pack();
+  scheduler.schedule(packedPlan);
+}

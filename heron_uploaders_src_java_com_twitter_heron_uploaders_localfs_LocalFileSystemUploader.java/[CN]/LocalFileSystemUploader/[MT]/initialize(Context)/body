@@ -1,8 +1,0 @@
-{
-  this.cluster=context.getStringValue(Keys.Config.CLUSTER);
-  this.role=context.getStringValue(Keys.Config.ROLE);
-  this.environ=context.getStringValue(Keys.Config.ENVIRON);
-  this.verbose=context.getBooleanValue(Keys.Config.VERBOSE);
-  this.topologyName=context.getStringValue(Keys.Config.TOPOLOGY_NAME);
-  this.fileSystemPath=context.getStringValue(LocalFileSystemKeys.Config.FILE_SYSTEM_PATH);
-}

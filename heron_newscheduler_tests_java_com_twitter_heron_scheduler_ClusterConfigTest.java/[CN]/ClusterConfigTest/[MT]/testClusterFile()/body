@@ -1,9 +1,0 @@
-{
-  String configPath=Paths.get(System.getenv("JAVA_RUNFILES"),TestConstants.TEST_DATA_PATH).toString();
-  Context props=ClusterConfig.loadClusterConfig("local",configPath);
-  Assert.assertEquals(4,props.size());
-  Assert.assertEquals("com.twitter.heron.uploader.localfs.FileSystemUploader",props.getStringValue(Keys.Config.UPLOADER_CLASS));
-  Assert.assertEquals("com.twitter.heron.scheduler.local.LocalScheduler",props.getStringValue(Keys.Config.SCHEDULER_CLASS));
-  Assert.assertEquals("com.twitter.heron.packing.roundrobin.RoundRobinPacking",props.getStringValue(Keys.Config.PACKING_CLASS));
-  Assert.assertEquals("com.twitter.heron.state.localfs.LocalFileStateManager",props.getStringValue(Keys.Config.STATE_MANAGER_CLASS));
-}

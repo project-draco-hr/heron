@@ -1,0 +1,10 @@
+{
+  runtimeManager.initialize(config);
+  boolean result;
+  if (command.equals("activate"))   result=activateTopologyHandler(Context.topologyName(config));
+ else   if (command.equals("deactivate"))   result=deactivateTopologyHandler(Context.topologyName(config));
+ else   if (command.equals("restart"))   result=restartTopologyHandler(Context.topologyName(config));
+ else   if (command.equals("kill"))   result=killTopologyHandler(Context.topologyName(config));
+  runtimeManager.close();
+  return result;
+}

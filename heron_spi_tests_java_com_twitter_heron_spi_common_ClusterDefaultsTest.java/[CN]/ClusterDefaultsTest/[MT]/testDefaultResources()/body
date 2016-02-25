@@ -1,0 +1,7 @@
+{
+  Config props=ClusterDefaults.getDefaultResources();
+  Assert.assertEquals(Long.valueOf(Defaults.STMGR_RAM),Context.stmgrRam(props));
+  Assert.assertEquals(Long.valueOf(Defaults.INSTANCE_CPU),Context.instanceCpu(props));
+  Assert.assertEquals(Long.valueOf(Defaults.INSTANCE_RAM),Context.instanceRam(props));
+  Assert.assertEquals(Long.valueOf(Defaults.INSTANCE_DISK),Context.instanceDisk(props));
+}

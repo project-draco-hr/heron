@@ -1,0 +1,3 @@
+{
+  return (TopologyAPI.Topology)runtime.get(Keys.TOPOLOGY_DEFINITION);
+}

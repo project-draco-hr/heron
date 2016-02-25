@@ -1,6 +1,0 @@
-{
-  this.command=command;
-  this.runtimeManager=runtimeManager;
-  this.context=context;
-  this.topologyName=this.context.getTopologyName();
-}

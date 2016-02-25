@@ -1,0 +1,3 @@
+{
+  return cfg.getLongValue(Keys.INSTANCE_RAM);
+}

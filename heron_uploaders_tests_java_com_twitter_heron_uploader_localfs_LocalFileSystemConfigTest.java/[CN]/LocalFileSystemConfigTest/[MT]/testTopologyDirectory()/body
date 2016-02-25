@@ -1,0 +1,7 @@
+{
+  Config config=getDefaultConfig();
+  LocalFileSystemUploader uploader=new LocalFileSystemUploader();
+  uploader.initialize(config);
+  String destDirectory=Paths.get(LocalFileSystemContext.fileSystemDirectory(config),Context.cluster(config),Context.role(config),Context.topologyName(config)).toString();
+  Assert.assertEquals(uploader.getTopologyDirectory(),Misc.substitute(config,LocalFileSystemDefaults.FILE_SYSTEM_DIRECTORY));
+}

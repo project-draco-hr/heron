@@ -2,6 +2,6 @@
   List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
   double totalInstanceCpu=instanceCpuDefault * TopologyUtils.getTotalInstance(topology);
   double defaultContainerCpu=(float)(1 + totalInstanceCpu / TopologyUtils.getNumContainers(topology));
-  String cpuHint=TopologyUtils.getConfigWithDefault(topologyConfig,Config.TOPOLOGY_CONTAINER_CPU_REQUESTED,Double.toString(defaultContainerCpu));
+  String cpuHint=TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_CPU_REQUESTED,Double.toString(defaultContainerCpu));
   return Double.parseDouble(cpuHint);
 }

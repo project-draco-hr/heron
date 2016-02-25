@@ -1,0 +1,3 @@
+{
+  return cfg.getStringValue(Keys.RUNTIME_MANAGER_CLASS);
+}
