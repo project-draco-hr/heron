@@ -17,6 +17,6 @@
     }
   }
   IStateManager stateManager=Runtime.stateManager(runtime);
-  stateManager.deleteTMasterLocation(topologyName);
+  stateManager.deleteTMasterLocation(Context.topologyName(config));
   return true;
 }

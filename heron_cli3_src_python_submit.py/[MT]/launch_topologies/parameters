@@ -1,5 +1,5 @@
+cluster_role_env
 topology_file
 tmp_dir
-config_loader
 config_path
 config_overrides

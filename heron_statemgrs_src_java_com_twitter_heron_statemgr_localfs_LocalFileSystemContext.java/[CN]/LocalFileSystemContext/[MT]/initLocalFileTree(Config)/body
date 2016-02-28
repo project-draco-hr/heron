@@ -1,0 +1,3 @@
+{
+  return cfg.get(LocalFileSystemKeys.IS_INITIALIZE_FILE_TREE) == null ? true : (Boolean)cfg.get(LocalFileSystemKeys.IS_INITIALIZE_FILE_TREE);
+}

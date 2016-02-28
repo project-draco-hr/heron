@@ -1,5 +1,5 @@
 {
   Config.Builder builder=Config.newBuilder();
-  builder.put(LocalSchedulerKeys.WORKING_DIRECTORY,topologyWorkingDirectory);
+  builder.put(LocalKeys.WORKING_DIRECTORY,topologyWorkingDirectory);
   return builder.build();
 }

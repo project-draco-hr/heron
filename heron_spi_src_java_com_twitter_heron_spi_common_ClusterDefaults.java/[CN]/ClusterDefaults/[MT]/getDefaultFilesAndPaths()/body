@@ -1,7 +1,6 @@
 {
-  Config homeConfig=getDefaultHome();
   Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.CORE_PACKAGE_URI,Misc.substitute(homeConfig,Defaults.CORE_PACKAGE_URI));
+  cb.put(Keys.CORE_PACKAGE_URI,Defaults.CORE_PACKAGE_URI);
   cb.put(Keys.METRICS_MANAGER_CLASSPATH,Defaults.METRICS_MANAGER_CLASSPATH);
   return cb.build();
 }

@@ -1,6 +1,7 @@
 {
+  Map<String,Object> treeMap=new TreeMap<String,Object>(cfgMap);
   StringBuilder sb=new StringBuilder();
-  for (  Object obj : cfgMap.entrySet()) {
+  for (  Object obj : treeMap.entrySet()) {
     Map.Entry<String,Object> entry=(Map.Entry)obj;
     sb.append("(\"" + entry.getKey() + "\"");
     sb.append(", " + entry.getValue() + ")\n");

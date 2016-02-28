@@ -1,2 +1,4 @@
 {
+  String workingDirectory=cfg.getStringValue(LocalKeys.WORKING_DIRECTORY,LocalDefaults.WORKING_DIRECTORY);
+  return Misc.substitute(cfg,workingDirectory);
 }

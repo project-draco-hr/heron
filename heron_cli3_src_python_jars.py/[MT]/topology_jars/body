@@ -1,3 +1,3 @@
 def topology_jars():
-    jars = ['lib/protobuf-java-2.5.0.jar', 'lib/log4j-over-slf4j-1.7.7.jar', 'lib/slf4j-api-1.7.7.jar', 'lib/slf4j-jdk14-1.7.7.jar']
+    jars = [pick(utils.get_heron_lib_dir(), 'protobuf-java-*.jar'), pick(utils.get_heron_lib_dir(), 'log4j-over-slf4j-*.jar'), pick(utils.get_heron_lib_dir(), 'slf4j-api-*.jar'), pick(utils.get_heron_lib_dir(), 'slf4j-jdk*.jar')]
     return jars

@@ -1,4 +1,4 @@
 {
-  Config config=Config.newBuilder().put(Keys.CLUSTER,"cluster").put(Keys.ROLE,"role").put(Keys.TOPOLOGY_NAME,"topology").put(Keys.TOPOLOGY_PACKAGE_TYPE,"tar").build();
+  Config config=Config.newBuilder().put(Keys.CLUSTER,"cluster").put(Keys.ROLE,"role").put(Keys.TOPOLOGY_NAME,"topology").put(Keys.TOPOLOGY_PACKAGE_TYPE,"tar").put(Keys.TOPOLOGY_PACKAGE_FILE,"/tmp/something.tar.gz").put(LocalFileSystemKeys.FILE_SYSTEM_DIRECTORY,LocalFileSystemDefaults.FILE_SYSTEM_DIRECTORY).build();
   return config;
 }

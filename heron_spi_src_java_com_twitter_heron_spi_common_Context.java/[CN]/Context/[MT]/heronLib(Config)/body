@@ -1,3 +1,3 @@
 {
-  return cfg.getStringValue(Keys.HERON_LIBS);
+  return cfg.getStringValue(Keys.HERON_LIB);
 }

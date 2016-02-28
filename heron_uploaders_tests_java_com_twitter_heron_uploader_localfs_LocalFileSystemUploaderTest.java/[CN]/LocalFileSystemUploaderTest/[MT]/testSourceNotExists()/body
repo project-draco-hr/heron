@@ -1,6 +1,6 @@
 {
   String topologyPackage=Paths.get(testTopologyDirectory,"doesnot-exist-topology.tar").toString();
-  Config newconfig=Config.newBuilder().putAll(config).put(Keys.TOPOLOGY_PACKAGE_URI,topologyPackage).build();
+  Config newconfig=Config.newBuilder().putAll(config).put(Keys.TOPOLOGY_PACKAGE_FILE,topologyPackage).build();
   LocalFileSystemUploader uploader=new LocalFileSystemUploader();
   uploader.initialize(newconfig);
   Assert.assertFalse(uploader.uploadPackage());

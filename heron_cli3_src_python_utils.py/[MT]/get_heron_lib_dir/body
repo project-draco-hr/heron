@@ -1,0 +1,4 @@
+def get_heron_lib_dir():
+    '\n  This will provide heron lib directory from .pex file.\n  :return: absolute path of heron lib directory\n  '
+    lib_path = os.path.join(get_heron_dir(), 'lib')
+    return lib_path

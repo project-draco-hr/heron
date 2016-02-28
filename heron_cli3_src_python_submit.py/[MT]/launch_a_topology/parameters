@@ -1,7 +1,6 @@
+cluster_role_env
 tmp_dir
 topology_file
 topology_defn_file
-heron_internals_file
-config_loader
 config_path
 config_overrides

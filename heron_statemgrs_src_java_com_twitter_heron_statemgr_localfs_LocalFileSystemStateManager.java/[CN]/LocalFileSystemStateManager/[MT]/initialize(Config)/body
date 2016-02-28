@@ -1,17 +1,7 @@
 {
-  Config.Builder stateMgrConfigBuilder=Config.newBuilder();
-  String rootAddress=config.getStringValue(ROOT_ADDRESS);
-  if (rootAddress == null) {
-    Object workingDir=config.get(WORKING_DIRECTORY);
-    if (workingDir == null) {
-      throw new IllegalArgumentException("Misses required config: " + WORKING_DIRECTORY);
-    }
-    rootAddress=String.format("%s/%s",workingDir,"state");
-    stateMgrConfigBuilder.put(ROOT_ADDRESS,rootAddress);
-  }
-  stateMgrConfig=stateMgrConfigBuilder.build();
-  super.initialize(Config.newBuilder().putAll(config).putAll(stateMgrConfig).build());
-  boolean isInitLocalFileTree=config.get(IS_INITIALIZE_FILE_TREE) == null ? true : (Boolean)config.get(IS_INITIALIZE_FILE_TREE);
+  this.config=config;
+  super.initialize(config);
+  boolean isInitLocalFileTree=LocalFileSystemContext.initLocalFileTree(config);
   if (isInitLocalFileTree && !initTree()) {
     throw new IllegalArgumentException("Failed to initialize Local State manager. " + "Check rootAddress: " + rootAddress);
   }

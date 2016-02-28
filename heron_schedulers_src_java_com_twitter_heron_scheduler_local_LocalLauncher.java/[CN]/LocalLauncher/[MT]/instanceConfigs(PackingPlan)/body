@@ -2,6 +2,6 @@
   TopologyAPI.Topology topology=Runtime.topology(runtime);
   String distribution=TopologyUtils.packingToString(packing);
   String jvmOptions=TopologyUtils.getInstanceJvmOptions(topology);
-  Config.Builder builder=Config.newBuilder().put(LocalSchedulerKeys.INSTANCE_DISTRIBUTION,distribution).put(LocalSchedulerKeys.INSTANCE_JVM_OPTS_IN_BASE64,formatJavaOpts(jvmOptions));
+  Config.Builder builder=Config.newBuilder().put(Keys.INSTANCE_DISTRIBUTION,distribution).put(Keys.INSTANCE_JVM_OPTS_IN_BASE64,formatJavaOpts(jvmOptions));
   return builder.build();
 }

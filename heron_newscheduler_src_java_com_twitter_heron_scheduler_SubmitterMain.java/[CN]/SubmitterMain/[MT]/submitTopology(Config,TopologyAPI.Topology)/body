@@ -2,18 +2,23 @@
   String statemgrClass=Context.stateManagerClass(config);
   IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
   Config runtime=Config.newBuilder().put(Keys.TOPOLOGY_ID,topology.getId()).put(Keys.TOPOLOGY_NAME,topology.getName()).put(Keys.TOPOLOGY_DEFINITION,topology).put(Keys.STATE_MANAGER,statemgr).build();
+  statemgr.initialize(config);
   UploadRunner uploadRunner=new UploadRunner(config);
   boolean result=uploadRunner.call();
   if (!result) {
     LOG.severe("Failed to upload package. Exiting");
+    statemgr.close();
     return false;
   }
+  Runtime.getRuntime().exit(0);
   LaunchRunner launchRunner=new LaunchRunner(config,runtime);
   result=launchRunner.call();
   if (!result) {
     LOG.severe("Failed to launch topology. Attempting to roll back upload.");
     uploadRunner.undo();
+    statemgr.close();
     return false;
   }
+  statemgr.close();
   return true;
 }
