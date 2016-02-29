@@ -1,4 +1,0 @@
-{
-  String packageUri=cfg.getStringValue(LocalKeys.CORE_PACKAGE_URI,LocalDefaults.CORE_PACKAGE_URI);
-  return Misc.substitute(cfg,packageUri);
-}

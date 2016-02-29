@@ -1,5 +1,6 @@
 {
-  Config.Builder cb=Config.newBuilder().put(Keys.HERON_HOME,Defaults.HERON_HOME);
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.HERON_HOME,Defaults.HERON_HOME);
   cb.put(Keys.HERON_BIN,Defaults.HERON_BIN);
   cb.put(Keys.HERON_CONF,Defaults.HERON_CONF);
   cb.put(Keys.HERON_DIST,Defaults.HERON_DIST);

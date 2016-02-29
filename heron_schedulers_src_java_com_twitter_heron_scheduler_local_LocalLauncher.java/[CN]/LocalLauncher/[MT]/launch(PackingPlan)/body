@@ -1,11 +1,14 @@
 {
   LOG.info("Launching topology for local cluster " + Context.cluster(config));
-  Config localConfig=Config.newBuilder().putAll(topologyConfigs()).putAll(componentConfigs()).putAll(instanceConfigs(packing)).putAll(resourceConfigs()).putAll(filesAndDirsConfigs()).build();
-  if (!downloadPackages()) {
+  Config schedulerConfig=Config.expand(Config.newBuilder().putAll(defaultConfigs()).putAll(topologyConfigs()).putAll(componentConfigs()).putAll(instanceConfigs(packing)).putAll(resourceConfigs()).putAll(filesAndDirsConfigs()).build());
+  LOG.info("loaded scheduler config " + schedulerConfig);
+  if (!downloadAndExtractPackages()) {
     LOG.severe("Failed to download the core and topology packages");
     return false;
   }
-  String configInBase64=DatatypeConverter.printBase64Binary(localConfig.asString().getBytes(Charset.forName("UTF-8")));
+  String configInBase64=DatatypeConverter.printBase64Binary(schedulerConfig.asString().getBytes(Charset.forName("UTF-8")));
+  System.out.println(configInBase64);
+  System.exit(0);
   String schedulerBinary=Paths.get(topologyWorkingDirectory,Context.schedulerJar(config)).toString();
   StringBuilder schedulerCmd=new StringBuilder().append("java").append(" ").append("-cp").append(" ").append(schedulerBinary).append(" ").append("com.twitter.heron.scheduler.service.SchedulerMain").append(" ").append(Runtime.topologyName(runtime)).append(" ").append(Context.schedulerClass(config)).append(" ").append(configInBase64).append(" ").append(NetworkUtils.getFreePort()).append(" ");
   LOG.info("Local scheduler command line: " + schedulerCmd.toString());

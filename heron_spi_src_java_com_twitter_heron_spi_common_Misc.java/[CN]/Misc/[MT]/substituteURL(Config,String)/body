@@ -1,0 +1,9 @@
+{
+  Matcher m=urlPattern.matcher(pathString);
+  if (m.matches()) {
+    StringBuilder sb=new StringBuilder();
+    sb.append(m.group(1)).append("//").append(substitute(config,m.group(2)));
+    return sb.toString();
+  }
+  return pathString;
+}

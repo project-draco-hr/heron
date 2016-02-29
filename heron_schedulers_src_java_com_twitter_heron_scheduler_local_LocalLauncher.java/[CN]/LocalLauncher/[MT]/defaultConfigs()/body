@@ -1,0 +1,4 @@
+{
+  Config.Builder builder=Config.newBuilder().putAll(ClusterDefaults.getDefaultHome()).putAll(ClusterDefaults.getDefaultBinaries()).putAll(ClusterDefaults.getDefaultJars()).putAll(ClusterConfig.loadSchedulerConfig());
+  return builder.build();
+}

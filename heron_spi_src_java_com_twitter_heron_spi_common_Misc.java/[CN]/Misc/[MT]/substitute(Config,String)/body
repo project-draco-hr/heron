@@ -1,11 +1,10 @@
 {
   String trimmedPath=pathString.trim();
+  if (isURL(trimmedPath))   return substituteURL(config,trimmedPath);
   String fileSeparator=Matcher.quoteReplacement(System.getProperty("file.separator"));
   List<String> fixedList=Arrays.asList(trimmedPath.split(fileSeparator));
   List<String> list=new LinkedList<String>(fixedList);
-  list.removeAll(Collections.singleton(""));
-  String hp=FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
-  String homePath=hp.substring(1);
+  String homePath=FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
   for (int i=0; i < list.size(); i++) {
     String elem=list.get(i);
     if (elem.equals("${HOME}")) {
@@ -39,17 +38,5 @@
       list.set(i,Context.topologyName(config));
     }
   }
-  StringBuilder sb=new StringBuilder();
-  if (list.size() == 1) {
-    sb.append(list.get(0));
-  }
- else {
-    for (    String s : list) {
-      if (!s.startsWith(System.getProperty("file.separator"))) {
-        sb.append(System.getProperty("file.separator"));
-      }
-      sb.append(s);
-    }
-  }
-  return sb.toString();
+  return combinePaths(list);
 }
