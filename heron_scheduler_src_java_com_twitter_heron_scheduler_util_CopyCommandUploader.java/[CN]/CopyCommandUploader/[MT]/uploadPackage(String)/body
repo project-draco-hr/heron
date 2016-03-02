@@ -1,0 +1,5 @@
+{
+  String fileName=Paths.get(topologyPackage).getFileName().toString();
+  String copyCommand=String.format(getUploaderCommand(),topologyPackage);
+  return 0 == ShellUtility.runProcess(context.isVerbose(),copyCommand,null,null);
+}
