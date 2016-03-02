@@ -1,0 +1,4 @@
+{
+  Config.Builder cb=Config.newBuilder().put(Keys.CLUSTER_YAML,Misc.substitute(heronHome,configPath,Defaults.CLUSTER_YAML)).put(Keys.DEFAULTS_YAML,Misc.substitute(heronHome,configPath,Defaults.DEFAULTS_YAML)).put(Keys.METRICS_YAML,Misc.substitute(heronHome,configPath,Defaults.METRICS_YAML)).put(Keys.PACKING_YAML,Misc.substitute(heronHome,configPath,Defaults.PACKING_YAML)).put(Keys.SCHEDULER_YAML,Misc.substitute(heronHome,configPath,Defaults.SCHEDULER_YAML)).put(Keys.STATEMGR_YAML,Misc.substitute(heronHome,configPath,Defaults.STATEMGR_YAML)).put(Keys.SYSTEM_YAML,Misc.substitute(heronHome,configPath,Defaults.SYSTEM_YAML)).put(Keys.UPLOADER_YAML,Misc.substitute(heronHome,configPath,Defaults.UPLOADER_YAML));
+  return cb.build();
+}

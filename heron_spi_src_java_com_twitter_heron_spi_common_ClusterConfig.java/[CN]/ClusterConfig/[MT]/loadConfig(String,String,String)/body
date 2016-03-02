@@ -1,4 +1,0 @@
-{
-  Config.Builder cb=Config.newBuilder().putAll(loadHeronHome(heronHome,configPath)).putAll(loadClusterConfig(cluster,configPath)).putAll(loadDefaultsConfig(cluster,configPath)).putAll(loadPackingConfig(cluster,configPath)).putAll(loadSchedulerConfig(cluster,configPath)).putAll(loadStateManagerConfig(cluster,configPath)).putAll(loadUploaderConfig(cluster,configPath));
-  return cb.build();
-}

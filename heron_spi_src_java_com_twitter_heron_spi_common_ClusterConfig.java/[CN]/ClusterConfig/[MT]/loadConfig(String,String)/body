@@ -1,4 +1,5 @@
 {
-  String configPath=Misc.substitute(heronHome,Defaults.HERON_CONF);
-  return loadConfig(heronHome,cluster,configPath);
+  Config homeConfig=loadBasicConfig(heronHome,configPath);
+  Config.Builder cb=Config.newBuilder().putAll(homeConfig).putAll(loadDefaultsConfig(homeConfig)).putAll(loadPackingConfig(homeConfig)).putAll(loadSchedulerConfig(homeConfig)).putAll(loadStateManagerConfig(homeConfig)).putAll(loadUploaderConfig(homeConfig));
+  return cb.build();
 }

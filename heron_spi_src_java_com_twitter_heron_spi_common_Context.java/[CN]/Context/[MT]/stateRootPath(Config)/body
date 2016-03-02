@@ -1,3 +1,0 @@
-{
-  return cfg.getStringValue(Keys.STATE_ROOT_PATH);
-}

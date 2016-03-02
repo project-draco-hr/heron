@@ -1,4 +1,0 @@
-{
-  Map config=ClusterConfigReader.load(cluster,configPath,Defaults.CLUSTER_YAML);
-  return Config.newBuilder().putAll(config).build();
-}
