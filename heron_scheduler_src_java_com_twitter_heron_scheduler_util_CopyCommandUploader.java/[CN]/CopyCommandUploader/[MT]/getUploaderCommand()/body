@@ -1,0 +1,3 @@
+{
+  return context.getPropertyWithException(Constants.HERON_UPLOADER_COPY_COMMAND);
+}
