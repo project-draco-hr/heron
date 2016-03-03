@@ -1,3 +1,0 @@
-{
-  return Utils.getInt(this.get(SystemConfig.INSTANCE_METRICS_SYSTEM_SAMPLE_INTERVAL_SEC));
-}

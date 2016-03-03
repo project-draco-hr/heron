@@ -1,6 +1,0 @@
-{
-  bitField0_=(bitField0_ & ~0x00000002);
-  gtype_=com.twitter.heron.api.generated.TopologyAPI.Grouping.SHUFFLE;
-  onChanged();
-  return this;
-}

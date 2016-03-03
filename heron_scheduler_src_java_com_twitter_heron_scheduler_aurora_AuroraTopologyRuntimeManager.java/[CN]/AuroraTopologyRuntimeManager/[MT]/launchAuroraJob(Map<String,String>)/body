@@ -4,7 +4,7 @@
     auroraCmd.add("--bind");
     auroraCmd.add(String.format("%s=%s",binding,args.get(binding)));
   }
-  auroraCmd.add(String.format("%s/%s/%s/%s",dc,role,"devel",args.get("JOB_NAME")));
+  auroraCmd.add(String.format("%s/%s/%s/%s",cluster,role,"devel",args.get("JOB_NAME")));
   auroraCmd.add(getHeronControllerAuroraPath());
   if (context.isVerbose()) {
     auroraCmd.add("--verbose");

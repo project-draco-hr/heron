@@ -1,9 +1,0 @@
-{
-  if (!hasKey()) {
-    return false;
-  }
-  if (!hasType()) {
-    return false;
-  }
-  return true;
-}

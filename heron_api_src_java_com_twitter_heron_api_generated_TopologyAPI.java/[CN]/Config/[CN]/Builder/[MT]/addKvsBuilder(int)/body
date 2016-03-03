@@ -1,3 +1,0 @@
-{
-  return getKvsFieldBuilder().addBuilder(index,com.twitter.heron.api.generated.TopologyAPI.Config.KeyValue.getDefaultInstance());
-}

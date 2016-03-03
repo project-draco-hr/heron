@@ -1,0 +1,10 @@
+def test_many_opts(self):
+    opts.clear_config()
+    for k in range(1, 100):
+        key = ('key-%d' % k)
+        value = ('value-%d' % k)
+        opts.set_config(key, value)
+    for k in range(1, 100):
+        key = ('key-%d' % k)
+        value = ('value-%d' % k)
+        self.assertEqual(value, opts.get_config(key))

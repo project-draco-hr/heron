@@ -2,6 +2,7 @@ import argparse
 import atexit
 import base64
 import contextlib
+import getpass
 import glob
 import logging
 import logging.handlers

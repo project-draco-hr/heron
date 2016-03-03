@@ -1,8 +1,0 @@
-{
-  if (boltsBuilder_ != null) {
-    return boltsBuilder_.getMessageOrBuilderList();
-  }
- else {
-    return java.util.Collections.unmodifiableList(bolts_);
-  }
-}

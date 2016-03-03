@@ -1,8 +1,0 @@
-{
-  if (compBuilder_ == null) {
-    return comp_;
-  }
- else {
-    return compBuilder_.getMessage();
-  }
-}

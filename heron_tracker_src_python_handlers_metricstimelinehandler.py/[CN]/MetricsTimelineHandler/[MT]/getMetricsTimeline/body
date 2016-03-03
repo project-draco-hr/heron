@@ -1,19 +1,19 @@
 @tornado.gen.coroutine
-def getMetricsTimeline(self, tmaster, componentName, metricNames, instances, startTime, endTime, callback=None):
+def getMetricsTimeline(self, tmaster, component_name, metric_names, instances, start_time, end_time, callback=None):
     '\n    Get the specified metrics for the given component name of this topology.\n    Returns the following dict on success:\n    {\n      "timeline": {\n        <metricname>: {\n          <instance>: {\n            <start_time> : <numeric value>,\n            <start_time> : <numeric value>,\n            ...\n          }\n          ...\n        }, ...\n      },\n      "starttime": <numeric value>,\n      "endtime": <numeric value>,\n      "component": "..."\n    }\n\n    Returns the following dict on failure:\n    {\n      "message": "..."\n    }\n    '
     if ((not tmaster) or (not tmaster.host) or (not tmaster.stats_port)):
         raise Exception('No Tmaster found')
     host = tmaster.host
     port = tmaster.stats_port
     metricRequest = tmaster_pb2.MetricRequest()
-    metricRequest.component_name = componentName
+    metricRequest.component_name = component_name
     if (len(instances) > 0):
         for instance in instances:
             metricRequest.instance_id.append(instance)
-    for metricName in metricNames:
+    for metricName in metric_names:
         metricRequest.metric.append(metricName)
-    metricRequest.explicit_interval.start = startTime
-    metricRequest.explicit_interval.end = endTime
+    metricRequest.explicit_interval.start = start_time
+    metricRequest.explicit_interval.end = end_time
     metricRequest.minutely = True
     metricRequestString = metricRequest.SerializeToString()
     url = 'http://{0}:{1}/stats'.format(host, port)
@@ -38,9 +38,9 @@ def getMetricsTimeline(self, tmaster, componentName, metricNames, instances, sta
         if metricResponse.status.HasField('message'):
             raise Exception(metricResponse.status.message)
     ret = {}
-    ret['starttime'] = startTime
-    ret['endtime'] = endTime
-    ret['component'] = componentName
+    ret['starttime'] = start_time
+    ret['endtime'] = end_time
+    ret['component'] = component_name
     ret['timeline'] = {}
     for metric in metricResponse.metric:
         instance = metric.instance_id

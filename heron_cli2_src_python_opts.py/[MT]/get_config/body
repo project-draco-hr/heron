@@ -1,0 +1,5 @@
+def get_config(k):
+    global config_opts
+    if config_opts.has_key(k):
+        return config_opts[k]
+    return None

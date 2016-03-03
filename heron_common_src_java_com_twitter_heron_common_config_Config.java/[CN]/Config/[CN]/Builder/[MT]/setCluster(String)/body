@@ -1,0 +1,4 @@
+{
+  this.mCluster=cluster;
+  return this;
+}

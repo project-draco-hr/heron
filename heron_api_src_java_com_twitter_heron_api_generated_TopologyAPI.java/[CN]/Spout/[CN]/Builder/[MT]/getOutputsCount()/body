@@ -1,8 +1,0 @@
-{
-  if (outputsBuilder_ == null) {
-    return outputs_.size();
-  }
- else {
-    return outputsBuilder_.getCount();
-  }
-}

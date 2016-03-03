@@ -1,0 +1,7 @@
+{
+  this.cluster=builder.mCluster;
+  this.role=builder.mRole;
+  this.env=builder.mEnv;
+  this.topologyName=builder.mTopologyName;
+  this.configPath=builder.mConfigPath;
+}

@@ -1,3 +1,0 @@
-{
-  return Utils.getInt(this.get(SystemConfig.INSTANCE_STATE_CHECK_INTERVAL_SEC));
-}

@@ -1,0 +1,3 @@
+config_opts = dict()
+verbose_flag = False
+trace_execution_flag = False

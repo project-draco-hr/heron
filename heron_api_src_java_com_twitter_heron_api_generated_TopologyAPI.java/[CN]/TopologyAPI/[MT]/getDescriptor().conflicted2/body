@@ -1,3 +1,0 @@
-{
-  return com.twitter.heron.api.generated.TopologyAPI.getDescriptor().getEnumTypes().get(2);
-}

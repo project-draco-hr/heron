@@ -1,12 +1,12 @@
 @tornado.gen.coroutine
 def get(self):
-    dcs = self.get_arguments(constants.PARAM_DC)
+    clusters = self.get_arguments(constants.PARAM_CLUSTER)
     environs = self.get_arguments(constants.PARAM_ENVIRON)
-    topNames = self.get_arguments(constants.PARAM_TOPOLOGY)
+    topology_names = self.get_arguments(constants.PARAM_TOPOLOGY)
     ret = {}
-    if (len(topNames) > 1):
+    if (len(topology_names) > 1):
         if (not dcs):
-            message = ('Missing argument' + constants.PARAM_DC)
+            message = ('Missing argument' + constants.PARAM_CLUSTER)
             self.write_error_response(message)
             return
         if (not environs):
@@ -16,20 +16,20 @@ def get(self):
     ret = {}
     topologies = self.tracker.topologies
     for topology in topologies:
-        dc = topology.dc
+        cluster = topology.cluster
         environ = topology.environ
-        topName = topology.name
-        if ((not dc) or (not environ)):
+        topology_name = topology.name
+        if ((not cluster) or (not environ)):
             continue
-        if (dcs and (dc not in dcs)):
+        if (clusters and (cluster not in clusters)):
             continue
         if (environs and (environ not in environs)):
             continue
-        if (topNames and (topName not in topNames)):
+        if (topology_names and (topology_name not in topology_names)):
             continue
-        if (dc not in ret):
-            ret[dc] = {}
-        if (environ not in ret[dc]):
-            ret[dc][environ] = {}
-        ret[dc][environ][topName] = topology.get_machines()
+        if (cluster not in ret):
+            ret[cluster] = {}
+        if (environ not in ret[cluster]):
+            ret[cluster][environ] = {}
+        ret[cluster][environ][topology_name] = topology.get_machines()
     self.write_success_response(ret)

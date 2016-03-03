@@ -1,0 +1,4 @@
+def set_trace_execution():
+    global trace_execution_flag
+    trace_execution_flag = True
+    set_verbose()

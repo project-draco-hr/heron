@@ -1,0 +1,10 @@
+{
+  String file=Paths.get(configPath,fileName).toString();
+  Map props1=loadFile(file);
+  file=Paths.get(configPath,cluster,fileName).toString();
+  Map props2=loadFile(file);
+  if (props1.isEmpty() && props2.isEmpty())   return false;
+  config.putAll(props1);
+  config.putAll(props2);
+  return true;
+}
