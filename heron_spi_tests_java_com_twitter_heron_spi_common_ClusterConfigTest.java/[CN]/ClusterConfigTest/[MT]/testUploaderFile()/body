@@ -1,6 +1,5 @@
 {
-  String configPath=Paths.get(System.getenv("JAVA_RUNFILES"),TestConstants.TEST_DATA_PATH).toString();
-  Config props=ClusterConfig.loadUploaderConfig("local",configPath);
+  Config props=ClusterConfig.loadUploaderConfig(basicConfig);
   Assert.assertEquals(1,props.size());
   Assert.assertEquals("/vagrant/heron/jobs",props.getStringValue("heron.uploader.file.system.path"));
 }

@@ -1,6 +1,5 @@
 {
-  String configPath=Paths.get(System.getenv("JAVA_RUNFILES"),TestConstants.TEST_DATA_PATH).toString();
-  Config props=ClusterConfig.loadDefaultsConfig("local",configPath);
+  Config props=ClusterConfig.loadDefaultsConfig(basicConfig);
   Assert.assertEquals(10,props.size());
   Assert.assertEquals("heron-executor",Context.executorBinary(props));
   Assert.assertEquals("heron-stmgr",Context.stmgrBinary(props));

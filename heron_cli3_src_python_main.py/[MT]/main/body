@@ -6,7 +6,6 @@ def main():
     sys.argv = parse.insert_bool_values(sys.argv)
     (args, unknown_args) = parser.parse_known_args()
     namespace = vars(args)
-    print namespace
     try:
         if namespace['verbose']:
             opts.set_verbose()

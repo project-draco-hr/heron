@@ -1,7 +1,0 @@
-{
-  TopologyAPI.Topology topology=Runtime.topology(runtime);
-  String jvmOptions=TopologyUtils.getComponentJvmOptions(topology);
-  Map<String,Long> ramMap=TopologyUtils.getComponentRamMap(topology);
-  Config.Builder builder=Config.newBuilder().put(Keys.COMPONENT_RAMMAP,TopologyUtils.formatRamMap(ramMap)).put(Keys.COMPONENT_JVM_OPTS_IN_BASE64,formatJavaOpts(jvmOptions));
-  return builder.build();
-}

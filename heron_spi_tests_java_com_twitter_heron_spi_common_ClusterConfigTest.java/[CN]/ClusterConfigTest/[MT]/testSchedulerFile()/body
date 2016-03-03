@@ -1,6 +1,5 @@
 {
-  String configPath=Paths.get(System.getenv("JAVA_RUNFILES"),TestConstants.TEST_DATA_PATH).toString();
-  Config props=ClusterConfig.loadSchedulerConfig("local",configPath);
+  Config props=ClusterConfig.loadSchedulerConfig(basicConfig);
   Assert.assertEquals(2,props.size());
   Assert.assertEquals("com.twitter.heron.scheduler.local.LocalLauncher",Context.launcherClass(props));
   Assert.assertEquals("com.twitter.heron.scheduler.local.LocalRuntimeManager",Context.runtimeManagerClass(props));

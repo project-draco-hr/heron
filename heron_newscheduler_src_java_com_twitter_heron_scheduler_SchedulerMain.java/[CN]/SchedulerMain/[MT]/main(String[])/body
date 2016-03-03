@@ -2,12 +2,11 @@
   String cluster=args[0];
   String role=args[1];
   String environ=args[2];
-  String heronHome=args[3];
-  String topologyName=args[4];
-  int schedulerServerPort=Integer.parseInt(args[5]);
-  Config.Builder defaultConfigs=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,cluster));
+  String topologyName=args[3];
+  int schedulerServerPort=Integer.parseInt(args[4]);
+  Config.Builder defaultConfigs=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadSandboxConfig());
   Config.Builder commandLineConfigs=Config.newBuilder().put(Keys.CLUSTER,cluster).put(Keys.ROLE,role).put(Keys.ENVIRON,environ);
-  String topologyDefnFile=TopologyUtils.lookUpTopologyDefnFile(heronHome,topologyName);
+  String topologyDefnFile=TopologyUtils.lookUpTopologyDefnFile(".",topologyName);
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
   Config.Builder topologyConfigs=Config.newBuilder().put(Keys.TOPOLOGY_ID,topology.getId()).put(Keys.TOPOLOGY_NAME,topology.getName());
   Config config=Config.newBuilder().putAll(defaultConfigs.build()).putAll(commandLineConfigs.build()).putAll(topologyConfigs.build()).build();

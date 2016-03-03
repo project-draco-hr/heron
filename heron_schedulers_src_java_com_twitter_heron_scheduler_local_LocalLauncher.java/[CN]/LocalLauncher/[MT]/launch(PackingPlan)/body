@@ -1,16 +1,28 @@
 {
   LOG.info("Launching topology for local cluster " + Context.cluster(config));
-  Config schedulerConfig=Config.expand(Config.newBuilder().putAll(defaultConfigs()).putAll(topologyConfigs()).putAll(componentConfigs()).putAll(instanceConfigs(packing)).putAll(resourceConfigs()).putAll(filesAndDirsConfigs()).build());
-  LOG.info("loaded scheduler config " + schedulerConfig);
+  TopologyAPI.Topology topology=Runtime.topology(runtime);
+  String sandboxHome=Defaults.HERON_SANDBOX_HOME;
+  String sandboxConf=Defaults.HERON_SANDBOX_CONF;
+  Config sandboxConfig=Config.expand(Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadBasicConfig(sandboxHome,sandboxConf)).build());
+  LOG.info("loaded sandbox config " + sandboxConfig);
   if (!downloadAndExtractPackages()) {
     LOG.severe("Failed to download the core and topology packages");
     return false;
   }
-  String configInBase64=DatatypeConverter.printBase64Binary(schedulerConfig.asString().getBytes(Charset.forName("UTF-8")));
+  String configInBase64=DatatypeConverter.printBase64Binary(sandboxConfig.asString().getBytes(Charset.forName("UTF-8")));
   System.out.println(configInBase64);
+  int port1=NetworkUtils.getFreePort();
+  int port2=NetworkUtils.getFreePort();
+  int port3=NetworkUtils.getFreePort();
+  int shellPort=NetworkUtils.getFreePort();
+  int port4=NetworkUtils.getFreePort();
+  int schedulerPort=NetworkUtils.getFreePort();
+  if (port1 == -1 || port2 == -1 || port3 == -1) {
+    throw new RuntimeException("Could not find available ports to start topology");
+  }
+  String executorCmd=String.format("%s %d %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %d %s %s %d %s %s %s %s %d",Context.executorBinary(sandboxConfig),0,topology.getName(),topology.getId(),FilenameUtils.getName(Context.topologyDefinitionFile(config)),TopologyUtils.packingToString(packing),Context.stateManagerConnectionString(config),Context.stateManagerRootPath(config),Context.tmasterBinary(sandboxConfig),Context.stmgrBinary(sandboxConfig),"./heron-core/lib/heron-metricsmgr.jar",formatJavaOpts(TopologyUtils.getInstanceJvmOptions(topology)),TopologyUtils.makeClassPath(topology,Context.topologyJarFile(config)),port1,port2,port3,Context.systemConfigFile(sandboxConfig),TopologyUtils.formatRamMap(TopologyUtils.getComponentRamMap(topology)),formatJavaOpts(TopologyUtils.getComponentJvmOptions(topology)),Context.topologyPackageType(config),Context.topologyJarFile(config),Context.javaHome(config),shellPort,Context.logDirectory(sandboxConfig),Context.shellBinary(sandboxConfig),port4,Context.cluster(config),Context.role(config),Context.environ(config),"./heron-core/lib/heron-scheduler.jar:./heron-core/lib/heron-local-scheduler.jar",schedulerPort);
+  System.out.println(executorCmd);
   System.exit(0);
-  String schedulerBinary=Paths.get(topologyWorkingDirectory,Context.schedulerJar(config)).toString();
-  StringBuilder schedulerCmd=new StringBuilder().append("java").append(" ").append("-cp").append(" ").append(schedulerBinary).append(" ").append("com.twitter.heron.scheduler.service.SchedulerMain").append(" ").append(Runtime.topologyName(runtime)).append(" ").append(Context.schedulerClass(config)).append(" ").append(configInBase64).append(" ").append(NetworkUtils.getFreePort()).append(" ");
-  LOG.info("Local scheduler command line: " + schedulerCmd.toString());
-  return 0 == ShellUtils.runSyncProcess(true,true,schedulerCmd.toString(),new StringBuilder(),new StringBuilder(),new File(topologyWorkingDirectory));
+  LOG.info("Executor command line: " + executorCmd.toString());
+  return 0 == ShellUtils.runSyncProcess(true,true,executorCmd.toString(),new StringBuilder(),new StringBuilder(),new File(topologyWorkingDirectory));
 }

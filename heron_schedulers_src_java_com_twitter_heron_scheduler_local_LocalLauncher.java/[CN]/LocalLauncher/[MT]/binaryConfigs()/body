@@ -1,4 +1,0 @@
-{
-  Config.Builder builder=Config.newBuilder().put(LocalKeys.WORKING_DIRECTORY,topologyWorkingDirectory);
-  return builder.build();
-}

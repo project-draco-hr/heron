@@ -6,6 +6,6 @@ def create_tar(tar_filename, files, config_dir):
             else:
                 raise Exception(('%s is not an existing file' % filename))
         if os.path.isdir(config_dir):
-            tar.add(config_dir, arcname=sandbox.get_conf_dir())
+            tar.add(config_dir, arcname=get_heron_sandbox_conf_dir())
         else:
             raise Exception(('%s is not an existing directory' % config_dir))

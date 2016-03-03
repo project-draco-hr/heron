@@ -1,6 +1,5 @@
 def add_config(parser):
-    heron_directory = utils.get_heron_dir()
-    default_config_path = os.path.join(heron_directory, 'conf')
-    parser.add_argument('--config-path', metavar=(('(a string; path to cluster config; default: "' + default_config_path) + '")'), default=os.path.join(utils.get_heron_dir(), default_config_path))
+    default_config_path = utils.get_heron_conf_dir()
+    parser.add_argument('--config-path', metavar=(('(a string; path to cluster config; default: "' + default_config_path) + '/<cluster>")'), default=os.path.join(utils.get_heron_dir(), default_config_path))
     parser.add_argument('--config-property', metavar='(a string; a config property; default: [])', action='append', default=[])
     return parser

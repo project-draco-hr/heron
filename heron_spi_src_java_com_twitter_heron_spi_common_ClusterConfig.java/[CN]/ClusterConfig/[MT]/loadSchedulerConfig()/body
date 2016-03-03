@@ -1,4 +1,0 @@
-{
-  String configPath=Misc.substitute(Defaults.HERON_SANDBOX_HOME,Defaults.HERON_SANDBOX_CONF);
-  return loadHeronHome(Defaults.HERON_SANDBOX_HOME,configPath);
-}

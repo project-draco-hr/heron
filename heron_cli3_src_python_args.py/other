@@ -1,4 +1,3 @@
 import os
 import argparse
-import getpass
 import heron.cli3.src.python.utils as utils

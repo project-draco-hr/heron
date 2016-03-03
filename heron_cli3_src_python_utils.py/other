@@ -4,4 +4,10 @@ import subprocess
 import os
 import tarfile
 import contextlib
-import heron.cli3.src.python.sandbox as sandbox
+import getpass
+ENVIRON = 'default'
+BIN_DIR = 'bin'
+CONF_DIR = 'conf'
+ETC_DIR = 'etc'
+LIB_DIR = 'lib'
+SANDBOX_CONF_DIR = 'heron-conf'

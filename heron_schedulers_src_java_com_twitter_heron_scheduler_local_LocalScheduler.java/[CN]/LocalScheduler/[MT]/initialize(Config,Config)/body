@@ -3,8 +3,6 @@
   this.runtime=runtime;
   LOG.info("Starting to deploy topology: " + Context.topologyName(config));
   LOG.info("# of containers: " + Runtime.numContainers(config));
-  startExecutor(0);
-  LOG.info("TMaster is started.");
   int numContainers=Integer.parseInt(Runtime.numContainers(config));
   for (int i=1; i < numContainers; i++) {
     startExecutor(i);

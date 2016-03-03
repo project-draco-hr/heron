@@ -1,0 +1,3 @@
+{
+  return cfg.getStringValue(CuratorStateKeys.ZK_CONNECTION_STRING);
+}

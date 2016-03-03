@@ -1,8 +1,0 @@
-{
-  TopologyAPI.Topology topology=Runtime.topology(runtime);
-  String defFile=FilenameUtils.getName(Context.topologyDefinitionFile(config));
-  String jarFile=FilenameUtils.getName(Context.topologyJarFile(config));
-  String pkgType=Context.topologyPackageType(config);
-  Config.Builder builder=Config.newBuilder().put(Keys.TOPOLOGY_ID,topology.getId()).put(Keys.TOPOLOGY_NAME,topology.getName()).put(Keys.TOPOLOGY_DEFINITION_FILE,defFile).put(Keys.TOPOLOGY_JAR_FILE,jarFile).put(Keys.TOPOLOGY_PACKAGE_TYPE,pkgType);
-  return builder.build();
-}
