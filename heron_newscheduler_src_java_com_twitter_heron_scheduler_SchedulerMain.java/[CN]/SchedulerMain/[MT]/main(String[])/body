@@ -5,10 +5,10 @@
   String topologyName=args[3];
   int schedulerServerPort=Integer.parseInt(args[4]);
   Config.Builder defaultConfigs=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadSandboxConfig());
-  Config.Builder commandLineConfigs=Config.newBuilder().put(Keys.CLUSTER,cluster).put(Keys.ROLE,role).put(Keys.ENVIRON,environ);
+  Config.Builder commandLineConfigs=Config.newBuilder().put(Keys.get("CLUSTER"),cluster).put(Keys.get("ROLE"),role).put(Keys.get("ENVIRON"),environ);
   String topologyDefnFile=TopologyUtils.lookUpTopologyDefnFile(".",topologyName);
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
-  Config.Builder topologyConfigs=Config.newBuilder().put(Keys.TOPOLOGY_ID,topology.getId()).put(Keys.TOPOLOGY_NAME,topology.getName());
+  Config.Builder topologyConfigs=Config.newBuilder().put(Keys.get("TOPOLOGY_ID"),topology.getId()).put(Keys.get("TOPOLOGY_NAME"),topology.getName());
   Config config=Config.newBuilder().putAll(defaultConfigs.build()).putAll(commandLineConfigs.build()).putAll(topologyConfigs.build()).build();
   runScheduler(config,schedulerServerPort,topology);
 }

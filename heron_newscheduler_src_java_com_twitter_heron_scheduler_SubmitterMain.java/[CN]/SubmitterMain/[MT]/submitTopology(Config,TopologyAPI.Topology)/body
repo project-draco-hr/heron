@@ -9,7 +9,7 @@
     statemgr.close();
     return false;
   }
-  Config runtime=Config.newBuilder().put(Keys.TOPOLOGY_ID,topology.getId()).put(Keys.TOPOLOGY_NAME,topology.getName()).put(Keys.TOPOLOGY_DEFINITION,topology).put(Keys.STATE_MANAGER,statemgr).put(Keys.TOPOLOGY_PACKAGE_URI,uploadRunner.getUri()).build();
+  Config runtime=Config.newBuilder().put(Keys.get("TOPOLOGY_ID"),topology.getId()).put(Keys.get("TOPOLOGY_NAME"),topology.getName()).put(Keys.get("TOPOLOGY_DEFINITION"),topology).put(Keys.get("STATE_MANAGER"),statemgr).put(Keys.get("TOPOLOGY_PACKAGE_URI"),uploadRunner.getUri()).build();
   LaunchRunner launchRunner=new LaunchRunner(config,runtime);
   result=launchRunner.call();
   if (!result) {

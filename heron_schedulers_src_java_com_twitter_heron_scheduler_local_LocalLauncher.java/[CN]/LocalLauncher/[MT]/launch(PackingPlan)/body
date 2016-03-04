@@ -1,8 +1,8 @@
 {
   LOG.info("Launching topology for local cluster " + Context.cluster(config));
   TopologyAPI.Topology topology=Runtime.topology(runtime);
-  String sandboxHome=Defaults.HERON_SANDBOX_HOME;
-  String sandboxConf=Defaults.HERON_SANDBOX_CONF;
+  String sandboxHome=Defaults.get("HERON_SANDBOX_HOME");
+  String sandboxConf=Defaults.get("HERON_SANDBOX_CONF");
   Config sandboxConfig=Config.expand(Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadBasicConfig(sandboxHome,sandboxConf)).build());
   LOG.info("loaded sandbox config " + sandboxConfig);
   if (!downloadAndExtractPackages()) {
