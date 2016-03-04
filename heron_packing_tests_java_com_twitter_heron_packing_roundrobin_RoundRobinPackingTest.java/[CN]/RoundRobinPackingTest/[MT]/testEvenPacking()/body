@@ -10,8 +10,8 @@
   TopologyAPI.Topology topology=TopologyTests.createTopology("testTopology",topologyConfig,spouts,bolts);
   int numInstance=TopologyUtils.getTotalInstance(topology);
   Assert.assertEquals((spouts.size() + bolts.size()) * componentParallelism,numInstance);
-  Config config=Config.newBuilder().put(Keys.TOPOLOGY_ID,topology.getId()).put(Keys.TOPOLOGY_NAME,topology.getName()).putAll(ClusterDefaults.getDefaults()).build();
-  Config runtime=Config.newBuilder().put(Keys.TOPOLOGY_DEFINITION,topology).build();
+  Config config=Config.newBuilder().put(Keys.get("TOPOLOGY_ID"),topology.getId()).put(Keys.get("TOPOLOGY_NAME"),topology.getName()).putAll(ClusterDefaults.getDefaults()).build();
+  Config runtime=Config.newBuilder().put(Keys.get("TOPOLOGY_DEFINITION"),topology).build();
   RoundRobinPacking packing=RoundRobinPacking.class.newInstance();
   packing.initialize(config,runtime);
   PackingPlan output=packing.pack();
