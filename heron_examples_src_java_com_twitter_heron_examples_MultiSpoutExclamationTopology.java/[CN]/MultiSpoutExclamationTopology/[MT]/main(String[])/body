@@ -14,7 +14,7 @@
   conf.setComponentRam("exclaim1",1024 * 1024 * 1024);
   if (args != null && args.length > 0) {
     conf.setNumStmgrs(1);
-    HeronSubmitter.submitTopology(args[0],conf,builder.createTopology());
+    StormSubmitter.submitTopology(args[0],conf,builder.createTopology());
   }
  else {
     System.out.println("Local mode not yet supported");

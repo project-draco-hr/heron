@@ -3,8 +3,8 @@
   ++spoutAcked;
   if (spoutAcked % N == 0) {
     System.out.println("spoutAck() is invoked in hook");
-    System.out.println(info.getCompleteLatencyMs());
-    System.out.println(info.getMessageId());
-    System.out.println(info.getSpoutTaskId());
+    System.out.println(info.completeLatencyMs);
+    System.out.println(info.messageId);
+    System.out.println(info.spoutTaskId);
   }
 }
