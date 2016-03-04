@@ -1,5 +1,5 @@
 {
   Config props=ClusterConfig.loadUploaderConfig(basicConfig);
-  Assert.assertEquals(1,props.size());
+  Assert.assertEquals(2,props.size());
   Assert.assertEquals("/vagrant/heron/jobs",props.getStringValue("heron.uploader.file.system.path"));
 }

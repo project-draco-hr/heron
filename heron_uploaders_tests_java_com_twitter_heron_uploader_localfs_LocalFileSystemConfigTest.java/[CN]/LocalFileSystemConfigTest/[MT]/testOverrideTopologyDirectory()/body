@@ -1,7 +1,7 @@
 {
   LocalFileSystemUploader uploader=new LocalFileSystemUploader();
   String overrideDirectory="/users/twitter";
-  Config config=Config.expand(Config.newBuilder().putAll(getDefaultConfig()).put(LocalFileSystemKeys.FILE_SYSTEM_DIRECTORY,overrideDirectory).build());
+  Config config=Config.expand(Config.newBuilder().putAll(getDefaultConfig()).put(LocalFileSystemKeys.get("FILE_SYSTEM_DIRECTORY"),overrideDirectory).build());
   uploader.initialize(config);
   Assert.assertEquals(uploader.getTopologyDirectory(),overrideDirectory);
 }

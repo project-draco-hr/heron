@@ -1,4 +1,4 @@
 {
-  String configPath=Misc.substitute(Defaults.HERON_SANDBOX_HOME,Defaults.HERON_SANDBOX_CONF);
-  return loadConfig(Defaults.HERON_SANDBOX_HOME,configPath);
+  String configPath=Misc.substitute(Defaults.get("HERON_SANDBOX_HOME"),Defaults.get("HERON_SANDBOX_CONF"));
+  return loadConfig(Defaults.get("HERON_SANDBOX_HOME"),configPath);
 }

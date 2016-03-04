@@ -1,3 +1,3 @@
 {
-  return cfg.getStringValue(Keys.HERON_DIST);
+  return cfg.getStringValue(Keys.get("HERON_DIST"));
 }

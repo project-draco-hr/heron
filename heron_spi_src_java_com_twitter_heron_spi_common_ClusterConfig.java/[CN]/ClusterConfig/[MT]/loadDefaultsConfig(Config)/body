@@ -1,5 +1,5 @@
 {
-  String defaultsFile=config.getStringValue(Keys.DEFAULTS_YAML);
+  String defaultsFile=config.getStringValue(Keys.get("DEFAULTS_YAML"));
   Map readConfig=ConfigReader.loadFile(defaultsFile);
   return Config.newBuilder().putAll(readConfig).build();
 }

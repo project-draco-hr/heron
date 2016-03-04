@@ -1,5 +1,5 @@
 {
-  String packingFile=config.getStringValue(Keys.PACKING_YAML);
+  String packingFile=config.getStringValue(Keys.get("PACKING_YAML"));
   Map readConfig=ConfigReader.loadFile(packingFile);
   return Config.newBuilder().putAll(readConfig).build();
 }

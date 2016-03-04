@@ -1,12 +1,12 @@
 {
   Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.CLUSTER_YAML,Defaults.CLUSTER_YAML);
-  cb.put(Keys.DEFAULTS_YAML,Defaults.DEFAULTS_YAML);
-  cb.put(Keys.METRICS_YAML,Defaults.METRICS_YAML);
-  cb.put(Keys.PACKING_YAML,Defaults.PACKING_YAML);
-  cb.put(Keys.SCHEDULER_YAML,Defaults.SCHEDULER_YAML);
-  cb.put(Keys.STATEMGR_YAML,Defaults.STATEMGR_YAML);
-  cb.put(Keys.SYSTEM_YAML,Defaults.SYSTEM_YAML);
-  cb.put(Keys.UPLOADER_YAML,Defaults.UPLOADER_YAML);
+  cb.put(Keys.get("CLUSTER_YAML"),Defaults.get("CLUSTER_YAML"));
+  cb.put(Keys.get("DEFAULTS_YAML"),Defaults.get("DEFAULTS_YAML"));
+  cb.put(Keys.get("METRICS_YAML"),Defaults.get("METRICS_YAML"));
+  cb.put(Keys.get("PACKING_YAML"),Defaults.get("PACKING_YAML"));
+  cb.put(Keys.get("SCHEDULER_YAML"),Defaults.get("SCHEDULER_YAML"));
+  cb.put(Keys.get("STATEMGR_YAML"),Defaults.get("STATEMGR_YAML"));
+  cb.put(Keys.get("SYSTEM_YAML"),Defaults.get("SYSTEM_YAML"));
+  cb.put(Keys.get("UPLOADER_YAML"),Defaults.get("UPLOADER_YAML"));
   return cb.build();
 }

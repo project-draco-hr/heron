@@ -1,7 +1,7 @@
 {
   Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.CORE_PACKAGE_URI,Defaults.CORE_PACKAGE_URI);
-  cb.put(Keys.LOGGING_DIRECTORY,Defaults.LOGGING_DIRECTORY);
-  cb.put(Keys.METRICS_MANAGER_CLASSPATH,Defaults.METRICS_MANAGER_CLASSPATH);
+  cb.put(Keys.get("CORE_PACKAGE_URI"),Defaults.get("CORE_PACKAGE_URI"));
+  cb.put(Keys.get("LOGGING_DIRECTORY"),Defaults.get("LOGGING_DIRECTORY"));
+  cb.put(Keys.get("METRICS_MANAGER_CLASSPATH"),Defaults.get("METRICS_MANAGER_CLASSPATH"));
   return cb.build();
 }

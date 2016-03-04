@@ -1,5 +1,5 @@
 {
   Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.SCHEDULER_JAR,Defaults.SCHEDULER_JAR);
+  cb.put(Keys.get("SCHEDULER_JAR"),Defaults.get("SCHEDULER_JAR"));
   return cb.build();
 }

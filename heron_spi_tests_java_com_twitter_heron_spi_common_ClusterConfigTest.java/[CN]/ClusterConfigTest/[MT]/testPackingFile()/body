@@ -1,4 +1,5 @@
 {
   Config props=ClusterConfig.loadPackingConfig(basicConfig);
-  Assert.assertEquals(0,props.size());
+  Assert.assertEquals(1,props.size());
+  Assert.assertEquals("com.twitter.heron.packing.roundrobin.RoundRobinPacking",props.getStringValue("heron.class.packing.algorithm"));
 }

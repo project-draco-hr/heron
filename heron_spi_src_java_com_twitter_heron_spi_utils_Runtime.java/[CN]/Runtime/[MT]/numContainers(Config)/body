@@ -1,3 +1,3 @@
 {
-  return runtime.getStringValue(Keys.NUM_CONTAINERS);
+  return runtime.getStringValue(Keys.get("NUM_CONTAINERS"));
 }

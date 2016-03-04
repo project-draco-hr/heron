@@ -1,8 +1,8 @@
 {
   Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.EXECUTOR_BINARY,Defaults.EXECUTOR_BINARY);
-  cb.put(Keys.STMGR_BINARY,Defaults.STMGR_BINARY);
-  cb.put(Keys.TMASTER_BINARY,Defaults.TMASTER_BINARY);
-  cb.put(Keys.SHELL_BINARY,Defaults.SHELL_BINARY);
+  cb.put(Keys.get("EXECUTOR_BINARY"),Defaults.get("EXECUTOR_BINARY"));
+  cb.put(Keys.get("STMGR_BINARY"),Defaults.get("STMGR_BINARY"));
+  cb.put(Keys.get("TMASTER_BINARY"),Defaults.get("TMASTER_BINARY"));
+  cb.put(Keys.get("SHELL_BINARY"),Defaults.get("SHELL_BINARY"));
   return cb.build();
 }

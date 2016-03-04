@@ -1,0 +1,11 @@
+{
+  Class cls=Class.forName(className);
+  ClassLoader cLoader=cls.getClassLoader();
+  InputStream fileStream=cLoader.getResourceAsStream(resName);
+  Map kvPairs=ConfigReader.loadStream(fileStream);
+  if (kvPairs.isEmpty()) {
+    LOG.severe("Config keys cannot be empty ");
+    System.exit(1);
+  }
+  return kvPairs;
+}

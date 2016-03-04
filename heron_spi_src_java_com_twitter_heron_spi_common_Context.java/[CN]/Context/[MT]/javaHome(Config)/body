@@ -1,4 +1,4 @@
 {
-  String javaHome=cfg.getStringValue(Keys.JAVA_HOME);
+  String javaHome=cfg.getStringValue(Keys.get("JAVA_HOME"));
   return javaHome == null ? System.getenv("JAVA_HOME") : javaHome;
 }

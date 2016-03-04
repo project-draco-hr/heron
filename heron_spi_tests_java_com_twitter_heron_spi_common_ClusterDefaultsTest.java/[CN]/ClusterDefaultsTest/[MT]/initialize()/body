@@ -1,0 +1,4 @@
+{
+  home=ClusterDefaults.getDefaultHome();
+  props=Config.newBuilder().putAll(ClusterDefaults.getDefaultBinaries()).putAll(ClusterDefaults.getDefaultJars()).build();
+}

@@ -1,3 +1,3 @@
 {
-  return cfg.getStringValue(Keys.TOPOLOGY_PACKAGE_URI);
+  return cfg.getStringValue(Keys.get("TOPOLOGY_PACKAGE_URI"));
 }

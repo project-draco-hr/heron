@@ -1,2 +1,3 @@
 {
+  config=Config.newBuilder().put(Keys.get("STATEMGR_ROOT_PATH"),rootAddr).put(LocalFileSystemKeys.get("IS_INITIALIZE_FILE_TREE"),false).build();
 }

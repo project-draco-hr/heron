@@ -1,10 +1,10 @@
 {
   Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.HERON_HOME,Defaults.HERON_HOME);
-  cb.put(Keys.HERON_BIN,Defaults.HERON_BIN);
-  cb.put(Keys.HERON_CONF,Defaults.HERON_CONF);
-  cb.put(Keys.HERON_DIST,Defaults.HERON_DIST);
-  cb.put(Keys.HERON_ETC,Defaults.HERON_ETC);
-  cb.put(Keys.HERON_LIB,Defaults.HERON_LIB);
+  cb.put(Keys.get("HERON_HOME"),Defaults.get("HERON_HOME"));
+  cb.put(Keys.get("HERON_BIN"),Defaults.get("HERON_BIN"));
+  cb.put(Keys.get("HERON_CONF"),Defaults.get("HERON_CONF"));
+  cb.put(Keys.get("HERON_DIST"),Defaults.get("HERON_DIST"));
+  cb.put(Keys.get("HERON_ETC"),Defaults.get("HERON_ETC"));
+  cb.put(Keys.get("HERON_LIB"),Defaults.get("HERON_LIB"));
   return cb.build();
 }

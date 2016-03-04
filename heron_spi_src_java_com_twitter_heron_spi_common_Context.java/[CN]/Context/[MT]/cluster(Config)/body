@@ -1,3 +1,3 @@
 {
-  return cfg.getStringValue(Keys.CLUSTER);
+  return cfg.getStringValue(Keys.get("CLUSTER"));
 }

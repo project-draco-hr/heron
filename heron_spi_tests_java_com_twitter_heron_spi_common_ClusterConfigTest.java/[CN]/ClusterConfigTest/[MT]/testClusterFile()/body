@@ -2,7 +2,4 @@
   Config props=ClusterConfig.loadClusterConfig(basicConfig);
   Assert.assertEquals(4,props.size());
   Assert.assertEquals("com.twitter.heron.uploader.localfs.FileSystemUploader",Context.uploaderClass(props));
-  Assert.assertEquals("com.twitter.heron.scheduler.local.LocalScheduler",Context.schedulerClass(props));
-  Assert.assertEquals("com.twitter.heron.packing.roundrobin.RoundRobinPacking",Context.packingClass(props));
-  Assert.assertEquals("com.twitter.heron.state.localfs.LocalFileStateManager",Context.stateManagerClass(props));
 }

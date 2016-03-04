@@ -1,4 +1,4 @@
 {
   Object value=cfgMap.get(key);
-  return getDouble(value);
+  return Convert.getDouble(value);
 }
