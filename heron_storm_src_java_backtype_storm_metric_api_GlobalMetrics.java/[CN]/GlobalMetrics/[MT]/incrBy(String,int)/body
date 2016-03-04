@@ -1,0 +1,3 @@
+{
+  com.twitter.heron.api.metric.GlobalMetrics.incrBy(counterName,N);
+}

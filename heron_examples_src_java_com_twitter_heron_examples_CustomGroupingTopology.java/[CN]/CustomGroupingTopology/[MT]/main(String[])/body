@@ -4,5 +4,5 @@
   builder.setBolt("mybolt",new MyBolt(),2).customGrouping("word",new MyCustomStreamGrouping());
   Config conf=new Config();
   conf.setNumStmgrs(1);
-  HeronSubmitter.submitTopology(args[0],conf,builder.createTopology());
+  StormSubmitter.submitTopology(args[0],conf,builder.createTopology());
 }

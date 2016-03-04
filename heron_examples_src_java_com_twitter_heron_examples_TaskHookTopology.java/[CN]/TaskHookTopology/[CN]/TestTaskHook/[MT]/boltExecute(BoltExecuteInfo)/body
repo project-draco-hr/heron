@@ -3,8 +3,8 @@
   ++boltExecuted;
   if (boltExecuted % N == 0) {
     System.out.println("boltExecute() is invoked in hook");
-    System.out.println(info.getExecuteLatencyMs());
-    System.out.println(info.getExecutingTaskId());
-    System.out.println(info.getTuple());
+    System.out.println(info.executeLatencyMs);
+    System.out.println(info.executingTaskId);
+    System.out.println(info.tuple);
   }
 }
