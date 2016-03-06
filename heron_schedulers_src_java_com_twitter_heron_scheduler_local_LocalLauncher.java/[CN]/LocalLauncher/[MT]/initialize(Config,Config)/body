@@ -2,7 +2,7 @@
   this.config=config;
   this.runtime=runtime;
   this.topologyWorkingDirectory=LocalContext.workingDirectory(config);
-  this.coreReleasePackage=Context.corePackageUri(config);
+  this.coreReleasePackage=LocalContext.corePackageUri(config);
   this.targetCoreReleaseFile=Paths.get(topologyWorkingDirectory,"heron-core.tar.gz").toString();
   this.targetTopologyPackageFile=Paths.get(topologyWorkingDirectory,"topology.tar.gz").toString();
 }

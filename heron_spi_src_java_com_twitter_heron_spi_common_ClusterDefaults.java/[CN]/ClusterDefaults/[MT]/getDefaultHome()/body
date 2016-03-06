@@ -1,10 +1,11 @@
 {
   Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.get("HERON_HOME"),Defaults.get("HERON_HOME"));
-  cb.put(Keys.get("HERON_BIN"),Defaults.get("HERON_BIN"));
-  cb.put(Keys.get("HERON_CONF"),Defaults.get("HERON_CONF"));
-  cb.put(Keys.get("HERON_DIST"),Defaults.get("HERON_DIST"));
-  cb.put(Keys.get("HERON_ETC"),Defaults.get("HERON_ETC"));
-  cb.put(Keys.get("HERON_LIB"),Defaults.get("HERON_LIB"));
+  cb.put(Keys.heronHome(),Defaults.heronHome());
+  cb.put(Keys.heronBin(),Defaults.heronBin());
+  cb.put(Keys.heronConf(),Defaults.heronConf());
+  cb.put(Keys.heronDist(),Defaults.heronDist());
+  cb.put(Keys.heronEtc(),Defaults.heronEtc());
+  cb.put(Keys.heronLib(),Defaults.heronLib());
+  cb.put(Keys.javaHome(),Defaults.javaHome());
   return cb.build();
 }

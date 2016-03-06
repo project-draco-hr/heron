@@ -1,5 +1,5 @@
 {
-  String schedulerFile=config.getStringValue(Keys.get("SCHEDULER_YAML"));
+  String schedulerFile=config.getStringValue(Keys.schedulerFile());
   Map readConfig=ConfigReader.loadFile(schedulerFile);
   return Config.newBuilder().putAll(readConfig).build();
 }

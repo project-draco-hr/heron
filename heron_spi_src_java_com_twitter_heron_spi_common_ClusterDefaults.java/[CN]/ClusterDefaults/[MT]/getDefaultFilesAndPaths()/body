@@ -1,7 +1,12 @@
 {
   Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.get("CORE_PACKAGE_URI"),Defaults.get("CORE_PACKAGE_URI"));
-  cb.put(Keys.get("LOGGING_DIRECTORY"),Defaults.get("LOGGING_DIRECTORY"));
-  cb.put(Keys.get("METRICS_MANAGER_CLASSPATH"),Defaults.get("METRICS_MANAGER_CLASSPATH"));
+  cb.put(Keys.corePackageUri(),Defaults.corePackageUri());
+  cb.put(Keys.logDirectory(),Defaults.logDirectory());
+  cb.put(Keys.instanceClassPath(),Defaults.instanceClassPath());
+  cb.put(Keys.metricsManagerClassPath(),Defaults.metricsManagerClassPath());
+  cb.put(Keys.packingClassPath(),Defaults.packingClassPath());
+  cb.put(Keys.schedulerClassPath(),Defaults.schedulerClassPath());
+  cb.put(Keys.stateManagerClassPath(),Defaults.stateManagerClassPath());
+  cb.put(Keys.uploaderClassPath(),Defaults.uploaderClassPath());
   return cb.build();
 }

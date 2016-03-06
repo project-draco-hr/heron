@@ -1,12 +1,12 @@
 {
   Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.get("CLUSTER_YAML"),Defaults.get("CLUSTER_YAML"));
-  cb.put(Keys.get("DEFAULTS_YAML"),Defaults.get("DEFAULTS_YAML"));
-  cb.put(Keys.get("METRICS_YAML"),Defaults.get("METRICS_YAML"));
-  cb.put(Keys.get("PACKING_YAML"),Defaults.get("PACKING_YAML"));
-  cb.put(Keys.get("SCHEDULER_YAML"),Defaults.get("SCHEDULER_YAML"));
-  cb.put(Keys.get("STATEMGR_YAML"),Defaults.get("STATEMGR_YAML"));
-  cb.put(Keys.get("SYSTEM_YAML"),Defaults.get("SYSTEM_YAML"));
-  cb.put(Keys.get("UPLOADER_YAML"),Defaults.get("UPLOADER_YAML"));
+  cb.put(Keys.clusterFile(),Defaults.clusterFile());
+  cb.put(Keys.defaultsFile(),Defaults.defaultsFile());
+  cb.put(Keys.metricsSinksFile(),Defaults.metricsSinksFile());
+  cb.put(Keys.packingFile(),Defaults.packingFile());
+  cb.put(Keys.schedulerFile(),Defaults.schedulerFile());
+  cb.put(Keys.stateManagerFile(),Defaults.stateManagerFile());
+  cb.put(Keys.systemFile(),Defaults.systemFile());
+  cb.put(Keys.uploaderFile(),Defaults.uploaderFile());
   return cb.build();
 }

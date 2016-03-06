@@ -1,5 +1,5 @@
 {
-  String stateMgrFile=config.getStringValue(Keys.get("STATEMGR_YAML"));
+  String stateMgrFile=config.getStringValue(Keys.stateManagerFile());
   Map readConfig=ConfigReader.loadFile(stateMgrFile);
   return Config.newBuilder().putAll(readConfig).build();
 }

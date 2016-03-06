@@ -1,5 +1,5 @@
 {
-  String topologyName=Context.topologyName(config);
+  String topologyName=LocalContext.topologyName(config);
   LOG.info("Command to kill topology: " + topologyName);
   topologyKilled=true;
   for (  Process p : processToContainer.keySet()) {

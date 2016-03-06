@@ -1,3 +1,3 @@
 {
-  return runtime.getStringValue(Keys.get("COMPONENT_RAMMAP"));
+  return runtime.getStringValue(Keys.componentRamMap());
 }

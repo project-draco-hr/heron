@@ -1,3 +1,4 @@
 {
   this.rootAddress=Context.stateManagerRootPath(config);
+  LOG.info("File system state maanger root address: " + rootAddress);
 }

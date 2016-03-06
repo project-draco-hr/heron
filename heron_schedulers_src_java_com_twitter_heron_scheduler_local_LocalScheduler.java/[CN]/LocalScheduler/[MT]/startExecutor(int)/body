@@ -1,6 +1,6 @@
 {
   LOG.info("Starting a new executor for container: " + container);
-  final Process regularExecutor=ShellUtils.runASyncProcess(true,true,(String)null,new File(LocalContext.workingDirectory(config)));
+  final Process regularExecutor=ShellUtils.runASyncProcess(true,true,getExecutorCommand(container),new File(LocalContext.workingDirectory(config)));
   processToContainer.put(regularExecutor,container);
   LOG.info("Started the executor for container: " + container);
   Runnable r=new Runnable(){

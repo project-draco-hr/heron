@@ -1,0 +1,3 @@
+{
+  return ConfigDefaults.getDouble("INSTANCE_CPU");
+}

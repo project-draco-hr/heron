@@ -1,5 +1,5 @@
 def get_daemon_processes(self):
     "\n    Get a map from all daemon services' name to the command to start them\n    "
     retval = {}
-    retval[self.heron_shell_binary] = [('./%s' % self.heron_shell_binary), ('--port=%s' % self.shell_port)]
+    retval[self.heron_shell_binary] = [('%s' % self.heron_shell_binary), ('--port=%s' % self.shell_port)]
     return retval

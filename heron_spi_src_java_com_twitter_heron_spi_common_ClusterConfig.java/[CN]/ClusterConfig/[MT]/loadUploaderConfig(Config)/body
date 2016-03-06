@@ -1,5 +1,5 @@
 {
-  String uploaderFile=config.getStringValue(Keys.get("UPLOADER_YAML"));
+  String uploaderFile=config.getStringValue(Keys.uploaderFile());
   Map readConfig=ConfigReader.loadFile(uploaderFile);
   return Config.newBuilder().putAll(readConfig).build();
 }

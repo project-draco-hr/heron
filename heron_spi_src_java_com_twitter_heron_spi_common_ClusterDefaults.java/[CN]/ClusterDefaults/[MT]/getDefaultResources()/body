@@ -1,8 +1,8 @@
 {
   Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.get("STMGR_RAM"),Defaults.getLong("STMGR_RAM"));
-  cb.put(Keys.get("INSTANCE_CPU"),Defaults.getDouble("INSTANCE_CPU"));
-  cb.put(Keys.get("INSTANCE_RAM"),Defaults.getLong("INSTANCE_RAM"));
-  cb.put(Keys.get("INSTANCE_DISK"),Defaults.getLong("INSTANCE_DISK"));
+  cb.put(Keys.stmgrRam(),Defaults.stmgrRam());
+  cb.put(Keys.instanceCpu(),Defaults.instanceCpu());
+  cb.put(Keys.instanceRam(),Defaults.instanceRam());
+  cb.put(Keys.instanceDisk(),Defaults.instanceDisk());
   return cb.build();
 }

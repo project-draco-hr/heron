@@ -1,4 +1,4 @@
 {
-  String stateManagerClass=cfg.getStringValue(Keys.get("STATE_MANAGER_CLASS"));
+  String stateManagerClass=cfg.getStringValue(ConfigKeys.get("STATE_MANAGER_CLASS"));
   return stateManagerClass.equals(Constants.ZK_STATE_MANAGER_CLASS) ? true : false;
 }

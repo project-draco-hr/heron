@@ -38,6 +38,8 @@ def __init__(self, args):
     self.cluster = args[26]
     self.role = args[27]
     self.environ = args[28]
-    self.scheduler_classpath = args[29]
-    self.scheduler_port = args[30]
+    self.instance_classpath = args[29]
+    self.metrics_sinks_config_file = args[30]
+    self.scheduler_classpath = args[31]
+    self.scheduler_port = args[32]
     log_pid_for_process(get_heron_executor_process_name(self.shard), os.getpid())
