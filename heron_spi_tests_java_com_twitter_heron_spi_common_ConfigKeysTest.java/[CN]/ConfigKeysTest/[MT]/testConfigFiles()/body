@@ -1,0 +1,10 @@
+{
+  Assert.assertEquals("heron.config.file.cluster.yaml",ConfigKeys.get("CLUSTER_YAML"));
+  Assert.assertEquals("heron.config.file.defaults.yaml",ConfigKeys.get("DEFAULTS_YAML"));
+  Assert.assertEquals("heron.config.file.metrics.yaml",ConfigKeys.get("METRICS_YAML"));
+  Assert.assertEquals("heron.config.file.packing.yaml",ConfigKeys.get("PACKING_YAML"));
+  Assert.assertEquals("heron.config.file.scheduler.yaml",ConfigKeys.get("SCHEDULER_YAML"));
+  Assert.assertEquals("heron.config.file.statemgr.yaml",ConfigKeys.get("STATEMGR_YAML"));
+  Assert.assertEquals("heron.config.file.system.yaml",ConfigKeys.get("SYSTEM_YAML"));
+  Assert.assertEquals("heron.config.file.uploader.yaml",ConfigKeys.get("UPLOADER_YAML"));
+}
