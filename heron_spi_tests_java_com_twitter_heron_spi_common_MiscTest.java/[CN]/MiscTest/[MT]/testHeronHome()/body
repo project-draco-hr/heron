@@ -1,0 +1,9 @@
+{
+  Assert.assertEquals("./bin",Misc.substitute("/usr/local/heron","./bin"));
+  Assert.assertEquals("/usr/local/heron/bin",Misc.substitute("/usr/local/heron","${HERON_HOME}/bin"));
+  Assert.assertEquals("./usr/local/heron/bin",Misc.substitute("/usr/local/heron","./${HERON_HOME}/bin"));
+  Assert.assertEquals("/bin/usr/local/heron",Misc.substitute("/usr/local/heron","/bin/${HERON_HOME}"));
+  Assert.assertEquals("./bin/usr/local/heron",Misc.substitute("/usr/local/heron","./bin/${HERON_HOME}"));
+  Assert.assertEquals("/bin/usr/local/heron/etc",Misc.substitute("/usr/local/heron","/bin/${HERON_HOME}/etc"));
+  Assert.assertEquals("./bin/usr/local/heron/etc",Misc.substitute("/usr/local/heron","./bin/${HERON_HOME}/etc"));
+}
