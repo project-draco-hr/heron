@@ -1,0 +1,9 @@
+{
+  Assert.assertEquals("/usr/local/heron",ConfigDefaults.get("HERON_HOME"));
+  Assert.assertEquals("${HERON_HOME}/bin",ConfigDefaults.get("HERON_BIN"));
+  Assert.assertEquals("${HERON_HOME}/conf",ConfigDefaults.get("HERON_CONF"));
+  Assert.assertEquals("${HERON_HOME}/dist",ConfigDefaults.get("HERON_DIST"));
+  Assert.assertEquals("${HERON_HOME}/etc",ConfigDefaults.get("HERON_ETC"));
+  Assert.assertEquals("${HERON_HOME}/lib",ConfigDefaults.get("HERON_LIB"));
+  Assert.assertEquals("${JAVA_HOME}",ConfigDefaults.get("JAVA_HOME"));
+}

@@ -1,0 +1,6 @@
+{
+  Assert.assertEquals(Long.valueOf(Constants.GB),ConfigDefaults.getLong("STMGR_RAM"));
+  Assert.assertEquals(Double.valueOf(1.0),ConfigDefaults.getDouble("INSTANCE_CPU"),0.001);
+  Assert.assertEquals(Long.valueOf(Constants.GB),ConfigDefaults.getLong("INSTANCE_RAM"));
+  Assert.assertEquals(Long.valueOf(Constants.GB),ConfigDefaults.getLong("INSTANCE_DISK"));
+}
