@@ -1,0 +1,3 @@
+{
+  return LocalFileSystemConfigKeys.get("IS_INITIALIZE_FILE_TREE");
+}

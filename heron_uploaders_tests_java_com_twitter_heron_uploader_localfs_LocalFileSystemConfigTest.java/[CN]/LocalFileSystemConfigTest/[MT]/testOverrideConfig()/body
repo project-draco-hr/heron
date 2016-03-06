@@ -1,5 +1,5 @@
 {
   String overrideDirectory="/users/twitter";
-  Config config=Config.expand(Config.newBuilder().putAll(getDefaultConfig()).put(LocalFileSystemKeys.get("FILE_SYSTEM_DIRECTORY"),overrideDirectory).build());
+  Config config=Config.expand(Config.newBuilder().putAll(getDefaultConfig()).put(LocalFileSystemKeys.fileSystemDirectory(),overrideDirectory).build());
   Assert.assertEquals(LocalFileSystemContext.fileSystemDirectory(config),overrideDirectory);
 }

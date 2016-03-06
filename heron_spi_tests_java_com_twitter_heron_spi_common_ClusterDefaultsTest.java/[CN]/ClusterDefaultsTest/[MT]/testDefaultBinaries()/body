@@ -1,6 +1,6 @@
 {
-  Assert.assertEquals(Defaults.get("EXECUTOR_BINARY"),Context.executorBinary(props));
-  Assert.assertEquals(Defaults.get("STMGR_BINARY"),Context.stmgrBinary(props));
-  Assert.assertEquals(Defaults.get("TMASTER_BINARY"),Context.tmasterBinary(props));
-  Assert.assertEquals(Defaults.get("SHELL_BINARY"),Context.shellBinary(props));
+  Assert.assertEquals(Defaults.executorBinary(),Context.executorBinary(props));
+  Assert.assertEquals(Defaults.stmgrBinary(),Context.stmgrBinary(props));
+  Assert.assertEquals(Defaults.tmasterBinary(),Context.tmasterBinary(props));
+  Assert.assertEquals(Defaults.shellBinary(),Context.shellBinary(props));
 }
