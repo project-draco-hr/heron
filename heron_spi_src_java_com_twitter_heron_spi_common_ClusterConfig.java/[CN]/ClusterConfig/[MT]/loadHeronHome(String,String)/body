@@ -1,5 +1,4 @@
 {
-  System.out.println(heronHome + " " + Keys.javaHome()+ " "+ Defaults.javaHome());
   Config.Builder cb=Config.newBuilder().put(Keys.heronHome(),heronHome).put(Keys.heronBin(),Misc.substitute(heronHome,Defaults.heronBin())).put(Keys.heronConf(),configPath).put(Keys.heronDist(),Misc.substitute(heronHome,Defaults.heronDist())).put(Keys.heronEtc(),Misc.substitute(heronHome,Defaults.heronEtc())).put(Keys.heronLib(),Misc.substitute(heronHome,Defaults.heronLib())).put(Keys.javaHome(),Misc.substitute(heronHome,Defaults.javaHome()));
   return cb.build();
 }

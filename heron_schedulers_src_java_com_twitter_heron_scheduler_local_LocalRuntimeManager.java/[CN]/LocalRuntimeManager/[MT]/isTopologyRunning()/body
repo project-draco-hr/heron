@@ -1,0 +1,10 @@
+{
+  String topologyName=LocalContext.topologyName(config);
+  SchedulerStateManager statemgr=Runtime.schedulerStateManager(runtime);
+  ListenableFuture<Boolean> boolFuture=statemgr.isTopologyRunning(topologyName);
+  if (!NetworkUtils.awaitResult(boolFuture,1000,TimeUnit.MILLISECONDS)) {
+    System.err.println("Topology " + topologyName + " is not running...");
+    return false;
+  }
+  return true;
+}
