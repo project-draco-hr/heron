@@ -1,6 +1,6 @@
 def get_tmaster_processes(self):
     retval = {}
-    tmaster_cmd = [self.tmaster_binary, self.port1, self.port2, self.port3, self.topology_name, self.topology_id, self.zknode, self.zkroot, ','.join(self.stmgr_ids), self.heron_internals_config_file, self.port4]
+    tmaster_cmd = [self.tmaster_binary, self.port1, self.port2, self.port3, self.topology_name, self.topology_id, self.zknode, self.zkroot, ','.join(self.stmgr_ids), self.heron_internals_config_file, self.metrics_sinks_config_file, self.port4]
     retval['heron-tmaster'] = tmaster_cmd
     retval[self.metricsmgr_ids[0]] = self.get_metricsmgr_cmd(self.metricsmgr_ids[0], self.metrics_sinks_config_file, self.port4)
     return retval
