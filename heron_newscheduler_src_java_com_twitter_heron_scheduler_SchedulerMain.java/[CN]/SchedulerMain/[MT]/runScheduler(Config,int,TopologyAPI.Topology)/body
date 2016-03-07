@@ -11,7 +11,7 @@
   String schedulerClass=Context.schedulerClass(config);
   IScheduler scheduler=(IScheduler)Class.forName(schedulerClass).newInstance();
   scheduler.initialize(config,ytruntime);
-  SchedulerServer server=runServer(runtime,scheduler,schedulerServerPort);
+  SchedulerServer server=runServer(ytruntime,scheduler,schedulerServerPort);
   setSchedulerLocation(runtime,server);
   scheduler.schedule(packedPlan);
   LOG.info("Waiting for termination... ");
