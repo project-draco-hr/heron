@@ -3,8 +3,8 @@
   ++boltAcked;
   if (boltAcked % N == 0) {
     System.out.println("boltAck() is invoked in hook");
-    System.out.println(info.getAckingTaskId());
-    System.out.println(info.getProcessLatencyMs());
-    System.out.println(info.getTuple());
+    System.out.println(info.ackingTaskId);
+    System.out.println(info.processLatencyMs);
+    System.out.println(info.tuple);
   }
 }

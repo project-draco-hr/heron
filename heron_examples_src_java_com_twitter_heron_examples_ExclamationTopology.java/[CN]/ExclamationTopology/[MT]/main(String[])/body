@@ -6,13 +6,13 @@
   conf.setDebug(true);
   conf.setMaxSpoutPending(10);
   conf.put(Config.TOPOLOGY_WORKER_CHILDOPTS,"-XX:+HeapDumpOnOutOfMemoryError");
-  conf.setComponentRam("word",1L * 1024 * 1024* 1024);
-  conf.setComponentRam("exclaim1",1L * 1024 * 1024* 1024);
+  conf.setComponentRam("word",512L * 1024 * 1024);
+  conf.setComponentRam("exclaim1",512L * 1024 * 1024);
   conf.setContainerDiskRequested(1024L * 1024 * 1024);
   conf.setContainerCpuRequested(1);
   if (args != null && args.length > 0) {
     conf.setNumStmgrs(1);
-    HeronSubmitter.submitTopology(args[0],conf,builder.createTopology());
+    StormSubmitter.submitTopology(args[0],conf,builder.createTopology());
   }
  else {
     System.out.println("Local mode not yet supported");
