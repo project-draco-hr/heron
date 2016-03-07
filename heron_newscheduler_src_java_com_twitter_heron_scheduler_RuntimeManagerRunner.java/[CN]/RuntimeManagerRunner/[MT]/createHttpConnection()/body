@@ -1,5 +1,5 @@
 {
-  IStateManager statemgr=Runtime.stateManager(runtime);
+  SchedulerStateManager statemgr=Runtime.schedulerStateManager(runtime);
   LOG.info("Fetching scheduler location from state manager for " + command + " topology");
   ListenableFuture<Scheduler.SchedulerLocation> locationFuture=statemgr.getSchedulerLocation(null,Runtime.topologyName(runtime));
   Scheduler.SchedulerLocation schedulerLocation=NetworkUtils.awaitResult(locationFuture,5,TimeUnit.SECONDS);
@@ -7,7 +7,7 @@
     LOG.severe("Failed to get scheduler location for " + command + " topology");
     return Pair.create(false,null);
   }
-  if (schedulerLocation.getHttpEndpoint().equals(statemgr.NO_SCHEDULER_REST_ENDPOINT)) {
+  if (schedulerLocation.getHttpEndpoint().equals(IStateManager.NO_SCHEDULER_REST_ENDPOINT)) {
     LOG.info("Nothing required to be done on scheduler.");
     return Pair.create(true,null);
   }

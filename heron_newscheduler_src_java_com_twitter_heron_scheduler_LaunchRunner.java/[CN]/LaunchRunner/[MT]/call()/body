@@ -1,5 +1,5 @@
 {
-  IStateManager statemgr=Runtime.stateManager(runtime);
+  SchedulerStateManager statemgr=Runtime.schedulerStateManager(runtime);
   TopologyAPI.Topology topology=Runtime.topology(runtime);
   String topologyName=Context.topologyName(config);
   packing.initialize(config,runtime);

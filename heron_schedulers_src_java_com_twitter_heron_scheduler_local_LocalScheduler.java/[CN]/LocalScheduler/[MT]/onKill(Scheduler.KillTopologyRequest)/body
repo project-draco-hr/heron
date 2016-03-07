@@ -9,7 +9,7 @@
     LOG.info("Killed executor for container: " + index);
   }
   processToContainer.clear();
-  IStateManager stateManager=Runtime.stateManager(runtime);
+  SchedulerStateManager stateManager=Runtime.schedulerStateManager(runtime);
   LOG.info("Removing scheduler location for topology: " + topologyName);
   stateManager.deleteSchedulerLocation(topologyName);
   LOG.info("Cleared scheduler location for topology: " + topologyName);

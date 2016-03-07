@@ -16,7 +16,7 @@
       }
     }
   }
-  IStateManager stateManager=Runtime.stateManager(runtime);
+  SchedulerStateManager stateManager=Runtime.schedulerStateManager(runtime);
   stateManager.deleteTMasterLocation(LocalContext.topologyName(config));
   return true;
 }

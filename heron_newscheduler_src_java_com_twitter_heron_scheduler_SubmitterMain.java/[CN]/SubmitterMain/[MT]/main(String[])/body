@@ -7,16 +7,11 @@
   String configOverrideEncoded=args[5];
   String topologyPackage=args[6];
   String topologyDefnFile=args[7];
-  String originalPackageFile=args[8];
+  String topologyJarFile=args[8];
   System.out.println(heronHome + " " + configPath);
-  Config.Builder defaultsConfig=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,configPath));
-  Config.Builder commandLineConfig=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ);
-  String pkgType=FileUtils.isOriginalPackageJar(FileUtils.getBaseName(originalPackageFile)) ? "jar" : "tar";
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
-  Config.Builder topologyConfig=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).put(Keys.topologyDefinitionFile(),topologyDefnFile).put(Keys.topologyPackageFile(),topologyPackage).put(Keys.topologyJarFile(),originalPackageFile).put(Keys.topologyPackageType(),pkgType);
-  Config config=Config.expand(Config.newBuilder().putAll(defaultsConfig.build()).putAll(commandLineConfig.build()).putAll(topologyConfig.build()).build());
+  Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath)).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyPackage,topologyJarFile,topologyDefnFile,topology)).build());
   LOG.info("Static config loaded successfully ");
-  LOG.info(config.asString());
   LOG.info(config.toString());
   if (!submitTopology(config,topology)) {
     Runtime.getRuntime().exit(1);

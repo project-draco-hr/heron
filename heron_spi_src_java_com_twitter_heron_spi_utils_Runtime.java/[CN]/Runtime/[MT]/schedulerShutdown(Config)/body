@@ -1,0 +1,3 @@
+{
+  return (Shutdown)runtime.get(Keys.schedulerShutdown());
+}

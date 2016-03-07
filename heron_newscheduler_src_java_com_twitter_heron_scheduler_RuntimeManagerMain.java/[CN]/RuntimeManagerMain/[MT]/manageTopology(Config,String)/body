@@ -1,8 +1,10 @@
 {
   String statemgrClass=Context.stateManagerClass(config);
   IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
-  Config runtime=Config.newBuilder().put(Keys.topologyName(),topologyName).put(Keys.stateManager(),statemgr).build();
+  statemgr.initialize(config);
+  Config runtime=Config.newBuilder().put(Keys.topologyName(),Context.topologyName(config)).put(Keys.schedulerStateManager(),new SchedulerStateManager(statemgr)).build();
   RuntimeManagerRunner runtimeManagerRunner=new RuntimeManagerRunner(config,runtime,command);
   boolean ret=runtimeManagerRunner.call();
+  statemgr.close();
   return ret;
 }

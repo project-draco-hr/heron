@@ -5,13 +5,9 @@
   String topologyName=args[3];
   String topologyJarFile=args[4];
   int schedulerServerPort=Integer.parseInt(args[5]);
-  Config.Builder defaultConfigs=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadSandboxConfig());
-  Config.Builder commandLineConfigs=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ);
-  String pkgType=FileUtils.isOriginalPackageJar(FileUtils.getBaseName(topologyJarFile)) ? "jar" : "tar";
   String topologyDefnFile=TopologyUtils.lookUpTopologyDefnFile(".",topologyName);
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
-  Config.Builder topologyConfigs=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).put(Keys.topologyDefinitionFile(),topologyDefnFile).put(Keys.topologyPackageType(),pkgType).put(Keys.topologyJarFile(),topologyJarFile);
-  Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs.build()).putAll(commandLineConfigs.build()).putAll(topologyConfigs.build()).build());
+  Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs()).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyJarFile,topologyDefnFile,topology)).build());
   System.out.println("loaded scheduler config " + config);
   runScheduler(config,schedulerServerPort,topology);
 }

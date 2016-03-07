@@ -1,5 +1,5 @@
 {
-  IStateManager stateManager=Runtime.stateManager(runtime);
+  SchedulerStateManager stateManager=Runtime.schedulerStateManager(runtime);
   LOG.info("State manager used: " + stateManager.getClass().getName());
   File workingDirectory=new File(topologyWorkingDirectory);
   if (!workingDirectory.exists()) {
