@@ -1,5 +1,5 @@
 {
-  Thread.currentThread().setName(Constants.THREAD_GATEWAY_NAME);
+  Thread.currentThread().setName(ThreadNames.THREAD_GATEWAY_NAME);
   streamManagerClient.start();
   metricsManagerClient.start();
   gatewayLooper.loop();

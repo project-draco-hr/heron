@@ -3,7 +3,7 @@
   final CountDownLatch exited=new CountDownLatch(1);
   final ExecutorService exitExecutor=Executors.newSingleThreadExecutor();
   exitExecutor.execute(new ForceExitTask(exited,systemConfig.getInstanceForceExitTimeoutMs()));
-  if (thread.getName().equals(Constants.THREAD_SLAVE_NAME)) {
+  if (thread.getName().equals(ThreadNames.THREAD_SLAVE_NAME)) {
     new SlaveExitTask().run();
     gatewayLooper.exitLoop();
   }
