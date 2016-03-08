@@ -1,5 +1,5 @@
 {
-  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
   int interval=systemConfig.getHeronMetricsExportIntervalSec();
   topologyContext.registerMetric("__ack-count",ackCount,interval);
   topologyContext.registerMetric("__complete-latency",completeLatency,interval);

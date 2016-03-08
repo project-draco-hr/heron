@@ -1,5 +1,5 @@
 {
-  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(com.twitter.heron.common.utils.misc.Constants.HERON_SYSTEM_CONFIG);
+  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
   int interval=systemConfig.getHeronMetricsExportIntervalSec();
   metricsCollector.registerMetric("__jvm-gc-collection-time-ms",jvmGCTimeMs,interval);
   metricsCollector.registerMetric("__jvm-gc-collection-count",jvmGCCount,interval);
