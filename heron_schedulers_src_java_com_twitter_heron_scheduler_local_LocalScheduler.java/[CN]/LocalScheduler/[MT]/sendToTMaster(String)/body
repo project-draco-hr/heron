@@ -1,6 +1,6 @@
 {
   String topologyName=LocalContext.topologyName(config);
-  SchedulerStateManager stateManager=Runtime.schedulerStateManager(runtime);
+  SchedulerStateManagerAdaptor stateManager=Runtime.schedulerStateManagerAdaptor(runtime);
   LOG.info("Fetching TMaster location for topology: " + topologyName);
   ListenableFuture<TopologyMaster.TMasterLocation> locationFuture=stateManager.getTMasterLocation(null,LocalContext.topologyName(config));
   TopologyMaster.TMasterLocation location=NetworkUtils.awaitResult(locationFuture,5,TimeUnit.SECONDS);

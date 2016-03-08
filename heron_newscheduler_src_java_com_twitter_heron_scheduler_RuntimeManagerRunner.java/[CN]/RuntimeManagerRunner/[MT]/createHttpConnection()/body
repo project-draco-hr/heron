@@ -1,5 +1,5 @@
 {
-  SchedulerStateManager statemgr=Runtime.schedulerStateManager(runtime);
+  SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
   LOG.info("Fetching scheduler location from state manager for " + command + " topology");
   ListenableFuture<Scheduler.SchedulerLocation> locationFuture=statemgr.getSchedulerLocation(null,Runtime.topologyName(runtime));
   Scheduler.SchedulerLocation schedulerLocation=NetworkUtils.awaitResult(locationFuture,5,TimeUnit.SECONDS);

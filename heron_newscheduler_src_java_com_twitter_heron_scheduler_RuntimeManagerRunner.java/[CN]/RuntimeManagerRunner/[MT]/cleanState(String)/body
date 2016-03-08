@@ -1,6 +1,6 @@
 {
   LOG.info("Cleaning up Heron State");
-  SchedulerStateManager statemgr=Runtime.schedulerStateManager(runtime);
+  SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
   ListenableFuture<Boolean> booleanFuture;
   try {
     booleanFuture=statemgr.deletePhysicalPlan(topologyName);

@@ -1,3 +1,0 @@
-{
-  return (SchedulerStateManager)runtime.get(Keys.schedulerStateManager());
-}
