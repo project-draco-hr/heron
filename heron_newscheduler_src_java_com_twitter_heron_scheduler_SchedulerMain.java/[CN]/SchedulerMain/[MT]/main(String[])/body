@@ -8,6 +8,7 @@
   String topologyDefnFile=TopologyUtils.lookUpTopologyDefnFile(".",topologyName);
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
   Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs()).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyJarFile,topologyDefnFile,topology)).build());
-  System.out.println("loaded scheduler config " + config);
+  setupLogging(config);
+  LOG.info("loaded scheduler config " + config);
   runScheduler(config,schedulerServerPort,topology);
 }
