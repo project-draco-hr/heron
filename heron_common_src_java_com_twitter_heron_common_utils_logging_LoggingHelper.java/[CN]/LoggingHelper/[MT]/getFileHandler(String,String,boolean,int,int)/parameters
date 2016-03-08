@@ -1,0 +1,5 @@
+String processId
+String loggingDir
+boolean append
+int limit
+int count
