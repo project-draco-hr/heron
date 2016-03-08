@@ -1,0 +1,5 @@
+{
+  heronHome=Paths.get(System.getenv("JAVA_RUNFILES"),TestConstants.TEST_DATA_PATH).toString();
+  configPath=Paths.get(heronHome,"local").toString();
+  basicConfig=Config.newBuilder().putAll(ClusterConfig.loadHeronHome(heronHome,configPath)).putAll(ClusterConfig.loadConfigHome(heronHome,configPath)).build();
+}

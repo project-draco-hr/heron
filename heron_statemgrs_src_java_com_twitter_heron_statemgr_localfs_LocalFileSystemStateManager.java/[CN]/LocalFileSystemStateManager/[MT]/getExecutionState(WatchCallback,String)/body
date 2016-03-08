@@ -1,7 +1,7 @@
 {
   SettableFuture<ExecutionEnvironment.ExecutionState> future=SettableFuture.create();
   String path=getExecutionStatePath(topologyName);
-  byte[] data=FileUtility.readFromFile(path);
+  byte[] data=FileUtils.readFromFile(path);
   ExecutionEnvironment.ExecutionState executionState;
   try {
     executionState=ExecutionEnvironment.ExecutionState.parseFrom(data);

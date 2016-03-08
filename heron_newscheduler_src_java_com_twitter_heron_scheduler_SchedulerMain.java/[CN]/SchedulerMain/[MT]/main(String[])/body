@@ -1,0 +1,13 @@
+{
+  String cluster=args[0];
+  String role=args[1];
+  String environ=args[2];
+  String topologyName=args[3];
+  String topologyJarFile=args[4];
+  int schedulerServerPort=Integer.parseInt(args[5]);
+  String topologyDefnFile=TopologyUtils.lookUpTopologyDefnFile(".",topologyName);
+  TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
+  Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs()).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyJarFile,topologyDefnFile,topology)).build());
+  System.out.println("loaded scheduler config " + config);
+  runScheduler(config,schedulerServerPort,topology);
+}

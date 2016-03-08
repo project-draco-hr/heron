@@ -1,0 +1,3 @@
+{
+  cfgMap.putAll(build.keyValues);
+}

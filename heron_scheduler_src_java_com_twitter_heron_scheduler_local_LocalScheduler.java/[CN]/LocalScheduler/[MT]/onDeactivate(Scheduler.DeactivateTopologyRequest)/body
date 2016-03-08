@@ -1,4 +1,0 @@
-{
-  LOG.info("To deactivate topology: " + localConfig.getTopologyName());
-  return communicateTMaster("deactivate");
-}

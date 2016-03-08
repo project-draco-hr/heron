@@ -1,0 +1,22 @@
+{
+  int containerId=request.getContainerIndex();
+  if (containerId == -1) {
+    LOG.info("Command to restart the entire topology: " + LocalContext.topologyName(config));
+    List<Process> tmpProcessList=new LinkedList<>(processToContainer.keySet());
+    for (    Process process : tmpProcessList) {
+      process.destroy();
+    }
+  }
+ else {
+    LOG.info("Command to restart a container of topology: " + LocalContext.topologyName(config));
+    LOG.info("Restart container requested: " + containerId);
+    for (    Process p : processToContainer.keySet()) {
+      if (containerId == processToContainer.get(p)) {
+        p.destroy();
+      }
+    }
+  }
+  SchedulerStateManagerAdaptor stateManager=Runtime.schedulerStateManagerAdaptor(runtime);
+  stateManager.deleteTMasterLocation(LocalContext.topologyName(config));
+  return true;
+}

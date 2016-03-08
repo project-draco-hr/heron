@@ -1,0 +1,5 @@
+{
+  String uploaderClass=Context.uploaderClass(config);
+  this.uploader=(IUploader)Class.forName(uploaderClass).newInstance();
+  this.uploader.initialize(config);
+}

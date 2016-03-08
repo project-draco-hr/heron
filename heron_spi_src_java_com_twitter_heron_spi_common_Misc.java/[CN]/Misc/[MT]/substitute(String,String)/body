@@ -1,0 +1,4 @@
+{
+  Config config=Config.newBuilder().put(Keys.heronHome(),heronHome).build();
+  return substitute(config,pathString);
+}

@@ -1,0 +1,6 @@
+{
+  long defaultContainerDisk=instanceDiskDefault * getLargestContainerSize(packing) + DEFAULT_DISK_PADDING;
+  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
+  String diskHint=TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_DISK_REQUESTED,Long.toString(defaultContainerDisk));
+  return Long.parseLong(diskHint);
+}

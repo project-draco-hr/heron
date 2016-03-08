@@ -1,0 +1,7 @@
+{
+  File file=new File(paths.get(0));
+  for (int i=1; i < paths.size(); i++) {
+    file=new File(file,paths.get(i));
+  }
+  return file.getPath();
+}

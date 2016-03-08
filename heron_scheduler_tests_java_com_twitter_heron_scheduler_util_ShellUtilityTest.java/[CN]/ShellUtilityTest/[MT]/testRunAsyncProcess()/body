@@ -1,8 +1,0 @@
-{
-  String testString="testString";
-  StringBuilder stdout=new StringBuilder();
-  StringBuilder stderr=new StringBuilder();
-  Process p=ShellUtility.runASyncProcess(true,false,String.format("sleep 1 && echo %s",testString),new File("."));
-  NetworkUtility.await(10,TimeUnit.MILLISECONDS);
-  Assert.assertEquals(0,p.getInputStream().available());
-}

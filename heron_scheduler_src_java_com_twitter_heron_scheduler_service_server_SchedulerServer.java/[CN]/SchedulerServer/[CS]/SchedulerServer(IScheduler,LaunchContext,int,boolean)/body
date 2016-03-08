@@ -1,7 +1,0 @@
-{
-  this.schedulerServer=getSchedulerServer(port);
-  this.context=context;
-  if (initialize) {
-    initializeContext(scheduler);
-  }
-}

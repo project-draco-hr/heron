@@ -1,0 +1,3 @@
+{
+  return cfg.getLongValue(ConfigKeys.get("INSTANCE_DISK"));
+}

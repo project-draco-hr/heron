@@ -1,3 +1,0 @@
-{
-  return String.format("http://%s/%s",location.getHttpEndpoint(),command.name().toLowerCase());
-}

@@ -1,0 +1,6 @@
+{
+  String toRead="abc";
+  PowerMockito.mockStatic(Files.class);
+  PowerMockito.when(Files.readAllBytes(Matchers.any(Path.class))).thenReturn(toRead.getBytes());
+  Assert.assertEquals(new String(FileUtils.readFromFile("")),toRead);
+}

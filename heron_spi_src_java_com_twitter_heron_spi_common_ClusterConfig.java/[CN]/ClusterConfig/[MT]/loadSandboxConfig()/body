@@ -1,0 +1,4 @@
+{
+  String configPath=Misc.substitute(Defaults.sandboxHome(),Defaults.sandboxConf());
+  return loadConfig(Defaults.sandboxHome(),configPath);
+}

@@ -1,0 +1,5 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.schedulerJar(),Defaults.schedulerJar());
+  return cb.build();
+}

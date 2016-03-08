@@ -1,0 +1,12 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.clusterFile(),Defaults.clusterFile());
+  cb.put(Keys.defaultsFile(),Defaults.defaultsFile());
+  cb.put(Keys.metricsSinksFile(),Defaults.metricsSinksFile());
+  cb.put(Keys.packingFile(),Defaults.packingFile());
+  cb.put(Keys.schedulerFile(),Defaults.schedulerFile());
+  cb.put(Keys.stateManagerFile(),Defaults.stateManagerFile());
+  cb.put(Keys.systemFile(),Defaults.systemFile());
+  cb.put(Keys.uploaderFile(),Defaults.uploaderFile());
+  return cb.build();
+}

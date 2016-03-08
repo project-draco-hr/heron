@@ -1,0 +1,7 @@
+{
+  Assert.assertEquals("heron.binaries.executor",ConfigKeys.get("EXECUTOR_BINARY"));
+  Assert.assertEquals("heron.binaries.stmgr",ConfigKeys.get("STMGR_BINARY"));
+  Assert.assertEquals("heron.binaries.tmaster",ConfigKeys.get("TMASTER_BINARY"));
+  Assert.assertEquals("heron.binaries.shell",ConfigKeys.get("SHELL_BINARY"));
+  Assert.assertEquals("heron.jars.scheduler",ConfigKeys.get("SCHEDULER_JAR"));
+}

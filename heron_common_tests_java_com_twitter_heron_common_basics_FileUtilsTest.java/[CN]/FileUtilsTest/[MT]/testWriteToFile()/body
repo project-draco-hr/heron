@@ -1,0 +1,7 @@
+{
+  String currentWorkingDir=Paths.get("").toAbsolutePath().normalize().toString();
+  Assert.assertFalse(FileUtils.writeToFile(currentWorkingDir,null));
+  PowerMockito.mockStatic(Files.class);
+  String randomString=UUID.randomUUID().toString();
+  Assert.assertTrue(FileUtils.writeToFile(randomString,null));
+}

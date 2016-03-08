@@ -1,0 +1,3 @@
+{
+  return cfg.getLongValue(ConfigKeys.get("STMGR_RAM"));
+}

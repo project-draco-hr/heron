@@ -1,0 +1,14 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  for (  String key : config.getKeySet()) {
+    Object value=config.get(key);
+    if (value instanceof String) {
+      String expanded_value=Misc.substitute(config,(String)value);
+      cb.put(key,expanded_value);
+    }
+ else {
+      cb.put(key,value);
+    }
+  }
+  return cb.build();
+}

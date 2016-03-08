@@ -1,3 +1,0 @@
-def scheduler_jars():
-    jars = ['lib/heron-scheduler.jar']
-    return jars

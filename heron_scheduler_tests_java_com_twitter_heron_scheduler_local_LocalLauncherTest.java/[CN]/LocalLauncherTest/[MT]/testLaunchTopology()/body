@@ -19,8 +19,8 @@
   Mockito.when(ShellUtility.runSyncProcess(Matchers.anyBoolean(),Matchers.anyBoolean(),Matchers.anyString(),Matchers.any(StringBuilder.class),Matchers.any(StringBuilder.class),Matchers.any(File.class))).thenReturn(0);
   PowerMockito.spy(TopologyUtility.class);
   PowerMockito.doReturn("").when(TopologyUtility.class,"makeClasspath",Matchers.any(TopologyAPI.Topology.class));
-  PowerMockito.mockStatic(FileUtility.class);
-  PowerMockito.when(FileUtility.getBaseName(Matchers.anyString())).thenReturn("");
+  PowerMockito.mockStatic(FileUtils.class);
+  PowerMockito.when(FileUtils.getBaseName(Matchers.anyString())).thenReturn("");
   Assert.assertTrue(launcher.launchTopology(packing.pack(context)));
   PowerMockito.verifyStatic();
   ShellUtility.runSyncProcess(Matchers.anyBoolean(),Matchers.anyBoolean(),Matchers.startsWith("java -cp"),Matchers.any(StringBuilder.class),Matchers.any(StringBuilder.class),Matchers.any(File.class));

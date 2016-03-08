@@ -1,0 +1,7 @@
+{
+  Assert.assertEquals("${HERON_BIN}/heron-executor",ConfigDefaults.get("EXECUTOR_BINARY"));
+  Assert.assertEquals("${HERON_BIN}/heron-stmgr",ConfigDefaults.get("STMGR_BINARY"));
+  Assert.assertEquals("${HERON_BIN}/heron-tmaster",ConfigDefaults.get("TMASTER_BINARY"));
+  Assert.assertEquals("${HERON_BIN}/heron-shell",ConfigDefaults.get("SHELL_BINARY"));
+  Assert.assertEquals("heron.jars.scheduler","${HERON_LIB}/heron-scheduler.jar",ConfigDefaults.get("SCHEDULER_JAR"));
+}

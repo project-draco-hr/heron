@@ -1,0 +1,13 @@
+{
+  Config props=ClusterConfig.loadDefaultsConfig(basicConfig);
+  Assert.assertEquals(10,props.size());
+  Assert.assertEquals("heron-executor",Context.executorBinary(props));
+  Assert.assertEquals("heron-stmgr",Context.stmgrBinary(props));
+  Assert.assertEquals("heron-tmaster",Context.tmasterBinary(props));
+  Assert.assertEquals("heron-shell",Context.shellBinary(props));
+  Assert.assertEquals("heron-scheduler.jar",Context.schedulerJar(props));
+  Assert.assertEquals(Double.valueOf(1),Context.instanceCpu(props),0.001);
+  Assert.assertEquals(Long.valueOf(128 * Constants.MB),Context.instanceRam(props));
+  Assert.assertEquals(Long.valueOf(256 * Constants.MB),Context.instanceDisk(props));
+  Assert.assertEquals(Long.valueOf(512 * Constants.MB),Context.stmgrRam(props));
+}

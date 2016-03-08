@@ -1,6 +1,6 @@
 {
   SettableFuture<Boolean> future=SettableFuture.create();
-  boolean ret=FileUtility.writeToFile(getPhysicalPlanPath(topologyName),physicalPlan.toByteArray());
+  boolean ret=FileUtils.writeToFile(getPhysicalPlanPath(topologyName),physicalPlan.toByteArray());
   future.set(ret);
   return future;
 }

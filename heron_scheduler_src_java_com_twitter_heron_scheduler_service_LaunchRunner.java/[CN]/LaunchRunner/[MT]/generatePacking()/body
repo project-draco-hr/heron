@@ -1,3 +1,0 @@
-{
-  return packingAlgorithm.pack(context);
-}

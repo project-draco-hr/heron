@@ -1,0 +1,11 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.heronHome(),Defaults.heronHome());
+  cb.put(Keys.heronBin(),Defaults.heronBin());
+  cb.put(Keys.heronConf(),Defaults.heronConf());
+  cb.put(Keys.heronDist(),Defaults.heronDist());
+  cb.put(Keys.heronEtc(),Defaults.heronEtc());
+  cb.put(Keys.heronLib(),Defaults.heronLib());
+  cb.put(Keys.javaHome(),Defaults.javaHome());
+  return cb.build();
+}

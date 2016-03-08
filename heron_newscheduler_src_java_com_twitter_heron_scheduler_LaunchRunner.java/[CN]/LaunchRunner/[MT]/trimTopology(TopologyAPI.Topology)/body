@@ -1,0 +1,10 @@
+{
+  TopologyAPI.Topology.Builder builder=topology.newBuilder().mergeFrom(topology);
+  for (  TopologyAPI.Spout.Builder spout : builder.getSpoutsBuilderList()) {
+    spout.getCompBuilder().clearJavaObject();
+  }
+  for (  TopologyAPI.Bolt.Builder bolt : builder.getBoltsBuilderList()) {
+    bolt.getCompBuilder().clearJavaObject();
+  }
+  return builder.build();
+}

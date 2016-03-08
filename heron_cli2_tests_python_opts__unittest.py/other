@@ -1,2 +1,0 @@
-import unittest2 as unittest
-import heron.cli2.src.python.opts as opts

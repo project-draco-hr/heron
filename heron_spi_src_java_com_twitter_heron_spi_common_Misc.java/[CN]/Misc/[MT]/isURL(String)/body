@@ -1,0 +1,4 @@
+{
+  Matcher m=urlPattern.matcher(pathString);
+  return m.matches();
+}

@@ -1,0 +1,6 @@
+{
+  Assert.assertTrue(Misc.isURL("file:///users/john/afile.txt"));
+  Assert.assertFalse(Misc.isURL("/users/john/afile.txt"));
+  Assert.assertTrue(Misc.isURL("https://gotoanywebsite.net/afile.html"));
+  Assert.assertFalse(Misc.isURL("https//gotoanywebsite.net//afile.html"));
+}

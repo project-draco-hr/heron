@@ -1,0 +1,38 @@
+{
+  if (!runtimeManager.prepareRestart()) {
+    LOG.severe("Failed to prepare restart locally");
+    return false;
+  }
+  Pair<Boolean,HttpURLConnection> ret=createHttpConnection();
+  if (ret.second == null)   return ret.first;
+  HttpURLConnection connection=ret.second;
+  byte[] data=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
+  if (!HttpUtils.sendHttpPostRequest(connection,data)) {
+    LOG.log(Level.SEVERE,"Failed to send http request for restart ");
+    connection.disconnect();
+    return false;
+  }
+  Common.StatusCode statusCode;
+  try {
+    LOG.info("Receiving restart response from scheduler...");
+    statusCode=Scheduler.RestartTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to parse restart response: " + e);
+    connection.disconnect();
+    return false;
+  }
+  if (!statusCode.equals(Common.StatusCode.OK)) {
+    LOG.severe("Received not OK response from scheduler for restart");
+    connection.disconnect();
+    return false;
+  }
+  if (!runtimeManager.postRestart()) {
+    LOG.severe("Failed in post restart locally");
+    connection.disconnect();
+    return false;
+  }
+  connection.disconnect();
+  LOG.info("Scheduler restarted topology successfully.");
+  return true;
+}

@@ -1,0 +1,4 @@
+{
+  Config config=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ).build();
+  return config;
+}

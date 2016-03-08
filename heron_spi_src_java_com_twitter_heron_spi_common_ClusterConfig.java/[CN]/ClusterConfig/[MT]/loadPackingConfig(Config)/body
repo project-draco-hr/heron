@@ -1,0 +1,5 @@
+{
+  String packingFile=config.getStringValue(Keys.packingFile());
+  Map readConfig=ConfigReader.loadFile(packingFile);
+  return Config.newBuilder().putAll(readConfig).build();
+}

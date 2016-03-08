@@ -1,0 +1,8 @@
+{
+  Assert.assertEquals("${HERON_LIB}/instance/*",ConfigDefaults.get("INSTANCE_CLASSPATH"));
+  Assert.assertEquals("${HERON_LIB}/metricsmgr/*",ConfigDefaults.get("METRICSMGR_CLASSPATH"));
+  Assert.assertEquals("${HERON_LIB}/packing/*",ConfigDefaults.get("PACKING_CLASSPATH"));
+  Assert.assertEquals("${HERON_LIB}/scheduler/*",ConfigDefaults.get("SCHEDULER_CLASSPATH"));
+  Assert.assertEquals("${HERON_LIB}/statemgr/*",ConfigDefaults.get("STATEMGR_CLASSPATH"));
+  Assert.assertEquals("${HERON_LIB}/uploader/*",ConfigDefaults.get("UPLOADER_CLASSPATH"));
+}

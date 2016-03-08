@@ -1,0 +1,25 @@
+{
+  SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
+  LOG.info("Fetching scheduler location from state manager for " + command + " topology");
+  ListenableFuture<Scheduler.SchedulerLocation> locationFuture=statemgr.getSchedulerLocation(null,Runtime.topologyName(runtime));
+  Scheduler.SchedulerLocation schedulerLocation=NetworkUtils.awaitResult(locationFuture,5,TimeUnit.SECONDS);
+  if (schedulerLocation == null) {
+    LOG.severe("Failed to get scheduler location for " + command + " topology");
+    return Pair.create(false,null);
+  }
+  if (schedulerLocation.getHttpEndpoint().equals(IStateManager.NO_SCHEDULER_REST_ENDPOINT)) {
+    LOG.info("Nothing required to be done on scheduler.");
+    return Pair.create(true,null);
+  }
+  LOG.info("Scheduler is listening on location: " + schedulerLocation.toString());
+  String endpoint=String.format("http://%s/%s",schedulerLocation.getHttpEndpoint(),command);
+  HttpURLConnection connection;
+  try {
+    connection=HttpUtils.getConnection(endpoint);
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to connect to scheduler http endpoint: " + endpoint);
+    return Pair.create(false,null);
+  }
+  return Pair.create(true,connection);
+}

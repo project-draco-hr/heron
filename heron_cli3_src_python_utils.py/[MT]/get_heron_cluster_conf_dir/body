@@ -1,0 +1,6 @@
+def get_heron_cluster_conf_dir(cluster_role_env, default_config_path):
+    '\n  This will provide heron cluster config directory, if config path is default\n  :return: absolute path of heron cluster conf directory\n  '
+    cluster_role_env = parse_cluster_role_env(cluster_role_env)
+    if (default_config_path == get_heron_conf_dir()):
+        return os.path.join(default_config_path, cluster_role_env[0])
+    return default_config_path

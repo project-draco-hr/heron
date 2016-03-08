@@ -1,5 +1,0 @@
-{
-  final SchedulerServer schedulerServer=new SchedulerServer(scheduler,context,port,true);
-  schedulerServer.start();
-  return schedulerServer;
-}

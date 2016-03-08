@@ -1,0 +1,10 @@
+{
+  Assert.assertEquals("${HERON_CONF}/cluster.yaml",ConfigDefaults.get("CLUSTER_YAML"));
+  Assert.assertEquals("${HERON_CONF}/defaults.yaml",ConfigDefaults.get("DEFAULTS_YAML"));
+  Assert.assertEquals("${HERON_CONF}/metrics_sinks.yaml",ConfigDefaults.get("METRICS_YAML"));
+  Assert.assertEquals("${HERON_CONF}/packing.yaml",ConfigDefaults.get("PACKING_YAML"));
+  Assert.assertEquals("${HERON_CONF}/scheduler.yaml",ConfigDefaults.get("SCHEDULER_YAML"));
+  Assert.assertEquals("${HERON_CONF}/statemgr.yaml",ConfigDefaults.get("STATEMGR_YAML"));
+  Assert.assertEquals("${HERON_CONF}/heron_internals.yaml",ConfigDefaults.get("SYSTEM_YAML"));
+  Assert.assertEquals("${HERON_CONF}/uploader.yaml",ConfigDefaults.get("UPLOADER_YAML"));
+}

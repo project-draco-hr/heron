@@ -1,7 +1,0 @@
-def add_config(parser):
-    default_config_path = 'conf/com/twitter/aurora'
-    parser.add_argument('--config-path', metavar=(('(a string; path to scheduler config; default: "' + default_config_path) + '")'), default=os.path.join(utils.get_heron_dir(), default_config_path))
-    default_config_loader = 'com.twitter.heron.scheduler.aurora.AuroraConfigLoader'
-    parser.add_argument('--config-loader', metavar=(('(a string; class to load scheduler config; default: "' + default_config_loader) + '")'), default=default_config_loader)
-    parser.add_argument('--config-property', metavar='(a string; scheduler config property; default: [])', action='append', default=[])
-    return parser

@@ -1,0 +1,3 @@
+{
+  return ConfigDefaults.get("PACKING_CLASS");
+}

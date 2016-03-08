@@ -1,0 +1,3 @@
+{
+  return Convert.getLong(defaults.get(key));
+}

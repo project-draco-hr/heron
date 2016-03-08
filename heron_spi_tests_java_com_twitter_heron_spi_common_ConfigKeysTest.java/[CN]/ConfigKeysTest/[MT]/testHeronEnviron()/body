@@ -1,0 +1,9 @@
+{
+  Assert.assertEquals("heron.directory.home",ConfigKeys.get("HERON_HOME"));
+  Assert.assertEquals("heron.directory.bin",ConfigKeys.get("HERON_BIN"));
+  Assert.assertEquals("heron.directory.conf",ConfigKeys.get("HERON_CONF"));
+  Assert.assertEquals("heron.directory.lib",ConfigKeys.get("HERON_LIB"));
+  Assert.assertEquals("heron.directory.dist",ConfigKeys.get("HERON_DIST"));
+  Assert.assertEquals("heron.directory.etc",ConfigKeys.get("HERON_ETC"));
+  Assert.assertEquals("heron.directory.java.home",ConfigKeys.get("JAVA_HOME"));
+}

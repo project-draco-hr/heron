@@ -1,3 +1,0 @@
-{
-  this.rootAddress=(String)conf.get(ROOT_ADDRESS);
-}

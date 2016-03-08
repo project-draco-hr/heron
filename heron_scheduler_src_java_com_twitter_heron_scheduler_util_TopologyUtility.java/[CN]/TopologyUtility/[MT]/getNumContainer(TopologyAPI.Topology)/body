@@ -1,4 +1,0 @@
-{
-  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
-  return Integer.parseInt(TopologyUtility.getConfigWithDefault(topologyConfig,Config.TOPOLOGY_STMGRS,"1").trim());
-}

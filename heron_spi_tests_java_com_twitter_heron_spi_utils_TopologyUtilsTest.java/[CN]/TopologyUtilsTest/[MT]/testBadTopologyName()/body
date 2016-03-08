@@ -1,0 +1,8 @@
+{
+  int componentParallelism=2;
+  Map<String,Integer> spouts=new HashMap<>();
+  spouts.put("spout",componentParallelism);
+  Map<String,Integer> bolts=new HashMap<>();
+  bolts.put("bolt",componentParallelism);
+  Assert.assertFalse(TopologyUtils.verifyTopology(TopologyTests.createTopology("test.topology",new Config(),spouts,bolts)));
+}

@@ -1,0 +1,11 @@
+{
+  runtimeManager.initialize(config,runtime);
+  boolean result=false;
+  if (command.equals("activate") || command.equals("resume"))   result=activateTopologyHandler(Context.topologyName(config));
+ else   if (command.equals("deactivate") || command.equals("suspend"))   result=deactivateTopologyHandler(Context.topologyName(config));
+ else   if (command.equals("restart"))   result=restartTopologyHandler(Context.topologyName(config));
+ else   if (command.equals("kill"))   result=killTopologyHandler(Context.topologyName(config));
+ else   LOG.info("Unknown command for topology: " + command);
+  runtimeManager.close();
+  return result;
+}

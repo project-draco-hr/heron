@@ -1,0 +1,9 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.putAll(getDefaultHome());
+  cb.putAll(getDefaultBinaries());
+  cb.putAll(getDefaultJars());
+  cb.putAll(getDefaultFilesAndPaths());
+  cb.putAll(getDefaultResources());
+  return cb.build();
+}
