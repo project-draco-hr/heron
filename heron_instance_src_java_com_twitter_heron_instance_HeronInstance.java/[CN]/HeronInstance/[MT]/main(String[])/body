@@ -17,7 +17,9 @@
   PhysicalPlans.Instance instance=PhysicalPlans.Instance.newBuilder().setInstanceId(instanceId).setStmgrId(streamId).setInfo(instanceInfo).build();
   Level loggingLevel=Level.INFO;
   String loggingDir=systemConfig.getHeronLoggingDirectory();
-  LoggingHelper.loggerInit(instanceId,loggingLevel,loggingDir);
+  LoggingHelper.loggerInit(loggingLevel,true);
+  LoggingHelper.addLoggingHandler(LoggingHelper.getFileHandler(instanceId,loggingDir,true,systemConfig.getHeronLoggingMaximumSizeMb() * Constants.MB_TO_BYTES,systemConfig.getHeronLoggingMaximumFiles()));
+  LoggingHelper.addLoggingHandler(new ErrorReportLoggingHandler());
   LOG.info("\nStarting instance " + instanceId + " for topology "+ topologyName+ " and topologyId "+ topologyId+ " for component "+ componentName+ " with taskId "+ taskId+ " and componentIndex "+ componentIndex+ " and stmgrId "+ streamId+ " and stmgrPort "+ streamPort+ " and metricsManagerPort "+ metricsPort);
   LOG.info("System Config: " + systemConfig);
   HeronInstance heronInstance=new HeronInstance(topologyName,topologyId,instance,streamPort,metricsPort);
