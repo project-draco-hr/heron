@@ -9,7 +9,7 @@
   String systemConfigFilename=args[4];
   String metricsSinksConfigFilename=args[5];
   SystemConfig systemConfig=new SystemConfig(systemConfigFilename,true);
-  SingletonRegistry.INSTANCE.registerSingleton(Constants.HERON_SYSTEM_CONFIG,systemConfig);
+  SingletonRegistry.INSTANCE.registerSingleton(SystemConfig.HERON_SYSTEM_CONFIG,systemConfig);
   Level loggingLevel=Level.INFO;
   String loggingDir=systemConfig.getHeronLoggingDirectory();
   LoggingHelper.loggerInit(metricsmgrId,loggingLevel,loggingDir);

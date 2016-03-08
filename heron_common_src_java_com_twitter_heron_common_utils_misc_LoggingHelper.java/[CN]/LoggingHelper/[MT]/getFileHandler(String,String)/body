@@ -1,5 +1,5 @@
 {
-  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(com.twitter.heron.common.utils.misc.Constants.HERON_SYSTEM_CONFIG);
+  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
   String pattern=loggingDir + "/" + instanceId+ ".log.%g";
   boolean append=true;
   int limit=systemConfig.getHeronLoggingMaximumSizeMb() * Constants.MB_TO_BYTES;

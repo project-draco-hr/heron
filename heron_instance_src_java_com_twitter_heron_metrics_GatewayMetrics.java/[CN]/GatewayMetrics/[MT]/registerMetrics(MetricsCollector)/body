@@ -1,5 +1,5 @@
 {
-  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
   int interval=systemConfig.getHeronMetricsExportIntervalSec();
   metricsCollector.registerMetric("__gateway-received-packets-size",receivedPacketsSize,interval);
   metricsCollector.registerMetric("__gateway-sent-packets-size",sentPacketsSize,interval);

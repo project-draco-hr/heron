@@ -12,7 +12,7 @@
   int streamPort=Integer.parseInt(args[7]);
   int metricsPort=Integer.parseInt(args[8]);
   SystemConfig systemConfig=new SystemConfig(args[9],true);
-  SingletonRegistry.INSTANCE.registerSingleton(Constants.HERON_SYSTEM_CONFIG,systemConfig);
+  SingletonRegistry.INSTANCE.registerSingleton(SystemConfig.HERON_SYSTEM_CONFIG,systemConfig);
   PhysicalPlans.InstanceInfo instanceInfo=PhysicalPlans.InstanceInfo.newBuilder().setTaskId(taskId).setComponentIndex(componentIndex).setComponentName(componentName).build();
   PhysicalPlans.Instance instance=PhysicalPlans.Instance.newBuilder().setInstanceId(instanceId).setStmgrId(streamId).setInfo(instanceInfo).build();
   Level loggingLevel=Level.INFO;
