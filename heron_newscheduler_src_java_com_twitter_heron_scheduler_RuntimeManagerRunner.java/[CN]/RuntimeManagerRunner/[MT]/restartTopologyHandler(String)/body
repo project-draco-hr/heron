@@ -1,12 +1,13 @@
 {
-  if (!runtimeManager.prepareRestart()) {
+  Integer containerId=Context.topologyContainerIdentifier(config);
+  if (!runtimeManager.prepareRestart(containerId)) {
     LOG.severe("Failed to prepare restart locally");
     return false;
   }
   Pair<Boolean,HttpURLConnection> ret=createHttpConnection();
   if (ret.second == null)   return ret.first;
   HttpURLConnection connection=ret.second;
-  byte[] data=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
+  byte[] data=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(topologyName).setContainerIndex(containerId).build().toByteArray();
   if (!HttpUtils.sendHttpPostRequest(connection,data)) {
     LOG.log(Level.SEVERE,"Failed to send http request for restart ");
     connection.disconnect();
@@ -27,7 +28,7 @@
     connection.disconnect();
     return false;
   }
-  if (!runtimeManager.postRestart()) {
+  if (!runtimeManager.postRestart(containerId)) {
     LOG.severe("Failed in post restart locally");
     connection.disconnect();
     return false;

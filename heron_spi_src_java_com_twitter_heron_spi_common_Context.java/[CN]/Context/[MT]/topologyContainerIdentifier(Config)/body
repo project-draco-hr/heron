@@ -1,0 +1,3 @@
+{
+  return cfg.getIntegerValue(ConfigKeys.get("TOPOLOGY_CONTAINER_IDENTIFIER"));
+}
