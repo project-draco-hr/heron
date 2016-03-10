@@ -1,4 +1,7 @@
 def setup():
+    pid = os.getpid()
+    sys.stdout = open(('stdout.%d' % pid), 'w')
+    sys.stderr = open(('stderr.%d' % pid), 'w')
     do_print('Set up process group; executor becomes leader')
     os.setpgrp()
     do_print('Register the SIGTERM signal handler')
