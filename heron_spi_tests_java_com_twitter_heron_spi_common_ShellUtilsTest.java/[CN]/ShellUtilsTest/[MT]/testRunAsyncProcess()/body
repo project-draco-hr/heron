@@ -2,7 +2,7 @@
   String testString="testString";
   StringBuilder stdout=new StringBuilder();
   StringBuilder stderr=new StringBuilder();
-  Process p=ShellUtils.runASyncProcess(true,false,String.format("sleep 1 && echo %s",testString),new File("."));
+  Process p=ShellUtils.runASyncProcess(true,String.format("sleep 1 && echo %s",testString),new File("."));
   wait(10,TimeUnit.MILLISECONDS);
   Assert.assertEquals(0,p.getInputStream().available());
 }
