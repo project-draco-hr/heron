@@ -1,4 +1,13 @@
 {
+  TopologyAPI.TopologyState state=getRuntimeTopologyState(topologyName);
+  if (state == null) {
+    LOG.severe("Topology still not initialized.");
+    return false;
+  }
+  if (state == TopologyAPI.TopologyState.PAUSED) {
+    LOG.warning("Topology is already deactivated");
+    return true;
+  }
   if (!runtimeManager.prepareDeactivate()) {
     LOG.severe("Failed to prepare deactivate locally");
     return false;
