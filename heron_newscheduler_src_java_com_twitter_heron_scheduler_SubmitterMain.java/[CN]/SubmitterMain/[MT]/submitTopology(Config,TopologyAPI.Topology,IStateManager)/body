@@ -1,7 +1,4 @@
 {
-  String statemgrClass=Context.stateManagerClass(config);
-  IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
-  statemgr.initialize(config);
   UploadRunner uploadRunner=new UploadRunner(config);
   boolean result=uploadRunner.call();
   if (!result) {
@@ -15,9 +12,7 @@
   if (!result) {
     LOG.severe("Failed to launch topology. Attempting to roll back upload.");
     uploadRunner.undo();
-    statemgr.close();
     return false;
   }
-  statemgr.close();
   return true;
 }

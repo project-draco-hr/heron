@@ -13,7 +13,23 @@
   Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath)).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyPackage,topologyJarFile,topologyDefnFile,topology)).build());
   LOG.info("Static config loaded successfully ");
   LOG.info(config.toString());
-  if (!submitTopology(config,topology)) {
+  String statemgrClass=Context.stateManagerClass(config);
+  IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
+  statemgr.initialize(config);
+  String topologyName=topology.getName();
+  boolean isValid=validateSubmit(statemgr,topologyName);
+  boolean isSubmitSuccess=false;
+  if (isValid) {
+    LOG.info("Topology: " + topologyName + " to be submitted");
+    isSubmitSuccess=submitTopology(config,topology,statemgr);
+  }
+  statemgr.close();
+  if (!isSubmitSuccess) {
+    LOG.severe("Failed to submit topology " + topologyName);
     Runtime.getRuntime().exit(1);
+  }
+ else {
+    LOG.info("Topology " + topologyName + " submitted successfully");
+    Runtime.getRuntime().exit(0);
   }
 }
