@@ -1,0 +1,3 @@
+def get_query(self, metric, component, instance):
+    q = queries.get(metric)
+    return q.format(component, instance)

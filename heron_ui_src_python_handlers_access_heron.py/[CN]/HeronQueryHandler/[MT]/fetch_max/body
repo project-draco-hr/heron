@@ -14,7 +14,3 @@ def fetch_max(self, cluster, metric, topology, component, instance, timerange, e
         data = dict(zip(keys, values))
         result = dict(status='success', starttime=timerange[0], endtime=timerange[1], result=dict(timeline=[dict(data=data)]))
     raise tornado.gen.Return(result)
-
-    def get_query(self, metric, component, instance):
-        q = queries.get(metric)
-        return q.format(component, instance)
