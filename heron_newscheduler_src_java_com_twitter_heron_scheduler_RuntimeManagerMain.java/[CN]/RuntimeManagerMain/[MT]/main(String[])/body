@@ -21,13 +21,13 @@
   IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
   statemgr.initialize(config);
   boolean isValid=validateRuntimeManage(statemgr,topologyName);
-  boolean isManageSuccess=false;
+  boolean isSuccessful=false;
   if (isValid) {
     LOG.info("Topology: " + topologyName + " to be "+ command+ "ed");
-    isManageSuccess=manageTopology(config,command,statemgr);
+    isSuccessful=manageTopology(config,command,statemgr);
   }
   statemgr.close();
-  if (!isManageSuccess) {
+  if (!isSuccessful) {
     LOG.severe("Failed to " + command + " topology "+ topologyName);
     Runtime.getRuntime().exit(1);
   }

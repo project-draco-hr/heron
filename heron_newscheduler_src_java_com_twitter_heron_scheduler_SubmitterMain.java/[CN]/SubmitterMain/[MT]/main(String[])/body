@@ -18,13 +18,13 @@
   statemgr.initialize(config);
   String topologyName=topology.getName();
   boolean isValid=validateSubmit(statemgr,topologyName);
-  boolean isSubmitSuccess=false;
+  boolean isSuccessful=false;
   if (isValid) {
     LOG.info("Topology: " + topologyName + " to be submitted");
-    isSubmitSuccess=submitTopology(config,topology,statemgr);
+    isSuccessful=submitTopology(config,topology,statemgr);
   }
   statemgr.close();
-  if (!isSubmitSuccess) {
+  if (!isSuccessful) {
     LOG.severe("Failed to submit topology " + topologyName);
     Runtime.getRuntime().exit(1);
   }
