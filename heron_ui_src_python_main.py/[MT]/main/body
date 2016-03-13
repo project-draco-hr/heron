@@ -1,0 +1,8 @@
+def main(argv):
+    define_options()
+    tornado.options.parse_command_line()
+    tornado.log.enable_pretty_logging()
+    port = options.port
+    http_server = tornado.httpserver.HTTPServer(Application())
+    http_server.listen(port)
+    tornado.ioloop.IOLoop.instance().start()

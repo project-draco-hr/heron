@@ -1,0 +1,17 @@
+@tornado.gen.coroutine
+def get(self):
+    topologies = yield access.get_topologies_states()
+    result = dict()
+    for (cluster, cluster_value) in topologies.iteritems():
+        result[cluster] = dict()
+        for (environ, environ_value) in cluster_value.iteritems():
+            result[cluster][environ] = dict()
+            for (topology, topology_value) in environ_value.iteritems():
+                if (('jobname' not in topology_value) or (topology_value['jobname'] is None)):
+                    continue
+                if topology_value.has_key('submission_time'):
+                    topology_value['submission_time'] = topology_value['submission_time']
+                else:
+                    topology_value['submission_time'] = '-'
+                result[cluster][environ][topology] = topology_value
+    self.write(result)

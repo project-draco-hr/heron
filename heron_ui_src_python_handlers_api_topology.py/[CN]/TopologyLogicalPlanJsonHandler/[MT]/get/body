@@ -1,0 +1,19 @@
+@tornado.gen.coroutine
+def get(self, cluster, environ, topology):
+    start_time = time.time()
+    lplan = yield access.get_logical_plan(cluster, environ, topology)
+    if (not lplan):
+        self.write(dict())
+        return
+    if ((not lplan.has_key('spouts')) or (not lplan.has_key('bolts'))):
+        self.write(dict())
+        return
+    spouts_map = dict()
+    for (sn, sv) in lplan['spouts'].items():
+        spouts_map[sn] = dict(outputs=sv['outputs'], spout_type=sv['type'], spout_source=sv['source'])
+    bolts_map = dict()
+    for (bn, bv) in lplan['bolts'].items():
+        bolts_map[bn] = dict(inputComponents=[i['component_name'] for i in bv['inputs']], inputs=bv['inputs'], outputs=bv['outputs'])
+    diameter = common.graph.TopologyDAG(lplan).diameter()
+    result = dict(status='success', message='', version=common.VERSION, executiontime=(time.time() - start_time), result=dict(stages=diameter, spouts=spouts_map, bolts=bolts_map))
+    self.write(result)

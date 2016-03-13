@@ -1,0 +1,20 @@
+@tornado.gen.coroutine
+def fetch_max(self, cluster, metric, topology, component, instance, timerange, environ=None):
+    components = ([component] if ('*' != component) else yield get_comps(cluster, environ, topology))
+    futures = []
+    for comp in components:
+        query = self.get_query(metric, comp, instance)
+        max_query = ('MAX(%s)' % query)
+        future = get_metrics(cluster, environ, topology, timerange, max_query)
+        futures.append(future)
+        results = yield futures
+        keys = results[0]['timeline'][0]['data'].keys()
+        timelines = (map(r['timeline'][0]['data'].get, keys) for r in results)
+        values = (max(v) for v in zip(*timelines))
+        data = dict(zip(keys, values))
+        result = dict(status='success', starttime=timerange[0], endtime=timerange[1], result=dict(timeline=[dict(data=data)]))
+    raise tornado.gen.Return(result)
+
+    def get_query(self, metric, component, instance):
+        q = queries.get(metric)
+        return q.format(component, instance)
