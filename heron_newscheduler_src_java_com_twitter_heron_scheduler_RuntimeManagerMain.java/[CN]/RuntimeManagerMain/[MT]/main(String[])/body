@@ -21,19 +21,26 @@
   String statemgrClass=Context.stateManagerClass(config);
   IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
   statemgr.initialize(config);
-  boolean isValid=validateRuntimeManage(statemgr,topologyName);
+  String runtimeManagerClass=Context.runtimeManagerClass(config);
+  IRuntimeManager runtimeManager=(IRuntimeManager)Class.forName(runtimeManagerClass).newInstance();
   boolean isSuccessful=false;
-  if (isValid) {
-    LOG.info("Topology: " + topologyName + " to be "+ command+ "ed");
-    isSuccessful=manageTopology(config,command,statemgr);
+  try {
+    boolean isValid=validateRuntimeManage(statemgr,topologyName);
+    if (isValid) {
+      LOG.info("Topology: " + topologyName + " to be "+ command+ "ed");
+      isSuccessful=manageTopology(config,command,statemgr,runtimeManager);
+    }
   }
-  statemgr.close();
-  if (!isSuccessful) {
-    LOG.severe("Failed to " + command + " topology "+ topologyName);
-    Runtime.getRuntime().exit(1);
-  }
+  finally {
+    statemgr.close();
+    runtimeManager.close();
+    if (!isSuccessful) {
+      LOG.severe("Failed to " + command + " topology "+ topologyName);
+      Runtime.getRuntime().exit(1);
+    }
  else {
-    LOG.info("Topology " + topologyName + " "+ command+ " successfully");
-    Runtime.getRuntime().exit(0);
+      LOG.info("Topology " + topologyName + " "+ command+ " successfully");
+      Runtime.getRuntime().exit(0);
+    }
   }
 }

@@ -17,6 +17,5 @@ break;
 default :
 LOG.severe("Unknown command for topology: " + command);
 }
-runtimeManager.close();
 return result;
 }

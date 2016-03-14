@@ -1,3 +1,4 @@
 Config config
 IRuntimeManager.Command command
 IStateManager statemgr
+IRuntimeManager runtimeManager
