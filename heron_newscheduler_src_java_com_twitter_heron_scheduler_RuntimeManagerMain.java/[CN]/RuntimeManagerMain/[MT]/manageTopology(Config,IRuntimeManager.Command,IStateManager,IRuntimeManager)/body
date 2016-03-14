@@ -1,6 +1,6 @@
 {
   Config runtime=Config.newBuilder().put(Keys.topologyName(),Context.topologyName(config)).put(Keys.schedulerStateManagerAdaptor(),new SchedulerStateManagerAdaptor(statemgr)).build();
-  RuntimeManagerRunner runtimeManagerRunner=new RuntimeManagerRunner(config,runtime,command);
+  RuntimeManagerRunner runtimeManagerRunner=new RuntimeManagerRunner(config,runtime,command,runtimeManager);
   boolean ret=runtimeManagerRunner.call();
   return ret;
 }

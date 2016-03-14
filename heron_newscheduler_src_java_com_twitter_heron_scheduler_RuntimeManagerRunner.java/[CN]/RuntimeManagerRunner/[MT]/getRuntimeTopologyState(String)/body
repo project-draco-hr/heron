@@ -3,7 +3,7 @@
   ListenableFuture<PhysicalPlans.PhysicalPlan> physicalPlanFuture=statemgr.getPhysicalPlan(null,topologyName);
   PhysicalPlans.PhysicalPlan plan=NetworkUtils.awaitResult(physicalPlanFuture,5,TimeUnit.SECONDS);
   if (plan == null) {
-    LOG.severe("Failed to get physical plan for topology: " + topologyName);
+    LOG.log(Level.SEVERE,"Failed to get physical plan for topology {0}",topologyName);
     return null;
   }
   return plan.getTopology().getState();
