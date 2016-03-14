@@ -1,17 +1,14 @@
 {
-  UploadRunner uploadRunner=new UploadRunner(config);
   boolean result=uploadRunner.call();
   if (!result) {
-    LOG.severe("Failed to upload package. Exiting");
-    statemgr.close();
+    LOG.severe("Failed to upload package.");
     return false;
   }
   Config runtime=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).put(Keys.topologyDefinition(),topology).put(Keys.schedulerStateManagerAdaptor(),new SchedulerStateManagerAdaptor(statemgr)).put(Keys.topologyPackageUri(),uploadRunner.getUri()).build();
-  LaunchRunner launchRunner=new LaunchRunner(config,runtime);
+  LaunchRunner launchRunner=new LaunchRunner(config,runtime,launcher,packing);
   result=launchRunner.call();
   if (!result) {
     LOG.severe("Failed to launch topology. Attempting to roll back upload.");
-    uploadRunner.undo();
     return false;
   }
   return true;
