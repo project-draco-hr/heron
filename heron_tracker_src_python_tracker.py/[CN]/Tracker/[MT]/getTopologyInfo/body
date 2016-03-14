@@ -1,8 +1,8 @@
-def getTopologyInfo(self, topologyName, dc, environ):
-    '\n    Returns the JSON representation of a topology\n    by its name, dc and environ.\n    Raises exception if no such topology is found.\n    '
+def getTopologyInfo(self, topologyName, cluster, environ):
+    '\n    Returns the JSON representation of a topology\n    by its name, cluster and environ.\n    Raises exception if no such topology is found.\n    '
     for ((topology_name, state_manager_name), topologyInfo) in self.topologyInfos.iteritems():
         executionState = topologyInfo['execution_state']
-        if ((topologyName == topology_name) and (dc == executionState['dc']) and (environ == executionState['environ'])):
+        if ((topologyName == topology_name) and (cluster == executionState['cluster']) and (environ == executionState['environ'])):
             return topologyInfo
-    LOG.info('Could not find topology info for topology: {0},              dc: {1} and environ: {2}'.format(topologyName, dc, environ))
+    LOG.info('Could not find topology info for topology: {0},              cluster: {1} and environ: {2}'.format(topologyName, cluster, environ))
     raise Exception('No topology found')
