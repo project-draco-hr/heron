@@ -20,11 +20,11 @@
   LOG.info(config.toString());
   String statemgrClass=Context.stateManagerClass(config);
   IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
-  statemgr.initialize(config);
   String runtimeManagerClass=Context.runtimeManagerClass(config);
   IRuntimeManager runtimeManager=(IRuntimeManager)Class.forName(runtimeManagerClass).newInstance();
   boolean isSuccessful=false;
   try {
+    statemgr.initialize(config);
     boolean isValid=validateRuntimeManage(statemgr,topologyName);
     if (isValid) {
       LOG.log(Level.INFO,"Topology: {0} to be {1}ed",new Object[]{topologyName,command});

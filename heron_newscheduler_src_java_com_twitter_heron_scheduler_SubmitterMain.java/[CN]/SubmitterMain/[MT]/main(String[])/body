@@ -15,15 +15,16 @@
   LOG.info(config.toString());
   String statemgrClass=Context.stateManagerClass(config);
   IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
-  statemgr.initialize(config);
   String launcherClass=Context.launcherClass(config);
   ILauncher launcher=(ILauncher)Class.forName(launcherClass).newInstance();
   String packingClass=Context.packingClass(config);
   IPacking packing=(IPacking)Class.forName(packingClass).newInstance();
-  UploadRunner uploadRunner=new UploadRunner(config);
   String topologyName=topology.getName();
   boolean isSuccessful=false;
+  UploadRunner uploadRunner=null;
   try {
+    statemgr.initialize(config);
+    uploadRunner=new UploadRunner(config);
     boolean isValid=validateSubmit(statemgr,topologyName);
     if (isValid) {
       LOG.log(Level.INFO,"Topology {0} to be submitted",topologyName);
@@ -33,7 +34,9 @@
   finally {
     statemgr.close();
     if (!isSuccessful) {
-      uploadRunner.undo();
+      if (uploadRunner != null) {
+        uploadRunner.undo();
+      }
       launcher.undo();
       LOG.log(Level.SEVERE,"Failed to submit topology {0}. Existing",topologyName);
       System.exit(1);
