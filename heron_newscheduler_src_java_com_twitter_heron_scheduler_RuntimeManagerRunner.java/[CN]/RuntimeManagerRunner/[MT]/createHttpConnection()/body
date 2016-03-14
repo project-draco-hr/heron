@@ -12,7 +12,7 @@
     return Pair.create(true,null);
   }
   LOG.info("Scheduler is listening on location: " + schedulerLocation.toString());
-  String endpoint=String.format("http://%s/%s",schedulerLocation.getHttpEndpoint(),command);
+  String endpoint=getCommandEndpoint(schedulerLocation.getHttpEndpoint(),command);
   HttpURLConnection connection;
   try {
     connection=HttpUtils.getConnection(endpoint);

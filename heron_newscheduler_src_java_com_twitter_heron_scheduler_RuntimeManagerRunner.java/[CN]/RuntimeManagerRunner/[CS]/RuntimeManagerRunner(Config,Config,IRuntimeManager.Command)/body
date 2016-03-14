@@ -1,7 +1,7 @@
 {
   this.config=config;
   this.runtime=runtime;
-  this.command=command.toLowerCase();
+  this.command=command;
   String runtimeManagerClass=Context.runtimeManagerClass(config);
   this.runtimeManager=(IRuntimeManager)Class.forName(runtimeManagerClass).newInstance();
 }
