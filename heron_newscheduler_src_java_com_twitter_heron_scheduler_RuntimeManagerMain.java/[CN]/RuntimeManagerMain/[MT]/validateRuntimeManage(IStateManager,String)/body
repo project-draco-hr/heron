@@ -1,0 +1,8 @@
+{
+  Boolean isTopologyRunning=NetworkUtils.awaitResult(statemgr.isTopologyRunning(topologyName),5,TimeUnit.SECONDS);
+  if (isTopologyRunning == null || isTopologyRunning.equals(Boolean.FALSE)) {
+    LOG.severe("No such topology exists");
+    return false;
+  }
+  return true;
+}
