@@ -1,17 +1,17 @@
 def fill_tracker_topologies(self):
     self.topology1 = Topology('top_name1', 'mock_name1')
-    self.topology1.dc = 'dc1'
+    self.topology1.cluster = 'cluster1'
     self.topology1.environ = 'env1'
     self.topology2 = Topology('top_name2', 'mock_name1')
-    self.topology2.dc = 'dc1'
+    self.topology2.cluster = 'cluster1'
     self.topology2.environ = 'env1'
     self.topology3 = Topology('top_name3', 'mock_name1')
-    self.topology3.dc = 'dc1'
+    self.topology3.cluster = 'cluster1'
     self.topology3.environ = 'env2'
     self.topology4 = Topology('top_name4', 'mock_name2')
-    self.topology4.dc = 'dc2'
+    self.topology4.cluster = 'cluster2'
     self.topology4.environ = 'env1'
     self.topology5 = Topology('top_name5', 'mock_name2')
-    self.topology5.dc = 'dc2'
+    self.topology5.cluster = 'cluster2'
     self.topology5.environ = 'env2'
     self.tracker.topologies = [self.topology1, self.topology2, self.topology3, self.topology4, self.topology5]

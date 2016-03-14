@@ -1,0 +1,7 @@
+def test_get_topology_by_cluster_environ_and_name(self):
+    self.fill_tracker_topologies()
+    self.assertEqual(self.topology1, self.tracker.getTopologyByClusterEnvironAndName('cluster1', 'env1', 'top_name1'))
+    self.assertEqual(self.topology2, self.tracker.getTopologyByClusterEnvironAndName('cluster1', 'env1', 'top_name2'))
+    self.assertEqual(self.topology3, self.tracker.getTopologyByClusterEnvironAndName('cluster1', 'env2', 'top_name3'))
+    self.assertEqual(self.topology4, self.tracker.getTopologyByClusterEnvironAndName('cluster2', 'env1', 'top_name4'))
+    self.assertEqual(self.topology5, self.tracker.getTopologyByClusterEnvironAndName('cluster2', 'env2', 'top_name5'))
