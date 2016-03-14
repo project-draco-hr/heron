@@ -19,7 +19,7 @@
     statusCode=Scheduler.RestartTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
   }
  catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Failed to parse restart response: " + e);
+    LOG.log(Level.SEVERE,"Failed to parse restart response: ",e);
     connection.disconnect();
     return false;
   }

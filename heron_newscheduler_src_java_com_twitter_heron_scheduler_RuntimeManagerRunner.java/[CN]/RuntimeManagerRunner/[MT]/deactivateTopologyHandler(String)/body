@@ -27,7 +27,7 @@
     statusCode=Scheduler.DeactivateTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
   }
  catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Failed to parse deactivate response: " + e);
+    LOG.log(Level.SEVERE,"Failed to parse deactivate response: ",e);
     connection.disconnect();
     return false;
   }

@@ -18,7 +18,7 @@
     statusCode=Scheduler.KillTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
   }
  catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Failed to parse kill response: " + e);
+    LOG.log(Level.SEVERE,"Failed to parse kill response: ",e);
     connection.disconnect();
     return false;
   }
