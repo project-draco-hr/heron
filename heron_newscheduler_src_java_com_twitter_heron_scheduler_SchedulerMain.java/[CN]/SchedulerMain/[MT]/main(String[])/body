@@ -26,6 +26,6 @@
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
   Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs()).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyJarFile,topologyDefnFile,topology)).build());
   setupLogging(config);
-  LOG.info("loaded scheduler config " + config);
+  LOG.log(Level.INFO,"Loaded scheduler config: {0}",config);
   runScheduler(config,schedulerServerPort,topology);
 }
