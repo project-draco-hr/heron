@@ -6,7 +6,7 @@
   PackingPlan packedPlan=packing.pack();
   launcher.initialize(config,runtime);
   if (!launcher.prepareLaunch(packedPlan)) {
-    LOG.severe(launcher.getClass().getName() + " Failed to prepare launch topology locally.");
+    LOG.log(Level.SEVERE,"{0} failed to prepare launch topology locally",launcher.getClass().getName());
     return false;
   }
   ExecutionEnvironment.ExecutionState executionState=launcher.updateExecutionState(createBasicExecutionState());
@@ -33,7 +33,7 @@
     return false;
   }
   if (!launcher.postLaunch(packedPlan)) {
-    LOG.severe(launcher.getClass().getName() + " failed to post launch topology locally.");
+    LOG.log(Level.SEVERE,"{0} failed to post launch topology locally",launcher.getClass().getName());
     return false;
   }
   return true;

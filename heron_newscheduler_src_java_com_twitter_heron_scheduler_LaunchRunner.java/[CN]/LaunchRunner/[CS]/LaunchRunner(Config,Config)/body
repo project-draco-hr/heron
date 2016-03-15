@@ -1,8 +1,6 @@
 {
   this.config=config;
   this.runtime=runtime;
-  String launcherClass=Context.launcherClass(config);
-  this.launcher=(ILauncher)Class.forName(launcherClass).newInstance();
-  String packingClass=Context.packingClass(config);
-  this.packing=(IPacking)Class.forName(packingClass).newInstance();
+  this.launcher=Runtime.launcherClassInstance(runtime);
+  this.packing=Runtime.packingClassInstance(runtime);
 }
