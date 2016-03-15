@@ -38,12 +38,14 @@
         uploadRunner.undo();
       }
       launcher.undo();
-      LOG.log(Level.SEVERE,"Failed to submit topology {0}. Existing",topologyName);
-      System.exit(1);
     }
+  }
+  if (!isSuccessful) {
+    LOG.log(Level.SEVERE,"Failed to submit topology {0}. Existing",topologyName);
+    System.exit(1);
+  }
  else {
-      LOG.log(Level.INFO,"Topology {0} submitted successfully",topologyName);
-      System.exit(0);
-    }
+    LOG.log(Level.INFO,"Topology {0} submitted successfully",topologyName);
+    System.exit(0);
   }
 }
