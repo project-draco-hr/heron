@@ -1,4 +1,13 @@
 {
+  TopologyAPI.TopologyState state=getRuntimeTopologyState(topologyName);
+  if (state == null) {
+    LOG.severe("Topology still not initialized.");
+    return false;
+  }
+  if (state == TopologyAPI.TopologyState.RUNNING) {
+    LOG.warning("Topology is already activated");
+    return true;
+  }
   if (!runtimeManager.prepareActivate()) {
     LOG.severe("Failed to prepare activate locally");
     return false;
