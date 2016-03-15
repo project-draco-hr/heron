@@ -1,2 +1,6 @@
 '\nContains utility functions used by tracker.\n'
+import os, sys
 import string
+BIN_DIR = 'bin'
+CONF_DIR = 'conf'
+LIB_DIR = 'lib'
