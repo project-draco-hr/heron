@@ -1,8 +1,14 @@
 def main():
     log.configure(log.logging.DEBUG)
-    options.parse_command_line()
-    port = options.port
-    LOG.info(('Running on port: ' + str(port)))
-    http_server = tornado.httpserver.HTTPServer(Application())
-    http_server.listen(port)
+    (parser, ya_parser) = create_parsers()
+    (args, remaining) = parser.parse_known_args()
+    if remaining:
+        yaargs = ya_parser.parse_args(args=remaining, namespace=args)
+        parser.print_help()
+        parser.exit()
+    namespace = vars(args)
+    LOG.info('Running on port: %d', namespace['port'])
+    LOG.info('Using config file: %s', namespace['config_file'])
+    http_server = tornado.httpserver.HTTPServer(Application(namespace['config_file']))
+    http_server.listen(namespace['port'])
     tornado.ioloop.IOLoop.instance().start()
