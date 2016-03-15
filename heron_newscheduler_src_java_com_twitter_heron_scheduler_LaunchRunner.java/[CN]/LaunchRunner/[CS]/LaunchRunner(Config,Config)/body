@@ -1,0 +1,6 @@
+{
+  this.config=config;
+  this.runtime=runtime;
+  this.launcher=Runtime.launcherClassInstance(runtime);
+  this.packing=Runtime.packingClassInstance(runtime);
+}
