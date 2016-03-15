@@ -5,7 +5,7 @@
   ListenableFuture<TopologyMaster.TMasterLocation> locationFuture=stateManager.getTMasterLocation(null,LocalContext.topologyName(config));
   TopologyMaster.TMasterLocation location=NetworkUtils.awaitResult(locationFuture,5,TimeUnit.SECONDS);
   LOG.info("Fetched TMaster location for topology: " + topologyName);
-  String endpoint=String.format("http://%s:%d/%s?topologyid=%s",location.getHost(),location.getControllerPort(),command,location.getTopologyId());
+  String endpoint=String.format("http://localhost:%d/%s?topologyid=%s",location.getControllerPort(),command,location.getTopologyId());
   LOG.info("HTTP URL for TMaster: " + endpoint);
   HttpURLConnection connection=null;
   try {
@@ -18,10 +18,15 @@
   LOG.info("Successfully opened HTTP connection to TMaster");
   HttpUtils.sendHttpGetRequest(connection);
   LOG.info("Sent the HTTP payload to TMaster");
+  boolean success=false;
   try {
-    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+    int responseCode=connection.getResponseCode();
+    if (responseCode == HttpURLConnection.HTTP_OK) {
       LOG.info("Successfully got a HTTP response from TMaster for " + command);
-      return true;
+      success=true;
+    }
+ else {
+      LOG.info(String.format("Non OK HTTP response %d from TMaster for command %s",responseCode,command));
     }
   }
  catch (  IOException e) {
@@ -30,5 +35,5 @@
  finally {
     connection.disconnect();
   }
-  return true;
+  return success;
 }
