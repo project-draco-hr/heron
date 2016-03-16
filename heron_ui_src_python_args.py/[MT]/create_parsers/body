@@ -1,0 +1,9 @@
+def create_parsers():
+    parser = argparse.ArgumentParser(epilog='For detailed documentation, go to http://go/heron', usage='%(prog)s [options] [help]', add_help=False)
+    parser = add_titles(parser)
+    parser = add_arguments(parser)
+    child_parser = argparse.ArgumentParser(parents=[parser], formatter_class=SubcommandHelpFormatter, add_help=False)
+    subparsers = child_parser.add_subparsers(title='Available commands')
+    help_parser = subparsers.add_parser('help', help='Prints help', add_help=False)
+    help_parser.set_defaults(help=True)
+    return (parser, child_parser)

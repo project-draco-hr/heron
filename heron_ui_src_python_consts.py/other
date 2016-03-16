@@ -1,0 +1,2 @@
+DEFAULT_PORT = 8889
+DEFAULT_TRACKER_URL = 'http://localhost:8888'
