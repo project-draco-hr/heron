@@ -1,8 +1,16 @@
 def main(argv):
-    define_options()
-    tornado.options.parse_command_line()
+    log.configure(log.logging.DEBUG)
     tornado.log.enable_pretty_logging()
-    port = options.port
+    (parser, ya_parser) = args.create_parsers()
+    (clargs, remaining) = parser.parse_known_args()
+    if remaining:
+        yaargs = ya_parser.parse_args(args=remaining, namespace=clargs)
+        parser.print_help()
+        parser.exit()
+    namespace = vars(clargs)
+    LOG.info('Running on port: %d', namespace['port'])
+    LOG.info('Using tracker url: %s', namespace['tracker_url'])
+    define_options(namespace['port'], namespace['tracker_url'])
     http_server = tornado.httpserver.HTTPServer(Application())
-    http_server.listen(port)
+    http_server.listen(namespace['port'])
     tornado.ioloop.IOLoop.instance().start()
