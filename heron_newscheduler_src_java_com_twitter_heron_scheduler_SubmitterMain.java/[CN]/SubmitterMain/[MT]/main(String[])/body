@@ -38,7 +38,7 @@
         uploadRunner.undo();
       }
       launcher.undo();
-      LOG.log(Level.SEVERE,"Failed to submit topology {0}. Existing",topologyName);
+      LOG.log(Level.SEVERE,"Failed to submit topology {0}. Exiting",topologyName);
       System.exit(1);
     }
  else {
