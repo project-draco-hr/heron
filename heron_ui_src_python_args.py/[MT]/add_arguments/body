@@ -1,4 +1,4 @@
 def add_arguments(parser):
-    parser.add_argument('--tracker_url', metavar=(('(a url; path to tracker; default: "' + DEFAULT_TRACKER_URL) + '")'), default=DEFAULT_TRACKER_URL)
-    parser.add_argument('--port', metavar=(('(an integer; port to listen; default: ' + str(DEFAULT_PORT)) + ')'), type=int, default=DEFAULT_PORT)
+    parser.add_argument('--tracker_url', metavar=(('(a url; path to tracker; default: "' + consts.DEFAULT_TRACKER_URL) + '")'), default=consts.DEFAULT_TRACKER_URL)
+    parser.add_argument('--port', metavar=(('(an integer; port to listen; default: ' + str(consts.DEFAULT_PORT)) + ')'), type=int, default=consts.DEFAULT_PORT)
     return parser
