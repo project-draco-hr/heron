@@ -1,0 +1,21 @@
+def __init__(self, logical_plan):
+    Graph.__init__(self)
+    all_spouts = logical_plan['spouts']
+    all_bolts = dict()
+    if ('bolts' in logical_plan):
+        all_bolts = logical_plan['bolts']
+    stream_source = dict()
+    for spout_name in all_spouts:
+        for output_stream_data in all_spouts[spout_name]['outputs']:
+            stream_name = output_stream_data['stream_name']
+            stream_source[('%s,%s' % (spout_name, stream_name))] = spout_name
+    for bolt_name in all_bolts:
+        for output_stream_data in all_bolts[bolt_name]['outputs']:
+            stream_name = output_stream_data['stream_name']
+            stream_source[('%s,%s' % (bolt_name, stream_name))] = bolt_name
+    for bolt_name in all_bolts:
+        for input_stream_data in all_bolts[bolt_name]['inputs']:
+            stream_name = input_stream_data['stream_name']
+            component_name = input_stream_data['component_name']
+            stream_hash = ('%s,%s' % (component_name, stream_name))
+            self.add_edge(stream_source[stream_hash], bolt_name)

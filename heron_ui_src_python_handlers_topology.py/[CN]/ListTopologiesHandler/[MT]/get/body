@@ -1,0 +1,3 @@
+def get(self):
+    options = dict(topologies=[], cluster='local', active='topologies', function=common.className)
+    self.render('topologies.html', **options)

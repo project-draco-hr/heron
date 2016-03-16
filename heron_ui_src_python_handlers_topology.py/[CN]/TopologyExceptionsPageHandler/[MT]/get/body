@@ -1,0 +1,3 @@
+def get(self, cluster, environ, topology, comp_name, instance):
+    options = dict(cluster=cluster, environ=environ, topology=topology, comp_name=comp_name, instance=instance, active='topologies', function=common.className)
+    self.render('exception.html', **options)

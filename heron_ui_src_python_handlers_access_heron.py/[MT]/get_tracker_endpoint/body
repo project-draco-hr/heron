@@ -1,0 +1,2 @@
+def get_tracker_endpoint():
+    return options.tracker_url
