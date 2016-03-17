@@ -1,6 +1,6 @@
 @tornado.gen.coroutine
-def getMetricsTimeline(self, tmaster, component_name, metric_names, instances, start_time, end_time, callback=None):
-    '\n    Get the specified metrics for the given component name of this topology.\n    Returns the following dict on success:\n    {\n      "timeline": {\n        <metricname>: {\n          <instance>: {\n            <start_time> : <numeric value>,\n            <start_time> : <numeric value>,\n            ...\n          }\n          ...\n        }, ...\n      },\n      "starttime": <numeric value>,\n      "endtime": <numeric value>,\n      "component": "..."\n    }\n\n    Returns the following dict on failure:\n    {\n      "message": "..."\n    }\n    '
+def getMetricsTimeline(tmaster, component_name, metric_names, instances, start_time, end_time, callback=None):
+    '\n  Get the specified metrics for the given component name of this topology.\n  Returns the following dict on success:\n  {\n    "timeline": {\n      <metricname>: {\n        <instance>: {\n          <start_time> : <numeric value>,\n          <start_time> : <numeric value>,\n          ...\n        }\n        ...\n      }, ...\n    },\n    "starttime": <numeric value>,\n    "endtime": <numeric value>,\n    "component": "..."\n  }\n\n  Returns the following dict on failure:\n  {\n    "message": "..."\n  }\n  '
     if ((not tmaster) or (not tmaster.host) or (not tmaster.stats_port)):
         raise Exception('No Tmaster found')
     host = tmaster.host

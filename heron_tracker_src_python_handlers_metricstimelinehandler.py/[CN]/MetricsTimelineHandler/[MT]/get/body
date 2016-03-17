@@ -11,7 +11,7 @@ def get(self):
         self.validateInterval(start_time, end_time)
         instances = self.get_arguments(constants.PARAM_INSTANCE)
         topology = self.tracker.getTopologyByClusterEnvironAndName(cluster, environ, topology_name)
-        metrics = yield tornado.gen.Task(self.getMetricsTimeline, topology.tmaster, component, metric_names, instances, int(start_time), int(end_time))
+        metrics = yield tornado.gen.Task(getMetricsTimeline, topology.tmaster, component, metric_names, instances, int(start_time), int(end_time))
         self.write_success_response(metrics)
     except Exception as e:
         self.write_error_response(e)
