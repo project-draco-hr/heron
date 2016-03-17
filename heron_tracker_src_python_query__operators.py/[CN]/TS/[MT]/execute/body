@@ -1,6 +1,6 @@
 @tornado.gen.coroutine
 def execute(self, tracker, tmaster, start, end):
-    metrics = yield tracker.getMetricsTimeline(tmaster, self.component, [self.metricName], self.instances, (start - 60), (end + 60))
+    metrics = yield getMetricsTimeline(tmaster, self.component, [self.metricName], self.instances, (start - 60), (end + 60))
     if (not metrics):
         return
     if ('message' in metrics):

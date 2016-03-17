@@ -7,13 +7,13 @@ def test_TS_execute(self):
     end = 300
 
     @tornado.gen.coroutine
-    def tracker_side_effect(*args):
+    def getMetricTimelineSideEffect(*args):
         self.assertEqual((tmaster, 'a', ['c'], ['b'], 40, 360), args)
         raise tornado.gen.Return({'starttime': 40, 'endtime': 360, 'component': 'a', 'timeline': {'c': {'b': {40: '1.0', 100: '1.0', 160: '1.0', 220: '1.0', 280: '1.0', 340: '1.0', }, }, }, })
-    tracker.getMetricsTimeline.side_effect = tracker_side_effect
-    metrics = yield ts.execute(tracker, tmaster, start, end)
-    self.assertEqual(1, len(metrics))
-    self.assertEqual('b', metrics[0].instance)
-    self.assertEqual('c', metrics[0].metricName)
-    self.assertEqual('a', metrics[0].componentName)
-    self.assertDictEqual({120: 1.0, 180: 1.0, 240: 1.0, 300: 1.0, }, metrics[0].timeline)
+    with patch('heron.tracker.src.python.query_operators.getMetricsTimeline', side_effect=getMetricTimelineSideEffect):
+        metrics = yield ts.execute(tracker, tmaster, start, end)
+        self.assertEqual(1, len(metrics))
+        self.assertEqual('b', metrics[0].instance)
+        self.assertEqual('c', metrics[0].metricName)
+        self.assertEqual('a', metrics[0].componentName)
+        self.assertDictEqual({120: 1.0, 180: 1.0, 240: 1.0, 300: 1.0, }, metrics[0].timeline)
