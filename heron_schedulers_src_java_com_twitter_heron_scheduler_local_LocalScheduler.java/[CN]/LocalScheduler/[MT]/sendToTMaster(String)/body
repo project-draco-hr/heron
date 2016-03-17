@@ -18,10 +18,15 @@
   LOG.info("Successfully opened HTTP connection to TMaster");
   HttpUtils.sendHttpGetRequest(connection);
   LOG.info("Sent the HTTP payload to TMaster");
+  boolean success=false;
   try {
-    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+    int responseCode=connection.getResponseCode();
+    if (responseCode == HttpURLConnection.HTTP_OK) {
       LOG.info("Successfully got a HTTP response from TMaster for " + command);
-      return true;
+      success=true;
+    }
+ else {
+      LOG.info(String.format("Non OK HTTP response %d from TMaster for command %s",responseCode,command));
     }
   }
  catch (  IOException e) {
@@ -30,5 +35,5 @@
  finally {
     connection.disconnect();
   }
-  return true;
+  return success;
 }
