@@ -1,0 +1,8 @@
+{
+  Options options=new Options();
+  Option cluster=Option.builder("c").desc("Cluster name in which the topology needs to run on").longOpt("cluster").hasArgs().argName("cluster").required().build();
+  Option role=Option.builder("r").desc("Role under which the topology needs to run").longOpt("role").hasArgs().argName("role").required().build();
+  Option environment=Option.builder("e").desc("Environment under which the topology needs to run").longOpt("environment").hasArgs().argName("environment").required().build();
+  Option topologyName=Option.builder("n").desc("Name of the topology").longOpt("topology_name").hasArgs().argName("topology name").required().build();
+  Option topologyName=Option.builder("n").desc("Heron home directory").longOpt("heron_home").hasArgs().argName("heron home dir").required().build();
+}
