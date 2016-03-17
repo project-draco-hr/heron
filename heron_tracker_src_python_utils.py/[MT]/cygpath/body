@@ -1,4 +1,5 @@
 def cygpath(x):
+    '\n  This will return the path of input arg for windows\n  :return: the path in windows\n  '
     command = ['cygpath', '-wp', x]
     p = subprocess.Popen(command, stdout=subprocess.PIPE)
     (output, errors) = p.communicate()

@@ -1,4 +1,5 @@
 def normalized_class_path(x):
+    '\n  This will return the class path depending on the platform\n  :return: the class path\n  '
     if (sys.platform == 'cygwin'):
         return cygpath(x)
     return identity(x)

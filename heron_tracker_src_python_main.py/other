@@ -1,15 +1,16 @@
+import argparse
 import os
 import sys
-import argparse
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 from tornado.escape import json_encode, utf8
 from tornado.options import define, options
-from heron.tracker.src.python import utils
+from heron.tracker.src.python import constants
 from heron.tracker.src.python import handlers
 from heron.tracker.src.python import log
 from heron.tracker.src.python.log import Log as LOG
+from heron.tracker.src.python import utils
 from heron.tracker.src.python.tracker import Tracker
 if (__name__ == '__main__'):
     main()

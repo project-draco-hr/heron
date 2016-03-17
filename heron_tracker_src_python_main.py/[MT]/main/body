@@ -9,6 +9,7 @@ def main():
     namespace = vars(args)
     LOG.info('Running on port: %d', namespace['port'])
     LOG.info('Using config file: %s', namespace['config_file'])
-    http_server = tornado.httpserver.HTTPServer(Application(namespace['config_file']))
+    define_options(namespace['port'], namespace['config_file'])
+    http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(namespace['port'])
     tornado.ioloop.IOLoop.instance().start()

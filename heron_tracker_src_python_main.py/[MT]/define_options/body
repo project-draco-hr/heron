@@ -1,0 +1,3 @@
+def define_options(port, config_file):
+    define('port', default=port)
+    define('config_file', default=config_file)
