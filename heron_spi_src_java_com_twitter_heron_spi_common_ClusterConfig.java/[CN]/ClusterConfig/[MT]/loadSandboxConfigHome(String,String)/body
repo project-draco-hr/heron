@@ -1,0 +1,4 @@
+{
+  Config.Builder cb=Config.newBuilder().put(Keys.clusterSandboxFile(),Misc.substitute(heronSandboxHome,configPath,Defaults.clusterSandboxFile())).put(Keys.defaultsSandboxFile(),Misc.substitute(heronSandboxHome,configPath,Defaults.defaultsSandboxFile())).put(Keys.metricsSinksSandboxFile(),Misc.substitute(heronSandboxHome,configPath,Defaults.metricsSinksSandboxFile())).put(Keys.packingSandboxFile(),Misc.substitute(heronSandboxHome,configPath,Defaults.packingSandboxFile())).put(Keys.schedulerSandboxFile(),Misc.substitute(heronSandboxHome,configPath,Defaults.schedulerSandboxFile())).put(Keys.stateManagerSandboxFile(),Misc.substitute(heronSandboxHome,configPath,Defaults.stateManagerSandboxFile())).put(Keys.systemSandboxFile(),Misc.substitute(heronSandboxHome,configPath,Defaults.systemSandboxFile())).put(Keys.uploaderSandboxFile(),Misc.substitute(heronSandboxHome,configPath,Defaults.uploaderSandboxFile()));
+  return cb.build();
+}

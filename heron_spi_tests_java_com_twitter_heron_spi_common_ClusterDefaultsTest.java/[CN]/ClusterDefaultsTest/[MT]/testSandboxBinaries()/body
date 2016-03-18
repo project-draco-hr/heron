@@ -1,0 +1,6 @@
+{
+  Assert.assertEquals(Defaults.executorSandboxBinary(),Context.executorSandboxBinary(props));
+  Assert.assertEquals(Defaults.stmgrSandboxBinary(),Context.stmgrSandboxBinary(props));
+  Assert.assertEquals(Defaults.tmasterSandboxBinary(),Context.tmasterSandboxBinary(props));
+  Assert.assertEquals(Defaults.shellSandboxBinary(),Context.shellSandboxBinary(props));
+}

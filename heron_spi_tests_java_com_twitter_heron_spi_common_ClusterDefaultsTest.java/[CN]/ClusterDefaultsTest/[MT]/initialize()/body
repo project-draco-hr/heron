@@ -1,4 +1,5 @@
 {
   home=ClusterDefaults.getDefaultHome();
-  props=Config.newBuilder().putAll(ClusterDefaults.getDefaultBinaries()).putAll(ClusterDefaults.getDefaultJars()).build();
+  sandbox=ClusterDefaults.getSandboxHome();
+  props=Config.newBuilder().putAll(ClusterDefaults.getDefaultJars()).putAll(ClusterDefaults.getSandboxBinaries()).build();
 }

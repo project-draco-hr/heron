@@ -1,7 +1,6 @@
 {
   Config.Builder cb=Config.newBuilder();
   cb.put(Keys.corePackageUri(),Defaults.corePackageUri());
-  cb.put(Keys.logDirectory(),Defaults.logDirectory());
   cb.put(Keys.instanceClassPath(),Defaults.instanceClassPath());
   cb.put(Keys.metricsManagerClassPath(),Defaults.metricsManagerClassPath());
   cb.put(Keys.packingClassPath(),Defaults.packingClassPath());

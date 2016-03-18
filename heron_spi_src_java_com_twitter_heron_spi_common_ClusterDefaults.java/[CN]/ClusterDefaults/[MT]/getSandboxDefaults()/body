@@ -1,0 +1,8 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.putAll(getSandboxHome());
+  cb.putAll(getSandboxBinaries());
+  cb.putAll(getSandboxJars());
+  cb.putAll(getSandboxFilesAndPaths());
+  return cb.build();
+}

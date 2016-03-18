@@ -1,8 +1,0 @@
-{
-  Config.Builder cb=Config.newBuilder();
-  cb.put(Keys.executorBinary(),Defaults.executorBinary());
-  cb.put(Keys.stmgrBinary(),Defaults.stmgrBinary());
-  cb.put(Keys.tmasterBinary(),Defaults.tmasterBinary());
-  cb.put(Keys.shellBinary(),Defaults.shellBinary());
-  return cb.build();
-}
