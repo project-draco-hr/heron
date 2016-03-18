@@ -1,4 +1,4 @@
 {
   HelpFormatter formatter=new HelpFormatter();
-  formatter.printHelp("SchedulerMain",options);
+  formatter.printHelp("RuntimeManagerMain",options);
 }
