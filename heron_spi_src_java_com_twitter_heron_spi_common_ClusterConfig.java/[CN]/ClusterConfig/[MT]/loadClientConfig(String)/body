@@ -1,0 +1,4 @@
+{
+  Map readConfig=ConfigReader.loadFile(clientFile);
+  return Config.newBuilder().putAll(readConfig).build();
+}
