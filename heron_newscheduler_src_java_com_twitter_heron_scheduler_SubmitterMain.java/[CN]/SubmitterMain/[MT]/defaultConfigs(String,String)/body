@@ -1,4 +1,4 @@
 {
-  Config config=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,configPath)).build();
+  Config config=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterDefaults.getSandboxDefaults()).putAll(ClusterConfig.loadConfig(heronHome,configPath)).build();
   return config;
 }
