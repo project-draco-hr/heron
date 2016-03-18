@@ -1,5 +1,0 @@
-{
-  String clusterFile=config.getStringValue(Keys.clusterFile());
-  Map readConfig=ConfigReader.loadFile(clusterFile);
-  return Config.newBuilder().putAll(readConfig).build();
-}

@@ -1,5 +1,5 @@
 {
-  Config props=ClusterConfig.loadClusterConfig(basicConfig);
+  Config props=ClusterConfig.loadClusterConfig(Context.clusterFile(basicConfig));
   Assert.assertEquals(4,props.size());
   Assert.assertEquals("com.twitter.heron.uploader.localfs.FileSystemUploader",Context.uploaderClass(props));
 }

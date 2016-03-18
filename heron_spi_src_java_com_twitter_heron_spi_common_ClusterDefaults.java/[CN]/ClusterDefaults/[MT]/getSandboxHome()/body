@@ -1,0 +1,9 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.heronSandboxHome(),Defaults.heronSandboxHome());
+  cb.put(Keys.heronSandboxBin(),Defaults.heronSandboxBin());
+  cb.put(Keys.heronSandboxConf(),Defaults.heronSandboxConf());
+  cb.put(Keys.heronSandboxLib(),Defaults.heronSandboxLib());
+  cb.put(Keys.javaSandboxHome(),Defaults.javaSandboxHome());
+  return cb.build();
+}

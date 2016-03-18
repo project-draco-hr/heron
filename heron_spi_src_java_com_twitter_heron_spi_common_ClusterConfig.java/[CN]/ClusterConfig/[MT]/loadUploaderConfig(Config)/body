@@ -1,5 +1,0 @@
-{
-  String uploaderFile=config.getStringValue(Keys.uploaderFile());
-  Map readConfig=ConfigReader.loadFile(uploaderFile);
-  return Config.newBuilder().putAll(readConfig).build();
-}
