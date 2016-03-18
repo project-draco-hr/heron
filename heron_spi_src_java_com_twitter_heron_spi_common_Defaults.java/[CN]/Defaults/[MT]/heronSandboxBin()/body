@@ -1,3 +1,3 @@
 {
-  return ConfigKeys.get("HERON_SANDBOX_BIN");
+  return ConfigDefaults.get("HERON_SANDBOX_BIN");
 }

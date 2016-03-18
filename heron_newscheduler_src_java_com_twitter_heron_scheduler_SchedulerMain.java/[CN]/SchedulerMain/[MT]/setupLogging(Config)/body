@@ -1,5 +1,5 @@
 {
-  String systemConfigFilename=Context.systemConfigFile(config);
+  String systemConfigFilename=Context.systemConfigSandboxFile(config);
   SystemConfig systemConfig=new SystemConfig(systemConfigFilename,true);
   Level loggingLevel=Level.INFO;
   String loggingDir="./";
