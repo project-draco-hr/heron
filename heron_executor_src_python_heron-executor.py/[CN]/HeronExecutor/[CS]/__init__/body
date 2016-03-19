@@ -30,6 +30,7 @@ def __init__(self, args):
     self.topology_jar_file = args[20]
     self.stmgr_ids = stmgr_list(len(self.instance_distribution))
     self.metricsmgr_ids = metricsmgr_list(len(self.instance_distribution))
+    self.heron_shell_ids = heron_shell_list(len(self.instance_distribution))
     self.heron_java_home = args[21]
     self.shell_port = args[22]
     self.log_dir = args[23]

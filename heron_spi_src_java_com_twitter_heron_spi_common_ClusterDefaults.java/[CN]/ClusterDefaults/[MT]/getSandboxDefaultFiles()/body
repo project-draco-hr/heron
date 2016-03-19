@@ -1,0 +1,12 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.clusterSandboxFile(),Defaults.clusterSandboxFile());
+  cb.put(Keys.defaultsSandboxFile(),Defaults.defaultsSandboxFile());
+  cb.put(Keys.metricsSinksSandboxFile(),Defaults.metricsSinksSandboxFile());
+  cb.put(Keys.packingSandboxFile(),Defaults.packingSandboxFile());
+  cb.put(Keys.schedulerSandboxFile(),Defaults.schedulerSandboxFile());
+  cb.put(Keys.stateManagerSandboxFile(),Defaults.stateManagerSandboxFile());
+  cb.put(Keys.systemSandboxFile(),Defaults.systemSandboxFile());
+  cb.put(Keys.uploaderSandboxFile(),Defaults.uploaderSandboxFile());
+  return cb.build();
+}

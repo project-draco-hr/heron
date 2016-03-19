@@ -1,8 +1,11 @@
 {
-  String systemConfigFilename=Context.systemConfigFile(config);
+  String systemConfigFilename=Context.systemConfigSandboxFile(config);
   SystemConfig systemConfig=new SystemConfig(systemConfigFilename,true);
   Level loggingLevel=Level.INFO;
-  String loggingDir="./";
+  String loggingDir=systemConfig.getHeronLoggingDirectory();
+  if (!FileUtils.isDirectoryExists(loggingDir)) {
+    FileUtils.createDirectory(loggingDir);
+  }
   LoggingHelper.loggerInit(loggingLevel,true);
   String processId=String.format("%s-%s-%s","heron",Context.topologyName(config),"scheduler");
   LoggingHelper.addLoggingHandler(LoggingHelper.getFileHandler(processId,loggingDir,true,systemConfig.getHeronLoggingMaximumSizeMb() * Constants.MB_TO_BYTES,systemConfig.getHeronLoggingMaximumFiles()));

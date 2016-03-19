@@ -1,0 +1,8 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.executorSandboxBinary(),Defaults.executorSandboxBinary());
+  cb.put(Keys.stmgrSandboxBinary(),Defaults.stmgrSandboxBinary());
+  cb.put(Keys.tmasterSandboxBinary(),Defaults.tmasterSandboxBinary());
+  cb.put(Keys.shellSandboxBinary(),Defaults.shellSandboxBinary());
+  return cb.build();
+}

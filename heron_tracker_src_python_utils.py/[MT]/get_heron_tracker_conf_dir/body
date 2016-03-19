@@ -1,0 +1,4 @@
+def get_heron_tracker_conf_dir():
+    '\n  This will provide heron tracker conf directory from .pex file.\n  :return: absolute path of heron conf directory\n  '
+    conf_path = os.path.join(get_heron_tracker_dir(), CONF_DIR)
+    return conf_path

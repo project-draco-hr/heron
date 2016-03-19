@@ -1,3 +1,0 @@
-{
-  return cfg.getStringValue(ConfigKeys.get("EXECUTOR_BINARY"));
-}
