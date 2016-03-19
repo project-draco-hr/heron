@@ -1,3 +1,0 @@
-{
-  return ConfigKeys.get("TOPOLOGY_CONTAINER_IDENTIFIER");
-}

@@ -29,7 +29,7 @@
   }
   IRuntimeManager.Command command=IRuntimeManager.Command.makeCommand(commandOption);
   Config.Builder defaultsConfig=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,configPath));
-  Config.Builder commandLineConfig=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ).put(Keys.topologyContainerIdentifier(),containerId);
+  Config.Builder commandLineConfig=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ).put(Keys.topologyContainerId(),containerId);
   Config.Builder topologyConfig=Config.newBuilder().put(Keys.topologyName(),topologyName);
   Config config=Config.expand(Config.newBuilder().putAll(defaultsConfig.build()).putAll(commandLineConfig.build()).putAll(topologyConfig.build()).build());
   LOG.info("Static config loaded successfully ");
