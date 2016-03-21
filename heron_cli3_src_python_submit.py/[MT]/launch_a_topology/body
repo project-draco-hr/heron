@@ -2,6 +2,6 @@ def launch_a_topology(cluster_role_env, tmp_dir, topology_file, topology_defn_fi
     topology_pkg_path = utils.normalized_class_path(os.path.join(tmp_dir, 'topology.tar.gz'))
     tar_pkg_files = [topology_file, topology_defn_file]
     utils.create_tar(topology_pkg_path, tar_pkg_files, config_path)
-    args = [cluster_role_env[0], cluster_role_env[1], cluster_role_env[2], utils.get_heron_dir(), config_path, base64.b64encode(config_overrides), topology_pkg_path, topology_defn_file, topology_file]
+    args = ['--cluster', cluster_role_env[0], '--role', cluster_role_env[1], '--environment', cluster_role_env[2], '--heron_home', utils.get_heron_dir(), '--config_path', config_path, '--config_overrides', base64.b64encode(config_overrides), '--topology_package', topology_pkg_path, '--topology_defn', topology_defn_file, '--topology_jar', topology_file]
     lib_jars = utils.get_heron_libs((((jars.scheduler_jars() + jars.uploader_jars()) + jars.statemgr_jars()) + jars.packing_jars()))
     execute.heron_class('com.twitter.heron.scheduler.SubmitterMain', lib_jars, extra_jars=[], args=args)

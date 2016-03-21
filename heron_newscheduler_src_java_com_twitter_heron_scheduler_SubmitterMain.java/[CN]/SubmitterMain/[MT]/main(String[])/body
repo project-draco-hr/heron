@@ -1,13 +1,39 @@
 {
-  String cluster=args[0];
-  String role=args[1];
-  String environ=args[2];
-  String heronHome=args[3];
-  String configPath=args[4];
-  String configOverrideEncoded=args[5];
-  String topologyPackage=args[6];
-  String topologyDefnFile=args[7];
-  String topologyJarFile=args[8];
+  Options options=constructOptions();
+  Options helpOptions=constructHelpOptions();
+  CommandLineParser parser=new DefaultParser();
+  CommandLine cmd=parser.parse(helpOptions,args,true);
+  ;
+  if (cmd.hasOption("h")) {
+    usage(options);
+    return;
+  }
+  try {
+    cmd=parser.parse(options,args);
+  }
+ catch (  ParseException e) {
+    LOG.severe("Error parsing command line options: " + e.getMessage());
+    usage(options);
+    System.exit(1);
+  }
+  String cluster=cmd.getOptionValue("cluster");
+  ;
+  String role=cmd.getOptionValue("role");
+  ;
+  String environ=cmd.getOptionValue("environment");
+  ;
+  String heronHome=cmd.getOptionValue("heron_home");
+  ;
+  String configPath=cmd.getOptionValue("config_path");
+  ;
+  String configOverrideEncoded=cmd.getOptionValue("config_overrides");
+  ;
+  String topologyPackage=cmd.getOptionValue("topology_package");
+  ;
+  String topologyDefnFile=cmd.getOptionValue("topology_defn");
+  ;
+  String topologyJarFile=cmd.getOptionValue("topology_jar");
+  ;
   System.out.println(heronHome + " " + configPath);
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
   Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath)).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyPackage,topologyJarFile,topologyDefnFile,topology)).build());
