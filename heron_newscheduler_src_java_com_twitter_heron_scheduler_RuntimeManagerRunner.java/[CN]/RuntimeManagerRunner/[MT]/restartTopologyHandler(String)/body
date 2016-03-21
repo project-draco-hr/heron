@@ -1,5 +1,5 @@
 {
-  Integer containerId=Context.topologyContainerIdentifier(config);
+  Integer containerId=Context.topologyContainerId(config);
   if (!runtimeManager.prepareRestart(containerId)) {
     LOG.severe("Failed to prepare restart locally");
     return false;

@@ -1,19 +1,35 @@
 {
-  String cluster=args[0];
-  String role=args[1];
-  String environ=args[2];
-  String heronHome=args[3];
-  String configPath=args[4];
-  String configOverrideEncoded=args[5];
-  String topologyName=args[6];
-  String sCommand=args[7];
-  String containerId=Integer.toString(-1);
-  if (args.length == 9) {
-    containerId=args[8];
+  Options options=constructOptions();
+  Options helpOptions=constructHelpOptions();
+  CommandLineParser parser=new DefaultParser();
+  CommandLine cmd=parser.parse(helpOptions,args,true);
+  ;
+  if (cmd.hasOption("h")) {
+    usage(options);
+    return;
   }
-  IRuntimeManager.Command command=IRuntimeManager.Command.makeCommand(sCommand);
+  try {
+    cmd=parser.parse(options,args);
+  }
+ catch (  ParseException e) {
+    LOG.severe("Error parsing command line options: " + e.getMessage());
+    usage(options);
+    System.exit(1);
+  }
+  String cluster=cmd.getOptionValue("cluster");
+  String role=cmd.getOptionValue("role");
+  String environ=cmd.getOptionValue("environment");
+  String heronHome=cmd.getOptionValue("heron_home");
+  String configPath=cmd.getOptionValue("config_path");
+  String topologyName=cmd.getOptionValue("topology_name");
+  String commandOption=cmd.getOptionValue("command");
+  String containerId=Integer.toString(-1);
+  if (cmd.hasOption("container_id")) {
+    containerId=cmd.getOptionValue("container_id");
+  }
+  IRuntimeManager.Command command=IRuntimeManager.Command.makeCommand(commandOption);
   Config.Builder defaultsConfig=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,configPath));
-  Config.Builder commandLineConfig=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ).put(Keys.topologyContainerIdentifier(),containerId);
+  Config.Builder commandLineConfig=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ).put(Keys.topologyContainerId(),containerId);
   Config.Builder topologyConfig=Config.newBuilder().put(Keys.topologyName(),topologyName);
   Config config=Config.expand(Config.newBuilder().putAll(defaultsConfig.build()).putAll(commandLineConfig.build()).putAll(topologyConfig.build()).build());
   LOG.info("Static config loaded successfully ");
