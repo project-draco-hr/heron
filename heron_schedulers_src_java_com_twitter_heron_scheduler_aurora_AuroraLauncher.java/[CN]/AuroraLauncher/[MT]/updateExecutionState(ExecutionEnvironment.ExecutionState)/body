@@ -4,7 +4,7 @@
   String releaseVersion="releaseVersion";
   String uploadVersion="uploadVersion";
   ExecutionEnvironment.ExecutionState.Builder builder=ExecutionEnvironment.ExecutionState.newBuilder().mergeFrom(executionState);
-  builder.setDc(Context.cluster(config)).setRole(Context.role(config)).setEnviron(Context.environ(config));
+  builder.setCluster(Context.cluster(config)).setRole(Context.role(config)).setEnviron(Context.environ(config));
   ExecutionEnvironment.HeronReleaseState.Builder releaseBuilder=ExecutionEnvironment.HeronReleaseState.newBuilder();
   releaseBuilder.setReleaseUsername(releaseUsername);
   releaseBuilder.setReleaseTag(releaseTag);
