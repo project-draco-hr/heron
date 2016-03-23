@@ -1,0 +1,5 @@
+{
+  String[] cmdline=command.toArray(new String[command.size()]);
+  LOG.info("cmdline=" + Arrays.toString(cmdline));
+  return cmdline;
+}

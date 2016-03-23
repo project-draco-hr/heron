@@ -1,8 +1,6 @@
 {
-  String topologyName=LocalContext.topologyName(config);
-  SchedulerStateManagerAdaptor stateManager=Runtime.schedulerStateManagerAdaptor(runtime);
   LOG.info("Fetching TMaster location for topology: " + topologyName);
-  ListenableFuture<TopologyMaster.TMasterLocation> locationFuture=stateManager.getTMasterLocation(null,LocalContext.topologyName(config));
+  ListenableFuture<TopologyMaster.TMasterLocation> locationFuture=stateManager.getTMasterLocation(null,topologyName);
   TopologyMaster.TMasterLocation location=NetworkUtils.awaitResult(locationFuture,5,TimeUnit.SECONDS);
   LOG.info("Fetched TMaster location for topology: " + topologyName);
   String endpoint=String.format("http://%s:%d/%s?topologyid=%s",location.getHost(),location.getControllerPort(),command,location.getTopologyId());

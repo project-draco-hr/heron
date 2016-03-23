@@ -4,3 +4,4 @@ String role
 String env
 String auroraFilename
 Map<String,String> bindings
+boolean isVerbose

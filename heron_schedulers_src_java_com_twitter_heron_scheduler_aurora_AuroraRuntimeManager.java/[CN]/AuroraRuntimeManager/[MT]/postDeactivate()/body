@@ -1,0 +1,3 @@
+{
+  return Runtime.sendToTMaster("deactivate",Context.topologyName(config),Runtime.schedulerStateManagerAdaptor(runtime));
+}

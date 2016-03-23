@@ -9,12 +9,5 @@
     LOG.info("Killed executor for container: " + index);
   }
   processToContainer.clear();
-  SchedulerStateManagerAdaptor stateManager=Runtime.schedulerStateManagerAdaptor(runtime);
-  LOG.info("Removing scheduler location for topology: " + topologyName);
-  stateManager.deleteSchedulerLocation(topologyName);
-  LOG.info("Cleared scheduler location for topology: " + topologyName);
-  LOG.info("Removing TMaster location for topology: " + topologyName);
-  stateManager.deleteTMasterLocation(topologyName);
-  LOG.info("Cleared TMaster location for topology: " + topologyName);
   return true;
 }

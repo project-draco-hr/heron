@@ -13,35 +13,37 @@
     return false;
   }
   Pair<Boolean,HttpURLConnection> ret=createHttpConnection();
-  if (ret.second == null)   return ret.first;
+  if (!ret.first) {
+    return false;
+  }
   HttpURLConnection connection=ret.second;
-  byte[] data=Scheduler.DeactivateTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
-  if (!HttpUtils.sendHttpPostRequest(connection,data)) {
-    LOG.log(Level.SEVERE,"Failed to send http request for deactivate");
-    connection.disconnect();
-    return false;
-  }
-  Common.StatusCode statusCode;
-  try {
-    LOG.info("Receiving deactivate response from scheduler...");
-    statusCode=Scheduler.DeactivateTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
-  }
- catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Failed to parse deactivate response: ",e);
-    connection.disconnect();
-    return false;
-  }
-  if (!statusCode.equals(Common.StatusCode.OK)) {
-    LOG.severe("Received not OK response from scheduler for deactivate");
-    connection.disconnect();
-    return false;
+  if (connection != null) {
+    try {
+      byte[] data=Scheduler.DeactivateTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
+      if (!HttpUtils.sendHttpPostRequest(connection,data)) {
+        LOG.log(Level.SEVERE,"Failed to send http request for deactivate");
+        return false;
+      }
+      Common.StatusCode statusCode;
+      LOG.info("Receiving deactivate response from scheduler...");
+      statusCode=Scheduler.DeactivateTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
+      if (!statusCode.equals(Common.StatusCode.OK)) {
+        LOG.severe("Received not OK response from scheduler for deactivate");
+        return false;
+      }
+    }
+ catch (    Exception e) {
+      LOG.log(Level.SEVERE,"Failed to deactivate with Scheduler: ",e);
+      return false;
+    }
+ finally {
+      connection.disconnect();
+    }
   }
   if (!runtimeManager.postDeactivate()) {
     LOG.severe("Failed in post deactivate locally");
-    connection.disconnect();
     return false;
   }
-  connection.disconnect();
   LOG.info("Scheduler deactivated topology successfully.");
   return true;
 }
