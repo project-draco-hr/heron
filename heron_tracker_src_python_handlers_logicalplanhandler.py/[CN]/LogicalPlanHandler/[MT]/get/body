@@ -8,4 +8,5 @@ def get(self):
         logical_plan = topology_info['logical_plan']
         self.write_success_response(logical_plan)
     except Exception as e:
+        traceback.print_exc()
         self.write_error_response(e)

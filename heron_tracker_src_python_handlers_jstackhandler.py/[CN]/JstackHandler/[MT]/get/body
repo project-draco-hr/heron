@@ -9,4 +9,5 @@ def get(self):
         ret = yield self.getInstanceJstack(topology_info, instance)
         self.write_success_response(ret)
     except Exception as e:
+        traceback.print_exc()
         self.write_error_response(e)
