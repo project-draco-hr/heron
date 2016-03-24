@@ -3,7 +3,6 @@
   Options helpOptions=constructHelpOptions();
   CommandLineParser parser=new DefaultParser();
   CommandLine cmd=parser.parse(helpOptions,args,true);
-  ;
   if (cmd.hasOption("h")) {
     usage(options);
     return;
@@ -16,16 +15,6 @@
     usage(options);
     System.exit(1);
   }
-  String cluster=cmd.getOptionValue("cluster");
-  String role=cmd.getOptionValue("role");
-  String environ=cmd.getOptionValue("environment");
-  String topologyName=cmd.getOptionValue("topology_name");
-  String topologyJarFile=cmd.getOptionValue("topology_jar");
-  int schedulerServerPort=Integer.parseInt(cmd.getOptionValue("http_port"));
-  String topologyDefnFile=TopologyUtils.lookUpTopologyDefnFile(".",topologyName);
-  TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
-  Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs()).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyJarFile,topologyDefnFile,topology)).build());
-  setupLogging(config);
-  LOG.log(Level.INFO,"Loaded scheduler config: {0}",config);
-  runScheduler(config,schedulerServerPort,topology);
+  SchedulerMain.initialize(cmd.getOptionValue("cluster"),cmd.getOptionValue("role"),cmd.getOptionValue("environment"),cmd.getOptionValue("topology_name"),cmd.getOptionValue("topology_jar"),Integer.parseInt(cmd.getOptionValue("http_port")));
+  SchedulerMain.runScheduler();
 }
