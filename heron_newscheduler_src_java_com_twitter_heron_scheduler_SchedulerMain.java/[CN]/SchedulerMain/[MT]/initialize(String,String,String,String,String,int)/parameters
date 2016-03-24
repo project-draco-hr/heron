@@ -1,0 +1,6 @@
+String iCluster
+String iRole
+String iEnviron
+String iTopologyName
+String iTopologyJarFile
+int iSchedulerServerPort
