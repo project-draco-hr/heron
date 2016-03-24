@@ -1,0 +1,3 @@
+def check_environment():
+    if (not utils.java_home_set()):
+        sys.exit(1)
