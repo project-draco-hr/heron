@@ -12,4 +12,5 @@ def get(self):
         metrics = yield tornado.gen.Task(self.getComponentMetrics, topology.tmaster, component, metric_names, instances, interval)
         self.write_success_response(metrics)
     except Exception as e:
+        traceback.print_exc()
         self.write_error_response(e)

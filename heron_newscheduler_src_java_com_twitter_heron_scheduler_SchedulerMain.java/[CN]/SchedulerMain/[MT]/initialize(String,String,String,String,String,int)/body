@@ -1,0 +1,13 @@
+{
+  cluster=iCluster;
+  role=iRole;
+  environ=iEnviron;
+  topologyName=iTopologyName;
+  topologyJarFile=iTopologyJarFile;
+  schedulerServerPort=iSchedulerServerPort;
+  String topologyDefnFile=TopologyUtils.lookUpTopologyDefnFile(".",topologyName);
+  topology=TopologyUtils.getTopology(topologyDefnFile);
+  config=SchedulerConfig.loadConfig(cluster,role,environ,topologyJarFile,topologyDefnFile,topology);
+  setupLogging(config);
+  LOG.log(Level.INFO,"Loaded scheduler config: {0}",config);
+}
