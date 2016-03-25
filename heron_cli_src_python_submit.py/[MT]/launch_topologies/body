@@ -12,11 +12,11 @@ def launch_topologies(cluster_role_env, topology_file, tmp_dir, config_path, con
             except:
                 raise Exception(('Could not open and parse topology defn file %s' % defn_file))
             try:
-                print ("Launching topology '%s'" % topology_defn.name)
+                Log.info(("Launching topology '%s'" % topology_defn.name))
                 launch_a_topology(cluster_role_env, tmp_dir, topology_file, defn_file, config_path, config_overrides)
-                print ("Topology '%s' launched successfully" % topology_defn.name)
+                Log.info(("Topology '%s' launched successfully" % topology_defn.name))
             except Exception as ex:
-                print ("Failed to launch topology '%s' because %s" % (topology_defn.name, str(ex)))
+                Log.error(("Failed to launch topology '%s' because %s" % (topology_defn.name, str(ex))))
                 raise
     except:
         raise

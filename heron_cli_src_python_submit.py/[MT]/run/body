@@ -1,12 +1,11 @@
 def run(command, parser, cl_args, unknown_args):
     topology_file = cl_args['topology-file-name']
     if (not os.path.isfile(topology_file)):
-        print ('Topology jar/tar %s does not exist' % topology_file)
-        sys.exit(1)
+        Log.error(('Topology jar|tar file %s does not exist' % topology_file))
+        return True
     if topology_file.endswith('.jar'):
-        submit_fatjar(command, parser, cl_args, unknown_args)
+        return submit_fatjar(command, parser, cl_args, unknown_args)
     elif (topology_file.endswith('.tar') or topology_file.endswith('.tar.gz')):
-        submit_tar(command, parser, cl_args, unknown_args)
-    else:
-        print 'Unknown file type. Please use .tar or .jar file'
-        sys.exit(1)
+        return submit_tar(command, parser, cl_args, unknown_args)
+    Log.error('Unknown file type. Please use .tar or .jar file')
+    return False
