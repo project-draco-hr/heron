@@ -8,11 +8,11 @@ def submit_tar(command, parser, cl_args, unknown_args):
     except KeyError:
         subparser = utils.get_subparser(parser, command)
         print subparser.format_help()
-        parser.exit()
+        return False
     config_path = utils.get_heron_cluster_conf_dir(cluster_role_env, config_path)
     if (not os.path.isdir(config_path)):
-        print ('Config directory does not exist: %s' % config_path)
-        parser.exit()
+        Log.error(('Config directory does not exist: %s' % config_path))
+        return False
     tmp_dir = tempfile.mkdtemp()
     opts.set_config('cmdline.topologydefn.tmpdirectory', tmp_dir)
     if cl_args['deploy_deactivated']:
@@ -22,8 +22,12 @@ def submit_tar(command, parser, cl_args, unknown_args):
     opts.set_config('cmdline.topology.initial.state', initial_state)
     execute.heron_tar(topology_class_name, topology_file, topology_args, tmp_dir)
     try:
-        cluster_role_env = utils.parse_cluster_role_env(cluster_role_env)
-        config_overrides = utils.parse_cmdline_override(cl_args)
-        launch_topologies(cluster_role_env, topology_file, tmp_dir, config_path, config_overrides)
+        try:
+            cluster_role_env = utils.parse_cluster_role_env(cluster_role_env)
+            config_overrides = utils.parse_cmdline_override(cl_args)
+            launch_topologies(cluster_role_env, topology_file, tmp_dir, config_path, config_overrides)
+        except Exception as ex:
+            return False
     finally:
         shutil.rmtree(tmp_dir)
+    return True

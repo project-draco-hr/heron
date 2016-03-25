@@ -11,7 +11,8 @@ import sys
 import subprocess
 import tarfile
 import tempfile
-import pprint
+import time
+from heron.common.src.python.color import Log
 import heron.cli.src.python.help as help
 import heron.cli.src.python.args as parse
 import heron.cli.src.python.opts as opts
@@ -24,4 +25,4 @@ import heron.cli.src.python.submit as submit
 import heron.cli.src.python.utils as utils
 import heron.cli.src.python.version as version
 if (__name__ == '__main__'):
-    main()
+    sys.exit(main())
