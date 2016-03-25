@@ -21,6 +21,7 @@ import heron.cli.src.python.deactivate as deactivate
 import heron.cli.src.python.kill as kill
 import heron.cli.src.python.restart as restart
 import heron.cli.src.python.submit as submit
+import heron.cli.src.python.utils as utils
 import heron.cli.src.python.version as version
 if (__name__ == '__main__'):
     main()
