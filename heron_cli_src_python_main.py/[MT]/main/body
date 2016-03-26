@@ -1,8 +1,9 @@
 def main():
+    check_environment()
     parser = create_parser()
     if (len(sys.argv[1:]) == 0):
         parser.print_help()
-        parser.exit()
+        return 0
     sys.argv = parse.insert_bool_values(sys.argv)
     (args, unknown_args) = parser.parse_known_args()
     namespace = vars(args)
@@ -15,4 +16,10 @@ def main():
         pass
     atexit.register(cleanup)
     command = namespace['subcommand']
-    return run(command, parser, namespace, unknown_args)
+    start = time.time()
+    retcode = run(command, parser, namespace, unknown_args)
+    end = time.time()
+    if (command != 'help'):
+        sys.stdout.flush()
+        Log.info(('Elapsed time: %.3fs.' % (end - start)))
+    return (0 if (retcode == True) else 1)
