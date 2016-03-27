@@ -16,10 +16,8 @@ def main():
     except:
         pass
     command = command_line_args['subcommand']
-    print command_line_args
     if ((command != 'help') and (command != 'version')):
         command_line_args = extract_common_args(command, parser, command_line_args)
-        print command_line_args
     start = time.time()
     retcode = run(command, parser, command_line_args, unknown_args)
     end = time.time()
