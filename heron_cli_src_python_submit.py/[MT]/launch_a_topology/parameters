@@ -1,6 +1,4 @@
-cluster_role_env
+cl_args
 tmp_dir
 topology_file
 topology_defn_file
-config_path
-config_overrides

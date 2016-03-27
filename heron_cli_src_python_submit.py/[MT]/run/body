@@ -2,10 +2,21 @@ def run(command, parser, cl_args, unknown_args):
     topology_file = cl_args['topology-file-name']
     if (not os.path.isfile(topology_file)):
         Log.error(('Topology jar|tar file %s does not exist' % topology_file))
-        return True
-    if topology_file.endswith('.jar'):
-        return submit_fatjar(command, parser, cl_args, unknown_args)
-    elif (topology_file.endswith('.tar') or topology_file.endswith('.tar.gz')):
-        return submit_tar(command, parser, cl_args, unknown_args)
-    Log.error('Unknown file type. Please use .tar or .jar file')
+        return False
+    jar_type = topology_file.endswith('.jar')
+    tar_type = (topology_file.endswith('.tar') or topology_file.endswith('.tar.gz'))
+    if ((not jar_type) and (not tar_type)):
+        Log.error('Unknown file type. Please use .tar or .tar.gz or .jar file')
+        return False
+    tmp_dir = tempfile.mkdtemp()
+    if cl_args['deploy_deactivated']:
+        initial_state = topology_pb2.TopologyState.Name(topology_pb2.PAUSED)
+    else:
+        initial_state = topology_pb2.TopologyState.Name(topology_pb2.RUNNING)
+    opts.set_config('cmdline.topologydefn.tmpdirectory', tmp_dir)
+    opts.set_config('cmdline.topology.initial.state', initial_state)
+    if jar_type:
+        return submit_fatjar(cl_args, unknown_args, tmp_dir)
+    elif tar_type:
+        return submit_tar(cl_args, unknown_args, tmp_dir)
     return False
