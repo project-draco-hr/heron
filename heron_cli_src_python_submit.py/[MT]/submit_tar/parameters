@@ -1,4 +1,3 @@
-command
-parser
 cl_args
 unknown_args
+tmp_dir
