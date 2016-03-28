@@ -1,0 +1,42 @@
+{
+  Options options=CommandHandlerOptions.constructOptions();
+  Options helpOptions=CommandHandlerOptions.constructHelpOptions();
+  CommandLineParser parser=new DefaultParser();
+  CommandLine cmd=parser.parse(helpOptions,args,true);
+  ;
+  if (cmd.hasOption("h")) {
+    CommandHandlerOptions.usage(options);
+    System.exit(0);
+  }
+  try {
+    cmd=parser.parse(options,args);
+  }
+ catch (  ParseException e) {
+    LOG.severe("Error parsing command line options: " + e.getMessage());
+    CommandHandlerOptions.usage(options);
+    System.exit(1);
+  }
+  String command=cmd.getOptionValue("command");
+  Config config=CommandHandlerConfig.loadConfig(cmd);
+  LOG.info("Static config loaded successfully ");
+  LOG.info(config.toString());
+  String statemgrClass=Context.stateManagerClass(config);
+  IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
+  try {
+    statemgr.initialize(config);
+    Config runtime=Config.newBuilder().put(Keys.schedulerStateManagerAdaptor(),new SchedulerStateManagerAdaptor(statemgr)).build();
+    CommandHandler commandHandler=CommandHandlerFactory.makeCommand(command,config,runtime);
+    commandHandler.beforeExecution();
+    commandHandler.execute();
+    commandHandler.afterExecution();
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+    LOG.severe("Unable to execute command " + command);
+    System.exit(1);
+  }
+ finally {
+    statemgr.close();
+  }
+  System.exit(0);
+}

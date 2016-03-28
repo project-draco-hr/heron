@@ -1,18 +1,27 @@
 def main():
+    check_environment()
+    atexit.register(cleanup)
     parser = create_parser()
     if (len(sys.argv[1:]) == 0):
         parser.print_help()
-        parser.exit()
+        return 0
     sys.argv = parse.insert_bool_values(sys.argv)
     (args, unknown_args) = parser.parse_known_args()
-    namespace = vars(args)
+    command_line_args = vars(args)
     try:
-        if namespace['verbose']:
+        if command_line_args['verbose']:
             opts.set_verbose()
-        if namespace['trace_execution']:
+        if command_line_args['trace_execution']:
             opts.set_trace_execution()
     except:
         pass
-    atexit.register(cleanup)
-    command = namespace['subcommand']
-    return run(command, parser, namespace, unknown_args)
+    command = command_line_args['subcommand']
+    if ((command != 'help') and (command != 'version')):
+        command_line_args = extract_common_args(command, parser, command_line_args)
+    start = time.time()
+    retcode = run(command, parser, command_line_args, unknown_args)
+    end = time.time()
+    if (command != 'help'):
+        sys.stdout.flush()
+        Log.info(('Elapsed time: %.3fs.' % (end - start)))
+    return (0 if (retcode == True) else 1)

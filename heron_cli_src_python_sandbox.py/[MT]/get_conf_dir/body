@@ -1,2 +1,0 @@
-def get_conf_dir():
-    return CONF_DIR
