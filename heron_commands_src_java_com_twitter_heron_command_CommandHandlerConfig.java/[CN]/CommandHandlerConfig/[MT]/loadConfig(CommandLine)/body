@@ -1,0 +1,9 @@
+{
+  String cluster=commandLine.getOptionValue("cluster");
+  String role=commandLine.getOptionValue("role");
+  String environ=commandLine.getOptionValue("environment");
+  String heronHome=commandLine.getOptionValue("heron_home");
+  String configPath=commandLine.getOptionValue("config_path");
+  Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath)).putAll(commandLineConfigs(cluster,role,environ)).build());
+  return config;
+}
