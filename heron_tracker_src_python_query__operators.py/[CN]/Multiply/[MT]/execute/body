@@ -14,8 +14,8 @@ def execute(self, tracker, tmaster, start, end):
     else:
         met = futureResolvedMetrics.pop(0)
         if (not met):
-            raise Exception('No metrics found')
-        if (len(met) == 1):
+            pass
+        elif ((len(met) == 1) and (not met[0].instance)):
             metrics[''] = met[0]
         else:
             for m in met:
@@ -30,15 +30,15 @@ def execute(self, tracker, tmaster, start, end):
     else:
         met = futureResolvedMetrics.pop(0)
         if (not met):
-            raise Exception('No metrics found')
-        if (len(met) == 1):
+            pass
+        elif ((len(met) == 1) and (not met[0].instance)):
             metrics2[''] = met[0]
         else:
             for m in met:
                 if (not m.instance):
                     raise Exception('MULTIPLY with multivariate requires instance based timeseries')
                 metrics2[m.instance] = m
-    if ((len(metrics) > 1) and (len(metrics2) > 1)):
+    if (((len(metrics) > 1) or ((len(metrics) == 1) and ('' not in metrics))) and ((len(metrics2) > 1) or ((len(metrics2) == 1) and ('' not in metrics2)))):
         allMetrics = []
         for key in metrics:
             if (key not in metrics2):
@@ -51,7 +51,7 @@ def execute(self, tracker, tmaster, start, end):
                     met.timeline[timestamp] = (metrics[key].timeline[timestamp] * metrics2[key].timeline[timestamp])
             allMetrics.append(met)
         raise tornado.gen.Return(allMetrics)
-    elif (len(metrics) == 1):
+    elif ((len(metrics) == 1) and ('' in metrics)):
         allMetrics = []
         for (key, metric) in metrics2.iteritems():
             met = Metrics(None, None, metric.instance, start, end, dict(metrics[''].timeline))

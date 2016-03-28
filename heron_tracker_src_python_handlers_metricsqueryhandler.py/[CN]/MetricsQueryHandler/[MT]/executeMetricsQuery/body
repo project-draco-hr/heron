@@ -7,13 +7,9 @@ def executeMetricsQuery(self, tmaster, queryString, start_time, end_time, callba
     ret['starttime'] = start_time
     ret['endtime'] = end_time
     ret['timeline'] = []
-    if (not metrics):
-        raise Exception('No metrics found')
     for metric in metrics:
         tl = {'data': metric.timeline, }
         if metric.instance:
             tl['instance'] = metric.instance
         ret['timeline'].append(tl)
-    if (not ret['timeline']):
-        raise Exception('No metrics found')
     raise tornado.gen.Return(ret)
