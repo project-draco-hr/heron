@@ -47,6 +47,4 @@ def getComponentMetrics(self, tmaster, componentName, metricNames, instances, in
             if (metricname not in ret['metrics']):
                 ret['metrics'][metricname] = {}
             ret['metrics'][metricname][instance] = value
-    if (not ret['metrics']):
-        raise Exception('No metrics found')
     raise tornado.gen.Return(ret)
