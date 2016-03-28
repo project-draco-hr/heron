@@ -7,6 +7,8 @@ def run(command, parser, command_args, unknown_args):
         return kill.run(command, parser, command_args, unknown_args)
     elif (command == 'restart'):
         return restart.run(command, parser, command_args, unknown_args)
+    elif (command == 'ps'):
+        return ps.run(command, parser, command_args, unknown_args)
     elif (command == 'submit'):
         return submit.run(command, parser, command_args, unknown_args)
     elif (command == 'help'):

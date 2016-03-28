@@ -8,7 +8,7 @@
     future.set(executionState);
   }
  catch (  InvalidProtocolBufferException e) {
-    future.setException(new RuntimeException("Could not parse SchedulerLocation",e));
+    future.setException(new RuntimeException("Could not parse ExecutionState",e));
   }
   return future;
 }

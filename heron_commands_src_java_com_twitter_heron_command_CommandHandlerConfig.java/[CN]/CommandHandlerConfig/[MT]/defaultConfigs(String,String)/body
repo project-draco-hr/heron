@@ -1,0 +1,4 @@
+{
+  Config config=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadCommandsConfig(heronHome,configPath)).build();
+  return config;
+}
