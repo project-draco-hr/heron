@@ -1,0 +1,12 @@
+{
+  int componentParallelism=4;
+  Config topologyConfig=new Config();
+  Map<String,Integer> spouts=new HashMap<>();
+  spouts.put("spout",componentParallelism);
+  Map<String,Integer> bolts=new HashMap<>();
+  bolts.put("bolt",componentParallelism);
+  TopologyAPI.Topology topology=TopologyTests.createTopology("testTopology",topologyConfig,spouts,bolts);
+  Map<String,Integer> componentParallelismMap=TopologyUtils.getComponentParallelism(topology);
+  Assert.assertEquals(componentParallelism,componentParallelismMap.get("spout").intValue());
+  Assert.assertEquals(componentParallelism,componentParallelismMap.get("bolt").intValue());
+}

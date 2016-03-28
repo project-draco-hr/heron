@@ -1,0 +1,4 @@
+{
+  Config config=Config.newBuilder().putAll(ClusterDefaults.getSandboxDefaults()).putAll(ClusterConfig.loadSandboxConfig()).build();
+  return config;
+}

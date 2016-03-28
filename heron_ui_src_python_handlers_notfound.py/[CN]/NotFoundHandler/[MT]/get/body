@@ -1,0 +1,3 @@
+def get(self, *args, **kwargs):
+    errormessage = 'Sorry, we could not find this page'
+    self.render('error.html', errormessage=errormessage)

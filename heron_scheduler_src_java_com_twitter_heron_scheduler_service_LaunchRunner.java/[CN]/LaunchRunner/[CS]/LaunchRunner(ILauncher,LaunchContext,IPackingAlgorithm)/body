@@ -1,6 +1,0 @@
-{
-  this.topology=context.getTopology();
-  this.launcher=launcher;
-  this.context=context;
-  this.packingAlgorithm=packingAlgorithm;
-}

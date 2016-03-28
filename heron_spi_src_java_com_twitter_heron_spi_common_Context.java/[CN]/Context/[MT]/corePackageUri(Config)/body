@@ -1,0 +1,3 @@
+{
+  return cfg.getStringValue(ConfigKeys.get("CORE_PACKAGE_URI"));
+}

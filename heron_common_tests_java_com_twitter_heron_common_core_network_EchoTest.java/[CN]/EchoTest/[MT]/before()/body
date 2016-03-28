@@ -1,4 +1,0 @@
-{
-  threadsPool=Executors.newSingleThreadExecutor();
-  serverPort=Utils.getFreePort();
-}

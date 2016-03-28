@@ -1,0 +1,6 @@
+{
+  lock.lock();
+  terminated=true;
+  terminateCondition.signal();
+  lock.unlock();
+}

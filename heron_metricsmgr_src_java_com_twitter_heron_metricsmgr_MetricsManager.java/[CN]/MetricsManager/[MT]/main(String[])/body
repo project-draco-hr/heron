@@ -9,10 +9,12 @@
   String systemConfigFilename=args[4];
   String metricsSinksConfigFilename=args[5];
   SystemConfig systemConfig=new SystemConfig(systemConfigFilename,true);
-  SingletonRegistry.INSTANCE.registerSingleton(Constants.HERON_SYSTEM_CONFIG,systemConfig);
+  SingletonRegistry.INSTANCE.registerSingleton(SystemConfig.HERON_SYSTEM_CONFIG,systemConfig);
   Level loggingLevel=Level.INFO;
   String loggingDir=systemConfig.getHeronLoggingDirectory();
-  LoggingHelper.loggerInit(metricsmgrId,loggingLevel,loggingDir);
+  LoggingHelper.loggerInit(loggingLevel,true);
+  LoggingHelper.addLoggingHandler(LoggingHelper.getFileHandler(metricsmgrId,loggingDir,true,systemConfig.getHeronLoggingMaximumSizeMb() * Constants.MB_TO_BYTES,systemConfig.getHeronLoggingMaximumFiles()));
+  LoggingHelper.addLoggingHandler(new ErrorReportLoggingHandler());
   LOG.info(String.format("Starting Metrics Manager for topology %s with topologyId %s with " + "Metrics Manager Id %s, Merics Manager Port: %d.",topologyName,topologyId,metricsmgrId,metricsPort));
   LOG.info("System Config: " + systemConfig);
   MetricsSinksConfig sinksConfig=new MetricsSinksConfig(metricsSinksConfigFilename);

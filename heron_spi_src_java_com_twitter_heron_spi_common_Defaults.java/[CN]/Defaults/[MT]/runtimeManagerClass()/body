@@ -1,0 +1,3 @@
+{
+  return ConfigDefaults.get("RUNTIME_MANAGER_CLASS");
+}

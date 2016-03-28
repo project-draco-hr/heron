@@ -1,8 +1,0 @@
-{
-  if (groupingFieldsBuilder_ == null) {
-    return groupingFields_;
-  }
- else {
-    return groupingFieldsBuilder_.getMessage();
-  }
-}

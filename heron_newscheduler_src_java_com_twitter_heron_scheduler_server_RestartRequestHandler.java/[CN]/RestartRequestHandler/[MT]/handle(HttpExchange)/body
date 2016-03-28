@@ -1,0 +1,7 @@
+{
+  byte[] requestBody=HttpUtils.readHttpRequestBody(exchange);
+  Scheduler.RestartTopologyRequest restartTopologyRequest=Scheduler.RestartTopologyRequest.newBuilder().mergeFrom(requestBody).build();
+  boolean isRestartSuccessfully=scheduler.onRestart(restartTopologyRequest);
+  Scheduler.RestartTopologyResponse response=Scheduler.RestartTopologyResponse.newBuilder().setStatus(NetworkUtils.getHeronStatus(isRestartSuccessfully)).build();
+  HttpUtils.sendHttpResponse(exchange,response.toByteArray());
+}

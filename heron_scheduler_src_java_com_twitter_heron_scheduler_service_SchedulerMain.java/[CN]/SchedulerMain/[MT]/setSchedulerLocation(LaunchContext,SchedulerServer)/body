@@ -1,5 +1,0 @@
-{
-  Scheduler.SchedulerLocation location=Scheduler.SchedulerLocation.newBuilder().setTopologyName(context.getTopologyName()).setHttpEndpoint(String.format("%s:%d",schedulerServer.getHost(),schedulerServer.getPort())).build();
-  LOG.info("Setting SchedulerLocation: " + location);
-  context.getStateManagerAdaptor().setSchedulerLocation(location);
-}

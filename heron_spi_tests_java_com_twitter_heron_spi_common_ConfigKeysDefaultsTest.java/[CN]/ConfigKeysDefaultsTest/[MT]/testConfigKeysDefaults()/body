@@ -1,0 +1,9 @@
+{
+  Map<String,String> keys=ConfigKeys.keys;
+  Map<String,Object> defaults=ConfigDefaults.defaults;
+  for (  Map.Entry<String,Object> entry : defaults.entrySet()) {
+    String key=entry.getKey();
+    System.out.println(key);
+    Assert.assertTrue(keys.containsKey(key));
+  }
+}

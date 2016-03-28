@@ -1,0 +1,3 @@
+{
+  SingletonRegistry.INSTANCE.registerSingleton(SystemConfig.HERON_SYSTEM_CONFIG,systemConfig);
+}

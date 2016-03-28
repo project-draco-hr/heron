@@ -1,0 +1,3 @@
+{
+  return ConfigDefaults.get("SANDBOX_TMASTER_BINARY");
+}

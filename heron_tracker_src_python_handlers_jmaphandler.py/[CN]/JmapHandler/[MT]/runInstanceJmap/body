@@ -1,14 +1,14 @@
 @tornado.gen.coroutine
-def runInstanceJmap(self, topologyInfo, instance_id):
+def runInstanceJmap(self, topology_info, instance_id):
     '\n    Fetches Instance jstack from heron-shell.\n    '
-    pid_response = yield getInstancePid(topologyInfo, instance_id)
+    pid_response = yield getInstancePid(topology_info, instance_id)
     try:
         http_client = tornado.httpclient.AsyncHTTPClient()
         pid_json = json.loads(pid_response)
         pid = pid_json['stdout'].strip()
         if (pid == ''):
             raise Exception('Failed to get pid')
-        endpoint = utils.make_shell_endpoint(topologyInfo, instance_id)
+        endpoint = utils.make_shell_endpoint(topology_info, instance_id)
         url = ('%s/jmap/%s' % (endpoint, pid))
         response = yield http_client.fetch(url)
         LOG.debug(('HTTP call for url: %s' % url))

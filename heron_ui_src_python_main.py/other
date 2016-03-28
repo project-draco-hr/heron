@@ -1,0 +1,14 @@
+import os, sys
+import argparse
+import tornado.ioloop
+import tornado.options
+import tornado.web
+import tornado.log
+import tornado.template
+from tornado.options import options, define
+from heron.ui.src.python import handlers
+from heron.ui.src.python import args
+from heron.ui.src.python import log
+from heron.ui.src.python.log import Log as LOG
+if (__name__ == '__main__'):
+    main(sys.argv)

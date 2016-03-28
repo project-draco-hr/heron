@@ -1,0 +1,14 @@
+{
+  SettableFuture<ExecutionEnvironment.ExecutionState> future=SettableFuture.create();
+  String path=getExecutionStatePath(topologyName);
+  byte[] data=FileUtils.readFromFile(path);
+  ExecutionEnvironment.ExecutionState executionState;
+  try {
+    executionState=ExecutionEnvironment.ExecutionState.parseFrom(data);
+    future.set(executionState);
+  }
+ catch (  InvalidProtocolBufferException e) {
+    future.setException(new RuntimeException("Could not parse SchedulerLocation",e));
+  }
+  return future;
+}

@@ -2,7 +2,7 @@
   super(s,MetricsHost,MetricsPort,options);
   this.instance=instance;
   this.outMetricsQueues=outs;
-  this.systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  this.systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
   this.gatewayMetrics=gatewayMetrics;
   addMetricsManagerClientTasksOnWakeUp();
 }

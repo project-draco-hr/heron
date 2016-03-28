@@ -1,0 +1,14 @@
+{
+  ExecutionEnvironment.ExecutionState executionState;
+  TopologyAPI.Topology topology=Runtime.topology(runtime);
+  ExecutionEnvironment.ExecutionState.Builder builder=ExecutionEnvironment.ExecutionState.newBuilder();
+  builder.setTopologyName(topology.getName());
+  builder.setTopologyId(topology.getId());
+  builder.setSubmissionTime(System.currentTimeMillis() / 1000);
+  builder.setSubmissionUser(System.getProperty("user.name"));
+  if (!builder.isInitialized()) {
+    return null;
+  }
+  executionState=builder.build();
+  return executionState;
+}

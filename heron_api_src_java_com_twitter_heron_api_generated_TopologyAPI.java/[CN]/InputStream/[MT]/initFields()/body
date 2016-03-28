@@ -1,6 +1,0 @@
-{
-  stream_=com.twitter.heron.api.generated.TopologyAPI.StreamId.getDefaultInstance();
-  gtype_=com.twitter.heron.api.generated.TopologyAPI.Grouping.SHUFFLE;
-  groupingFields_=com.twitter.heron.api.generated.TopologyAPI.StreamSchema.getDefaultInstance();
-  customGroupingJavaObject_=com.google.protobuf.ByteString.EMPTY;
-}

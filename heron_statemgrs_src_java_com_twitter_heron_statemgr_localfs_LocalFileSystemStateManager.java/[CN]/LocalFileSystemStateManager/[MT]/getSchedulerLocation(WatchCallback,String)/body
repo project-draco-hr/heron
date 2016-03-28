@@ -1,0 +1,14 @@
+{
+  SettableFuture<Scheduler.SchedulerLocation> future=SettableFuture.create();
+  String path=getSchedulerLocationPath(topologyName);
+  byte[] data=FileUtils.readFromFile(path);
+  Scheduler.SchedulerLocation location;
+  try {
+    location=Scheduler.SchedulerLocation.parseFrom(data);
+    future.set(location);
+  }
+ catch (  InvalidProtocolBufferException e) {
+    future.setException(new RuntimeException("Could not parse SchedulerLocation",e));
+  }
+  return future;
+}

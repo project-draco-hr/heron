@@ -1,3 +1,0 @@
-{
-  return com.twitter.heron.api.generated.TopologyAPI.internal_static_heron_proto_api_Component_descriptor;
-}

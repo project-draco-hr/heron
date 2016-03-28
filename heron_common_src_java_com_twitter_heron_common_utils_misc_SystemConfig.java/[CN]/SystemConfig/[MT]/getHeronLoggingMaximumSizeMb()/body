@@ -1,3 +1,0 @@
-{
-  return Utils.getInt(this.get(SystemConfig.HERON_LOGGING_MAXIMUM_SIZE_MB));
-}

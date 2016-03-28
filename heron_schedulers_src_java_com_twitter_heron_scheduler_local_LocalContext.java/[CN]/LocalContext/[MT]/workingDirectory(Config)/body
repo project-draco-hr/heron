@@ -1,0 +1,4 @@
+{
+  String workingDirectory=config.getStringValue(LocalKeys.get("WORKING_DIRECTORY"),LocalDefaults.get("WORKING_DIRECTORY"));
+  return Misc.substitute(config,workingDirectory);
+}

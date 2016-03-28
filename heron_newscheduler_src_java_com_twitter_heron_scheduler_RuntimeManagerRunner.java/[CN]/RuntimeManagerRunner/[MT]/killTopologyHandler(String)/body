@@ -1,0 +1,43 @@
+{
+  if (!runtimeManager.prepareKill()) {
+    LOG.severe("Failed to prepare kill locally");
+    return false;
+  }
+  Pair<Boolean,HttpURLConnection> ret=createHttpConnection();
+  if (ret.second == null)   return ret.first;
+  HttpURLConnection connection=ret.second;
+  byte[] data=Scheduler.KillTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
+  if (!HttpUtils.sendHttpPostRequest(connection,data)) {
+    LOG.log(Level.SEVERE,"Failed to send http request for kill");
+    connection.disconnect();
+    return false;
+  }
+  Common.StatusCode statusCode;
+  try {
+    LOG.info("Receiving kill response from scheduler...");
+    statusCode=Scheduler.KillTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to parse kill response: ",e);
+    connection.disconnect();
+    return false;
+  }
+  if (!statusCode.equals(Common.StatusCode.OK)) {
+    LOG.severe("Received not OK response from scheduler for kill");
+    connection.disconnect();
+    return false;
+  }
+  if (!runtimeManager.postKill()) {
+    LOG.severe("Failed in post deactivate locally");
+    connection.disconnect();
+    return false;
+  }
+  if (!cleanState(topologyName)) {
+    LOG.severe("Failed in clean state");
+    connection.disconnect();
+    return false;
+  }
+  connection.disconnect();
+  LOG.info("Scheduler killed topology successfully.");
+  return true;
+}

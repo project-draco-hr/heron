@@ -3,9 +3,9 @@
   ++emitted;
   if (emitted % N == 0) {
     System.out.println("emit() is invoked in hook");
-    System.out.println(info.getValues());
-    System.out.println(info.getTaskId());
-    System.out.println(info.getStream());
-    System.out.println(info.getOutTasks());
+    System.out.println(info.values);
+    System.out.println(info.taskId);
+    System.out.println(info.stream);
+    System.out.println(info.outTasks);
   }
 }

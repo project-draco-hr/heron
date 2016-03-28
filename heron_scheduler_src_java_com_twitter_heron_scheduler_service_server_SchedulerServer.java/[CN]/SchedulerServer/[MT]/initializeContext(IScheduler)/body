@@ -1,6 +1,0 @@
-{
-  this.schedulerServer.createContext(KILL_REQUEST_CONTEXT,new KillRequestHandler(scheduler,context));
-  this.schedulerServer.createContext(ACTIVATE_REQUEST_CONTEXT,new ActivateRequestHandler(scheduler,context));
-  this.schedulerServer.createContext(DEACTIVATE_REQUEST_CONTEXT,new DeactivateRequestHandler(scheduler,context));
-  this.schedulerServer.createContext(RESTART_REQUEST_CONTEXT,new RestartRequestHandler(scheduler,context));
-}

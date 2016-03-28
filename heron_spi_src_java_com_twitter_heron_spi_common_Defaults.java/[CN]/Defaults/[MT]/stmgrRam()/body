@@ -1,0 +1,3 @@
+{
+  return ConfigDefaults.getLong("STMGR_RAM");
+}

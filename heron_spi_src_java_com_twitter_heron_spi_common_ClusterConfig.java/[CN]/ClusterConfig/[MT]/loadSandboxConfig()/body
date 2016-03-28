@@ -1,0 +1,5 @@
+{
+  Config sandboxConfig=loadBasicSandboxConfig();
+  Config.Builder cb=Config.newBuilder().putAll(sandboxConfig).putAll(loadPackingConfig(Context.packingSandboxFile(sandboxConfig))).putAll(loadSchedulerConfig(Context.schedulerSandboxFile(sandboxConfig))).putAll(loadStateManagerConfig(Context.stateManagerSandboxFile(sandboxConfig))).putAll(loadUploaderConfig(Context.uploaderSandboxFile(sandboxConfig)));
+  return cb.build();
+}

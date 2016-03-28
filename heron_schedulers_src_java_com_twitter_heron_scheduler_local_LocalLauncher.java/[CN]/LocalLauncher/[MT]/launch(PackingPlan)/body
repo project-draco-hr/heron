@@ -1,0 +1,18 @@
+{
+  LOG.info("Launching topology for local cluster " + LocalContext.cluster(config));
+  TopologyAPI.Topology topology=Runtime.topology(runtime);
+  if (!downloadAndExtractPackages()) {
+    LOG.severe("Failed to download the core and topology packages");
+    return false;
+  }
+  String schedulerClassPath=new StringBuilder().append(LocalContext.schedulerSandboxClassPath(config)).append(":").append(LocalContext.packingSandboxClassPath(config)).append(":").append(LocalContext.stateManagerSandboxClassPath(config)).toString();
+  String schedulerCmd=String.format("%s %s %s %s %s %s %s %s %s %s","java","-cp",schedulerClassPath,"com.twitter.heron.scheduler.SchedulerMain","--cluster " + LocalContext.cluster(config),"--role " + LocalContext.role(config),"--environment " + LocalContext.environ(config),"--topology_name " + topology.getName(),"--topology_jar " + LocalContext.topologyJarFile(config),"--http_port " + NetworkUtils.getFreePort());
+  LOG.info("Scheduler command line: " + schedulerCmd.toString());
+  Process p=ShellUtils.runASyncProcess(true,schedulerCmd.toString(),new File(topologyWorkingDirectory));
+  if (p == null) {
+    LOG.severe("Failed to start SchedulerMain using: " + schedulerCmd);
+    return false;
+  }
+  LOG.info(String.format("For checking the status and logs of the topology, use the working directory %s",LocalContext.workingDirectory(config)));
+  return true;
+}

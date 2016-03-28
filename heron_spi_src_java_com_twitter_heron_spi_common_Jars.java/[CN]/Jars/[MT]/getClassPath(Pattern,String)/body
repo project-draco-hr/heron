@@ -1,0 +1,9 @@
+{
+  List<String> jars=getJars(pattern,directory);
+  StringBuilder sb=new StringBuilder();
+  for (  String s : jars) {
+    sb.append(s).append(':');
+  }
+  sb.deleteCharAt(sb.length() - 1);
+  return sb.toString();
+}

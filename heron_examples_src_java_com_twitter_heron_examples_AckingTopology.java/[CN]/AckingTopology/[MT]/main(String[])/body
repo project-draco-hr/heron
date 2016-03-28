@@ -11,5 +11,5 @@
   conf.setEnableAcking(true);
   conf.put(Config.TOPOLOGY_WORKER_CHILDOPTS,"-XX:+HeapDumpOnOutOfMemoryError");
   conf.setNumStmgrs(1);
-  HeronSubmitter.submitTopology(args[0],conf,builder.createTopology());
+  StormSubmitter.submitTopology(args[0],conf,builder.createTopology());
 }

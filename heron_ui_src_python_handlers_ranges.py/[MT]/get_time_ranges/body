@@ -1,0 +1,6 @@
+def get_time_ranges(ranges):
+    now = int(time.time())
+    time_slots = dict()
+    for (key, value) in ranges.iteritems():
+        time_slots[key] = ((now - value[0]), (now - value[1]), value[2])
+    return (now, time_slots)

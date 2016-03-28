@@ -1,0 +1,6 @@
+{
+  if (client != null) {
+    LOG.info("Closing the CuratorClient to: " + connectionString);
+    client.close();
+  }
+}

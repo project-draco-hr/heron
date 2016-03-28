@@ -1,0 +1,9 @@
+{
+  LocalFileSystemStateManager manager=Mockito.spy(new LocalFileSystemStateManager());
+  manager.initialize(getConfig());
+  PowerMockito.spy(FileUtils.class);
+  PowerMockito.doReturn(true).when(FileUtils.class,"createDirectory",Matchers.anyString());
+  Assert.assertTrue(manager.initTree());
+  PowerMockito.verifyStatic(Mockito.atLeastOnce());
+  FileUtils.createDirectory(Matchers.anyString());
+}

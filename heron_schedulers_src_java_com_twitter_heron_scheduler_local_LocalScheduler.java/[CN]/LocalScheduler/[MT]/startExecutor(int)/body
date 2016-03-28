@@ -1,0 +1,25 @@
+{
+  LOG.info("Starting a new executor for container: " + container);
+  final Process regularExecutor=ShellUtils.runASyncProcess(true,getExecutorCommand(container),new File(LocalContext.workingDirectory(config)));
+  processToContainer.put(regularExecutor,container);
+  LOG.info("Started the executor for container: " + container);
+  Runnable r=new Runnable(){
+    @Override public void run(){
+      try {
+        LOG.info("Waiting for container " + container + " to finish.");
+        regularExecutor.waitFor();
+        LOG.info("Container " + container + " is completed. Exit status: "+ regularExecutor.exitValue());
+        if (topologyKilled) {
+          LOG.info("Topology is killed. Not to start new executors.");
+          return;
+        }
+        startExecutor(processToContainer.remove(regularExecutor));
+      }
+ catch (      InterruptedException e) {
+        LOG.log(Level.SEVERE,"Process is interrupted: ",e);
+      }
+    }
+  }
+;
+  monitorService.submit(r);
+}

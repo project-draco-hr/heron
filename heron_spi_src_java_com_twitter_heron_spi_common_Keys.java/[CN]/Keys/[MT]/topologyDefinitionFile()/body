@@ -1,0 +1,3 @@
+{
+  return ConfigKeys.get("TOPOLOGY_DEFINITION_FILE");
+}

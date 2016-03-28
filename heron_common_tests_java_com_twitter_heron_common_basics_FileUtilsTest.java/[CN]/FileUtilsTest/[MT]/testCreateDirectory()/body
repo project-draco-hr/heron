@@ -1,0 +1,7 @@
+{
+  String currentWorkingDir=Paths.get("").toAbsolutePath().normalize().toString();
+  Assert.assertFalse(FileUtils.createDirectory(currentWorkingDir));
+  String newDir=String.format("%s/%s",currentWorkingDir,UUID.randomUUID().toString());
+  Assert.assertTrue(FileUtils.createDirectory(newDir));
+  Assert.assertTrue(FileUtils.deleteFile(newDir));
+}

@@ -1,0 +1,28 @@
+{
+  Map<String,Long> ramMap=TopologyUtils.getComponentRamMap(topology,getDefaultInstanceRam(basePacking));
+  Map<String,PackingPlan.ContainerPlan> containerPlanMap=new HashMap<>();
+  long containerRam=getContainerRamHint(basePacking);
+  long containerDisk=getContainerDiskHint(basePacking);
+  double containerCpu=getContainerCpuHint(basePacking);
+  for (  Map.Entry<String,List<String>> entry : basePacking.entrySet()) {
+    String containerId=entry.getKey();
+    List<String> instanceList=entry.getValue();
+    Map<String,PackingPlan.InstancePlan> instancePlanMap=new HashMap<>();
+    for (    String instanceId : instanceList) {
+      long instanceRam=ramMap.get(getComponentName(instanceId));
+      long instanceDisk=1 * Constants.GB;
+      PackingPlan.Resource resource=new PackingPlan.Resource(instanceCpuDefault,instanceRam,instanceDisk);
+      PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,getComponentName(instanceId),resource);
+      instancePlanMap.put(instanceId,instancePlan);
+    }
+    PackingPlan.Resource resource=new PackingPlan.Resource(containerCpu,containerRam,containerDisk);
+    PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlanMap,resource);
+    containerPlanMap.put(containerId,containerPlan);
+  }
+  int totalContainer=containerPlanMap.size() + 1;
+  long topologyRam=totalContainer * containerRam;
+  long topologyDisk=totalContainer * containerDisk;
+  double topologyCpu=totalContainer * containerCpu;
+  PackingPlan.Resource resource=new PackingPlan.Resource(topologyCpu,topologyRam,topologyDisk);
+  return new PackingPlan(topology.getId(),containerPlanMap,resource);
+}

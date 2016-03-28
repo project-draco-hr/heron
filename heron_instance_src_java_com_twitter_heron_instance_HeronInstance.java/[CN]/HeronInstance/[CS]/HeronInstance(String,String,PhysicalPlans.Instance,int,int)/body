@@ -1,5 +1,5 @@
 {
-  systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
   gatewayLooper=new NIOLooper();
   slaveLooper=new SlaveLooper();
   gatewayLooper.addTasksOnExit(new GatewayExitTask());

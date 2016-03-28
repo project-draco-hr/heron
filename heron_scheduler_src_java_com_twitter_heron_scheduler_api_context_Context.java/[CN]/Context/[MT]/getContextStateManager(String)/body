@@ -1,3 +1,0 @@
-{
-  return stateManagerClass == null ? new DummySchedulerStateManager() : Factory.makeStateManager(stateManagerClass);
-}

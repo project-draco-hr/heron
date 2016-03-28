@@ -14,5 +14,5 @@
   taskHooks.add("com.twitter.heron.examples.TaskHookTopology$TestTaskHook");
   conf.setAutoTaskHooks(taskHooks);
   conf.setNumStmgrs(1);
-  HeronSubmitter.submitTopology(args[0],conf,builder.createTopology());
+  StormSubmitter.submitTopology(args[0],conf,builder.createTopology());
 }

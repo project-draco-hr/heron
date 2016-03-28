@@ -1,0 +1,58 @@
+{
+  String trimmedPath=pathString.trim();
+  if (isURL(trimmedPath))   return substituteURL(config,trimmedPath);
+  String fileSeparator=Matcher.quoteReplacement(System.getProperty("file.separator"));
+  List<String> fixedList=Arrays.asList(trimmedPath.split(fileSeparator));
+  List<String> list=new LinkedList<String>(fixedList);
+  String homePath=FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
+  for (int i=0; i < list.size(); i++) {
+    String elem=list.get(i);
+    if (elem.equals("${HOME}")) {
+      list.set(i,homePath);
+    }
+ else     if (elem.equals("~")) {
+      list.set(i,homePath);
+    }
+ else     if (elem.equals("${JAVA_HOME}")) {
+      String javaPath=System.getenv("JAVA_HOME");
+      if (javaPath != null)       list.set(i,javaPath);
+    }
+ else     if (elem.equals("${HERON_HOME}")) {
+      list.set(i,Context.heronHome(config));
+    }
+ else     if (elem.equals("${HERON_BIN}")) {
+      list.set(i,Context.heronBin(config));
+    }
+ else     if (elem.equals("${HERON_CONF}")) {
+      list.set(i,Context.heronConf(config));
+    }
+ else     if (elem.equals("${HERON_LIB}")) {
+      list.set(i,Context.heronLib(config));
+    }
+ else     if (elem.equals("${HERON_DIST}")) {
+      list.set(i,Context.heronDist(config));
+    }
+ else     if (elem.equals("${HERON_SANDBOX_HOME}")) {
+      list.set(i,Context.heronSandboxHome(config));
+    }
+ else     if (elem.equals("${HERON_SANDBOX_BIN}")) {
+      list.set(i,Context.heronSandboxBin(config));
+    }
+ else     if (elem.equals("${HERON_SANDBOX_CONF}")) {
+      list.set(i,Context.heronSandboxConf(config));
+    }
+ else     if (elem.equals("${HERON_SANDBOX_LIB}")) {
+      list.set(i,Context.heronSandboxLib(config));
+    }
+ else     if (elem.equals("${CLUSTER}")) {
+      list.set(i,Context.cluster(config));
+    }
+ else     if (elem.equals("${ROLE}")) {
+      list.set(i,Context.role(config));
+    }
+ else     if (elem.equals("${TOPOLOGY}")) {
+      list.set(i,Context.topologyName(config));
+    }
+  }
+  return combinePaths(list);
+}

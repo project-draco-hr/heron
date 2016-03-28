@@ -1,8 +1,0 @@
-{
-  super.clear();
-  key_="";
-  bitField0_=(bitField0_ & ~0x00000001);
-  type_=com.twitter.heron.api.generated.TopologyAPI.Type.OBJECT;
-  bitField0_=(bitField0_ & ~0x00000002);
-  return this;
-}

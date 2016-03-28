@@ -1,0 +1,13 @@
+{
+  Logger.getLogger("").setLevel(level);
+  if (isRedirectStdOutErr) {
+    Logger logger;
+    LoggingOutputStream los;
+    logger=Logger.getLogger("stdout");
+    los=new LoggingOutputStream(logger,StdOutErrLevel.STDOUT);
+    System.setOut(new PrintStream(los,true));
+    logger=Logger.getLogger("stderr");
+    los=new LoggingOutputStream(logger,StdOutErrLevel.STDERR);
+    System.setErr(new PrintStream(los,true));
+  }
+}

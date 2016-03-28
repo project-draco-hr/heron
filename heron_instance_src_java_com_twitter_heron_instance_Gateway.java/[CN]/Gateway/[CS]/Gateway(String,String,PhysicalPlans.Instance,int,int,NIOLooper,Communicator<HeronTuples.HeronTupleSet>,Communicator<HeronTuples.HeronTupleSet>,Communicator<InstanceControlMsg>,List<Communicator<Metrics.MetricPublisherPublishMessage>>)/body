@@ -1,5 +1,5 @@
 {
-  systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
   this.gatewayLooper=gatewayLooper;
   this.gatewayMetricsCollector=new MetricsCollector(gatewayLooper,outMetricsQueues.get(0));
   jvmMetrics=new JVMMetrics();
@@ -21,7 +21,7 @@
   }
 ;
   gatewayMetricsCollector.registerMetricSampleRunnable(sampleStreamQueuesSize,systemConfig.getInstanceMetricsSystemSampleIntervalSec());
-  final long instanceTuningIntervalMs=systemConfig.getInstanceTuningIntervalMs() * com.twitter.heron.common.core.base.Constants.MILLISECONDS_TO_NANOSECONDS;
+  final long instanceTuningIntervalMs=systemConfig.getInstanceTuningIntervalMs() * com.twitter.heron.common.basics.Constants.MILLISECONDS_TO_NANOSECONDS;
   Runnable tuningStreamQueueSize=new Runnable(){
     @Override public void run(){
       inStreamQueue.updateExpectedAvailableCapacity();

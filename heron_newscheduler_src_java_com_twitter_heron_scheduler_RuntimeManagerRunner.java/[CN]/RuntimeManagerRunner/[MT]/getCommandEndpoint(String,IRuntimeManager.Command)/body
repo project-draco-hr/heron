@@ -1,0 +1,3 @@
+{
+  return String.format("http://%s/%s",schedulerEndpoint,command.name().toLowerCase());
+}

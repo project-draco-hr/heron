@@ -10,10 +10,10 @@
  catch (  IOException e) {
     throw new RuntimeException("Could not create the NIOLooper",e);
   }
-  HeronSocketOptions socketOptions=new HeronSocketOptions(Utils.getLong(tmasterClientConfig.get(KEY_NETWORK_WRITE_BATCH_SIZE_BYTES)),Utils.getLong(tmasterClientConfig.get(KEY_NETWORK_WRITE_BATCH_TIME_MS)),Utils.getLong(tmasterClientConfig.get(KEY_NETWORK_READ_BATCH_SIZE_BYTES)),Utils.getLong(tmasterClientConfig.get(KEY_NETWORK_READ_BATCH_TIME_MS)),Utils.getInt(tmasterClientConfig.get(KEY_SOCKET_SEND_BUFFER_BYTES)),Utils.getInt(tmasterClientConfig.get(KEY_SOCKET_RECEIVED_BUFFER_BYTES)));
+  HeronSocketOptions socketOptions=new HeronSocketOptions(TypeUtils.getLong(tmasterClientConfig.get(KEY_NETWORK_WRITE_BATCH_SIZE_BYTES)),TypeUtils.getLong(tmasterClientConfig.get(KEY_NETWORK_WRITE_BATCH_TIME_MS)),TypeUtils.getLong(tmasterClientConfig.get(KEY_NETWORK_READ_BATCH_SIZE_BYTES)),TypeUtils.getLong(tmasterClientConfig.get(KEY_NETWORK_READ_BATCH_TIME_MS)),TypeUtils.getInt(tmasterClientConfig.get(KEY_SOCKET_SEND_BUFFER_BYTES)),TypeUtils.getInt(tmasterClientConfig.get(KEY_SOCKET_RECEIVED_BUFFER_BYTES)));
   metricsCommunicator.setConsumer(looper);
   tMasterClient=new TMasterClient(looper,currentTMasterLocation.getHost(),currentTMasterLocation.getMasterPort(),socketOptions,metricsCommunicator);
-  tMasterClient.setReconnectIntervalSec(Utils.getLong(tmasterClientConfig.get(KEY_TMASTER_RECONNECT_INTERVAL_SEC)));
+  tMasterClient.setReconnectIntervalSec(TypeUtils.getLong(tmasterClientConfig.get(KEY_TMASTER_RECONNECT_INTERVAL_SEC)));
   LOG.severe(String.format("Starting TMasterClient for the %d time.",startedAttempts.incrementAndGet()));
   tmasterClientExecutor.execute(tMasterClient);
 }

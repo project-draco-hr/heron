@@ -1,3 +1,0 @@
-{
-  return (IRuntimeManager)Class.forName(runtimeManagerClass).newInstance();
-}

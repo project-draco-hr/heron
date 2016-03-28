@@ -1,8 +1,0 @@
-{
-  for (int i=0; i < getKvsCount(); i++) {
-    if (!getKvs(i).isInitialized()) {
-      return false;
-    }
-  }
-  return true;
-}

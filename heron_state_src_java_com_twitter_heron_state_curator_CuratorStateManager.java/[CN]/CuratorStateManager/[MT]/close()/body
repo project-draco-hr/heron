@@ -1,4 +1,0 @@
-{
-  LOG.info("Closing the CuratorClient to: " + connectionString);
-  client.close();
-}

@@ -1,6 +1,6 @@
 {
   try {
-    TSocket socket=new TSocket((String)config.get(KEY_SCRIBE_HOST),Utils.getInt(config.get(KEY_SCRIBE_PORT)),Utils.getInt(config.get(KEY_SCRIBE_TIMEOUT_MS)));
+    TSocket socket=new TSocket((String)config.get(KEY_SCRIBE_HOST),TypeUtils.getInt(config.get(KEY_SCRIBE_PORT)),TypeUtils.getInt(config.get(KEY_SCRIBE_TIMEOUT_MS)));
     transport=new TFramedTransport(socket);
     transport.open();
   }

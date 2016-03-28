@@ -1,0 +1,8 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.stmgrRam(),Defaults.stmgrRam());
+  cb.put(Keys.instanceCpu(),Defaults.instanceCpu());
+  cb.put(Keys.instanceRam(),Defaults.instanceRam());
+  cb.put(Keys.instanceDisk(),Defaults.instanceDisk());
+  return cb.build();
+}

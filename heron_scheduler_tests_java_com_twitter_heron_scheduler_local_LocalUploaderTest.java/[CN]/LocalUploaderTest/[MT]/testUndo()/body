@@ -1,8 +1,0 @@
-{
-  LocalUploader uploader=Mockito.spy(LocalUploader.class.newInstance());
-  PowerMockito.mockStatic(FileUtility.class);
-  Mockito.when(FileUtility.deleteFile(Matchers.anyString())).thenReturn(true);
-  uploader.undo();
-  PowerMockito.verifyStatic();
-  FileUtility.deleteFile(Matchers.anyString());
-}

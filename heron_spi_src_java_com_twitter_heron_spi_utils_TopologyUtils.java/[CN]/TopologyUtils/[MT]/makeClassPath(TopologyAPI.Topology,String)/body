@@ -1,0 +1,17 @@
+{
+  String originalPackage=new File(originalPackageFile).getName();
+  StringBuilder classPathBuilder=new StringBuilder();
+  if (originalPackage.endsWith(".jar")) {
+    classPathBuilder.append(originalPackage);
+  }
+ else {
+    String topologyJar=originalPackage.replace(".tar.gz","").replace(".tar","") + ".jar";
+    classPathBuilder.append(String.format("libs/*:%s",topologyJar));
+  }
+  String additionalClasspath=TopologyUtils.getAdditionalClassPath(topology);
+  if (!additionalClasspath.isEmpty()) {
+    classPathBuilder.append(":");
+    classPathBuilder.append(TopologyUtils.getAdditionalClassPath(topology));
+  }
+  return classPathBuilder.toString();
+}

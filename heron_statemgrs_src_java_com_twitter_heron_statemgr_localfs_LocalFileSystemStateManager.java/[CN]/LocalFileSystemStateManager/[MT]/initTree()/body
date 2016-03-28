@@ -1,0 +1,11 @@
+{
+  LOG.info("Topologies directory: " + getTopologyDir());
+  LOG.info("Tmaster location directory: " + getTMasterLocationDir());
+  LOG.info("Physical plan directory: " + getPhysicalPlanDir());
+  LOG.info("Execution state directory: " + getExecutionStateDir());
+  LOG.info("Scheduler location directory: " + getSchedulerLocationDir());
+  if ((FileUtils.isDirectoryExists(getTopologyDir()) || FileUtils.createDirectory(getTopologyDir())) && (FileUtils.isDirectoryExists(getTMasterLocationDir()) || FileUtils.createDirectory(getTMasterLocationDir())) && (FileUtils.isDirectoryExists(getPhysicalPlanDir()) || FileUtils.createDirectory(getPhysicalPlanDir()))&& (FileUtils.isDirectoryExists(getExecutionStateDir()) || FileUtils.createDirectory(getExecutionStateDir()))&& (FileUtils.isDirectoryExists(getSchedulerLocationDir()) || FileUtils.createDirectory(getSchedulerLocationDir()))) {
+    return true;
+  }
+  return false;
+}

@@ -1,0 +1,13 @@
+import argparse
+import sys
+import subprocess
+import os
+import tarfile
+import contextlib
+import getpass
+ENVIRON = 'default'
+BIN_DIR = 'bin'
+CONF_DIR = 'conf'
+ETC_DIR = 'etc'
+LIB_DIR = 'lib'
+SANDBOX_CONF_DIR = './heron-conf'

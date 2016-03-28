@@ -1,0 +1,6 @@
+{
+  SettableFuture<Boolean> future=SettableFuture.create();
+  boolean ret=FileUtils.writeToFile(getTMasterLocationPath(topologyName),location.toByteArray());
+  future.set(ret);
+  return future;
+}

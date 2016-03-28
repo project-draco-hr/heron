@@ -1,0 +1,4 @@
+{
+  Config config=Config.expand(getDefaultConfig());
+  Assert.assertEquals(LocalFileSystemContext.fileSystemDirectory(config),Misc.substitute(config,LocalFileSystemDefaults.fileSystemDirectory()));
+}

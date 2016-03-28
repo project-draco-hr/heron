@@ -1,3 +1,0 @@
-{
-  return runASyncProcess(verbose,isInheritIO,splitTokens(command),workingDirectory);
-}

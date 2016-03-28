@@ -1,4 +1,0 @@
-TopologyContext context
-String component
-String streamId
-List<Integer> targetTasks

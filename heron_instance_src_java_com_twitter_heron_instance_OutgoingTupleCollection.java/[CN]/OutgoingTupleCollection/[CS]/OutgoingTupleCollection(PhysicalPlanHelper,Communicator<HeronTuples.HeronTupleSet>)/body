@@ -1,7 +1,7 @@
 {
   this.outQueue=outQueue;
   this.helper=helper;
-  this.systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
+  this.systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
   this.dataTupleSetCapacity=systemConfig.getInstanceSetDataTupleCapacity();
   this.controlTupleSetCapacity=systemConfig.getInstanceSetControlTupleCapacity();
 }

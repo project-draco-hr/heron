@@ -1,0 +1,3 @@
+{
+  return cfg.getStringValue(ConfigKeys.get("STATE_MANAGER_CLASS"));
+}

@@ -1,0 +1,3 @@
+{
+  Assert.assertEquals(Defaults.schedulerJar(),Context.schedulerJar(props));
+}

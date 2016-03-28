@@ -3,8 +3,8 @@
   ++boltFailed;
   if (boltFailed % N == 0) {
     System.out.println("boltFail() is invoked in hook");
-    System.out.println(info.getFailingTaskId());
-    System.out.println(info.getFailLatencyMs());
-    System.out.println(info.getTuple());
+    System.out.println(info.failingTaskId);
+    System.out.println(info.failLatencyMs);
+    System.out.println(info.tuple);
   }
 }

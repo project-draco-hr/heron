@@ -1,0 +1,7 @@
+{
+  Assert.assertEquals("heron.binaries.sandbox.executor",ConfigKeys.get("SANDBOX_EXECUTOR_BINARY"));
+  Assert.assertEquals("heron.binaries.sandbox.stmgr",ConfigKeys.get("SANDBOX_STMGR_BINARY"));
+  Assert.assertEquals("heron.binaries.sandbox.tmaster",ConfigKeys.get("SANDBOX_TMASTER_BINARY"));
+  Assert.assertEquals("heron.binaries.sandbox.shell",ConfigKeys.get("SANDBOX_SHELL_BINARY"));
+  Assert.assertEquals("heron.jars.scheduler",ConfigKeys.get("SCHEDULER_JAR"));
+}

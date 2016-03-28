@@ -2,8 +2,6 @@
   TopologyAPI.Topology topologyToRun=heronTopology.setConfig(heronConfig).setName(name).setState(TopologyAPI.TopologyState.RUNNING).getTopology();
   PhysicalPlans.PhysicalPlan pPlan=PhysicalPlanUtil.getPhysicalPlan(topologyToRun);
   LOG.info("Physical Plan: \n" + pPlan);
-  SystemConfig systemConfig=getSystemConfig();
-  SingletonRegistry.INSTANCE.registerSingleton(Constants.HERON_SYSTEM_CONFIG,systemConfig);
   streamExecutor=new StreamExecutor(pPlan);
   metricsExecutor=new MetricsExecutor(systemConfig);
   for (  PhysicalPlans.Instance instance : pPlan.getInstancesList()) {

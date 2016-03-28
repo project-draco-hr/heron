@@ -1,0 +1,7 @@
+@tornado.gen.coroutine
+def get(self, cluster, environ, topology):
+    estate = yield access.get_execution_state(cluster, environ, topology)
+    launched_at = datetime.utcfromtimestamp(estate['submission_time'])
+    launched_time = launched_at.strftime('%Y-%m-%d %H:%M:%S UTC')
+    options = dict(cluster=cluster, environ=environ, topology=topology, estate=estate, launched=launched_time, status=('running' if random.randint(0, 1) else 'errors'), active='topologies', function=common.className)
+    self.render('topology.html', **options)

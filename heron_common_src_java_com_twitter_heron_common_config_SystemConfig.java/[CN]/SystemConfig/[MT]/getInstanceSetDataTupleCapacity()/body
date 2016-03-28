@@ -1,0 +1,3 @@
+{
+  return TypeUtils.getInt(this.config.get(SystemConfig.INSTANCE_SET_DATA_TUPLE_CAPACITY));
+}

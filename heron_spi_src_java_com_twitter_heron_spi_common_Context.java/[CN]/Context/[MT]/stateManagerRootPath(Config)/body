@@ -1,0 +1,3 @@
+{
+  return cfg.getStringValue(ConfigKeys.get("STATEMGR_ROOT_PATH"));
+}

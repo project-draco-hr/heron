@@ -1,14 +1,14 @@
 {
   LOG.info("Copying topology package to target working directory: " + localConfig.getWorkingDirectory());
-  if (!FileUtility.isDirectoryExists(this.localConfig.getWorkingDirectory())) {
+  if (!FileUtils.isDirectoryExists(this.localConfig.getWorkingDirectory())) {
     LOG.info("The working directory does not exist; creating it.");
-    if (!FileUtility.createDirectory(this.localConfig.getWorkingDirectory())) {
+    if (!FileUtils.createDirectory(this.localConfig.getWorkingDirectory())) {
       LOG.severe("Failed to create directory: " + this.localConfig.getWorkingDirectory());
       return false;
     }
   }
-  targetTopologyPackage=String.format("%s/%s",localConfig.getWorkingDirectory(),FileUtility.getBaseName(topologyPackageLocation));
-  if (!FileUtility.copyFile(topologyPackageLocation,targetTopologyPackage)) {
+  targetTopologyPackage=String.format("%s/%s",localConfig.getWorkingDirectory(),FileUtils.getBaseName(topologyPackageLocation));
+  if (!FileUtils.copyFile(topologyPackageLocation,targetTopologyPackage)) {
     return false;
   }
   return true;

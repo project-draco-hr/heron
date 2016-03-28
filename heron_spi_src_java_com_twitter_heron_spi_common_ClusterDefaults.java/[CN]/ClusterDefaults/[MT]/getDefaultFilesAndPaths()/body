@@ -1,0 +1,11 @@
+{
+  Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.corePackageUri(),Defaults.corePackageUri());
+  cb.put(Keys.instanceClassPath(),Defaults.instanceClassPath());
+  cb.put(Keys.metricsManagerClassPath(),Defaults.metricsManagerClassPath());
+  cb.put(Keys.packingClassPath(),Defaults.packingClassPath());
+  cb.put(Keys.schedulerClassPath(),Defaults.schedulerClassPath());
+  cb.put(Keys.stateManagerClassPath(),Defaults.stateManagerClassPath());
+  cb.put(Keys.uploaderClassPath(),Defaults.uploaderClassPath());
+  return cb.build();
+}

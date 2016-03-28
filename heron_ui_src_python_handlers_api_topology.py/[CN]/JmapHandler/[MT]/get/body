@@ -1,0 +1,7 @@
+@tornado.gen.coroutine
+def get(self, cluster, environ, topology, instance):
+    pplan = yield access.get_physical_plan(cluster, environ, topology)
+    host = pplan['stmgrs'][pplan['instances'][instance]['stmgrId']]['host']
+    result = json.loads(yield access.run_instance_jmap(cluster, environ, topology, instance))
+    notes = '<br/>\n'.join([('* May Take longer than usual (1-2 min) please be patient.* Use scp to copy heap dump files from host. (scp %s:/tmp/heap.bin /tmp/)' % host)])
+    self.write(('<pre>%s<br/>$%s>: %s<br/><br/>%s</pre>' % (notes, host, tornado.escape.xhtml_escape(result['command']), tornado.escape.xhtml_escape(result['stdout']))))

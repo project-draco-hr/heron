@@ -1,3 +1,0 @@
-{
-  return (IStateManager)Class.forName(stateManagerClass).newInstance();
-}

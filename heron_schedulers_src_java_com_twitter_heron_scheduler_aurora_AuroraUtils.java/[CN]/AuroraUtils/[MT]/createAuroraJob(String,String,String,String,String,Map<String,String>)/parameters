@@ -1,0 +1,6 @@
+String jobName
+String cluster
+String role
+String env
+String auroraFilename
+Map<String,String> bindings

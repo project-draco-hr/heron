@@ -1,0 +1,7 @@
+{
+  Config props=ClusterConfig.loadSchedulerConfig(Context.schedulerFile(basicConfig));
+  Assert.assertEquals(3,props.size());
+  Assert.assertEquals("com.twitter.heron.scheduler.local.LocalScheduler",Context.schedulerClass(props));
+  Assert.assertEquals("com.twitter.heron.scheduler.local.LocalLauncher",Context.launcherClass(props));
+  Assert.assertEquals("com.twitter.heron.scheduler.local.LocalRuntimeManager",Context.runtimeManagerClass(props));
+}

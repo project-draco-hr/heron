@@ -1,0 +1,3 @@
+{
+  return ConfigKeys.get("COMPONENT_JVM_OPTS_IN_BASE64");
+}

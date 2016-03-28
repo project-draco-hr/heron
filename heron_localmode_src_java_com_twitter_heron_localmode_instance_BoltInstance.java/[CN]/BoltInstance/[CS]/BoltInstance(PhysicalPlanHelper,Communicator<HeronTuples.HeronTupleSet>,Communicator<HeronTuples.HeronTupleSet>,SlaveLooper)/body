@@ -9,7 +9,7 @@
   }
   TopologyContextImpl topologyContext=helper.getTopologyContext();
   serializer=SerializeDeSerializeHelper.getSerializer(topologyContext.getTopologyConfig());
-  systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(com.twitter.heron.common.utils.misc.Constants.HERON_SYSTEM_CONFIG);
+  systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
   if (helper.getMyBolt().getComp().hasJavaObject()) {
     bolt=(IBolt)Utils.deserialize(helper.getMyBolt().getComp().getJavaObject().toByteArray());
   }
