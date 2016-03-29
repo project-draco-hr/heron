@@ -1,5 +1,0 @@
-{
-  if (command.equalsIgnoreCase("ps"))   return new ListTopologiesHandler(config,runtime);
-  LOG.info("Invalid command " + command);
-  return null;
-}

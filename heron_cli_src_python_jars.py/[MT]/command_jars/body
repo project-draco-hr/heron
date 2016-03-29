@@ -1,3 +1,0 @@
-def command_jars():
-    jars = [os.path.join(utils.get_heron_lib_dir(), 'commands', '*')]
-    return jars

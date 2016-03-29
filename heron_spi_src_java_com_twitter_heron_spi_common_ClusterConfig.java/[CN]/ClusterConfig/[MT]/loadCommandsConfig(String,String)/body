@@ -1,5 +1,0 @@
-{
-  Config homeConfig=loadBasicConfig(heronHome,configPath);
-  Config.Builder cb=Config.newBuilder().putAll(homeConfig).putAll(loadStateManagerConfig(Context.stateManagerFile(homeConfig)));
-  return cb.build();
-}

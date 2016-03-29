@@ -5,7 +5,6 @@ def create_parser():
     deactivate.create_parser(subparsers)
     help.create_parser(subparsers)
     kill.create_parser(subparsers)
-    ps.create_parser(subparsers)
     restart.create_parser(subparsers)
     submit.create_parser(subparsers)
     version.create_parser(subparsers)

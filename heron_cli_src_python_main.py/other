@@ -19,7 +19,6 @@ import heron.cli.src.python.opts as opts
 import heron.cli.src.python.activate as activate
 import heron.cli.src.python.deactivate as deactivate
 import heron.cli.src.python.kill as kill
-import heron.cli.src.python.ps as ps
 import heron.cli.src.python.restart as restart
 import heron.cli.src.python.submit as submit
 import heron.cli.src.python.utils as utils

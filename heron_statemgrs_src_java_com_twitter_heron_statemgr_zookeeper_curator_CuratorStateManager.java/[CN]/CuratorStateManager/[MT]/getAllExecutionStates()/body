@@ -1,5 +1,0 @@
-{
-  final SettableFuture<List<ExecutionEnvironment.ExecutionState>> executionStateFuture=SettableFuture.create();
-  executionStateFuture.set(new LinkedList<ExecutionEnvironment.ExecutionState>());
-  return executionStateFuture;
-}
