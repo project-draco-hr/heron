@@ -7,4 +7,5 @@ def get(self):
         topology_info = self.tracker.getTopologyInfo(topology_name, cluster, environ)
         self.write_success_response(topology_info)
     except Exception as e:
+        traceback.print_exc()
         self.write_error_response(e)

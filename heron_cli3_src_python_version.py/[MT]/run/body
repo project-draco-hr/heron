@@ -1,2 +1,0 @@
-def run(command, parser, args, unknown_args):
-    pass

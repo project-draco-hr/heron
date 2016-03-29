@@ -1,4 +1,3 @@
 {
-  LOG.info(directory);
   return getClassPath(metricsManagerPattern,directory);
 }

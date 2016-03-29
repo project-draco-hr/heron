@@ -34,7 +34,6 @@
   ;
   String topologyJarFile=cmd.getOptionValue("topology_jar");
   ;
-  System.out.println(heronHome + " " + configPath);
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
   Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath)).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyPackage,topologyJarFile,topologyDefnFile,topology)).build());
   LOG.info("Static config loaded successfully ");
