@@ -1,6 +1,0 @@
-{
-  Options options=new Options();
-  Option help=Option.builder("h").desc("List all options and their description").longOpt("help").build();
-  options.addOption(help);
-  return options;
-}
