@@ -1,0 +1,3 @@
+{
+  return delegate.select(selector.getDelegate(),tuple);
+}

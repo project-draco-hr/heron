@@ -1,0 +1,6 @@
+{
+  BoltFailInfo fail=new BoltFailInfo(info);
+  for (  ITaskHook hook : hooks_) {
+    hook.boltFail(fail);
+  }
+}

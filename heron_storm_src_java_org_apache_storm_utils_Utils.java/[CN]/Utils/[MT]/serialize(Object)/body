@@ -1,0 +1,3 @@
+{
+  return com.twitter.heron.api.utils.Utils.serialize(obj);
+}

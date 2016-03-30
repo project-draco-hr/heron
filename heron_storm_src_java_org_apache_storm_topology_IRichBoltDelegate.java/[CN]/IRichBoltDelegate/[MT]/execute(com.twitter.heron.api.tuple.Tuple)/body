@@ -1,0 +1,4 @@
+{
+  TupleImpl impl=new TupleImpl(tuple);
+  delegate.execute(impl);
+}

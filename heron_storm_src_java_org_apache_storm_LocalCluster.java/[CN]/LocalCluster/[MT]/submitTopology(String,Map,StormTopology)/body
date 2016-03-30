@@ -1,0 +1,7 @@
+{
+  assertNotAlive();
+  this.topologyName=topologyName;
+  this.conf=conf;
+  this.topology=topology;
+  localMode.submitTopology(topologyName,ConfigUtils.translateConfig(conf),topology.getStormTopology());
+}

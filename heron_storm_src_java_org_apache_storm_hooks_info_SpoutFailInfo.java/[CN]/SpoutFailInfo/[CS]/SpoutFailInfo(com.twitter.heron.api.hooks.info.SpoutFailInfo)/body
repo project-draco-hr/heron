@@ -1,0 +1,5 @@
+{
+  this.messageId=info.getMessageId();
+  this.spoutTaskId=info.getSpoutTaskId();
+  this.failLatencyMs=info.getFailLatencyMs();
+}

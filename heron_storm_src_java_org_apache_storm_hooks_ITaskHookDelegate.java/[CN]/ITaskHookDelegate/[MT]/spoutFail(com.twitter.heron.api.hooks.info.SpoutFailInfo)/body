@@ -1,0 +1,6 @@
+{
+  SpoutFailInfo fail=new SpoutFailInfo(info);
+  for (  ITaskHook hook : hooks_) {
+    hook.spoutFail(fail);
+  }
+}

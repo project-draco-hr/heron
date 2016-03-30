@@ -1,0 +1,4 @@
+com.twitter.heron.api.topology.TopologyContext context
+String component
+String streamId
+List<Integer> targetTasks

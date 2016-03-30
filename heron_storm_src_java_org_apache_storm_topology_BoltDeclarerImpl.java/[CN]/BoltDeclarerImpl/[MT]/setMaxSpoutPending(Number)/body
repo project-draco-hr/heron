@@ -1,0 +1,4 @@
+{
+  delegate.setMaxSpoutPending(val);
+  return this;
+}

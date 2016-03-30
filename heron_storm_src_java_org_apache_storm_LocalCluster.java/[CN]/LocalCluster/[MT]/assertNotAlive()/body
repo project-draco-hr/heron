@@ -1,0 +1,5 @@
+{
+  if (this.topologyName != null) {
+    throw new AlreadyAliveException();
+  }
+}

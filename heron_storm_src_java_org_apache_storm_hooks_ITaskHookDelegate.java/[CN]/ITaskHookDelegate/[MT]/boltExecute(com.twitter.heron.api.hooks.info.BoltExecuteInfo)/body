@@ -1,0 +1,6 @@
+{
+  BoltExecuteInfo execute=new BoltExecuteInfo(info);
+  for (  ITaskHook hook : hooks_) {
+    hook.boltExecute(execute);
+  }
+}

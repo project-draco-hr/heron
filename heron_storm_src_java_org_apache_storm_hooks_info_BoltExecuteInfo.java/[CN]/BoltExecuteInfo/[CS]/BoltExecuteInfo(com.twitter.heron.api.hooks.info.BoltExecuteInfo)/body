@@ -1,0 +1,5 @@
+{
+  this.tuple=new org.apache.storm.tuple.TupleImpl(info.getTuple());
+  this.executingTaskId=info.getExecutingTaskId();
+  this.executeLatencyMs=info.getExecuteLatencyMs();
+}

@@ -1,0 +1,5 @@
+{
+  List<Integer> retval=new LinkedList<Integer>();
+  retval.add(delegate_.getThisTaskId());
+  return retval;
+}

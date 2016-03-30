@@ -1,0 +1,4 @@
+{
+  delegate.directGrouping(componentId,streamId);
+  return this;
+}

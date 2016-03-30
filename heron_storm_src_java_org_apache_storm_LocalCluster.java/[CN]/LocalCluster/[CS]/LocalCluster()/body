@@ -1,0 +1,4 @@
+{
+  this.localMode=new LocalMode();
+  resetFields();
+}
