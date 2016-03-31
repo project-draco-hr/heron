@@ -1,0 +1,14 @@
+{
+  List<String> auroraCmd=Arrays.asList("aurora","job","create","--wait-until","RUNNING");
+  for (  Map.Entry<String,String> binding : bindings.entrySet()) {
+    auroraCmd.add("--bind");
+    auroraCmd.add(String.format("%s=%s",binding.getKey(),binding.getValue()));
+  }
+  String jobSpec=String.format("%s/%s/%s/%s",cluster,role,env,jobName);
+  auroraCmd.add(jobSpec);
+  auroraCmd.add(auroraFilename);
+  if (isVerbose) {
+    auroraCmd.add("--verbose");
+  }
+  return 0 == ShellUtils.runProcess(isVerbose,(String[])auroraCmd.toArray(),new StringBuilder(),new StringBuilder());
+}
