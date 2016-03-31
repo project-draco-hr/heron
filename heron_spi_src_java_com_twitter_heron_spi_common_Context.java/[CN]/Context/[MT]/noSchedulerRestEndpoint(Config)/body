@@ -1,3 +1,0 @@
-{
-  return cfg.getBooleanValue(ConfigKeys.get("NO_SCHEDULER_REST_ENDPOINT"));
-}

@@ -12,33 +12,30 @@
     LOG.severe("Failed to prepare deactivate locally");
     return false;
   }
-  Pair<Boolean,HttpURLConnection> ret=createHttpConnection();
-  if (!ret.first) {
+  HttpURLConnection connection=createHttpConnection();
+  if (connection == null) {
     return false;
   }
-  HttpURLConnection connection=ret.second;
-  if (connection != null) {
-    try {
-      byte[] data=Scheduler.DeactivateTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
-      if (!HttpUtils.sendHttpPostRequest(connection,data)) {
-        LOG.log(Level.SEVERE,"Failed to send http request for deactivate");
-        return false;
-      }
-      Common.StatusCode statusCode;
-      LOG.info("Receiving deactivate response from scheduler...");
-      statusCode=Scheduler.DeactivateTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
-      if (!statusCode.equals(Common.StatusCode.OK)) {
-        LOG.severe("Received not OK response from scheduler for deactivate");
-        return false;
-      }
-    }
- catch (    Exception e) {
-      LOG.log(Level.SEVERE,"Failed to deactivate with Scheduler: ",e);
+  try {
+    byte[] data=Scheduler.DeactivateTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
+    if (!HttpUtils.sendHttpPostRequest(connection,data)) {
+      LOG.log(Level.SEVERE,"Failed to send http request for deactivate");
       return false;
     }
- finally {
-      connection.disconnect();
+    Common.StatusCode statusCode;
+    LOG.info("Receiving deactivate response from scheduler...");
+    statusCode=Scheduler.DeactivateTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
+    if (!statusCode.equals(Common.StatusCode.OK)) {
+      LOG.severe("Received not OK response from scheduler for deactivate");
+      return false;
     }
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to deactivate with Scheduler: ",e);
+    return false;
+  }
+ finally {
+    connection.disconnect();
   }
   if (!runtimeManager.postDeactivate()) {
     LOG.severe("Failed in post deactivate locally");

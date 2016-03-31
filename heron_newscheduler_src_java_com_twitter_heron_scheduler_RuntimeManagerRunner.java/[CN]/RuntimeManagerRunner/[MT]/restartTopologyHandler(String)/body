@@ -4,39 +4,36 @@
     LOG.severe("Failed to prepare restart locally");
     return false;
   }
-  Pair<Boolean,HttpURLConnection> ret=createHttpConnection();
-  if (!ret.first) {
+  HttpURLConnection connection=createHttpConnection();
+  if (connection == null) {
     return false;
   }
-  HttpURLConnection connection=ret.second;
-  if (connection != null) {
-    try {
-      byte[] data=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(topologyName).setContainerIndex(containerId).build().toByteArray();
-      if (!HttpUtils.sendHttpPostRequest(connection,data)) {
-        LOG.log(Level.SEVERE,"Failed to send http request for restart ");
-        return false;
-      }
-      Common.StatusCode statusCode;
-      try {
-        LOG.info("Receiving restart response from scheduler...");
-        statusCode=Scheduler.RestartTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
-      }
- catch (      Exception e) {
-        LOG.log(Level.SEVERE,"Failed to parse restart response: ",e);
-        return false;
-      }
-      if (!statusCode.equals(Common.StatusCode.OK)) {
-        LOG.severe("Received not OK response from scheduler for restart");
-        return false;
-      }
-    }
- catch (    Exception e) {
-      LOG.log(Level.SEVERE,"Failed to restart with Scheduler: ",e);
+  try {
+    byte[] data=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(topologyName).setContainerIndex(containerId).build().toByteArray();
+    if (!HttpUtils.sendHttpPostRequest(connection,data)) {
+      LOG.log(Level.SEVERE,"Failed to send http request for restart ");
       return false;
     }
- finally {
-      connection.disconnect();
+    Common.StatusCode statusCode;
+    try {
+      LOG.info("Receiving restart response from scheduler...");
+      statusCode=Scheduler.RestartTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
     }
+ catch (    Exception e) {
+      LOG.log(Level.SEVERE,"Failed to parse restart response: ",e);
+      return false;
+    }
+    if (!statusCode.equals(Common.StatusCode.OK)) {
+      LOG.severe("Received not OK response from scheduler for restart");
+      return false;
+    }
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to restart with Scheduler: ",e);
+    return false;
+  }
+ finally {
+    connection.disconnect();
   }
   if (!runtimeManager.postRestart(containerId)) {
     LOG.severe("Failed in post restart locally");

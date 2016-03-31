@@ -30,16 +30,14 @@
  catch (  Exception e) {
     LOG.log(Level.SEVERE,"Failed to clear physical plan",e);
   }
-  if (!Context.noSchedulerRestEndpoint(config)) {
-    try {
-      booleanFuture=statemgr.deleteSchedulerLocation(topologyName);
-      if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
-        LOG.severe("Failed to clear scheduler location. Check whether Scheduler set it correctly.");
-      }
+  try {
+    booleanFuture=statemgr.deleteSchedulerLocation(topologyName);
+    if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
+      LOG.severe("Failed to clear scheduler location. Check whether Scheduler set it correctly.");
     }
- catch (    Exception e) {
-      LOG.severe("Failed to clear scheduler location");
-    }
+  }
+ catch (  Exception e) {
+    LOG.severe("Failed to clear scheduler location");
   }
   LOG.info("Cleaned up Heron State");
   return true;

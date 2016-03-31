@@ -36,7 +36,8 @@
   auroraProperties.put("ROLE",Context.role(config));
   auroraProperties.put("SANDBOX_INSTANCE_CLASSPATH",Context.instanceSandboxClassPath(config));
   auroraProperties.put("SANDBOX_METRICS_YAML",Context.metricsSinksSandboxFile(config));
-  auroraProperties.put("SANDBOX_SCHEDULER_CLASSPATH",Context.schedulerSandboxClassPath(config));
+  String completeSchedulerClassPath=new StringBuilder().append(Context.schedulerSandboxClassPath(config)).append(":").append(Context.packingSandboxClassPath(config)).append(":").append(Context.stateManagerSandboxClassPath(config)).toString();
+  auroraProperties.put("SANDBOX_SCHEDULER_CLASSPATH",completeSchedulerClassPath);
   String heronCoreReleasePkgURI=Context.corePackageUri(config);
   String topologyPkgURI=Runtime.topologyPackageUri(runtime);
   auroraProperties.put("CORE_PACKAGE_URI",heronCoreReleasePkgURI);

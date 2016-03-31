@@ -1,4 +1,3 @@
 {
-  LOG.info("Command to deactivate topology: " + LocalContext.topologyName(config));
-  return Runtime.sendToTMaster("deactivate",LocalContext.topologyName(config),Runtime.schedulerStateManagerAdaptor(runtime));
+  return true;
 }

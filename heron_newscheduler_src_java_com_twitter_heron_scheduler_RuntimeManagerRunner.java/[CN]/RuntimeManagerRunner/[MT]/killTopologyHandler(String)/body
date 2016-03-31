@@ -3,12 +3,11 @@
     LOG.severe("Failed to prepare kill locally");
     return false;
   }
-  Pair<Boolean,HttpURLConnection> ret=createHttpConnection();
-  if (!ret.first) {
-    return false;
+  HttpURLConnection connection=createHttpConnection();
+  if (connection == null) {
+    LOG.info("Scheduler Not exists.");
   }
-  HttpURLConnection connection=ret.second;
-  if (connection != null) {
+ else {
     try {
       byte[] data=Scheduler.KillTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
       if (!HttpUtils.sendHttpPostRequest(connection,data)) {

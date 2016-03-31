@@ -1,15 +1,11 @@
 {
-  if (Context.noSchedulerRestEndpoint(config)) {
-    LOG.info("No Scheduler RestEndpoint/ Nothing required to be done on scheduler.");
-    return Pair.create(true,null);
-  }
   SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
   LOG.log(Level.INFO,"Fetching scheduler location from state manager to {0} topology",command);
   ListenableFuture<Scheduler.SchedulerLocation> locationFuture=statemgr.getSchedulerLocation(null,Runtime.topologyName(runtime));
   Scheduler.SchedulerLocation schedulerLocation=NetworkUtils.awaitResult(locationFuture,5,TimeUnit.SECONDS);
   if (schedulerLocation == null) {
     LOG.log(Level.INFO,"Failed to get scheduler location to {0} topology",command);
-    return Pair.create(false,null);
+    return null;
   }
   LOG.info("Scheduler is listening on location: " + schedulerLocation.toString());
   String endpoint=getCommandEndpoint(schedulerLocation.getHttpEndpoint(),command);
@@ -19,7 +15,7 @@
   }
  catch (  IOException e) {
     LOG.log(Level.SEVERE,"Failed to connect to scheduler http endpoint: {0}",endpoint);
-    return Pair.create(false,null);
+    return null;
   }
-  return Pair.create(true,connection);
+  return connection;
 }
