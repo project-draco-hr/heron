@@ -3,7 +3,7 @@
     LOG.severe("Failed to prepare kill locally");
     return false;
   }
-  HttpURLConnection connection=createHttpConnection();
+  final HttpURLConnection connection=createHttpConnection();
   if (connection == null) {
     LOG.info("Scheduler Not exists.");
   }

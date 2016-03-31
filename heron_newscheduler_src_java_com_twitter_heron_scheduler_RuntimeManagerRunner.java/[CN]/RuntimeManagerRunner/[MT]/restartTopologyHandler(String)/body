@@ -4,7 +4,7 @@
     LOG.severe("Failed to prepare restart locally");
     return false;
   }
-  HttpURLConnection connection=createHttpConnection();
+  final HttpURLConnection connection=createHttpConnection();
   if (connection == null) {
     return false;
   }
