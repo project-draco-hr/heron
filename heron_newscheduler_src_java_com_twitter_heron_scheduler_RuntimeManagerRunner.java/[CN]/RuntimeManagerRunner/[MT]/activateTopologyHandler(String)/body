@@ -12,36 +12,41 @@
     LOG.severe("Failed to prepare activate locally");
     return false;
   }
-  Pair<Boolean,HttpURLConnection> ret=createHttpConnection();
-  if (ret.second == null)   return ret.first;
-  HttpURLConnection connection=ret.second;
-  byte[] data=Scheduler.ActivateTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
-  if (!HttpUtils.sendHttpPostRequest(connection,data)) {
-    LOG.log(Level.SEVERE,"Failed to send http request for activate");
-    connection.disconnect();
+  final HttpURLConnection connection=createHttpConnection();
+  if (connection == null) {
     return false;
   }
-  Common.StatusCode statusCode;
   try {
-    LOG.info("Receiving activate response from scheduler...");
-    statusCode=Scheduler.ActivateTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
+    byte[] data=Scheduler.ActivateTopologyRequest.newBuilder().setTopologyName(topologyName).build().toByteArray();
+    if (!HttpUtils.sendHttpPostRequest(connection,data)) {
+      LOG.log(Level.SEVERE,"Failed to send http request for activate");
+      return false;
+    }
+    Common.StatusCode statusCode;
+    try {
+      LOG.info("Receiving activate response from scheduler...");
+      statusCode=Scheduler.ActivateTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
+    }
+ catch (    Exception e) {
+      LOG.log(Level.SEVERE,"Failed to parse activate response: " + e);
+      return false;
+    }
+    if (!statusCode.equals(Common.StatusCode.OK)) {
+      LOG.severe("Received not OK response from scheduler for activate");
+      return false;
+    }
   }
  catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Failed to parse activate response: " + e);
-    connection.disconnect();
+    LOG.log(Level.SEVERE,"Failed to activate with Scheduler: ",e);
     return false;
   }
-  if (!statusCode.equals(Common.StatusCode.OK)) {
-    LOG.severe("Received not OK response from scheduler for activate");
+ finally {
     connection.disconnect();
-    return false;
   }
   if (!runtimeManager.postActivate()) {
     LOG.severe("Failed in post activate locally");
-    connection.disconnect();
     return false;
   }
-  connection.disconnect();
   LOG.info("Scheduler activated topology successfully.");
   return true;
 }

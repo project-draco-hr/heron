@@ -1,0 +1,4 @@
+{
+  String topologyName=Runtime.topologyName(runtime);
+  return AuroraUtils.killAuroraJob(topologyName,Context.cluster(config),Context.role(config),Context.environ(config),true);
+}

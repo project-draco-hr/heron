@@ -1,0 +1,7 @@
+{
+  List<String> auroraCmd=Arrays.asList("aurora","job","killall");
+  String jobSpec=String.format("%s/%s/%s/%s",cluster,role,env,jobName);
+  auroraCmd.add(jobSpec);
+  appendAuroraCommandOptions(auroraCmd,isVerbose);
+  return 0 == ShellUtils.runProcess(isVerbose,(String[])auroraCmd.toArray(),new StringBuilder(),new StringBuilder());
+}

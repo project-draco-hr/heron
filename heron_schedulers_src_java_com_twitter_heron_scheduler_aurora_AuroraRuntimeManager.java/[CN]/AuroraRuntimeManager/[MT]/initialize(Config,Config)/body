@@ -1,4 +1,4 @@
 {
-  this.scheduler=scheduler;
+  this.config=config;
   this.runtime=runtime;
 }
