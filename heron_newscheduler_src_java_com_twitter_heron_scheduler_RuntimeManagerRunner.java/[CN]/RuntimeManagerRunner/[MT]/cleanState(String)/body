@@ -2,6 +2,25 @@
   LOG.info("Cleaning up Heron State");
   SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
   ListenableFuture<Boolean> booleanFuture;
+  booleanFuture=statemgr.deleteTopology(topologyName);
+  if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
+    LOG.severe("Failed to clear topology state");
+    return false;
+  }
+  booleanFuture=statemgr.deleteExecutionState(topologyName);
+  if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
+    LOG.severe("Failed to clear execution state");
+    return false;
+  }
+  try {
+    booleanFuture=statemgr.deleteTMasterLocation(topologyName);
+    if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
+      LOG.severe("Failed to clear TMaster location. Check whether TMaster set it correctly.");
+    }
+  }
+ catch (  Exception e) {
+    LOG.severe("Failed to clear TMaster location");
+  }
   try {
     booleanFuture=statemgr.deletePhysicalPlan(topologyName);
     if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
@@ -11,15 +30,14 @@
  catch (  Exception e) {
     LOG.log(Level.SEVERE,"Failed to clear physical plan",e);
   }
-  booleanFuture=statemgr.deleteExecutionState(topologyName);
-  if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
-    LOG.severe("Failed to clear execution state");
-    return false;
+  try {
+    booleanFuture=statemgr.deleteSchedulerLocation(topologyName);
+    if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
+      LOG.severe("Failed to clear scheduler location. Check whether Scheduler set it correctly.");
+    }
   }
-  booleanFuture=statemgr.deleteTopology(topologyName);
-  if (!NetworkUtils.awaitResult(booleanFuture,5,TimeUnit.SECONDS)) {
-    LOG.severe("Failed to clear topology state");
-    return false;
+ catch (  Exception e) {
+    LOG.severe("Failed to clear scheduler location");
   }
   LOG.info("Cleaned up Heron State");
   return true;

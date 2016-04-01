@@ -1,0 +1,5 @@
+String jobName
+String cluster
+String role
+String env
+boolean isVerbose
