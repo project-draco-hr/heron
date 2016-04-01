@@ -1,8 +1,8 @@
 {
-  LOG.info("Reading config stream");
+  LOG.fine("Reading config stream");
   Map props_yaml=null;
   Yaml yaml=new Yaml();
   props_yaml=(Map)yaml.load(inputStream);
-  LOG.info("Successfully read config");
+  LOG.fine("Successfully read config");
   return props_yaml != null ? props_yaml : new HashMap();
 }

@@ -18,13 +18,13 @@
       LOG.warning("Config file " + fileName + " might be a directory.\n");
       return props;
     }
-    LOG.info("Reading config file " + fileName);
+    LOG.fine("Reading config file " + fileName);
     Map props_yaml=null;
     try {
       FileInputStream fin=new FileInputStream(new File(fileName));
       Yaml yaml=new Yaml();
       props_yaml=(Map)yaml.load(fin);
-      LOG.info("Successfully read config file " + fileName);
+      LOG.fine("Successfully read config file " + fileName);
     }
  catch (    IOException e) {
       LOG.log(Level.SEVERE,"Failed to load config file: " + fileName,e);

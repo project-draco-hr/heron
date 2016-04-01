@@ -5,5 +5,7 @@ def launch_a_topology(cl_args, tmp_dir, topology_file, topology_defn_file):
     utils.create_tar(topology_pkg_path, tar_pkg_files, config_path)
     config_overrides = utils.parse_cmdline_override(cl_args)
     args = ['--cluster', cl_args['cluster'], '--role', cl_args['role'], '--environment', cl_args['environ'], '--heron_home', utils.get_heron_dir(), '--config_path', config_path, '--config_overrides', base64.b64encode(config_overrides), '--topology_package', topology_pkg_path, '--topology_defn', topology_defn_file, '--topology_jar', topology_file]
+    if opts.verbose():
+        args.append('--verbose')
     lib_jars = utils.get_heron_libs((((jars.scheduler_jars() + jars.uploader_jars()) + jars.statemgr_jars()) + jars.packing_jars()))
     execute.heron_class('com.twitter.heron.scheduler.SubmitterMain', lib_jars, extra_jars=[], args=args)
