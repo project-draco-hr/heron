@@ -1,5 +1,5 @@
 def heron_class(class_name, lib_jars, extra_jars=[], args=[]):
-    all_args = ['java', '-client', '-Xmx1g', opts.get_heron_config(), '-cp', utils.get_classpath((lib_jars + extra_jars))]
+    all_args = [utils.get_java_path(), '-client', '-Xmx1g', opts.get_heron_config(), '-cp', utils.get_classpath((lib_jars + extra_jars))]
     all_args += ([class_name] + list(args))
     if opts.verbose():
         print ('$> %s' % ' '.join(all_args))
