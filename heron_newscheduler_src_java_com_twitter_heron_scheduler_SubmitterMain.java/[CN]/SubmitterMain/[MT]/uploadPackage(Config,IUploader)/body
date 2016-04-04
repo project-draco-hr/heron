@@ -1,0 +1,5 @@
+{
+  uploader.initialize(config);
+  URI uploaderRet=uploader.uploadPackage();
+  return uploaderRet;
+}
