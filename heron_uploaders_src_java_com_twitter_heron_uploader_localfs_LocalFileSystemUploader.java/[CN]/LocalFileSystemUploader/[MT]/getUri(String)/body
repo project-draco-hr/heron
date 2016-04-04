@@ -1,4 +1,4 @@
 {
-  StringBuilder sb=new StringBuilder().append("file://").append(this.destTopologyFile);
-  return sb.toString();
+  StringBuilder sb=new StringBuilder().append("file://").append(filename);
+  return Convert.getURI(sb.toString());
 }

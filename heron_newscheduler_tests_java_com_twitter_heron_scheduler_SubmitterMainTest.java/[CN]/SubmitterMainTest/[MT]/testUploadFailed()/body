@@ -12,7 +12,7 @@
   PowerMockito.doReturn(config).when(Factory.class,"makeConfigLoader",eq(configLoader));
   PowerMockito.doReturn(failUploader).when(Factory.class,"makeUploader",anyString());
   PowerMockito.doReturn(mockLauncher).when(Factory.class,"makeLauncher",anyString());
-  when(failUploader.uploadPackage(anyString())).thenReturn(null);
+  when(failUploader.uploadPackage()).thenReturn(null);
   assertTrue(!SubmitterMain.submitTopology(topologyPkg,configLoader,submitterConfigFile,configOverride,createTopology(new Config())));
   verify(mockLauncher,never()).initialize(any(LaunchContext.class));
   verify(mockLauncher,never()).launchTopology(any(PackingPlan.class));

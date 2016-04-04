@@ -3,4 +3,4 @@ TopologyAPI.Topology topology
 IStateManager statemgr
 ILauncher launcher
 IPacking packing
-Object uploaderRet
+URI packageURI
