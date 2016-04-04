@@ -17,23 +17,14 @@
     System.exit(1);
   }
   String cluster=cmd.getOptionValue("cluster");
-  ;
   String role=cmd.getOptionValue("role");
-  ;
   String environ=cmd.getOptionValue("environment");
-  ;
   String heronHome=cmd.getOptionValue("heron_home");
-  ;
   String configPath=cmd.getOptionValue("config_path");
-  ;
   String configOverrideEncoded=cmd.getOptionValue("config_overrides");
-  ;
   String topologyPackage=cmd.getOptionValue("topology_package");
-  ;
   String topologyDefnFile=cmd.getOptionValue("topology_defn");
-  ;
   String topologyJarFile=cmd.getOptionValue("topology_jar");
-  ;
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
   Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath)).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyPackage,topologyJarFile,topologyDefnFile,topology)).build());
   LOG.info("Static config loaded successfully ");
@@ -44,24 +35,28 @@
   ILauncher launcher=(ILauncher)Class.forName(launcherClass).newInstance();
   String packingClass=Context.packingClass(config);
   IPacking packing=(IPacking)Class.forName(packingClass).newInstance();
+  String uploaderClass=Context.uploaderClass(config);
+  IUploader uploader=(IUploader)Class.forName(uploaderClass).newInstance();
   String topologyName=topology.getName();
   boolean isSuccessful=false;
-  UploadRunner uploadRunner=null;
   try {
     statemgr.initialize(config);
-    uploadRunner=new UploadRunner(config);
     boolean isValid=validateSubmit(statemgr,topologyName);
     if (isValid) {
       LOG.log(Level.INFO,"Topology {0} to be submitted",topologyName);
-      isSuccessful=submitTopology(config,topology,statemgr,launcher,packing,uploadRunner);
+      Object uploaderRet=uploadPackage(config,uploader);
+      if (uploaderRet == null) {
+        LOG.severe("Failed to upload package.");
+      }
+ else {
+        isSuccessful=submitTopology(config,topology,statemgr,launcher,packing,uploaderRet);
+      }
     }
   }
   finally {
     statemgr.close();
     if (!isSuccessful) {
-      if (uploadRunner != null) {
-        uploadRunner.undo();
-      }
+      uploader.undo();
       launcher.undo();
     }
   }
