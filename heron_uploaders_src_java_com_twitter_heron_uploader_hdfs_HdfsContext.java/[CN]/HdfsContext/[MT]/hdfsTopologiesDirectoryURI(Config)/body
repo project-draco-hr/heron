@@ -1,0 +1,3 @@
+{
+  return config.getStringValue(HDFS_TOPOLOGIES_DIRECTORY_URI);
+}
