@@ -1,0 +1,4 @@
+String configDir
+String source
+String target
+boolean isVerbose

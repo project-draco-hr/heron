@@ -1,0 +1,8 @@
+{
+  this.config=config;
+  this.hadoopConfdir=HdfsContext.hadoopConfigDirectory(config);
+  this.destTopologyDirectoryURI=HdfsContext.hdfsTopologiesDirectoryURI(config);
+  this.topologyPackageLocation=Context.topologyPackageFile(config);
+  String fileName=new File(topologyPackageLocation).getName();
+  packageURI=Convert.getURI(String.format("%s/%s",destTopologyDirectoryURI,fileName));
+}

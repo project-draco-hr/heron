@@ -1,4 +1,0 @@
-{
-  StringBuilder sb=new StringBuilder().append("file://").append(this.destTopologyFile);
-  return sb.toString();
-}

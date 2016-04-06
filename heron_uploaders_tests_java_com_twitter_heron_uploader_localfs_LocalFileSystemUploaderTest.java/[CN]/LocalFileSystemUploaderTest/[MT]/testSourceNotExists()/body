@@ -3,5 +3,5 @@
   Config newconfig=Config.newBuilder().putAll(config).put(Keys.topologyPackageFile(),topologyPackage).build();
   LocalFileSystemUploader uploader=new LocalFileSystemUploader();
   uploader.initialize(newconfig);
-  Assert.assertFalse(uploader.uploadPackage());
+  Assert.assertNull(uploader.uploadPackage());
 }

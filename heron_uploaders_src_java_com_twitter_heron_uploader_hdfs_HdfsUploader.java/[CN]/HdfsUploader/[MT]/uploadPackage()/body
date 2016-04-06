@@ -1,0 +1,23 @@
+{
+  boolean fileExists=new File(topologyPackageLocation).isFile();
+  if (!fileExists) {
+    LOG.info("Topology file " + topologyPackageLocation + " does not exist.");
+    return null;
+  }
+  if (!HdfsUtils.isFileExists(hadoopConfdir,destTopologyDirectoryURI,true)) {
+    LOG.info("The destination directory does not exist; creating it.");
+    if (!HdfsUtils.createDir(hadoopConfdir,destTopologyDirectoryURI,true)) {
+      LOG.severe("Failed to create directory: " + destTopologyDirectoryURI);
+      return null;
+    }
+  }
+  if (HdfsUtils.isFileExists(hadoopConfdir,packageURI.toString(),true)) {
+    LOG.info("Target topology file " + packageURI.toString() + " exists, overwriting...");
+  }
+  LOG.info("Uploading topology " + topologyPackageLocation + " package to target hdfs "+ packageURI.toString());
+  if (!HdfsUtils.copyFromLocal(hadoopConfdir,topologyPackageLocation,packageURI.toString(),true)) {
+    LOG.severe("Failed to upload the package to:" + packageURI.toString());
+    return null;
+  }
+  return packageURI;
+}

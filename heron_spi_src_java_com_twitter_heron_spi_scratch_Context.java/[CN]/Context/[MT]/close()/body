@@ -1,4 +1,0 @@
-{
-  stateManager.close();
-  return true;
-}

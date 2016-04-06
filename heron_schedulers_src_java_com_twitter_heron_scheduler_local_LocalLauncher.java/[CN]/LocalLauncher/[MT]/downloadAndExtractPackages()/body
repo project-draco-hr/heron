@@ -24,7 +24,7 @@
   if (!FileUtils.deleteQuietly(new File(targetCoreReleaseFile))) {
     LOG.warning("Unable to delete the core release file: " + targetCoreReleaseFile);
   }
-  String topologyPackage=Runtime.topologyPackageUri(runtime);
+  String topologyPackage=Runtime.topologyPackageUri(runtime).toString();
   LOG.fine("Fetching topology package " + Runtime.topologyPackageUri(runtime));
   LOG.fine("If topology package is already in the working directory");
   LOG.fine("the old one will be overwritten");
