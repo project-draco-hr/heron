@@ -1,8 +1,0 @@
-{
-  this.configLoader=configLoader;
-  this.topologyName=topologyName;
-  this.config=configLoader.getConfig();
-  String stateManagerClass=getStateManagerClass();
-  stateManager=getContextStateManager(stateManagerClass);
-  adaptor=new SchedulerStateManagerAdaptor(stateManager,topologyName);
-}

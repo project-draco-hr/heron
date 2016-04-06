@@ -1,7 +1,0 @@
-{
-  String shardStr=(String)getConfig().get(RESTART_CONTAINER_INDEX);
-  if (shardStr == null) {
-    throw new RuntimeException("Failed to get shard to restart in config");
-  }
-  return Integer.parseInt(shardStr);
-}

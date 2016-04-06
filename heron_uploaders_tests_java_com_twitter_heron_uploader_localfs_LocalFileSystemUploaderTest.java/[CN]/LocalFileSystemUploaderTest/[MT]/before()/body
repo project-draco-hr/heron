@@ -1,5 +1,5 @@
 {
   fileSystemDirectory=Paths.get(System.getenv("JAVA_RUNFILES"),"topologies").toString();
-  testTopologyDirectory=Paths.get(System.getenv("JAVA_RUNFILES"),LocalFileSystemConstants.TEST_DATA_PATH).toString();
+  testTopologyDirectory=Paths.get(System.getenv("JAVA_RUNFILES"),LocalFileSystemConstantsTest.TEST_DATA_PATH).toString();
   config=Config.newBuilder().put(Keys.cluster(),"cluster").put(Keys.role(),"role").put(Keys.topologyName(),"topology").put(Keys.topologyPackageType(),"tar").put(LocalFileSystemKeys.fileSystemDirectory(),fileSystemDirectory).build();
 }
