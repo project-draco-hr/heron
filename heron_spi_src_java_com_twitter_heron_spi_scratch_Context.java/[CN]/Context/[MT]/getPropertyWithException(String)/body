@@ -1,6 +1,0 @@
-{
-  if (config.containsKey(key)) {
-    return (String)config.get(key);
-  }
-  throw new RuntimeException("Missing required key: " + key + " in config");
-}

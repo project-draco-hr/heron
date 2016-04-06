@@ -1,6 +1,0 @@
-{
-  if (config.containsKey(key)) {
-    return (String)config.get(key);
-  }
-  return null;
-}
