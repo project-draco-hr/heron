@@ -54,11 +54,12 @@
     }
   }
   finally {
-    statemgr.close();
     if (!isSuccessful) {
       uploader.undo();
       launcher.undo();
     }
+    uploader.close();
+    statemgr.close();
   }
   if (!isSuccessful) {
     LOG.log(Level.SEVERE,"Failed to submit topology {0}. Exiting",topologyName);

@@ -3,7 +3,6 @@
   Options helpOptions=constructHelpOptions();
   CommandLineParser parser=new DefaultParser();
   CommandLine cmd=parser.parse(helpOptions,args,true);
-  ;
   if (cmd.hasOption("h")) {
     usage(options);
     return;
@@ -48,8 +47,8 @@
     }
   }
   finally {
-    statemgr.close();
     runtimeManager.close();
+    statemgr.close();
   }
   if (!isSuccessful) {
     LOG.log(Level.SEVERE,"Failed to {0} topology {1}",new Object[]{command,topologyName});
