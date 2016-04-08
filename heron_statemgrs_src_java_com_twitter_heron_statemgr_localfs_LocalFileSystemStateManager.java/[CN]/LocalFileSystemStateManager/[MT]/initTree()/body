@@ -1,9 +1,9 @@
 {
-  LOG.fine("Topologies directory: " + getTopologyDir());
-  LOG.fine("Tmaster location directory: " + getTMasterLocationDir());
-  LOG.fine("Physical plan directory: " + getPhysicalPlanDir());
-  LOG.fine("Execution state directory: " + getExecutionStateDir());
-  LOG.fine("Scheduler location directory: " + getSchedulerLocationDir());
+  LOG.log(Level.FINE,"Topologies directory: {0}",getTopologyDir());
+  LOG.log(Level.FINE,"Tmaster location directory: {0}",getTMasterLocationDir());
+  LOG.log(Level.FINE,"Physical plan directory: {0}",getPhysicalPlanDir());
+  LOG.log(Level.FINE,"Execution state directory: {0}",getExecutionStateDir());
+  LOG.log(Level.FINE,"Scheduler location directory: {0}",getSchedulerLocationDir());
   if ((FileUtils.isDirectoryExists(getTopologyDir()) || FileUtils.createDirectory(getTopologyDir())) && (FileUtils.isDirectoryExists(getTMasterLocationDir()) || FileUtils.createDirectory(getTMasterLocationDir())) && (FileUtils.isDirectoryExists(getPhysicalPlanDir()) || FileUtils.createDirectory(getPhysicalPlanDir()))&& (FileUtils.isDirectoryExists(getExecutionStateDir()) || FileUtils.createDirectory(getExecutionStateDir()))&& (FileUtils.isDirectoryExists(getSchedulerLocationDir()) || FileUtils.createDirectory(getSchedulerLocationDir()))) {
     return true;
   }
