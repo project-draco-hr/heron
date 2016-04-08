@@ -20,7 +20,7 @@
   if (cmd.hasOption("v")) {
     logLevel=Level.ALL;
   }
-  initLog(logLevel);
+  LoggingHelper.loggerInit(logLevel,false);
   String cluster=cmd.getOptionValue("cluster");
   ;
   String role=cmd.getOptionValue("role");

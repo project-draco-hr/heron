@@ -1,8 +1,0 @@
-{
-  Logger globalLogger=Logger.getLogger("");
-  Handler[] handlers=globalLogger.getHandlers();
-  for (  Handler handler : handlers) {
-    handler.setLevel(level);
-  }
-  globalLogger.setLevel(level);
-}

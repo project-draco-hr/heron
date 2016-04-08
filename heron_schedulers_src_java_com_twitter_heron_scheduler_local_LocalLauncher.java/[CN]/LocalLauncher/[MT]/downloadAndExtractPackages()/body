@@ -1,6 +1,6 @@
 {
   SchedulerStateManagerAdaptor stateManager=Runtime.schedulerStateManagerAdaptor(runtime);
-  LOG.fine("State manager used: " + stateManager.getClass().getName());
+  LOG.log(Level.FINE,"State manager used: {0} ",stateManager.getClass().getName());
   File workingDirectory=new File(topologyWorkingDirectory);
   if (!workingDirectory.exists()) {
     LOG.fine("The working directory does not exist; creating it.");
@@ -9,14 +9,14 @@
       return false;
     }
   }
-  LOG.fine("Fetching heron core release " + coreReleasePackage);
+  LOG.log(Level.FINE,"Fetching heron core release {0}",coreReleasePackage);
   LOG.fine("If release package is already in the working directory");
   LOG.fine("the old one will be overwritten");
   if (!copyPackage(coreReleasePackage,targetCoreReleaseFile)) {
     LOG.severe("Failed to fetch the heron core release package.");
     return false;
   }
-  LOG.fine("Untar the heron core release " + coreReleasePackage);
+  LOG.log(Level.FINE,"Untar the heron core release {0}",coreReleasePackage);
   if (!untarPackage(targetCoreReleaseFile,topologyWorkingDirectory)) {
     LOG.severe("Failed to untar heron core release package.");
     return false;
@@ -25,14 +25,14 @@
     LOG.warning("Unable to delete the core release file: " + targetCoreReleaseFile);
   }
   String topologyPackage=Runtime.topologyPackageUri(runtime).toString();
-  LOG.fine("Fetching topology package " + Runtime.topologyPackageUri(runtime));
+  LOG.log(Level.FINE,"Fetching topology package {0}",Runtime.topologyPackageUri(runtime));
   LOG.fine("If topology package is already in the working directory");
   LOG.fine("the old one will be overwritten");
   if (!copyPackage(topologyPackage,targetTopologyPackageFile)) {
     LOG.severe("Failed to fetch the heron core release package.");
     return false;
   }
-  LOG.fine("Untar the topology package: " + topologyPackage);
+  LOG.log(Level.FINE,"Untar the topology package: {0}",topologyPackage);
   if (!untarPackage(targetTopologyPackageFile,topologyWorkingDirectory)) {
     LOG.severe("Failed to untar topology package.");
     return false;
