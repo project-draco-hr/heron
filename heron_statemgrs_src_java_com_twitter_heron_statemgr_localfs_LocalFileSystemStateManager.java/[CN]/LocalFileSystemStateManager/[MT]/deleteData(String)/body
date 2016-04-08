@@ -1,0 +1,6 @@
+{
+  final SettableFuture<Boolean> future=SettableFuture.create();
+  boolean ret=FileUtils.deleteFile(path);
+  future.set(ret);
+  return future;
+}

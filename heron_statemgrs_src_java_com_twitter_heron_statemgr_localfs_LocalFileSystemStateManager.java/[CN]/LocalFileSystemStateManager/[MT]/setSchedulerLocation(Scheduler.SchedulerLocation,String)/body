@@ -1,6 +1,3 @@
 {
-  SettableFuture<Boolean> future=SettableFuture.create();
-  boolean ret=FileUtils.writeToFile(getSchedulerLocationPath(topologyName),location.toByteArray());
-  future.set(ret);
-  return future;
+  return setData(getSchedulerLocationPath(topologyName),location.toByteArray());
 }

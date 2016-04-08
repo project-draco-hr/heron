@@ -1,24 +1,3 @@
 {
-  final SettableFuture<TopologyMaster.TMasterLocation> tLocationFuture=SettableFuture.create();
-  String path=getTMasterLocationPath(topologyName);
-  Watcher wc=ZkWatcherCallback.makeZkWatcher(watcher);
-  BackgroundCallback cb=new BackgroundCallback(){
-    @Override public void processResult(    CuratorFramework client,    CuratorEvent event) throws Exception {
-      byte[] data;
-      if (event != null & (data=event.getData()) != null) {
-        tLocationFuture.set(TopologyMaster.TMasterLocation.parseFrom(data));
-      }
- else {
-        tLocationFuture.setException(new RuntimeException("Failed to fetch data from path: " + event.getPath()));
-      }
-    }
-  }
-;
-  try {
-    client.getData().usingWatcher(wc).inBackground(cb).forPath(path);
-  }
- catch (  Exception e) {
-    tLocationFuture.setException(new RuntimeException("Could not getData",e));
-  }
-  return tLocationFuture;
+  return getNodeData(watcher,getTMasterLocationPath(topologyName),TopologyMaster.TMasterLocation.newBuilder());
 }

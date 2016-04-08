@@ -1,0 +1,16 @@
+{
+  final SettableFuture<M> future=SettableFuture.create();
+  byte[] data=FileUtils.readFromFile(path);
+  if (data.length == 0) {
+    future.set(null);
+    return future;
+  }
+  try {
+    builder.mergeFrom(data);
+    future.set((M)builder.build());
+  }
+ catch (  InvalidProtocolBufferException e) {
+    future.setException(new RuntimeException("Could not parse " + M.Builder.class,e));
+  }
+  return future;
+}

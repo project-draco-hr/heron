@@ -1,14 +1,3 @@
 {
-  SettableFuture<TopologyAPI.Topology> future=SettableFuture.create();
-  String path=getTopologyPath(topologyName);
-  byte[] data=FileUtils.readFromFile(path);
-  TopologyAPI.Topology topology;
-  try {
-    topology=TopologyAPI.Topology.parseFrom(data);
-    future.set(topology);
-  }
- catch (  InvalidProtocolBufferException e) {
-    future.setException(new RuntimeException("Could not parse SchedulerLocation",e));
-  }
-  return future;
+  return getData(getTopologyPath(topologyName),TopologyAPI.Topology.newBuilder());
 }

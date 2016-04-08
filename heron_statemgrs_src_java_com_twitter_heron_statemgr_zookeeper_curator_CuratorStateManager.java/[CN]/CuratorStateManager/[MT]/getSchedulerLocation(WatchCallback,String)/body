@@ -1,25 +1,3 @@
 {
-  final SettableFuture<Scheduler.SchedulerLocation> schedulerLocationFuture=SettableFuture.create();
-  String path=getSchedulerLocationPath(topologyName);
-  Watcher wc=ZkWatcherCallback.makeZkWatcher(watcher);
-  BackgroundCallback cb=new BackgroundCallback(){
-    @Override public void processResult(    CuratorFramework client,    CuratorEvent event) throws Exception {
-      byte[] data;
-      if (event != null & (data=event.getData()) != null) {
-        LOG.info("SEE SEE the data: " + new String(data));
-        schedulerLocationFuture.set(Scheduler.SchedulerLocation.parseFrom(data));
-      }
- else {
-        schedulerLocationFuture.setException(new RuntimeException("Failed to fetch data from path: " + event.getPath()));
-      }
-    }
-  }
-;
-  try {
-    client.getData().usingWatcher(wc).inBackground(cb).forPath(path);
-  }
- catch (  Exception e) {
-    schedulerLocationFuture.setException(new RuntimeException("Could not getData",e));
-  }
-  return schedulerLocationFuture;
+  return getNodeData(watcher,getSchedulerLocationPath(topologyName),Scheduler.SchedulerLocation.newBuilder());
 }
