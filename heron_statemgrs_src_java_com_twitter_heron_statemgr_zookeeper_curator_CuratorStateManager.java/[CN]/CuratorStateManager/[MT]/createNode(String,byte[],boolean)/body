@@ -1,7 +1,7 @@
 {
   final SettableFuture<Boolean> result=SettableFuture.create();
   try {
-    client.create().creatingParentsIfNeeded().withMode(isEphemeral ? CreateMode.EPHEMERAL : CreateMode.PERSISTENT).forPath(path,data);
+    client.create().withMode(isEphemeral ? CreateMode.EPHEMERAL : CreateMode.PERSISTENT).forPath(path,data);
     LOG.info("Created node for path: " + path);
     result.set(true);
   }
