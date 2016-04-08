@@ -3,22 +3,14 @@ def write_env_exec_file(platform, environ):
     out_file = open(env_exec_file, 'w')
     out_file.write('#!/bin/bash\n\n')
     out_file.write('set -eu \n\n')
-    if ('CC' in os.environ):
-        out_file.write((('export CC=' + os.environ['CC']) + '\n'))
-    if ('CPP' in os.environ):
-        out_file.write((('export CPP=' + os.environ['CPP']) + '\n'))
-    if ('CFLAGS' in os.environ):
-        out_file.write((('export CFLAGS=' + os.environ['CFLAGS']) + '\n'))
-    if ('CXX' in os.environ):
-        out_file.write((('export CXX=' + os.environ['CXX']) + '\n'))
-    if ('CXXCPP' in os.environ):
-        out_file.write((('export CXXCPP=' + os.environ['CXXCPP']) + '\n'))
-    if ('CXXFLAGS' in os.environ):
-        out_file.write((('export CXXFLAGS=' + os.environ['CXXFLAGS']) + '\n'))
-    if ('LDFLAGS' in os.environ):
-        out_file.write((('export LDFLAGS=' + os.environ['LDFLAGS']) + '\n'))
-    if ('LIBS' in os.environ):
-        out_file.write((('export LIBS=' + os.environ['LIBS']) + '\n'))
+    for env in ['CC', 'CPP', 'CFLAGS']:
+        export_env_to_file(out_file, env)
+    for env in ['CXX', 'CXXCPP', 'CXXFLAGS']:
+        export_env_to_file(out_file, env)
+    for env in ['LDFLAGS', 'LIBS']:
+        export_env_to_file(out_file, env)
+    if ('CMAKE' in os.environ):
+        out_file.write((('export PATH=' + os.path.dirname(os.environ['CMAKE'])) + ':$PATH\n'))
     out_file.write('# Execute the input programs\n')
     out_file.write('$*')
     make_executable(env_exec_file)
