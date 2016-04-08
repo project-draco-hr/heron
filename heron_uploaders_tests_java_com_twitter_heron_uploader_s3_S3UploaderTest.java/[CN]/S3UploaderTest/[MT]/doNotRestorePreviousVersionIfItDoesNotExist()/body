@@ -1,0 +1,7 @@
+{
+  String expectedPreviousVersionPath="test-topology/previous_topology.tar.gz";
+  String expectedBucket="bucket";
+  when(mockS3Client.doesObjectExist(expectedBucket,expectedPreviousVersionPath)).thenReturn(false);
+  uploader.undo();
+  verify(mockS3Client,never()).copyObject(Mockito.anyString(),Mockito.anyString(),Mockito.anyString(),Mockito.anyString());
+}

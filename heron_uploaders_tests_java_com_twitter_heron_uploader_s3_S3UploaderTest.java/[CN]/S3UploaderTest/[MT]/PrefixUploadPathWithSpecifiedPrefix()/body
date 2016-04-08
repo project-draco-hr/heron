@@ -1,0 +1,10 @@
+{
+  configBuilder.put(S3Context.HERON_UPLOADER_S3_PATH_PREFIX,"path/prefix");
+  uploader.initialize(configBuilder.build());
+  uploader.s3Client=mockS3Client;
+  String expectedRemotePath="path/prefix/test-topology/topology.tar.gz";
+  String expectedBucket="bucket";
+  when(mockS3Client.getResourceUrl(expectedBucket,expectedRemotePath)).thenReturn("http://url");
+  uploader.uploadPackage();
+  verify(mockS3Client).putObject(Mockito.eq("bucket"),Mockito.eq(expectedRemotePath),Mockito.any(File.class));
+}
