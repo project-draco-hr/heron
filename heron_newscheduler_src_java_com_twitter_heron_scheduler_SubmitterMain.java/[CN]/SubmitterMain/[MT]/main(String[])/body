@@ -53,12 +53,13 @@
   IUploader uploader=(IUploader)Class.forName(uploaderClass).newInstance();
   String topologyName=topology.getName();
   boolean isSuccessful=false;
+  URI packageURI=null;
   try {
     statemgr.initialize(config);
     boolean isValid=validateSubmit(statemgr,topologyName);
     if (isValid) {
       LOG.log(Level.INFO,"Topology {0} to be submitted",topologyName);
-      URI packageURI=uploadPackage(config,uploader);
+      packageURI=uploadPackage(config,uploader);
       if (packageURI == null) {
         LOG.severe("Failed to upload package.");
       }
@@ -69,10 +70,13 @@
   }
   finally {
     if (!isSuccessful) {
-      uploader.undo();
-      launcher.undo();
+      if (packageURI != null) {
+        uploader.undo();
+      }
     }
     uploader.close();
+    packing.close();
+    launcher.close();
     statemgr.close();
   }
   if (!isSuccessful) {

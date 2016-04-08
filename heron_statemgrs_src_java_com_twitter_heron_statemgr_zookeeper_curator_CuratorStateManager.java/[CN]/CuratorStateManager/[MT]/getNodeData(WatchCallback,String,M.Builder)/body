@@ -1,0 +1,24 @@
+{
+  final SettableFuture<M> future=SettableFuture.create();
+  Watcher wc=ZkWatcherCallback.makeZkWatcher(watcher);
+  BackgroundCallback cb=new BackgroundCallback(){
+    @Override public void processResult(    CuratorFramework client,    CuratorEvent event) throws Exception {
+      byte[] data;
+      if (event != null & (data=event.getData()) != null) {
+        builder.mergeFrom(data);
+        future.set((M)builder.build());
+      }
+ else {
+        future.setException(new RuntimeException("Failed to fetch data from path: " + event.getPath()));
+      }
+    }
+  }
+;
+  try {
+    client.getData().usingWatcher(wc).inBackground(cb).forPath(path);
+  }
+ catch (  Exception e) {
+    future.setException(new RuntimeException("Could not getData",e));
+  }
+  return future;
+}

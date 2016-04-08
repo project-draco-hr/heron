@@ -1,20 +1,24 @@
 {
   super.initialize(config);
-  int sessionTimeoutMs=30 * 1000;
-  int connectionTimeoutMs=30 * 1000;
-  int retryCount=10;
-  int retryIntervalMs=1000;
   connectionString=Context.stateManagerConnectionString(config);
-  ExponentialBackoffRetry retryPolicy=new ExponentialBackoffRetry(retryIntervalMs,retryCount);
-  client=CuratorFrameworkFactory.builder().connectString(connectionString).retryPolicy(retryPolicy).connectionTimeoutMs(connectionTimeoutMs).sessionTimeoutMs(sessionTimeoutMs).build();
+  ExponentialBackoffRetry retryPolicy=new ExponentialBackoffRetry(ZkContext.retryIntervalMs(config),ZkContext.retryCount(config));
+  client=CuratorFrameworkFactory.builder().connectString(connectionString).retryPolicy(retryPolicy).connectionTimeoutMs(ZkContext.connectionTimeoutMs(config)).sessionTimeoutMs(ZkContext.sessionTimeoutMs(config)).build();
   LOG.info("Starting client to: " + connectionString);
   client.start();
   try {
-    if (!client.blockUntilConnected(connectionTimeoutMs,TimeUnit.MILLISECONDS)) {
+    if (!client.blockUntilConnected(ZkContext.connectionTimeoutMs(config),TimeUnit.MILLISECONDS)) {
       throw new RuntimeException("Failed to initialize CuratorClient");
     }
   }
  catch (  InterruptedException e) {
     throw new RuntimeException("Failed to initialize CuratorClient",e);
+  }
+  if (ZkContext.isInitializeTree(config)) {
+    try {
+      initTree();
+    }
+ catch (    Exception e) {
+      throw new RuntimeException("Failed to initialize tree",e);
+    }
   }
 }

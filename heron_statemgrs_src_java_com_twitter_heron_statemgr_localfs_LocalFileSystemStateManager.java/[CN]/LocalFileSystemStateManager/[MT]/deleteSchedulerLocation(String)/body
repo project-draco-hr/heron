@@ -1,6 +1,3 @@
 {
-  SettableFuture<Boolean> future=SettableFuture.create();
-  boolean ret=FileUtils.deleteFile(getSchedulerLocationPath(topologyName));
-  future.set(ret);
-  return future;
+  return deleteData(getSchedulerLocationPath(topologyName));
 }
