@@ -1,0 +1,3 @@
+{
+  s3Client.deleteObject(bucket,previousVersionFilePath);
+}

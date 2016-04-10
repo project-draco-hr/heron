@@ -1,0 +1,25 @@
+{
+  if (s3Client.doesObjectExist(bucket,remoteFilePath)) {
+    s3Client.copyObject(bucket,remoteFilePath,bucket,previousVersionFilePath);
+  }
+  try {
+    s3Client.putObject(bucket,remoteFilePath,packageFileHandler);
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Error writing topology package to " + bucket + " "+ remoteFilePath,e);
+    return null;
+  }
+  final String resourceUrl=s3Client.getResourceUrl(bucket,remoteFilePath);
+  LOG.log(Level.INFO,"Package URL: {0}",resourceUrl);
+  if (resourceUrl == null) {
+    LOG.log(Level.SEVERE,"Resource not found for bucket " + bucket + " and path "+ remoteFilePath);
+    return null;
+  }
+  try {
+    return new URI(resourceUrl);
+  }
+ catch (  URISyntaxException e) {
+    LOG.log(Level.SEVERE,e.getMessage());
+    return null;
+  }
+}
