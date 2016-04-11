@@ -1,3 +1,7 @@
 {
+  if (packing == null || packing.containers.isEmpty()) {
+    LOG.severe("No container requested. Can't schedule");
+    return false;
+  }
   return true;
 }
