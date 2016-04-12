@@ -1,3 +1,0 @@
-{
-  return ConfigKeys.get("PROXY_CONNECTION_STRING");
-}
