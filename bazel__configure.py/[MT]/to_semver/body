@@ -1,0 +1,7 @@
+def to_semver(version):
+    if re.search('^[\\d]+\\.[\\d]+$', version):
+        return ('%s.0' % version)
+    version_search = re.search('^([\\d]+\\.[\\d]+\\.[\\d]+)\\.[\\d]+$', version)
+    if version_search:
+        return version_search.group(1)
+    return version

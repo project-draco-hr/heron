@@ -2,7 +2,7 @@ def discover_tool_default(program, msg, envvar, defvalue):
     VALUE = discover_program(program, envvar)
     if (not VALUE):
         VALUE = defvalue
-        print ('%s:\t not found, but ok' % program.ljust(26))
+        print ('%s:\tnot found, but ok' % program.ljust(26))
     else:
-        print ('Using %s:\t"%s"' % (msg.ljust(20), VALUE))
+        print ('Using %s:\t%s' % (msg.ljust(20), VALUE))
     return VALUE

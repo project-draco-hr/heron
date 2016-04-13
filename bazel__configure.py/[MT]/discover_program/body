@@ -1,6 +1,6 @@
 def discover_program(program_name, env_variable=''):
     env_value = program_name
-    if (len(env_variable) > 0):
+    if env_variable:
         try:
             env_value = os.environ[env_variable]
         except KeyError:

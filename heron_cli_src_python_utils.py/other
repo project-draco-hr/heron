@@ -1,10 +1,11 @@
 import argparse
-import sys
-import subprocess
-import os
-import tarfile
 import contextlib
 import getpass
+import os
+import sys
+import subprocess
+import tarfile
+import yaml
 from heron.common.src.python.color import Log
 ENVIRON = 'default'
 BIN_DIR = 'bin'
@@ -12,3 +13,6 @@ CONF_DIR = 'conf'
 ETC_DIR = 'etc'
 LIB_DIR = 'lib'
 SANDBOX_CONF_DIR = './heron-conf'
+CLIENT_YAML = 'client.yaml'
+ROLE_REQUIRED = 'heron.config.role.required'
+ENV_REQUIRED = 'heron.config.env.required'
