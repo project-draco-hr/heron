@@ -1,0 +1,27 @@
+def discover_version(path):
+    if ('python' in path):
+        version_flag = '-V'
+    else:
+        version_flag = '--version'
+    command = ('%s %s' % (path, version_flag))
+    version_output = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True)
+    first_line = version_output.split('\n')[0]
+    version = get_trailing_version(first_line)
+    if version:
+        return version
+    redhat_line = re.search('(.*)\\s+[0-9]+\\s+\\(Red Hat .*\\)$', first_line)
+    if redhat_line:
+        version = get_trailing_version(redhat_line.group(1))
+        if version:
+            return version
+    ubuntu_line = re.search('.*\\s+\\(Ubuntu .*\\)\\s+([\\d\\.]+)\\s+\\d+$', first_line)
+    if ubuntu_line:
+        version = get_trailing_version(ubuntu_line.group(1))
+        if version:
+            return version
+    mac_line = re.search('^(Apple LLVM version\\s+[\\d\\.]+)\\s+\\(clang.*', first_line)
+    if mac_line:
+        version = get_trailing_version(mac_line.group(1))
+        if version:
+            return version
+    fail(('Could not determine the version of %s from the following output\n%s\n%s' % (path, command, version_output)))

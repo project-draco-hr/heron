@@ -1,0 +1,7 @@
+def format_version(major, minor, patch, prerelease=None, build=None):
+    version = ('%d.%d.%d' % (major, minor, patch))
+    if (prerelease is not None):
+        version = (version + ('-%s' % prerelease))
+    if (build is not None):
+        version = (version + ('+%s' % build))
+    return version

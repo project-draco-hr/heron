@@ -1,0 +1,13 @@
+{
+  LOG.info("Topologies directory: " + getTopologyDir());
+  LOG.info("Tmaster location directory: " + getTMasterLocationDir());
+  LOG.info("Physical plan directory: " + getPhysicalPlanDir());
+  LOG.info("Execution state directory: " + getExecutionStateDir());
+  LOG.info("Scheduler location directory: " + getSchedulerLocationDir());
+  client.createContainers(getTopologyDir());
+  client.createContainers(getTMasterLocationDir());
+  client.createContainers(getPhysicalPlanDir());
+  client.createContainers(getExecutionStateDir());
+  client.createContainers(getSchedulerLocationDir());
+  LOG.info("Directory tree initialized.");
+}

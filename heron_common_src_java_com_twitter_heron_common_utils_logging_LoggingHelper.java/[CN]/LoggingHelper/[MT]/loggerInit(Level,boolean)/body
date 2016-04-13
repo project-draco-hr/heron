@@ -1,6 +1,15 @@
 {
-  Logger.getLogger("").setLevel(level);
+  Logger rootLogger=Logger.getLogger("");
+  for (  Handler handler : rootLogger.getHandlers()) {
+    handler.setLevel(level);
+  }
+  rootLogger.setLevel(level);
   if (isRedirectStdOutErr) {
+    for (    Handler handler : rootLogger.getHandlers()) {
+      if (handler instanceof ConsoleHandler) {
+        rootLogger.removeHandler(handler);
+      }
+    }
     Logger logger;
     LoggingOutputStream los;
     logger=Logger.getLogger("stdout");

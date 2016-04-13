@@ -1,4 +1,0 @@
-{
-  super(configLoader,topology.getName());
-  this.topology=topology;
-}

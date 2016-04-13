@@ -2,3 +2,4 @@ class_name
 topology_tar
 arguments
 tmpdir_root
+javaDefines

@@ -1,0 +1,6 @@
+{
+  String expectedPreviousVersionPath="test-topology/previous_topology.tar.gz";
+  String expectedBucket="bucket";
+  uploader.close();
+  verify(mockS3Client).deleteObject(expectedBucket,expectedPreviousVersionPath);
+}

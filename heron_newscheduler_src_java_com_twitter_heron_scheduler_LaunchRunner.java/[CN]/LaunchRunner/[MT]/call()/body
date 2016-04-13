@@ -9,7 +9,7 @@
     LOG.log(Level.SEVERE,"{0} failed to prepare launch topology locally",launcher.getClass().getName());
     return false;
   }
-  ExecutionEnvironment.ExecutionState executionState=launcher.updateExecutionState(createBasicExecutionState());
+  ExecutionEnvironment.ExecutionState executionState=createExecutionState();
   ListenableFuture<Boolean> sFuture=statemgr.setExecutionState(executionState,topologyName);
   if (!NetworkUtils.awaitResult(sFuture,5,TimeUnit.SECONDS)) {
     LOG.severe("Failed to set execution state");

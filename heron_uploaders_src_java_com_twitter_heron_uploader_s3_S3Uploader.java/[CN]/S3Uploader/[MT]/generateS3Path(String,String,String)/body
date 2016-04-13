@@ -1,0 +1,6 @@
+{
+  List<String> pathParts=new ArrayList<>(Arrays.asList(pathPrefix.split("/")));
+  pathParts.add(topologyName);
+  pathParts.add(filename);
+  return String.join("/",pathParts);
+}

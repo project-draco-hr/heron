@@ -1,0 +1,3 @@
+{
+  return config.getIntegerValue(SESSION_TIMEOUT_MS);
+}

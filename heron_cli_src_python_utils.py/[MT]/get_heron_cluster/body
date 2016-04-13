@@ -1,0 +1,2 @@
+def get_heron_cluster(cluster_role_env):
+    return cluster_role_env.split('/')[0]

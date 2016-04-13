@@ -1,4 +1,0 @@
-{
-  stateManager.initialize(config);
-  return true;
-}

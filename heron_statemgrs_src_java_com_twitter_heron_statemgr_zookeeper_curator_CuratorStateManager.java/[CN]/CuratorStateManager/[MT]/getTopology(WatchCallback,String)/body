@@ -1,24 +1,3 @@
 {
-  final SettableFuture<TopologyAPI.Topology> topologyFuture=SettableFuture.create();
-  String path=getTopologyPath(topologyName);
-  Watcher wc=ZkWatcherCallback.makeZkWatcher(watcher);
-  BackgroundCallback cb=new BackgroundCallback(){
-    @Override public void processResult(    CuratorFramework client,    CuratorEvent event) throws Exception {
-      byte[] data;
-      if (event != null & (data=event.getData()) != null) {
-        topologyFuture.set(TopologyAPI.Topology.parseFrom(data));
-      }
- else {
-        topologyFuture.setException(new RuntimeException("Failed to fetch data from path: " + event.getPath()));
-      }
-    }
-  }
-;
-  try {
-    client.getData().usingWatcher(wc).inBackground(cb).forPath(path);
-  }
- catch (  Exception e) {
-    topologyFuture.setException(new RuntimeException("Could not getData",e));
-  }
-  return topologyFuture;
+  return getNodeData(watcher,getTopologyPath(topologyName),TopologyAPI.Topology.newBuilder());
 }

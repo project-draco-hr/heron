@@ -1,0 +1,4 @@
+def get_trailing_version(line):
+    version = re.search('([\\d.]+)$', line)
+    if (version and ('.' in version.group(0))):
+        return version.group(0)

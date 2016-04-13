@@ -1,10 +1,10 @@
 {
-  List<String> auroraCmd=Arrays.asList("aurora","job","restart");
+  List<String> auroraCmd=new ArrayList<>(Arrays.asList("aurora","job","restart"));
   String jobSpec=String.format("%s/%s/%s/%s",cluster,role,env,jobName);
   if (containerId != -1) {
     jobSpec=String.format("%s/%s",jobSpec,"" + containerId);
   }
   auroraCmd.add(jobSpec);
   appendAuroraCommandOptions(auroraCmd,isVerbose);
-  return 0 == ShellUtils.runProcess(isVerbose,(String[])auroraCmd.toArray(),new StringBuilder(),new StringBuilder());
+  return 0 == ShellUtils.runProcess(isVerbose,auroraCmd.toArray(new String[0]),new StringBuilder(),new StringBuilder());
 }

@@ -1,0 +1,22 @@
+{
+  bucket=S3Context.bucket(config);
+  String accessKey=S3Context.accessKey(config);
+  String accessSecret=S3Context.secretKey(config);
+  if (bucket == null || bucket.isEmpty()) {
+    throw new RuntimeException("Missing heron.uploader.s3.bucket config value");
+  }
+  if (accessKey == null || accessKey.isEmpty()) {
+    throw new RuntimeException("Missing heron.uploader.s3.access_key config value");
+  }
+  if (accessSecret == null || accessSecret.isEmpty()) {
+    throw new RuntimeException("Missing heron.uploader.s3.secret_key config value");
+  }
+  AWSCredentials credentials=new BasicAWSCredentials(accessKey,accessSecret);
+  s3Client=new AmazonS3Client(credentials);
+  final String topologyName=Context.topologyName(config);
+  final String topologyPackageLocation=Context.topologyPackageFile(config);
+  pathPrefix=S3Context.pathPrefix(config);
+  packageFileHandler=new File(topologyPackageLocation);
+  remoteFilePath=generateS3Path(pathPrefix,topologyName,packageFileHandler.getName());
+  previousVersionFilePath=generateS3Path(pathPrefix,topologyName,"previous_" + packageFileHandler.getName());
+}

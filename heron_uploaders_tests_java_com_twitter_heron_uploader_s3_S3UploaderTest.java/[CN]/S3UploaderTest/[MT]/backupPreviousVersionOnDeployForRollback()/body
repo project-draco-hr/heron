@@ -1,0 +1,12 @@
+{
+  String expectedRemotePath="test-topology/topology.tar.gz";
+  String expectedPreviousVersionPath="test-topology/previous_topology.tar.gz";
+  String expectedBucket="bucket";
+  when(mockS3Client.doesObjectExist(expectedBucket,expectedRemotePath)).thenReturn(true);
+  when(mockS3Client.getResourceUrl(expectedBucket,expectedRemotePath)).thenReturn("http://url");
+  URI uri=uploader.uploadPackage();
+  verify(mockS3Client).copyObject(expectedBucket,expectedRemotePath,expectedBucket,expectedPreviousVersionPath);
+  verify(mockS3Client).putObject(Mockito.eq(expectedBucket),Mockito.eq(expectedRemotePath),Mockito.any(File.class));
+  verify(mockS3Client).getResourceUrl(expectedBucket,expectedRemotePath);
+  assertEquals(new URI("http://url"),uri);
+}

@@ -16,6 +16,11 @@
     usage(options);
     System.exit(1);
   }
+  Level logLevel=Level.INFO;
+  if (cmd.hasOption("v")) {
+    logLevel=Level.ALL;
+  }
+  LoggingHelper.loggerInit(logLevel,false);
   String cluster=cmd.getOptionValue("cluster");
   String role=cmd.getOptionValue("role");
   String environ=cmd.getOptionValue("environment");
@@ -27,8 +32,8 @@
   String topologyJarFile=cmd.getOptionValue("topology_jar");
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
   Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath)).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyPackage,topologyJarFile,topologyDefnFile,topology)).build());
-  LOG.info("Static config loaded successfully ");
-  LOG.info(config.toString());
+  LOG.fine("Static config loaded successfully ");
+  LOG.fine(config.toString());
   String statemgrClass=Context.stateManagerClass(config);
   IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
   String launcherClass=Context.launcherClass(config);
@@ -39,12 +44,13 @@
   IUploader uploader=(IUploader)Class.forName(uploaderClass).newInstance();
   String topologyName=topology.getName();
   boolean isSuccessful=false;
+  URI packageURI=null;
   try {
     statemgr.initialize(config);
     boolean isValid=validateSubmit(statemgr,topologyName);
     if (isValid) {
       LOG.log(Level.INFO,"Topology {0} to be submitted",topologyName);
-      URI packageURI=uploadPackage(config,uploader);
+      packageURI=uploadPackage(config,uploader);
       if (packageURI == null) {
         LOG.severe("Failed to upload package.");
       }
@@ -54,11 +60,15 @@
     }
   }
   finally {
-    statemgr.close();
     if (!isSuccessful) {
-      uploader.undo();
-      launcher.undo();
+      if (packageURI != null) {
+        uploader.undo();
+      }
     }
+    uploader.close();
+    packing.close();
+    launcher.close();
+    statemgr.close();
   }
   if (!isSuccessful) {
     LOG.log(Level.SEVERE,"Failed to submit topology {0}. Exiting",topologyName);
