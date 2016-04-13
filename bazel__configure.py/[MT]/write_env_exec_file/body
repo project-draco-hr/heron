@@ -14,4 +14,4 @@ def write_env_exec_file(platform, environ):
     out_file.write('# Execute the input programs\n')
     out_file.write('$*')
     make_executable(env_exec_file)
-    print ('Wrote the environment exec file:  \t"%s"' % env_exec_file)
+    print ('Wrote the environment exec file %s' % env_exec_file)

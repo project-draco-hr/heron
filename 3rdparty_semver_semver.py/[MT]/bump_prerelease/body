@@ -1,0 +1,4 @@
+def bump_prerelease(version):
+    verinfo = parse(version)
+    verinfo['prerelease'] = _increment_string((verinfo['prerelease'] or 'rc.0'))
+    return format_version(verinfo['major'], verinfo['minor'], verinfo['patch'], verinfo['prerelease'])

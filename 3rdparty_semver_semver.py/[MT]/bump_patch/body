@@ -1,0 +1,3 @@
+def bump_patch(version):
+    verinfo = parse(version)
+    return format_version(verinfo['major'], verinfo['minor'], (verinfo['patch'] + 1))

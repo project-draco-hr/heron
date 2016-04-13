@@ -1,10 +1,10 @@
-def discover_tool(program, msg, envvar):
+def discover_tool(program, msg, envvar, min_version=''):
     VALUE = discover_program(program, envvar)
     if (not VALUE):
-        print ('You need to have %s installed to build Heron.' % program)
-        print ('Note: Some vendors install %s with a versioned name' % program)
-        print ('(like /usr/bin/%s-4.8). You can set the %s environment' % (program, envvar))
-        print 'variable to specify the full path to yours.'
-        sys.exit(1)
-    print ('Using %s:\t"%s"' % (msg.ljust(20), VALUE))
+        fail(("You need to have %s installed to build Heron.\nNote: Some vendors install %s with a versioned name\n(like /usr/bin/%s-4.8). You can set the %s environment\nvariable to specify the full path to yours.'" % (program, program, program, envvar)))
+    print_value = VALUE
+    if min_version:
+        version = assert_min_version(VALUE, min_version)
+        print_value = ('%s (%s)' % (VALUE, version))
+    print ('Using %s:\t%s' % (msg.ljust(20), print_value))
     return VALUE

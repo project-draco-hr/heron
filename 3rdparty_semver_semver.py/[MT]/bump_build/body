@@ -1,0 +1,4 @@
+def bump_build(version):
+    verinfo = parse(version)
+    verinfo['build'] = _increment_string((verinfo['build'] or 'build.0'))
+    return format_version(verinfo['major'], verinfo['minor'], verinfo['patch'], verinfo['prerelease'], verinfo['build'])

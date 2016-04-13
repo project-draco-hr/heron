@@ -1,0 +1,5 @@
+def assert_min_version(path, min_version):
+    version = discover_version(path)
+    if (not semver.match(to_semver(version), ('>=%s' % to_semver(min_version)))):
+        fail(('%s is version %s which is less than the required version %s' % (path, version, min_version)))
+    return version
