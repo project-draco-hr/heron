@@ -1,3 +1,3 @@
 {
-  return delegate.deleteTMasterLocation(topologyName);
+  return awaitResult(delegate.deleteTMasterLocation(topologyName));
 }

@@ -9,14 +9,15 @@
     LOG.log(Level.SEVERE,"{0} failed to prepare launch topology locally",launcher.getClass().getName());
     return false;
   }
+  Boolean result;
   ExecutionEnvironment.ExecutionState executionState=createExecutionState();
-  ListenableFuture<Boolean> sFuture=statemgr.setExecutionState(executionState,topologyName);
-  if (!NetworkUtils.awaitResult(sFuture,5,TimeUnit.SECONDS)) {
+  result=statemgr.setExecutionState(executionState,topologyName);
+  if (result == null || !result) {
     LOG.severe("Failed to set execution state");
     return false;
   }
-  ListenableFuture<Boolean> tFuture=statemgr.setTopology(trimTopology(topology),topologyName);
-  if (!NetworkUtils.awaitResult(tFuture,5,TimeUnit.SECONDS)) {
+  result=statemgr.setTopology(trimTopology(topology),topologyName);
+  if (result == null || !result) {
     LOG.severe("Failed to set topology");
     statemgr.deleteExecutionState(topologyName);
     return false;

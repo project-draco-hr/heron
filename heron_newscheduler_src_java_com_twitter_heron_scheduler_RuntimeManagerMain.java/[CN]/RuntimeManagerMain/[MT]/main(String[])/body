@@ -40,10 +40,11 @@
   boolean isSuccessful=false;
   try {
     statemgr.initialize(config);
-    boolean isValid=validateRuntimeManage(statemgr,topologyName);
+    SchedulerStateManagerAdaptor adaptor=new SchedulerStateManagerAdaptor(statemgr,5000);
+    boolean isValid=validateRuntimeManage(adaptor,topologyName);
     if (isValid) {
       LOG.log(Level.INFO,"Topology: {0} to be {1}ed",new Object[]{topologyName,command});
-      isSuccessful=manageTopology(config,command,statemgr,runtimeManager);
+      isSuccessful=manageTopology(config,command,adaptor,runtimeManager);
     }
   }
   finally {

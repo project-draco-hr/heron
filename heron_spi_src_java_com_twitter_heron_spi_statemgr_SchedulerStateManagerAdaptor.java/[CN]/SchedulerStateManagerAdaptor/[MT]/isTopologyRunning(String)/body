@@ -1,3 +1,3 @@
 {
-  return delegate.isTopologyRunning(topologyName);
+  return awaitResult(delegate.isTopologyRunning(topologyName));
 }

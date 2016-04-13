@@ -49,7 +49,8 @@
   URI packageURI=null;
   try {
     statemgr.initialize(config);
-    boolean isValid=validateSubmit(statemgr,topologyName);
+    SchedulerStateManagerAdaptor adaptor=new SchedulerStateManagerAdaptor(statemgr,5000);
+    boolean isValid=validateSubmit(adaptor,topologyName);
     if (isValid) {
       LOG.log(Level.INFO,"Topology {0} to be submitted",topologyName);
       packageURI=uploadPackage(config,uploader);
@@ -57,7 +58,7 @@
         LOG.severe("Failed to upload package.");
       }
  else {
-        isSuccessful=submitTopology(config,topology,statemgr,launcher,packing,packageURI);
+        isSuccessful=submitTopology(config,topology,adaptor,launcher,packing,packageURI);
       }
     }
   }

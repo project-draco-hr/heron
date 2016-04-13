@@ -1,0 +1,3 @@
+{
+  return awaitResult(delegate.getExecutionState(null,topologyName));
+}

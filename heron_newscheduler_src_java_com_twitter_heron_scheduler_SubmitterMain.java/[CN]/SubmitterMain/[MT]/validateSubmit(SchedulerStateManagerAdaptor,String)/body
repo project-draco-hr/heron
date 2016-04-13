@@ -1,0 +1,8 @@
+{
+  Boolean isTopologyRunning=adaptor.isTopologyRunning(topologyName);
+  if (isTopologyRunning != null && isTopologyRunning.equals(Boolean.TRUE)) {
+    LOG.severe("Topology already exists");
+    return false;
+  }
+  return true;
+}

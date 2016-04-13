@@ -1,8 +1,0 @@
-{
-  Boolean isTopologyRunning=NetworkUtils.awaitResult(statemgr.isTopologyRunning(topologyName),5,TimeUnit.SECONDS);
-  if (isTopologyRunning != null && isTopologyRunning.equals(Boolean.TRUE)) {
-    LOG.severe("Topology already exists");
-    return false;
-  }
-  return true;
-}
