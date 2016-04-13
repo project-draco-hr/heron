@@ -20,6 +20,7 @@ PID_URL_FMT = ('%s/pid' % TOPOLOGIES_URL_FMT)
 JSTACK_URL_FMT = ('%s/jstack' % TOPOLOGIES_URL_FMT)
 JMAP_URL_FMT = ('%s/jmap' % TOPOLOGIES_URL_FMT)
 HISTOGRAM_URL_FMT = ('%s/histo' % TOPOLOGIES_URL_FMT)
+LOGFILE_DATA_URL_FMT = ('%s/logfiledata' % TOPOLOGIES_URL_FMT)
 capacity = 'DIVIDE(  DEFAULT(0,    MULTIPLY(      TS({0},{1},__execute-count/default),      TS({0},{1},__execute-latency/default)    )  ),  60000000000)'
 failures = 'DEFAULT(0,  DIVIDE(    TS({0},{1},__fail-count/default),    SUM(      DEFAULT(1, TS({0},{1},__execute-count/default)),      DEFAULT(0, TS({0},{1},__fail-count/default))    )  ))'
 cpu = 'DEFAULT(0, TS({0},{1},__jvm-process-cpu-load))'
