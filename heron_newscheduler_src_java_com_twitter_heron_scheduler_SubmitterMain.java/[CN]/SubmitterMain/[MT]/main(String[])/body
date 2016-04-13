@@ -16,9 +16,11 @@
     usage(options);
     System.exit(1);
   }
+  Boolean verbose=true;
   Level logLevel=Level.INFO;
   if (cmd.hasOption("v")) {
     logLevel=Level.ALL;
+    verbose=true;
   }
   LoggingHelper.loggerInit(logLevel,false);
   String cluster=cmd.getOptionValue("cluster");
@@ -31,7 +33,7 @@
   String topologyDefnFile=cmd.getOptionValue("topology_defn");
   String topologyJarFile=cmd.getOptionValue("topology_jar");
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
-  Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath)).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyPackage,topologyJarFile,topologyDefnFile,topology)).build());
+  Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath)).putAll(commandLineConfigs(cluster,role,environ,verbose)).putAll(topologyConfigs(topologyPackage,topologyJarFile,topologyDefnFile,topology)).build());
   LOG.fine("Static config loaded successfully ");
   LOG.fine(config.toString());
   String statemgrClass=Context.stateManagerClass(config);
