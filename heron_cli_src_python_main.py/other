@@ -23,5 +23,6 @@ import heron.cli.src.python.restart as restart
 import heron.cli.src.python.submit as submit
 import heron.cli.src.python.utils as utils
 import heron.cli.src.python.version as version
+help_epilog = 'Getting more help: \n  heron help <command> Prints help and options for <command>\n\nFor detailed documentation, go to http://heronstreaming.io'
 if (__name__ == '__main__'):
     sys.exit(main())
