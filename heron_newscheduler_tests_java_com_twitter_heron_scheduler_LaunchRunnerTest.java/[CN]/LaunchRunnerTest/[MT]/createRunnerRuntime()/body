@@ -1,0 +1,12 @@
+{
+  Config runtime=Mockito.mock(Config.class);
+  ILauncher launcher=Mockito.mock(ILauncher.class);
+  IPacking packing=Mockito.mock(IPacking.class);
+  SchedulerStateManagerAdaptor adaptor=Mockito.mock(SchedulerStateManagerAdaptor.class);
+  TopologyAPI.Topology topology=createTopology(new com.twitter.heron.api.Config());
+  Mockito.when(runtime.get(Keys.launcherClassInstance())).thenReturn(launcher);
+  Mockito.when(runtime.get(Keys.packingClassInstance())).thenReturn(packing);
+  Mockito.when(runtime.get(Keys.schedulerStateManagerAdaptor())).thenReturn(adaptor);
+  Mockito.when(runtime.get(Keys.topologyDefinition())).thenReturn(topology);
+  return runtime;
+}

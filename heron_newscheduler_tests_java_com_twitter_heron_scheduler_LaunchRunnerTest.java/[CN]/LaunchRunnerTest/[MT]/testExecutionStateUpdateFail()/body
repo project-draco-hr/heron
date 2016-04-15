@@ -1,8 +1,0 @@
-{
-  SettableFuture<Boolean> falseFuture=SettableFuture.create();
-  falseFuture.set(false);
-  when(stateManager.setExecutionState(any(ExecutionEnvironment.ExecutionState.class))).thenReturn(falseFuture);
-  assertFalse(launchRunner.call());
-  verify(stateManager,never()).setTopology(any(TopologyAPI.Topology.class));
-  verify(launcher,never()).launchTopology(any(PackingPlan.class));
-}

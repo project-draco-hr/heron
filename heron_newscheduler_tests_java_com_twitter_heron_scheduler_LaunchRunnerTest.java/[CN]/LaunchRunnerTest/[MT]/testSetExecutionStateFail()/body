@@ -1,0 +1,11 @@
+{
+  Config runtime=createRunnerRuntime();
+  Config config=createRunnerConfig();
+  ILauncher launcher=Runtime.launcherClassInstance(runtime);
+  Mockito.when(launcher.prepareLaunch(Mockito.any(PackingPlan.class))).thenReturn(true);
+  LaunchRunner launchRunner=new LaunchRunner(config,runtime);
+  SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
+  Mockito.when(statemgr.setExecutionState(Mockito.any(ExecutionEnvironment.ExecutionState.class),Mockito.eq(topologyName))).thenReturn(false);
+  Assert.assertFalse(launchRunner.call());
+  Mockito.verify(launcher,Mockito.never()).launch(Mockito.any(PackingPlan.class));
+}
