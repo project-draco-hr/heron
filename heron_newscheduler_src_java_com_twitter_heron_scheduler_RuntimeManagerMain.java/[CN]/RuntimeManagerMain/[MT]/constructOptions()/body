@@ -9,6 +9,7 @@
   Option configOverrides=Option.builder("o").desc("Command line config overrides").longOpt("config_overrides").hasArgs().argName("config overrides").build();
   Option command=Option.builder("m").desc("Command to run").longOpt("command").hasArgs().required().argName("command to run").build();
   Option containerId=Option.builder("i").desc("Container Id for restart command").longOpt("container_id").hasArgs().argName("container id").build();
+  Option verbose=Option.builder("v").desc("Enable debug logs").longOpt("verbose").build();
   options.addOption(cluster);
   options.addOption(role);
   options.addOption(environment);
@@ -18,5 +19,6 @@
   options.addOption(command);
   options.addOption(heronHome);
   options.addOption(containerId);
+  options.addOption(verbose);
   return options;
 }
