@@ -1,0 +1,3 @@
+def get_heron_release_file():
+    '\n  This will provide the path to heron release.yaml file \n  :return: absolute path of heron release.yaml file\n  '
+    return os.path.join(get_heron_dir(), RELEASE_YAML)
