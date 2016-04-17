@@ -1,0 +1,6 @@
+{
+  Config homeConfig=loadBasicConfig(heronHome,configPath);
+  Config sandboxConfig=loadBasicSandboxConfig();
+  Config.Builder cb=Config.newBuilder().putAll(homeConfig).putAll(sandboxConfig).putAll(loadClusterConfig(Context.clusterFile(homeConfig))).putAll(loadClientConfig(Context.clientFile(homeConfig))).putAll(loadPackingConfig(Context.packingFile(homeConfig))).putAll(loadSchedulerConfig(Context.schedulerFile(homeConfig))).putAll(loadStateManagerConfig(Context.stateManagerFile(homeConfig))).putAll(loadUploaderConfig(Context.uploaderFile(homeConfig))).putAll(loadReleaseConfig(releaseFile));
+  return cb.build();
+}

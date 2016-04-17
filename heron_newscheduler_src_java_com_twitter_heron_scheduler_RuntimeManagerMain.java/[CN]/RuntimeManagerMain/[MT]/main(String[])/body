@@ -27,6 +27,7 @@
   String environ=cmd.getOptionValue("environment");
   String heronHome=cmd.getOptionValue("heron_home");
   String configPath=cmd.getOptionValue("config_path");
+  String releaseFile=cmd.getOptionValue("release_file");
   String topologyName=cmd.getOptionValue("topology_name");
   String commandOption=cmd.getOptionValue("command");
   String containerId=Integer.toString(-1);
@@ -34,7 +35,7 @@
     containerId=cmd.getOptionValue("container_id");
   }
   IRuntimeManager.Command command=IRuntimeManager.Command.makeCommand(commandOption);
-  Config.Builder defaultsConfig=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,configPath));
+  Config.Builder defaultsConfig=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,configPath,releaseFile));
   Config.Builder commandLineConfig=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ).put(Keys.topologyContainerId(),containerId);
   Config.Builder topologyConfig=Config.newBuilder().put(Keys.topologyName(),topologyName);
   Config config=Config.expand(Config.newBuilder().putAll(defaultsConfig.build()).putAll(commandLineConfig.build()).putAll(topologyConfig.build()).build());
