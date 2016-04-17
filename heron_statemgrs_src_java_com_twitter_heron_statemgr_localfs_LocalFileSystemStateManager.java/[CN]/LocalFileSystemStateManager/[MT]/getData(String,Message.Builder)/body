@@ -10,7 +10,7 @@
     future.set((M)builder.build());
   }
  catch (  InvalidProtocolBufferException e) {
-    future.setException(new RuntimeException("Could not parse " + M.Builder.class,e));
+    future.setException(new RuntimeException("Could not parse " + Message.Builder.class,e));
   }
   return future;
 }
