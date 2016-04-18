@@ -1,6 +1,5 @@
 import argparse
 import atexit
-import base64
 import contextlib
 import glob
 import logging

@@ -1,0 +1,3 @@
+def add_deactive_deploy(parser):
+    parser.add_argument('--deploy-deactivated', metavar='(a boolean; default: "false")', default=False)
+    return parser

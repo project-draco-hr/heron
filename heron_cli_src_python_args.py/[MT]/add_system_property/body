@@ -1,0 +1,3 @@
+def add_system_property(parser):
+    parser.add_argument('-D', default=[], action='append', dest='javaDefines', metavar='DEFINE', help='Define a system property to pass to java -D when running main.')
+    return parser

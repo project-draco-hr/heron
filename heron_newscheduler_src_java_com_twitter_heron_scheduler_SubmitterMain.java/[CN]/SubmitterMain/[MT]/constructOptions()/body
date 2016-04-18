@@ -5,7 +5,7 @@
   Option environment=Option.builder("e").desc("Environment under which the topology needs to run").longOpt("environment").hasArgs().argName("environment").required().build();
   Option heronHome=Option.builder("d").desc("Directory where heron is installed").longOpt("heron_home").hasArgs().argName("heron home dir").required().build();
   Option configFile=Option.builder("p").desc("Path of the config files").longOpt("config_path").hasArgs().argName("config path").required().build();
-  Option configOverrides=Option.builder("o").desc("Command line config overrides").longOpt("config_overrides").hasArgs().argName("config overrides").build();
+  Option configOverrides=Option.builder("o").desc("Command line override config path").longOpt("override_config_file").hasArgs().argName("override config file").build();
   Option releaseFile=Option.builder("b").desc("Release file name").longOpt("release_file").hasArgs().argName("release information").build();
   Option topologyPackage=Option.builder("y").desc("tar ball containing user submitted jar/tar, defn and config").longOpt("topology_package").hasArgs().argName("topology package").required().build();
   Option topologyDefn=Option.builder("f").desc("serialized file containing Topology protobuf").longOpt("topology_defn").hasArgs().argName("topology definition").required().build();

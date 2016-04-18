@@ -2,6 +2,7 @@ def extract_common_args(command, parser, cl_args):
     try:
         cluster_role_env = cl_args.pop('cluster/[role]/[env]')
         config_path = cl_args['config_path']
+        override_config_file = utils.parse_override_config(cl_args['config_property'])
     except KeyError:
         subparser = utils.get_subparser(parser, command)
         print subparser.format_help()
@@ -18,6 +19,7 @@ def extract_common_args(command, parser, cl_args):
         new_cl_args['role'] = cluster_tuple[1]
         new_cl_args['environ'] = cluster_tuple[2]
         new_cl_args['config_path'] = config_path
+        new_cl_args['override_config_file'] = override_config_file
     except Exception as e:
         Log.error(('Argument cluster/[role]/[env] is not correct: %s' % str(e)))
         return dict()

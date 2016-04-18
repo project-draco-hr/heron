@@ -1,6 +1,5 @@
 def main():
     check_environment()
-    atexit.register(cleanup)
     parser = create_parser()
     if (len(sys.argv[1:]) == 0):
         parser.print_help()
@@ -20,6 +19,8 @@ def main():
         command_line_args = extract_common_args(command, parser, command_line_args)
     if (not command_line_args):
         return 1
+    files = [command_line_args['override_config_file']]
+    atexit.register(cleanup, files)
     start = time.time()
     retcode = run(command, parser, command_line_args, unknown_args)
     end = time.time()

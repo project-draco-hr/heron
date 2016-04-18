@@ -6,7 +6,7 @@
   Option topologyName=Option.builder("n").desc("Name of the topology").longOpt("topology_name").hasArgs().argName("topology name").required().build();
   Option heronHome=Option.builder("d").desc("Directory where heron is installed").longOpt("heron_home").hasArgs().argName("heron home dir").required().build();
   Option configFile=Option.builder("p").desc("Path of the config files").longOpt("config_path").hasArgs().argName("config path").required().build();
-  Option configOverrides=Option.builder("o").desc("Command line config overrides").longOpt("config_overrides").hasArgs().argName("config overrides").build();
+  Option configOverrides=Option.builder("o").desc("Command line override config path").longOpt("override_config_file").hasArgs().argName("override config file").build();
   Option releaseFile=Option.builder("b").desc("Release file name").longOpt("release_file").hasArgs().argName("release information").build();
   Option command=Option.builder("m").desc("Command to run").longOpt("command").hasArgs().required().argName("command to run").build();
   Option containerId=Option.builder("i").desc("Container Id for restart command").longOpt("container_id").hasArgs().argName("container id").build();

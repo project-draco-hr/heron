@@ -1,9 +1,0 @@
-def parse_cmdline_override(namespace):
-    override = []
-    for key in namespace.keys():
-        if (namespace[key] is None):
-            continue
-        property_key = key.replace('-', '.').replace('_', '.')
-        property_value = str(namespace[key])
-        override.append(('%s="%s"' % (property_key, property_value)))
-    return ' '.join(override)

@@ -27,6 +27,7 @@
   String environ=cmd.getOptionValue("environment");
   String heronHome=cmd.getOptionValue("heron_home");
   String configPath=cmd.getOptionValue("config_path");
+  String overrideConfigFile=cmd.getOptionValue("override_config_file");
   String releaseFile=cmd.getOptionValue("release_file");
   String topologyName=cmd.getOptionValue("topology_name");
   String commandOption=cmd.getOptionValue("command");
@@ -38,7 +39,8 @@
   Config.Builder defaultsConfig=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,configPath,releaseFile));
   Config.Builder commandLineConfig=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ).put(Keys.topologyContainerId(),containerId);
   Config.Builder topologyConfig=Config.newBuilder().put(Keys.topologyName(),topologyName);
-  Config config=Config.expand(Config.newBuilder().putAll(defaultsConfig.build()).putAll(commandLineConfig.build()).putAll(topologyConfig.build()).build());
+  Config.Builder overrideConfig=Config.newBuilder().putAll(ClusterConfig.loadOverrideConfig(overrideConfigFile));
+  Config config=Config.expand(Config.newBuilder().putAll(defaultsConfig.build()).putAll(overrideConfig.build()).putAll(commandLineConfig.build()).putAll(topologyConfig.build()).build());
   LOG.fine("Static config loaded successfully ");
   LOG.fine(config.toString());
   String statemgrClass=Context.stateManagerClass(config);

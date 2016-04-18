@@ -1,2 +1,3 @@
-def cleanup():
-    pass
+def cleanup(files):
+    for file in files:
+        shutil.rmtree(os.path.dirname(file))

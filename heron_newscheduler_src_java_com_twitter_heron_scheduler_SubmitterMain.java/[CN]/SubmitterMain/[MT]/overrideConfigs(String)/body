@@ -1,0 +1,4 @@
+{
+  Config config=Config.newBuilder().putAll(ClusterConfig.loadOverrideConfig(overrideConfigPath)).build();
+  return config;
+}
