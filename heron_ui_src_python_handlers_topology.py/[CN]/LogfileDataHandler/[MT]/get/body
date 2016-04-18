@@ -1,5 +1,0 @@
-@tornado.gen.coroutine
-def get(self, cluster, environ, topology, instance, offset, length):
-    data = yield access.get_logfile_data(cluster, environ, topology, instance, offset, length)
-    self.write(data)
-    self.finish()

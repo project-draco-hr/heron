@@ -1,0 +1,3 @@
+def make_shell_filestats_url(host, shell_port, path):
+    '\n  Make the url for filestats data in heron-shell\n  from the info stored in stmgr.\n  '
+    return ('http://%s:%d/filestats/%s' % (host, shell_port, path))

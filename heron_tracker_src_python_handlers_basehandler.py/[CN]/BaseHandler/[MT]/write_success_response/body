@@ -3,5 +3,5 @@ def write_success_response(self, result):
     response = self.make_success_response(result)
     now = time.time()
     spent = (now - self.basehandler_starttime)
-    response[constants.RESPONSE_KEY_ECECUTION_TIME] = spent
+    response[constants.RESPONSE_KEY_EXECUTION_TIME] = spent
     self.write(tornado.escape.json_encode(response))

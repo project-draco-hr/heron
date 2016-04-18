@@ -1,0 +1,5 @@
+@tornado.gen.coroutine
+def get(self, cluster, environ, topology, container):
+    path = self.get_argument('path')
+    options = dict(cluster=cluster, environ=environ, topology=topology, container=container, path=path)
+    self.render('file.html', **options)

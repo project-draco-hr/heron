@@ -1,4 +1,0 @@
-@tornado.gen.coroutine
-def get(self, cluster, environ, topology, instance):
-    options = dict(cluster=cluster, environ=environ, topology=topology, instance=instance)
-    self.render('file.html', **options)

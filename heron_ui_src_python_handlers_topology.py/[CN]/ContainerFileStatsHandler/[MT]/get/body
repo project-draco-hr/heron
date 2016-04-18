@@ -1,0 +1,6 @@
+@tornado.gen.coroutine
+def get(self, cluster, environ, topology, container):
+    path = self.get_argument('path', default='.')
+    data = yield access.get_filestats(cluster, environ, topology, container, path)
+    options = dict(cluster=cluster, environ=environ, topology=topology, container=container, path=path, filestats=data)
+    self.render('browse.html', **options)
