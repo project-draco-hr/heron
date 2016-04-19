@@ -1,0 +1,2 @@
+def on_connection_close(self):
+    self.connection_closed = True

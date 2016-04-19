@@ -4,6 +4,7 @@ from heron.ui.src.python.handlers.base import BaseHandler
 from heron.ui.src.python.handlers.mainhandler import MainHandler
 from heron.ui.src.python.handlers.notfound import NotFoundHandler
 from heron.ui.src.python.handlers.topology import ContainerFileDataHandler
+from heron.ui.src.python.handlers.topology import ContainerFileDownloadHandler
 from heron.ui.src.python.handlers.topology import ContainerFileHandler
 from heron.ui.src.python.handlers.topology import ContainerFileStatsHandler
 from heron.ui.src.python.handlers.topology import ListTopologiesHandler

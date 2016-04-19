@@ -1,0 +1,17 @@
+@tornado.gen.coroutine
+def get(self, cluster, environ, topology, container):
+    self.connection_closed = False
+    path = self.get_argument('path')
+    filename = path.split('/')[(-1)]
+    self.set_header('Content-Disposition', ('attachment; filename=%s' % filename))
+    length = ((4 * 1024) * 1024)
+    offset = 0
+    while True:
+        response = yield access.get_container_file_data(cluster, environ, topology, container, path, offset, length)
+        if (self.connection_closed or ('data' not in response) or (len(response['data']) < length)):
+            break
+        offset += length
+        self.write(response['data'])
+        self.flush()
+    self.write(response['data'])
+    self.finish()
