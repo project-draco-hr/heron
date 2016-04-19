@@ -2,7 +2,7 @@ def runTest(topologyName, classPath, expectedResultFilePath, params):
     httpServerUrl = (((('http://' + params.resultsServerHostname) + ':') + params.resultsServerPort) + '/results')
     try:
         args = ((httpServerUrl + ' ') + topologyName)
-        submitTopology(params.heronCliPath, params.dataCenter, params.role, params.env, params.testsJarPath, classPath, params.releasePackageRole, params.releasePackageName, args)
+        submitTopology(params.heronCliPath, params.dataCenter, params.role, params.env, params.testsJarPath, classPath, params.releasePackageUri, args)
     except Exception as e:
         logging.error(('Failed to submit %s topology: %s' % (topologyName, str(e))))
         return 'fail'

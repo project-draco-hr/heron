@@ -1,6 +1,6 @@
-def killTopology(heronCliPath, dc, role, env, topologyName):
+def killTopology(heronCliPath, cluster, role, env, topologyName):
     logging.info('Killing topology')
-    cmd = ('%s kill %s/%s/%s %s --verbose' % (heronCliPath, dc, role, env, topologyName))
+    cmd = ('%s kill %s/%s/%s %s --verbose' % (heronCliPath, cluster, role, env, topologyName))
     logging.info(('Submitting command: %s' % cmd))
     for i in range(0, RETRY_ATTEMPTS):
         if (os.system(cmd) != 0):

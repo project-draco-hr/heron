@@ -1,8 +1,0 @@
-def kinit(interval):
-    cmd = 'kinit -k -t /etc/twkeys/jenkins/kerberos/jenkins.keytab jenkins@TWITTER.BIZ'
-    while True:
-        if (os.system(cmd) == 0):
-            logging.info('Successfully kinited')
-        else:
-            logging.info('Failed to kinit')
-        time.sleep(interval)

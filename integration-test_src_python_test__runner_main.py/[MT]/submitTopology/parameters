@@ -1,9 +1,8 @@
 heronCliPath
-dc
+cluster
 role
 env
 jarPath
 classPath
-pkgRole
-pkgName
+pkgUri
 args
