@@ -1,5 +1,6 @@
 {
   Config.Builder cb=Config.newBuilder();
+  cb.put(Keys.verbose(),Defaults.verbose());
   cb.put(Keys.schedulerService(),Defaults.schedulerService());
   return cb.build();
 }
