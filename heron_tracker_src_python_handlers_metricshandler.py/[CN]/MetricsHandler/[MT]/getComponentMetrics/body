@@ -25,7 +25,6 @@ def getComponentMetrics(self, tmaster, componentName, metricNames, instances, in
     except tornado.httpclient.HTTPError as e:
         raise Exception(str(e))
     responseCode = result.code
-    print responseCode
     if (responseCode >= 400):
         message = ('Error in getting metrics from Tmaster, code: ' + responseCode)
         LOG.error(message)

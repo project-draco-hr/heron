@@ -11,7 +11,7 @@ def getComponentExceptionSummary(self, tmaster, component_name, instances=[], ca
     port = str(tmaster.stats_port)
     host = tmaster.host
     url = 'http://{0}:{1}/exceptionsummary'.format(host, port)
-    print 'Creating request object.'
+    LOG.debug('Creating request object.')
     request = tornado.httpclient.HTTPRequest(url, body=request_str, method='POST', request_timeout=5)
     LOG.debug(('Making HTTP call to fetch exceptionsummary url: %s' % url))
     try:
@@ -21,7 +21,6 @@ def getComponentExceptionSummary(self, tmaster, component_name, instances=[], ca
     except tornado.httpclient.HTTPError as e:
         raise Exception(str(e))
     responseCode = result.code
-    print responseCode
     if (responseCode >= 400):
         message = ('Error in getting exceptions from Tmaster, code: ' + responseCode)
         LOG.error(message)

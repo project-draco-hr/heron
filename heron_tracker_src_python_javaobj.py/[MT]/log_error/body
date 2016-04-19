@@ -1,0 +1,2 @@
+def log_error(message, ident=0):
+    LOG.error(((' ' * (ident * 2)) + str(message)))

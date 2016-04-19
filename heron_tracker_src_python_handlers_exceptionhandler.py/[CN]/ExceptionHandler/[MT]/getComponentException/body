@@ -20,7 +20,6 @@ def getComponentException(self, tmaster, component_name, instances=[], callback=
     except tornado.httpclient.HTTPError as e:
         raise Exception(str(e))
     responseCode = result.code
-    print responseCode
     if (responseCode >= 400):
         message = ('Error in getting exceptions from Tmaster, code: ' + responseCode)
         LOG.error(message)

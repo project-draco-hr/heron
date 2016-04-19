@@ -1,4 +1,5 @@
+import logging
 import tornado.gen
-from heron.tracker.src.python.log import Log as LOG
 from heron.proto import common_pb2
 from heron.proto import tmaster_pb2
+LOG = logging.getLogger(__name__)
