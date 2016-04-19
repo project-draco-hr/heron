@@ -1,0 +1,11 @@
+{
+  if (o instanceof Boolean) {
+    return ((Boolean)o);
+  }
+ else   if (o instanceof String) {
+    return Boolean.valueOf((String)o);
+  }
+ else {
+    throw new IllegalArgumentException("Failed to convert " + o + " + to boolean");
+  }
+}

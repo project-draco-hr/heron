@@ -4,5 +4,6 @@
   cb.putAll(getDefaultJars());
   cb.putAll(getDefaultFilesAndPaths());
   cb.putAll(getDefaultResources());
+  cb.putAll(getDefaultMiscellaneous());
   return cb.build();
 }
