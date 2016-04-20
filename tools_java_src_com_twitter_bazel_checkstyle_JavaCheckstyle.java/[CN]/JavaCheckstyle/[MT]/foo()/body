@@ -1,3 +1,0 @@
-{
-  LOG.info("No java class files found by checkstyle");
-}
