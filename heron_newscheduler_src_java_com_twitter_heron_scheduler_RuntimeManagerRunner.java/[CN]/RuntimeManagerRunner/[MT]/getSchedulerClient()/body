@@ -1,0 +1,17 @@
+{
+  ISchedulerClient schedulerClient;
+  if (Context.schedulerService(config)) {
+    Scheduler.SchedulerLocation schedulerLocation=getSchedulerLocation();
+    if (schedulerLocation == null) {
+      LOG.log(Level.SEVERE,"Failed to get scheduler location to {0} topology",command);
+      return null;
+    }
+    schedulerClient=new HttpServiceSchedulerClient(config,runtime,schedulerLocation);
+  }
+ else {
+    final String schedulerClass=Context.schedulerClass(config);
+    final IScheduler scheduler=(IScheduler)Class.forName(schedulerClass).newInstance();
+    schedulerClient=new LibrarySchedulerClient(config,runtime,scheduler);
+  }
+  return schedulerClient;
+}

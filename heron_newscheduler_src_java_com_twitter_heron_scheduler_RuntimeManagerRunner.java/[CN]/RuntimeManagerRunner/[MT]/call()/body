@@ -1,18 +1,18 @@
 {
-  runtimeManager.initialize(config,runtime);
+  String topologyName=Context.topologyName(config);
   boolean result=false;
 switch (command) {
 case ACTIVATE:
-    result=activateTopologyHandler(Context.topologyName(config));
+    result=activateTopologyHandler(topologyName);
   break;
 case DEACTIVATE:
-result=deactivateTopologyHandler(Context.topologyName(config));
+result=deactivateTopologyHandler(topologyName);
 break;
 case RESTART:
-result=restartTopologyHandler(Context.topologyName(config));
+result=restartTopologyHandler(topologyName);
 break;
 case KILL:
-result=killTopologyHandler(Context.topologyName(config));
+result=killTopologyHandler(topologyName);
 break;
 default :
 LOG.severe("Unknown command for topology: " + command);

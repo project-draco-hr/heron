@@ -1,9 +1,0 @@
-{
-  SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
-  PhysicalPlans.PhysicalPlan plan=statemgr.getPhysicalPlan(topologyName);
-  if (plan == null) {
-    LOG.log(Level.SEVERE,"Failed to get physical plan for topology {0}",topologyName);
-    return null;
-  }
-  return plan.getTopology().getState();
-}

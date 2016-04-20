@@ -1,6 +1,0 @@
-{
-  this.config=config;
-  this.runtime=runtime;
-  this.command=command;
-  this.runtimeManager=Runtime.runtimeManagerClassInstance(runtime);
-}

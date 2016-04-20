@@ -1,5 +1,3 @@
 {
-  LOG.info("Launching topology in aurora");
-  Map<String,String> auroraProperties=createAuroraProperties(packing);
-  return AuroraUtils.createAuroraJob(Runtime.topologyName(runtime),Context.cluster(config),Context.role(config),Context.environ(config),getHeronAuroraPath(),auroraProperties,true);
+  return SchedulerUtils.onScheduleAsLibrary(config,runtime,new AuroraScheduler(),packing);
 }

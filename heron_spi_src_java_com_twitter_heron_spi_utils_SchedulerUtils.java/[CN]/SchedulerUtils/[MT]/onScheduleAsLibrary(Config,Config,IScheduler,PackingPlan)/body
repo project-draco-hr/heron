@@ -1,0 +1,15 @@
+{
+  boolean ret=false;
+  try {
+    scheduler.initialize(config,runtime);
+    ret=scheduler.onSchedule(packing);
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to invoke schedule method",e);
+    return false;
+  }
+ finally {
+    scheduler.close();
+  }
+  return ret;
+}

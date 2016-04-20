@@ -1,21 +1,21 @@
 {
   Map props=new HashMap();
   if (fileName == null) {
-    LOG.warning("Config file name cannot be null\n");
+    LOG.warning("Config file name cannot be null");
     return props;
   }
  else   if (fileName.isEmpty()) {
-    LOG.warning("Config file name is empty\n");
+    LOG.warning("Config file name is empty");
     return props;
   }
  else {
     Path path=Paths.get(fileName);
     if (!Files.exists(path)) {
-      LOG.warning("Config file " + fileName + " does not exist.\n");
+      LOG.warning("Config file " + fileName + " does not exist.");
       return props;
     }
     if (!Files.isRegularFile(path)) {
-      LOG.warning("Config file " + fileName + " might be a directory.\n");
+      LOG.warning("Config file " + fileName + " might be a directory.");
       return props;
     }
     LOG.log(Level.FINE,"Reading config file {0}",fileName);

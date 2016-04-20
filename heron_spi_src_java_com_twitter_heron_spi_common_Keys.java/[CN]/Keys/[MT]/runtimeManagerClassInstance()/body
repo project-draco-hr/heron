@@ -1,3 +1,0 @@
-{
-  return ConfigKeys.get("RUNTIME_MANAGER_CLASS_INSTANCE");
-}

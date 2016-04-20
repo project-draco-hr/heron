@@ -1,6 +1,0 @@
-String jobName
-String cluster
-String role
-String env
-int containerId
-boolean isVerbose

@@ -1,7 +1,0 @@
-{
-  byte[] requestBody=HttpUtils.readHttpRequestBody(exchange);
-  Scheduler.ActivateTopologyRequest activateTopologyRequest=Scheduler.ActivateTopologyRequest.newBuilder().mergeFrom(requestBody).build();
-  boolean isActivatedSuccessfully=scheduler.onActivate(activateTopologyRequest) && TMasterUtils.sendToTMaster("activate",Runtime.topologyName(runtime),Runtime.schedulerStateManagerAdaptor(runtime));
-  Scheduler.ActivateTopologyResponse response=Scheduler.ActivateTopologyResponse.newBuilder().setStatus(NetworkUtils.getHeronStatus(isActivatedSuccessfully)).build();
-  HttpUtils.sendHttpResponse(exchange,response.toByteArray());
-}

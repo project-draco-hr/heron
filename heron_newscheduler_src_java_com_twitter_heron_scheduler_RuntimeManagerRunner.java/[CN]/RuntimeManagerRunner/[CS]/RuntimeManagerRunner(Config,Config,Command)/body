@@ -1,0 +1,9 @@
+{
+  this.config=config;
+  this.runtime=runtime;
+  this.command=command;
+  this.schedulerClient=getSchedulerClient();
+  if (this.schedulerClient == null) {
+    throw new RuntimeException("Failed to initialize scheduler client");
+  }
+}

@@ -16,5 +16,5 @@
   PowerMockito.doNothing().when(SchedulerMain.class,"setSchedulerLocation",any(LaunchContext.class),any(SchedulerServer.class));
   SchedulerMain.runScheduler(config.getSchedulerClass(),configLoader,"",NetworkUtility.getFreePort(),"",TopologyAPI.Topology.getDefaultInstance());
   verify(scheduler,times(1)).initialize(any(LaunchContext.class));
-  verify(scheduler,atLeastOnce()).schedule(any(PackingPlan.class));
+  verify(scheduler,atLeastOnce()).onSchedule(any(PackingPlan.class));
 }

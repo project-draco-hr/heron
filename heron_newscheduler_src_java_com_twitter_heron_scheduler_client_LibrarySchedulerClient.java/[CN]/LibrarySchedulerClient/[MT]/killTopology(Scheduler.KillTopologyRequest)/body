@@ -1,0 +1,15 @@
+{
+  boolean ret=false;
+  try {
+    scheduler.initialize(config,runtime);
+    ret=scheduler.onKill(killTopologyRequest);
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to kill topology",e);
+    return false;
+  }
+ finally {
+    scheduler.close();
+  }
+  return ret;
+}

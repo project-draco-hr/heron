@@ -1,7 +1,0 @@
-{
-  if (isVerbose) {
-    auroraCmd.add("--verbose");
-  }
-  auroraCmd.add("--no-batching");
-  return;
-}

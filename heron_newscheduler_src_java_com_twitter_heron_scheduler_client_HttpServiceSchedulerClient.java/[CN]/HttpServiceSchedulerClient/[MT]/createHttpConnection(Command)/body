@@ -1,0 +1,12 @@
+{
+  String endpoint=getCommandEndpoint(schedulerLocation.getHttpEndpoint(),command);
+  HttpURLConnection connection;
+  try {
+    connection=HttpUtils.getConnection(endpoint);
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to connect to scheduler http endpoint: {0}",endpoint);
+    return null;
+  }
+  return connection;
+}

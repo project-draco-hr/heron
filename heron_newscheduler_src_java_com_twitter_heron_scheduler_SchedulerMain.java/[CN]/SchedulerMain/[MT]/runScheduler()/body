@@ -16,7 +16,9 @@
     scheduler.initialize(config,ytruntime);
     server=runServer(ytruntime,scheduler,schedulerServerPort);
     setSchedulerLocation(runtime,server);
-    scheduler.schedule(packedPlan);
+    if (!scheduler.onSchedule(packedPlan)) {
+      throw new RuntimeException("Failed to scheduler topology");
+    }
     LOG.info("Waiting for termination... ");
     Runtime.schedulerShutdown(ytruntime).await();
   }

@@ -5,10 +5,6 @@
   packing.initialize(config,runtime);
   PackingPlan packedPlan=packing.pack();
   launcher.initialize(config,runtime);
-  if (!launcher.prepareLaunch(packedPlan)) {
-    LOG.log(Level.SEVERE,"{0} failed to prepare launch topology locally",launcher.getClass().getName());
-    return false;
-  }
   Boolean result;
   ExecutionEnvironment.ExecutionState executionState=createExecutionState();
   result=statemgr.setExecutionState(executionState,topologyName);
@@ -30,18 +26,7 @@
  catch (  RuntimeException e) {
     statemgr.deleteExecutionState(topologyName);
     statemgr.deleteTopology(topologyName);
-    LOG.log(Level.SEVERE,"Failed to launch topology remotely",e);
-    return false;
-  }
-  try {
-    if (!launcher.postLaunch(packedPlan)) {
-      throw new RuntimeException(launcher.getClass().getName() + " failed ");
-    }
-  }
- catch (  RuntimeException e) {
-    statemgr.deleteExecutionState(topologyName);
-    statemgr.deleteTopology(topologyName);
-    LOG.log(Level.SEVERE,"{0} failed to post launch topology locally",launcher.getClass().getName());
+    LOG.log(Level.SEVERE,"Failed to launch topology",e);
     return false;
   }
   return true;

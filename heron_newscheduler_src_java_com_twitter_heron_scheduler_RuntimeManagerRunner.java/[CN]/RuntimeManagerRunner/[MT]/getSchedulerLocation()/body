@@ -1,0 +1,6 @@
+{
+  SchedulerStateManagerAdaptor statemgr=com.twitter.heron.spi.utils.Runtime.schedulerStateManagerAdaptor(runtime);
+  LOG.log(Level.FINE,"Fetching scheduler location from state manager to {0} topology",command);
+  Scheduler.SchedulerLocation schedulerLocation=statemgr.getSchedulerLocation(Runtime.topologyName(runtime));
+  return schedulerLocation;
+}

@@ -1,3 +1,0 @@
-{
-  return (IRuntimeManager)runtime.get(Keys.runtimeManagerClassInstance());
-}

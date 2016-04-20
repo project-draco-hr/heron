@@ -1,0 +1,28 @@
+{
+  LOG.fine("Cleaning up Heron State");
+  Boolean result;
+  result=statemgr.deleteTopology(topologyName);
+  if (result == null || !result) {
+    LOG.severe("Failed to clear topology state");
+    return false;
+  }
+  result=statemgr.deleteExecutionState(topologyName);
+  if (result == null || !result) {
+    LOG.severe("Failed to clear execution state");
+    return false;
+  }
+  result=statemgr.deleteTMasterLocation(topologyName);
+  if (result == null || !result) {
+    LOG.warning("Failed to clear TMaster location. Check whether TMaster set it correctly.");
+  }
+  result=statemgr.deletePhysicalPlan(topologyName);
+  if (result == null || !result) {
+    LOG.warning("Failed to clear physical plan. Check whether TMaster set it correctly.");
+  }
+  result=statemgr.deleteSchedulerLocation(topologyName);
+  if (result == null || !result) {
+    LOG.warning("Failed to clear scheduler location. Check whether Scheduler set it correctly.");
+  }
+  LOG.fine("Cleaned up Heron State");
+  return true;
+}

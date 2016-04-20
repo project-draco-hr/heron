@@ -2,7 +2,6 @@
   Config runtime=createRunnerRuntime();
   Config config=createRunnerConfig();
   ILauncher launcher=Runtime.launcherClassInstance(runtime);
-  Mockito.when(launcher.prepareLaunch(Mockito.any(PackingPlan.class))).thenReturn(true);
   SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
   Mockito.when(statemgr.setTopology(Mockito.any(TopologyAPI.Topology.class),Mockito.eq(topologyName))).thenReturn(true);
   Mockito.when(statemgr.setExecutionState(Mockito.any(ExecutionEnvironment.ExecutionState.class),Mockito.eq(topologyName))).thenReturn(true);

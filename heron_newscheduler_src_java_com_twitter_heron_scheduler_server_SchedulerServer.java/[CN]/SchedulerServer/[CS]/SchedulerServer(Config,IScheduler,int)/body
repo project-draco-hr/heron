@@ -2,7 +2,5 @@
   this.runtime=runtime;
   this.schedulerServer=createServer(port);
   this.schedulerServer.createContext(KILL_REQUEST_CONTEXT,new KillRequestHandler(runtime,scheduler));
-  this.schedulerServer.createContext(ACTIVATE_REQUEST_CONTEXT,new ActivateRequestHandler(runtime,scheduler));
-  this.schedulerServer.createContext(DEACTIVATE_REQUEST_CONTEXT,new DeactivateRequestHandler(runtime,scheduler));
   this.schedulerServer.createContext(RESTART_REQUEST_CONTEXT,new RestartRequestHandler(runtime,scheduler));
 }
