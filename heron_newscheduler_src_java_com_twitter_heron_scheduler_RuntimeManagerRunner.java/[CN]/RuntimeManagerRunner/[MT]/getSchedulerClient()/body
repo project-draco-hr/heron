@@ -6,7 +6,8 @@
       LOG.log(Level.SEVERE,"Failed to get scheduler location to {0} topology",command);
       return null;
     }
-    schedulerClient=new HttpServiceSchedulerClient(config,runtime,schedulerLocation);
+    LOG.log(Level.FINE,"Scheduler is listening on location: {0} ",schedulerLocation.toString());
+    schedulerClient=new HttpServiceSchedulerClient(config,runtime,schedulerLocation.getHttpEndpoint());
   }
  else {
     final String schedulerClass=Context.schedulerClass(config);

@@ -4,33 +4,31 @@
     LOG.severe("Scheduler not found.");
     return false;
   }
- else {
-    try {
-      if (!HttpUtils.sendHttpPostRequest(connection,data)) {
-        LOG.log(Level.SEVERE,"Failed to send http request to scheduler");
-        return false;
-      }
-      Common.StatusCode statusCode;
-      try {
-        LOG.fine("Receiving response from scheduler...");
-        statusCode=Scheduler.SchedulerResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
-      }
- catch (      Exception e) {
-        LOG.log(Level.SEVERE,"Failed to parse response from scheduler: ",e);
-        return false;
-      }
-      if (!statusCode.equals(Common.StatusCode.OK)) {
-        LOG.severe("Received not OK response from scheduler");
-        return false;
-      }
-    }
- catch (    Exception e) {
-      LOG.log(Level.SEVERE,"Failed to communicate with Scheduler: ",e);
+  try {
+    if (!HttpUtils.sendHttpPostRequest(connection,data)) {
+      LOG.log(Level.SEVERE,"Failed to send http request to scheduler");
       return false;
     }
- finally {
-      connection.disconnect();
+    Common.StatusCode statusCode;
+    try {
+      LOG.fine("Receiving response from scheduler...");
+      statusCode=Scheduler.SchedulerResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
     }
+ catch (    Exception e) {
+      LOG.log(Level.SEVERE,"Failed to parse response from scheduler: ",e);
+      return false;
+    }
+    if (!statusCode.equals(Common.StatusCode.OK)) {
+      LOG.severe("Received not OK response from scheduler");
+      return false;
+    }
+  }
+ catch (  Exception e) {
+    LOG.log(Level.SEVERE,"Failed to communicate with Scheduler: ",e);
+    return false;
+  }
+ finally {
+    connection.disconnect();
   }
   return true;
 }

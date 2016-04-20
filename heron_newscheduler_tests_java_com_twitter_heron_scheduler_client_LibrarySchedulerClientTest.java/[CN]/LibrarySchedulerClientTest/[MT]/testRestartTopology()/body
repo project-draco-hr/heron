@@ -1,0 +1,15 @@
+{
+  IScheduler scheduler=Mockito.mock(IScheduler.class);
+  Scheduler.RestartTopologyRequest request=Scheduler.RestartTopologyRequest.getDefaultInstance();
+  LibrarySchedulerClient client=new LibrarySchedulerClient(config,runtime,scheduler);
+  Mockito.when(scheduler.onRestart(request)).thenReturn(false);
+  Assert.assertFalse(client.restartTopology(request));
+  Mockito.verify(scheduler).initialize(config,runtime);
+  Mockito.verify(scheduler).close();
+  Mockito.verify(scheduler).onRestart(request);
+  Mockito.when(scheduler.onRestart(request)).thenReturn(true);
+  Assert.assertTrue(client.restartTopology(request));
+  Mockito.verify(scheduler,Mockito.times(2)).initialize(config,runtime);
+  Mockito.verify(scheduler,Mockito.times(2)).close();
+  Mockito.verify(scheduler,Mockito.times(2)).onRestart(request);
+}

@@ -1,5 +1,5 @@
 {
-  String endpoint=getCommandEndpoint(schedulerLocation.getHttpEndpoint(),command);
+  String endpoint=getCommandEndpoint(schedulerHttpEndpoint,command);
   HttpURLConnection connection;
   try {
     connection=HttpUtils.getConnection(endpoint);

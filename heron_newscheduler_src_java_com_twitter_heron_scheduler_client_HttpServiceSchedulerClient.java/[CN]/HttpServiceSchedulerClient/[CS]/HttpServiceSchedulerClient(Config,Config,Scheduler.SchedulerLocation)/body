@@ -1,6 +1,0 @@
-{
-  this.config=config;
-  this.runtime=runtime;
-  this.schedulerLocation=schedulerLocation;
-  LOG.log(Level.FINE,"Scheduler is listening on location: {0} ",schedulerLocation.toString());
-}

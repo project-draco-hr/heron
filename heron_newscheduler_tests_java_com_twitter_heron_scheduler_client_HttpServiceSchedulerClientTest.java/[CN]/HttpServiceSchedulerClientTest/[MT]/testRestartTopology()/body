@@ -1,0 +1,9 @@
+{
+  HttpServiceSchedulerClient client=Mockito.spy(new HttpServiceSchedulerClient(config,runtime,SCHEDULER_HTTP_ENDPOINT));
+  Mockito.doReturn(true).when(client).requestSchedulerService(Command.RESTART,restartTopologyRequest.toByteArray());
+  Assert.assertTrue(client.restartTopology(restartTopologyRequest));
+  Mockito.verify(client).requestSchedulerService(Command.RESTART,restartTopologyRequest.toByteArray());
+  Mockito.doReturn(false).when(client).requestSchedulerService(Command.RESTART,restartTopologyRequest.toByteArray());
+  Assert.assertFalse(client.restartTopology(restartTopologyRequest));
+  Mockito.verify(client,Mockito.times(2)).requestSchedulerService(Command.RESTART,restartTopologyRequest.toByteArray());
+}

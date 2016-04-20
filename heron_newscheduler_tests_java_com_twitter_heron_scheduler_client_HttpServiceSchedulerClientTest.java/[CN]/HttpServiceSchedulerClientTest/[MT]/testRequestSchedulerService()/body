@@ -1,0 +1,20 @@
+{
+  HttpServiceSchedulerClient client=Mockito.spy(new HttpServiceSchedulerClient(config,runtime,SCHEDULER_HTTP_ENDPOINT));
+  Mockito.doReturn(null).when(client).createHttpConnection(Mockito.any(Command.class));
+  Assert.assertFalse(client.requestSchedulerService(Mockito.any(Command.class),Mockito.any(byte[].class)));
+  HttpURLConnection connection=Mockito.mock(HttpURLConnection.class);
+  Mockito.doReturn(connection).when(client).createHttpConnection(Mockito.any(Command.class));
+  PowerMockito.spy(HttpUtils.class);
+  PowerMockito.doReturn(false).when(HttpUtils.class,"sendHttpPostRequest",Mockito.eq(connection),Mockito.any(byte[].class));
+  Assert.assertFalse(client.requestSchedulerService(Mockito.any(Command.class),Mockito.any(byte[].class)));
+  Mockito.verify(connection).disconnect();
+  PowerMockito.doReturn(true).when(HttpUtils.class,"sendHttpPostRequest",Mockito.eq(connection),Mockito.any(byte[].class));
+  Scheduler.SchedulerResponse notOKResponse=Scheduler.SchedulerResponse.newBuilder().setStatus(NetworkUtils.getHeronStatus(false)).build();
+  PowerMockito.doReturn(notOKResponse.toByteArray()).when(HttpUtils.class,"readHttpResponse",Mockito.eq(connection));
+  Assert.assertFalse(client.requestSchedulerService(Mockito.any(Command.class),Mockito.any(byte[].class)));
+  Mockito.verify(connection,Mockito.times(2)).disconnect();
+  Scheduler.SchedulerResponse oKResponse=Scheduler.SchedulerResponse.newBuilder().setStatus(NetworkUtils.getHeronStatus(true)).build();
+  PowerMockito.doReturn(oKResponse.toByteArray()).when(HttpUtils.class,"readHttpResponse",Mockito.eq(connection));
+  Assert.assertTrue(client.requestSchedulerService(Mockito.any(Command.class),Mockito.any(byte[].class)));
+  Mockito.verify(connection,Mockito.times(3)).disconnect();
+}
