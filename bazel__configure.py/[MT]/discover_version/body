@@ -24,6 +24,11 @@ def discover_version(path):
         version = get_trailing_version(mac_line.group(1))
         if version:
             return version
+    centos_line = re.search('^cmake version\\s+(\\d.\\d)-patch\\s+(\\d)', first_line)
+    if centos_line:
+        version = '.'.join([centos_line.group(1), centos_line.group(2)])
+        if version:
+            return version
     anaconda_line = re.search('.*\\s+Anaconda\\s+.*\\s', first_line)
     if anaconda_line:
         version = anaconda_line.group(0).split(' ')[1]
