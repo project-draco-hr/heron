@@ -1,0 +1,24 @@
+{
+  CommandLineParser parser=new DefaultParser();
+  Options options=new Options();
+  options.addOption(Option.builder("f").required(true).hasArg().longOpt("extra_action_file").desc("bazel extra action protobuf file").build());
+  options.addOption(Option.builder("c").required(true).hasArg().longOpt("checkstyle_config_file").desc("checkstyle config file").build());
+  try {
+    CommandLine line=parser.parse(options,args);
+    String extraActionFile=line.getOptionValue("f");
+    String configFile=line.getOptionValue("c");
+    String[] sourceFiles=getSourceFiles(extraActionFile);
+    if (sourceFiles.length == 0) {
+      LOG.info("No java class files found by checkstyle");
+      return;
+    }
+    String[] checkstyleArgs=(String[])ArrayUtils.addAll(new String[]{"-c",configFile},sourceFiles);
+    LOG.fine("checkstyle args: " + Joiner.on(" ").join(checkstyleArgs));
+    com.puppycrawl.tools.checkstyle.Main.main(checkstyleArgs);
+  }
+ catch (  ParseException exp) {
+    LOG.severe(String.format("Invalid input to %s: %s",CLASSNAME,exp.getMessage()));
+    HelpFormatter formatter=new HelpFormatter();
+    formatter.printHelp("java " + CLASSNAME,options);
+  }
+}
