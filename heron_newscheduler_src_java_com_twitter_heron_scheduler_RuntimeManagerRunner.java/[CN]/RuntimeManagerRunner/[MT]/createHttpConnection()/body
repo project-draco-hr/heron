@@ -1,12 +1,12 @@
 {
   SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
-  LOG.log(Level.INFO,"Fetching scheduler location from state manager to {0} topology",command);
+  LOG.log(Level.FINE,"Fetching scheduler location from state manager to {0} topology",command);
   Scheduler.SchedulerLocation schedulerLocation=statemgr.getSchedulerLocation(Runtime.topologyName(runtime));
   if (schedulerLocation == null) {
     LOG.log(Level.INFO,"Failed to get scheduler location to {0} topology",command);
     return null;
   }
-  LOG.info("Scheduler is listening on location: " + schedulerLocation.toString());
+  LOG.log(Level.FINE,"Scheduler is listening on location {0}",schedulerLocation.toString());
   String endpoint=getCommandEndpoint(schedulerLocation.getHttpEndpoint(),command);
   HttpURLConnection connection;
   try {

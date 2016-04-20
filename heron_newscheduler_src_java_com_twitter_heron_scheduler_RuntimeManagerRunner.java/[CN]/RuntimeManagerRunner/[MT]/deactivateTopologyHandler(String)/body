@@ -23,7 +23,7 @@
       return false;
     }
     Common.StatusCode statusCode;
-    LOG.info("Receiving deactivate response from scheduler...");
+    LOG.fine("Receiving deactivate response from scheduler...");
     statusCode=Scheduler.DeactivateTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
     if (!statusCode.equals(Common.StatusCode.OK)) {
       LOG.severe("Received not OK response from scheduler for deactivate");

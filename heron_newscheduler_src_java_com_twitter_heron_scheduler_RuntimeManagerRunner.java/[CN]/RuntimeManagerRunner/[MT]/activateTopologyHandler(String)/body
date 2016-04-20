@@ -24,7 +24,7 @@
     }
     Common.StatusCode statusCode;
     try {
-      LOG.info("Receiving activate response from scheduler...");
+      LOG.fine("Receiving activate response from scheduler...");
       statusCode=Scheduler.ActivateTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
     }
  catch (    Exception e) {

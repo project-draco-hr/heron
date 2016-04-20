@@ -1,5 +1,5 @@
 {
-  LOG.info("Cleaning up Heron State");
+  LOG.fine("Cleaning up Heron State");
   SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
   Boolean result;
   result=statemgr.deleteTopology(topologyName);
@@ -24,6 +24,6 @@
   if (result == null || !result) {
     LOG.severe("Failed to clear scheduler location. Check whether Scheduler set it correctly.");
   }
-  LOG.info("Cleaned up Heron State");
+  LOG.fine("Cleaned up Heron State");
   return true;
 }

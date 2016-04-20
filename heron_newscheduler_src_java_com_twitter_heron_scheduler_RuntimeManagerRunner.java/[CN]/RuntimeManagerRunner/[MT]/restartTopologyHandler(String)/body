@@ -16,7 +16,7 @@
     }
     Common.StatusCode statusCode;
     try {
-      LOG.info("Receiving restart response from scheduler...");
+      LOG.fine("Receiving restart response from scheduler...");
       statusCode=Scheduler.RestartTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
     }
  catch (    Exception e) {

@@ -16,7 +16,7 @@
       }
       Common.StatusCode statusCode;
       try {
-        LOG.info("Receiving kill response from scheduler...");
+        LOG.fine("Receiving kill response from scheduler...");
         statusCode=Scheduler.KillTopologyResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
       }
  catch (      Exception e) {
