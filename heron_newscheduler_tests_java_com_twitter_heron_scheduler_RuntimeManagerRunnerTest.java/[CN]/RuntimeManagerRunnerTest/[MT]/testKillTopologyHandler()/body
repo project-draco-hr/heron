@@ -1,0 +1,16 @@
+{
+  Scheduler.KillTopologyRequest killTopologyRequest=Scheduler.KillTopologyRequest.newBuilder().setTopologyName(topologyName).build();
+  ISchedulerClient client=Mockito.mock(ISchedulerClient.class);
+  RuntimeManagerRunner runner=new RuntimeManagerRunner(config,runtime,Command.KILL,client);
+  Mockito.when(client.killTopology(killTopologyRequest)).thenReturn(false);
+  Assert.assertFalse(runner.killTopologyHandler(topologyName));
+  Mockito.verify(client).killTopology(killTopologyRequest);
+  Mockito.when(client.killTopology(killTopologyRequest)).thenReturn(true);
+  PowerMockito.spy(SchedulerUtils.class);
+  PowerMockito.doReturn(false).when(SchedulerUtils.class,"cleanState",Mockito.eq(topologyName),Mockito.any(SchedulerStateManagerAdaptor.class));
+  Assert.assertFalse(runner.killTopologyHandler(topologyName));
+  Mockito.verify(client,Mockito.times(2)).killTopology(killTopologyRequest);
+  PowerMockito.doReturn(true).when(SchedulerUtils.class,"cleanState",Mockito.eq(topologyName),Mockito.any(SchedulerStateManagerAdaptor.class));
+  Assert.assertTrue(runner.killTopologyHandler(topologyName));
+  Mockito.verify(client,Mockito.times(3)).killTopology(killTopologyRequest);
+}

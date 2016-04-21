@@ -1,0 +1,3 @@
+{
+  Mockito.when(config.getStringValue(ConfigKeys.get("TOPOLOGY_NAME"))).thenReturn(topologyName);
+}

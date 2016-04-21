@@ -1,9 +1,11 @@
 {
+  LOG.fine("Creating scheduler client");
   ISchedulerClient schedulerClient;
   if (Context.schedulerService(config)) {
-    Scheduler.SchedulerLocation schedulerLocation=getSchedulerLocation();
+    SchedulerStateManagerAdaptor statemgr=com.twitter.heron.spi.utils.Runtime.schedulerStateManagerAdaptor(runtime);
+    Scheduler.SchedulerLocation schedulerLocation=statemgr.getSchedulerLocation(Runtime.topologyName(runtime));
     if (schedulerLocation == null) {
-      LOG.log(Level.SEVERE,"Failed to get scheduler location to {0} topology",command);
+      LOG.log(Level.SEVERE,"Failed to get scheduler location");
       return null;
     }
     LOG.log(Level.FINE,"Scheduler is listening on location: {0} ",schedulerLocation.toString());
@@ -12,6 +14,7 @@
  else {
     final String schedulerClass=Context.schedulerClass(config);
     final IScheduler scheduler=(IScheduler)Class.forName(schedulerClass).newInstance();
+    LOG.fine("Invoke scheduler as a library");
     schedulerClient=new LibrarySchedulerClient(config,runtime,scheduler);
   }
   return schedulerClient;

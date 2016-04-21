@@ -1,0 +1,11 @@
+{
+  ISchedulerClient client=Mockito.mock(ISchedulerClient.class);
+  RuntimeManagerRunner restartRunner=Mockito.spy(new RuntimeManagerRunner(config,runtime,Command.RESTART,client));
+  Mockito.doReturn(true).when(restartRunner).restartTopologyHandler(topologyName);
+  Assert.assertTrue(restartRunner.call());
+  Mockito.verify(restartRunner).restartTopologyHandler(topologyName);
+  RuntimeManagerRunner killRunner=Mockito.spy(new RuntimeManagerRunner(config,runtime,Command.KILL,client));
+  Mockito.doReturn(true).when(killRunner).killTopologyHandler(topologyName);
+  Assert.assertTrue(killRunner.call());
+  Mockito.verify(killRunner).killTopologyHandler(topologyName);
+}

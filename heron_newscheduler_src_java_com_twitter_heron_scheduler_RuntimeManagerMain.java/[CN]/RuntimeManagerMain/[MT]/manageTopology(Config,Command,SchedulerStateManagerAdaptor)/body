@@ -1,6 +1,10 @@
 {
   Config runtime=Config.newBuilder().put(Keys.topologyName(),Context.topologyName(config)).put(Keys.schedulerStateManagerAdaptor(),adaptor).build();
-  RuntimeManagerRunner runtimeManagerRunner=new RuntimeManagerRunner(config,runtime,command);
+  ISchedulerClient schedulerClient=getSchedulerClient(config,runtime);
+  if (schedulerClient == null) {
+    throw new IllegalArgumentException("Failed to initialize scheduler client");
+  }
+  RuntimeManagerRunner runtimeManagerRunner=new RuntimeManagerRunner(config,runtime,command,schedulerClient);
   boolean ret=runtimeManagerRunner.call();
   return ret;
 }

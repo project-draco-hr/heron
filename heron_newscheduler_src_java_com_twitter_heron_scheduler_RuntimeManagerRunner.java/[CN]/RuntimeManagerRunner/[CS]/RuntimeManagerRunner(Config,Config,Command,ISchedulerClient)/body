@@ -1,0 +1,6 @@
+{
+  this.config=config;
+  this.runtime=runtime;
+  this.command=command;
+  this.schedulerClient=schedulerClient;
+}

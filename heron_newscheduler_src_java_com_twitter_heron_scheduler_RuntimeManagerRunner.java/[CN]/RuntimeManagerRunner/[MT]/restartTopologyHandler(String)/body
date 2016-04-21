@@ -1,6 +1,14 @@
 {
   Integer containerId=Context.topologyContainerId(config);
   Scheduler.RestartTopologyRequest restartTopologyRequest=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(topologyName).setContainerIndex(containerId).build();
+  if (containerId == -1 || containerId == 0) {
+    SchedulerStateManagerAdaptor stateManager=Runtime.schedulerStateManagerAdaptor(runtime);
+    Boolean result=stateManager.deleteTMasterLocation(topologyName);
+    if (result == null || !result) {
+      LOG.severe("Failed to clear TMaster location. Check whether TMaster set it correctly.");
+      return false;
+    }
+  }
   if (!schedulerClient.restartTopology(restartTopologyRequest)) {
     LOG.log(Level.SEVERE,"Failed to restart with Scheduler: ");
     return false;

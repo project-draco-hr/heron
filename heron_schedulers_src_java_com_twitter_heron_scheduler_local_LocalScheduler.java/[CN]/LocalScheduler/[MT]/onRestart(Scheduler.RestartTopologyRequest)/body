@@ -16,13 +16,5 @@
       }
     }
   }
-  SchedulerStateManagerAdaptor stateManager=Runtime.schedulerStateManagerAdaptor(runtime);
-  if (containerId == -1 || containerId == 0) {
-    Boolean result=stateManager.deleteTMasterLocation(LocalContext.topologyName(config));
-    if (result == null || !result) {
-      LOG.severe("Failed to clear TMaster location. Check whether TMaster set it correctly.");
-      return false;
-    }
-  }
   return true;
 }
