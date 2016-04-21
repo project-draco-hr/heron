@@ -2,7 +2,7 @@ def runTest(topologyName, classPath, expectedResultFilePath, params):
     httpServerUrl = (((('http://' + params.resultsServerHostname) + ':') + params.resultsServerPort) + '/results')
     try:
         args = ((httpServerUrl + ' ') + topologyName)
-        submitTopology(params.heronCliPath, params.dataCenter, params.role, params.env, params.testsJarPath, classPath, params.releasePackageUri, args)
+        submitTopology(params.heronCliPath, params.cluster, params.role, params.env, params.testsJarPath, classPath, params.releasePackageUri, args)
     except Exception as e:
         logging.error(('Failed to submit %s topology: %s' % (topologyName, str(e))))
         return 'fail'
@@ -14,7 +14,7 @@ def runTest(topologyName, classPath, expectedResultFilePath, params):
             logging.error(('Fetching result failed for %s topology: %s' % (topologyName, str(e))))
             return 'fail'
     finally:
-        killTopology(params.heronCliPath, params.dataCenter, params.role, params.env, topologyName)
+        killTopology(params.heronCliPath, params.cluster, params.role, params.env, topologyName)
     try:
         if (not os.path.exists(expectedResultFilePath)):
             raise RuntimeError((' %s does not exist' % expectedResultFilePath))
