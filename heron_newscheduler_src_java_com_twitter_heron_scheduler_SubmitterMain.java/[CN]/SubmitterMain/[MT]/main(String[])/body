@@ -52,7 +52,7 @@
     SchedulerStateManagerAdaptor adaptor=new SchedulerStateManagerAdaptor(statemgr,5000);
     boolean isValid=validateSubmit(adaptor,topologyName);
     if (isValid) {
-      LOG.log(Level.INFO,"Topology {0} to be submitted",topologyName);
+      LOG.log(Level.FINE,"Topology {0} to be submitted",topologyName);
       packageURI=uploadPackage(config,uploader);
       if (packageURI == null) {
         LOG.severe("Failed to upload package.");
@@ -78,7 +78,7 @@
     System.exit(1);
   }
  else {
-    LOG.log(Level.INFO,"Topology {0} submitted successfully",topologyName);
+    LOG.log(Level.FINE,"Topology {0} submitted successfully",topologyName);
     System.exit(0);
   }
 }

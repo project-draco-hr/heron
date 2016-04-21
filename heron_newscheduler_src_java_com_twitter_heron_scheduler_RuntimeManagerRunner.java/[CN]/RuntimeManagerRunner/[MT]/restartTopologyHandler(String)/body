@@ -13,6 +13,6 @@
     LOG.log(Level.SEVERE,"Failed to restart with Scheduler: ");
     return false;
   }
-  LOG.info("Scheduler restarted topology successfully.");
+  LOG.fine("Scheduler restarted topology successfully.");
   return true;
 }

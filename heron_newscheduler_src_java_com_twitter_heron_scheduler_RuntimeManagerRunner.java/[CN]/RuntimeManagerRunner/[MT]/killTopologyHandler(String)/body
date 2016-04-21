@@ -8,6 +8,6 @@
     LOG.severe("Failed to clean state");
     return false;
   }
-  LOG.info("Scheduler killed topology successfully.");
+  LOG.fine("Scheduler killed topology successfully.");
   return true;
 }
