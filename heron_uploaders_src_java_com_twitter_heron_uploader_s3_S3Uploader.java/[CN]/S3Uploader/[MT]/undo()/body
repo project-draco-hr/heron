@@ -3,7 +3,7 @@
     try {
       s3Client.copyObject(bucket,previousVersionFilePath,bucket,remoteFilePath);
     }
- catch (    Exception e) {
+ catch (    AmazonClientException e) {
       LOG.log(Level.SEVERE,"Error undoing deploying",e);
       return false;
     }

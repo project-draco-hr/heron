@@ -5,7 +5,7 @@
   try {
     s3Client.putObject(bucket,remoteFilePath,packageFileHandler);
   }
- catch (  Exception e) {
+ catch (  AmazonClientException e) {
     LOG.log(Level.SEVERE,"Error writing topology package to " + bucket + " "+ remoteFilePath,e);
     return null;
   }
