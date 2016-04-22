@@ -1,5 +1,5 @@
 {
-  this.config=config;
+  this.config=ipconfig;
   this.destTopologyDirectory=LocalFileSystemContext.fileSystemDirectory(config);
   String fileName=new File(LocalFileSystemContext.topologyPackageFile(config)).getName();
   this.destTopologyFile=Paths.get(destTopologyDirectory,fileName).toString();

@@ -1,4 +1,4 @@
 {
   String command=String.format("hadoop --config %s fs -mkdir -p %s",configDir,dir);
-  return (0 == ShellUtils.runProcess(isVerbose,command,null,null));
+  return 0 == ShellUtils.runProcess(isVerbose,command,null,null);
 }

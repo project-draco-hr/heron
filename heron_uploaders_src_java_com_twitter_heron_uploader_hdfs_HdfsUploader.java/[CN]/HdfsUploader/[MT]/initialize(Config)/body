@@ -1,5 +1,5 @@
 {
-  this.config=config;
+  this.config=ipconfig;
   this.hadoopConfdir=HdfsContext.hadoopConfigDirectory(config);
   this.destTopologyDirectoryURI=HdfsContext.hdfsTopologiesDirectoryURI(config);
   this.topologyPackageLocation=Context.topologyPackageFile(config);
