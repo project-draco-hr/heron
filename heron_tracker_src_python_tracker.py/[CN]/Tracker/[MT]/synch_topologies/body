@@ -1,6 +1,6 @@
-def synch_topologies(self, stateconf):
-    '\n    Syncs the topologies with the zookeeper.\n    '
-    self.state_managers = statemanagerfactory.get_all_state_managers(stateconf)
+def synch_topologies(self):
+    '\n    Sync the topologies with the statemgrs.\n    '
+    self.state_managers = statemanagerfactory.get_all_state_managers(self.config.statemgr_config)
 
     def on_topologies_watch(state_manager, topologies):
         LOG.info('State watch triggered for topologies.')

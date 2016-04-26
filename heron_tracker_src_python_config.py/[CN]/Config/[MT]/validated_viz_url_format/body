@@ -1,0 +1,4 @@
+def validated_viz_url_format(self, viz_url_format):
+    valid_parameters = {'cluster': 'dummy', 'environ': 'dummy', 'jobname': 'dummy', 'role': 'dummy', 'submission_user': 'dummy', }
+    dummy_formatted_viz_url = viz_url_format.format(**valid_parameters)
+    return viz_url_format

@@ -1,7 +1,7 @@
 def get_all_zk_state_managers(conf):
     '\n  Connects to all the zookeeper state_managers and returns\n  the connected state_managers instances.\n  '
     state_managers = []
-    state_locations = Config(conf).get_state_locations_of_type('zookeeper')
+    state_locations = conf.get_state_locations_of_type('zookeeper')
     for location in state_locations:
         name = location['name']
         host = location['host']

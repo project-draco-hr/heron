@@ -1,0 +1,5 @@
+def __init__(self, conf_file):
+    self.configs = None
+    self.statemgr_config = StateMgrConfig()
+    self.viz_url_format = None
+    self.parse_config_file(conf_file)

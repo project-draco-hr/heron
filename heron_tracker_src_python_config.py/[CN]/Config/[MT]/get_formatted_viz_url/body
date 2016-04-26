@@ -1,0 +1,3 @@
+def get_formatted_viz_url(self, execution_state):
+    '\n    @param execution_state: The python dict representing JSON execution_state\n    @return Formatted viz url\n    '
+    return self.viz_url_format.format(**execution_state)

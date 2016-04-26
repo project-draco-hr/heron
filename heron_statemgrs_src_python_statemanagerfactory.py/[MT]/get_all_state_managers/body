@@ -1,5 +1,5 @@
 def get_all_state_managers(conf):
-    '\n  Reads the config file for requested state managers.\n  Instantiates them, start and then return them.\n  '
+    '\n  @param conf - An instance of Config class\n  Reads the config for requested state managers.\n  Instantiates them, start and then return them.\n  '
     state_managers = []
     state_managers.extend(get_all_zk_state_managers(conf))
     state_managers.extend(get_all_file_state_managers(conf))

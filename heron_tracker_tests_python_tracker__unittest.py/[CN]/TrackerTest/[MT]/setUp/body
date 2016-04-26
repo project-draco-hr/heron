@@ -1,2 +1,4 @@
 def setUp(self):
-    self.tracker = Tracker()
+    mock_config = Mock()
+    mock_config.validate.return_value = True
+    self.tracker = Tracker(mock_config)

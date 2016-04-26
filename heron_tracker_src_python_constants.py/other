@@ -22,4 +22,4 @@ RESPONSE_STATUS_FAILURE = 'failure'
 RESPONSE_STATUS_SUCCESS = 'success'
 HTTP_TIMEOUT = 5
 DEFAULT_PORT = 8888
-DEFAULT_CONFIG_FILE = 'localfilestateconf.yaml'
+DEFAULT_CONFIG_FILE = 'heron_tracker.yaml'

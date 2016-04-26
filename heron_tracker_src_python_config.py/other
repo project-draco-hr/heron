@@ -1,0 +1,5 @@
+import os
+import yaml
+from heron.statemgrs.src.python.config import Config as StateMgrConfig
+STATEMGRS_KEY = 'statemgrs'
+VIZ_URL_FORMAT_KEY = 'viz.url.format'

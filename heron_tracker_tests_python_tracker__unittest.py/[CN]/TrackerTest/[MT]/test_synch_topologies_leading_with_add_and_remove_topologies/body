@@ -20,7 +20,7 @@ def test_synch_topologies_leading_with_add_and_remove_topologies(self, mock_get_
         watches['2'] = on_topologies_watch
         on_topologies_watch(['top_name3', 'top_name4'])
     mock_state_manager_2.get_topologies = side_effect2
-    self.tracker.synch_topologies('test_conf')
+    self.tracker.synch_topologies()
     mock_get_topologies_for_state_location.assert_has_calls([call('mock_name2'), call('mock_name1')], any_order=True)
     mock_add_new_topology.assert_has_calls([call(mock_state_manager_1, 'top_name1'), call(mock_state_manager_1, 'top_name2'), call(mock_state_manager_2, 'top_name3'), call(mock_state_manager_2, 'top_name4')], any_order=True)
     self.assertEqual(4, mock_add_new_topology.call_count)
