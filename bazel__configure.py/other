@@ -1,6 +1,6 @@
 import os, sys
 import re, subprocess, shutil
-sys.path.append('3rdparty/semver')
+sys.path.append('3rdparty/python/semver')
 import semver
 ARCH_AND_SYS = {('x86_64', 'Darwin'): ('IS_I386_MACOSX', 'IS_MACOSX'), ('x86_64', 'Linux'): ('IS_I386_LINUX', 'IS_LINUX'), }
 if (__name__ == '__main__'):
