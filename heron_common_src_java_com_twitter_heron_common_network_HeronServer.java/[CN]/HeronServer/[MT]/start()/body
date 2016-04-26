@@ -6,7 +6,7 @@
     nioLooper.registerAccept(acceptChannel,this);
     return true;
   }
- catch (  Exception e) {
+ catch (  IOException e) {
     LOG.log(Level.SEVERE,"Failed to start server",e);
     return false;
   }
