@@ -1,6 +1,6 @@
 {
-  this.capacity=capacity;
-  this.expectedQueueSize=expectedQueueSize;
-  this.currentSampleWeight=currentSampleWeight;
+  this.capacity=ipcapacity;
+  this.expectedQueueSize=ipexpectedQueueSize;
+  this.currentSampleWeight=ipcurrentSampleWeight;
   this.expectedAvailableCapacity=capacity / 2;
 }

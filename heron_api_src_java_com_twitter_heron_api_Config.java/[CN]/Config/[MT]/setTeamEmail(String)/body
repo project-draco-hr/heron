@@ -1,3 +1,3 @@
 {
-  setTeamEmail(this,team_email);
+  setTeamEmail(this,teamEmail);
 }

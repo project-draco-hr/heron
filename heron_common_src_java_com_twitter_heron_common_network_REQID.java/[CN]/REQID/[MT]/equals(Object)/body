@@ -1,7 +1,13 @@
 {
-  if (other == null)   return false;
-  if (other == this)   return true;
-  if (!(other instanceof REQID))   return false;
-  REQID rother=(REQID)(other);
+  if (other == null) {
+    return false;
+  }
+  if (other == this) {
+    return true;
+  }
+  if (!(other instanceof REQID)) {
+    return false;
+  }
+  REQID rother=(REQID)other;
   return Arrays.equals(this.bytes,rother.value());
 }

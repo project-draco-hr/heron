@@ -1,4 +1,4 @@
 {
-  this.state=state;
+  this.state=topologyState;
   return this;
 }

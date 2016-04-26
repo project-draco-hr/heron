@@ -1,4 +1,4 @@
 {
-  this.heronConfig=heronConfig;
+  this.heronConfig=hConfig;
   return this;
 }

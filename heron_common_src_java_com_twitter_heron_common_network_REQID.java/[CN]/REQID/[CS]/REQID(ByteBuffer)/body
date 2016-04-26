@@ -1,4 +1,4 @@
 {
-  bytes=new byte[REQID.REQIDSize];
+  bytes=new byte[REQID.REQID_SIZE];
   buffer.get(bytes);
 }
