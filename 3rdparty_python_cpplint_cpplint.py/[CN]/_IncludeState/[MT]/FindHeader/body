@@ -1,0 +1,7 @@
+def FindHeader(self, header):
+    'Check if a header has already been included.\n\n    Args:\n      header: header to check.\n    Returns:\n      Line number of previous occurrence, or -1 if the header has not\n      been seen before.\n    '
+    for section_list in self.include_list:
+        for f in section_list:
+            if (f[0] == header):
+                return f[1]
+    return (-1)

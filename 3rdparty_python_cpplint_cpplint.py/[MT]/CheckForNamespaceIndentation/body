@@ -1,0 +1,4 @@
+def CheckForNamespaceIndentation(filename, nesting_state, clean_lines, line, error):
+    is_namespace_indent_item = ((len(nesting_state.stack) > 1) and nesting_state.stack[(-1)].check_namespace_indentation and isinstance(nesting_state.previous_stack_top, _NamespaceInfo) and (nesting_state.previous_stack_top == nesting_state.stack[(-2)]))
+    if ShouldCheckNamespaceIndentation(nesting_state, is_namespace_indent_item, clean_lines.elided, line):
+        CheckItemIndentationInNamespace(filename, clean_lines.elided, line, error)

@@ -1,0 +1,74 @@
+'Does google-lint on c++ files.\n\nThe goal of this script is to identify places in the code that *may*\nbe in non-compliance with google style.  It does not attempt to fix\nup these problems -- the point is to educate.  It does also not\nattempt to find all problems, or to ensure that everything it does\nfind is legitimately a problem.\n\nIn particular, we can get very confused by /* and // inside strings!\nWe do a small hack, which is to ignore //\'s with "\'s after them on the\nsame line, but it is far from perfect (in either direction).\n'
+import codecs
+import copy
+import getopt
+import math
+import os
+import re
+import sre_compile
+import string
+import sys
+import unicodedata
+_USAGE = '\nSyntax: cpplint.py [--verbose=#] [--output=vs7] [--filter=-x,+y,...]\n                   [--counting=total|toplevel|detailed] [--root=subdir]\n                   [--linelength=digits]\n        <file> [file] ...\n\n  The style guidelines this tries to follow are those in\n    http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml\n\n  Every problem is given a confidence score from 1-5, with 5 meaning we are\n  certain of the problem, and 1 meaning it could be a legitimate construct.\n  This will miss some errors, and is not a substitute for a code review.\n\n  To suppress false-positive errors of a certain category, add a\n  \'NOLINT(category)\' comment to the line.  NOLINT or NOLINT(*)\n  suppresses errors of all categories on that line.\n\n  The files passed in will be linted; at least one file must be provided.\n  Default linted extensions are .cc, .cpp, .cu, .cuh and .h.  Change the\n  extensions with the --extensions flag.\n\n  Flags:\n\n    output=vs7\n      By default, the output is formatted to ease emacs parsing.  Visual Studio\n      compatible output (vs7) may also be used.  Other formats are unsupported.\n\n    verbose=#\n      Specify a number 0-5 to restrict errors to certain verbosity levels.\n\n    filter=-x,+y,...\n      Specify a comma-separated list of category-filters to apply: only\n      error messages whose category names pass the filters will be printed.\n      (Category names are printed with the message and look like\n      "[whitespace/indent]".)  Filters are evaluated left to right.\n      "-FOO" and "FOO" means "do not print categories that start with FOO".\n      "+FOO" means "do print categories that start with FOO".\n\n      Examples: --filter=-whitespace,+whitespace/braces\n                --filter=whitespace,runtime/printf,+runtime/printf_format\n                --filter=-,+build/include_what_you_use\n\n      To see a list of all the categories used in cpplint, pass no arg:\n         --filter=\n\n    counting=total|toplevel|detailed\n      The total number of errors found is always printed. If\n      \'toplevel\' is provided, then the count of errors in each of\n      the top-level categories like \'build\' and \'whitespace\' will\n      also be printed. If \'detailed\' is provided, then a count\n      is provided for each category like \'build/class\'.\n\n    root=subdir\n      The root directory used for deriving header guard CPP variable.\n      By default, the header guard CPP variable is calculated as the relative\n      path to the directory that contains .git, .hg, or .svn.  When this flag\n      is specified, the relative path is calculated from the specified\n      directory. If the specified directory does not exist, this flag is\n      ignored.\n\n      Examples:\n        Assuming that src/.git exists, the header guard CPP variables for\n        src/chrome/browser/ui/browser.h are:\n\n        No flag => CHROME_BROWSER_UI_BROWSER_H_\n        --root=chrome => BROWSER_UI_BROWSER_H_\n        --root=chrome/browser => UI_BROWSER_H_\n\n    linelength=digits\n      This is the allowed line length for the project. The default value is\n      80 characters.\n\n      Examples:\n        --linelength=120\n\n    extensions=extension,extension,...\n      The allowed file extensions that cpplint will check\n\n      Examples:\n        --extensions=hpp,cpp\n\n    cpplint.py supports per-directory configurations specified in CPPLINT.cfg\n    files. CPPLINT.cfg file can contain a number of key=value pairs.\n    Currently the following options are supported:\n\n      set noparent\n      filter=+filter1,-filter2,...\n      exclude_files=regex\n      linelength=80\n\n    "set noparent" option prevents cpplint from traversing directory tree\n    upwards looking for more .cfg files in parent directories. This option\n    is usually placed in the top-level project directory.\n\n    The "filter" option is similar in function to --filter flag. It specifies\n    message filters in addition to the |_DEFAULT_FILTERS| and those specified\n    through --filter command-line flag.\n\n    "exclude_files" allows to specify a regular expression to be matched against\n    a file name. If the expression matches, the file is skipped and not run\n    through liner.\n\n    "linelength" allows to specify the allowed line length for the project.\n\n    CPPLINT.cfg has an effect on files in the same directory and all\n    sub-directories, unless overridden by a nested configuration file.\n\n      Example file:\n        filter=-build/include_order,+build/include_alpha\n        exclude_files=.*\\.cc\n\n    The above example disables build/include_order warning and enables\n    build/include_alpha as well as excludes all .cc from being\n    processed by linter, in the current directory (where the .cfg\n    file is located) and all sub-directories.\n'
+_ERROR_CATEGORIES = ['build/class', 'build/c++11', 'build/deprecated', 'build/endif_comment', 'build/explicit_make_pair', 'build/forward_decl', 'build/header_guard', 'build/include', 'build/include_alpha', 'build/include_order', 'build/include_what_you_use', 'build/namespaces', 'build/printf_format', 'build/storage_class', 'legal/copyright', 'readability/alt_tokens', 'readability/braces', 'readability/casting', 'readability/check', 'readability/constructors', 'readability/fn_size', 'readability/function', 'readability/inheritance', 'readability/multiline_comment', 'readability/multiline_string', 'readability/namespace', 'readability/nolint', 'readability/nul', 'readability/strings', 'readability/todo', 'readability/utf8', 'runtime/arrays', 'runtime/casting', 'runtime/explicit', 'runtime/int', 'runtime/init', 'runtime/invalid_increment', 'runtime/member_string_references', 'runtime/memset', 'runtime/indentation_namespace', 'runtime/operator', 'runtime/printf', 'runtime/printf_format', 'runtime/references', 'runtime/string', 'runtime/threadsafe_fn', 'runtime/vlog', 'whitespace/blank_line', 'whitespace/braces', 'whitespace/comma', 'whitespace/comments', 'whitespace/empty_conditional_body', 'whitespace/empty_loop_body', 'whitespace/end_of_line', 'whitespace/ending_newline', 'whitespace/forcolon', 'whitespace/indent', 'whitespace/line_length', 'whitespace/newline', 'whitespace/operators', 'whitespace/parens', 'whitespace/semicolon', 'whitespace/tab', 'whitespace/todo']
+_LEGACY_ERROR_CATEGORIES = ['readability/streams']
+_DEFAULT_FILTERS = ['-build/include_alpha']
+_CPP_HEADERS = frozenset(['algobase.h', 'algo.h', 'alloc.h', 'builtinbuf.h', 'bvector.h', 'complex.h', 'defalloc.h', 'deque.h', 'editbuf.h', 'fstream.h', 'function.h', 'hash_map', 'hash_map.h', 'hash_set', 'hash_set.h', 'hashtable.h', 'heap.h', 'indstream.h', 'iomanip.h', 'iostream.h', 'istream.h', 'iterator.h', 'list.h', 'map.h', 'multimap.h', 'multiset.h', 'ostream.h', 'pair.h', 'parsestream.h', 'pfstream.h', 'procbuf.h', 'pthread_alloc', 'pthread_alloc.h', 'rope', 'rope.h', 'ropeimpl.h', 'set.h', 'slist', 'slist.h', 'stack.h', 'stdiostream.h', 'stl_alloc.h', 'stl_relops.h', 'streambuf.h', 'stream.h', 'strfile.h', 'strstream.h', 'tempbuf.h', 'tree.h', 'type_traits.h', 'vector.h', 'algorithm', 'array', 'atomic', 'bitset', 'chrono', 'codecvt', 'complex', 'condition_variable', 'deque', 'exception', 'forward_list', 'fstream', 'functional', 'future', 'initializer_list', 'iomanip', 'ios', 'iosfwd', 'iostream', 'istream', 'iterator', 'limits', 'list', 'locale', 'map', 'memory', 'mutex', 'new', 'numeric', 'ostream', 'queue', 'random', 'ratio', 'regex', 'set', 'sstream', 'stack', 'stdexcept', 'streambuf', 'string', 'strstream', 'system_error', 'thread', 'tuple', 'typeindex', 'typeinfo', 'type_traits', 'unordered_map', 'unordered_set', 'utility', 'valarray', 'vector', 'cassert', 'ccomplex', 'cctype', 'cerrno', 'cfenv', 'cfloat', 'cinttypes', 'ciso646', 'climits', 'clocale', 'cmath', 'csetjmp', 'csignal', 'cstdalign', 'cstdarg', 'cstdbool', 'cstddef', 'cstdint', 'cstdio', 'cstdlib', 'cstring', 'ctgmath', 'ctime', 'cuchar', 'cwchar', 'cwctype'])
+_THIRD_PARTY_HEADERS_PATTERN = re.compile('^(?:[^/]*[A-Z][^/]*\\.h|lua\\.h|lauxlib\\.h|lualib\\.h)$')
+_CHECK_MACROS = ['DCHECK', 'CHECK', 'EXPECT_TRUE_M', 'EXPECT_TRUE', 'ASSERT_TRUE_M', 'ASSERT_TRUE', 'EXPECT_FALSE_M', 'EXPECT_FALSE', 'ASSERT_FALSE_M', 'ASSERT_FALSE']
+_CHECK_REPLACEMENT = dict([(m, {}) for m in _CHECK_MACROS])
+for (op, replacement) in [('==', 'EQ'), ('!=', 'NE'), ('>=', 'GE'), ('>', 'GT'), ('<=', 'LE'), ('<', 'LT')]:
+    _CHECK_REPLACEMENT['DCHECK'][op] = ('DCHECK_%s' % replacement)
+    _CHECK_REPLACEMENT['CHECK'][op] = ('CHECK_%s' % replacement)
+    _CHECK_REPLACEMENT['EXPECT_TRUE'][op] = ('EXPECT_%s' % replacement)
+    _CHECK_REPLACEMENT['ASSERT_TRUE'][op] = ('ASSERT_%s' % replacement)
+    _CHECK_REPLACEMENT['EXPECT_TRUE_M'][op] = ('EXPECT_%s_M' % replacement)
+    _CHECK_REPLACEMENT['ASSERT_TRUE_M'][op] = ('ASSERT_%s_M' % replacement)
+for (op, inv_replacement) in [('==', 'NE'), ('!=', 'EQ'), ('>=', 'LT'), ('>', 'LE'), ('<=', 'GT'), ('<', 'GE')]:
+    _CHECK_REPLACEMENT['EXPECT_FALSE'][op] = ('EXPECT_%s' % inv_replacement)
+    _CHECK_REPLACEMENT['ASSERT_FALSE'][op] = ('ASSERT_%s' % inv_replacement)
+    _CHECK_REPLACEMENT['EXPECT_FALSE_M'][op] = ('EXPECT_%s_M' % inv_replacement)
+    _CHECK_REPLACEMENT['ASSERT_FALSE_M'][op] = ('ASSERT_%s_M' % inv_replacement)
+_ALT_TOKEN_REPLACEMENT = {'and': '&&', 'bitor': '|', 'or': '||', 'xor': '^', 'compl': '~', 'bitand': '&', 'and_eq': '&=', 'or_eq': '|=', 'xor_eq': '^=', 'not': '!', 'not_eq': '!=', }
+_ALT_TOKEN_REPLACEMENT_PATTERN = re.compile((('[ =()](' + '|'.join(_ALT_TOKEN_REPLACEMENT.keys())) + ')(?=[ (]|$)'))
+_C_SYS_HEADER = 1
+_CPP_SYS_HEADER = 2
+_LIKELY_MY_HEADER = 3
+_POSSIBLE_MY_HEADER = 4
+_OTHER_HEADER = 5
+_NO_ASM = 0
+_INSIDE_ASM = 1
+_END_ASM = 2
+_BLOCK_ASM = 3
+_MATCH_ASM = re.compile('^\\s*(?:asm|_asm|__asm|__asm__)(?:\\s+(volatile|__volatile__))?\\s*[{(]')
+_regexp_compile_cache = {}
+_error_suppressions = {}
+_root = None
+_line_length = 80
+_valid_extensions = set(['cc', 'h', 'cpp', 'cu', 'cuh'])
+_cpplint_state = _CppLintState()
+_RE_PATTERN_CLEANSE_LINE_ESCAPES = re.compile('\\\\([abfnrtv?"\\\\\\\']|\\d+|x[0-9a-fA-F]+)')
+_RE_PATTERN_C_COMMENTS = '/\\*(?:[^*]|\\*(?!/))*\\*/'
+_RE_PATTERN_CLEANSE_LINE_C_COMMENTS = re.compile(((((((((('(\\s*' + _RE_PATTERN_C_COMMENTS) + '\\s*$|') + _RE_PATTERN_C_COMMENTS) + '\\s+|') + '\\s+') + _RE_PATTERN_C_COMMENTS) + '(?=\\W)|') + _RE_PATTERN_C_COMMENTS) + ')'))
+_UNSAFE_FUNC_PREFIX = '(?:[-+*/=%^&|(<]\\s*|>\\s+)'
+_THREADING_LIST = (('asctime(', 'asctime_r(', (_UNSAFE_FUNC_PREFIX + 'asctime\\([^)]+\\)')), ('ctime(', 'ctime_r(', (_UNSAFE_FUNC_PREFIX + 'ctime\\([^)]+\\)')), ('getgrgid(', 'getgrgid_r(', (_UNSAFE_FUNC_PREFIX + 'getgrgid\\([^)]+\\)')), ('getgrnam(', 'getgrnam_r(', (_UNSAFE_FUNC_PREFIX + 'getgrnam\\([^)]+\\)')), ('getlogin(', 'getlogin_r(', (_UNSAFE_FUNC_PREFIX + 'getlogin\\(\\)')), ('getpwnam(', 'getpwnam_r(', (_UNSAFE_FUNC_PREFIX + 'getpwnam\\([^)]+\\)')), ('getpwuid(', 'getpwuid_r(', (_UNSAFE_FUNC_PREFIX + 'getpwuid\\([^)]+\\)')), ('gmtime(', 'gmtime_r(', (_UNSAFE_FUNC_PREFIX + 'gmtime\\([^)]+\\)')), ('localtime(', 'localtime_r(', (_UNSAFE_FUNC_PREFIX + 'localtime\\([^)]+\\)')), ('rand(', 'rand_r(', (_UNSAFE_FUNC_PREFIX + 'rand\\(\\)')), ('strtok(', 'strtok_r(', (_UNSAFE_FUNC_PREFIX + 'strtok\\([^)]+\\)')), ('ttyname(', 'ttyname_r(', (_UNSAFE_FUNC_PREFIX + 'ttyname\\([^)]+\\)')))
+_RE_PATTERN_INVALID_INCREMENT = re.compile('^\\s*\\*\\w+(\\+\\+|--);')
+_RE_PATTERN_TODO = re.compile('^//(\\s*)TODO(\\(.+?\\))?:?(\\s|$)?')
+_RE_PATTERN_INCLUDE = re.compile('^\\s*#\\s*include\\s*([<"])([^>"]*)[>"].*$')
+_RE_FIRST_COMPONENT = re.compile('^[^-_.]+')
+_RE_PATTERN_IDENT = '[_a-zA-Z]\\w*'
+_RE_PATTERN_TYPE = '(?:const\\s+)?(?:typename\\s+|class\\s+|struct\\s+|union\\s+|enum\\s+)?(?:\\w|\\s*<(?:<(?:<[^<>]*>|[^<>])*>|[^<>])*>|::)+'
+_RE_PATTERN_REF_PARAM = re.compile((((('(' + _RE_PATTERN_TYPE) + '(?:\\s*(?:\\bconst\\b|[*]))*\\s*&\\s*') + _RE_PATTERN_IDENT) + ')\\s*(?:=[^,()]+)?[,)]'))
+_RE_PATTERN_CONST_REF_PARAM = (((((('(?:.*\\s*\\bconst\\s*&\\s*' + _RE_PATTERN_IDENT) + '|const\\s+') + _RE_PATTERN_TYPE) + '\\s*&\\s*') + _RE_PATTERN_IDENT) + ')')
+_HEADERS_CONTAINING_TEMPLATES = (('<deque>', ('deque',)), ('<functional>', ('unary_function', 'binary_function', 'plus', 'minus', 'multiplies', 'divides', 'modulus', 'negate', 'equal_to', 'not_equal_to', 'greater', 'less', 'greater_equal', 'less_equal', 'logical_and', 'logical_or', 'logical_not', 'unary_negate', 'not1', 'binary_negate', 'not2', 'bind1st', 'bind2nd', 'pointer_to_unary_function', 'pointer_to_binary_function', 'ptr_fun', 'mem_fun_t', 'mem_fun', 'mem_fun1_t', 'mem_fun1_ref_t', 'mem_fun_ref_t', 'const_mem_fun_t', 'const_mem_fun1_t', 'const_mem_fun_ref_t', 'const_mem_fun1_ref_t', 'mem_fun_ref')), ('<limits>', ('numeric_limits',)), ('<list>', ('list',)), ('<map>', ('map', 'multimap')), ('<memory>', ('allocator',)), ('<queue>', ('queue', 'priority_queue')), ('<set>', ('set', 'multiset')), ('<stack>', ('stack',)), ('<string>', ('char_traits', 'basic_string')), ('<tuple>', ('tuple',)), ('<utility>', ('pair',)), ('<vector>', ('vector',)), ('<hash_map>', ('hash_map', 'hash_multimap')), ('<hash_set>', ('hash_set', 'hash_multiset')), ('<slist>', ('slist',)))
+_RE_PATTERN_STRING = re.compile('\\bstring\\b')
+_re_pattern_algorithm_header = []
+for _template in ('copy', 'max', 'min', 'min_element', 'sort', 'swap', 'transform'):
+    _re_pattern_algorithm_header.append((re.compile((('[^>.]\\b' + _template) + '(<.*?>)?\\([^\\)]')), _template, '<algorithm>'))
+_re_pattern_templates = []
+for (_header, _templates) in _HEADERS_CONTAINING_TEMPLATES:
+    for _template in _templates:
+        _re_pattern_templates.append((re.compile((('(\\<|\\b)' + _template) + '\\s*\\<')), (_template + '<>'), _header))
+_RE_PATTERN_EXPLICIT_MAKEPAIR = re.compile('\\bmake_pair\\s*<')
+if (__name__ == '__main__'):
+    main()

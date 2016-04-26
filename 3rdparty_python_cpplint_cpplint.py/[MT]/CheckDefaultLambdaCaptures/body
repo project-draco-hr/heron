@@ -1,0 +1,8 @@
+def CheckDefaultLambdaCaptures(filename, clean_lines, linenum, error):
+    'Check that default lambda captures are not used.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    match = Match('^(.*)\\[\\s*(?:=|&[^\\w])', line)
+    if match:
+        (line, _, pos) = CloseExpression(clean_lines, linenum, len(match.group(1)))
+        if ((pos >= 0) and Match('^\\s*[{(]', line[pos:])):
+            error(filename, linenum, 'build/c++11', 4, 'Default lambda captures are an unapproved C++ feature.')

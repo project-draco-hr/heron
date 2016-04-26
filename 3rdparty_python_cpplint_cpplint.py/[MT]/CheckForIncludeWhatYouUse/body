@@ -1,0 +1,36 @@
+def CheckForIncludeWhatYouUse(filename, clean_lines, include_state, error, io=codecs):
+    'Reports for missing stl includes.\n\n  This function will output warnings to make sure you are including the headers\n  necessary for the stl containers and functions that you use. We only give one\n  reason to include a header. For example, if you use both equal_to<> and\n  less<> in a .h file, only one (the latter in the file) of these will be\n  reported as a reason to include the <functional>.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    include_state: An _IncludeState instance.\n    error: The function to call with any errors found.\n    io: The IO factory to use to read the header file. Provided for unittest\n        injection.\n  '
+    required = {}
+    for linenum in xrange(clean_lines.NumLines()):
+        line = clean_lines.elided[linenum]
+        if ((not line) or (line[0] == '#')):
+            continue
+        matched = _RE_PATTERN_STRING.search(line)
+        if matched:
+            prefix = line[:matched.start()]
+            if (prefix.endswith('std::') or (not prefix.endswith('::'))):
+                required['<string>'] = (linenum, 'string')
+        for (pattern, template, header) in _re_pattern_algorithm_header:
+            if pattern.search(line):
+                required[header] = (linenum, template)
+        if (not ('<' in line)):
+            continue
+        for (pattern, template, header) in _re_pattern_templates:
+            if pattern.search(line):
+                required[header] = (linenum, template)
+    include_dict = dict([item for sublist in include_state.include_list for item in sublist])
+    header_found = False
+    abs_filename = FileInfo(filename).FullName()
+    abs_filename = re.sub('_flymake\\.cc$', '.cc', abs_filename)
+    header_keys = include_dict.keys()
+    for header in header_keys:
+        (same_module, common_path) = FilesBelongToSameModule(abs_filename, header)
+        fullpath = (common_path + header)
+        if (same_module and UpdateIncludeState(fullpath, include_dict, io)):
+            header_found = True
+    if (filename.endswith('.cc') and (not header_found)):
+        return
+    for required_header_unstripped in required:
+        template = required[required_header_unstripped][1]
+        if (required_header_unstripped.strip('<>"') not in include_dict):
+            error(filename, required[required_header_unstripped][0], 'build/include_what_you_use', 4, ((('Add #include ' + required_header_unstripped) + ' for ') + template))

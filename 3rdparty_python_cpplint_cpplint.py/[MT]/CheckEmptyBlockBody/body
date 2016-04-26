@@ -1,0 +1,11 @@
+def CheckEmptyBlockBody(filename, clean_lines, linenum, error):
+    'Look for empty loop/conditional body with only a single semicolon.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    matched = Match('\\s*(for|while|if)\\s*\\(', line)
+    if matched:
+        (end_line, end_linenum, end_pos) = CloseExpression(clean_lines, linenum, line.find('('))
+        if ((end_pos >= 0) and Match(';', end_line[end_pos:])):
+            if (matched.group(1) == 'if'):
+                error(filename, end_linenum, 'whitespace/empty_conditional_body', 5, 'Empty conditional bodies should use {}')
+            else:
+                error(filename, end_linenum, 'whitespace/empty_loop_body', 5, 'Empty loop bodies should use {} or continue')

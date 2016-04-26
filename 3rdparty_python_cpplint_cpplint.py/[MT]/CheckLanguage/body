@@ -1,0 +1,76 @@
+def CheckLanguage(filename, clean_lines, linenum, file_extension, include_state, nesting_state, error):
+    "Checks rules from the 'C++ language rules' section of cppguide.html.\n\n  Some of these rules are hard to test (function overloading, using\n  uint32 inappropriately), but we do the best we can.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    file_extension: The extension (without the dot) of the filename.\n    include_state: An _IncludeState instance in which the headers are inserted.\n    nesting_state: A NestingState instance which maintains information about\n                   the current stack of nested blocks being parsed.\n    error: The function to call with any errors found.\n  "
+    line = clean_lines.elided[linenum]
+    if (not line):
+        return
+    match = _RE_PATTERN_INCLUDE.search(line)
+    if match:
+        CheckIncludeLine(filename, clean_lines, linenum, include_state, error)
+        return
+    match = Match('^\\s*#\\s*(if|ifdef|ifndef|elif|else|endif)\\b', line)
+    if match:
+        include_state.ResetSection(match.group(1))
+    fullname = os.path.abspath(filename).replace('\\', '/')
+    CheckCasts(filename, clean_lines, linenum, error)
+    CheckGlobalStatic(filename, clean_lines, linenum, error)
+    CheckPrintf(filename, clean_lines, linenum, error)
+    if (file_extension == 'h'):
+        pass
+    if Search('\\bshort port\\b', line):
+        if (not Search('\\bunsigned short port\\b', line)):
+            error(filename, linenum, 'runtime/int', 4, 'Use "unsigned short" for ports, not "short"')
+    else:
+        match = Search('\\b(short|long(?! +double)|long long)\\b', line)
+        if match:
+            error(filename, linenum, 'runtime/int', 4, ('Use int16/int64/etc, rather than the C type %s' % match.group(1)))
+    if Search('\\boperator\\s*&\\s*\\(\\s*\\)', line):
+        error(filename, linenum, 'runtime/operator', 4, 'Unary operator& is dangerous.  Do not use it.')
+    if Search('\\}\\s*if\\s*\\(', line):
+        error(filename, linenum, 'readability/braces', 4, 'Did you mean "else if"? If not, start a new line for "if".')
+    printf_args = _GetTextInside(line, '(?i)\\b(string)?printf\\s*\\(')
+    if printf_args:
+        match = Match('([\\w.\\->()]+)$', printf_args)
+        if (match and (match.group(1) != '__VA_ARGS__')):
+            function_name = re.search('\\b((?:string)?printf)\\s*\\(', line, re.I).group(1)
+            error(filename, linenum, 'runtime/printf', 4, ('Potential format string bug. Do %s("%%s", %s) instead.' % (function_name, match.group(1))))
+    match = Search('memset\\s*\\(([^,]*),\\s*([^,]*),\\s*0\\s*\\)', line)
+    if (match and (not Match("^''|-?[0-9]+|0x[0-9A-Fa-f]$", match.group(2)))):
+        error(filename, linenum, 'runtime/memset', 4, ('Did you mean "memset(%s, 0, %s)"?' % (match.group(1), match.group(2))))
+    if Search('\\busing namespace\\b', line):
+        error(filename, linenum, 'build/namespaces', 5, 'Do not use namespace using-directives.  Use using-declarations instead.')
+    match = Match('\\s*(.+::)?(\\w+) [a-z]\\w*\\[(.+)];', line)
+    if (match and (match.group(2) != 'return') and (match.group(2) != 'delete') and (match.group(3).find(']') == (-1))):
+        tokens = re.split('\\s|\\+|\\-|\\*|\\/|<<|>>]', match.group(3))
+        is_const = True
+        skip_next = False
+        for tok in tokens:
+            if skip_next:
+                skip_next = False
+                continue
+            if Search('sizeof\\(.+\\)', tok):
+                continue
+            if Search('arraysize\\(\\w+\\)', tok):
+                continue
+            tok = tok.lstrip('(')
+            tok = tok.rstrip(')')
+            if (not tok):
+                continue
+            if Match('\\d+', tok):
+                continue
+            if Match('0[xX][0-9a-fA-F]+', tok):
+                continue
+            if Match('k[A-Z0-9]\\w*', tok):
+                continue
+            if Match('(.+::)?k[A-Z0-9]\\w*', tok):
+                continue
+            if Match('(.+::)?[A-Z][A-Z0-9_]*', tok):
+                continue
+            if tok.startswith('sizeof'):
+                skip_next = True
+                continue
+            is_const = False
+            break
+        if (not is_const):
+            error(filename, linenum, 'runtime/arrays', 1, "Do not use variable-length arrays.  Use an appropriately named ('k' followed by CamelCase) compile-time constant for the size.")
+    if ((file_extension == 'h') and Search('\\bnamespace\\s*{', line) and (line[(-1)] != '\\')):
+        error(filename, linenum, 'build/namespaces', 4, 'Do not use unnamed namespaces in header files.  See http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml#Namespaces for more information.')

@@ -1,0 +1,51 @@
+def CheckForHeaderGuard(filename, clean_lines, error):
+    'Checks that the file contains a header guard.\n\n  Logs an error if no #ifndef header guard is present.  For other\n  headers, checks that the full pathname is used.\n\n  Args:\n    filename: The name of the C++ header file.\n    clean_lines: A CleansedLines instance containing the file.\n    error: The function to call with any errors found.\n  '
+    raw_lines = clean_lines.lines_without_raw_strings
+    for i in raw_lines:
+        if Search('//\\s*NOLINT\\(build/header_guard\\)', i):
+            return
+    cppvar = GetHeaderGuardCPPVariable(filename)
+    ifndef = ''
+    ifndef_linenum = 0
+    define = ''
+    endif = ''
+    endif_linenum = 0
+    for (linenum, line) in enumerate(raw_lines):
+        linesplit = line.split()
+        if (len(linesplit) >= 2):
+            if ((not ifndef) and (linesplit[0] == '#ifndef')):
+                ifndef = linesplit[1]
+                ifndef_linenum = linenum
+            if ((not define) and (linesplit[0] == '#define')):
+                define = linesplit[1]
+        if line.startswith('#endif'):
+            endif = line
+            endif_linenum = linenum
+    if ((not ifndef) or (not define) or (ifndef != define)):
+        error(filename, 0, 'build/header_guard', 5, ('No #ifndef header guard found, suggested CPP variable is: %s' % cppvar))
+        return
+    if (ifndef != cppvar):
+        error_level = 0
+        if (ifndef != (cppvar + '_')):
+            error_level = 5
+        ParseNolintSuppressions(filename, raw_lines[ifndef_linenum], ifndef_linenum, error)
+        error(filename, ifndef_linenum, 'build/header_guard', error_level, ('#ifndef header guard has wrong style, please use: %s' % cppvar))
+    ParseNolintSuppressions(filename, raw_lines[endif_linenum], endif_linenum, error)
+    match = Match((('#endif\\s*//\\s*' + cppvar) + '(_)?\\b'), endif)
+    if match:
+        if (match.group(1) == '_'):
+            error(filename, endif_linenum, 'build/header_guard', 0, ('#endif line should be "#endif  // %s"' % cppvar))
+        return
+    no_single_line_comments = True
+    for i in xrange(1, (len(raw_lines) - 1)):
+        line = raw_lines[i]
+        if Match('^(?:(?:\\\'(?:\\.|[^\\\'])*\\\')|(?:"(?:\\.|[^"])*")|[^\\\'"])*//', line):
+            no_single_line_comments = False
+            break
+    if no_single_line_comments:
+        match = Match((('#endif\\s*/\\*\\s*' + cppvar) + '(_)?\\s*\\*/'), endif)
+        if match:
+            if (match.group(1) == '_'):
+                error(filename, endif_linenum, 'build/header_guard', 0, ('#endif line should be "#endif  /* %s */"' % cppvar))
+            return
+    error(filename, endif_linenum, 'build/header_guard', 5, ('#endif line should be "#endif  // %s"' % cppvar))

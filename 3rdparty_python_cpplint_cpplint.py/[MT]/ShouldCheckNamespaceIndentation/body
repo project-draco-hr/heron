@@ -1,0 +1,8 @@
+def ShouldCheckNamespaceIndentation(nesting_state, is_namespace_indent_item, raw_lines_no_comments, linenum):
+    'This method determines if we should apply our namespace indentation check.\n\n  Args:\n    nesting_state: The current nesting state.\n    is_namespace_indent_item: If we just put a new class on the stack, True.\n      If the top of the stack is not a class, or we did not recently\n      add the class, False.\n    raw_lines_no_comments: The lines without the comments.\n    linenum: The current line number we are processing.\n\n  Returns:\n    True if we should apply our namespace indentation check. Currently, it\n    only works for classes and namespaces inside of a namespace.\n  '
+    is_forward_declaration = IsForwardClassDeclaration(raw_lines_no_comments, linenum)
+    if (not (is_namespace_indent_item or is_forward_declaration)):
+        return False
+    if IsMacroDefinition(raw_lines_no_comments, linenum):
+        return False
+    return IsBlockInNameSpace(nesting_state, is_forward_declaration)

@@ -1,0 +1,24 @@
+def CheckSpacingForFunctionCall(filename, clean_lines, linenum, error):
+    'Checks for the correctness of various spacing around function calls.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    fncall = line
+    for pattern in ('\\bif\\s*\\((.*)\\)\\s*{', '\\bfor\\s*\\((.*)\\)\\s*{', '\\bwhile\\s*\\((.*)\\)\\s*[{;]', '\\bswitch\\s*\\((.*)\\)\\s*{'):
+        match = Search(pattern, line)
+        if match:
+            fncall = match.group(1)
+            break
+    if ((not Search('\\b(if|for|while|switch|return|new|delete|catch|sizeof)\\b', fncall)) and (not Search(' \\([^)]+\\)\\([^)]*(\\)|,$)', fncall)) and (not Search(' \\([^)]+\\)\\[[^\\]]+\\]', fncall))):
+        if Search('\\w\\s*\\(\\s(?!\\s*\\\\$)', fncall):
+            error(filename, linenum, 'whitespace/parens', 4, 'Extra space after ( in function call')
+        elif Search('\\(\\s+(?!(\\s*\\\\)|\\()', fncall):
+            error(filename, linenum, 'whitespace/parens', 2, 'Extra space after (')
+        if (Search('\\w\\s+\\(', fncall) and (not Search('#\\s*define|typedef|using\\s+\\w+\\s*=', fncall)) and (not Search('\\w\\s+\\((\\w+::)*\\*\\w+\\)\\(', fncall)) and (not Search('\\bcase\\s+\\(', fncall))):
+            if Search('\\boperator_*\\b', line):
+                error(filename, linenum, 'whitespace/parens', 0, 'Extra space before ( in function call')
+            else:
+                error(filename, linenum, 'whitespace/parens', 4, 'Extra space before ( in function call')
+        if Search('[^)]\\s+\\)\\s*[^{\\s]', fncall):
+            if Search('^\\s+\\)', fncall):
+                error(filename, linenum, 'whitespace/parens', 2, 'Closing ) should be moved to the previous line')
+            else:
+                error(filename, linenum, 'whitespace/parens', 2, 'Extra space before )')

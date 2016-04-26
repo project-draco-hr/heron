@@ -1,0 +1,13 @@
+def CheckParenthesisSpacing(filename, clean_lines, linenum, error):
+    'Checks for horizontal spacing around parentheses.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    match = Search(' (if\\(|for\\(|while\\(|switch\\()', line)
+    if match:
+        error(filename, linenum, 'whitespace/parens', 5, ('Missing space before ( in %s' % match.group(1)))
+    match = Search('\\b(if|for|while|switch)\\s*\\(([ ]*)(.).*[^ ]+([ ]*)\\)\\s*{\\s*$', line)
+    if match:
+        if (len(match.group(2)) != len(match.group(4))):
+            if (not (((match.group(3) == ';') and (len(match.group(2)) == (1 + len(match.group(4))))) or ((not match.group(2)) and Search('\\bfor\\s*\\(.*; \\)', line)))):
+                error(filename, linenum, 'whitespace/parens', 5, ('Mismatching spaces inside () in %s' % match.group(1)))
+        if (len(match.group(2)) not in [0, 1]):
+            error(filename, linenum, 'whitespace/parens', 5, ('Should have zero or one spaces inside ( and ) in %s' % match.group(1)))

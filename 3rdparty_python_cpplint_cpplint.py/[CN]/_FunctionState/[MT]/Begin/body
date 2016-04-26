@@ -1,0 +1,5 @@
+def Begin(self, function_name):
+    'Start analyzing function body.\n\n    Args:\n      function_name: The name of the function being tracked.\n    '
+    self.in_a_function = True
+    self.lines_in_function = 0
+    self.current_function = function_name

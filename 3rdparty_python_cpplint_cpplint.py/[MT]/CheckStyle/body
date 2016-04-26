@@ -1,0 +1,46 @@
+def CheckStyle(filename, clean_lines, linenum, file_extension, nesting_state, error):
+    "Checks rules from the 'C++ style rules' section of cppguide.html.\n\n  Most of these rules are hard to test (naming, comment style), but we\n  do what we can.  In particular we check for 2-space indents, line lengths,\n  tab usage, spaces inside code, etc.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    file_extension: The extension (without the dot) of the filename.\n    nesting_state: A NestingState instance which maintains information about\n                   the current stack of nested blocks being parsed.\n    error: The function to call with any errors found.\n  "
+    raw_lines = clean_lines.lines_without_raw_strings
+    line = raw_lines[linenum]
+    if (line.find('\t') != (-1)):
+        error(filename, linenum, 'whitespace/tab', 1, 'Tab found; better to use spaces')
+    scope_or_label_pattern = '\\s*\\w+\\s*:\\s*\\\\?$'
+    classinfo = nesting_state.InnermostClass()
+    initial_spaces = 0
+    cleansed_line = clean_lines.elided[linenum]
+    while ((initial_spaces < len(line)) and (line[initial_spaces] == ' ')):
+        initial_spaces += 1
+    if (line and line[(-1)].isspace()):
+        error(filename, linenum, 'whitespace/end_of_line', 4, 'Line ends in whitespace.  Consider deleting these extra spaces.')
+    elif (((initial_spaces == 1) or (initial_spaces == 3)) and (not Match(scope_or_label_pattern, cleansed_line)) and (not ((clean_lines.raw_lines[linenum] != line) and Match('^\\s*""', line)))):
+        error(filename, linenum, 'whitespace/indent', 3, 'Weird number of spaces at line-start.  Are you using a 2-space indent?')
+    is_header_guard = False
+    if (file_extension == 'h'):
+        cppvar = GetHeaderGuardCPPVariable(filename)
+        if (line.startswith(('#ifndef %s' % cppvar)) or line.startswith(('#define %s' % cppvar)) or line.startswith(('#endif  // %s' % cppvar))):
+            is_header_guard = True
+    if ((not line.startswith('#include')) and (not is_header_guard) and (not Match('^\\s*//.*http(s?)://\\S*$', line)) and (not Match('^// \\$Id:.*#[0-9]+ \\$$', line))):
+        line_width = GetLineWidth(line)
+        extended_length = int((_line_length * 1.25))
+        if (line_width > extended_length):
+            error(filename, linenum, 'whitespace/line_length', 4, ('Lines should very rarely be longer than %i characters' % extended_length))
+        elif (line_width > _line_length):
+            error(filename, linenum, 'whitespace/line_length', 2, ('Lines should be <= %i characters long' % _line_length))
+    if ((cleansed_line.count(';') > 1) and (cleansed_line.find('for') == (-1)) and ((GetPreviousNonBlankLine(clean_lines, linenum)[0].find('for') == (-1)) or (GetPreviousNonBlankLine(clean_lines, linenum)[0].find(';') != (-1))) and (not (((cleansed_line.find('case ') != (-1)) or (cleansed_line.find('default:') != (-1))) and (cleansed_line.find('break;') != (-1))))):
+        error(filename, linenum, 'whitespace/newline', 0, 'More than one command on the same line')
+    CheckBraces(filename, clean_lines, linenum, error)
+    CheckTrailingSemicolon(filename, clean_lines, linenum, error)
+    CheckEmptyBlockBody(filename, clean_lines, linenum, error)
+    CheckAccess(filename, clean_lines, linenum, nesting_state, error)
+    CheckSpacing(filename, clean_lines, linenum, nesting_state, error)
+    CheckOperatorSpacing(filename, clean_lines, linenum, error)
+    CheckParenthesisSpacing(filename, clean_lines, linenum, error)
+    CheckCommaSpacing(filename, clean_lines, linenum, error)
+    CheckBracesSpacing(filename, clean_lines, linenum, error)
+    CheckSpacingForFunctionCall(filename, clean_lines, linenum, error)
+    CheckRValueReference(filename, clean_lines, linenum, nesting_state, error)
+    CheckCheck(filename, clean_lines, linenum, error)
+    CheckAltTokens(filename, clean_lines, linenum, error)
+    classinfo = nesting_state.InnermostClass()
+    if classinfo:
+        CheckSectionSpacing(filename, clean_lines, classinfo, linenum, error)

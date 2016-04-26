@@ -1,0 +1,27 @@
+def CleanseRawStrings(raw_lines):
+    'Removes C++11 raw strings from lines.\n\n    Before:\n      static const char kData[] = R"(\n          multi-line string\n          )";\n\n    After:\n      static const char kData[] = ""\n          (replaced by blank line)\n          "";\n\n  Args:\n    raw_lines: list of raw lines.\n\n  Returns:\n    list of lines with C++11 raw strings replaced by empty strings.\n  '
+    delimiter = None
+    lines_without_raw_strings = []
+    for line in raw_lines:
+        if delimiter:
+            end = line.find(delimiter)
+            if (end >= 0):
+                leading_space = Match('^(\\s*)\\S', line)
+                line = ((leading_space.group(1) + '""') + line[(end + len(delimiter)):])
+                delimiter = None
+            else:
+                line = '""'
+        while (delimiter is None):
+            matched = Match('^(.*)\\b(?:R|u8R|uR|UR|LR)"([^\\s\\\\()]*)\\((.*)$', line)
+            if matched:
+                delimiter = ((')' + matched.group(2)) + '"')
+                end = matched.group(3).find(delimiter)
+                if (end >= 0):
+                    line = ((matched.group(1) + '""') + matched.group(3)[(end + len(delimiter)):])
+                    delimiter = None
+                else:
+                    line = (matched.group(1) + '""')
+            else:
+                break
+        lines_without_raw_strings.append(line)
+    return lines_without_raw_strings

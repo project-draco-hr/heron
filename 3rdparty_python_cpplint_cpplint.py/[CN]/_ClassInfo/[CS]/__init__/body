@@ -1,0 +1,21 @@
+def __init__(self, name, class_or_struct, clean_lines, linenum):
+    _BlockInfo.__init__(self, False)
+    self.name = name
+    self.starting_linenum = linenum
+    self.is_derived = False
+    self.check_namespace_indentation = True
+    if (class_or_struct == 'struct'):
+        self.access = 'public'
+        self.is_struct = True
+    else:
+        self.access = 'private'
+        self.is_struct = False
+    self.class_indent = GetIndentLevel(clean_lines.raw_lines[linenum])
+    self.last_line = 0
+    depth = 0
+    for i in range(linenum, clean_lines.NumLines()):
+        line = clean_lines.elided[i]
+        depth += (line.count('{') - line.count('}'))
+        if (not depth):
+            self.last_line = i
+            break

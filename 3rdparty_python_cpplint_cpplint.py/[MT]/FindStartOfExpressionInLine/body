@@ -1,0 +1,37 @@
+def FindStartOfExpressionInLine(line, endpos, stack):
+    'Find position at the matching start of current expression.\n\n  This is almost the reverse of FindEndOfExpressionInLine, but note\n  that the input position and returned position differs by 1.\n\n  Args:\n    line: a CleansedLines line.\n    endpos: start searching at this position.\n    stack: nesting stack at endpos.\n\n  Returns:\n    On finding matching start: (index at matching start, None)\n    On finding an unclosed expression: (-1, None)\n    Otherwise: (-1, new stack at beginning of this line)\n  '
+    i = endpos
+    while (i >= 0):
+        char = line[i]
+        if (char in ')]}'):
+            stack.append(char)
+        elif (char == '>'):
+            if ((i > 0) and ((line[(i - 1)] == '-') or Match('\\s>=\\s', line[(i - 1):]) or Search('\\boperator\\s*$', line[0:i]))):
+                i -= 1
+            else:
+                stack.append('>')
+        elif (char == '<'):
+            if ((i > 0) and (line[(i - 1)] == '<')):
+                i -= 1
+            elif (stack and (stack[(-1)] == '>')):
+                stack.pop()
+                if (not stack):
+                    return (i, None)
+        elif (char in '([{'):
+            while (stack and (stack[(-1)] == '>')):
+                stack.pop()
+            if (not stack):
+                return ((-1), None)
+            if (((char == '(') and (stack[(-1)] == ')')) or ((char == '[') and (stack[(-1)] == ']')) or ((char == '{') and (stack[(-1)] == '}'))):
+                stack.pop()
+                if (not stack):
+                    return (i, None)
+            else:
+                return ((-1), None)
+        elif (char == ';'):
+            while (stack and (stack[(-1)] == '>')):
+                stack.pop()
+            if (not stack):
+                return ((-1), None)
+        i -= 1
+    return ((-1), stack)

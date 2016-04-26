@@ -1,0 +1,12 @@
+def CheckRedundantOverrideOrFinal(filename, clean_lines, linenum, error):
+    'Check if line contains a redundant "override" or "final" virt-specifier.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    declarator_end = line.rfind(')')
+    if (declarator_end >= 0):
+        fragment = line[declarator_end:]
+    elif ((linenum > 1) and (clean_lines.elided[(linenum - 1)].rfind(')') >= 0)):
+        fragment = line
+    else:
+        return
+    if (Search('\\boverride\\b', fragment) and Search('\\bfinal\\b', fragment)):
+        error(filename, linenum, 'readability/inheritance', 4, '"override" is redundant since function is already declared as "final"')

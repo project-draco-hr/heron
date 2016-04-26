@@ -1,0 +1,4 @@
+def RemoveMultiLineCommentsFromRange(lines, begin, end):
+    'Clears a range of lines for multi-line comments.'
+    for i in range(begin, end):
+        lines[i] = '/**/'

@@ -1,0 +1,3 @@
+def SeenOpenBrace(self):
+    'Check if we have seen the opening brace for the innermost block.\n\n    Returns:\n      True if we have seen the opening brace, False if the innermost\n      block is still expecting an opening brace.\n    '
+    return ((not self.stack) or self.stack[(-1)].seen_open_brace)

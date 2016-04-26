@@ -1,0 +1,6 @@
+def _IsTestFilename(filename):
+    "Determines if the given filename has a suffix that identifies it as a test.\n\n  Args:\n    filename: The input filename.\n\n  Returns:\n    True if 'filename' looks like a test, False otherwise.\n  "
+    if (filename.endswith('_test.cc') or filename.endswith('_unittest.cc') or filename.endswith('_regtest.cc')):
+        return True
+    else:
+        return False

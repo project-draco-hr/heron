@@ -1,0 +1,4 @@
+def ResetErrorCounts(self):
+    "Sets the module's error statistic back to zero."
+    self.error_count = 0
+    self.errors_by_category = {}

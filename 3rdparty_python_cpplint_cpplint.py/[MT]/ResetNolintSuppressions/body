@@ -1,0 +1,3 @@
+def ResetNolintSuppressions():
+    'Resets the set of NOLINT suppressions to empty.'
+    _error_suppressions.clear()

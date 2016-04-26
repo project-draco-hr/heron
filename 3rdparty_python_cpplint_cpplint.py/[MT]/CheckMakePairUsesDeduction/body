@@ -1,0 +1,6 @@
+def CheckMakePairUsesDeduction(filename, clean_lines, linenum, error):
+    "Check that make_pair's template arguments are deduced.\n\n  G++ 4.6 in C++11 mode fails badly if make_pair's template arguments are\n  specified explicitly, and such use isn't intended in any case.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  "
+    line = clean_lines.elided[linenum]
+    match = _RE_PATTERN_EXPLICIT_MAKEPAIR.search(line)
+    if match:
+        error(filename, linenum, 'build/explicit_make_pair', 4, 'For C++11-compatibility, omit template arguments from make_pair OR use pair directly OR if appropriate, construct a pair directly')

@@ -1,0 +1,30 @@
+def CheckRedundantVirtual(filename, clean_lines, linenum, error):
+    'Check if line contains a redundant "virtual" function-specifier.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    virtual = Match('^(.*)(\\bvirtual\\b)(.*)$', line)
+    if (not virtual):
+        return
+    if (Search('\\b(public|protected|private)\\s+$', virtual.group(1)) or Match('^\\s+(public|protected|private)\\b', virtual.group(3))):
+        return
+    if Match('^.*[^:]:[^:].*$', line):
+        return
+    end_col = (-1)
+    end_line = (-1)
+    start_col = len(virtual.group(2))
+    for start_line in xrange(linenum, min((linenum + 3), clean_lines.NumLines())):
+        line = clean_lines.elided[start_line][start_col:]
+        parameter_list = Match('^([^(]*)\\(', line)
+        if parameter_list:
+            (_, end_line, end_col) = CloseExpression(clean_lines, start_line, (start_col + len(parameter_list.group(1))))
+            break
+        start_col = 0
+    if (end_col < 0):
+        return
+    for i in xrange(end_line, min((end_line + 3), clean_lines.NumLines())):
+        line = clean_lines.elided[i][end_col:]
+        match = Search('\\b(override|final)\\b', line)
+        if match:
+            error(filename, linenum, 'readability/inheritance', 4, ('"virtual" is redundant since function is already declared as "%s"' % match.group(1)))
+        end_col = 0
+        if Search('[^\\w]\\s*$', line):
+            break

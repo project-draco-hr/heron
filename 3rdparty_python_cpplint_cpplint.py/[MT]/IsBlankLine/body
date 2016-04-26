@@ -1,0 +1,3 @@
+def IsBlankLine(line):
+    'Returns true if the given line is blank.\n\n  We consider a line to be blank if the line is empty or consists of\n  only white spaces.\n\n  Args:\n    line: A line of a string.\n\n  Returns:\n    True, if the given line is blank.\n  '
+    return ((not line) or line.isspace())

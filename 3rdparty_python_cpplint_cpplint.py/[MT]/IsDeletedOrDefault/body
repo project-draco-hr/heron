@@ -1,0 +1,9 @@
+def IsDeletedOrDefault(clean_lines, linenum):
+    'Check if current constructor or operator is deleted or default.\n\n  Args:\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n  Returns:\n    True if this is a deleted or default constructor.\n  '
+    open_paren = clean_lines.elided[linenum].find('(')
+    if (open_paren < 0):
+        return False
+    (close_line, _, close_paren) = CloseExpression(clean_lines, linenum, open_paren)
+    if (close_paren < 0):
+        return False
+    return Match('\\s*=\\s*(?:delete|default)\\b', close_line[close_paren:])

@@ -1,0 +1,49 @@
+def CheckForNonConstReference(filename, clean_lines, linenum, nesting_state, error):
+    'Check for non-const references.\n\n  Separate from CheckLanguage since it scans backwards from current\n  line, instead of scanning forward.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    nesting_state: A NestingState instance which maintains information about\n                   the current stack of nested blocks being parsed.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    if ('&' not in line):
+        return
+    if IsDerivedFunction(clean_lines, linenum):
+        return
+    if IsOutOfLineMethodDefinition(clean_lines, linenum):
+        return
+    if (linenum > 1):
+        previous = None
+        if Match('\\s*::(?:[\\w<>]|::)+\\s*&\\s*\\S', line):
+            previous = Search('\\b((?:const\\s*)?(?:[\\w<>]|::)+[\\w<>])\\s*$', clean_lines.elided[(linenum - 1)])
+        elif Match('\\s*[a-zA-Z_]([\\w<>]|::)+\\s*&\\s*\\S', line):
+            previous = Search('\\b((?:const\\s*)?(?:[\\w<>]|::)+::)\\s*$', clean_lines.elided[(linenum - 1)])
+        if previous:
+            line = (previous.group(1) + line.lstrip())
+        else:
+            endpos = line.rfind('>')
+            if (endpos > (-1)):
+                (_, startline, startpos) = ReverseCloseExpression(clean_lines, linenum, endpos)
+                if ((startpos > (-1)) and (startline < linenum)):
+                    line = ''
+                    for i in xrange(startline, (linenum + 1)):
+                        line += clean_lines.elided[i].strip()
+    if (nesting_state.previous_stack_top and (not (isinstance(nesting_state.previous_stack_top, _ClassInfo) or isinstance(nesting_state.previous_stack_top, _NamespaceInfo)))):
+        return
+    if (linenum > 0):
+        for i in xrange((linenum - 1), max(0, (linenum - 10)), (-1)):
+            previous_line = clean_lines.elided[i]
+            if (not Search('[),]\\s*$', previous_line)):
+                break
+            if Match('^\\s*:\\s+\\S', previous_line):
+                return
+    if Search('\\\\\\s*$', line):
+        return
+    if IsInitializerList(clean_lines, linenum):
+        return
+    whitelisted_functions = '(?:[sS]wap(?:<\\w:+>)?|operator\\s*[<>][<>]|static_assert|COMPILE_ASSERT)\\s*\\('
+    if Search(whitelisted_functions, line):
+        return
+    elif (not Search('\\S+\\([^)]*$', line)):
+        for i in xrange(2):
+            if ((linenum > i) and Search(whitelisted_functions, clean_lines.elided[((linenum - i) - 1)])):
+                return
+    decls = ReplaceAll('{[^}]*}', ' ', line)
+    for parameter in re.findall(_RE_PATTERN_REF_PARAM, decls):
+        if (not Match(_RE_PATTERN_CONST_REF_PARAM, parameter)):
+            error(filename, linenum, 'runtime/references', 2, ('Is this a non-const reference? If so, make const or use a pointer: ' + ReplaceAll(' *<', '<', parameter)))

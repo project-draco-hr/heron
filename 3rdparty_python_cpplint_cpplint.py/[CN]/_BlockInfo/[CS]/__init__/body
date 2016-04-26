@@ -1,0 +1,5 @@
+def __init__(self, seen_open_brace):
+    self.seen_open_brace = seen_open_brace
+    self.open_parentheses = 0
+    self.inline_asm = _NO_ASM
+    self.check_namespace_indentation = False

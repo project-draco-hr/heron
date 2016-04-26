@@ -1,0 +1,32 @@
+def CheckCStyleCast(filename, clean_lines, linenum, cast_type, pattern, error):
+    'Checks for a C-style cast by looking for the pattern.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    cast_type: The string for the C++ cast to recommend.  This is either\n      reinterpret_cast, static_cast, or const_cast, depending.\n    pattern: The regular expression used to find C-style casts.\n    error: The function to call with any errors found.\n\n  Returns:\n    True if an error was emitted.\n    False otherwise.\n  '
+    line = clean_lines.elided[linenum]
+    match = Search(pattern, line)
+    if (not match):
+        return False
+    context = line[0:(match.start(1) - 1)]
+    if Match('.*\\b(?:sizeof|alignof|alignas|[_A-Z][_A-Z0-9]*)\\s*$', context):
+        return False
+    if (linenum > 0):
+        for i in xrange((linenum - 1), max(0, (linenum - 5)), (-1)):
+            context = (clean_lines.elided[i] + context)
+    if Match('.*\\b[_A-Z][_A-Z0-9]*\\s*\\((?:\\([^()]*\\)|[^()])*$', context):
+        return False
+    if (context.endswith(' operator++') or context.endswith(' operator--')):
+        return False
+    remainder = line[match.end(0):]
+    if Match('^\\s*(?:;|const\\b|throw\\b|final\\b|override\\b|[=>{),]|->)', remainder):
+        if Match('^\\s*>', remainder):
+            return False
+        matched_zero = Match('^\\s=\\s*(\\S+)\\s*;', remainder)
+        if (matched_zero and (matched_zero.group(1) != '0')):
+            return False
+        if Match('.*\\)\\s*$', line[0:match.start(0)]):
+            return False
+        raw_line = clean_lines.raw_lines[linenum]
+        if ('/*' in raw_line):
+            return False
+        error(filename, linenum, 'readability/function', 3, 'All parameters should be named in a function')
+        return True
+    error(filename, linenum, 'readability/casting', 4, ('Using C-style cast.  Use %s<%s>(...) instead' % (cast_type, match.group(1))))
+    return True

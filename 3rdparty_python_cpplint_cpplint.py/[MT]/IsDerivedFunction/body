@@ -1,0 +1,8 @@
+def IsDerivedFunction(clean_lines, linenum):
+    'Check if current line contains an inherited function.\n\n  Args:\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n  Returns:\n    True if current line contains a function with "override"\n    virt-specifier.\n  '
+    for i in xrange(linenum, max((-1), (linenum - 10)), (-1)):
+        match = Match('^([^()]*\\w+)\\(', clean_lines.elided[i])
+        if match:
+            (line, _, closing_paren) = CloseExpression(clean_lines, i, len(match.group(1)))
+            return ((closing_paren >= 0) and Search('\\boverride\\b', line[closing_paren:]))
+    return False

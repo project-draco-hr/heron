@@ -1,0 +1,20 @@
+{
+  LOG.info("checkstyle command: " + command);
+  ProcessBuilder processBuilder=new ProcessBuilder(command);
+  processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+  processBuilder.redirectError(ProcessBuilder.Redirect.INHERIT);
+  Process cpplint=processBuilder.start();
+  try {
+    cpplint.waitFor();
+  }
+ catch (  InterruptedException e) {
+    throw new RuntimeException("cpp checkstyle command was interrupted: " + command,e);
+  }
+  if (cpplint.exitValue() == 1) {
+    LOG.warning("cpp checkstyle detected bad styles.");
+    System.exit(1);
+  }
+  if (cpplint.exitValue() != 0) {
+    throw new RuntimeException("cpp checkstyle command failed with status " + cpplint.exitValue());
+  }
+}

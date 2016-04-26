@@ -1,0 +1,3 @@
+def BackupFilters(self):
+    ' Saves the current filter list to backup storage.'
+    self._filters_backup = self.filters[:]

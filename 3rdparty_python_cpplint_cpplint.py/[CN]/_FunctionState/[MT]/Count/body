@@ -1,0 +1,4 @@
+def Count(self):
+    'Count line in current function body.'
+    if self.in_a_function:
+        self.lines_in_function += 1

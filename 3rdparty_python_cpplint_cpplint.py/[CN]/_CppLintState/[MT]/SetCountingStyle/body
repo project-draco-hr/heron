@@ -1,0 +1,3 @@
+def SetCountingStyle(self, counting_style):
+    "Sets the module's counting options."
+    self.counting = counting_style

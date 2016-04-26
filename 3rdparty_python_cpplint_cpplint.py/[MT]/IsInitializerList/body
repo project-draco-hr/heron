@@ -1,0 +1,15 @@
+def IsInitializerList(clean_lines, linenum):
+    'Check if current line is inside constructor initializer list.\n\n  Args:\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n  Returns:\n    True if current line appears to be inside constructor initializer\n    list, False otherwise.\n  '
+    for i in xrange(linenum, 1, (-1)):
+        line = clean_lines.elided[i]
+        if (i == linenum):
+            remove_function_body = Match('^(.*)\\{\\s*$', line)
+            if remove_function_body:
+                line = remove_function_body.group(1)
+        if Search('\\s:\\s*\\w+[({]', line):
+            return True
+        if Search('\\}\\s*,\\s*$', line):
+            return True
+        if Search('[{};]\\s*$', line):
+            return False
+    return False

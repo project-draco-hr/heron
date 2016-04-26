@@ -1,0 +1,13 @@
+def CheckEnd(self, filename, clean_lines, linenum, error):
+    'Check end of namespace comments.'
+    line = clean_lines.raw_lines[linenum]
+    if (((linenum - self.starting_linenum) < 10) and (not Match('};*\\s*(//|/\\*).*\\bnamespace\\b', line))):
+        return
+    if self.name:
+        if (not Match((('};*\\s*(//|/\\*).*\\bnamespace\\s+' + re.escape(self.name)) + '[\\*/\\.\\\\\\s]*$'), line)):
+            error(filename, linenum, 'readability/namespace', 5, ('Namespace should be terminated with "// namespace %s"' % self.name))
+    elif (not Match('};*\\s*(//|/\\*).*\\bnamespace[\\*/\\.\\\\\\s]*$', line)):
+        if Match('}.*\\b(namespace anonymous|anonymous namespace)\\b', line):
+            error(filename, linenum, 'readability/namespace', 5, 'Anonymous namespace should be terminated with "// namespace" or "// anonymous namespace"')
+        else:
+            error(filename, linenum, 'readability/namespace', 5, 'Anonymous namespace should be terminated with "// namespace"')

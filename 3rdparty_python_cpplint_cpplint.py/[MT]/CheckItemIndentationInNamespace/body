@@ -1,0 +1,4 @@
+def CheckItemIndentationInNamespace(filename, raw_lines_no_comments, linenum, error):
+    line = raw_lines_no_comments[linenum]
+    if Match('^\\s+', line):
+        error(filename, linenum, 'runtime/indentation_namespace', 4, 'Do not indent within a namespace')

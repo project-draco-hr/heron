@@ -1,0 +1,5 @@
+def CheckInvalidIncrement(filename, clean_lines, linenum, error):
+    'Checks for invalid increment *count++.\n\n  For example following function:\n  void increment_counter(int* count) {\n    *count++;\n  }\n  is invalid, because it effectively does count++, moving pointer, and should\n  be replaced with ++*count, (*count)++ or *count += 1.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    if _RE_PATTERN_INVALID_INCREMENT.match(line):
+        error(filename, linenum, 'runtime/invalid_increment', 5, 'Changing pointer instead of value (or unused value of operator*).')

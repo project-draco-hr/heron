@@ -1,0 +1,23 @@
+def ProcessLine(filename, file_extension, clean_lines, line, include_state, function_state, nesting_state, error, extra_check_functions=[]):
+    'Processes a single line in the file.\n\n  Args:\n    filename: Filename of the file that is being processed.\n    file_extension: The extension (dot not included) of the file.\n    clean_lines: An array of strings, each representing a line of the file,\n                 with comments stripped.\n    line: Number of line being processed.\n    include_state: An _IncludeState instance in which the headers are inserted.\n    function_state: A _FunctionState instance which counts function lines, etc.\n    nesting_state: A NestingState instance which maintains information about\n                   the current stack of nested blocks being parsed.\n    error: A callable to which errors are reported, which takes 4 arguments:\n           filename, line number, error level, and message\n    extra_check_functions: An array of additional check functions that will be\n                           run on each source line. Each function takes 4\n                           arguments: filename, clean_lines, line, error\n  '
+    raw_lines = clean_lines.raw_lines
+    ParseNolintSuppressions(filename, raw_lines[line], line, error)
+    nesting_state.Update(filename, clean_lines, line, error)
+    CheckForNamespaceIndentation(filename, nesting_state, clean_lines, line, error)
+    if nesting_state.InAsmBlock():
+        return
+    CheckForFunctionLengths(filename, clean_lines, line, function_state, error)
+    CheckForMultilineCommentsAndStrings(filename, clean_lines, line, error)
+    CheckStyle(filename, clean_lines, line, file_extension, nesting_state, error)
+    CheckLanguage(filename, clean_lines, line, file_extension, include_state, nesting_state, error)
+    CheckForNonConstReference(filename, clean_lines, line, nesting_state, error)
+    CheckForNonStandardConstructs(filename, clean_lines, line, nesting_state, error)
+    CheckVlogArguments(filename, clean_lines, line, error)
+    CheckPosixThreading(filename, clean_lines, line, error)
+    CheckInvalidIncrement(filename, clean_lines, line, error)
+    CheckMakePairUsesDeduction(filename, clean_lines, line, error)
+    CheckDefaultLambdaCaptures(filename, clean_lines, line, error)
+    CheckRedundantVirtual(filename, clean_lines, line, error)
+    CheckRedundantOverrideOrFinal(filename, clean_lines, line, error)
+    for check_fn in extra_check_functions:
+        check_fn(filename, clean_lines, line, error)

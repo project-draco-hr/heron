@@ -1,0 +1,8 @@
+def ResetSection(self, directive):
+    'Reset section checking for preprocessor directive.\n\n    Args:\n      directive: preprocessor directive (e.g. "if", "else").\n    '
+    self._section = self._INITIAL_SECTION
+    self._last_header = ''
+    if (directive in ('if', 'ifdef', 'ifndef')):
+        self.include_list.append([])
+    elif (directive in ('else', 'elif')):
+        self.include_list[(-1)] = []

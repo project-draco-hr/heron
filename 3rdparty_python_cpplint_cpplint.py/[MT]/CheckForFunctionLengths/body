@@ -1,0 +1,38 @@
+def CheckForFunctionLengths(filename, clean_lines, linenum, function_state, error):
+    'Reports for long function bodies.\n\n  For an overview why this is done, see:\n  http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml#Write_Short_Functions\n\n  Uses a simplistic algorithm assuming other style guidelines\n  (especially spacing) are followed.\n  Only checks unindented functions, so class members are unchecked.\n  Trivial bodies are unchecked, so constructors with huge initializer lists\n  may be missed.\n  Blank/comment lines are not counted so as to avoid encouraging the removal\n  of vertical space and comments just to get through a lint check.\n  NOLINT *on the last line of a function* disables this check.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    function_state: Current function name and lines in body so far.\n    error: The function to call with any errors found.\n  '
+    lines = clean_lines.lines
+    line = lines[linenum]
+    joined_line = ''
+    starting_func = False
+    regexp = '(\\w(\\w|::|\\*|\\&|\\s)*)\\('
+    match_result = Match(regexp, line)
+    if match_result:
+        function_name = match_result.group(1).split()[(-1)]
+        if ((function_name == 'TEST') or (function_name == 'TEST_F') or (not Match('[A-Z_]+$', function_name))):
+            starting_func = True
+    if starting_func:
+        body_found = False
+        for start_linenum in xrange(linenum, clean_lines.NumLines()):
+            start_line = lines[start_linenum]
+            joined_line += (' ' + start_line.lstrip())
+            if Search('(;|})', start_line):
+                body_found = True
+                break
+            elif Search('{', start_line):
+                body_found = True
+                function = Search('((\\w|:)*)\\(', line).group(1)
+                if Match('TEST', function):
+                    parameter_regexp = Search('(\\(.*\\))', joined_line)
+                    if parameter_regexp:
+                        function += parameter_regexp.group(1)
+                else:
+                    function += '()'
+                function_state.Begin(function)
+                break
+        if (not body_found):
+            error(filename, linenum, 'readability/fn_size', 5, 'Lint failed to find start of function body.')
+    elif Match('^\\}\\s*$', line):
+        function_state.Check(error, filename, linenum)
+        function_state.End()
+    elif (not Match('^\\s*$', line)):
+        function_state.Count()

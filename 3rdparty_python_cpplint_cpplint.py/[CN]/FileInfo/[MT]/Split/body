@@ -1,0 +1,5 @@
+def Split(self):
+    "Splits the file into the directory, basename, and extension.\n\n    For 'chrome/browser/browser.cc', Split() would\n    return ('chrome/browser', 'browser', '.cc')\n\n    Returns:\n      A tuple of (directory, basename, extension).\n    "
+    googlename = self.RepositoryName()
+    (project, rest) = os.path.split(googlename)
+    return ((project,) + os.path.splitext(rest))

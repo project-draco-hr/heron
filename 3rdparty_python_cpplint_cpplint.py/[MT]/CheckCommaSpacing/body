@@ -1,0 +1,8 @@
+def CheckCommaSpacing(filename, clean_lines, linenum, error):
+    'Checks for horizontal spacing near commas and semicolons.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    raw = clean_lines.lines_without_raw_strings
+    line = clean_lines.elided[linenum]
+    if (Search(',[^,\\s]', ReplaceAll('\\boperator\\s*,\\s*\\(', 'F(', line)) and Search(',[^,\\s]', raw[linenum])):
+        error(filename, linenum, 'whitespace/comma', 3, 'Missing space after ,')
+    if Search(';[^\\s};\\\\)/]', line):
+        error(filename, linenum, 'whitespace/semicolon', 3, 'Missing space after ;')

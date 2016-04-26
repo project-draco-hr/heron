@@ -1,0 +1,23 @@
+def FilesBelongToSameModule(filename_cc, filename_h):
+    "Check if these two filenames belong to the same module.\n\n  The concept of a 'module' here is a as follows:\n  foo.h, foo-inl.h, foo.cc, foo_test.cc and foo_unittest.cc belong to the\n  same 'module' if they are in the same directory.\n  some/path/public/xyzzy and some/path/internal/xyzzy are also considered\n  to belong to the same module here.\n\n  If the filename_cc contains a longer path than the filename_h, for example,\n  '/absolute/path/to/base/sysinfo.cc', and this file would include\n  'base/sysinfo.h', this function also produces the prefix needed to open the\n  header. This is used by the caller of this function to more robustly open the\n  header file. We don't have access to the real include paths in this context,\n  so we need this guesswork here.\n\n  Known bugs: tools/base/bar.cc and base/bar.h belong to the same module\n  according to this implementation. Because of this, this function gives\n  some false positives. This should be sufficiently rare in practice.\n\n  Args:\n    filename_cc: is the path for the .cc file\n    filename_h: is the path for the header path\n\n  Returns:\n    Tuple with a bool and a string:\n    bool: True if filename_cc and filename_h belong to the same module.\n    string: the additional prefix needed to open the header file.\n  "
+    if (not filename_cc.endswith('.cc')):
+        return (False, '')
+    filename_cc = filename_cc[:(- len('.cc'))]
+    if filename_cc.endswith('_unittest'):
+        filename_cc = filename_cc[:(- len('_unittest'))]
+    elif filename_cc.endswith('_test'):
+        filename_cc = filename_cc[:(- len('_test'))]
+    filename_cc = filename_cc.replace('/public/', '/')
+    filename_cc = filename_cc.replace('/internal/', '/')
+    if (not filename_h.endswith('.h')):
+        return (False, '')
+    filename_h = filename_h[:(- len('.h'))]
+    if filename_h.endswith('-inl'):
+        filename_h = filename_h[:(- len('-inl'))]
+    filename_h = filename_h.replace('/public/', '/')
+    filename_h = filename_h.replace('/internal/', '/')
+    files_belong_to_same_module = filename_cc.endswith(filename_h)
+    common_path = ''
+    if files_belong_to_same_module:
+        common_path = filename_cc[:(- len(filename_h))]
+    return (files_belong_to_same_module, common_path)

@@ -1,0 +1,3 @@
+def NoExtension(self):
+    'File has no source file extension.'
+    return '/'.join(self.Split()[0:2])

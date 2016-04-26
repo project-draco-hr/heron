@@ -1,0 +1,55 @@
+def CheckForNonStandardConstructs(filename, clean_lines, linenum, nesting_state, error):
+    'Logs an error if we see certain non-ANSI constructs ignored by gcc-2.\n\n  Complain about several constructs which gcc-2 accepts, but which are\n  not standard C++.  Warning about these in lint is one way to ease the\n  transition to new compilers.\n  - put storage class first (e.g. "static const" instead of "const static").\n  - "%lld" instead of %qd" in printf-type functions.\n  - "%1$d" is non-standard in printf-type functions.\n  - "\\%" is an undefined character escape sequence.\n  - text after #endif is not allowed.\n  - invalid inner-style forward declaration.\n  - >? and <? operators, and their >?= and <?= cousins.\n\n  Additionally, check for constructor/destructor style violations and reference\n  members, as it is very convenient to do so while checking for\n  gcc-2 compliance.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    nesting_state: A NestingState instance which maintains information about\n                   the current stack of nested blocks being parsed.\n    error: A callable to which errors are reported, which takes 4 arguments:\n           filename, line number, error level, and message\n  '
+    line = clean_lines.lines[linenum]
+    if Search('printf\\s*\\(.*".*%[-+ ]?\\d*q', line):
+        error(filename, linenum, 'runtime/printf_format', 3, '%q in format strings is deprecated.  Use %ll instead.')
+    if Search('printf\\s*\\(.*".*%\\d+\\$', line):
+        error(filename, linenum, 'runtime/printf_format', 2, '%N$ formats are unconventional.  Try rewriting to avoid them.')
+    line = line.replace('\\\\', '')
+    if Search('("|\\\').*\\\\(%|\\[|\\(|{)', line):
+        error(filename, linenum, 'build/printf_format', 3, '%, [, (, and { are undefined character escapes.  Unescape them.')
+    line = clean_lines.elided[linenum]
+    if Search('\\b(const|volatile|void|char|short|int|long|float|double|signed|unsigned|schar|u?int8|u?int16|u?int32|u?int64)\\s+(register|static|extern|typedef)\\b', line):
+        error(filename, linenum, 'build/storage_class', 5, 'Storage class (static, extern, typedef, etc) should be first.')
+    if Match('\\s*#\\s*endif\\s*[^/\\s]+', line):
+        error(filename, linenum, 'build/endif_comment', 5, 'Uncommented text after #endif is non-standard.  Use a comment.')
+    if Match('\\s*class\\s+(\\w+\\s*::\\s*)+\\w+\\s*;', line):
+        error(filename, linenum, 'build/forward_decl', 5, 'Inner-style forward declarations are invalid.  Remove this line.')
+    if Search('(\\w+|[+-]?\\d+(\\.\\d*)?)\\s*(<|>)\\?=?\\s*(\\w+|[+-]?\\d+)(\\.\\d*)?', line):
+        error(filename, linenum, 'build/deprecated', 3, '>? and <? (max and min) operators are non-standard and deprecated.')
+    if Search('^\\s*const\\s*string\\s*&\\s*\\w+\\s*;', line):
+        error(filename, linenum, 'runtime/member_string_references', 2, 'const string& members are dangerous. It is much better to use alternatives, such as pointers or simple constants.')
+    classinfo = nesting_state.InnermostClass()
+    if ((not classinfo) or (not classinfo.seen_open_brace)):
+        return
+    base_classname = classinfo.name.split('::')[(-1)]
+    explicit_constructor_match = Match(('\\s+(?:inline\\s+)?(explicit\\s+)?(?:inline\\s+)?%s\\s*\\(((?:[^()]|\\([^()]*\\))*)\\)' % re.escape(base_classname)), line)
+    if explicit_constructor_match:
+        is_marked_explicit = explicit_constructor_match.group(1)
+        if (not explicit_constructor_match.group(2)):
+            constructor_args = []
+        else:
+            constructor_args = explicit_constructor_match.group(2).split(',')
+        i = 0
+        while (i < len(constructor_args)):
+            constructor_arg = constructor_args[i]
+            while ((constructor_arg.count('<') > constructor_arg.count('>')) or (constructor_arg.count('(') > constructor_arg.count(')'))):
+                constructor_arg += (',' + constructor_args[(i + 1)])
+                del constructor_args[(i + 1)]
+            constructor_args[i] = constructor_arg
+            i += 1
+        defaulted_args = [arg for arg in constructor_args if ('=' in arg)]
+        noarg_constructor = ((not constructor_args) or ((len(constructor_args) == 1) and (constructor_args[0].strip() == 'void')))
+        onearg_constructor = (((len(constructor_args) == 1) and (not noarg_constructor)) or ((len(constructor_args) >= 1) and (not noarg_constructor) and (len(defaulted_args) >= (len(constructor_args) - 1))))
+        initializer_list_constructor = bool((onearg_constructor and Search('\\bstd\\s*::\\s*initializer_list\\b', constructor_args[0])))
+        copy_constructor = bool((onearg_constructor and Match(('(const\\s+)?%s(\\s*<[^>]*>)?(\\s+const)?\\s*(?:<\\w+>\\s*)?&' % re.escape(base_classname)), constructor_args[0].strip())))
+        if ((not is_marked_explicit) and onearg_constructor and (not initializer_list_constructor) and (not copy_constructor)):
+            if defaulted_args:
+                error(filename, linenum, 'runtime/explicit', 5, 'Constructors callable with one argument should be marked explicit.')
+            else:
+                error(filename, linenum, 'runtime/explicit', 5, 'Single-parameter constructors should be marked explicit.')
+        elif (is_marked_explicit and (not onearg_constructor)):
+            if noarg_constructor:
+                error(filename, linenum, 'runtime/explicit', 5, 'Zero-parameter constructors should not be marked explicit.')
+            else:
+                error(filename, linenum, 'runtime/explicit', 0, 'Constructors that require multiple arguments should not be marked explicit.')

@@ -1,0 +1,33 @@
+def IsRValueAllowed(clean_lines, linenum, typenames):
+    'Check if RValue reference is allowed on a particular line.\n\n  Args:\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    typenames: set of type names from template-argument-list.\n  Returns:\n    True if line is within the region where RValue references are allowed.\n  '
+    for i in xrange(linenum, 0, (-1)):
+        line = clean_lines.elided[i]
+        if Match('GOOGLE_ALLOW_RVALUE_REFERENCES_(?:PUSH|POP)', line):
+            if (not line.endswith('PUSH')):
+                return False
+            for j in xrange(linenum, clean_lines.NumLines(), 1):
+                line = clean_lines.elided[j]
+                if Match('GOOGLE_ALLOW_RVALUE_REFERENCES_(?:PUSH|POP)', line):
+                    return line.endswith('POP')
+    line = clean_lines.elided[linenum]
+    if Search('\\boperator\\s*=\\s*\\(', line):
+        return IsDeletedOrDefault(clean_lines, linenum)
+    match = Match('\\s*(?:[\\w<>]+::)*([\\w<>]+)\\s*::\\s*([\\w<>]+)\\s*\\(', line)
+    if (match and (match.group(1) == match.group(2))):
+        return IsDeletedOrDefault(clean_lines, linenum)
+    if Search('\\b(?:explicit|inline)\\s+[\\w<>]+\\s*\\(', line):
+        return IsDeletedOrDefault(clean_lines, linenum)
+    if Match('\\s*[\\w<>]+\\s*\\(', line):
+        previous_line = 'ReturnType'
+        if (linenum > 0):
+            previous_line = clean_lines.elided[(linenum - 1)]
+        if (Match('^\\s*$', previous_line) or Search('[{}:;]\\s*$', previous_line)):
+            return IsDeletedOrDefault(clean_lines, linenum)
+    while line:
+        match = Match('^.*?(\\w+)\\s*&&(.*)$', line)
+        if (not match):
+            break
+        if (match.group(1) not in typenames):
+            return False
+        line = match.group(2)
+    return (line.find('&&') < 0)

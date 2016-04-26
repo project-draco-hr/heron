@@ -1,0 +1,11 @@
+{
+  ExtensionRegistry registry=ExtensionRegistry.newInstance();
+  ExtraActionsBase.registerAllExtensions(registry);
+  try (InputStream stream=Files.newInputStream(Paths.get(extraActionFile))){
+    CodedInputStream coded=CodedInputStream.newInstance(stream);
+    return ExtraActionInfo.parseFrom(coded,registry);
+  }
+ catch (  IOException e) {
+    throw new RuntimeException("ERROR: failed to deserialize extra action file " + extraActionFile + ": "+ e.getMessage(),e);
+  }
+}

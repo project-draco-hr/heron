@@ -1,0 +1,11 @@
+def CheckPrintf(filename, clean_lines, linenum, error):
+    'Check for printf related issues.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    match = Search('snprintf\\s*\\(([^,]*),\\s*([0-9]*)\\s*,', line)
+    if (match and (match.group(2) != '0')):
+        error(filename, linenum, 'runtime/printf', 3, ('If you can, use sizeof(%s) instead of %s as the 2nd arg to snprintf.' % (match.group(1), match.group(2))))
+    if Search('\\bsprintf\\s*\\(', line):
+        error(filename, linenum, 'runtime/printf', 5, 'Never use sprintf. Use snprintf instead.')
+    match = Search('\\b(strcpy|strcat)\\s*\\(', line)
+    if match:
+        error(filename, linenum, 'runtime/printf', 4, ('Almost always, snprintf is better than %s' % match.group(1)))

@@ -1,0 +1,21 @@
+def CheckComment(line, filename, linenum, next_line_start, error):
+    'Checks for common mistakes in comments.\n\n  Args:\n    line: The line in question.\n    filename: The name of the current file.\n    linenum: The number of the line to check.\n    next_line_start: The first non-whitespace column of the next line.\n    error: The function to call with any errors found.\n  '
+    commentpos = line.find('//')
+    if (commentpos != (-1)):
+        if (((line.count('"', 0, commentpos) - line.count('\\"', 0, commentpos)) % 2) == 0):
+            if ((not (Match('^.*{ *//', line) and (next_line_start == commentpos))) and (((commentpos >= 1) and (line[(commentpos - 1)] not in string.whitespace)) or ((commentpos >= 2) and (line[(commentpos - 2)] not in string.whitespace)))):
+                error(filename, linenum, 'whitespace/comments', 2, 'At least two spaces is best between code and comments')
+            comment = line[commentpos:]
+            match = _RE_PATTERN_TODO.match(comment)
+            if match:
+                leading_whitespace = match.group(1)
+                if (len(leading_whitespace) > 1):
+                    error(filename, linenum, 'whitespace/todo', 2, 'Too many spaces before TODO')
+                username = match.group(2)
+                if (not username):
+                    error(filename, linenum, 'readability/todo', 2, 'Missing username in TODO; it should look like "// TODO(my_username): Stuff."')
+                middle_whitespace = match.group(3)
+                if ((middle_whitespace != ' ') and (middle_whitespace != '')):
+                    error(filename, linenum, 'whitespace/todo', 2, 'TODO(my_username) should be followed by a space')
+            if (Match('//[^ ]*\\w', comment) and (not Match('(///|//\\!)(\\s+|$)', comment))):
+                error(filename, linenum, 'whitespace/comments', 4, 'Should have a space between // and comment')

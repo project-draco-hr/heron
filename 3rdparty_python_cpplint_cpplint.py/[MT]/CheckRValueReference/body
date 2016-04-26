@@ -1,0 +1,15 @@
+def CheckRValueReference(filename, clean_lines, linenum, nesting_state, error):
+    'Check for rvalue references.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    nesting_state: A NestingState instance which maintains information about\n                   the current stack of nested blocks being parsed.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    match = Match('^(.*\\S)&&', line)
+    if (not match):
+        match = Match('(.*)&&\\S', line)
+    if ((not match) or ('(&&)' in line) or Search('\\boperator\\s*$', match.group(1))):
+        return
+    typenames = GetTemplateArgs(clean_lines, linenum)
+    and_pos = len(match.group(1))
+    if IsRValueType(typenames, clean_lines, nesting_state, linenum, and_pos):
+        if (not IsRValueAllowed(clean_lines, linenum, typenames)):
+            error(filename, linenum, 'build/c++11', 3, 'RValue references are an unapproved C++ feature.')
+    else:
+        error(filename, linenum, 'whitespace/operators', 3, 'Missing spaces around &&')

@@ -1,0 +1,3 @@
+def FullName(self):
+    'Make Windows paths like Unix.'
+    return os.path.abspath(self._filename).replace('\\', '/')

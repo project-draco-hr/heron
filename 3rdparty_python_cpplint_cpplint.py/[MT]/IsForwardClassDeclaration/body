@@ -1,0 +1,2 @@
+def IsForwardClassDeclaration(clean_lines, linenum):
+    return Match('^\\s*(\\btemplate\\b)*.*class\\s+\\w+;\\s*$', clean_lines[linenum])

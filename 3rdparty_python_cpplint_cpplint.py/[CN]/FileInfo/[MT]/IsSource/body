@@ -1,0 +1,3 @@
+def IsSource(self):
+    'File has a source file extension.'
+    return (self.Extension()[1:] in ('c', 'cc', 'cpp', 'cxx'))

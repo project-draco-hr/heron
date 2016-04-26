@@ -1,0 +1,21 @@
+def ProcessFileData(filename, file_extension, lines, error, extra_check_functions=[]):
+    'Performs lint checks and reports any errors to the given error function.\n\n  Args:\n    filename: Filename of the file that is being processed.\n    file_extension: The extension (dot not included) of the file.\n    lines: An array of strings, each representing a line of the file, with the\n           last element being empty if the file is terminated with a newline.\n    error: A callable to which errors are reported, which takes 4 arguments:\n           filename, line number, error level, and message\n    extra_check_functions: An array of additional check functions that will be\n                           run on each source line. Each function takes 4\n                           arguments: filename, clean_lines, line, error\n  '
+    lines = ((['// marker so line numbers and indices both start at 1'] + lines) + ['// marker so line numbers end in a known way'])
+    include_state = _IncludeState()
+    function_state = _FunctionState()
+    nesting_state = NestingState()
+    ResetNolintSuppressions()
+    CheckForCopyright(filename, lines, error)
+    RemoveMultiLineComments(filename, lines, error)
+    clean_lines = CleansedLines(lines)
+    if (file_extension == 'h'):
+        CheckForHeaderGuard(filename, clean_lines, error)
+    for line in xrange(clean_lines.NumLines()):
+        ProcessLine(filename, file_extension, clean_lines, line, include_state, function_state, nesting_state, error, extra_check_functions)
+        FlagCxx11Features(filename, clean_lines, line, error)
+    nesting_state.CheckCompletedBlocks(filename, error)
+    CheckForIncludeWhatYouUse(filename, clean_lines, include_state, error)
+    if (file_extension == 'cc'):
+        CheckHeaderFileIncluded(filename, include_state, error)
+    CheckForBadCharacters(filename, lines, error)
+    CheckForNewlineAtEOF(filename, lines, error)

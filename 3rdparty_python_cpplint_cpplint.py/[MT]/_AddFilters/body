@@ -1,0 +1,3 @@
+def _AddFilters(filters):
+    'Adds more filter overrides.\n\n  Unlike _SetFilters, this function does not reset the current list of filters\n  available.\n\n  Args:\n    filters: A string of comma-separated filters (eg "whitespace/indent").\n             Each filter should start with + or -; else we die.\n  '
+    _cpplint_state.AddFilters(filters)

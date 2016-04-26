@@ -1,0 +1,4 @@
+def IsCppString(line):
+    "Does line terminate so, that the next symbol is in string constant.\n\n  This function does not consider single-line nor multi-line comments.\n\n  Args:\n    line: is a partial line of code starting from the 0..n.\n\n  Returns:\n    True, if next character appended to 'line' is inside a\n    string constant.\n  "
+    line = line.replace('\\\\', 'XX')
+    return ((((line.count('"') - line.count('\\"')) - line.count('\'"\'')) & 1) == 1)

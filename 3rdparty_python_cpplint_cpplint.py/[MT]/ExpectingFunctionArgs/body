@@ -1,0 +1,4 @@
+def ExpectingFunctionArgs(clean_lines, linenum):
+    "Checks whether where function type arguments are expected.\n\n  Args:\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n\n  Returns:\n    True if the line at 'linenum' is inside something that expects arguments\n    of function types.\n  "
+    line = clean_lines.elided[linenum]
+    return (Match('^\\s*MOCK_(CONST_)?METHOD\\d+(_T)?\\(', line) or ((linenum >= 2) and (Match('^\\s*MOCK_(?:CONST_)?METHOD\\d+(?:_T)?\\((?:\\S+,)?\\s*$', clean_lines.elided[(linenum - 1)]) or Match('^\\s*MOCK_(?:CONST_)?METHOD\\d+(?:_T)?\\(\\s*$', clean_lines.elided[(linenum - 2)]) or Search('\\bstd::m?function\\s*\\<\\s*$', clean_lines.elided[(linenum - 1)]))))

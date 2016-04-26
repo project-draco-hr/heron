@@ -1,0 +1,3 @@
+def BaseName(self):
+    'File base name - text after the final slash, before the final period.'
+    return self.Split()[1]

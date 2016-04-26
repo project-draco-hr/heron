@@ -1,0 +1,10 @@
+def __init__(self, lines):
+    self.elided = []
+    self.lines = []
+    self.raw_lines = lines
+    self.num_lines = len(lines)
+    self.lines_without_raw_strings = CleanseRawStrings(lines)
+    for linenum in range(len(self.lines_without_raw_strings)):
+        self.lines.append(CleanseComments(self.lines_without_raw_strings[linenum]))
+        elided = self._CollapseStrings(self.lines_without_raw_strings[linenum])
+        self.elided.append(CleanseComments(elided))

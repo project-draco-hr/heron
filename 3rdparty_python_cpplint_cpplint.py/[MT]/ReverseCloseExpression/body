@@ -1,0 +1,15 @@
+def ReverseCloseExpression(clean_lines, linenum, pos):
+    "If input points to ) or } or ] or >, finds the position that opens it.\n\n  If lines[linenum][pos] points to a ')' or '}' or ']' or '>', finds the\n  linenum/pos that correspond to the opening of the expression.\n\n  Args:\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    pos: A position on the line.\n\n  Returns:\n    A tuple (line, linenum, pos) pointer *at* the opening brace, or\n    (line, 0, -1) if we never find the matching opening brace.  Note\n    we ignore strings and comments when matching; and the line we\n    return is the 'cleansed' line at linenum.\n  "
+    line = clean_lines.elided[linenum]
+    if (line[pos] not in ')}]>'):
+        return (line, 0, (-1))
+    (start_pos, stack) = FindStartOfExpressionInLine(line, pos, [])
+    if (start_pos > (-1)):
+        return (line, linenum, start_pos)
+    while (stack and (linenum > 0)):
+        linenum -= 1
+        line = clean_lines.elided[linenum]
+        (start_pos, stack) = FindStartOfExpressionInLine(line, (len(line) - 1), stack)
+        if (start_pos > (-1)):
+            return (line, linenum, start_pos)
+    return (line, 0, (-1))

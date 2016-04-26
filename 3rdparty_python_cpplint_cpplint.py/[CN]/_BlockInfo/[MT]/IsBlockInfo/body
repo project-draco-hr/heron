@@ -1,0 +1,3 @@
+def IsBlockInfo(self):
+    'Returns true if this block is a _BlockInfo.\n\n    This is convenient for verifying that an object is an instance of\n    a _BlockInfo, but not an instance of any of the derived classes.\n\n    Returns:\n      True for this class, False for derived classes.\n    '
+    return (self.__class__ == _BlockInfo)

@@ -1,0 +1,58 @@
+def CheckCheck(filename, clean_lines, linenum, error):
+    'Checks the use of CHECK and EXPECT macros.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    lines = clean_lines.elided
+    (check_macro, start_pos) = FindCheckMacro(lines[linenum])
+    if (not check_macro):
+        return
+    (last_line, end_line, end_pos) = CloseExpression(clean_lines, linenum, start_pos)
+    if (end_pos < 0):
+        return
+    if (not Match('\\s*;', last_line[end_pos:])):
+        return
+    if (linenum == end_line):
+        expression = lines[linenum][(start_pos + 1):(end_pos - 1)]
+    else:
+        expression = lines[linenum][(start_pos + 1):]
+        for i in xrange((linenum + 1), end_line):
+            expression += lines[i]
+        expression += last_line[0:(end_pos - 1)]
+    lhs = ''
+    rhs = ''
+    operator = None
+    while expression:
+        matched = Match('^\\s*(<<|<<=|>>|>>=|->\\*|->|&&|\\|\\||==|!=|>=|>|<=|<|\\()(.*)$', expression)
+        if matched:
+            token = matched.group(1)
+            if (token == '('):
+                expression = matched.group(2)
+                (end, _) = FindEndOfExpressionInLine(expression, 0, ['('])
+                if (end < 0):
+                    return
+                lhs += ('(' + expression[0:end])
+                expression = expression[end:]
+            elif (token in ('&&', '||')):
+                return
+            elif (token in ('<<', '<<=', '>>', '>>=', '->*', '->')):
+                lhs += token
+                expression = matched.group(2)
+            else:
+                operator = token
+                rhs = matched.group(2)
+                break
+        else:
+            matched = Match('^([^-=!<>()&|]+)(.*)$', expression)
+            if (not matched):
+                matched = Match('^(\\s*\\S)(.*)$', expression)
+                if (not matched):
+                    break
+            lhs += matched.group(1)
+            expression = matched.group(2)
+    if (not (lhs and operator and rhs)):
+        return
+    if ((rhs.find('&&') > (-1)) or (rhs.find('||') > (-1))):
+        return
+    lhs = lhs.strip()
+    rhs = rhs.strip()
+    match_constant = '^([-+]?(\\d+|0[xX][0-9a-fA-F]+)[lLuU]{0,3}|".*"|\\\'.*\\\')$'
+    if (Match(match_constant, lhs) or Match(match_constant, rhs)):
+        error(filename, linenum, 'readability/check', 2, ('Consider using %s instead of %s(a %s b)' % (_CHECK_REPLACEMENT[check_macro][operator], check_macro, operator)))

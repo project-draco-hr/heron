@@ -1,0 +1,3 @@
+def NumLines(self):
+    'Returns the number of lines represented.'
+    return self.num_lines

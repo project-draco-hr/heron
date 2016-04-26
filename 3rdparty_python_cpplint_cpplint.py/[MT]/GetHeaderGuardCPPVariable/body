@@ -1,0 +1,10 @@
+def GetHeaderGuardCPPVariable(filename):
+    'Returns the CPP variable that should be used as a header guard.\n\n  Args:\n    filename: The name of a C++ header file.\n\n  Returns:\n    The CPP variable that should be used as a header guard in the\n    named file.\n\n  '
+    filename = re.sub('_flymake\\.h$', '.h', filename)
+    filename = re.sub('/\\.flymake/([^/]*)$', '/\\1', filename)
+    filename = filename.replace('C++', 'cpp').replace('c++', 'cpp')
+    fileinfo = FileInfo(filename)
+    file_path_from_root = fileinfo.RepositoryName()
+    if _root:
+        file_path_from_root = re.sub((('^' + _root) + os.sep), '', file_path_from_root)
+    return (re.sub('[^a-zA-Z0-9]', '_', file_path_from_root).upper() + '_')

@@ -1,0 +1,3 @@
+def _Filters():
+    "Returns the module's list of output filters, as a list."
+    return _cpplint_state.filters

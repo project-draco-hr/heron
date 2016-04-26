@@ -1,0 +1,5 @@
+def IsInAlphabeticalOrder(self, clean_lines, linenum, header_path):
+    'Check if a header is in alphabetical order with the previous header.\n\n    Args:\n      clean_lines: A CleansedLines instance containing the file.\n      linenum: The number of the line to check.\n      header_path: Canonicalized header to be checked.\n\n    Returns:\n      Returns true if the header is in alphabetical order.\n    '
+    if ((self._last_header > header_path) and Match('^\\s*#\\s*include\\b', clean_lines.elided[(linenum - 1)])):
+        return False
+    return True

@@ -1,0 +1,3 @@
+def CheckBegin(self, filename, clean_lines, linenum, error):
+    'Run checks that applies to text up to the opening brace.\n\n    This is mostly for checking the text after the class identifier\n    and the "{", usually where the base class is specified.  For other\n    blocks, there isn\'t much to check, so we always pass.\n\n    Args:\n      filename: The name of the current file.\n      clean_lines: A CleansedLines instance containing the file.\n      linenum: The number of the line to check.\n      error: The function to call with any errors found.\n    '
+    pass

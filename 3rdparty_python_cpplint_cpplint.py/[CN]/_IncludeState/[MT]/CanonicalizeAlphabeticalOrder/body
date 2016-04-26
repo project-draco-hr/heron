@@ -1,0 +1,3 @@
+def CanonicalizeAlphabeticalOrder(self, header_path):
+    'Returns a path canonicalized for alphabetical comparison.\n\n    - replaces "-" with "_" so they both cmp the same.\n    - removes \'-inl\' since we don\'t require them to be after the main header.\n    - lowercase everything, just in case.\n\n    Args:\n      header_path: Path to be canonicalized.\n\n    Returns:\n      Canonicalized path.\n    '
+    return header_path.replace('-inl.h', '.h').replace('-', '_').lower()

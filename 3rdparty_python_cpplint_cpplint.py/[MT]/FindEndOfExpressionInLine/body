@@ -1,0 +1,41 @@
+def FindEndOfExpressionInLine(line, startpos, stack):
+    'Find the position just after the end of current parenthesized expression.\n\n  Args:\n    line: a CleansedLines line.\n    startpos: start searching at this position.\n    stack: nesting stack at startpos.\n\n  Returns:\n    On finding matching end: (index just after matching end, None)\n    On finding an unclosed expression: (-1, None)\n    Otherwise: (-1, new stack at end of this line)\n  '
+    for i in xrange(startpos, len(line)):
+        char = line[i]
+        if (char in '([{'):
+            stack.append(char)
+        elif (char == '<'):
+            if ((i > 0) and (line[(i - 1)] == '<')):
+                if (stack and (stack[(-1)] == '<')):
+                    stack.pop()
+                    if (not stack):
+                        return ((-1), None)
+            elif ((i > 0) and Search('\\boperator\\s*$', line[0:i])):
+                continue
+            else:
+                stack.append('<')
+        elif (char in ')]}'):
+            while (stack and (stack[(-1)] == '<')):
+                stack.pop()
+            if (not stack):
+                return ((-1), None)
+            if (((stack[(-1)] == '(') and (char == ')')) or ((stack[(-1)] == '[') and (char == ']')) or ((stack[(-1)] == '{') and (char == '}'))):
+                stack.pop()
+                if (not stack):
+                    return ((i + 1), None)
+            else:
+                return ((-1), None)
+        elif (char == '>'):
+            if ((i > 0) and ((line[(i - 1)] == '-') or Search('\\boperator\\s*$', line[0:(i - 1)]))):
+                continue
+            if stack:
+                if (stack[(-1)] == '<'):
+                    stack.pop()
+                    if (not stack):
+                        return ((i + 1), None)
+        elif (char == ';'):
+            while (stack and (stack[(-1)] == '<')):
+                stack.pop()
+            if (not stack):
+                return ((-1), None)
+    return ((-1), stack)

@@ -1,0 +1,75 @@
+def IsRValueType(typenames, clean_lines, nesting_state, linenum, column):
+    'Check if the token ending on (linenum, column) is a type.\n\n  Assumes that text to the right of the column is "&&" or a function\n  name.\n\n  Args:\n    typenames: set of type names from template-argument-list.\n    clean_lines: A CleansedLines instance containing the file.\n    nesting_state: A NestingState instance which maintains information about\n                   the current stack of nested blocks being parsed.\n    linenum: the number of the line to check.\n    column: end column of the token to check.\n  Returns:\n    True if this token is a type, False if we are not sure.\n  '
+    prefix = clean_lines.elided[linenum][0:column]
+    match = Match('^(.*)(\\b\\w+|[>*)&])\\s*$', prefix)
+    if (not match):
+        return False
+    suffix = clean_lines.elided[linenum][column:]
+    if Match('&&\\s*(?:[>,]|\\.\\.\\.)', suffix):
+        return True
+    if ((match.group(2) in typenames) or (match.group(2) in ['char', 'char16_t', 'char32_t', 'wchar_t', 'bool', 'short', 'int', 'long', 'signed', 'unsigned', 'float', 'double', 'void', 'auto', '>', '*', '&'])):
+        return True
+    if (match.group(2) == ')'):
+        return IsDecltype(clean_lines, linenum, ((len(match.group(1)) + len(match.group(2))) - 1))
+    if Search('\\b(?:const_cast\\s*<|static_cast\\s*<|dynamic_cast\\s*<|reinterpret_cast\\s*<|\\w+\\s)\\s*$', match.group(1)):
+        return True
+    start = linenum
+    line = match.group(1)
+    match_symbol = None
+    while (start >= 0):
+        match_symbol = Match('^(.*)([^\\w\\s,])[\\w\\s,]*$', line)
+        if match_symbol:
+            break
+        start -= 1
+        line = clean_lines.elided[start]
+    if (not match_symbol):
+        return True
+    if (match_symbol.group(2) == '}'):
+        return True
+    if (match_symbol.group(2) == ';'):
+        before_text = match_symbol.group(1)
+        for i in xrange((start - 1), max((start - 6), 0), (-1)):
+            before_text = (clean_lines.elided[i] + before_text)
+        if Search('for\\s*\\([^{};]*$', before_text):
+            return False
+        return True
+    if (match_symbol.group(2) == '{'):
+        line = clean_lines.elided[start][0:(len(match_symbol.group(1)) + 1)]
+        end = start
+        depth = 1
+        while True:
+            for ch in line:
+                if (ch == ';'):
+                    return True
+                elif (ch == '{'):
+                    depth += 1
+                elif (ch == '}'):
+                    depth -= 1
+                    if (depth == 0):
+                        return False
+            end += 1
+            if (end >= clean_lines.NumLines()):
+                break
+            line = clean_lines.elided[end]
+        return False
+    if (match_symbol.group(2) == '('):
+        before_text = match_symbol.group(1)
+        if (linenum > 1):
+            before_text = (clean_lines.elided[(linenum - 1)] + before_text)
+        before_text = match_symbol.group(1)
+        if Search('(?:\\]|\\bfor|\\bsizeof|\\boperator\\s*\\S+\\s*)\\s*$', before_text):
+            return True
+        if Search('(?:\\bif|\\bwhile|[-+=%^(<!?:,&*]\\s*)$', before_text):
+            return False
+        match_func = Match('^(.*\\S.*)\\s+\\w(?:\\w|::)*(?:<[^<>]*>)?\\s*$', match_symbol.group(1))
+        if match_func:
+            if Search('\\b(?:explicit|inline)$', match_func.group(1)):
+                return True
+            implicit_constructor = Match('\\s*(\\w+)\\((?:const\\s+)?(\\w+)', prefix)
+            if (implicit_constructor and (implicit_constructor.group(1) == implicit_constructor.group(2))):
+                return True
+            return IsRValueType(typenames, clean_lines, nesting_state, linenum, len(match_func.group(1)))
+        return (not (nesting_state.previous_stack_top and nesting_state.previous_stack_top.IsBlockInfo()))
+    if (match_symbol.group(2) == '>'):
+        return IsTemplateParameterList(clean_lines, start, len(match_symbol.group(1)))
+    return False

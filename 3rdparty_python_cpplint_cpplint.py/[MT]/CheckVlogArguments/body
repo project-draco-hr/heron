@@ -1,0 +1,5 @@
+def CheckVlogArguments(filename, clean_lines, linenum, error):
+    'Checks that VLOG() is only used for defining a logging level.\n\n  For example, VLOG(2) is correct. VLOG(INFO), VLOG(WARNING), VLOG(ERROR), and\n  VLOG(FATAL) are not.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    if Search('\\bVLOG\\((INFO|ERROR|WARNING|DFATAL|FATAL)\\)', line):
+        error(filename, linenum, 'runtime/vlog', 5, 'VLOG() should be used with numeric verbosity level.  Use LOG() if you want symbolic severity levels.')

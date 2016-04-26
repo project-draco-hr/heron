@@ -1,0 +1,2 @@
+def SetLastHeader(self, header_path):
+    self._last_header = header_path

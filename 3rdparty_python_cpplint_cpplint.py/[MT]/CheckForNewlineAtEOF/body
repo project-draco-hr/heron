@@ -1,0 +1,4 @@
+def CheckForNewlineAtEOF(filename, lines, error):
+    'Logs an error if there is no newline char at the end of the file.\n\n  Args:\n    filename: The name of the current file.\n    lines: An array of strings, each representing a line of the file.\n    error: The function to call with any errors found.\n  '
+    if ((len(lines) < 3) or lines[(-2)]):
+        error(filename, (len(lines) - 2), 'whitespace/ending_newline', 5, 'Could not find a newline character at the end of the file.')

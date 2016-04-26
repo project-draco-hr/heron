@@ -1,0 +1,19 @@
+def UpdatePreprocessor(self, line):
+    'Update preprocessor stack.\n\n    We need to handle preprocessors due to classes like this:\n      #ifdef SWIG\n      struct ResultDetailsPageElementExtensionPoint {\n      #else\n      struct ResultDetailsPageElementExtensionPoint : public Extension {\n      #endif\n\n    We make the following assumptions (good enough for most files):\n    - Preprocessor condition evaluates to true from #if up to first\n      #else/#elif/#endif.\n\n    - Preprocessor condition evaluates to false from #else/#elif up\n      to #endif.  We still perform lint checks on these lines, but\n      these do not affect nesting stack.\n\n    Args:\n      line: current line to check.\n    '
+    if Match('^\\s*#\\s*(if|ifdef|ifndef)\\b', line):
+        self.pp_stack.append(_PreprocessorInfo(copy.deepcopy(self.stack)))
+    elif Match('^\\s*#\\s*(else|elif)\\b', line):
+        if self.pp_stack:
+            if (not self.pp_stack[(-1)].seen_else):
+                self.pp_stack[(-1)].seen_else = True
+                self.pp_stack[(-1)].stack_before_else = copy.deepcopy(self.stack)
+            self.stack = copy.deepcopy(self.pp_stack[(-1)].stack_before_if)
+        else:
+            pass
+    elif Match('^\\s*#\\s*endif\\b', line):
+        if self.pp_stack:
+            if self.pp_stack[(-1)].seen_else:
+                self.stack = self.pp_stack[(-1)].stack_before_else
+            self.pp_stack.pop()
+        else:
+            pass

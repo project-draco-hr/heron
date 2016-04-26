@@ -1,0 +1,10 @@
+def Error(filename, linenum, category, confidence, message):
+    'Logs the fact we\'ve found a lint error.\n\n  We log where the error was found, and also our confidence in the error,\n  that is, how certain we are this is a legitimate style regression, and\n  not a misidentification or a use that\'s sometimes justified.\n\n  False positives can be suppressed by the use of\n  "cpplint(category)"  comments on the offending line.  These are\n  parsed into _error_suppressions.\n\n  Args:\n    filename: The name of the file containing the error.\n    linenum: The number of the line containing the error.\n    category: A string used to describe the "category" this bug\n      falls under: "whitespace", say, or "runtime".  Categories\n      may have a hierarchy separated by slashes: "whitespace/indent".\n    confidence: A number from 1-5 representing a confidence score for\n      the error, with 5 meaning that we are certain of the problem,\n      and 1 meaning that it could be a legitimate construct.\n    message: The error message.\n  '
+    if _ShouldPrintError(category, confidence, linenum):
+        _cpplint_state.IncrementErrorCount(category)
+        if (_cpplint_state.output_format == 'vs7'):
+            sys.stderr.write(('%s(%s):  %s  [%s] [%d]\n' % (filename, linenum, message, category, confidence)))
+        elif (_cpplint_state.output_format == 'eclipse'):
+            sys.stderr.write(('%s:%s: warning: %s  [%s] [%d]\n' % (filename, linenum, message, category, confidence)))
+        else:
+            sys.stderr.write(('%s:%s:  %s  [%s] [%d]\n' % (filename, linenum, message, category, confidence)))

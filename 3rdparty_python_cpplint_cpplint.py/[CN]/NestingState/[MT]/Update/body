@@ -1,0 +1,73 @@
+def Update(self, filename, clean_lines, linenum, error):
+    'Update nesting state with current line.\n\n    Args:\n      filename: The name of the current file.\n      clean_lines: A CleansedLines instance containing the file.\n      linenum: The number of the line to check.\n      error: The function to call with any errors found.\n    '
+    line = clean_lines.elided[linenum]
+    if self.stack:
+        self.previous_stack_top = self.stack[(-1)]
+    else:
+        self.previous_stack_top = None
+    self.UpdatePreprocessor(line)
+    if self.stack:
+        inner_block = self.stack[(-1)]
+        depth_change = (line.count('(') - line.count(')'))
+        inner_block.open_parentheses += depth_change
+        if (inner_block.inline_asm in (_NO_ASM, _END_ASM)):
+            if ((depth_change != 0) and (inner_block.open_parentheses == 1) and _MATCH_ASM.match(line)):
+                inner_block.inline_asm = _INSIDE_ASM
+            else:
+                inner_block.inline_asm = _NO_ASM
+        elif ((inner_block.inline_asm == _INSIDE_ASM) and (inner_block.open_parentheses == 0)):
+            inner_block.inline_asm = _END_ASM
+    while True:
+        namespace_decl_match = Match('^\\s*namespace\\b\\s*([:\\w]+)?(.*)$', line)
+        if (not namespace_decl_match):
+            break
+        new_namespace = _NamespaceInfo(namespace_decl_match.group(1), linenum)
+        self.stack.append(new_namespace)
+        line = namespace_decl_match.group(2)
+        if (line.find('{') != (-1)):
+            new_namespace.seen_open_brace = True
+            line = line[(line.find('{') + 1):]
+    class_decl_match = Match('^(\\s*(?:template\\s*<[\\w\\s<>,:]*>\\s*)?(class|struct)\\s+(?:[A-Z_]+\\s+)*(\\w+(?:::\\w+)*))(.*)$', line)
+    if (class_decl_match and ((not self.stack) or (self.stack[(-1)].open_parentheses == 0))):
+        end_declaration = len(class_decl_match.group(1))
+        if (not self.InTemplateArgumentList(clean_lines, linenum, end_declaration)):
+            self.stack.append(_ClassInfo(class_decl_match.group(3), class_decl_match.group(2), clean_lines, linenum))
+            line = class_decl_match.group(4)
+    if (not self.SeenOpenBrace()):
+        self.stack[(-1)].CheckBegin(filename, clean_lines, linenum, error)
+    if (self.stack and isinstance(self.stack[(-1)], _ClassInfo)):
+        classinfo = self.stack[(-1)]
+        access_match = Match('^(.*)\\b(public|private|protected|signals)(\\s+(?:slots\\s*)?)?:(?:[^:]|$)', line)
+        if access_match:
+            classinfo.access = access_match.group(2)
+            indent = access_match.group(1)
+            if ((len(indent) != (classinfo.class_indent + 1)) and Match('^\\s*$', indent)):
+                if classinfo.is_struct:
+                    parent = ('struct ' + classinfo.name)
+                else:
+                    parent = ('class ' + classinfo.name)
+                slots = ''
+                if access_match.group(3):
+                    slots = access_match.group(3)
+                error(filename, linenum, 'whitespace/indent', 3, ('%s%s: should be indented +1 space inside %s' % (access_match.group(2), slots, parent)))
+    while True:
+        matched = Match('^[^{;)}]*([{;)}])(.*)$', line)
+        if (not matched):
+            break
+        token = matched.group(1)
+        if (token == '{'):
+            if (not self.SeenOpenBrace()):
+                self.stack[(-1)].seen_open_brace = True
+            elif Match('^extern\\s*"[^"]*"\\s*\\{', line):
+                self.stack.append(_ExternCInfo())
+            else:
+                self.stack.append(_BlockInfo(True))
+                if _MATCH_ASM.match(line):
+                    self.stack[(-1)].inline_asm = _BLOCK_ASM
+        elif ((token == ';') or (token == ')')):
+            if (not self.SeenOpenBrace()):
+                self.stack.pop()
+        elif self.stack:
+            self.stack[(-1)].CheckEnd(filename, clean_lines, linenum, error)
+            self.stack.pop()
+        line = matched.group(2)

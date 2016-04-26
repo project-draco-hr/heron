@@ -1,0 +1,3 @@
+def RestoreFilters(self):
+    ' Restores filters previously backed up.'
+    self.filters = self._filters_backup[:]

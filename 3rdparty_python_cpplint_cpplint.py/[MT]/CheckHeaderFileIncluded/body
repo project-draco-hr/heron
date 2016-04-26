@@ -1,0 +1,17 @@
+def CheckHeaderFileIncluded(filename, include_state, error):
+    'Logs an error if a .cc file does not include its header.'
+    if (filename.endswith('_test.cc') or filename.endswith('_unittest.cc')):
+        return
+    fileinfo = FileInfo(filename)
+    headerfile = (filename[0:(len(filename) - 2)] + 'h')
+    if (not os.path.exists(headerfile)):
+        return
+    headername = FileInfo(headerfile).RepositoryName()
+    first_include = 0
+    for section_list in include_state.include_list:
+        for f in section_list:
+            if ((headername in f[0]) or (f[0] in headername)):
+                return
+            if (not first_include):
+                first_include = f[1]
+    error(filename, first_include, 'build/include', 5, ('%s should include its header file %s' % (fileinfo.RepositoryName(), headername)))

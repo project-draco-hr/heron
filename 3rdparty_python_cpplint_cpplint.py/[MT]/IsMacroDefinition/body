@@ -1,0 +1,6 @@
+def IsMacroDefinition(clean_lines, linenum):
+    if Search('^#define', clean_lines[linenum]):
+        return True
+    if ((linenum > 0) and Search('\\\\$', clean_lines[(linenum - 1)])):
+        return True
+    return False

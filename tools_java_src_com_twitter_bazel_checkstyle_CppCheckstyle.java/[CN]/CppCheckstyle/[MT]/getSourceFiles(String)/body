@@ -1,0 +1,5 @@
+{
+  ExtraActionInfo info=ExtraActionUtils.getExtraActionInfo(extraActionFile);
+  CppCompileInfo cppInfo=info.getExtension(CppCompileInfo.cppCompileInfo);
+  return Collections2.filter(cppInfo.getSourcesAndHeadersList(),Predicates.not(Predicates.containsPattern("3rdparty/")));
+}

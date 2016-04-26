@@ -1,0 +1,4 @@
+def SetFilters(self, filters):
+    'Sets the error-message filters.\n\n    These filters are applied when deciding whether to emit a given\n    error message.\n\n    Args:\n      filters: A string of comma-separated filters (eg "+whitespace/indent").\n               Each filter should start with + or -; else we die.\n\n    Raises:\n      ValueError: The comma-separated filters did not all start with \'+\' or \'-\'.\n                  E.g. "-,+whitespace,-whitespace/indent,whitespace/badfilter"\n    '
+    self.filters = _DEFAULT_FILTERS[:]
+    self.AddFilters(filters)

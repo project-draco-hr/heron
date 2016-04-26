@@ -1,0 +1,6 @@
+def _DropCommonSuffixes(filename):
+    "Drops common suffixes like _test.cc or -inl.h from filename.\n\n  For example:\n    >>> _DropCommonSuffixes('foo/foo-inl.h')\n    'foo/foo'\n    >>> _DropCommonSuffixes('foo/bar/foo.cc')\n    'foo/bar/foo'\n    >>> _DropCommonSuffixes('foo/foo_internal.h')\n    'foo/foo'\n    >>> _DropCommonSuffixes('foo/foo_unusualinternal.h')\n    'foo/foo_unusualinternal'\n\n  Args:\n    filename: The input filename.\n\n  Returns:\n    The filename with the common suffix removed.\n  "
+    for suffix in ('test.cc', 'regtest.cc', 'unittest.cc', 'inl.h', 'impl.h', 'internal.h'):
+        if (filename.endswith(suffix) and (len(filename) > len(suffix)) and (filename[((- len(suffix)) - 1)] in ('-', '_'))):
+            return filename[:((- len(suffix)) - 1)]
+    return os.path.splitext(filename)[0]

@@ -1,0 +1,3 @@
+def SetOutputFormat(self, output_format):
+    'Sets the output format for errors.'
+    self.output_format = output_format

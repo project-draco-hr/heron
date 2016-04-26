@@ -1,0 +1,36 @@
+def CheckSpacing(filename, clean_lines, linenum, nesting_state, error):
+    "Checks for the correctness of various spacing issues in the code.\n\n  Things we check for: spaces around operators, spaces after\n  if/for/while/switch, no spaces around parens in function calls, two\n  spaces between code and comment, don't start a block with a blank\n  line, don't end a function with a blank line, don't add a blank line\n  after public/protected/private, don't have too many blank lines in a row.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    nesting_state: A NestingState instance which maintains information about\n                   the current stack of nested blocks being parsed.\n    error: The function to call with any errors found.\n  "
+    raw = clean_lines.lines_without_raw_strings
+    line = raw[linenum]
+    if (IsBlankLine(line) and (not nesting_state.InNamespaceBody()) and (not nesting_state.InExternC())):
+        elided = clean_lines.elided
+        prev_line = elided[(linenum - 1)]
+        prevbrace = prev_line.rfind('{')
+        if ((prevbrace != (-1)) and (prev_line[prevbrace:].find('}') == (-1))):
+            exception = False
+            if Match(' {6}\\w', prev_line):
+                search_position = (linenum - 2)
+                while ((search_position >= 0) and Match(' {6}\\w', elided[search_position])):
+                    search_position -= 1
+                exception = ((search_position >= 0) and (elided[search_position][:5] == '    :'))
+            else:
+                exception = (Match(' {4}\\w[^\\(]*\\)\\s*(const\\s*)?(\\{\\s*$|:)', prev_line) or Match(' {4}:', prev_line))
+            if (not exception):
+                error(filename, linenum, 'whitespace/blank_line', 2, 'Redundant blank line at the start of a code block should be deleted.')
+        if ((linenum + 1) < clean_lines.NumLines()):
+            next_line = raw[(linenum + 1)]
+            if (next_line and Match('\\s*}', next_line) and (next_line.find('} else ') == (-1))):
+                error(filename, linenum, 'whitespace/blank_line', 3, 'Redundant blank line at the end of a code block should be deleted.')
+        matched = Match('\\s*(public|protected|private):', prev_line)
+        if matched:
+            error(filename, linenum, 'whitespace/blank_line', 3, ('Do not leave a blank line after "%s:"' % matched.group(1)))
+    next_line_start = 0
+    if ((linenum + 1) < clean_lines.NumLines()):
+        next_line = raw[(linenum + 1)]
+        next_line_start = (len(next_line) - len(next_line.lstrip()))
+    CheckComment(line, filename, linenum, next_line_start, error)
+    line = clean_lines.elided[linenum]
+    if (Search('\\w\\s+\\[', line) and (not Search('(?:delete|return)\\s+\\[', line))):
+        error(filename, linenum, 'whitespace/braces', 5, 'Extra space before [')
+    if (Search('for *\\(.*[^:]:[^: ]', line) or Search('for *\\(.*[^: ]:[^:]', line)):
+        error(filename, linenum, 'whitespace/forcolon', 2, 'Missing space around colon in range-based for loop')

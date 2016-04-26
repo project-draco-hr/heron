@@ -1,0 +1,21 @@
+def CheckBracesSpacing(filename, clean_lines, linenum, error):
+    'Checks for horizontal spacing near commas.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    match = Match('^(.*[^ ({>]){', line)
+    if match:
+        (endline, endlinenum, endpos) = CloseExpression(clean_lines, linenum, len(match.group(1)))
+        trailing_text = ''
+        if (endpos > (-1)):
+            trailing_text = endline[endpos:]
+        for offset in xrange((endlinenum + 1), min((endlinenum + 3), (clean_lines.NumLines() - 1))):
+            trailing_text += clean_lines.elided[offset]
+        if (not Match('^[\\s}]*[{.;,)<>\\]:]', trailing_text)):
+            error(filename, linenum, 'whitespace/braces', 5, 'Missing space before {')
+    if Search('}else', line):
+        error(filename, linenum, 'whitespace/braces', 5, 'Missing space before else')
+    if Search(':\\s*;\\s*$', line):
+        error(filename, linenum, 'whitespace/semicolon', 5, 'Semicolon defining empty statement. Use {} instead.')
+    elif Search('^\\s*;\\s*$', line):
+        error(filename, linenum, 'whitespace/semicolon', 5, 'Line contains only semicolon. If this should be an empty statement, use {} instead.')
+    elif (Search('\\s+;\\s*$', line) and (not Search('\\bfor\\b', line))):
+        error(filename, linenum, 'whitespace/semicolon', 5, 'Extra space before last semicolon. If this should be an empty statement, use {} instead.')

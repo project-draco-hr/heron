@@ -1,0 +1,11 @@
+def CheckAccess(filename, clean_lines, linenum, nesting_state, error):
+    'Checks for improper use of DISALLOW* macros.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    nesting_state: A NestingState instance which maintains information about\n                   the current stack of nested blocks being parsed.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    matched = Match('\\s*(DISALLOW_COPY_AND_ASSIGN|DISALLOW_IMPLICIT_CONSTRUCTORS)', line)
+    if (not matched):
+        return
+    if (nesting_state.stack and isinstance(nesting_state.stack[(-1)], _ClassInfo)):
+        if (nesting_state.stack[(-1)].access != 'private'):
+            error(filename, linenum, 'readability/constructors', 3, ('%s must be in the private: section' % matched.group(1)))
+    else:
+        pass

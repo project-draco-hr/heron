@@ -1,0 +1,15 @@
+def CheckSectionSpacing(filename, clean_lines, class_info, linenum, error):
+    'Checks for additional blank line issues related to sections.\n\n  Currently the only thing checked here is blank line before protected/private.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    class_info: A _ClassInfo objects.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    if (((class_info.last_line - class_info.starting_linenum) <= 24) or (linenum <= class_info.starting_linenum)):
+        return
+    matched = Match('\\s*(public|protected|private):', clean_lines.lines[linenum])
+    if matched:
+        prev_line = clean_lines.lines[(linenum - 1)]
+        if ((not IsBlankLine(prev_line)) and (not Search('\\b(class|struct)\\b', prev_line)) and (not Search('\\\\$', prev_line))):
+            end_class_head = class_info.starting_linenum
+            for i in range(class_info.starting_linenum, linenum):
+                if Search('\\{\\s*$', clean_lines.lines[i]):
+                    end_class_head = i
+                    break
+            if (end_class_head < (linenum - 1)):
+                error(filename, linenum, 'whitespace/blank_line', 3, ('"%s:" should be preceded by a blank line' % matched.group(1)))

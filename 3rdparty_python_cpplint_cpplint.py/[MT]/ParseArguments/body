@@ -1,0 +1,49 @@
+def ParseArguments(args):
+    'Parses the command line arguments.\n\n  This may set the output format and verbosity level as side-effects.\n\n  Args:\n    args: The command line arguments:\n\n  Returns:\n    The list of filenames to lint.\n  '
+    try:
+        (opts, filenames) = getopt.getopt(args, '', ['help', 'output=', 'verbose=', 'counting=', 'filter=', 'root=', 'linelength=', 'extensions='])
+    except getopt.GetoptError:
+        PrintUsage('Invalid arguments.')
+    verbosity = _VerboseLevel()
+    output_format = _OutputFormat()
+    filters = ''
+    counting_style = ''
+    for (opt, val) in opts:
+        if (opt == '--help'):
+            PrintUsage(None)
+        elif (opt == '--output'):
+            if (val not in ('emacs', 'vs7', 'eclipse')):
+                PrintUsage('The only allowed output formats are emacs, vs7 and eclipse.')
+            output_format = val
+        elif (opt == '--verbose'):
+            verbosity = int(val)
+        elif (opt == '--filter'):
+            filters = val
+            if (not filters):
+                PrintCategories()
+        elif (opt == '--counting'):
+            if (val not in ('total', 'toplevel', 'detailed')):
+                PrintUsage('Valid counting options are total, toplevel, and detailed')
+            counting_style = val
+        elif (opt == '--root'):
+            global _root
+            _root = val
+        elif (opt == '--linelength'):
+            global _line_length
+            try:
+                _line_length = int(val)
+            except ValueError:
+                PrintUsage('Line length must be digits.')
+        elif (opt == '--extensions'):
+            global _valid_extensions
+            try:
+                _valid_extensions = set(val.split(','))
+            except ValueError:
+                PrintUsage('Extensions must be comma seperated list.')
+    if (not filenames):
+        PrintUsage('No files were specified.')
+    _SetOutputFormat(output_format)
+    _SetVerboseLevel(verbosity)
+    _SetFilters(filters)
+    _SetCountingStyle(counting_style)
+    return filenames

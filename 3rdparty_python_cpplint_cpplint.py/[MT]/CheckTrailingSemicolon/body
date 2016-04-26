@@ -1,0 +1,25 @@
+def CheckTrailingSemicolon(filename, clean_lines, linenum, error):
+    'Looks for redundant trailing semicolon.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    match = Match('^(.*\\)\\s*)\\{', line)
+    if match:
+        closing_brace_pos = match.group(1).rfind(')')
+        opening_parenthesis = ReverseCloseExpression(clean_lines, linenum, closing_brace_pos)
+        if (opening_parenthesis[2] > (-1)):
+            line_prefix = opening_parenthesis[0][0:opening_parenthesis[2]]
+            macro = Search('\\b([A-Z_]+)\\s*$', line_prefix)
+            func = Match('^(.*\\])\\s*$', line_prefix)
+            if ((macro and (macro.group(1) not in ('TEST', 'TEST_F', 'MATCHER', 'MATCHER_P', 'TYPED_TEST', 'EXCLUSIVE_LOCKS_REQUIRED', 'SHARED_LOCKS_REQUIRED', 'LOCKS_EXCLUDED', 'INTERFACE_DEF'))) or (func and (not Search('\\boperator\\s*\\[\\s*\\]', func.group(1)))) or Search('\\b(?:struct|union)\\s+alignas\\s*$', line_prefix) or Search('\\s+=\\s*$', line_prefix)):
+                match = None
+        if (match and (opening_parenthesis[1] > 1) and Search('\\]\\s*$', clean_lines.elided[(opening_parenthesis[1] - 1)])):
+            match = None
+    else:
+        match = Match('^(.*(?:else|\\)\\s*const)\\s*)\\{', line)
+        if (not match):
+            prevline = GetPreviousNonBlankLine(clean_lines, linenum)[0]
+            if (prevline and Search('[;{}]\\s*$', prevline)):
+                match = Match('^(\\s*)\\{', line)
+    if match:
+        (endline, endlinenum, endpos) = CloseExpression(clean_lines, linenum, len(match.group(1)))
+        if ((endpos > (-1)) and Match('^\\s*;', endline[endpos:])):
+            error(filename, endlinenum, 'readability/braces', 4, "You don't need a ; after a }")

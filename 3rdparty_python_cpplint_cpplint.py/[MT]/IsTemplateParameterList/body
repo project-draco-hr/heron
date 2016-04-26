@@ -1,0 +1,6 @@
+def IsTemplateParameterList(clean_lines, linenum, column):
+    'Check if the token ending on (linenum, column) is the end of template<>.\n\n  Args:\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: the number of the line to check.\n    column: end column of the token to check.\n  Returns:\n    True if this token is end of a template parameter list, False otherwise.\n  '
+    (_, startline, startpos) = ReverseCloseExpression(clean_lines, linenum, column)
+    if ((startpos > (-1)) and Search('\\btemplate\\s*$', clean_lines.elided[startline][0:startpos])):
+        return True
+    return False

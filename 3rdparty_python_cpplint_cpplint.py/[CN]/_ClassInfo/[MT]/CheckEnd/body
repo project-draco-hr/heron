@@ -1,0 +1,17 @@
+def CheckEnd(self, filename, clean_lines, linenum, error):
+    seen_last_thing_in_class = False
+    for i in xrange((linenum - 1), self.starting_linenum, (-1)):
+        match = Search((('\\b(DISALLOW_COPY_AND_ASSIGN|DISALLOW_IMPLICIT_CONSTRUCTORS)\\(' + self.name) + '\\)'), clean_lines.elided[i])
+        if match:
+            if seen_last_thing_in_class:
+                error(filename, i, 'readability/constructors', 3, (match.group(1) + ' should be the last thing in the class'))
+            break
+        if (not Match('^\\s*$', clean_lines.elided[i])):
+            seen_last_thing_in_class = True
+    indent = Match('^( *)\\}', clean_lines.elided[linenum])
+    if (indent and (len(indent.group(1)) != self.class_indent)):
+        if self.is_struct:
+            parent = ('struct ' + self.name)
+        else:
+            parent = ('class ' + self.name)
+        error(filename, linenum, 'whitespace/indent', 3, ('Closing brace should be aligned with beginning of %s' % parent))

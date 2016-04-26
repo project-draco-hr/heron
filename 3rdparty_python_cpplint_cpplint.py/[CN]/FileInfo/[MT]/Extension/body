@@ -1,0 +1,3 @@
+def Extension(self):
+    'File extension - text following the final period.'
+    return self.Split()[2]

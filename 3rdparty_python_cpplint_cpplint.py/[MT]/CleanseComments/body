@@ -1,0 +1,6 @@
+def CleanseComments(line):
+    'Removes //-comments and single-line C-style /* */ comments.\n\n  Args:\n    line: A line of C++ source.\n\n  Returns:\n    The line with single-line comments removed.\n  '
+    commentpos = line.find('//')
+    if ((commentpos != (-1)) and (not IsCppString(line[:commentpos]))):
+        line = line[:commentpos].rstrip()
+    return _RE_PATTERN_CLEANSE_LINE_C_COMMENTS.sub('', line)

@@ -1,0 +1,3 @@
+def CheckEnd(self, filename, clean_lines, linenum, error):
+    'Run checks that applies to text after the closing brace.\n\n    This is mostly used for checking end of namespace comments.\n\n    Args:\n      filename: The name of the current file.\n      clean_lines: A CleansedLines instance containing the file.\n      linenum: The number of the line to check.\n      error: The function to call with any errors found.\n    '
+    pass

@@ -1,0 +1,4 @@
+def __init__(self, stack_before_if):
+    self.stack_before_if = stack_before_if
+    self.stack_before_else = []
+    self.seen_else = False

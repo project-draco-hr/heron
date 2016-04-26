@@ -1,0 +1,3 @@
+def _VerboseLevel():
+    "Returns the module's verbosity setting."
+    return _cpplint_state.verbose_level

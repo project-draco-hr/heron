@@ -1,0 +1,17 @@
+def _ClassifyInclude(fileinfo, include, is_system):
+    'Figures out what kind of header \'include\' is.\n\n  Args:\n    fileinfo: The current file cpplint is running over. A FileInfo instance.\n    include: The path to a #included file.\n    is_system: True if the #include used <> rather than "".\n\n  Returns:\n    One of the _XXX_HEADER constants.\n\n  For example:\n    >>> _ClassifyInclude(FileInfo(\'foo/foo.cc\'), \'stdio.h\', True)\n    _C_SYS_HEADER\n    >>> _ClassifyInclude(FileInfo(\'foo/foo.cc\'), \'string\', True)\n    _CPP_SYS_HEADER\n    >>> _ClassifyInclude(FileInfo(\'foo/foo.cc\'), \'foo/foo.h\', False)\n    _LIKELY_MY_HEADER\n    >>> _ClassifyInclude(FileInfo(\'foo/foo_unknown_extension.cc\'),\n    ...                  \'bar/foo_other_ext.h\', False)\n    _POSSIBLE_MY_HEADER\n    >>> _ClassifyInclude(FileInfo(\'foo/foo.cc\'), \'foo/bar.h\', False)\n    _OTHER_HEADER\n  '
+    is_cpp_h = (include in _CPP_HEADERS)
+    if is_system:
+        if is_cpp_h:
+            return _CPP_SYS_HEADER
+        else:
+            return _C_SYS_HEADER
+    (target_dir, target_base) = os.path.split(_DropCommonSuffixes(fileinfo.RepositoryName()))
+    (include_dir, include_base) = os.path.split(_DropCommonSuffixes(include))
+    if ((target_base == include_base) and ((include_dir == target_dir) or (include_dir == os.path.normpath((target_dir + '/../public'))))):
+        return _LIKELY_MY_HEADER
+    target_first_component = _RE_FIRST_COMPONENT.match(target_base)
+    include_first_component = _RE_FIRST_COMPONENT.match(include_base)
+    if (target_first_component and include_first_component and (target_first_component.group(0) == include_first_component.group(0))):
+        return _POSSIBLE_MY_HEADER
+    return _OTHER_HEADER

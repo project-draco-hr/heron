@@ -1,0 +1,6 @@
+def CheckPosixThreading(filename, clean_lines, linenum, error):
+    'Checks for calls to thread-unsafe functions.\n\n  Much code has been originally written without consideration of\n  multi-threading. Also, engineers are relying on their old experience;\n  they have learned posix before threading extensions were added. These\n  tests guide the engineers to use thread-safe functions (when using\n  posix directly).\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    for (single_thread_func, multithread_safe_func, pattern) in _THREADING_LIST:
+        if Search(pattern, line):
+            error(filename, linenum, 'runtime/threadsafe_fn', 2, (((('Consider using ' + multithread_safe_func) + '...) instead of ') + single_thread_func) + '...) for improved thread safety.'))

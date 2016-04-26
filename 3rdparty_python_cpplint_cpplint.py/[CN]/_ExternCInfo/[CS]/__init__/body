@@ -1,0 +1,2 @@
+def __init__(self):
+    _BlockInfo.__init__(self, True)

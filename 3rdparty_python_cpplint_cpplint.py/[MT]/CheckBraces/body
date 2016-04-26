@@ -1,0 +1,51 @@
+def CheckBraces(filename, clean_lines, linenum, error):
+    'Looks for misplaced braces (e.g. at the end of line).\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    if Match('\\s*{\\s*$', line):
+        prevline = GetPreviousNonBlankLine(clean_lines, linenum)[0]
+        if ((not Search('[,;:}{(]\\s*$', prevline)) and (not Match('\\s*#', prevline))):
+            error(filename, linenum, 'whitespace/braces', 4, '{ should almost always be at the end of the previous line')
+    if Match('\\s*else\\b\\s*(?:if\\b|\\{|$)', line):
+        prevline = GetPreviousNonBlankLine(clean_lines, linenum)[0]
+        if Match('\\s*}\\s*$', prevline):
+            error(filename, linenum, 'whitespace/newline', 4, 'An else should appear on the same line as the preceding }')
+    if Search('else if\\s*\\(', line):
+        brace_on_left = bool(Search('}\\s*else if\\s*\\(', line))
+        pos = line.find('else if')
+        pos = line.find('(', pos)
+        if (pos > 0):
+            (endline, _, endpos) = CloseExpression(clean_lines, linenum, pos)
+            brace_on_right = (endline[endpos:].find('{') != (-1))
+            if (brace_on_left != brace_on_right):
+                error(filename, linenum, 'readability/braces', 5, 'If an else has a brace on one side, it should have it on both')
+    elif (Search('}\\s*else[^{]*$', line) or Match('[^}]*else\\s*{', line)):
+        error(filename, linenum, 'readability/braces', 5, 'If an else has a brace on one side, it should have it on both')
+    if (Search('\\belse [^\\s{]', line) and (not Search('\\belse if\\b', line))):
+        error(filename, linenum, 'whitespace/newline', 4, 'Else clause should never be on same line as else (use 2 lines)')
+    if Match('\\s*do [^\\s{]', line):
+        error(filename, linenum, 'whitespace/newline', 4, 'do/while clauses should not be on a single line')
+    if_else_match = Search('\\b(if\\s*\\(|else\\b)', line)
+    if (if_else_match and (not Match('\\s*#', line))):
+        if_indent = GetIndentLevel(line)
+        (endline, endlinenum, endpos) = (line, linenum, if_else_match.end())
+        if_match = Search('\\bif\\s*\\(', line)
+        if if_match:
+            pos = (if_match.end() - 1)
+            (endline, endlinenum, endpos) = CloseExpression(clean_lines, linenum, pos)
+        if ((not Match('\\s*{', endline[endpos:])) and (not (Match('\\s*$', endline[endpos:]) and (endlinenum < (len(clean_lines.elided) - 1)) and Match('\\s*{', clean_lines.elided[(endlinenum + 1)])))):
+            while ((endlinenum < len(clean_lines.elided)) and (';' not in clean_lines.elided[endlinenum][endpos:])):
+                endlinenum += 1
+                endpos = 0
+            if (endlinenum < len(clean_lines.elided)):
+                endline = clean_lines.elided[endlinenum]
+                endpos = endline.find(';')
+                if (not Match(';[\\s}]*(\\\\?)$', endline[endpos:])):
+                    if (not Match('^[^{};]*\\[[^\\[\\]]*\\][^{}]*\\{[^{}]*\\}\\s*\\)*[;,]\\s*$', endline)):
+                        error(filename, linenum, 'readability/braces', 4, 'If/else bodies with multiple statements require braces')
+                elif (endlinenum < (len(clean_lines.elided) - 1)):
+                    next_line = clean_lines.elided[(endlinenum + 1)]
+                    next_indent = GetIndentLevel(next_line)
+                    if (if_match and Match('\\s*else\\b', next_line) and (next_indent != if_indent)):
+                        error(filename, linenum, 'readability/braces', 4, 'Else clause should be indented at the same level as if. Ambiguous nested if/else chains require braces.')
+                    elif (next_indent > if_indent):
+                        error(filename, linenum, 'readability/braces', 4, 'If/else bodies with multiple statements require braces')

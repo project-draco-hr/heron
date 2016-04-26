@@ -1,0 +1,11 @@
+def FlagCxx11Features(filename, clean_lines, linenum, error):
+    'Flag those c++11 features that we only allow in certain places.\n\n  Args:\n    filename: The name of the current file.\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n    error: The function to call with any errors found.\n  '
+    line = clean_lines.elided[linenum]
+    include = Match('\\s*#\\s*include\\s+[<"]([^<"]+)[">]', line)
+    if (include and (include.group(1) in ('cfenv', 'condition_variable', 'fenv.h', 'future', 'mutex', 'thread', 'chrono', 'ratio', 'regex', 'system_error'))):
+        error(filename, linenum, 'build/c++11', 5, ('<%s> is an unapproved C++11 header.' % include.group(1)))
+    if (Match('\\s*#', line) and (not Match('\\s*#\\s*define\\b', line))):
+        return
+    for top_name in ('alignment_of', 'aligned_union'):
+        if Search(('\\bstd::%s\\b' % top_name), line):
+            error(filename, linenum, 'build/c++11', 5, ('std::%s is an unapproved C++11 class or function.  Send c-style an example of where it would make your code more readable, and they may let you use it.' % top_name))

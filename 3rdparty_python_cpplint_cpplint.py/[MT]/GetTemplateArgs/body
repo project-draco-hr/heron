@@ -1,0 +1,42 @@
+def GetTemplateArgs(clean_lines, linenum):
+    'Find list of template arguments associated with this function declaration.\n\n  Args:\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: Line number containing the start of the function declaration,\n             usually one line after the end of the template-argument-list.\n  Returns:\n    Set of type names, or empty set if this does not appear to have\n    any template parameters.\n  '
+    func_line = linenum
+    while (func_line > 0):
+        line = clean_lines.elided[func_line]
+        if Match('^\\s*$', line):
+            return set()
+        if (line.find('(') >= 0):
+            break
+        func_line -= 1
+    if (func_line == 0):
+        return set()
+    argument_list = ''
+    match = Match('^(\\s*template\\s*)<', clean_lines.elided[func_line])
+    if match:
+        start_col = len(match.group(1))
+        (_, end_line, end_col) = CloseExpression(clean_lines, func_line, start_col)
+        if ((end_col > (-1)) and (end_line == func_line)):
+            start_col += 1
+            argument_list = clean_lines.elided[func_line][start_col:end_col]
+    elif (func_line > 1):
+        match = Match('^(.*)>\\s*$', clean_lines.elided[(func_line - 1)])
+        if match:
+            end_col = len(match.group(1))
+            (_, start_line, start_col) = ReverseCloseExpression(clean_lines, (func_line - 1), end_col)
+            if (start_col > (-1)):
+                start_col += 1
+                while (start_line < (func_line - 1)):
+                    argument_list += clean_lines.elided[start_line][start_col:]
+                    start_col = 0
+                    start_line += 1
+                argument_list += clean_lines.elided[(func_line - 1)][start_col:end_col]
+    if (not argument_list):
+        return set()
+    typenames = set()
+    while True:
+        match = Match('^[,\\s]*(?:typename|class)(?:\\.\\.\\.)?\\s+(\\w+)(.*)$', argument_list)
+        if (not match):
+            break
+        typenames.add(match.group(1))
+        argument_list = match.group(2)
+    return typenames

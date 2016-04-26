@@ -1,0 +1,34 @@
+@staticmethod
+def _CollapseStrings(elided):
+    'Collapses strings and chars on a line to simple "" or \'\' blocks.\n\n    We nix strings first so we\'re not fooled by text like \'"http://"\'\n\n    Args:\n      elided: The line being processed.\n\n    Returns:\n      The line with collapsed strings.\n    '
+    if _RE_PATTERN_INCLUDE.match(elided):
+        return elided
+    elided = _RE_PATTERN_CLEANSE_LINE_ESCAPES.sub('', elided)
+    collapsed = ''
+    while True:
+        match = Match('^([^\\\'"]*)([\\\'"])(.*)$', elided)
+        if (not match):
+            collapsed += elided
+            break
+        (head, quote, tail) = match.groups()
+        if (quote == '"'):
+            second_quote = tail.find('"')
+            if (second_quote >= 0):
+                collapsed += (head + '""')
+                elided = tail[(second_quote + 1):]
+            else:
+                collapsed += elided
+                break
+        elif Search('\\b(?:0[bBxX]?|[1-9])[0-9a-fA-F]*$', head):
+            match_literal = Match("^((?:\\'?[0-9a-zA-Z_])*)(.*)$", ("'" + tail))
+            collapsed += (head + match_literal.group(1).replace("'", ''))
+            elided = match_literal.group(2)
+        else:
+            second_quote = tail.find("'")
+            if (second_quote >= 0):
+                collapsed += (head + "''")
+                elided = tail[(second_quote + 1):]
+            else:
+                collapsed += elided
+                break
+    return collapsed

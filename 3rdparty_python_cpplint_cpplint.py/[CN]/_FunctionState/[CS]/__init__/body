@@ -1,0 +1,4 @@
+def __init__(self):
+    self.in_a_function = False
+    self.lines_in_function = 0
+    self.current_function = ''

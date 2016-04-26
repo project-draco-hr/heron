@@ -1,0 +1,3 @@
+def End(self):
+    'Stop analyzing function body.'
+    self.in_a_function = False

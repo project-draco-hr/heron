@@ -1,0 +1,7 @@
+def CheckForCopyright(filename, lines, error):
+    'Logs an error if no Copyright message appears at the top of the file.'
+    for line in xrange(1, min(len(lines), 11)):
+        if re.search('Copyright', lines[line], re.I):
+            break
+    else:
+        error(filename, 0, 'legal/copyright', 5, 'No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"')

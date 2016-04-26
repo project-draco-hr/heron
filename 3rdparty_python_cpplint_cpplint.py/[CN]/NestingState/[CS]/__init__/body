@@ -1,0 +1,4 @@
+def __init__(self):
+    self.stack = []
+    self.previous_stack_top = []
+    self.pp_stack = []

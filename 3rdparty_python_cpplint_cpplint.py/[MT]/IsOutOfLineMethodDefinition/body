@@ -1,0 +1,6 @@
+def IsOutOfLineMethodDefinition(clean_lines, linenum):
+    'Check if current line contains an out-of-line method definition.\n\n  Args:\n    clean_lines: A CleansedLines instance containing the file.\n    linenum: The number of the line to check.\n  Returns:\n    True if current line contains an out-of-line method definition.\n  '
+    for i in xrange(linenum, max((-1), (linenum - 10)), (-1)):
+        if Match('^([^()]*\\w+)\\(', clean_lines.elided[i]):
+            return (Match('^[^()]*\\w+::\\w+\\(', clean_lines.elided[i]) is not None)
+    return False

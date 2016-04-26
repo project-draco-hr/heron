@@ -1,0 +1,27 @@
+def InTemplateArgumentList(self, clean_lines, linenum, pos):
+    'Check if current position is inside template argument list.\n\n    Args:\n      clean_lines: A CleansedLines instance containing the file.\n      linenum: The number of the line to check.\n      pos: position just after the suspected template argument.\n    Returns:\n      True if (linenum, pos) is inside template arguments.\n    '
+    while (linenum < clean_lines.NumLines()):
+        line = clean_lines.elided[linenum]
+        match = Match('^[^{};=\\[\\]\\.<>]*(.)', line[pos:])
+        if (not match):
+            linenum += 1
+            pos = 0
+            continue
+        token = match.group(1)
+        pos += len(match.group(0))
+        if (token in ('{', '}', ';')):
+            return False
+        if (token in ('>', '=', '[', ']', '.')):
+            return True
+        if (token != '<'):
+            pos += 1
+            if (pos >= len(line)):
+                linenum += 1
+                pos = 0
+            continue
+        (_, end_line, end_pos) = CloseExpression(clean_lines, linenum, (pos - 1))
+        if (end_pos < 0):
+            return False
+        linenum = end_line
+        pos = end_pos
+    return False

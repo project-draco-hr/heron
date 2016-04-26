@@ -1,0 +1,4 @@
+def PrintCategories():
+    'Prints a list of all the error-categories used by error messages.\n\n  These are the categories used to filter messages via --filter.\n  '
+    sys.stderr.write(''.join((('  %s\n' % cat) for cat in _ERROR_CATEGORIES)))
+    sys.exit(0)

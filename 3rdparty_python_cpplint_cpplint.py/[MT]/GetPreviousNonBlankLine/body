@@ -1,0 +1,9 @@
+def GetPreviousNonBlankLine(clean_lines, linenum):
+    'Return the most recent non-blank line and its line number.\n\n  Args:\n    clean_lines: A CleansedLines instance containing the file contents.\n    linenum: The number of the line to check.\n\n  Returns:\n    A tuple with two elements.  The first element is the contents of the last\n    non-blank line before the current line, or the empty string if this is the\n    first non-blank line.  The second is the line number of that line, or -1\n    if this is the first non-blank line.\n  '
+    prevlinenum = (linenum - 1)
+    while (prevlinenum >= 0):
+        prevline = clean_lines.elided[prevlinenum]
+        if (not IsBlankLine(prevline)):
+            return (prevline, prevlinenum)
+        prevlinenum -= 1
+    return ('', (-1))

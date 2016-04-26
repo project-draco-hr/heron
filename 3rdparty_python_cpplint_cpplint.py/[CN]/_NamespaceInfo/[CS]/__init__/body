@@ -1,0 +1,5 @@
+def __init__(self, name, linenum):
+    _BlockInfo.__init__(self, False)
+    self.name = (name or '')
+    self.starting_linenum = linenum
+    self.check_namespace_indentation = True

@@ -1,0 +1,12 @@
+def Check(self, error, filename, linenum):
+    'Report if too many lines in function body.\n\n    Args:\n      error: The function to call with any errors found.\n      filename: The name of the current file.\n      linenum: The number of the line to check.\n    '
+    if Match('T(EST|est)', self.current_function):
+        base_trigger = self._TEST_TRIGGER
+    else:
+        base_trigger = self._NORMAL_TRIGGER
+    trigger = (base_trigger * (2 ** _VerboseLevel()))
+    if (self.lines_in_function > trigger):
+        error_level = int(math.log((self.lines_in_function / base_trigger), 2))
+        if (error_level > 5):
+            error_level = 5
+        error(filename, linenum, 'readability/fn_size', error_level, ('Small and focused functions are preferred: %s has %d non-comment lines (error triggered by exceeding %d lines).' % (self.current_function, self.lines_in_function, trigger)))

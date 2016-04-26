@@ -1,0 +1,3 @@
+def _SetOutputFormat(output_format):
+    "Sets the module's output format."
+    _cpplint_state.SetOutputFormat(output_format)

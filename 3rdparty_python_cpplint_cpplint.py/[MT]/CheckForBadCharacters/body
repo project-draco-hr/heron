@@ -1,0 +1,7 @@
+def CheckForBadCharacters(filename, lines, error):
+    "Logs an error for each line containing bad characters.\n\n  Two kinds of bad characters:\n\n  1. Unicode replacement characters: These indicate that either the file\n  contained invalid UTF-8 (likely) or Unicode replacement characters (which\n  it shouldn't).  Note that it's possible for this to throw off line\n  numbering if the invalid UTF-8 occurred adjacent to a newline.\n\n  2. NUL bytes.  These are problematic for some tools.\n\n  Args:\n    filename: The name of the current file.\n    lines: An array of strings, each representing a line of the file.\n    error: The function to call with any errors found.\n  "
+    for (linenum, line) in enumerate(lines):
+        if (u'\ufffd' in line):
+            error(filename, linenum, 'readability/utf8', 5, 'Line contains invalid UTF-8 (or Unicode replacement character).')
+        if ('\x00' in line):
+            error(filename, linenum, 'readability/nul', 5, 'Line contains NUL byte.')
