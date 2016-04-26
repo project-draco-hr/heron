@@ -4,10 +4,15 @@
   LOG.info("Physical plan directory: " + getPhysicalPlanDir());
   LOG.info("Execution state directory: " + getExecutionStateDir());
   LOG.info("Scheduler location directory: " + getSchedulerLocationDir());
-  client.createContainers(getTopologyDir());
-  client.createContainers(getTMasterLocationDir());
-  client.createContainers(getPhysicalPlanDir());
-  client.createContainers(getExecutionStateDir());
-  client.createContainers(getSchedulerLocationDir());
+  try {
+    client.createContainers(getTopologyDir());
+    client.createContainers(getTMasterLocationDir());
+    client.createContainers(getPhysicalPlanDir());
+    client.createContainers(getExecutionStateDir());
+    client.createContainers(getSchedulerLocationDir());
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Failed to initialize tree",e);
+  }
   LOG.info("Directory tree initialized.");
 }
