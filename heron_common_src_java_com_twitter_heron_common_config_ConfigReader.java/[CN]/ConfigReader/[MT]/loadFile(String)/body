@@ -19,12 +19,12 @@
       return props;
     }
     LOG.log(Level.FINE,"Reading config file {0}",fileName);
-    Map props_yaml=null;
+    Map propsYaml=null;
     try {
       FileInputStream fin=new FileInputStream(new File(fileName));
       try {
         Yaml yaml=new Yaml();
-        props_yaml=(Map)yaml.load(fin);
+        propsYaml=(Map)yaml.load(fin);
         LOG.log(Level.FINE,"Successfully read config file {0}",fileName);
       }
   finally {
@@ -34,6 +34,6 @@
  catch (    IOException e) {
       LOG.log(Level.SEVERE,"Failed to load config file: " + fileName,e);
     }
-    return props_yaml != null ? props_yaml : props;
+    return propsYaml != null ? propsYaml : props;
   }
 }

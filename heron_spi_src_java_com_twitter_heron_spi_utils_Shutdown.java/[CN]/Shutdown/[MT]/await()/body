@@ -1,7 +1,9 @@
 {
   try {
     lock.lock();
-    while (!terminated)     terminateCondition.await();
+    while (!terminated) {
+      terminateCondition.await();
+    }
     lock.unlock();
   }
  catch (  InterruptedException e) {
