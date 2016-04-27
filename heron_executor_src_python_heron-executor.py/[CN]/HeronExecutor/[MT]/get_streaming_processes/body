@@ -1,4 +1,4 @@
-def get_regular_processes(self):
+def get_streaming_processes(self):
     retval = {}
     assert (self.shard in self.instance_distribution)
     my_instances = self.instance_distribution[self.shard]
