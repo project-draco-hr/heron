@@ -7,32 +7,26 @@
     LOG.severe("Invalid topology name. Topology name shouldn't have . or /");
     return false;
   }
-  try {
-    getComponentRamMap(topology,-1);
-    Set<String> outputStreams=new HashSet<>();
-    for (    TopologyAPI.Spout spout : topology.getSpoutsList()) {
-      for (      TopologyAPI.OutputStream stream : spout.getOutputsList()) {
-        outputStreams.add(stream.getStream().getComponentName() + "/" + stream.getStream().getId());
-      }
-    }
-    for (    TopologyAPI.Bolt bolt : topology.getBoltsList()) {
-      for (      TopologyAPI.OutputStream stream : bolt.getOutputsList()) {
-        outputStreams.add(stream.getStream().getComponentName() + "/" + stream.getStream().getId());
-      }
-    }
-    for (    TopologyAPI.Bolt bolt : topology.getBoltsList()) {
-      for (      TopologyAPI.InputStream stream : bolt.getInputsList()) {
-        String key=stream.getStream().getComponentName() + "/" + stream.getStream().getId();
-        if (!outputStreams.contains(key)) {
-          LOG.severe("Invalid input stream " + key + " existing streams are "+ outputStreams);
-          return false;
-        }
-      }
+  getComponentRamMap(topology,-1);
+  Set<String> outputStreams=new HashSet<>();
+  for (  TopologyAPI.Spout spout : topology.getSpoutsList()) {
+    for (    TopologyAPI.OutputStream stream : spout.getOutputsList()) {
+      outputStreams.add(stream.getStream().getComponentName() + "/" + stream.getStream().getId());
     }
   }
- catch (  RuntimeException e) {
-    LOG.log(Level.SEVERE,"Failed to identify resource requirements from topology",e);
-    return false;
+  for (  TopologyAPI.Bolt bolt : topology.getBoltsList()) {
+    for (    TopologyAPI.OutputStream stream : bolt.getOutputsList()) {
+      outputStreams.add(stream.getStream().getComponentName() + "/" + stream.getStream().getId());
+    }
+  }
+  for (  TopologyAPI.Bolt bolt : topology.getBoltsList()) {
+    for (    TopologyAPI.InputStream stream : bolt.getInputsList()) {
+      String key=stream.getStream().getComponentName() + "/" + stream.getStream().getId();
+      if (!outputStreams.contains(key)) {
+        LOG.severe("Invalid input stream " + key + " existing streams are "+ outputStreams);
+        return false;
+      }
+    }
   }
   return true;
 }
