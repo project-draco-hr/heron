@@ -1,6 +1,6 @@
 {
   if (o instanceof Double) {
-    return ((Double)o);
+    return (Double)o;
   }
  else   if (o instanceof Float) {
     return new Double(((Float)o).doubleValue());

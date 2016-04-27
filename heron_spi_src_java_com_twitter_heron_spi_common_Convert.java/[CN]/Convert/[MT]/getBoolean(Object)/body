@@ -1,6 +1,6 @@
 {
   if (o instanceof Boolean) {
-    return ((Boolean)o);
+    return (Boolean)o;
   }
  else   if (o instanceof String) {
     return Boolean.valueOf((String)o);

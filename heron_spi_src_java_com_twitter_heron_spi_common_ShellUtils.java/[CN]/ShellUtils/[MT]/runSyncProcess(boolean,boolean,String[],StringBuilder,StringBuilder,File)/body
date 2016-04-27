@@ -1,21 +1,23 @@
 {
+  StringBuilder pStdOut=stdout;
+  StringBuilder pStdErr=stderr;
   try {
     if (verbose) {
       LOG.info("$> " + Arrays.toString(cmdline));
     }
     Process process=getProcessBuilder(isInheritIO,cmdline,workingDirectory).start();
     int exitValue=process.waitFor();
-    if (stdout == null) {
-      stdout=new StringBuilder();
+    if (pStdOut == null) {
+      pStdOut=new StringBuilder();
     }
-    if (stderr == null) {
-      stderr=new StringBuilder();
+    if (pStdErr == null) {
+      pStdErr=new StringBuilder();
     }
-    stdout.append(inputstreamToString(process.getInputStream()));
-    stderr.append(inputstreamToString(process.getErrorStream()));
+    pStdOut.append(inputstreamToString(process.getInputStream()));
+    pStdErr.append(inputstreamToString(process.getErrorStream()));
     if (verbose) {
-      LOG.info(stdout.toString());
-      LOG.info(stderr.toString());
+      LOG.info(pStdOut.toString());
+      LOG.info(pStdErr.toString());
     }
     return exitValue;
   }

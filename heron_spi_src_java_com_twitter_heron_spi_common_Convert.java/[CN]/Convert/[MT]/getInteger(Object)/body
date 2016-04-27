@@ -1,6 +1,6 @@
 {
   if (o instanceof Integer) {
-    return ((Integer)o);
+    return (Integer)o;
   }
  else   if (o instanceof Long) {
     return new Integer(((Long)o).intValue());
