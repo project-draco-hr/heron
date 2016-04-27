@@ -1,4 +1,4 @@
 {
-  _reducer=reducer;
-  _accumulator=_reducer.init();
+  reducer=aReducer;
+  accumulator=reducer.init();
 }

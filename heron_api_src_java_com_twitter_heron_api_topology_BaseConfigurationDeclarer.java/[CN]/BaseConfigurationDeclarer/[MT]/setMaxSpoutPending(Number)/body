@@ -1,4 +1,7 @@
 {
-  if (val != null)   val=val.intValue();
-  return addConfiguration(Config.TOPOLOGY_MAX_SPOUT_PENDING,val);
+  Integer intValue=null;
+  if (val != null) {
+    intValue=val.intValue();
+  }
+  return addConfiguration(Config.TOPOLOGY_MAX_SPOUT_PENDING,intValue);
 }

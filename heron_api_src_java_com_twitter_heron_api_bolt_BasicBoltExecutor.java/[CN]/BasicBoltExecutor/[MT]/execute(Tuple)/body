@@ -1,13 +1,13 @@
 {
-  _collector.setContext(input);
+  collector.setContext(input);
   try {
-    _bolt.execute(input,_collector);
-    _collector.getOutputter().ack(input);
+    bolt.execute(input,collector);
+    collector.getOutputter().ack(input);
   }
  catch (  FailedException e) {
     if (e instanceof ReportedFailedException) {
-      _collector.reportError(e);
+      collector.reportError(e);
     }
-    _collector.getOutputter().fail(input);
+    collector.getOutputter().fail(input);
   }
 }

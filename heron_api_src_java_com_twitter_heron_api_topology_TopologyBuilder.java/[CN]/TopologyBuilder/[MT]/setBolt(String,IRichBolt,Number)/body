@@ -1,6 +1,6 @@
 {
   validateComponentName(id);
-  BoltDeclarer b=new BoltDeclarer(id,bolt,parallelism_hint);
-  _bolts.put(id,b);
+  BoltDeclarer b=new BoltDeclarer(id,bolt,parallelismHint);
+  bolts.put(id,b);
   return b;
 }

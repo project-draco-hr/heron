@@ -1,9 +1,9 @@
 {
-  Map<String,String> metrics=new HashMap<String,String>();
+  Map<String,String> metricsMap=new HashMap<String,String>();
   for (  MetricsInfo metricsInfo : getMetrics()) {
-    metrics.put(metricsInfo.getName(),metricsInfo.getValue());
+    metricsMap.put(metricsInfo.getName(),metricsInfo.getValue());
   }
-  LinkedList<Object> exceptions=new LinkedList<Object>();
+  LinkedList<Object> exceptionsList=new LinkedList<Object>();
   for (  ExceptionInfo exceptionInfo : getExceptions()) {
     Map<String,Object> exception=new HashMap<String,Object>();
     exception.put("firstTime",exceptionInfo.getFirstTime());
@@ -11,13 +11,13 @@
     exception.put("logging",exceptionInfo.getLogging());
     exception.put("stackTrace",exceptionInfo.getStackTrace());
     exception.put("count",exceptionInfo.getCount());
-    exceptions.add(exception);
+    exceptionsList.add(exception);
   }
   Map<String,Object> result=new HashMap<String,Object>();
   result.put("timestamp",getTimestamp());
   result.put("source",getSource());
   result.put("context",getContext());
-  result.put("metrics",metrics);
-  result.put("exceptions",exceptions);
+  result.put("metrics",metricsMap);
+  result.put("exceptions",exceptionsList);
   return result.toString();
 }

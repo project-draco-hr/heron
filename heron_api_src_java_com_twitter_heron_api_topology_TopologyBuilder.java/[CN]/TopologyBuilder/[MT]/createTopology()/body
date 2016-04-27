@@ -1,9 +1,9 @@
 {
   TopologyAPI.Topology.Builder bldr=TopologyAPI.Topology.newBuilder();
-  for (  Map.Entry<String,SpoutDeclarer> spout : _spouts.entrySet()) {
+  for (  Map.Entry<String,SpoutDeclarer> spout : spouts.entrySet()) {
     spout.getValue().dump(bldr);
   }
-  for (  Map.Entry<String,BoltDeclarer> bolt : _bolts.entrySet()) {
+  for (  Map.Entry<String,BoltDeclarer> bolt : bolts.entrySet()) {
     bolt.getValue().dump(bldr);
   }
   return new HeronTopology(bldr);

@@ -1,6 +1,6 @@
 {
   String dirName=heronCmdOptions.get("cmdline.topologydefn.tmpdirectory");
-  if (dirName == null || dirName == "") {
+  if (dirName == null || dirName.isEmpty()) {
     throw new RuntimeException("Improper specification of directory");
   }
   String fileName=dirName + "/" + fTopology.getName()+ ".defn";

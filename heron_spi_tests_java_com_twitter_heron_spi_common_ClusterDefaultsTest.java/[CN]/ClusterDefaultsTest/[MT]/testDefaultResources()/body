@@ -1,7 +1,7 @@
 {
-  Config props=ClusterDefaults.getDefaultResources();
-  Assert.assertEquals(Defaults.stmgrRam(),Context.stmgrRam(props));
-  Assert.assertEquals(Defaults.instanceCpu(),Context.instanceCpu(props),0.001);
-  Assert.assertEquals(Defaults.instanceRam(),Context.instanceRam(props));
-  Assert.assertEquals(Defaults.instanceDisk(),Context.instanceDisk(props));
+  Config defaultResources=ClusterDefaults.getDefaultResources();
+  Assert.assertEquals(Defaults.stmgrRam(),Context.stmgrRam(defaultResources));
+  Assert.assertEquals(Defaults.instanceCpu(),Context.instanceCpu(defaultResources),0.001);
+  Assert.assertEquals(Defaults.instanceRam(),Context.instanceRam(defaultResources));
+  Assert.assertEquals(Defaults.instanceDisk(),Context.instanceDisk(defaultResources));
 }

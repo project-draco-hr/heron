@@ -1,6 +1,6 @@
 {
   Map ret=new HashMap();
-  for (  Map.Entry<String,CountMetric> e : _value.entrySet()) {
+  for (  Map.Entry<String,CountMetric> e : value.entrySet()) {
     ret.put(e.getKey(),e.getValue().getValueAndReset());
   }
   return ret;

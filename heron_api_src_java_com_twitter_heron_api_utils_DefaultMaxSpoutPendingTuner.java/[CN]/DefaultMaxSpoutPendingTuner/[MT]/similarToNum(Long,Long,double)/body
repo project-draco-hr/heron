@@ -1,4 +1,6 @@
 {
-  if (((double)(Math.abs(val - prevVal))) / prevVal < bound)   return true;
+  if (((double)(Math.abs(val - prevVal))) / prevVal < bound) {
+    return true;
+  }
   return false;
 }

@@ -1,5 +1,5 @@
 {
-  ByteArrayInputStream bis=new ByteArrayInputStream(_input);
+  ByteArrayInputStream bis=new ByteArrayInputStream(input);
   try {
     ObjectInputStream ois=new ObjectInputStream(bis);
     return ois.readObject();

@@ -1,7 +1,7 @@
 {
-  ReducedMetric val=_value.get(key);
+  ReducedMetric val=value.get(key);
   if (val == null) {
-    _value.put(key,val=new ReducedMetric(_reducer));
+    value.put(key,val=new ReducedMetric(reducer));
   }
   return val;
 }

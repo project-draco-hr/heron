@@ -1,9 +1,9 @@
 {
   AssignableMetric val;
-synchronized (_value) {
-    val=_value.get(key);
+synchronized (value) {
+    val=value.get(key);
     if (val == null) {
-      _value.put(key,val=new AssignableMetric(0));
+      value.put(key,val=new AssignableMetric(0));
     }
   }
   return val;

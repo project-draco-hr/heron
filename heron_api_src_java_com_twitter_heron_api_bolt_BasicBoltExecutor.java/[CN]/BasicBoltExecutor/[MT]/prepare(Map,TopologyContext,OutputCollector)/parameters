@@ -1,3 +1,3 @@
 Map heronConf
 TopologyContext context
-OutputCollector collector
+OutputCollector aCollector

@@ -1,4 +1,6 @@
 {
-  if (!similarToNum(val,prevVal,bound))   return val > prevVal;
+  if (!similarToNum(val,prevVal,bound)) {
+    return val > prevVal;
+  }
   return false;
 }
