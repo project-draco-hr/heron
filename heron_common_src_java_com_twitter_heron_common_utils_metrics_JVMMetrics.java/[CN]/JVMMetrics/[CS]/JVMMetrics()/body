@@ -26,4 +26,5 @@
   jvmPeakUsagePerMemoryPool=new MultiAssignableMetric();
   jvmCollectionUsagePerMemoryPool=new MultiAssignableMetric();
   jvmEstimatedUsagePerMemoryPool=new MultiAssignableMetric();
+  jvmBufferPoolMemoryUsage=new MultiAssignableMetric();
 }

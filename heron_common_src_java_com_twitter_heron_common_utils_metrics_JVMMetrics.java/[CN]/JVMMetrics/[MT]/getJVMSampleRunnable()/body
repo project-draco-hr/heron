@@ -8,6 +8,7 @@
       processCPULoad.update(getProcessCPULoad() * runtime.availableProcessors());
       updateFdMetrics();
       updateMemoryPoolMetrics();
+      updateBufferPoolMetrics();
       long freeMemory=runtime.freeMemory();
       long totalMemory=runtime.totalMemory();
       jvmMemoryFreeMB.update(freeMemory / Constants.MB_TO_BYTES);

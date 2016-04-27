@@ -1,0 +1,11 @@
+{
+  for (  BufferPoolMXBean bufferPoolMXBean : bufferPoolMXBeanList) {
+    String normalizedKeyName=bufferPoolMXBean.getName().replaceAll("[^\\w]","-");
+    final long memoryUsedMB=bufferPoolMXBean.getMemoryUsed() / Constants.MB_TO_BYTES;
+    final long totalCapacityMB=bufferPoolMXBean.getTotalCapacity() / Constants.MB_TO_BYTES;
+    final long countMB=bufferPoolMXBean.getCount() / Constants.MB_TO_BYTES;
+    jvmBufferPoolMemoryUsage.safeScope(normalizedKeyName + "-memory-used").setValue(memoryUsedMB);
+    jvmBufferPoolMemoryUsage.safeScope(normalizedKeyName + "-total-capacity").setValue(totalCapacityMB);
+    jvmBufferPoolMemoryUsage.safeScope(normalizedKeyName + "-count").setValue(countMB);
+  }
+}

@@ -28,4 +28,5 @@
   metricsCollector.registerMetric("__jvm-peak-usage",jvmPeakUsagePerMemoryPool,interval);
   metricsCollector.registerMetric("__jvm-collection-usage",jvmCollectionUsagePerMemoryPool,interval);
   metricsCollector.registerMetric("__jvm-estimated-usage",jvmEstimatedUsagePerMemoryPool,interval);
+  metricsCollector.registerMetric("__jvm-buffer-pool",jvmBufferPoolMemoryUsage,interval);
 }
