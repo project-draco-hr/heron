@@ -5,7 +5,7 @@
     EchoClient c=new EchoClient(looper,serverPort,1000);
     c.start();
   }
- catch (  Exception e) {
+ catch (  IOException e) {
     throw new RuntimeException("Some error instantiating client");
   }
   looper.loop();
