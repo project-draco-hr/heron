@@ -1,6 +1,6 @@
 {
   physicalPlan=UnitTestHelper.getPhysicalPlan(true,-1,TopologyAPI.TopologyState.RUNNING);
-  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,SPOUT_INSTANCE_ID);
   InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
   inControlQueue.offer(instanceControlMsg);
   AtomicInteger activateCount=new AtomicInteger(0);
@@ -10,13 +10,13 @@
   SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
   systemConfig.put("heron.instance.state.check.interval.sec",1);
   physicalPlan=UnitTestHelper.getPhysicalPlan(true,-1,TopologyAPI.TopologyState.PAUSED);
-  physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,SPOUT_INSTANCE_ID);
   instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
   inControlQueue.offer(instanceControlMsg);
   Thread.sleep(Constants.TEST_WAIT_TIME_MS);
   Assert.assertEquals(1,deactivateCount.get());
   physicalPlan=UnitTestHelper.getPhysicalPlan(true,-1,TopologyAPI.TopologyState.RUNNING);
-  physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,SPOUT_INSTANCE_ID);
   instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
   inControlQueue.offer(instanceControlMsg);
   Thread.sleep(Constants.TEST_WAIT_TIME_MS);

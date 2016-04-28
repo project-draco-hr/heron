@@ -2,7 +2,7 @@
   physicalPlan=UnitTestHelper.getPhysicalPlan(false,-1);
   SystemConfig systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(Constants.HERON_SYSTEM_CONFIG);
   systemConfig.put(SystemConfig.HERON_METRICS_EXPORT_INTERVAL_SEC,1);
-  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,SPOUT_INSTANCE_ID);
   InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
   inControlQueue.offer(instanceControlMsg);
   Runnable task=new Runnable(){

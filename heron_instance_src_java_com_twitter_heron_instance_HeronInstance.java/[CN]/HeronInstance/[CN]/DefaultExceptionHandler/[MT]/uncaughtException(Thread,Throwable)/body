@@ -1,5 +1,5 @@
 {
-  LOG.log(Level.SEVERE,"Exception caught in thread: " + thread.getName() + " with id: "+ thread.getId(),exception);
+  LOG.log(Level.SEVERE,String.format("Exception caught in thread: %s with id: %d",thread.getName(),thread.getId()),exception);
   final CountDownLatch exited=new CountDownLatch(1);
   final ExecutorService exitExecutor=Executors.newSingleThreadExecutor();
   exitExecutor.execute(new ForceExitTask(exited,systemConfig.getInstanceForceExitTimeoutMs()));

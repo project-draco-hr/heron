@@ -10,6 +10,7 @@
     close(serverSocketChannel);
     IncomingPacket incomingPacket=new IncomingPacket();
     while (incomingPacket.readFromChannel(socketChannel) != 0) {
+      SysUtils.sleep(1);
     }
     String typeName=incomingPacket.unpackString();
     REQID rid=incomingPacket.unpackREQID();

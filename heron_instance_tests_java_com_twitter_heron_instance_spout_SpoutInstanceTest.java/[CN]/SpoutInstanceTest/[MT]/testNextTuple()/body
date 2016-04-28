@@ -1,12 +1,12 @@
 {
   physicalPlan=UnitTestHelper.getPhysicalPlan(false,-1);
-  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,SPOUT_INSTANCE_ID);
   InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
   inControlQueue.offer(instanceControlMsg);
   Runnable task=new Runnable(){
-    String streamId="";
-    String componentName="";
-    String receivedTupleStrings="";
+    private String streamId="";
+    private String componentName="";
+    private String receivedTupleStrings="";
     @Override public void run(){
       for (int i=0; i < Constants.RETRY_TIMES; i++) {
         if (outStreamQueue.size() != 0) {

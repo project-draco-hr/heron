@@ -1,6 +1,6 @@
 {
   if (args.length < 10) {
-    throw new RuntimeException("Invalid arguments; Usage is java com.twitter.heron.instance.HeronInstance <topology_name> <topology_id> <instance_id> <component_name> <task_id> <component_index> <stmgr_id> <stmgr_port> <metricsmgr_port> <heron_internals_config_filename>");
+    throw new RuntimeException("Invalid arguments; Usage is java com.twitter.heron.instance.HeronInstance " + "<topology_name> <topology_id> <instance_id> <component_name> <task_id> " + "<component_index> <stmgr_id> <stmgr_port> <metricsmgr_port> "+ "<heron_internals_config_filename>");
   }
   String topologyName=args[0];
   String topologyId=args[1];

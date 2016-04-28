@@ -1,6 +1,6 @@
 {
   physicalPlan=UnitTestHelper.getPhysicalPlan(false,-1);
-  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,SPOUT_INSTANCE_ID);
   InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
   inControlQueue.offer(instanceControlMsg);
   SingletonRegistry.INSTANCE.registerSingleton(Constants.ACK_COUNT,ackCount);

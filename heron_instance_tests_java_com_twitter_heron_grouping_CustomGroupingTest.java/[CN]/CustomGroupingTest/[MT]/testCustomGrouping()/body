@@ -2,10 +2,10 @@
   final MyCustomGrouping myCustomGrouping=new MyCustomGrouping();
   final String expectedCustomGroupingStringInPrepare="test-spout+test-spout+default+[1]";
   physicalPlan=constructPhysicalPlan(myCustomGrouping);
-  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,spoutInstanceId);
+  PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,SPOUT_INSTANCE_ID);
   InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
   inControlQueue.offer(instanceControlMsg);
-  SingletonRegistry.INSTANCE.registerSingleton(customGroupingInfo,customGroupingInfoInPrepare);
+  SingletonRegistry.INSTANCE.registerSingleton(CUSTOM_GROUPING_INFO,customGroupingInfoInPrepare);
   Runnable task=new Runnable(){
     @Override public void run(){
       for (int i=0; i < Constants.RETRY_TIMES; i++) {

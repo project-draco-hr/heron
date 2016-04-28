@@ -10,6 +10,7 @@
     close(serverSocketChannel);
     IncomingPacket incomingPacket=new IncomingPacket();
     while (incomingPacket.readFromChannel(socketChannel) != 0) {
+      SysUtils.sleep(1);
     }
     String typeName=incomingPacket.unpackString();
     REQID rid=incomingPacket.unpackREQID();
@@ -30,6 +31,7 @@
     for (int i=0; i < 10; i++) {
       incomingPacket=new IncomingPacket();
       while (incomingPacket.readFromChannel(socketChannel) != 0) {
+        SysUtils.sleep(1);
       }
       typeName=incomingPacket.unpackString();
       rid=incomingPacket.unpackREQID();
