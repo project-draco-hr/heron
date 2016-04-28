@@ -8,7 +8,7 @@
       retval.put(kv.getKey(),Utils.deserialize(kv.getJavaSerializedValue().toByteArray()));
     }
   }
-  for (  TopologyAPI.Config.KeyValue kv : component.getConfig().getKvsList()) {
+  for (  TopologyAPI.Config.KeyValue kv : acomponent.getConfig().getKvsList()) {
     if (kv.hasValue()) {
       retval.put(kv.getKey(),kv.getValue());
     }

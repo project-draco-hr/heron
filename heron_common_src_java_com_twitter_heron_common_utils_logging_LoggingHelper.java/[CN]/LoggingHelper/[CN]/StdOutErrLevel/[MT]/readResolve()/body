@@ -1,5 +1,9 @@
 {
-  if (this.intValue() == STDOUT.intValue())   return STDOUT;
-  if (this.intValue() == STDERR.intValue())   return STDERR;
+  if (this.intValue() == STDOUT.intValue()) {
+    return STDOUT;
+  }
+  if (this.intValue() == STDERR.intValue()) {
+    return STDERR;
+  }
   throw new InvalidObjectException("Unknown instance :" + this);
 }
