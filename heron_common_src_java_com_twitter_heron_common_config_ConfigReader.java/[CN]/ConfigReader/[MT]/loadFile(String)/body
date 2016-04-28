@@ -1,5 +1,5 @@
 {
-  Map props=new HashMap();
+  Map<String,Object> props=new HashMap<>();
   if (fileName == null) {
     LOG.warning("Config file name cannot be null");
     return props;
@@ -19,12 +19,12 @@
       return props;
     }
     LOG.log(Level.FINE,"Reading config file {0}",fileName);
-    Map propsYaml=null;
+    Map<String,Object> propsYaml=null;
     try {
       FileInputStream fin=new FileInputStream(new File(fileName));
       try {
         Yaml yaml=new Yaml();
-        propsYaml=(Map)yaml.load(fin);
+        propsYaml=(Map<String,Object>)yaml.load(fin);
         LOG.log(Level.FINE,"Successfully read config file {0}",fileName);
       }
   finally {

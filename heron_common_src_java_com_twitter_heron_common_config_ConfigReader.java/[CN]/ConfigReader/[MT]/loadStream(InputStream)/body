@@ -1,6 +1,6 @@
 {
   LOG.fine("Reading config stream");
-  Map propsYaml=null;
+  Map propsYaml;
   Yaml yaml=new Yaml();
   propsYaml=(Map)yaml.load(inputStream);
   LOG.fine("Successfully read config");

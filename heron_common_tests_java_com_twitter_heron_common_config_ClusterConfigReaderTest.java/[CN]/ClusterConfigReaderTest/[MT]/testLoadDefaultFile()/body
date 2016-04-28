@@ -1,7 +1,6 @@
 {
-  ClusterConfigReader configReader=ClusterConfigReader.class.newInstance();
   String configPath=Paths.get(System.getenv("JAVA_RUNFILES"),Constants.TEST_DATA_PATH).toString();
-  Map props=configReader.load("cluster",configPath,"defaults1.yaml");
+  Map<String,Object> props=ClusterConfigReader.load("cluster",configPath,"defaults1.yaml");
   Assert.assertTrue(!props.isEmpty());
   Assert.assertEquals("role",props.get(Constants.ROLE_KEY));
   Assert.assertEquals("environ",props.get(Constants.ENVIRON_KEY));

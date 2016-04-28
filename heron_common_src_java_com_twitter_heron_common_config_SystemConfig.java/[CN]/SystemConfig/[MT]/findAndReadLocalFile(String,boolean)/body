@@ -1,11 +1,7 @@
 {
-  try {
-    FileInputStream fin=new FileInputStream(new File(name));
-  }
- catch (  IOException ioe) {
-    if (mustExist) {
-      throw new RuntimeException(ioe);
-    }
+  File file=new File(name);
+  if (!file.exists() && mustExist) {
+    throw new RuntimeException(String.format("Config file %s does not exist",name));
   }
   return ConfigReader.loadFile(name);
 }

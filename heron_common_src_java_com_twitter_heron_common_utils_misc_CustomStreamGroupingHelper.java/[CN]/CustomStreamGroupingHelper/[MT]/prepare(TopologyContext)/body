@@ -1,7 +1,7 @@
 {
-  Iterator iterator=targets.entrySet().iterator();
+  Iterator<Map.Entry<String,List<Target>>> iterator=targets.entrySet().iterator();
   while (iterator.hasNext()) {
-    Map.Entry<String,List<Target>> entry=(Map.Entry<String,List<Target>>)iterator.next();
+    Map.Entry<String,List<Target>> entry=iterator.next();
     for (    Target target : entry.getValue()) {
       target.prepare(context,entry.getKey());
     }
