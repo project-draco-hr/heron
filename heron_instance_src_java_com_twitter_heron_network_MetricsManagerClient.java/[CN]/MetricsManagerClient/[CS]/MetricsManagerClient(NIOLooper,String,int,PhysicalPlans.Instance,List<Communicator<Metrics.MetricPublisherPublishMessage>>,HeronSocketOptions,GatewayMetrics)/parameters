@@ -1,6 +1,6 @@
 NIOLooper s
-String MetricsHost
-int MetricsPort
+String metricsHost
+int metricsPort
 PhysicalPlans.Instance instance
 List<Communicator<Metrics.MetricPublisherPublishMessage>> outs
 HeronSocketOptions options

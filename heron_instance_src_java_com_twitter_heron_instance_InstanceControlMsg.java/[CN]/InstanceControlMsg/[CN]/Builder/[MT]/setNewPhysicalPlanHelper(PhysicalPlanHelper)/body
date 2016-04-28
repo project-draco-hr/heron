@@ -1,4 +1,4 @@
 {
-  this.newPhysicalPlanHelper=newPhysicalPlanHelper;
+  this.newPhysicalPlanHelper=physicalPlanHelper;
   return this;
 }

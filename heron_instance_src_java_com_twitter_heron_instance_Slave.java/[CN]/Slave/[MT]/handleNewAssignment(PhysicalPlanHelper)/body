@@ -1,5 +1,5 @@
 {
-  LOG.info("Incarnating ourselves as " + newHelper.getMyComponent() + " with task id "+ newHelper.getMyTaskId());
+  LOG.log(Level.INFO,"Incarnating ourselves as {0} with task id {1}",new Object[]{newHelper.getMyComponent(),newHelper.getMyTaskId()});
   newHelper.setTopologyContext(metricsCollector);
   if (newHelper.getMySpout() != null) {
     instance=new SpoutInstance(newHelper,streamInCommunicator,streamOutCommunicator,slaveLooper);

@@ -1,6 +1,6 @@
 {
   if (status != StatusCode.OK) {
-    LOG.severe(String.format("Cannot connect to the metrics port with status: %s, Will Retry..",status));
+    LOG.log(Level.WARNING,"Cannot connect to the metrics port with status: {0}, Will Retry..",status);
     Runnable r=new Runnable(){
       public void run(){
         start();

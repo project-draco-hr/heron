@@ -8,8 +8,8 @@
   gatewayMetrics.registerMetrics(gatewayMetricsCollector);
   ErrorReportLoggingHandler.init(instance.getInstanceId(),gatewayMetricsCollector,systemConfig.getHeronMetricsExportIntervalSec());
   HeronSocketOptions socketOptions=new HeronSocketOptions(systemConfig.getInstanceNetworkWriteBatchSizeBytes(),systemConfig.getInstanceNetworkWriteBatchTimeMs(),systemConfig.getInstanceNetworkReadBatchSizeBytes(),systemConfig.getInstanceNetworkReadBatchTimeMs(),systemConfig.getInstanceNetworkOptionsSocketSendBufferSizeBytes(),systemConfig.getInstanceNetworkOptionsSocketReceivedBufferSizeBytes());
-  this.streamManagerClient=new StreamManagerClient(gatewayLooper,streamMgrHost,streamPort,topologyName,topologyId,instance,inStreamQueue,outStreamQueue,inControlQueue,socketOptions,gatewayMetrics);
-  this.metricsManagerClient=new MetricsManagerClient(gatewayLooper,metricsMgrHost,metricsPort,instance,outMetricsQueues,socketOptions,gatewayMetrics);
+  this.streamManagerClient=new StreamManagerClient(gatewayLooper,STREAM_MGR_HOST,streamPort,topologyName,topologyId,instance,inStreamQueue,outStreamQueue,inControlQueue,socketOptions,gatewayMetrics);
+  this.metricsManagerClient=new MetricsManagerClient(gatewayLooper,METRICS_MGR_HOST,metricsPort,instance,outMetricsQueues,socketOptions,gatewayMetrics);
   gatewayMetricsCollector.registerMetricSampleRunnable(jvmMetrics.getJVMSampleRunnable(),systemConfig.getInstanceMetricsSystemSampleIntervalSec());
   Runnable sampleStreamQueuesSize=new Runnable(){
     @Override public void run(){
@@ -21,7 +21,7 @@
   }
 ;
   gatewayMetricsCollector.registerMetricSampleRunnable(sampleStreamQueuesSize,systemConfig.getInstanceMetricsSystemSampleIntervalSec());
-  final long instanceTuningIntervalMs=systemConfig.getInstanceTuningIntervalMs() * com.twitter.heron.common.basics.Constants.MILLISECONDS_TO_NANOSECONDS;
+  final long instanceTuningIntervalMs=systemConfig.getInstanceTuningIntervalMs() * Constants.MILLISECONDS_TO_NANOSECONDS;
   Runnable tuningStreamQueueSize=new Runnable(){
     @Override public void run(){
       inStreamQueue.updateExpectedAvailableCapacity();
