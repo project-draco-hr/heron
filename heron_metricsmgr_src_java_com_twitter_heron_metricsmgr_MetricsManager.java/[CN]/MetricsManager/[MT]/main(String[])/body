@@ -1,6 +1,6 @@
 {
   if (args.length != 6) {
-    throw new RuntimeException("Invalid arguments; Usage: java com.twitter.heron.metricsmgr.MetricsManager <id> <port> <topname> <topid> <heron_internals_config_filename> <metrics_sinks_config_filename>");
+    throw new RuntimeException("Invalid arguments; Usage: java com.twitter.heron.metricsmgr.MetricsManager " + "<id> <port> <topname> <topid> <heron_internals_config_filename> " + "<metrics_sinks_config_filename>");
   }
   String metricsmgrId=args[0];
   int metricsPort=Integer.parseInt(args[1]);

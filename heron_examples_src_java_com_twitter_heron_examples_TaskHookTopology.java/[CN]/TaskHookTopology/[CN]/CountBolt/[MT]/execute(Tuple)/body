@@ -6,9 +6,9 @@
     GlobalMetrics.incr("selected_items");
   }
  else   if (nItems % 2 == 0) {
-    _collector.fail(tuple);
+    collector.fail(tuple);
   }
  else {
-    _collector.ack(tuple);
+    collector.ack(tuple);
   }
 }

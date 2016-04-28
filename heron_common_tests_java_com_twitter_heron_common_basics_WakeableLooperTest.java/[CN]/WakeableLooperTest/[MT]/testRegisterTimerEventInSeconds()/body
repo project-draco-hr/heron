@@ -2,7 +2,7 @@
   Runnable r=new Runnable(){
     @Override public void run(){
       slaveLooper.exitLoop();
-      globalVale=10;
+      globalValue=10;
     }
   }
 ;
@@ -12,5 +12,5 @@
   slaveLooper.loop();
   long endTime=System.nanoTime();
   Assert.assertTrue(endTime - startTime - (long)intervalSeconds * SECONDS_TO_NANOSECONDS >= 0);
-  Assert.assertEquals(10,globalVale);
+  Assert.assertEquals(10,globalValue);
 }

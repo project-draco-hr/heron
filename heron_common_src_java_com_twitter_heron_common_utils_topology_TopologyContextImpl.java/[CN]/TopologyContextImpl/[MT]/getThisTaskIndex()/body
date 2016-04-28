@@ -2,7 +2,9 @@
   List<Integer> allTasks=getComponentTasks(getThisComponentId());
   int retVal=0;
   for (  Integer tsk : allTasks) {
-    if (tsk.intValue() < myTaskId)     retVal++;
+    if (tsk.intValue() < myTaskId) {
+      retVal++;
+    }
   }
   return retVal;
 }

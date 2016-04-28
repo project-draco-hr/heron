@@ -5,7 +5,7 @@
   PowerMockito.doReturn(true).when(FileUtils.class,"createDirectory",Matchers.anyString());
   Assert.assertTrue(manager.initTree());
   PowerMockito.doReturn(true).when(FileUtils.class,"deleteFile",Matchers.anyString());
-  Assert.assertTrue(manager.deleteExecutionState(topologyName).get());
+  Assert.assertTrue(manager.deleteExecutionState(TOPOLOGY_NAME).get());
   PowerMockito.verifyStatic();
-  FileUtils.deleteFile(Matchers.eq(String.format("%s/%s/%s",rootAddr,"executionstate",topologyName)));
+  FileUtils.deleteFile(Matchers.eq(String.format("%s/%s/%s",ROOT_ADDR,"executionstate",TOPOLOGY_NAME)));
 }

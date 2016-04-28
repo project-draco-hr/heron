@@ -1,5 +1,5 @@
 {
   Utils.sleep(1);
   final String word=words[rand.nextInt(words.length)];
-  _collector.emit(new Values(word),"MESSAGE_ID");
+  collector.emit(new Values(word),"MESSAGE_ID");
 }

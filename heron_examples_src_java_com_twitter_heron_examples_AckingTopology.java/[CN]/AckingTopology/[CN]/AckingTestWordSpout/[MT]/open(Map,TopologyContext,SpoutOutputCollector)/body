@@ -1,5 +1,5 @@
 {
-  _collector=collector;
+  collector=acollector;
   words=new String[]{"nathan","mike","jackson","golda","bertels"};
   rand=new Random();
 }

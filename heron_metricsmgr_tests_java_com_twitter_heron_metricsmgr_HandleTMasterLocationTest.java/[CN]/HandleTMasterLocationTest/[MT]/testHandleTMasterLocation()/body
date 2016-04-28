@@ -4,11 +4,11 @@
   runClient();
   Thread.sleep(10 * 1000);
   TopologyMaster.TMasterLocation tMasterLocation=(TopologyMaster.TMasterLocation)SingletonRegistry.INSTANCE.getSingleton(TMASTER_LOCATION_BEAN_NAME);
-  Mockito.verify(metricsManagerServer,Mockito.times(2)).onMessage(Mockito.any(SocketChannel.class),Mockito.eq(tmasterLocationRefreshMessage0));
-  Mockito.verify(metricsManagerServer,Mockito.times(2)).onMessage(Mockito.any(SocketChannel.class),Mockito.eq(tmasterLocationRefreshMessage1));
+  Mockito.verify(metricsManagerServer,Mockito.times(2)).onMessage(Mockito.any(SocketChannel.class),Mockito.eq(TMASTERLOCATIONREFRESHMESSAGE0));
+  Mockito.verify(metricsManagerServer,Mockito.times(2)).onMessage(Mockito.any(SocketChannel.class),Mockito.eq(TMASTERLOCATIONREFRESHMESSAGE1));
   InOrder inOrder=Mockito.inOrder(metricsManagerServer);
-  inOrder.verify(metricsManagerServer,Mockito.times(2)).onMessage(Mockito.any(SocketChannel.class),Mockito.eq(tmasterLocationRefreshMessage0));
-  inOrder.verify(metricsManagerServer,Mockito.times(2)).onMessage(Mockito.any(SocketChannel.class),Mockito.eq(tmasterLocationRefreshMessage1));
+  inOrder.verify(metricsManagerServer,Mockito.times(2)).onMessage(Mockito.any(SocketChannel.class),Mockito.eq(TMASTERLOCATIONREFRESHMESSAGE0));
+  inOrder.verify(metricsManagerServer,Mockito.times(2)).onMessage(Mockito.any(SocketChannel.class),Mockito.eq(TMASTERLOCATIONREFRESHMESSAGE1));
   Assert.assertEquals("topology-name",tMasterLocation.getTopologyName());
   Assert.assertEquals("topology-id",tMasterLocation.getTopologyId());
   Assert.assertEquals("host",tMasterLocation.getHost());

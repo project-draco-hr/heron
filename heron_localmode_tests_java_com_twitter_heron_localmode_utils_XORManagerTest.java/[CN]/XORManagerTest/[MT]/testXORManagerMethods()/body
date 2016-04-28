@@ -1,7 +1,7 @@
 {
   long rotateIntervalNs=Constants.SECONDS_TO_NANOSECONDS * timeoutSec / nBuckets + (Constants.SECONDS_TO_NANOSECONDS * timeoutSec) % nBuckets;
   WakeableLooper looper=Mockito.mock(WakeableLooper.class);
-  XORManager g=new XORManager(looper,timeoutSec,task_ids,nBuckets);
+  XORManager g=new XORManager(looper,timeoutSec,taskIds,nBuckets);
   Mockito.verify(looper).registerTimerEventInNanoSeconds(Mockito.eq(Constants.SECONDS_TO_NANOSECONDS * timeoutSec),Mockito.any(Runnable.class));
   for (int i=0; i < 100; ++i) {
     g.create(1,i,1);

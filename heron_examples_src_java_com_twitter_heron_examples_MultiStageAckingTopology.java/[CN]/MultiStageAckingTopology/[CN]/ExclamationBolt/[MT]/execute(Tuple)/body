@@ -6,7 +6,7 @@
     GlobalMetrics.incr("selected_items");
   }
   if (emit) {
-    _collector.emit(tuple,new Values(tuple.getString(0) + "!!!"));
+    collector.emit(tuple,new Values(tuple.getString(0) + "!!!"));
   }
-  _collector.ack(tuple);
+  collector.ack(tuple);
 }

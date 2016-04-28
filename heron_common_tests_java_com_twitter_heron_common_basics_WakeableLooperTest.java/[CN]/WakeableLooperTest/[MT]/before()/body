@@ -1,4 +1,4 @@
 {
   slaveLooper=new SlaveLooper();
-  globalVale=6;
+  globalValue=6;
 }

@@ -1,7 +1,7 @@
 {
   Runnable r=new Runnable(){
     @Override public void run(){
-      globalVale=10;
+      globalValue=10;
     }
   }
 ;
@@ -17,5 +17,5 @@ catch (  IllegalAccessException e) {
   }
 catch (  InvocationTargetException e) {
   }
-  Assert.assertEquals(10,globalVale);
+  Assert.assertEquals(10,globalValue);
 }

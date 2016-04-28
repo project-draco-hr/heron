@@ -1,4 +1,4 @@
 {
   final String word=words[rand.nextInt(words.length)];
-  _collector.emit(new Values(word));
+  collector.emit(new Values(word));
 }

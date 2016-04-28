@@ -1,3 +1,3 @@
 {
-  config=Config.newBuilder().put(Keys.stateManagerRootPath(),rootAddr).put(LocalFileSystemKeys.initializeFileTree(),false).build();
+  config=Config.newBuilder().put(Keys.stateManagerRootPath(),ROOT_ADDR).put(LocalFileSystemKeys.initializeFileTree(),false).build();
 }

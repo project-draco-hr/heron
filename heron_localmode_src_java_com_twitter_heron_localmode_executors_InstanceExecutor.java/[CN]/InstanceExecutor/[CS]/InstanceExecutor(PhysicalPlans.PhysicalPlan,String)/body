@@ -6,5 +6,5 @@
   MetricsCollector metricsCollector=new MetricsCollector(looper,metricsOutQueue);
   physicalPlanHelper=createPhysicalPlanHelper(physicalPlan,instanceId,metricsCollector);
   initInstanceManager();
-  LOG.info("Incarnating ourselves as " + physicalPlanHelper.getMyComponent() + " with task id "+ physicalPlanHelper.getMyTaskId());
+  LOG.log(Level.INFO,"Incarnating ourselves as {0} with task id {1}",new Object[]{physicalPlanHelper.getMyComponent(),physicalPlanHelper.getMyTaskId()});
 }

@@ -1,5 +1,5 @@
 {
   topology=PhysicalPlanUtilTest.getTestTopology();
-  task_ids.add(1);
-  task_ids.add(2);
+  taskIds.add(1);
+  taskIds.add(2);
 }

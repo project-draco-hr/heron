@@ -1,36 +1,20 @@
 {
 switch (grouping) {
 case SHUFFLE:
-{
-      return new ShuffleGrouping(taskIds);
-    }
+    return new ShuffleGrouping(taskIds);
 case FIELDS:
-{
-    return new FieldsGrouping(inputStream,schema,taskIds);
-  }
+  return new FieldsGrouping(inputStream,schema,taskIds);
 case ALL:
-{
-  return new AllGrouping(taskIds);
-}
+return new AllGrouping(taskIds);
 case LOWEST:
-{
 return new LowestGrouping(taskIds);
-}
 case NONE:
-{
 return new ShuffleGrouping(taskIds);
-}
 case CUSTOM:
-{
 return new CustomGrouping(taskIds);
-}
 case DIRECT:
-{
 throw new IllegalArgumentException("Direct Grouping not supported");
-}
 default :
-{
 throw new IllegalArgumentException("Unknown Grouping");
-}
 }
 }

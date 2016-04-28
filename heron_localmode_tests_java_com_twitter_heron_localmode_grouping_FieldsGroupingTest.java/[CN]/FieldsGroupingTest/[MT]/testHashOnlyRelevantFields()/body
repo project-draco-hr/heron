@@ -1,7 +1,7 @@
 {
-  List<Integer> task_ids=new LinkedList<>();
+  List<Integer> taskIds=new LinkedList<>();
   for (int i=0; i < 100; i++) {
-    task_ids.add(i);
+    taskIds.add(i);
   }
   TopologyAPI.StreamSchema.KeyType kt=TopologyAPI.StreamSchema.KeyType.newBuilder().setType(TopologyAPI.Type.OBJECT).setKey("field1").build();
   TopologyAPI.StreamSchema s=TopologyAPI.StreamSchema.newBuilder().addKeys(kt).build();
@@ -9,7 +9,7 @@
   TopologyAPI.StreamSchema.KeyType kt1=TopologyAPI.StreamSchema.KeyType.newBuilder().setType(TopologyAPI.Type.OBJECT).setKey("field1").build();
   TopologyAPI.StreamSchema.KeyType kt2=TopologyAPI.StreamSchema.KeyType.newBuilder().setType(TopologyAPI.Type.OBJECT).setKey("field2").build();
   TopologyAPI.StreamSchema schema=TopologyAPI.StreamSchema.newBuilder().addKeys(kt1).addKeys(kt2).build();
-  FieldsGrouping g=new FieldsGrouping(is,schema,task_ids);
+  FieldsGrouping g=new FieldsGrouping(is,schema,taskIds);
   Set<Integer> allDests=new HashSet<>();
   for (int i=0; i < 1000; i++) {
     HeronTuples.HeronDataTuple tuple=HeronTuples.HeronDataTuple.newBuilder().setKey(-1).addValues(ByteString.copyFromUtf8("this matters")).addValues(ByteString.copyFromUtf8("this doesnt " + i)).build();
@@ -25,5 +25,5 @@
     Assert.assertEquals(1,dests.size());
     allDests.add(dests.get(0));
   }
-  Assert.assertEquals(task_ids.size(),allDests.size());
+  Assert.assertEquals(taskIds.size(),allDests.size());
 }

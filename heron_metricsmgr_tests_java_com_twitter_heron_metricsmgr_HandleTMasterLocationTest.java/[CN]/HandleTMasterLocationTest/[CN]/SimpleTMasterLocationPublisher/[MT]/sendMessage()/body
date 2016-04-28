@@ -1,6 +1,6 @@
 {
-  sendMessage(tmasterLocationRefreshMessage0);
-  sendMessage(tmasterLocationRefreshMessage0);
-  sendMessage(tmasterLocationRefreshMessage1);
-  sendMessage(tmasterLocationRefreshMessage1);
+  sendMessage(TMASTERLOCATIONREFRESHMESSAGE0);
+  sendMessage(TMASTERLOCATIONREFRESHMESSAGE0);
+  sendMessage(TMASTERLOCATIONREFRESHMESSAGE1);
+  sendMessage(TMASTERLOCATIONREFRESHMESSAGE1);
 }
