@@ -8,7 +8,9 @@
         streamManagerClient.start();
         nioLooper.loop();
       }
- catch (      Exception ignored) {
+  finally {
+        streamManagerClient.stop();
+        nioLooper.exitLoop();
       }
     }
   }

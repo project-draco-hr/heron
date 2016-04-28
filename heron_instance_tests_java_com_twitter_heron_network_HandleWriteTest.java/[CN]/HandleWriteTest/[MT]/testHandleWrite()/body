@@ -49,12 +49,7 @@
     }
     nioLooper.exitLoop();
   }
- catch (  ClosedByInterruptException ignored) {
-  }
-catch (  ClosedChannelException ignored) {
-  }
-catch (  Exception e) {
-    e.printStackTrace();
+ catch (  ClosedChannelException ignored) {
   }
  finally {
     close(socketChannel);
