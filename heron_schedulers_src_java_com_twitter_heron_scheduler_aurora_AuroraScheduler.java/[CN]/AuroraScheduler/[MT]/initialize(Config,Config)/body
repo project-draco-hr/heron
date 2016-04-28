@@ -1,5 +1,5 @@
 {
-  this.config=config;
-  this.runtime=runtime;
-  this.controller=new AuroraController(Runtime.topologyName(runtime),Context.cluster(config),Context.role(config),Context.environ(config),Context.verbose(config));
+  this.config=mConfig;
+  this.runtime=mRuntime;
+  this.controller=getController();
 }

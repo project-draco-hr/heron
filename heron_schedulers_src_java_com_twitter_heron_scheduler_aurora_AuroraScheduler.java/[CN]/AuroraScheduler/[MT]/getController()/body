@@ -1,0 +1,3 @@
+{
+  return new AuroraController(Runtime.topologyName(runtime),Context.cluster(config),Context.role(config),Context.environ(config),Context.verbose(config));
+}

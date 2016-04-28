@@ -8,7 +8,7 @@
       try {
         LOG.info("Waiting for container " + container + " to finish.");
         regularExecutor.waitFor();
-        LOG.info("Container " + container + " is completed. Exit status: "+ regularExecutor.exitValue());
+        LOG.log(Level.INFO,"Container {0} is completed. Exit status: {1}",new Object[]{container,regularExecutor.exitValue()});
         if (topologyKilled) {
           LOG.info("Topology is killed. Not to start new executors.");
           return;
