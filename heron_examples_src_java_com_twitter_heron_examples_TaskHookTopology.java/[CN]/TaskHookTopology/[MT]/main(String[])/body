@@ -10,7 +10,7 @@
   conf.setMaxSpoutPending(1000 * 1000 * 1000);
   conf.setEnableAcking(true);
   conf.put(Config.TOPOLOGY_WORKER_CHILDOPTS,"-XX:+HeapDumpOnOutOfMemoryError");
-  List<String> taskHooks=new LinkedList<String>();
+  List<String> taskHooks=new LinkedList<>();
   taskHooks.add("com.twitter.heron.examples.TaskHookTopology$TestTaskHook");
   conf.setAutoTaskHooks(taskHooks);
   conf.setNumStmgrs(1);

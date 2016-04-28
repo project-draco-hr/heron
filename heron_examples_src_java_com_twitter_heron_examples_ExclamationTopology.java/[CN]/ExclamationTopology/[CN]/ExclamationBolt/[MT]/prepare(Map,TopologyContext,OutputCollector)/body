@@ -1,5 +1,4 @@
 {
-  collector=acollector;
   nItems=0;
   startTime=System.currentTimeMillis();
 }

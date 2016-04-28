@@ -1,5 +1,5 @@
 {
-  List<Integer> ret=new ArrayList<Integer>();
+  List<Integer> ret=new ArrayList<>();
   ret.add(taskIds.get(0));
   return ret;
 }
