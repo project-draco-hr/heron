@@ -2,17 +2,17 @@
   ISchedulerClient client=Mockito.mock(ISchedulerClient.class);
   SchedulerStateManagerAdaptor adaptor=Mockito.mock(SchedulerStateManagerAdaptor.class);
   RuntimeManagerRunner runner=new RuntimeManagerRunner(config,runtime,Command.RESTART,client);
-  Scheduler.RestartTopologyRequest restartTopologyRequest=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(topologyName).setContainerIndex(1).build();
+  Scheduler.RestartTopologyRequest restartTopologyRequest=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(TOPOLOGY_NAME).setContainerIndex(1).build();
   Mockito.when(config.getIntegerValue(ConfigKeys.get("TOPOLOGY_CONTAINER_ID"))).thenReturn(1);
   Mockito.when(client.restartTopology(restartTopologyRequest)).thenReturn(false);
-  Assert.assertFalse(runner.restartTopologyHandler(topologyName));
-  Mockito.verify(adaptor,Mockito.never()).deleteTMasterLocation(topologyName);
+  Assert.assertFalse(runner.restartTopologyHandler(TOPOLOGY_NAME));
+  Mockito.verify(adaptor,Mockito.never()).deleteTMasterLocation(TOPOLOGY_NAME);
   Mockito.when(client.restartTopology(restartTopologyRequest)).thenReturn(true);
-  Assert.assertTrue(runner.restartTopologyHandler(topologyName));
-  Mockito.verify(adaptor,Mockito.never()).deleteTMasterLocation(topologyName);
+  Assert.assertTrue(runner.restartTopologyHandler(TOPOLOGY_NAME));
+  Mockito.verify(adaptor,Mockito.never()).deleteTMasterLocation(TOPOLOGY_NAME);
   Mockito.when(config.getIntegerValue(ConfigKeys.get("TOPOLOGY_CONTAINER_ID"))).thenReturn(0);
   Mockito.when(runtime.get(Keys.schedulerStateManagerAdaptor())).thenReturn(adaptor);
-  Mockito.when(adaptor.deleteTMasterLocation(topologyName)).thenReturn(false);
-  Assert.assertFalse(runner.restartTopologyHandler(topologyName));
-  Mockito.verify(adaptor).deleteTMasterLocation(topologyName);
+  Mockito.when(adaptor.deleteTMasterLocation(TOPOLOGY_NAME)).thenReturn(false);
+  Assert.assertFalse(runner.restartTopologyHandler(TOPOLOGY_NAME));
+  Mockito.verify(adaptor).deleteTMasterLocation(TOPOLOGY_NAME);
 }

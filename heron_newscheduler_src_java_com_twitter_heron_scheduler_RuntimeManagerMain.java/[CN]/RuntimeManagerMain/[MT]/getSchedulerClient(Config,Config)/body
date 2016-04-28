@@ -2,7 +2,7 @@
   LOG.fine("Creating scheduler client");
   ISchedulerClient schedulerClient;
   if (Context.schedulerService(config)) {
-    SchedulerStateManagerAdaptor statemgr=com.twitter.heron.spi.utils.Runtime.schedulerStateManagerAdaptor(runtime);
+    SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
     Scheduler.SchedulerLocation schedulerLocation=statemgr.getSchedulerLocation(Runtime.topologyName(runtime));
     if (schedulerLocation == null) {
       LOG.log(Level.SEVERE,"Failed to get scheduler location");

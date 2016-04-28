@@ -2,10 +2,10 @@
   LaunchRunner launchRunner=new LaunchRunner(createRunnerConfig(),createRunnerRuntime());
   ExecutionEnvironment.ExecutionState executionState=launchRunner.createExecutionState();
   Assert.assertTrue(executionState.isInitialized());
-  Assert.assertEquals(topologyName,executionState.getTopologyName());
-  Assert.assertEquals(cluster,executionState.getCluster());
-  Assert.assertEquals(role,executionState.getRole());
-  Assert.assertEquals(environ,executionState.getEnviron());
+  Assert.assertEquals(TOPOLOGY_NAME,executionState.getTopologyName());
+  Assert.assertEquals(CLUSTER,executionState.getCluster());
+  Assert.assertEquals(ROLE,executionState.getRole());
+  Assert.assertEquals(ENVIRON,executionState.getEnviron());
   Assert.assertEquals(System.getProperty("user.name"),executionState.getSubmissionUser());
   Assert.assertNotNull(executionState.getTopologyId());
   Assert.assertTrue(executionState.getSubmissionTime() <= (System.currentTimeMillis() / 1000));

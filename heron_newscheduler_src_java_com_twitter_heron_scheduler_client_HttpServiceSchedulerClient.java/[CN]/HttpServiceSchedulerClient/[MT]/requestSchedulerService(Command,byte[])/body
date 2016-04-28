@@ -10,12 +10,12 @@
       return false;
     }
     Common.StatusCode statusCode;
+    LOG.fine("Receiving response from scheduler...");
     try {
-      LOG.fine("Receiving response from scheduler...");
       statusCode=Scheduler.SchedulerResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
     }
- catch (    Exception e) {
-      LOG.log(Level.SEVERE,"Failed to parse response from scheduler: ",e);
+ catch (    InvalidProtocolBufferException e) {
+      LOG.log(Level.SEVERE,"Failed to parse response",e);
       return false;
     }
     if (!statusCode.equals(Common.StatusCode.OK)) {
@@ -23,11 +23,7 @@
       return false;
     }
   }
- catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Failed to communicate with Scheduler: ",e);
-    return false;
-  }
- finally {
+  finally {
     connection.disconnect();
   }
   return true;

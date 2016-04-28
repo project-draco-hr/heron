@@ -11,9 +11,8 @@
     cmd=parser.parse(options,args);
   }
  catch (  ParseException e) {
-    LOG.severe("Error parsing command line options: " + e.getMessage());
     usage(options);
-    System.exit(1);
+    throw new RuntimeException("Error parsing command line options: ",e);
   }
   String topologyName=cmd.getOptionValue("topology_name");
   SchedulerMain schedulerMain=new SchedulerMain(cmd.getOptionValue("cluster"),cmd.getOptionValue("role"),cmd.getOptionValue("environment"),topologyName,cmd.getOptionValue("topology_jar"),Integer.parseInt(cmd.getOptionValue("http_port")));

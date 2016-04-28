@@ -4,12 +4,12 @@
   ILauncher launcher=Runtime.launcherClassInstance(runtime);
   Mockito.when(launcher.launch(Mockito.any(PackingPlan.class))).thenReturn(true);
   SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
-  Mockito.when(statemgr.setTopology(Mockito.any(TopologyAPI.Topology.class),Mockito.eq(topologyName))).thenReturn(true);
-  Mockito.when(statemgr.setExecutionState(Mockito.any(ExecutionEnvironment.ExecutionState.class),Mockito.eq(topologyName))).thenReturn(true);
+  Mockito.when(statemgr.setTopology(Mockito.any(TopologyAPI.Topology.class),Mockito.eq(TOPOLOGY_NAME))).thenReturn(true);
+  Mockito.when(statemgr.setExecutionState(Mockito.any(ExecutionEnvironment.ExecutionState.class),Mockito.eq(TOPOLOGY_NAME))).thenReturn(true);
   LaunchRunner launchRunner=new LaunchRunner(config,runtime);
   Assert.assertTrue(launchRunner.call());
-  Mockito.verify(statemgr).setTopology(Mockito.any(TopologyAPI.Topology.class),Mockito.eq(topologyName));
-  Mockito.verify(statemgr).setExecutionState(Mockito.any(ExecutionEnvironment.ExecutionState.class),Mockito.eq(topologyName));
-  Mockito.verify(statemgr,Mockito.never()).deleteExecutionState(Mockito.eq(topologyName));
-  Mockito.verify(statemgr,Mockito.never()).deleteTopology(Mockito.eq(topologyName));
+  Mockito.verify(statemgr).setTopology(Mockito.any(TopologyAPI.Topology.class),Mockito.eq(TOPOLOGY_NAME));
+  Mockito.verify(statemgr).setExecutionState(Mockito.any(ExecutionEnvironment.ExecutionState.class),Mockito.eq(TOPOLOGY_NAME));
+  Mockito.verify(statemgr,Mockito.never()).deleteExecutionState(Mockito.eq(TOPOLOGY_NAME));
+  Mockito.verify(statemgr,Mockito.never()).deleteTopology(Mockito.eq(TOPOLOGY_NAME));
 }

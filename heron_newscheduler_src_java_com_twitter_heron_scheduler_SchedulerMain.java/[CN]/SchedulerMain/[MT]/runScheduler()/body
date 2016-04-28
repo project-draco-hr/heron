@@ -24,7 +24,8 @@
     PackingPlan packedPlan=packing.pack();
     Config ytruntime=Config.newBuilder().putAll(runtime).put(Keys.instanceDistribution(),TopologyUtils.packingToString(packedPlan)).put(Keys.schedulerShutdown(),new Shutdown()).build();
     scheduler.initialize(config,ytruntime);
-    server=runServer(ytruntime,scheduler,schedulerServerPort);
+    server=getServer(ytruntime,scheduler,schedulerServerPort);
+    server.start();
     isSuccessful=setSchedulerLocation(runtime,server);
     isSuccessful=isSuccessful && scheduler.onSchedule(packedPlan);
     LOG.info("Waiting for termination... ");

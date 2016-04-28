@@ -11,9 +11,8 @@
     cmd=parser.parse(options,args);
   }
  catch (  ParseException e) {
-    LOG.severe("Error parsing command line options: " + e.getMessage());
     usage(options);
-    System.exit(1);
+    throw new RuntimeException("Error parsing command line options: ",e);
   }
   Boolean verbose=false;
   Level logLevel=Level.INFO;
@@ -59,11 +58,9 @@
     statemgr.close();
   }
   if (!isSuccessful) {
-    LOG.log(Level.SEVERE,"Failed to {0} topology {1}",new Object[]{command,topologyName});
-    System.exit(1);
+    throw new RuntimeException(String.format("Failed to %s topology %s",command,topologyName));
   }
  else {
     LOG.log(Level.FINE,"Topology {0} {1} successfully",new Object[]{topologyName,command});
-    System.exit(0);
   }
 }

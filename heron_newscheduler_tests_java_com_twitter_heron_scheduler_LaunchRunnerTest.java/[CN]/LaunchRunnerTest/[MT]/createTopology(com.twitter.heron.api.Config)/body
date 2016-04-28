@@ -19,10 +19,5 @@
   }
 ,1);
   HeronTopology heronTopology=builder.createTopology();
-  try {
-    HeronSubmitter.submitTopology(topologyName,heronConfig,heronTopology);
-  }
- catch (  Exception e) {
-  }
-  return heronTopology.setName(topologyName).setConfig(heronConfig).setState(TopologyAPI.TopologyState.RUNNING).getTopology();
+  return heronTopology.setName(TOPOLOGY_NAME).setConfig(heronConfig).setState(TopologyAPI.TopologyState.RUNNING).getTopology();
 }

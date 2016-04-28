@@ -4,11 +4,7 @@
     scheduler.initialize(config,runtime);
     ret=scheduler.onRestart(restartTopologyRequest);
   }
- catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Failed to restart topology",e);
-    return false;
-  }
- finally {
+  finally {
     scheduler.close();
   }
   return ret;

@@ -18,15 +18,10 @@
     statemgr.deleteExecutionState(topologyName);
     return false;
   }
-  try {
-    if (!launcher.launch(packedPlan)) {
-      throw new RuntimeException(launcher.getClass().getName() + " failed ");
-    }
-  }
- catch (  RuntimeException e) {
+  if (!launcher.launch(packedPlan)) {
     statemgr.deleteExecutionState(topologyName);
     statemgr.deleteTopology(topologyName);
-    LOG.log(Level.SEVERE,"Failed to launch topology",e);
+    LOG.log(Level.SEVERE,"Failed to launch topology");
     return false;
   }
   return true;
