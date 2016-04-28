@@ -1,10 +1,10 @@
 {
   clearSingletonRegistry();
-  LocalMode spyLocalMode=spy(new LocalMode(false));
+  LocalMode spyLocalMode=Mockito.spy(new LocalMode(false));
   spyLocalMode.init();
-  verify(spyLocalMode,times(1)).isSystemConfigExisted();
-  verify(spyLocalMode,times(1)).registerSystemConfig(any(SystemConfig.class));
+  Mockito.verify(spyLocalMode,Mockito.times(1)).isSystemConfigExisted();
+  Mockito.verify(spyLocalMode,Mockito.times(1)).registerSystemConfig(Mockito.any(SystemConfig.class));
   spyLocalMode.init();
-  verify(spyLocalMode,times(2)).isSystemConfigExisted();
-  verify(spyLocalMode,times(1)).registerSystemConfig(any(SystemConfig.class));
+  Mockito.verify(spyLocalMode,Mockito.times(2)).isSystemConfigExisted();
+  Mockito.verify(spyLocalMode,Mockito.times(1)).registerSystemConfig(Mockito.any(SystemConfig.class));
 }
