@@ -1,11 +1,6 @@
 {
   TopologyContextImpl topologyContext=helper.getTopologyContext();
-  try {
-    GlobalMetrics.init(topologyContext,systemConfig.getHeronMetricsExportIntervalSec());
-  }
- catch (  RuntimeException e) {
-    LOG.log(Level.SEVERE,"Failed to initialize GlobalMetrics. Global Metrics will be lost." + "Check the version of heron-api used.",e);
-  }
+  GlobalMetrics.init(topologyContext,systemConfig.getHeronMetricsExportIntervalSec());
   spoutMetrics.registerMetrics(topologyContext);
   spout.open(topologyContext.getTopologyConfig(),topologyContext,new SpoutOutputCollector(collector));
   topologyContext.invokeHookPrepare();
