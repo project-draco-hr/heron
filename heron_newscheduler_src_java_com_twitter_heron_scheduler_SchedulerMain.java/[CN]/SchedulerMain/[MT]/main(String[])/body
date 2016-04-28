@@ -15,8 +15,15 @@
     usage(options);
     System.exit(1);
   }
-  SchedulerMain schedulerMain=new SchedulerMain(cmd.getOptionValue("cluster"),cmd.getOptionValue("role"),cmd.getOptionValue("environment"),cmd.getOptionValue("topology_name"),cmd.getOptionValue("topology_jar"),Integer.parseInt(cmd.getOptionValue("http_port")));
+  String topologyName=cmd.getOptionValue("topology_name");
+  SchedulerMain schedulerMain=new SchedulerMain(cmd.getOptionValue("cluster"),cmd.getOptionValue("role"),cmd.getOptionValue("environment"),topologyName,cmd.getOptionValue("topology_jar"),Integer.parseInt(cmd.getOptionValue("http_port")));
   setupLogging(schedulerMain.config);
   LOG.log(Level.INFO,"Loaded scheduler config: {0}",schedulerMain.config);
-  schedulerMain.runScheduler();
+  boolean ret=schedulerMain.runScheduler();
+  if (!ret) {
+    throw new RuntimeException("Failed to schedule topology: " + topologyName);
+  }
+ else {
+    LOG.log(Level.INFO,"Shutting down topology: {0}",topologyName);
+  }
 }

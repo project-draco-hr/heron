@@ -1,11 +1,21 @@
 {
   String statemgrClass=Context.stateManagerClass(config);
-  IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
+  IStateManager statemgr;
   String packingClass=Context.packingClass(config);
-  IPacking packing=(IPacking)Class.forName(packingClass).newInstance();
+  IPacking packing;
   String schedulerClass=Context.schedulerClass(config);
-  IScheduler scheduler=(IScheduler)Class.forName(schedulerClass).newInstance();
+  IScheduler scheduler;
+  try {
+    statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
+    packing=(IPacking)Class.forName(packingClass).newInstance();
+    scheduler=(IScheduler)Class.forName(schedulerClass).newInstance();
+  }
+ catch (  InstantiationException|IllegalAccessException|ClassNotFoundException e) {
+    LOG.log(Level.SEVERE,"Failed to instantiate instances",e);
+    return false;
+  }
   SchedulerServer server=null;
+  boolean isSuccessful=false;
   try {
     statemgr.initialize(config);
     SchedulerStateManagerAdaptor adaptor=new SchedulerStateManagerAdaptor(statemgr,5000);
@@ -15,17 +25,14 @@
     Config ytruntime=Config.newBuilder().putAll(runtime).put(Keys.instanceDistribution(),TopologyUtils.packingToString(packedPlan)).put(Keys.schedulerShutdown(),new Shutdown()).build();
     scheduler.initialize(config,ytruntime);
     server=runServer(ytruntime,scheduler,schedulerServerPort);
-    setSchedulerLocation(runtime,server);
-    if (!scheduler.onSchedule(packedPlan)) {
-      throw new RuntimeException("Failed to scheduler topology");
-    }
+    isSuccessful=setSchedulerLocation(runtime,server);
+    isSuccessful=isSuccessful && scheduler.onSchedule(packedPlan);
     LOG.info("Waiting for termination... ");
     Runtime.schedulerShutdown(ytruntime).await();
   }
- catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Exception occurred",e);
-    LOG.log(Level.SEVERE,"Failed to run scheduler for topology: {0}. Exiting...",topology.getName());
-    System.exit(1);
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to start server",e);
+    return false;
   }
  finally {
     if (server != null) {
@@ -35,6 +42,5 @@
     packing.close();
     statemgr.close();
   }
-  LOG.log(Level.INFO,"Shutting down topology: {0}",topology.getName());
-  System.exit(0);
+  return isSuccessful;
 }

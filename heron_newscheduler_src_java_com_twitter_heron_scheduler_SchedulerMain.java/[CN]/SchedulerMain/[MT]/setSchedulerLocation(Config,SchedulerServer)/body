@@ -4,6 +4,8 @@
   SchedulerStateManagerAdaptor statemgr=Runtime.schedulerStateManagerAdaptor(runtime);
   Boolean result=statemgr.setSchedulerLocation(location,Runtime.topologyName(runtime));
   if (result == null || !result) {
-    throw new RuntimeException("Failed to set Scheduler location");
+    LOG.severe("Failed to set Scheduler location");
+    return false;
   }
+  return true;
 }
