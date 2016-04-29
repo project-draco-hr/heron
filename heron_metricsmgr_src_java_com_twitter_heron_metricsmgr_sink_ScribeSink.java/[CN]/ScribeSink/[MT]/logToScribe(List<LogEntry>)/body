@@ -5,11 +5,11 @@
     for (int attempt=0; attempt < retryAttempts; attempt++) {
       ResultCode result=client.Log(pendingEntries);
       if (result.equals(ResultCode.OK)) {
-        counters.put(OK,counters.get(OK) + pendingEntries.size());
+        COUNTERS.put(OK,COUNTERS.get(OK) + pendingEntries.size());
         return;
       }
       if (result.equals(ResultCode.TRY_LATER)) {
-        counters.put(TRY_AGAIN,counters.get(TRY_AGAIN) + 1);
+        COUNTERS.put(TRY_AGAIN,COUNTERS.get(TRY_AGAIN) + 1);
       }
       SysUtils.sleep(retryIntervalMs);
     }
@@ -20,6 +20,6 @@
 catch (  Exception e) {
     LOG.log(Level.SEVERE,"Message sending failed due to exception: ",e);
   }
-  counters.put(FAILED,counters.get(FAILED) + 1);
+  COUNTERS.put(FAILED,COUNTERS.get(FAILED) + 1);
   close();
 }

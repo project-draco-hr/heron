@@ -24,7 +24,7 @@
   LOG.info(metricsToWrite + " metrics added");
   String result="";
   try {
-    result=mapper.writeValueAsString(json);
+    result=MAPPER.writeValueAsString(json);
   }
  catch (  JsonProcessingException e) {
     LOG.log(Level.SEVERE,"Could not convert map to JSONString: " + json.toString(),e);

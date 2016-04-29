@@ -1,5 +1,5 @@
 Map<String,List<String>> packing
-TopologyAPI.Topology topology
+TopologyAPI.Topology aTopology
 long instanceRamDefaultValue
 long stmgrRam
 long containerRamRequested

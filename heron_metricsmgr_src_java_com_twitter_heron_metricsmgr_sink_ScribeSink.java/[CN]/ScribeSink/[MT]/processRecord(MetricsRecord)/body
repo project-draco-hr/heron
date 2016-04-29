@@ -1,9 +1,9 @@
 {
-  counters.put(MESSAGE,counters.get(MESSAGE) + 1);
+  COUNTERS.put(MESSAGE,COUNTERS.get(MESSAGE) + 1);
   if (!transport.isOpen() && !open()) {
-    counters.put(FAILED,counters.get(FAILED) + 1);
+    COUNTERS.put(FAILED,COUNTERS.get(FAILED) + 1);
     LOG.severe("Failed due to TTransport is not open");
-    if (counters.get(FAILED) >= connectRetryAttempts) {
+    if (COUNTERS.get(FAILED) >= connectRetryAttempts) {
       throw new RuntimeException("The scribe sink failed to connect to server; exceeds " + connectRetryAttempts + " attempts");
     }
     return;

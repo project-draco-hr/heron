@@ -1,9 +1,9 @@
 {
   Metrics.MetricPublisher publisher=request.getPublisher();
-  LOG.info(String.format("Got a new register publisher from hostname: %s," + " component_name: %s, port: %d," + " instance_id: %s, instance_index: %d from %s",publisher.getHostname(),publisher.getComponentName(),publisher.getPort(),publisher.getInstanceId(),publisher.getInstanceIndex(),channel.socket().getRemoteSocketAddress()));
+  LOG.log(Level.SEVERE,"Got a new register publisher from hostname: {0}," + " component_name: {1}, port: {2}, instance_id: {3}, instance_index: {4} from {5}",new Object[]{publisher.getHostname(),publisher.getComponentName(),publisher.getPort(),publisher.getInstanceId(),publisher.getInstanceIndex(),channel.socket().getRemoteSocketAddress()});
   Common.StatusCode responseStatusCode=Common.StatusCode.NOTOK;
   if (publisherMap.containsKey(channel.socket().getRemoteSocketAddress())) {
-    LOG.severe(String.format("Metrics publisher already exists for hostname: %s," + " component_name: %s, port: %d," + " instance_id: %s, instance_index: %d",publisher.getHostname(),publisher.getComponentName(),publisher.getPort(),publisher.getInstanceId(),publisher.getInstanceIndex()));
+    LOG.log(Level.SEVERE,"Metrics publisher already exists for hostname: {0}," + " component_name: {1}, port: {2}, instance_id: {3}, instance_index: {4}",new Object[]{publisher.getHostname(),publisher.getComponentName(),publisher.getPort(),publisher.getInstanceId(),publisher.getInstanceIndex()});
   }
  else {
     publisherMap.put(channel.socket().getRemoteSocketAddress(),publisher);

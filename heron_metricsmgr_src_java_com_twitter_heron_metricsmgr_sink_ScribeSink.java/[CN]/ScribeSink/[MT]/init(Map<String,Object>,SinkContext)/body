@@ -1,8 +1,8 @@
 {
-  counters.put(MESSAGE,0L);
-  counters.put(OK,0L);
-  counters.put(TRY_AGAIN,0L);
-  counters.put(FAILED,0L);
+  COUNTERS.put(MESSAGE,0L);
+  COUNTERS.put(OK,0L);
+  COUNTERS.put(TRY_AGAIN,0L);
+  COUNTERS.put(FAILED,0L);
   config=conf;
   sinkContext=context;
   topologyName=context.getTopologyName();

@@ -1,8 +1,8 @@
 {
   flushCounters();
   sinkContext.exportCountMetric(FLUSH_COUNT,1);
-  sinkContext.exportCountMetric(MESSAGE_COUNT,counters.get(MESSAGE).intValue());
-  sinkContext.exportCountMetric(OK_COUNT,counters.get(OK).intValue());
-  sinkContext.exportCountMetric(TRY_AGAIN_COUNT,counters.get(TRY_AGAIN).intValue());
-  sinkContext.exportCountMetric(FAILED_COUNT,counters.get(FAILED).intValue());
+  sinkContext.exportCountMetric(MESSAGE_COUNT,COUNTERS.get(MESSAGE).intValue());
+  sinkContext.exportCountMetric(OK_COUNT,COUNTERS.get(OK).intValue());
+  sinkContext.exportCountMetric(TRY_AGAIN_COUNT,COUNTERS.get(TRY_AGAIN).intValue());
+  sinkContext.exportCountMetric(FAILED_COUNT,COUNTERS.get(FAILED).intValue());
 }

@@ -6,13 +6,13 @@
     for (    Map.Entry<String,String> metricToType : tmasterMetricsType.entrySet()) {
       String value=metricToType.getValue();
       MetricsFilter.MetricAggregationType type;
-      if (value.equals("SUM")) {
+      if ("SUM".equals(value)) {
         type=MetricsFilter.MetricAggregationType.SUM;
       }
- else       if (value.equals("AVG")) {
+ else       if ("AVG".equals(value)) {
         type=MetricsFilter.MetricAggregationType.AVG;
       }
- else       if (value.equals("LAST")) {
+ else       if ("LAST".equals(value)) {
         type=MetricsFilter.MetricAggregationType.LAST;
       }
  else {

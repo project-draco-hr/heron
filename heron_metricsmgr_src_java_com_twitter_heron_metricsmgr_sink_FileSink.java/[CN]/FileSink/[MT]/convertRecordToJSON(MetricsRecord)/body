@@ -27,7 +27,7 @@
   sinkContext.exportCountMetric(EXCEPTIONS_COUNT,exceptionsCount);
   String result="";
   try {
-    result=mapper.writeValueAsString(jsonToWrite);
+    result=MAPPER.writeValueAsString(jsonToWrite);
   }
  catch (  JsonProcessingException e) {
     LOG.log(Level.SEVERE,"Could not convert map to JSONString: " + jsonToWrite.toString(),e);
