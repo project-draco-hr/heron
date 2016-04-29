@@ -8,10 +8,6 @@
     LOG.log(Level.SEVERE,"Failed to open connection to scribe server " + connectionString(),tx);
     return false;
   }
-catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Failed to open connection to scribe server " + connectionString(),e);
-    return false;
-  }
   LOG.info("Opened connection to scribe server " + connectionString());
   TProtocol protocol=new TBinaryProtocol(transport);
   client=new scribe.Client(protocol);

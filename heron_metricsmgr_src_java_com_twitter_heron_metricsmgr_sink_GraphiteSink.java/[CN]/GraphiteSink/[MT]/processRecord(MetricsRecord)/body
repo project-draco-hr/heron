@@ -9,9 +9,8 @@
   try {
     graphite.write(lines.toString());
   }
- catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Error sending metrics to Graphite",e);
-    LOG.severe("Dropping messages.");
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Error sending metrics to Graphite. Dropping messages...",e);
     try {
       graphite.close();
     }

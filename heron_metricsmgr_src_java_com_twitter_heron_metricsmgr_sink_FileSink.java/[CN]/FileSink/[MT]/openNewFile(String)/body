@@ -6,7 +6,7 @@
   try {
     writer=filename == null ? System.out : new PrintStream(new FileOutputStream(filename,false),true,"UTF-8");
   }
- catch (  Exception e) {
+ catch (  FileNotFoundException|UnsupportedEncodingException e) {
     throw new RuntimeException("Error creating " + filename,e);
   }
 }

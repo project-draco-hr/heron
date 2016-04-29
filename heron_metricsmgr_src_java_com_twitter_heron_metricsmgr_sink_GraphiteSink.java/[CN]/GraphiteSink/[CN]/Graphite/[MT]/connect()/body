@@ -9,11 +9,11 @@
     socket=new Socket(serverHost,serverPort);
     writer=new OutputStreamWriter(socket.getOutputStream(),StandardCharsets.UTF_8);
   }
- catch (  Exception e) {
+ catch (  IOException e) {
     connectionFailures++;
     if (tooManyConnectionFailures()) {
       LOG.severe("Too many connection failures, would not try to connect again.");
     }
-    LOG.log(Level.SEVERE,"Error creating connection, " + serverHost + ":"+ serverPort,e);
+    LOG.log(Level.SEVERE,String.format("Error creating connection, %s:%d",serverHost,serverPort),e);
   }
 }

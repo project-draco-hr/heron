@@ -17,9 +17,6 @@
  catch (  TException te) {
     LOG.log(Level.SEVERE,"Message sending failed due to TransportException: ",te);
   }
-catch (  Exception e) {
-    LOG.log(Level.SEVERE,"Message sending failed due to exception: ",e);
-  }
   COUNTERS.put(FAILED,COUNTERS.get(FAILED) + 1);
   close();
 }
