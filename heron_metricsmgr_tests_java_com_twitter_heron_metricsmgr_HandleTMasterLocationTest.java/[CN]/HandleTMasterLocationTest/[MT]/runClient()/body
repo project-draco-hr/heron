@@ -1,6 +1,6 @@
 {
   Runnable runClient=new Runnable(){
-    NIOLooper looper;
+    private NIOLooper looper;
     @Override public void run(){
       try {
         looper=new NIOLooper();
