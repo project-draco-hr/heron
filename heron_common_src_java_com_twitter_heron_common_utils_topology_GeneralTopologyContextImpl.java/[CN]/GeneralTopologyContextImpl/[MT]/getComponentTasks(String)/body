@@ -1,5 +1,5 @@
 {
-  List<Integer> retVal=new LinkedList<Integer>();
+  List<Integer> retVal=new LinkedList<>();
   for (  Map.Entry<Integer,String> entry : taskToComponentMap.entrySet()) {
     if (entry.getValue().equals(componentId)) {
       retVal.add(entry.getKey());

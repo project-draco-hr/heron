@@ -2,12 +2,12 @@
   FilenameFilter fileNameFilter=new FilenameFilter(){
     @Override public boolean accept(    File dir,    String name){
       Matcher m=pattern.matcher(name);
-      return m.matches() ? true : false;
+      return m.matches();
     }
   }
 ;
   File[] paths=new File(directory).listFiles(fileNameFilter);
-  ArrayList<String> files=new ArrayList<String>();
+  ArrayList<String> files=new ArrayList<>();
   for (  File path : paths) {
     files.add(path.toString());
   }

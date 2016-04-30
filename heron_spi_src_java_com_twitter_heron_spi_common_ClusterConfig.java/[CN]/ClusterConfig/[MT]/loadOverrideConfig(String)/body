@@ -1,4 +1,4 @@
 {
-  Map readConfig=ConfigReader.loadFile(overrideConfigFile);
+  Map<String,Object> readConfig=ConfigReader.loadFile(overrideConfigFile);
   return Config.newBuilder().putAll(readConfig).build();
 }

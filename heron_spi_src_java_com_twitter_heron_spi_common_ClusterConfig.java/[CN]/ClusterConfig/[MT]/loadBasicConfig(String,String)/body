@@ -1,4 +1,3 @@
 {
-  Config config=Config.newBuilder().putAll(loadHeronHome(heronHome,configPath)).putAll(loadConfigHome(heronHome,configPath)).build();
-  return config;
+  return Config.newBuilder().putAll(loadHeronHome(heronHome,configPath)).putAll(loadConfigHome(heronHome,configPath)).build();
 }

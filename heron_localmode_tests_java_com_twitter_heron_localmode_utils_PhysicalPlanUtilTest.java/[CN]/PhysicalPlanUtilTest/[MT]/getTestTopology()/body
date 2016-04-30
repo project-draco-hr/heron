@@ -5,7 +5,7 @@
     @Override public void declareOutputFields(    OutputFieldsDeclarer outputFieldsDeclarer){
       outputFieldsDeclarer.declare(new Fields("word"));
     }
-    @Override public void open(    Map map,    TopologyContext topologyContext,    SpoutOutputCollector spoutOutputCollector){
+    @Override public void open(    Map<String,Object> map,    TopologyContext topologyContext,    SpoutOutputCollector spoutOutputCollector){
     }
     @Override public void nextTuple(){
     }

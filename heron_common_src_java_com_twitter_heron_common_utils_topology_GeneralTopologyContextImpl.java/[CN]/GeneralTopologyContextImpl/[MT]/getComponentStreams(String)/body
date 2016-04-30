@@ -1,6 +1,6 @@
 {
   if (outputs.containsKey(componentId)) {
-    Set<String> streams=new HashSet<String>();
+    Set<String> streams=new HashSet<>();
     List<TopologyAPI.OutputStream> olist=outputs.get(componentId);
     for (    TopologyAPI.OutputStream ostream : olist) {
       streams.add(ostream.getStream().getId());

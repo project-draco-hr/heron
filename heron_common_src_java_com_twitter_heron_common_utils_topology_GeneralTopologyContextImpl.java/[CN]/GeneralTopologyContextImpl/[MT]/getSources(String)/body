@@ -1,6 +1,6 @@
 {
   if (inputs.containsKey(componentId)) {
-    Map<TopologyAPI.StreamId,TopologyAPI.Grouping> retVal=new HashMap<TopologyAPI.StreamId,TopologyAPI.Grouping>();
+    Map<TopologyAPI.StreamId,TopologyAPI.Grouping> retVal=new HashMap<>();
     for (    TopologyAPI.InputStream istream : inputs.get(componentId)) {
       retVal.put(istream.getStream(),istream.getGtype());
     }

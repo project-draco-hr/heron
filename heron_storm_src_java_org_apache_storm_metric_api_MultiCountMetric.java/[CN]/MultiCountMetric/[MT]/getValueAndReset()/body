@@ -1,5 +1,5 @@
 {
-  Map ret=new HashMap();
+  Map<String,Object> ret=new HashMap<>();
   for (  Map.Entry<String,CountMetric> e : value.entrySet()) {
     ret.put(e.getKey(),e.getValue().getValueAndReset());
   }

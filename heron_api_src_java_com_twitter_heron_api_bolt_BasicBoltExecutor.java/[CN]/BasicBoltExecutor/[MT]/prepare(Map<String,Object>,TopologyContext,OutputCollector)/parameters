@@ -1,0 +1,3 @@
+Map<String,Object> heronConf
+TopologyContext context
+OutputCollector aCollector

@@ -1,4 +1,4 @@
 {
-  Map readConfig=ConfigReader.loadFile(schedulerFile);
+  Map<String,Object> readConfig=ConfigReader.loadFile(schedulerFile);
   return Config.newBuilder().putAll(readConfig).build();
 }

@@ -1,0 +1,3 @@
+Map<String,Object> conf
+TopologyContext context
+SpoutOutputCollector acollector

@@ -1,4 +1,4 @@
 {
-  Map readConfig=ConfigReader.loadFile(packingFile);
+  Map<String,Object> readConfig=ConfigReader.loadFile(packingFile);
   return Config.newBuilder().putAll(readConfig).build();
 }

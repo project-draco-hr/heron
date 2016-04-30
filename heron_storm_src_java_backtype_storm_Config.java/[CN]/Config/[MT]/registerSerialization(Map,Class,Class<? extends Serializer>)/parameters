@@ -1,3 +1,0 @@
-Map conf
-Class klass
-Class<? extends Serializer> serializerClass

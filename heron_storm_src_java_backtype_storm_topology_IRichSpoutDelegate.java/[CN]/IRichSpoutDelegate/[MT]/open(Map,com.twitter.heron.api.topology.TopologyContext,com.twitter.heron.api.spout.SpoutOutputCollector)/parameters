@@ -1,3 +1,0 @@
-Map conf
-com.twitter.heron.api.topology.TopologyContext context
-com.twitter.heron.api.spout.SpoutOutputCollector collector

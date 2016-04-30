@@ -1,4 +1,3 @@
 {
-  Config config=Config.newBuilder().putAll(loadSandboxHome(Defaults.heronSandboxHome(),Defaults.heronSandboxConf())).putAll(loadSandboxConfigHome(Defaults.heronSandboxHome(),Defaults.heronSandboxConf())).build();
-  return config;
+  return Config.newBuilder().putAll(loadSandboxHome(Defaults.heronSandboxHome(),Defaults.heronSandboxConf())).putAll(loadSandboxConfigHome(Defaults.heronSandboxHome(),Defaults.heronSandboxConf())).build();
 }

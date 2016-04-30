@@ -1,4 +1,4 @@
 {
-  Map readConfig=ConfigReader.loadFile(uploaderFile);
+  Map<String,Object> readConfig=ConfigReader.loadFile(uploaderFile);
   return Config.newBuilder().putAll(readConfig).build();
 }

@@ -1,8 +1,11 @@
 {
   LOG.fine("Reading config stream");
-  Map propsYaml;
   Yaml yaml=new Yaml();
-  propsYaml=(Map)yaml.load(inputStream);
+  Map<Object,Object> propsYaml=(Map<Object,Object>)yaml.load(inputStream);
   LOG.fine("Successfully read config");
-  return propsYaml != null ? propsYaml : new HashMap();
+  Map<String,Object> typedMap=new HashMap<>();
+  for (  Object key : propsYaml.keySet()) {
+    typedMap.put(key.toString(),propsYaml.get(key));
+  }
+  return typedMap;
 }

@@ -1,0 +1,3 @@
+Map<String,Object> conf
+com.twitter.heron.api.topology.TopologyContext context
+com.twitter.heron.api.bolt.OutputCollector collector

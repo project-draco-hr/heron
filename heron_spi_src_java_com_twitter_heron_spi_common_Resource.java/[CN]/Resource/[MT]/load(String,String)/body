@@ -1,8 +1,7 @@
 {
-  Class cls=Class.forName(className);
-  ClassLoader cLoader=cls.getClassLoader();
+  ClassLoader cLoader=Class.forName(className).getClassLoader();
   InputStream fileStream=cLoader.getResourceAsStream(resName);
-  Map kvPairs=ConfigReader.loadStream(fileStream);
+  Map<String,Object> kvPairs=ConfigReader.loadStream(fileStream);
   if (kvPairs.isEmpty()) {
     LOG.severe("Config keys cannot be empty ");
     throw new RuntimeException("Config keys file cannot be empty");

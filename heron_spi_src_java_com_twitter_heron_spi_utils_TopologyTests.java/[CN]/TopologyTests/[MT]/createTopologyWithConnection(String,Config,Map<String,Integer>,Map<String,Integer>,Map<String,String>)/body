@@ -5,7 +5,7 @@
     public void declareOutputFields(    OutputFieldsDeclarer declarer){
       declarer.declare(new Fields("field1"));
     }
-    public void open(    Map conf,    TopologyContext context,    SpoutOutputCollector collector){
+    public void open(    Map<String,Object> conf,    TopologyContext context,    SpoutOutputCollector collector){
     }
     public void nextTuple(){
     }

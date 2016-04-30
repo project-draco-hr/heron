@@ -1,5 +1,5 @@
 {
-  Map ret=new HashMap();
+  Map<String,Object> ret=new HashMap<>();
 synchronized (value) {
     for (    Map.Entry<String,AssignableMetric> e : value.entrySet()) {
       ret.put(e.getKey(),e.getValue().getValueAndReset());

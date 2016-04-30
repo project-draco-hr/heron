@@ -1,4 +1,4 @@
 {
-  Map readConfig=ConfigReader.loadFile(stateMgrFile);
+  Map<String,Object> readConfig=ConfigReader.loadFile(stateMgrFile);
   return Config.newBuilder().putAll(readConfig).build();
 }

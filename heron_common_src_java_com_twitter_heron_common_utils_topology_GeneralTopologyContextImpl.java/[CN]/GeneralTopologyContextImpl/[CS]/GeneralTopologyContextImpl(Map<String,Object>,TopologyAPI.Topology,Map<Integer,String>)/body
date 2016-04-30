@@ -1,10 +1,10 @@
 {
   this.topology=topology;
-  this.topologyConfig=new HashMap<String,Object>(clusterConfig);
+  this.topologyConfig=new HashMap<>(clusterConfig);
   this.taskToComponentMap=taskToComponentMap;
-  this.inputs=new HashMap<String,List<TopologyAPI.InputStream>>();
-  this.outputs=new HashMap<String,List<TopologyAPI.OutputStream>>();
-  this.componentsOutputFields=new HashMap<String,Map<String,Fields>>();
+  this.inputs=new HashMap<>();
+  this.outputs=new HashMap<>();
+  this.componentsOutputFields=new HashMap<>();
   for (int i=0; i < this.topology.getSpoutsCount(); ++i) {
     TopologyAPI.Spout spout=this.topology.getSpouts(i);
     this.inputs.put(spout.getComp().getName(),new LinkedList<TopologyAPI.InputStream>());
