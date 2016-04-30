@@ -1,0 +1,3 @@
+{
+  controller=Mockito.spy(new AuroraController(JOB_NAME,CLUSTER,ROLE,ENV,IS_VERBOSE));
+}

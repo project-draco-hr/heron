@@ -1,0 +1,11 @@
+{
+  AuroraController controller=Mockito.mock(AuroraController.class);
+  Mockito.doReturn(controller).when(scheduler).getController();
+  scheduler.initialize(Mockito.mock(Config.class),Mockito.mock(Config.class));
+  Mockito.doReturn(false).when(controller).killJob();
+  Assert.assertFalse(scheduler.onKill(Scheduler.KillTopologyRequest.getDefaultInstance()));
+  Mockito.verify(controller).killJob();
+  Mockito.doReturn(true).when(controller).killJob();
+  Assert.assertTrue(scheduler.onKill(Scheduler.KillTopologyRequest.getDefaultInstance()));
+  Mockito.verify(controller,Mockito.times(2)).killJob();
+}

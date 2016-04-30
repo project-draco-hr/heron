@@ -1,0 +1,18 @@
+{
+  AuroraController controller=Mockito.mock(AuroraController.class);
+  Mockito.doReturn(controller).when(scheduler).getController();
+  scheduler.initialize(Mockito.mock(Config.class),Mockito.mock(Config.class));
+  Assert.assertFalse(scheduler.onSchedule(null));
+  PackingPlan plan=new PackingPlan(PACKING_PLAN_ID,new HashMap<String,PackingPlan.ContainerPlan>(),Mockito.mock(PackingPlan.Resource.class));
+  Assert.assertTrue(plan.containers.isEmpty());
+  Assert.assertFalse(scheduler.onSchedule(plan));
+  Map<String,PackingPlan.ContainerPlan> containers=new HashMap<>();
+  containers.put(CONTAINER_ID,Mockito.mock(PackingPlan.ContainerPlan.class));
+  PackingPlan validPlan=new PackingPlan(PACKING_PLAN_ID,containers,Mockito.mock(PackingPlan.Resource.class));
+  Mockito.doReturn(false).when(controller).createJob(Mockito.anyString(),Mockito.any(Map.class));
+  Assert.assertFalse(scheduler.onSchedule(validPlan));
+  Mockito.verify(controller).createJob(Mockito.eq(AURORA_PATH),Mockito.any(Map.class));
+  Mockito.doReturn(true).when(controller).createJob(Mockito.anyString(),Mockito.any(Map.class));
+  Assert.assertTrue(scheduler.onSchedule(validPlan));
+  Mockito.verify(controller,Mockito.times(2)).createJob(Mockito.eq(AURORA_PATH),Mockito.any(Map.class));
+}

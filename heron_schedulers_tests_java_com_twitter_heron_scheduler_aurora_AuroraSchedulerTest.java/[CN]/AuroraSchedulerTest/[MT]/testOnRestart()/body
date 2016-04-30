@@ -1,0 +1,13 @@
+{
+  AuroraController controller=Mockito.mock(AuroraController.class);
+  Mockito.doReturn(controller).when(scheduler).getController();
+  scheduler.initialize(Mockito.mock(Config.class),Mockito.mock(Config.class));
+  int containerToRestart=1;
+  Scheduler.RestartTopologyRequest restartTopologyRequest=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(TOPOLOGY_NAME).setContainerIndex(containerToRestart).build();
+  Mockito.doReturn(false).when(controller).restartJob(containerToRestart);
+  Assert.assertFalse(scheduler.onRestart(restartTopologyRequest));
+  Mockito.verify(controller).restartJob(containerToRestart);
+  Mockito.doReturn(true).when(controller).restartJob(containerToRestart);
+  Assert.assertTrue(scheduler.onRestart(restartTopologyRequest));
+  Mockito.verify(controller,Mockito.times(2)).restartJob(containerToRestart);
+}

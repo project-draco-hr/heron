@@ -1,0 +1,9 @@
+{
+  List<String> expectedCommand=new ArrayList<>(Arrays.asList("aurora","job","killall",String.format("%s/%s/%s/%s",CLUSTER,ROLE,ENV,JOB_NAME),VERBOSE_CONFIG,BATCH_CONFIG,"" + Integer.MAX_VALUE));
+  Mockito.doReturn(false).when(controller).runProcess(Mockito.anyList());
+  Assert.assertFalse(controller.killJob());
+  Mockito.verify(controller).runProcess(Mockito.eq(expectedCommand));
+  Mockito.doReturn(true).when(controller).runProcess(Mockito.anyList());
+  Assert.assertTrue(controller.killJob());
+  Mockito.verify(controller,Mockito.times(2)).runProcess(expectedCommand);
+}

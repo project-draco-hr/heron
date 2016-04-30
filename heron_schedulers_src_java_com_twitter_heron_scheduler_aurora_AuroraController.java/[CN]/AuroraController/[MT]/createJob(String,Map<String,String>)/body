@@ -10,5 +10,5 @@
   if (isVerbose) {
     auroraCmd.add("--verbose");
   }
-  return 0 == ShellUtils.runProcess(isVerbose,auroraCmd.toArray(new String[0]),new StringBuilder(),new StringBuilder());
+  return runProcess(auroraCmd);
 }

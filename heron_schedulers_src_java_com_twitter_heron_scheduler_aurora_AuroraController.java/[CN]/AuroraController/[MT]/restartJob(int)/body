@@ -6,5 +6,5 @@
   }
   auroraCmd.add(jobSpec);
   appendAuroraCommandOptions(auroraCmd,isVerbose);
-  return 0 == ShellUtils.runProcess(isVerbose,auroraCmd.toArray(new String[0]),new StringBuilder(),new StringBuilder());
+  return runProcess(auroraCmd);
 }

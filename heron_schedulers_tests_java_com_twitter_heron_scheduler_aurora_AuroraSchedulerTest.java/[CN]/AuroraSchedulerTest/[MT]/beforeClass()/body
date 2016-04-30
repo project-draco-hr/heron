@@ -1,0 +1,5 @@
+{
+  scheduler=Mockito.spy(AuroraScheduler.class);
+  Mockito.doReturn(new HashMap<String,String>()).when(scheduler).createAuroraProperties(Mockito.any(PackingPlan.class));
+  Mockito.doReturn(AURORA_PATH).when(scheduler).getHeronAuroraPath();
+}

@@ -1,0 +1,13 @@
+{
+  AuroraLauncher launcher=Mockito.spy(AuroraLauncher.class);
+  PowerMockito.spy(SchedulerUtils.class);
+  PowerMockito.doReturn(false).when(SchedulerUtils.class,"onScheduleAsLibrary",Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
+  Assert.assertFalse(launcher.launch(Mockito.mock(PackingPlan.class)));
+  PowerMockito.verifyStatic();
+  SchedulerUtils.onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
+  PowerMockito.spy(SchedulerUtils.class);
+  PowerMockito.doReturn(true).when(SchedulerUtils.class,"onScheduleAsLibrary",Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
+  Assert.assertTrue(launcher.launch(Mockito.mock(PackingPlan.class)));
+  PowerMockito.verifyStatic();
+  SchedulerUtils.onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
+}
