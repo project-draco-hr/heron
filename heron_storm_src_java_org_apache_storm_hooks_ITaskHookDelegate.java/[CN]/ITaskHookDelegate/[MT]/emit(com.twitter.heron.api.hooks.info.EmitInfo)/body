@@ -1,6 +1,6 @@
 {
   EmitInfo emit=new EmitInfo(info);
-  for (  ITaskHook hook : hooks_) {
+  for (  ITaskHook hook : hooks) {
     hook.emit(emit);
   }
 }

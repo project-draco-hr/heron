@@ -1,4 +1,4 @@
 {
   delegate.prepare(stormConf,context);
-  this.collector=new BasicOutputCollector(collector);
+  this.collector=new BasicOutputCollector(newCollector);
 }

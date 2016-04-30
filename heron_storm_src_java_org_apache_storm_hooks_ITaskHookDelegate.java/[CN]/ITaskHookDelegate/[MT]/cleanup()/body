@@ -1,5 +1,5 @@
 {
-  for (  ITaskHook hook : hooks_) {
+  for (  ITaskHook hook : hooks) {
     hook.cleanup();
   }
 }

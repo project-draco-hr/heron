@@ -1,5 +1,5 @@
 {
-  Object ret=_reducer.extractResult(_accumulator);
-  _accumulator=_reducer.init();
+  Object ret=reducer.extractResult(accumulator);
+  accumulator=reducer.init();
   return ret;
 }

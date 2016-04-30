@@ -1,7 +1,7 @@
 {
-  CountMetric val=_value.get(key);
+  CountMetric val=value.get(key);
   if (val == null) {
-    _value.put(key,val=new CountMetric());
+    value.put(key,val=new CountMetric());
   }
   return val;
 }

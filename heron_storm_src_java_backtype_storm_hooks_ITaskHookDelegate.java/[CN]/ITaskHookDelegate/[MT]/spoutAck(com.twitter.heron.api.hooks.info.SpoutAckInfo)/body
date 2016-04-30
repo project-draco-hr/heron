@@ -1,6 +1,6 @@
 {
   SpoutAckInfo ack=new SpoutAckInfo(info);
-  for (  ITaskHook hook : hooks_) {
+  for (  ITaskHook hook : hooks) {
     hook.spoutAck(ack);
   }
 }

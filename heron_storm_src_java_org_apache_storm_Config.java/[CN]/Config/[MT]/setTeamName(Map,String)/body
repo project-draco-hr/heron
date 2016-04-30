@@ -1,3 +1,3 @@
 {
-  conf.put(Config.TOPOLOGY_TEAM_NAME,team_name);
+  conf.put(Config.TOPOLOGY_TEAM_NAME,teamName);
 }

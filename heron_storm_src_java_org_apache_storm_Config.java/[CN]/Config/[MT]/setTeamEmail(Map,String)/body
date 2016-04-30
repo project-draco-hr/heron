@@ -1,3 +1,3 @@
 {
-  conf.put(Config.TOPOLOGY_TEAM_EMAIL,team_email);
+  conf.put(Config.TOPOLOGY_TEAM_EMAIL,teamEmail);
 }

@@ -1,1 +1,1 @@
-com.twitter.heron.api.topology.TopologyContext _delegate
+com.twitter.heron.api.topology.TopologyContext newDelegate

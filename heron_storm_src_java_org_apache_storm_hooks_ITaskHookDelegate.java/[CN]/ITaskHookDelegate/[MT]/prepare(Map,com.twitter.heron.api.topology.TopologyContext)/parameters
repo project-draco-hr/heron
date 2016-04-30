@@ -1,2 +1,2 @@
-Map conf
+Map newConf
 com.twitter.heron.api.topology.TopologyContext context

@@ -1,6 +1,6 @@
 {
   Map ret=new HashMap();
-  for (  Map.Entry<String,ReducedMetric> e : _value.entrySet()) {
+  for (  Map.Entry<String,ReducedMetric> e : value.entrySet()) {
     Object val=e.getValue().getValueAndReset();
     if (val != null) {
       ret.put(e.getKey(),val);

@@ -1,9 +1,4 @@
 {
-  try {
-    kryoIn.setBuffer(input);
-    return kryo.readClassAndObject(kryoIn);
-  }
- catch (  Exception e) {
-    throw new RuntimeException(e);
-  }
+  kryoIn.setBuffer(input);
+  return kryo.readClassAndObject(kryoIn);
 }

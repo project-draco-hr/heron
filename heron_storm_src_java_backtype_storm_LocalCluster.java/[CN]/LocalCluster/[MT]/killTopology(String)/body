@@ -1,5 +1,5 @@
 {
-  assertAlive(topologyName);
-  localMode.killTopology(topologyName);
+  assertAlive(topoName);
+  localMode.killTopology(topoName);
   resetFields();
 }

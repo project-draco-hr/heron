@@ -16,7 +16,9 @@
     try {
       Class klass=Class.forName(klassName);
       Class serializerClass=null;
-      if (serializerClassName != null)       serializerClass=Class.forName(serializerClassName);
+      if (serializerClassName != null) {
+        serializerClass=Class.forName(serializerClassName);
+      }
       LOG.info("Doing kryo.register for class " + klass);
       if (serializerClass == null) {
         k.register(klass);

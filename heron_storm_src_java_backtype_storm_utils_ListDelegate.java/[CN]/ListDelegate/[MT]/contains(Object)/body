@@ -1,3 +1,3 @@
 {
-  return _delegate.contains(o);
+  return delegate.contains(o);
 }

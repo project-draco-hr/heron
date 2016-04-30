@@ -1,5 +1,5 @@
 {
-  if (this.topologyName == null || !this.topologyName.equals(topologyName)) {
+  if (this.topologyName == null || !this.topologyName.equals(topoName)) {
     throw new NotAliveException();
   }
 }

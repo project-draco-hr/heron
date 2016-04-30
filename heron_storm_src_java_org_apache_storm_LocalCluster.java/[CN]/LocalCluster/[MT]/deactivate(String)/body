@@ -1,4 +1,4 @@
 {
-  assertAlive(topologyName);
-  localMode.deactivate(topologyName);
+  assertAlive(topoName);
+  localMode.deactivate(topoName);
 }
