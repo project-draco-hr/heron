@@ -1,0 +1,13 @@
+@tornado.gen.coroutine
+def get(self):
+    clusters = dict()
+    for tp in self.tracker.topologies:
+        name = tp.cluster
+        if name:
+            cluster = clusters.get(name, dict(name='', tags=set()))
+            cluster['name'] = name
+            if tp.environ:
+                cluster['tags'].add(tp.environ)
+            clusters[name] = cluster
+    clusters = list((dict(name=v['name'], tags=list(v['tags'])) for (k, v) in clusters.iteritems()))
+    self.write_success_response(dict(clusters=clusters))
