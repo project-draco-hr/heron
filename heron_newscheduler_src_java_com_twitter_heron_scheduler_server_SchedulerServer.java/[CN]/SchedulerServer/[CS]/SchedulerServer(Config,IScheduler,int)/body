@@ -1,6 +1,6 @@
 {
   this.runtime=runtime;
-  this.schedulerServer=createServer(port);
+  this.schedulerServer=createServer(port,executorService);
   this.schedulerServer.createContext(KILL_REQUEST_CONTEXT,new KillRequestHandler(runtime,scheduler));
   this.schedulerServer.createContext(RESTART_REQUEST_CONTEXT,new RestartRequestHandler(runtime,scheduler));
 }

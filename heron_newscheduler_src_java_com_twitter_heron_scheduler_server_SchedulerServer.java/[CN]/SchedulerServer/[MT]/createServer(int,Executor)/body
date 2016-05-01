@@ -1,5 +1,5 @@
 {
   HttpServer server=HttpServer.create(new InetSocketAddress(port),SERVER_BACK_LOG);
-  server.setExecutor(Executors.newSingleThreadExecutor());
+  server.setExecutor(executor);
   return server;
 }
