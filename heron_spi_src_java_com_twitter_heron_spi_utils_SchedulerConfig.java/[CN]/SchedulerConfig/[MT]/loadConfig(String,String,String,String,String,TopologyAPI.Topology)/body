@@ -1,0 +1,4 @@
+{
+  Config config=Config.expand(Config.newBuilder().putAll(sandboxConfigs()).putAll(commandLineConfigs(cluster,role,environ)).putAll(topologyConfigs(topologyJarFile,topologyDefnFile,topology)).build());
+  return config;
+}
