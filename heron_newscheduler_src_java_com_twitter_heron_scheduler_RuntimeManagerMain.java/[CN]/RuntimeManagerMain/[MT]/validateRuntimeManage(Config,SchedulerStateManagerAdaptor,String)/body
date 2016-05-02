@@ -1,0 +1,13 @@
+{
+  Boolean isTopologyRunning=adaptor.isTopologyRunning(topologyName);
+  if (isTopologyRunning == null || isTopologyRunning.equals(Boolean.FALSE)) {
+    LOG.severe("No such topology exists");
+    return false;
+  }
+  ExecutionEnvironment.ExecutionState executionState=adaptor.getExecutionState(topologyName);
+  if (executionState == null || !executionState.getCluster().equals(Context.cluster(config)) || !executionState.getRole().equals(Context.role(config)) || !executionState.getEnviron().equals(Context.environ(config))) {
+    LOG.severe("cluster/role/environ not matched");
+    return false;
+  }
+  return true;
+}
