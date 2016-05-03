@@ -1,9 +1,0 @@
-{
-  StringBuilder override=new StringBuilder("cluster=cluster role=role environ=environ");
-  addConfig(override,Constants.HERON_RELEASE_PACKAGE_NAME,"testPackage");
-  addConfig(override,Constants.HERON_RELEASE_PACKAGE_ROLE,"test");
-  addConfig(override,Constants.HERON_RELEASE_PACKAGE_VERSION,"live");
-  AuroraConfigLoader configLoader=AuroraConfigLoader.class.newInstance();
-  configLoader.applyConfigOverride(override.toString());
-  Assert.assertEquals("live",configLoader.properties.getProperty(Constants.HERON_RELEASE_PACKAGE_VERSION));
-}

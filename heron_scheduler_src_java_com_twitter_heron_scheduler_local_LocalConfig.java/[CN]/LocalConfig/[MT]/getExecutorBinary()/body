@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(HERON_EXECUTOR_BINARY);
-}

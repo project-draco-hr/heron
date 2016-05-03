@@ -1,6 +1,0 @@
-{
-  Integer shardId=request.getContainerIndex();
-  BaseJob job=executorShardToJob.get(shardId);
-  jobScheduler.restartJob(job.name);
-  return true;
-}

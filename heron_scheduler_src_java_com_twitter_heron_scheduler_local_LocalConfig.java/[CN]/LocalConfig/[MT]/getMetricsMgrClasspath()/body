@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(METRICS_MGR_CLASSPATH);
-}

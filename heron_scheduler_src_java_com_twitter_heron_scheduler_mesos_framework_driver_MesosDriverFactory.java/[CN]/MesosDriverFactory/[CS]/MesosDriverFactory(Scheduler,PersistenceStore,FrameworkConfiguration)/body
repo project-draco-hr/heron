@@ -1,5 +1,0 @@
-{
-  this.scheduler=scheduler;
-  this.persistenceStore=persistenceStore;
-  this.config=config;
-}

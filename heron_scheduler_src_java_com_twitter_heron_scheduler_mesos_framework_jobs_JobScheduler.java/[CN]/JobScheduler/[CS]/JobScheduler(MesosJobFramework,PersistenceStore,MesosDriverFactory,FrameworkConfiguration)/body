@@ -1,6 +1,0 @@
-{
-  this.mesosJobFramework=mesosJobFramework;
-  this.persistenceStore=persistenceStore;
-  this.mesosDriver=mesosDriver;
-  this.config=config;
-}

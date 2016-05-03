@@ -1,4 +1,0 @@
-SchedulerDriver driver
-Protos.ExecutorID executorId
-Protos.SlaveID slaveId
-byte[] data

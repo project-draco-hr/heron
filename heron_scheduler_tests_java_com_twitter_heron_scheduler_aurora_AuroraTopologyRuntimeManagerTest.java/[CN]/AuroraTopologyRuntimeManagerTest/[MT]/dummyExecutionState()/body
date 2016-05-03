@@ -1,3 +1,0 @@
-{
-  return ExecutionEnvironment.ExecutionState.newBuilder().setRole(role).setCluster(cluster).setEnviron(environ).setTopologyId(topologyName).setTopologyName(topologyName).build();
-}

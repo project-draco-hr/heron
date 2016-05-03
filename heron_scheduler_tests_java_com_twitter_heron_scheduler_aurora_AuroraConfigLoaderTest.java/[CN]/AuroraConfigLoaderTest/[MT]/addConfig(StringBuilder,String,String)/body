@@ -1,3 +1,0 @@
-{
-  builder.append(String.format(" %s=\"%s\"",key,value));
-}

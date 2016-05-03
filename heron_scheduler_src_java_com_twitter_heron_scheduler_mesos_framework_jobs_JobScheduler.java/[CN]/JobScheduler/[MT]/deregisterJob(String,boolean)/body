@@ -1,7 +1,0 @@
-{
-  if (!mesosJobFramework.isReady()) {
-    LOG.info("The Scheduler is not ready; recovering from last failure. Please wait.");
-    return false;
-  }
-  return mesosJobFramework.removeScheduledJob(jobName,mesosDriver,killJobNow);
-}

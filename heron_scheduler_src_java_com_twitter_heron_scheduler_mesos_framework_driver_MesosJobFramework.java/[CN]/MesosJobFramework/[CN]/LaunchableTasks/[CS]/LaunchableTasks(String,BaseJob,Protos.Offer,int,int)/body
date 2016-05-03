@@ -1,7 +1,0 @@
-{
-  this.taskId=taskId;
-  this.baseJob=baseJob;
-  this.offer=offer;
-  this.portRangeStart=portRangeStart;
-  this.portRangeEnd=portRangeEnd;
-}

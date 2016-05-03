@@ -1,5 +1,0 @@
-{
-  LOG.info(String.format("Updating status for job: %s, to %s",jobName,task));
-  persistenceStore.persistTask(jobName,task);
-  trackingTasks.put(jobName,task);
-}

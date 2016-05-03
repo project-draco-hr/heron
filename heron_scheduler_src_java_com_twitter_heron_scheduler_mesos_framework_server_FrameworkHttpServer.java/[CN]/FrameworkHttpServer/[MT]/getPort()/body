@@ -1,3 +1,0 @@
-{
-  return schedulerServer.getAddress().getPort();
-}

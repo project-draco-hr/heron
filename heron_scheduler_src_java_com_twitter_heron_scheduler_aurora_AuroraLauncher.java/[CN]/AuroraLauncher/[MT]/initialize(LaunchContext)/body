@@ -1,7 +1,0 @@
-{
-  this.context=context;
-  this.cluster=context.getPropertyWithException(Constants.CLUSTER);
-  this.environ=context.getPropertyWithException(Constants.ENVIRON);
-  this.role=context.getPropertyWithException(Constants.ROLE);
-  this.topology=context.getTopology();
-}

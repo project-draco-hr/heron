@@ -1,6 +1,0 @@
-{
-  this.schedulerServer=getSchedulerServer(port);
-  if (initialize) {
-    initializeContext(jobScheduler);
-  }
-}

@@ -1,7 +1,0 @@
-{
-  this.cpu=cpu;
-  this.mem=mem;
-  this.disk=disk;
-  this.ports=0;
-  this.portsHold=portsResources;
-}

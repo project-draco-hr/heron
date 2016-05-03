@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(HERON_SHELL_BINARY);
-}

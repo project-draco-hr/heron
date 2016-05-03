@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(INSTANCE_JVM_OPTS_IN_BASE64);
-}

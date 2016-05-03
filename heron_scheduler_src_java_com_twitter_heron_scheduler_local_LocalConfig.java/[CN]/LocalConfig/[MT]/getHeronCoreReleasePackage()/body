@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(HERON_CORE_RELEASE_PACKAGE);
-}

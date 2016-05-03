@@ -1,5 +1,0 @@
-{
-  HttpServer schedulerServer=HttpServer.create(new InetSocketAddress(port),SERVER_BACK_LOG);
-  schedulerServer.setExecutor(Executors.newSingleThreadExecutor());
-  return schedulerServer;
-}

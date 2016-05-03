@@ -1,3 +1,0 @@
-{
-  NetworkUtility.await(1,TimeUnit.MILLISECONDS);
-}

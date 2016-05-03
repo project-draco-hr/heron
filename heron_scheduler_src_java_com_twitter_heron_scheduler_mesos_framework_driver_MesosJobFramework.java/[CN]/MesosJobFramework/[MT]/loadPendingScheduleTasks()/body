@@ -1,7 +1,0 @@
-{
-  for (  BaseTask task : trackingTasks.values()) {
-    if (task.state.equals(BaseTask.TaskState.TO_SCHEDULE)) {
-      pendingScheduleTasks.add(task.taskId);
-    }
-  }
-}

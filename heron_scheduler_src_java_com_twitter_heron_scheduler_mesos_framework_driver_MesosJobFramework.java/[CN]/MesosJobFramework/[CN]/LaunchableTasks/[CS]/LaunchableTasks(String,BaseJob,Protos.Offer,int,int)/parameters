@@ -1,5 +1,0 @@
-String taskId
-BaseJob baseJob
-Protos.Offer offer
-int portRangeStart
-int portRangeEnd

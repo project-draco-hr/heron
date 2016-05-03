@@ -1,3 +1,0 @@
-{
-  return TopologyMaster.TMasterLocation.newBuilder().setHost(tmasterHost).setMasterPort(0).setTopologyId(topologyName).setTopologyName(topologyName).setControllerPort(tmasterControlPort).build();
-}

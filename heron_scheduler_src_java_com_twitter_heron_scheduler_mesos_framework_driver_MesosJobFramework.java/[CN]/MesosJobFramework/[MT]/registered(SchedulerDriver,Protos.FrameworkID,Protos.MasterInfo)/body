@@ -1,7 +1,0 @@
-{
-  LOG.info("Registered with ID: " + frameworkId.getValue());
-  LOG.info("Master info: " + masterInfo.toString());
-  persistenceStore.persistFrameworkID(frameworkId);
-  LOG.info("Start to reconcile all tasks under monitoring");
-  reconcileTasks(driver);
-}

@@ -1,7 +1,0 @@
-{
-  if (mesosDriver == null) {
-    LOG.info("SchedulerDriver not exists yet. To create a new one...");
-    mesosDriver=makeDriver();
-  }
-  return mesosDriver;
-}

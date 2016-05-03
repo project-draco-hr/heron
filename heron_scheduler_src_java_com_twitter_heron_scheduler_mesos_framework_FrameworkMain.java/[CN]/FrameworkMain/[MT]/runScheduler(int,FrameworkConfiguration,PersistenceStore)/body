@@ -1,9 +1,0 @@
-{
-  MesosTaskBuilder mesosTaskBuilder=new MesosTaskBuilder();
-  MesosJobFramework mesosScheduler=new MesosJobFramework(mesosTaskBuilder,persistenceStore,config);
-  MesosDriverFactory mesosDriver=new MesosDriverFactory(mesosScheduler,persistenceStore,config);
-  JobScheduler jobScheduler=new JobScheduler(mesosScheduler,persistenceStore,mesosDriver,config);
-  LOG.info("Starting server on port: " + schedulerServerPort);
-  runServer(jobScheduler,schedulerServerPort);
-  jobScheduler.start();
-}

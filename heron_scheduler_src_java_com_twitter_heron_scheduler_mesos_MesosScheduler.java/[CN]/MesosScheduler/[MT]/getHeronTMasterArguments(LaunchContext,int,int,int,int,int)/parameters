@@ -1,6 +1,0 @@
-LaunchContext context
-int port1
-int port2
-int port3
-int shellPort
-int metricsmgrPort

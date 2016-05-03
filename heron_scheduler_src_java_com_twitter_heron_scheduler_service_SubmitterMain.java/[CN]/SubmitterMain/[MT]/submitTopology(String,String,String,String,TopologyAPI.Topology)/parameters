@@ -1,5 +1,0 @@
-String topologyPackage
-String submitterConfigLoader
-String submitterConfigFile
-String configOverride
-TopologyAPI.Topology topology

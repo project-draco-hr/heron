@@ -1,5 +1,0 @@
-{
-  String zkHost=context.getPropertyWithException(Constants.ZKHOST);
-  String zkPort=context.getPropertyWithException(Constants.ZKPORT);
-  return zkHost + ":" + zkPort;
-}

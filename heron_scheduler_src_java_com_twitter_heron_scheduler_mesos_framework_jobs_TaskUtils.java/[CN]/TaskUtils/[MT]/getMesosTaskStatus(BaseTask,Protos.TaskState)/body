@@ -1,5 +1,0 @@
-{
-  Protos.TaskStatus.Builder status=Protos.TaskStatus.newBuilder().setTaskId(Protos.TaskID.newBuilder().setValue(task.taskId)).setSlaveId(Protos.SlaveID.newBuilder().setValue(task.slaveId));
-  status.setState(state);
-  return status;
-}

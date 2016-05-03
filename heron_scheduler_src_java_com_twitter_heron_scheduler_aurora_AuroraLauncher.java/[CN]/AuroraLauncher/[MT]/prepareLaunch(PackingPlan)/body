@@ -1,8 +1,0 @@
-{
-  LOG.info("Checking whether the topology has been launched already!");
-  if (NetworkUtility.awaitResult(context.getStateManagerAdaptor().isTopologyRunning(),1000,TimeUnit.MILLISECONDS)) {
-    LOG.severe("Topology has been running: " + topology.getName());
-    return false;
-  }
-  return true;
-}

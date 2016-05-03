@@ -1,7 +1,0 @@
-{
-  this.topology=context.getTopology();
-  this.context=context;
-  this.cluster=context.getProperty(Constants.CLUSTER);
-  this.environ=context.getProperty(Constants.ENVIRON);
-  this.role=context.getProperty(Constants.ROLE);
-}

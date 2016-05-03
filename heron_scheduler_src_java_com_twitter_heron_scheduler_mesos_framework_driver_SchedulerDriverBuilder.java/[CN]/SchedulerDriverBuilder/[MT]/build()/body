@@ -1,6 +1,0 @@
-{
-  if (frameworkInfo == null || scheduler == null) {
-    throw new IllegalArgumentException("FrameworkInfo or Scheduler is not set");
-  }
-  return credential == null ? new MesosSchedulerDriver(scheduler,frameworkInfo,config.master) : new MesosSchedulerDriver(scheduler,frameworkInfo,config.master,credential);
-}

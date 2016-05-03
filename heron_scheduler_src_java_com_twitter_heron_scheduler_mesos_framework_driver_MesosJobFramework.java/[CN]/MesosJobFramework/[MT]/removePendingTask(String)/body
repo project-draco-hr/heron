@@ -1,9 +1,0 @@
-{
-  Iterator<String> it=pendingScheduleTasks.iterator();
-  while (it.hasNext()) {
-    if (it.next().equals(taskId)) {
-      it.remove();
-      break;
-    }
-  }
-}

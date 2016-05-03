@@ -1,3 +1,0 @@
-{
-  return Paths.get(configPath,"cluster",String.format("%s.conf",clusterName)).toFile();
-}

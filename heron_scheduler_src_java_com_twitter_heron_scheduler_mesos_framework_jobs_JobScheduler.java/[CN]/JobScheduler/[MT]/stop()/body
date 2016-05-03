@@ -1,6 +1,0 @@
-{
-  LOG.info("Shutting down the Job Scheduler!");
-  mesosDriver.close();
-  LOG.info("Clearing the states.....");
-  clear();
-}

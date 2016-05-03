@@ -1,4 +1,0 @@
-{
-  schedulerServer.start();
-  LOG.info("Starting listen on port:" + getPort());
-}

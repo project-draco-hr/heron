@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(WORKING_DIRECTORY);
-}

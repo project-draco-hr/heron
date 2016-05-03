@@ -1,4 +1,0 @@
-{
-  this.context=context;
-  this.topologyName=context.getTopologyName();
-}

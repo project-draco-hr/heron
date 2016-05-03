@@ -1,3 +1,0 @@
-{
-  return controlTopology(false) && verifyControllerSuccess(false);
-}

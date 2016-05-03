@@ -1,3 +1,0 @@
-JobScheduler jobScheduler
-int port
-boolean initialize

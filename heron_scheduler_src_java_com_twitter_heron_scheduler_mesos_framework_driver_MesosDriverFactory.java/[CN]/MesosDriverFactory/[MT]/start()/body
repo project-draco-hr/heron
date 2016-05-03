@@ -1,7 +1,0 @@
-{
-  Protos.Status status=get().start();
-  if (status != Protos.Status.DRIVER_RUNNING) {
-    LOG.severe(String.format("MesosSchedulerDriver start resulted in status: %s. Committing suicide!",status));
-    System.exit(1);
-  }
-}

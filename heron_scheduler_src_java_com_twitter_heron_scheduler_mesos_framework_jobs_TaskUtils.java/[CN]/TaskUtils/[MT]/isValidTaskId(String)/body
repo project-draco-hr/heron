@@ -1,4 +1,0 @@
-{
-  String[] info=taskId.split(":");
-  return info.length == 4;
-}

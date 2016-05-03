@@ -1,7 +1,0 @@
-{
-  DefaultConfigLoader schedulerConfig=DefaultConfigLoader.class.newInstance();
-  schedulerConfig.properties.setProperty(LocalConfig.WORKING_DIRECTORY,LocalConfig.WORKING_DIRECTORY);
-  schedulerConfig.addDefaultProperties();
-  schedulerConfig.properties.setProperty(Constants.STATE_MANAGER_CLASS,stateMgrClass);
-  return schedulerConfig;
-}

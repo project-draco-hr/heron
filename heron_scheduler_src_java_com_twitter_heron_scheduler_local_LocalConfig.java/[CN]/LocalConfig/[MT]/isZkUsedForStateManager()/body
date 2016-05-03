@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(Constants.ZK_CONNECTION_STRING) != null;
-}

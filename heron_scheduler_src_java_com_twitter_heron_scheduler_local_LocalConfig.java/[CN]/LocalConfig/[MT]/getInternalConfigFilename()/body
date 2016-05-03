@@ -1,3 +1,0 @@
-{
-  return properties.getProperty(HERON_INTERNALS_CONFIG_FILENAME);
-}

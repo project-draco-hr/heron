@@ -1,4 +1,0 @@
-{
-  this.rangeStart=rangeStart;
-  this.rangeEnd=rangeEnd;
-}

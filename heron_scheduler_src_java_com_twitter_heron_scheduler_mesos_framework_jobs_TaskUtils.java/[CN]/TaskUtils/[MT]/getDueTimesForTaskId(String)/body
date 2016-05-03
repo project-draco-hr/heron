@@ -1,3 +1,0 @@
-{
-  return Long.parseLong(taskId.split(":")[2]);
-}

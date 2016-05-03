@@ -1,3 +1,0 @@
-{
-  return BaseJob.getJobDefinitionInJSON(this);
-}

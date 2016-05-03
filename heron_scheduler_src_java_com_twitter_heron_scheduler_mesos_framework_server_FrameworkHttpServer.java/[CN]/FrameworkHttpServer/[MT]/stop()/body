@@ -1,3 +1,0 @@
-{
-  schedulerServer.stop(0);
-}

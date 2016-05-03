@@ -1,4 +1,0 @@
-{
-  mesosJobFramework.clear();
-  persistenceStore.removeFrameworkID();
-}
