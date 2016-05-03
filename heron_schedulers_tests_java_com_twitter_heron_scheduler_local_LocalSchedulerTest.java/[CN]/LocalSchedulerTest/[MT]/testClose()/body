@@ -1,0 +1,8 @@
+{
+  LocalScheduler localScheduler=new LocalScheduler();
+  ExecutorService monitorService=localScheduler.getMonitorService();
+  Assert.assertFalse(monitorService.isShutdown());
+  Assert.assertEquals(0,localScheduler.getProcessToContainer().size());
+  localScheduler.close();
+  Assert.assertTrue(monitorService.isShutdown());
+}

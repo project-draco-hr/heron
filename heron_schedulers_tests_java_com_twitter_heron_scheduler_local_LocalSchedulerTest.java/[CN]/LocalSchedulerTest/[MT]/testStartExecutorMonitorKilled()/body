@@ -1,0 +1,14 @@
+{
+  int containerId=0;
+  int exitValue=1;
+  Process containerExecutor=Mockito.mock(Process.class);
+  Mockito.doReturn(exitValue).when(containerExecutor).exitValue();
+  Mockito.doNothing().when(scheduler).startExecutor(Mockito.anyInt());
+  scheduler.onKill(Scheduler.KillTopologyRequest.getDefaultInstance());
+  scheduler.getProcessToContainer().put(containerExecutor,containerId);
+  scheduler.startExecutorMonitor(containerId,containerExecutor);
+  scheduler.getMonitorService().shutdown();
+  scheduler.getMonitorService().awaitTermination(MAX_WAITING_SECOND,TimeUnit.SECONDS);
+  Mockito.verify(scheduler,Mockito.never()).startExecutor(Mockito.anyInt());
+  Assert.assertTrue(scheduler.isTopologyKilled());
+}

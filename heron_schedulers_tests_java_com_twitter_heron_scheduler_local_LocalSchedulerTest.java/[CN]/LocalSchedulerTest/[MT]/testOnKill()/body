@@ -1,0 +1,8 @@
+{
+  Process mockProcess=Mockito.mock(Process.class);
+  scheduler.getProcessToContainer().put(mockProcess,0);
+  Assert.assertTrue(scheduler.onKill(Scheduler.KillTopologyRequest.getDefaultInstance()));
+  Assert.assertEquals(0,scheduler.getProcessToContainer().size());
+  Assert.assertTrue(scheduler.isTopologyKilled());
+  Mockito.verify(mockProcess).destroy();
+}

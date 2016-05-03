@@ -10,4 +10,5 @@
   Assert.assertTrue(launcher.launch(Mockito.mock(PackingPlan.class)));
   PowerMockito.verifyStatic();
   SchedulerUtils.onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
+  launcher.close();
 }

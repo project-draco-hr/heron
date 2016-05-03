@@ -1,0 +1,12 @@
+{
+  Process mockProcess=Mockito.mock(Process.class);
+  Scheduler.RestartTopologyRequest restartOne=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(TOPOLOGY_NAME).setContainerIndex(1).build();
+  scheduler.getProcessToContainer().put(mockProcess,0);
+  Assert.assertFalse(scheduler.onRestart(restartOne));
+  Scheduler.RestartTopologyRequest restartZero=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(TOPOLOGY_NAME).setContainerIndex(0).build();
+  scheduler.getProcessToContainer().put(mockProcess,0);
+  Assert.assertTrue(scheduler.onRestart(restartZero));
+  Scheduler.RestartTopologyRequest restartAll=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(TOPOLOGY_NAME).setContainerIndex(-1).build();
+  scheduler.getProcessToContainer().put(mockProcess,0);
+  Assert.assertTrue(scheduler.onRestart(restartAll));
+}

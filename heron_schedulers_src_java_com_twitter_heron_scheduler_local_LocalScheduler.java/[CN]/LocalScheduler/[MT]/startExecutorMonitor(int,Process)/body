@@ -1,0 +1,22 @@
+{
+  Runnable r=new Runnable(){
+    @Override public void run(){
+      try {
+        LOG.info("Waiting for container " + container + " to finish.");
+        containerExecutor.waitFor();
+        LOG.log(Level.INFO,"Container {0} is completed. Exit status: {1}",new Object[]{container,containerExecutor.exitValue()});
+        if (isTopologyKilled) {
+          LOG.info("Topology is killed. Not to start new executors.");
+          return;
+        }
+        LOG.log(Level.INFO,"Trying to restart container {0}",container);
+        startExecutor(processToContainer.remove(containerExecutor));
+      }
+ catch (      InterruptedException e) {
+        LOG.log(Level.SEVERE,"Process is interrupted: ",e);
+      }
+    }
+  }
+;
+  monitorService.submit(r);
+}

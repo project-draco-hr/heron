@@ -1,0 +1,13 @@
+{
+  Mockito.doNothing().when(scheduler).startExecutorMonitor(Mockito.anyInt(),Mockito.any(Process.class));
+  Process mockProcess=Mockito.mock(Process.class);
+  Mockito.doReturn(mockProcess).when(scheduler).startExecutorProcess(Mockito.anyInt());
+  PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
+  Assert.assertTrue(scheduler.onSchedule(packingPlan));
+  Assert.assertTrue(scheduler.getProcessToContainer().size() > 0);
+  for (int i=0; i < NUM_CONTAINER; i++) {
+    Mockito.verify(scheduler).startExecutor(i);
+    Mockito.verify(scheduler).startExecutorProcess(i);
+    Mockito.verify(scheduler).startExecutorMonitor(i,mockProcess);
+  }
+}

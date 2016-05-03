@@ -1,3 +1,4 @@
 {
   monitorService.shutdownNow();
+  processToContainer.clear();
 }
