@@ -1,5 +1,5 @@
 {
-  Object ret=value;
+  T ret=value;
   value=combiner.identity();
   return ret;
 }
