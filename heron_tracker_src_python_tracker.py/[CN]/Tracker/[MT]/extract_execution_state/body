@@ -1,7 +1,7 @@
 def extract_execution_state(self, topology):
     '\n    Returns the repesentation of execution state that will\n    be returned from Tracker.\n    '
     execution_state = topology.execution_state
-    executionState = {'cluster': execution_state.cluster, 'environ': execution_state.environ, 'role': execution_state.role, 'jobname': topology.name, 'submission_time': execution_state.submission_time, 'submission_user': execution_state.submission_user, 'release_username': execution_state.release_state.release_username, 'release_tag': execution_state.release_state.release_tag, 'release_version': execution_state.release_state.release_version, 'uploader_version': execution_state.release_state.uploader_version, 'has_physical_plan': None, 'has_tmaster_location': None, }
+    executionState = {'cluster': execution_state.cluster, 'environ': execution_state.environ, 'role': execution_state.role, 'jobname': topology.name, 'submission_time': execution_state.submission_time, 'submission_user': execution_state.submission_user, 'release_username': execution_state.release_state.release_username, 'release_tag': execution_state.release_state.release_tag, 'release_version': execution_state.release_state.release_version, 'has_physical_plan': None, 'has_tmaster_location': None, }
     viz_url = self.config.get_formatted_viz_url(executionState)
     executionState['viz'] = viz_url
     return executionState
