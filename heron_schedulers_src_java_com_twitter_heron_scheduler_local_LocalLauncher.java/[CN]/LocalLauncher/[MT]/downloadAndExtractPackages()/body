@@ -12,7 +12,7 @@
   LOG.log(Level.FINE,"Fetching heron core release {0}",coreReleasePackage);
   LOG.fine("If release package is already in the working directory");
   LOG.fine("the old one will be overwritten");
-  if (!copyPackage(coreReleasePackage,targetCoreReleaseFile)) {
+  if (!curlPackage(coreReleasePackage,targetCoreReleaseFile)) {
     LOG.severe("Failed to fetch the heron core release package.");
     return false;
   }
@@ -28,7 +28,7 @@
   LOG.log(Level.FINE,"Fetching topology package {0}",Runtime.topologyPackageUri(runtime));
   LOG.fine("If topology package is already in the working directory");
   LOG.fine("the old one will be overwritten");
-  if (!copyPackage(topologyPackage,targetTopologyPackageFile)) {
+  if (!curlPackage(topologyPackage,targetTopologyPackageFile)) {
     LOG.severe("Failed to fetch the heron core release package.");
     return false;
   }

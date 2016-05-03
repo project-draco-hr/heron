@@ -1,0 +1,21 @@
+{
+  Config config=createRunnerConfig();
+  Config runtime=Mockito.mock(Config.class);
+  PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
+  PowerMockito.spy(LocalContext.class);
+  PowerMockito.doReturn(WORKING_DIRECTORY).when(LocalContext.class,"workingDirectory",config);
+  LocalLauncher localLauncher=Mockito.spy(new LocalLauncher());
+  localLauncher.initialize(config,runtime);
+  Mockito.doReturn(false).when(localLauncher).downloadAndExtractPackages();
+  Assert.assertFalse(localLauncher.launch(packingPlan));
+  Mockito.verify(localLauncher).downloadAndExtractPackages();
+  Mockito.doReturn(true).when(localLauncher).downloadAndExtractPackages();
+  String[] expectedSchedulerCommand={"expected","scheduler","command"};
+  Mockito.doReturn(expectedSchedulerCommand).when(localLauncher).getSchedulerCommand();
+  Mockito.doReturn(null).when(localLauncher).startScheduler(Mockito.any(String[].class));
+  Assert.assertFalse(localLauncher.launch(packingPlan));
+  Mockito.verify(localLauncher).startScheduler(expectedSchedulerCommand);
+  Mockito.doReturn(Mockito.mock(Process.class)).when(localLauncher).startScheduler(Mockito.any(String[].class));
+  Assert.assertTrue(localLauncher.launch(packingPlan));
+  Mockito.verify(localLauncher,Mockito.times(2)).startScheduler(expectedSchedulerCommand);
+}
