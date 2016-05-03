@@ -14,10 +14,10 @@
   for (  String klassName : registrations.keySet()) {
     String serializerClassName=registrations.get(klassName);
     try {
-      Class klass=Class.forName(klassName);
-      Class serializerClass=null;
+      Class<?> klass=Class.forName(klassName);
+      Class<? extends Serializer<?>> serializerClass=null;
       if (serializerClassName != null) {
-        serializerClass=Class.forName(serializerClassName);
+        serializerClass=(Class<? extends Serializer<?>>)Class.forName(serializerClassName);
       }
       LOG.info("Doing kryo.register for class " + klass);
       if (serializerClass == null) {
@@ -40,7 +40,7 @@
   if (conf.get(Config.TOPOLOGY_KRYO_DECORATORS) != null) {
     for (    String klassName : (List<String>)conf.get(Config.TOPOLOGY_KRYO_DECORATORS)) {
       try {
-        Class klass=Class.forName(klassName);
+        Class<?> klass=Class.forName(klassName);
         IKryoDecorator decorator=(IKryoDecorator)klass.newInstance();
         decorator.decorate(k);
       }

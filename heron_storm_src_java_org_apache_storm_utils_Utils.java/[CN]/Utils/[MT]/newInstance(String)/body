@@ -1,6 +1,6 @@
 {
   try {
-    Class c=Class.forName(klass);
+    Class<?> c=Class.forName(klass);
     return c.newInstance();
   }
  catch (  ClassNotFoundException|InstantiationException|IllegalAccessException e) {

@@ -3,7 +3,7 @@
   if (res == null) {
     return new TreeMap<String,String>();
   }
-  Map<String,String> ret=new HashMap<String,String>();
+  Map<String,String> ret=new HashMap<>();
   if (res instanceof Map) {
     ret=(Map<String,String>)res;
   }
