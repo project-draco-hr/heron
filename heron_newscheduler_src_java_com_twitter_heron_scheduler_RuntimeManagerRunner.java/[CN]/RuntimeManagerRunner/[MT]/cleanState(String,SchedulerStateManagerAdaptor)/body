@@ -1,16 +1,6 @@
 {
-  LOG.fine("Cleaning up Heron State");
+  LOG.fine("Cleaning up topology state");
   Boolean result;
-  result=statemgr.deleteTopology(topologyName);
-  if (result == null || !result) {
-    LOG.severe("Failed to clear topology state");
-    return false;
-  }
-  result=statemgr.deleteExecutionState(topologyName);
-  if (result == null || !result) {
-    LOG.severe("Failed to clear execution state");
-    return false;
-  }
   result=statemgr.deleteTMasterLocation(topologyName);
   if (result == null || !result) {
     LOG.warning("Failed to clear TMaster location. Check whether TMaster set it correctly.");
@@ -23,6 +13,16 @@
   if (result == null || !result) {
     LOG.warning("Failed to clear scheduler location. Check whether Scheduler set it correctly.");
   }
-  LOG.fine("Cleaned up Heron State");
+  result=statemgr.deleteExecutionState(topologyName);
+  if (result == null || !result) {
+    LOG.severe("Failed to clear execution state");
+    return false;
+  }
+  result=statemgr.deleteTopology(topologyName);
+  if (result == null || !result) {
+    LOG.severe("Failed to clear topology definition");
+    return false;
+  }
+  LOG.fine("Cleaned up topology state");
   return true;
 }

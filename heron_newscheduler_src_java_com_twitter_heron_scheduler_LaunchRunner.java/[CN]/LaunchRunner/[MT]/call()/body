@@ -6,16 +6,16 @@
   PackingPlan packedPlan=packing.pack();
   launcher.initialize(config,runtime);
   Boolean result;
+  result=statemgr.setTopology(trimTopology(topology),topologyName);
+  if (result == null || !result) {
+    LOG.severe("Failed to set topology definition");
+    return false;
+  }
   ExecutionEnvironment.ExecutionState executionState=createExecutionState();
   result=statemgr.setExecutionState(executionState,topologyName);
   if (result == null || !result) {
     LOG.severe("Failed to set execution state");
-    return false;
-  }
-  result=statemgr.setTopology(trimTopology(topology),topologyName);
-  if (result == null || !result) {
-    LOG.severe("Failed to set topology");
-    statemgr.deleteExecutionState(topologyName);
+    statemgr.deleteTopology(topologyName);
     return false;
   }
   if (!launcher.launch(packedPlan)) {

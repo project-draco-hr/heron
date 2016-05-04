@@ -4,8 +4,8 @@
     LOG.log(Level.SEVERE,"Failed to kill with Scheduler.");
     return false;
   }
-  if (!SchedulerUtils.cleanState(topologyName,Runtime.schedulerStateManagerAdaptor(runtime))) {
-    LOG.severe("Failed to clean state");
+  if (!cleanState(topologyName,Runtime.schedulerStateManagerAdaptor(runtime))) {
+    LOG.severe("Failed to clean topology state");
     return false;
   }
   LOG.fine("Scheduler killed topology successfully.");
