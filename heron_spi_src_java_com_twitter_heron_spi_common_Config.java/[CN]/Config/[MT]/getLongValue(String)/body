@@ -1,4 +1,4 @@
 {
-  Object value=cfgMap.get(key);
-  return Convert.getLong(value);
+  Object value=get(key);
+  return TypeUtils.getLong(value);
 }

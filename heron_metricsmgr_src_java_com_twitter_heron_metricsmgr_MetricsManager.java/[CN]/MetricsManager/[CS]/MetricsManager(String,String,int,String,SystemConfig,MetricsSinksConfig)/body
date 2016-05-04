@@ -15,8 +15,8 @@
   metricsCollector.registerMetric(METRICS_MANAGER_COMPONENT_NAME,serverCounters,heronMetricsExportIntervalSec);
   metricsManagerServer=new MetricsManagerServer(metricsManagerServerLoop,serverHost,serverPort,serverSocketOptions,serverCounters);
   executors=Executors.newFixedThreadPool(config.getNumberOfSinks());
-  sinkExecutors=new ConcurrentHashMap<String,SinkExecutor>(config.getNumberOfSinks());
-  sinksRetryAttempts=new ConcurrentHashMap<String,Integer>(config.getNumberOfSinks());
+  sinkExecutors=new ConcurrentHashMap<>(config.getNumberOfSinks());
+  sinksRetryAttempts=new ConcurrentHashMap<>(config.getNumberOfSinks());
   Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
   for (  String sinkId : config.getSinkIds()) {
     SinkExecutor sinkExecutor=initSinkExecutor(sinkId);

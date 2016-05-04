@@ -13,7 +13,7 @@
       return Integer.parseInt(o.toString());
     }
  catch (    NumberFormatException nfe) {
-      throw new IllegalArgumentException("Don't know how to convert " + o + " + to int");
+      throw new IllegalArgumentException("Don't know how to convert " + o + " to int");
     }
   }
 }

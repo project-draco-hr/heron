@@ -1,5 +1,5 @@
 {
-  long timeoutInSeconds=Utils.getLong(config.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS));
+  long timeoutInSeconds=TypeUtils.getLong(config.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS));
   long timeoutInNs=timeoutInSeconds * Constants.SECONDS_TO_NANOSECONDS;
   int nBucket=systemConfig.getInstanceAcknowledgementNbuckets();
   List<RootTupleInfo> expiredObjects=collector.retireExpired(timeoutInNs);

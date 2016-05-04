@@ -1,4 +1,4 @@
 {
-  long maxSpoutPending=Utils.getLong(config.get(Config.TOPOLOGY_MAX_SPOUT_PENDING));
+  long maxSpoutPending=TypeUtils.getLong(config.get(Config.TOPOLOGY_MAX_SPOUT_PENDING));
   return topologyState.equals(TopologyAPI.TopologyState.RUNNING) && ((!ackEnabled && collector.isOutQueuesAvailable()) || (ackEnabled && collector.isOutQueuesAvailable() && collector.numInFlight() < maxSpoutPending) || (ackEnabled && !streamInQueue.isEmpty()));
 }

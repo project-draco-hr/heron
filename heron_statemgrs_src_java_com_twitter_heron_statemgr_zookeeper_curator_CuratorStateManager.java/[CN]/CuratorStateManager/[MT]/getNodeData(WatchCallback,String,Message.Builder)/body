@@ -2,7 +2,7 @@
   final SettableFuture<M> future=SettableFuture.create();
   Watcher wc=ZkWatcherCallback.makeZkWatcher(watcher);
   BackgroundCallback cb=new BackgroundCallback(){
-    @Override public void processResult(    CuratorFramework aClient,    CuratorEvent event) throws Exception {
+    @Override @SuppressWarnings("unchecked") public void processResult(    CuratorFramework aClient,    CuratorEvent event) throws Exception {
       byte[] data;
       if (event != null & (data=event.getData()) != null) {
         builder.mergeFrom(data);

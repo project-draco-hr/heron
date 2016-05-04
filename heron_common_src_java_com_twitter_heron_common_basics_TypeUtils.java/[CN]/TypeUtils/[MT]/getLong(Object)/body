@@ -13,7 +13,7 @@
       return Long.parseLong(o.toString());
     }
  catch (    NumberFormatException nfe) {
-      throw new IllegalArgumentException("Don't know how to convert " + o + " + to long");
+      throw new IllegalArgumentException("Don't know how to convert " + o + " to long");
     }
   }
 }

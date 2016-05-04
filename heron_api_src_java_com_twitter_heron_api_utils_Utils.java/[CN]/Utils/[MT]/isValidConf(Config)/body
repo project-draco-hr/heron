@@ -1,9 +1,0 @@
-{
-  Set<String> apiVars=heronConf.getApiVars();
-  for (  String apiVar : apiVars) {
-    if (heronConf.containsKey(apiVar) && !(heronConf.get(apiVar) instanceof String)) {
-      return false;
-    }
-  }
-  return true;
-}

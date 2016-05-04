@@ -1,7 +1,7 @@
 {
   Object value=get(key);
   if (value != null) {
-    return Convert.getDouble(value);
+    return TypeUtils.getDouble(value);
   }
   return defaultValue;
 }

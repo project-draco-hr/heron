@@ -1,8 +1,0 @@
-{
-  try {
-    return new URI(spec);
-  }
- catch (  URISyntaxException e) {
-    throw new IllegalArgumentException("Don't know how to convert " + spec + " + to URI");
-  }
-}

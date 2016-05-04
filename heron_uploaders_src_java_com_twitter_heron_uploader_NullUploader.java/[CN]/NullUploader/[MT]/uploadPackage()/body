@@ -1,3 +1,3 @@
 {
-  return Convert.getURI("null://uploader:9519/w#lanfang");
+  return TypeUtils.getURI("null://uploader:9519/w#lanfang");
 }

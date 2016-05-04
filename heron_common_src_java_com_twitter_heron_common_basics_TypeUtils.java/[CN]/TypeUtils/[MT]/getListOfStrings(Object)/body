@@ -1,0 +1,11 @@
+{
+  if (o == null) {
+    return new ArrayList<>();
+  }
+ else   if (o instanceof List) {
+    return (List<String>)o;
+  }
+ else {
+    throw new IllegalArgumentException("Failed to convert " + o + " to List<String>");
+  }
+}

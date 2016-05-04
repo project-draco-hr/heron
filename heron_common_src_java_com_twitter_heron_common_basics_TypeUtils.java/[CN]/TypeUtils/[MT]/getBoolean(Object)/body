@@ -6,6 +6,6 @@
     return Boolean.valueOf((String)o);
   }
  else {
-    throw new IllegalArgumentException("Failed to convert " + o + " + to boolean");
+    throw new IllegalArgumentException("Failed to convert " + o + " to boolean");
   }
 }
