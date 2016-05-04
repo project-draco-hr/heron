@@ -1,14 +1,13 @@
 def runTest(test, topologyName, params):
     try:
-        submitTopology(params.heronCliPath, params.heronWorkingDirectory, params.heronCorePath, params.testJarPath, params.topologyPath, topologyName, params.schedulerConfigPath, params.configLoaderClasspath)
+        submitTopology(params['cliPath'], params['cluster'], params['testJarPath'], params['topologyClassPath'], params['topologyName'], params['readFile'], params['outputFile'])
     except Exception as e:
         logging.error(('Failed to submit %s topology: %s' % (topologyName, str(e))))
         return False
     logging.info(('Successfully submitted %s topology' % topologyName))
     processList = getProcesses()
-    while (not processExists(processList, './heron-stmgr')):
+    while (not processExists(processList, HERON_STMGR_CMD)):
         processList = getProcesses()
-    outputFile = params.outputFile
     try:
         with open('temp.txt', 'w') as f:
             for line in TEST_INPUT:
@@ -16,27 +15,32 @@ def runTest(test, topologyName, params):
     except Exception as e:
         logging.error('Failed to write to temp.txt file')
         return False
-    time.sleep(2)
+    time.sleep(30)
     if (test == 'KILL_TMASTER'):
-        restartShard(params.heronCliPath, params.heronWorkingDirectory, topologyName, params.schedulerConfigPath, params.configLoaderClasspath, TMASTER_SHARD)
+        print 'Executing kill tmaster'
+        restartShard(params['cliPath'], params['cluster'], params['topologyName'], TMASTER_SHARD)
     elif (test == 'KILL_STMGR'):
-        stmgrPid = getPid(('%s-%d' % (HERON_STMGR, NON_TMASTER_SHARD)), params.heronWorkingDirectory)
+        print 'Executing kill stmgr'
+        stmgrPid = getPid(('%s-%d' % (STMGR, NON_TMASTER_SHARD)), params['workingDirectory'])
         killProcess(stmgrPid)
     elif (test == 'KILL_METRICSMGR'):
-        metricsmgrPid = getPid(('%s-%d' % (HERON_METRICSMGR, NON_TMASTER_SHARD)), params.heronWorkingDirectory)
+        print 'Executing kill metrics manager'
+        metricsmgrPid = getPid(('%s-%d' % (HERON_METRICSMGR, NON_TMASTER_SHARD)), params['workingDirectory'])
         killProcess(metricsmgrPid)
     elif (test == 'KILL_STMGR_METRICSMGR'):
-        stmgrPid = getPid(('%s-%d' % (HERON_STMGR, NON_TMASTER_SHARD)), params.heronWorkingDirectory)
+        print 'Executing kill stmgr metrics manager'
+        stmgrPid = getPid(('%s-%d' % (STMGR, NON_TMASTER_SHARD)), params['workingDirectory'])
         killProcess(stmgrPid)
-        metricsmgrPid = getPid(('%s-%d' % (HERON_METRICSMGR, NON_TMASTER_SHARD)), params.heronWorkingDirectory)
+        metricsmgrPid = getPid(('%s-%d' % (HERON_METRICSMGR, NON_TMASTER_SHARD)), params['workingDirectory'])
         killProcess(metricsmgrPid)
     elif (test == 'KILL_BOLT'):
-        boltPid = getPid(('container_%d_%s' % (NON_TMASTER_SHARD, HERON_BOLT)), params.heronWorkingDirectory)
+        print 'Executing kill bolt'
+        boltPid = getPid(('container_%d_%s' % (NON_TMASTER_SHARD, HERON_BOLT)), params['workingDirectory'])
         killProcess(boltPid)
     processList = getProcesses()
-    while (not processExists(processList, './heron-stmgr')):
+    while (not processExists(processList, HERON_STMGR_CMD)):
         processList = getProcesses()
-    os.rename('temp.txt', params.readFile)
+    os.rename('temp.txt', params['readFile'])
     time.sleep(15)
     expectedResult = ''
     actualResult = ''
@@ -46,9 +50,9 @@ def runTest(test, topologyName, params):
         expectedResult = ''
         actualResult = ''
         try:
-            with open(params.readFile, 'r') as f:
+            with open(params['readFile'], 'r') as f:
                 expectedResult = f.read()
-            with open(outputFile, 'r') as g:
+            with open(params['outputFile'], 'r') as g:
                 actualResult = g.read()
         except Exception as e:
             logging.error('Failed to get expected and actual results')
@@ -59,14 +63,14 @@ def runTest(test, topologyName, params):
             logging.info('Failed to get proper results, retrying')
             time.sleep(RETRY_INTERVAL)
     try:
-        killTopology(params.heronCliPath, params.heronWorkingDirectory, topologyName, params.schedulerConfigPath, params.configLoaderClasspath)
+        killTopology(params['cliPath'], params['cluster'], params['topologyName'])
     except Exception as e:
         logging.error(('Failed to kill %s topology: %s' % (topologyName, str(e))))
         return False
     logging.info(('Successfully killed %s topology' % topologyName))
     try:
-        os.remove(params.readFile)
-        os.remove(params.outputFile)
+        os.remove(params['readFile'])
+        os.remove(params['outputFile'])
     except Exception as e:
         logging.error('Failed to delete test files')
         return False

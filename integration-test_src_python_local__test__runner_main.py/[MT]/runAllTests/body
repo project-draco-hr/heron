@@ -1,4 +1,4 @@
-def runAllTests(conf, args):
+def runAllTests(args):
     successes = []
     failures = []
     for test in TEST_CASES:

@@ -1,8 +1,7 @@
 heronCliPath
-heronWorkingDirectory
-heronCorePath
+testCluster
 testJarPath
-topologyPath
+topologyClassPath
 topologyName
-schedulerConfigPath
-configLoaderClasspath
+inputFile
+outputFile

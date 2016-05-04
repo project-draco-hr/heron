@@ -1,6 +1,4 @@
 heronCliPath
-heronLocalDirectory
+testCluster
 topologyName
-schedulerConfigPath
-configLoaderClasspath
 shardNum
