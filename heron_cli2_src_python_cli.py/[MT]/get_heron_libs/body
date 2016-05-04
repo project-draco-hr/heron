@@ -1,3 +1,0 @@
-def get_heron_libs(localjars):
-    heron_dir = get_heron_dir()
-    return [os.path.join(heron_dir, f) for f in localjars]
