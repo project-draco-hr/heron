@@ -1,6 +1,6 @@
 {
   final String AGGREGATOR_BOLT="__integration_test_aggregator_bolt";
-  BaseBatchBolt aggregatorBolt=null;
+  BaseBatchBolt aggregatorBolt;
   try {
     aggregatorBolt=(BaseBatchBolt)Class.forName(terminalBoltClass).getConstructor(String.class).newInstance(this.outputLocation);
   }
@@ -44,8 +44,8 @@ catch (  ClassNotFoundException e) {
       }
     }
   }
-  HashSet<String> terminals=new HashSet<String>();
-  HashSet<String> nonTerminals=new HashSet<String>();
+  HashSet<String> terminals=new HashSet<>();
+  HashSet<String> nonTerminals=new HashSet<>();
   for (  HashSet<String> set : prev.values()) {
     nonTerminals.addAll(set);
   }

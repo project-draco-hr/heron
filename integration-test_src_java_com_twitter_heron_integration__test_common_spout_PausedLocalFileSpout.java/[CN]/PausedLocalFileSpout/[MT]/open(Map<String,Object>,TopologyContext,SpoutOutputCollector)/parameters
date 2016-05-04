@@ -1,0 +1,3 @@
+Map<String,Object> stormConf
+TopologyContext context
+SpoutOutputCollector collector
