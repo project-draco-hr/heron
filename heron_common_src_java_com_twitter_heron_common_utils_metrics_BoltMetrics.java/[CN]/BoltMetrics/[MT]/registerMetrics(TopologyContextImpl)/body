@@ -7,6 +7,7 @@
   topologyContext.registerMetric("__fail-count",failCount,interval);
   topologyContext.registerMetric("__execute-count",executeCount,interval);
   topologyContext.registerMetric("__execute-latency",executeLatency,interval);
+  topologyContext.registerMetric("__execute-time-ns",executeTimeNs,interval);
   topologyContext.registerMetric("__emit-count",emitCount,interval);
   topologyContext.registerMetric("__out-queue-full-count",outQueueFullCount,interval);
   topologyContext.registerMetric("__tuple-deserialization-time-ns",deserializationTimeNs,interval);

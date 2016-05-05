@@ -5,6 +5,7 @@
   failCount=new MultiCountMetric();
   executeCount=new MultiCountMetric();
   executeLatency=new MultiReducedMetric<>(new MeanReducer());
+  executeTimeNs=new MultiCountMetric();
   emitCount=new MultiCountMetric();
   outQueueFullCount=new CountMetric();
   deserializationTimeNs=new MultiCountMetric();

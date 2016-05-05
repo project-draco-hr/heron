@@ -6,9 +6,11 @@
     ackCount.scope(streamId);
     failCount.scope(streamId);
     executeCount.scope(streamId);
+    executeTimeNs.scope(streamId);
     ackCount.scope(globalStreamId);
     failCount.scope(globalStreamId);
     executeCount.scope(globalStreamId);
+    executeTimeNs.scope(globalStreamId);
   }
   List<TopologyAPI.OutputStream> outputs=helper.getMyBolt().getOutputsList();
   for (  TopologyAPI.OutputStream outputStream : outputs) {
