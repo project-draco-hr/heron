@@ -1,7 +1,7 @@
 {
   String key="key";
   String value="value";
-  Map<String,Object> propertyMap=new HashMap<String,Object>();
+  Map<String,Object> propertyMap=new HashMap<>();
   propertyMap.put(key,value);
   sinkExecutor.setPropertyMap(propertyMap);
   Field field=sinkExecutor.getClass().getDeclaredField("sinkConfig");

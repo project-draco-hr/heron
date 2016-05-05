@@ -1,3 +1,3 @@
 {
-  emitDirect(taskId,streamId,(List)null,tuple);
+  emitDirect(taskId,streamId,(Collection<Tuple>)null,tuple);
 }

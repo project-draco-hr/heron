@@ -1,7 +1,7 @@
 {
   metricsSink=new DummyMetricsSink();
   slaveLooper=new SlaveLooper();
-  communicator=new Communicator<MetricsRecord>(null,slaveLooper);
+  communicator=new Communicator<>(null,slaveLooper);
   SinkContext sinkContext=new SinkContextImpl("topology-name","metricsmgr-id","sink-id",new MultiCountMetric());
   sinkExecutor=new SinkExecutor("testSinkId",metricsSink,slaveLooper,communicator,sinkContext);
 }
