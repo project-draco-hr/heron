@@ -1,6 +1,6 @@
 {
   if (args.length < 3 || args.length > 4) {
-    throw new RuntimeException("Expects 3 or 4 arguments, topology name, inputFile, outputFile and max emit count (optional)");
+    throw new RuntimeException("Expects 3 or 4 arguments, topology name, " + "inputFile, outputFile and max emit count (optional)");
   }
   String topologyName=args[0];
   String inputFile=args[1];

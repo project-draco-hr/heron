@@ -2,7 +2,7 @@
   try {
     bw.flush();
   }
- catch (  Exception e) {
+ catch (  IOException e) {
     throw new RuntimeException("Unable to write to file",e);
   }
 }

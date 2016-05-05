@@ -5,13 +5,13 @@
     bw.newLine();
     bw.flush();
   }
- catch (  Exception e) {
+ catch (  IOException e) {
     try {
       if (bw != null) {
         bw.close();
       }
     }
- catch (    Exception e1) {
+ catch (    IOException e1) {
       throw new RuntimeException("Unable to close stream writer",e1);
     }
     throw new RuntimeException("Unable to write to file or emit tuples",e);

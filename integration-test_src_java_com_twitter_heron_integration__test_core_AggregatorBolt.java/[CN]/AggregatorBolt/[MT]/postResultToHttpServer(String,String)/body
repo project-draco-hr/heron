@@ -1,6 +1,6 @@
 {
   HttpClient client=HttpClientBuilder.create().build();
-  HttpPost post=new HttpPost(httpPostUrl);
+  HttpPost post=new HttpPost(newHttpPostUrl);
   StringEntity requestEntity=new StringEntity(resultJson,ContentType.APPLICATION_JSON);
   post.setEntity(requestEntity);
   HttpResponse response=client.execute(post);

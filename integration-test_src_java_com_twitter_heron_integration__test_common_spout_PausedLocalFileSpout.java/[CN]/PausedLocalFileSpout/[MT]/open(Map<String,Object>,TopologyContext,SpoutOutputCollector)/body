@@ -3,7 +3,7 @@
   if (paths.length != numTasks) {
     throw new RuntimeException(String.format("Number of specified files %d not equal to number of tasks %d",paths.length,numTasks));
   }
-  this.collector=collector;
+  this.collector=newCollector;
   int index=context.getThisTaskIndex();
   String path=paths[index];
   File file=new File(path);
@@ -12,13 +12,13 @@
   try {
     br=new BufferedReader(new FileReader(file),1024 * 1024);
   }
- catch (  Exception e) {
+ catch (  IOException e) {
     try {
       if (br != null) {
         br.close();
       }
     }
- catch (    Exception e1) {
+ catch (    IOException e1) {
       throw new RuntimeException("Unable to close file reader",e1);
     }
     throw new RuntimeException("Failed to create BufferedReader from file path",e);

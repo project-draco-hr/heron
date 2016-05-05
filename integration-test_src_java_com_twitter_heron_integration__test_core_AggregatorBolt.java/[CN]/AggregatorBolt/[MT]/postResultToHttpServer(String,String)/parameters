@@ -1,2 +1,2 @@
-String httpPostUrl
+String newHttpPostUrl
 String resultJson

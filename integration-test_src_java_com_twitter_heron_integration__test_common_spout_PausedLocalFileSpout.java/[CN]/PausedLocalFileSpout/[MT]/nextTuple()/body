@@ -8,13 +8,13 @@
       collector.emit(new Values(currentLine),"MESSAGE_ID");
     }
   }
- catch (  Exception e) {
+ catch (  IOException e) {
     try {
       if (br != null) {
         br.close();
       }
     }
- catch (    Exception e1) {
+ catch (    IOException e1) {
       throw new RuntimeException("Unable to close stream reader",e1);
     }
     throw new RuntimeException("Unable to emit tuples normally",e);

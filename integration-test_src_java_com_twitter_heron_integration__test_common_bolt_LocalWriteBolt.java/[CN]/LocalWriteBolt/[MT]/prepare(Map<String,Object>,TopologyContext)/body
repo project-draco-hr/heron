@@ -8,9 +8,11 @@
   }
  catch (  IOException e) {
     try {
-      if (bw != null)       bw.close();
+      if (bw != null) {
+        bw.close();
+      }
     }
- catch (    Exception e1) {
+ catch (    IOException e1) {
       throw new RuntimeException("Unable to close file writer",e1);
     }
     throw new RuntimeException("Failed to create BufferedWriter from file path",e);

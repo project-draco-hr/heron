@@ -3,19 +3,19 @@
   if (paths.length != numTasks) {
     throw new RuntimeException(String.format("Number of hdfs files %d not equal to number of tasks %d",paths.length,numTasks));
   }
-  this.collector=collector;
+  this.collector=newCollector;
   try {
     int index=context.getThisTaskIndex();
     String path=paths[index];
     br=new BufferedReader(HdfsHelper.getHdfsStreamReader(path),1024 * 1024);
   }
- catch (  Exception e) {
+ catch (  IOException e) {
     try {
       if (br != null) {
         br.close();
       }
     }
- catch (    Exception e1) {
+ catch (    IOException e1) {
       throw new RuntimeException("Unable to close stream reader",e1);
     }
     throw new RuntimeException("Failed to access the HDFS",e);

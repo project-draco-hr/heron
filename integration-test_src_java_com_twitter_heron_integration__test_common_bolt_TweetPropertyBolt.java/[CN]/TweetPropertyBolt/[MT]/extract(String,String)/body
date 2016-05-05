@@ -1,7 +1,7 @@
 {
   Map<String,Object> tweetJson=null;
   try {
-    tweetJson=mapper.readValue(tweet,Map.class);
+    tweetJson=MAPPER.readValue(tweet,Map.class);
   }
  catch (  IOException e) {
     LOG.log(Level.SEVERE,"Failed to parse the String into map: " + tweet,e);
