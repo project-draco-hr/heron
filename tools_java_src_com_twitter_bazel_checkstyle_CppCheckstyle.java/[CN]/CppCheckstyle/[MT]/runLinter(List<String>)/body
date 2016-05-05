@@ -1,5 +1,5 @@
 {
-  LOG.info("checkstyle command: " + command);
+  LOG.fine("checkstyle command: " + command);
   ProcessBuilder processBuilder=new ProcessBuilder(command);
   processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
   processBuilder.redirectError(ProcessBuilder.Redirect.INHERIT);

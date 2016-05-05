@@ -9,10 +9,10 @@
     String cpplintFile=line.getOptionValue("c");
     Collection<String> sourceFiles=getSourceFiles(extraActionFile);
     if (sourceFiles.size() == 0) {
-      LOG.info("No cpp files found by checkstyle");
+      LOG.fine("No cpp files found by checkstyle");
       return;
     }
-    LOG.info(sourceFiles.size() + " cpp files found by checkstyle");
+    LOG.fine(sourceFiles.size() + " cpp files found by checkstyle");
     List<String> commandBuilder=new ArrayList<>();
     commandBuilder.add(cpplintFile);
     commandBuilder.add("--linelength=100");
