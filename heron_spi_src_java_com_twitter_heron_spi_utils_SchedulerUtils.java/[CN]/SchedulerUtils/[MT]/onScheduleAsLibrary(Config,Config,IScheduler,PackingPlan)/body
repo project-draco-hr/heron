@@ -3,6 +3,12 @@
   try {
     scheduler.initialize(config,runtime);
     ret=scheduler.onSchedule(packing);
+    if (ret) {
+      ret=setSchedulerLocation(runtime,scheduler);
+    }
+ else {
+      LOG.severe("Failed to invoke IScheduler as library");
+    }
   }
   finally {
     scheduler.close();

@@ -24,12 +24,18 @@
     PackingPlan packedPlan=packing.pack();
     Config ytruntime=Config.newBuilder().putAll(runtime).put(Keys.instanceDistribution(),TopologyUtils.packingToString(packedPlan)).put(Keys.schedulerShutdown(),new Shutdown()).build();
     scheduler.initialize(config,ytruntime);
+    isSuccessful=scheduler.onSchedule(packedPlan);
+    if (!isSuccessful) {
+      LOG.severe("Failed to schedule topology");
+      return false;
+    }
     server=getServer(ytruntime,scheduler,schedulerServerPort);
     server.start();
-    isSuccessful=setSchedulerLocation(runtime,server);
-    isSuccessful=isSuccessful && scheduler.onSchedule(packedPlan);
-    LOG.info("Waiting for termination... ");
-    Runtime.schedulerShutdown(ytruntime).await();
+    isSuccessful=SchedulerUtils.setSchedulerLocation(runtime,server.getHost(),server.getPort(),scheduler);
+    if (isSuccessful) {
+      LOG.info("Waiting for termination... ");
+      Runtime.schedulerShutdown(ytruntime).await();
+    }
   }
  catch (  IOException e) {
     LOG.log(Level.SEVERE,"Failed to start server",e);

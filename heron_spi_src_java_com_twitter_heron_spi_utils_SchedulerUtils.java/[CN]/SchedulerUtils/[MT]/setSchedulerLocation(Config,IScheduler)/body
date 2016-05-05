@@ -1,0 +1,5 @@
+{
+  final String serverHost="scheduling_as_library";
+  final int serverPort=-1;
+  return setSchedulerLocation(runtime,serverHost,serverPort,scheduler);
+}
