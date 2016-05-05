@@ -30,5 +30,4 @@ def ProcessFile(filename, vlevel, extra_check_functions=[]):
         if (lf_lines and crlf_lines):
             for linenum in crlf_lines:
                 Error(filename, linenum, 'whitespace/newline', 1, 'Unexpected \\r (^M) found; better to use only \\n')
-    sys.stderr.write(('Done processing %s\n' % filename))
     _RestoreFilters()
