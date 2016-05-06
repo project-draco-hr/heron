@@ -29,4 +29,6 @@ def monitor(self):
         trigger_watches_based_on_files(self.pplan_watchers, pplan_path, self.pplan_directory, PhysicalPlan)
         tmaster_path = os.path.dirname(self.get_tmaster_path(''))
         trigger_watches_based_on_files(self.tmaster_watchers, tmaster_path, self.tmaster_directory, TMasterLocation)
+        scheduler_location_path = os.path.dirname(self.get_scheduler_location_path(''))
+        trigger_watches_based_on_files(self.scheduler_location_watchers, scheduler_location_path, self.scheduler_location_directory, SchedulerLocation)
         time.sleep(5)

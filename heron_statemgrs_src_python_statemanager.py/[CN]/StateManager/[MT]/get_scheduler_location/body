@@ -1,0 +1,4 @@
+@abc.abstractmethod
+def get_scheduler_location(self, topologyName, callback=None):
+    '\n    Gets the scheduler location for the topology.\n    If the callback is provided,\n    sets watch on the path and calls the callback\n    with the new pplan.\n    '
+    pass

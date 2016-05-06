@@ -1,0 +1,12 @@
+@tornado.gen.coroutine
+def get(self):
+    try:
+        cluster = self.get_argument_cluster()
+        environ = self.get_argument_environ()
+        topology_name = self.get_argument_topology()
+        topology_info = self.tracker.getTopologyInfo(topology_name, cluster, environ)
+        scheduler_location = topology_info['scheduler_location']
+        self.write_success_response(scheduler_location)
+    except Exception as e:
+        traceback.print_exc()
+        self.write_error_response(e)

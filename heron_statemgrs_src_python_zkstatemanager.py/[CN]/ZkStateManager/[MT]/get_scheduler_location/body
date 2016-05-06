@@ -1,0 +1,11 @@
+def get_scheduler_location(self, topologyName, callback=None):
+    isWatching = False
+    ret = {'result': None, }
+    if callback:
+        isWatching = True
+    else:
+
+        def callback(data):
+            ret['result'] = data
+    self._get_scheduler_location_with_watch(topologyName, callback, isWatching)
+    return ret['result']

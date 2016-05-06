@@ -8,4 +8,6 @@ def __init__(self, name, state_manager_name):
     self.cluster = None
     self.environ = None
     self.tmaster = None
+    self.job_page_links = None
+    self.scheduler_location = None
     self.watches = {}

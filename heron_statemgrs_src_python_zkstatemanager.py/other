@@ -11,5 +11,6 @@ from kazoo.exceptions import NotEmptyError
 from kazoo.exceptions import ZookeeperError
 from heron.proto.execution_state_pb2 import ExecutionState
 from heron.proto.physical_plan_pb2 import PhysicalPlan
+from heron.proto.scheduler_pb2 import SchedulerLocation
 from heron.proto.tmaster_pb2 import TMasterLocation
 from heron.proto.topology_pb2 import Topology

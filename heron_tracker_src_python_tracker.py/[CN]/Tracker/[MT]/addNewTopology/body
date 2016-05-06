@@ -22,6 +22,13 @@ def addNewTopology(self, state_manager, topologyName):
         topology.set_tmaster(data)
         if (not data):
             LOG.debug('No data to be set')
+
+    def on_topology_scheduler_location(data):
+        LOG.info(('Watch triggered for topology scheduler location: ' + topologyName))
+        topology.set_scheduler_location(data)
+        if (not data):
+            LOG.debug('No data to be set')
     state_manager.get_pplan(topologyName, on_topology_pplan)
     state_manager.get_execution_state(topologyName, on_topology_execution_state)
     state_manager.get_tmaster(topologyName, on_topology_tmaster)
+    state_manager.get_scheduler_location(topologyName, on_topology_scheduler_location)
