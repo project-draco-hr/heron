@@ -1,3 +1,6 @@
+@tornado.gen.coroutine
 def get(self):
-    options = dict(topologies=[], cluster='local', active='topologies', function=common.className)
+    clusters = yield access.get_clusters()
+    clusters = [str(c['name']) for c in clusters['clusters']]
+    options = dict(topologies=[], clusters=clusters, active='topologies', function=common.className)
     self.render('topologies.html', **options)
