@@ -1,3 +1,0 @@
-String name
-IReducer<T> reducer
-int timeBucketSizeInSecs

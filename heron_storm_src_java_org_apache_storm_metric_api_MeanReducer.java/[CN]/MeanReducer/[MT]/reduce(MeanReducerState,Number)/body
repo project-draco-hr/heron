@@ -1,0 +1,5 @@
+{
+  acc.count++;
+  acc.sum+=input.doubleValue();
+  return acc;
+}

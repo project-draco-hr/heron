@@ -1,19 +1,19 @@
 {
-  jvmGCTimeMs=new AssignableMetric(0);
-  jvmGCCount=new AssignableMetric(0);
-  jvmGCCountPerGCType=new MultiAssignableMetric();
-  jvmGCTimeMsPerGCType=new MultiAssignableMetric();
-  jvmUpTimeSecs=new AssignableMetric(0);
-  jvmThreadCount=new AssignableMetric(0);
-  jvmDaemonThreadCount=new AssignableMetric(0);
-  processCPUTimeNs=new AssignableMetric(0);
-  threadsCPUTimeNs=new MultiAssignableMetric();
-  otherThreadsCPUTimeNs=new AssignableMetric(0);
-  threadsUserCPUTimeNs=new MultiAssignableMetric();
-  otherThreadsUserCPUTimeNs=new AssignableMetric(0);
+  jvmGCTimeMs=new AssignableMetric<>(0L);
+  jvmGCCount=new AssignableMetric<>(0L);
+  jvmGCCountPerGCType=new MultiAssignableMetric<>(0L);
+  jvmGCTimeMsPerGCType=new MultiAssignableMetric<>(0L);
+  jvmUpTimeSecs=new AssignableMetric<>(0L);
+  jvmThreadCount=new AssignableMetric<>(0);
+  jvmDaemonThreadCount=new AssignableMetric<>(0);
+  processCPUTimeNs=new AssignableMetric<>(0L);
+  threadsCPUTimeNs=new MultiAssignableMetric<>(0L);
+  otherThreadsCPUTimeNs=new AssignableMetric<>(0L);
+  threadsUserCPUTimeNs=new MultiAssignableMetric<>(0L);
+  otherThreadsUserCPUTimeNs=new AssignableMetric<>(0L);
   processCPULoad=new ReducedMetric<>(new MeanReducer());
-  fdCount=new AssignableMetric(0);
-  fdLimit=new AssignableMetric(0);
+  fdCount=new AssignableMetric<>(0L);
+  fdLimit=new AssignableMetric<>(0L);
   jvmMemoryFreeMB=new ReducedMetric<>(new MeanReducer());
   jvmMemoryUsedMB=new ReducedMetric<>(new MeanReducer());
   jvmMemoryTotalMB=new ReducedMetric<>(new MeanReducer());
@@ -23,8 +23,8 @@
   jvmMemoryNonHeapUsedMB=new ReducedMetric<>(new MeanReducer());
   jvmMemoryNonHeapCommittedMB=new ReducedMetric<>(new MeanReducer());
   jvmMemoryNonHeapMaxMB=new ReducedMetric<>(new MeanReducer());
-  jvmPeakUsagePerMemoryPool=new MultiAssignableMetric();
-  jvmCollectionUsagePerMemoryPool=new MultiAssignableMetric();
-  jvmEstimatedUsagePerMemoryPool=new MultiAssignableMetric();
-  jvmBufferPoolMemoryUsage=new MultiAssignableMetric();
+  jvmPeakUsagePerMemoryPool=new MultiAssignableMetric<>(0L);
+  jvmCollectionUsagePerMemoryPool=new MultiAssignableMetric<>(0L);
+  jvmEstimatedUsagePerMemoryPool=new MultiAssignableMetric<>(0L);
+  jvmBufferPoolMemoryUsage=new MultiAssignableMetric<>(0L);
 }

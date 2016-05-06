@@ -1,9 +1,9 @@
 {
-  AssignableMetric val;
+  AssignableMetric<T> val;
 synchronized (value) {
     val=value.get(key);
     if (val == null) {
-      value.put(key,val=new AssignableMetric(0));
+      value.put(key,val=new AssignableMetric<>(this.initialValue));
     }
   }
   return val;

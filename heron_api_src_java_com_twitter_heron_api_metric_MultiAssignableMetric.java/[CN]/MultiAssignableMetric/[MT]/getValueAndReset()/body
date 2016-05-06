@@ -1,7 +1,7 @@
 {
-  Map<String,Object> ret=new HashMap<>();
+  Map<String,T> ret=new HashMap<>();
 synchronized (value) {
-    for (    Map.Entry<String,AssignableMetric> e : value.entrySet()) {
+    for (    Map.Entry<String,AssignableMetric<T>> e : value.entrySet()) {
       ret.put(e.getKey(),e.getValue().getValueAndReset());
     }
   }

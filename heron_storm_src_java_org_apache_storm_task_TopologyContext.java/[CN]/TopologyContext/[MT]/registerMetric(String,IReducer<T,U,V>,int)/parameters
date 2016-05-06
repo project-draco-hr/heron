@@ -1,0 +1,3 @@
+String name
+IReducer<T,U,V> reducer
+int timeBucketSizeInSecs

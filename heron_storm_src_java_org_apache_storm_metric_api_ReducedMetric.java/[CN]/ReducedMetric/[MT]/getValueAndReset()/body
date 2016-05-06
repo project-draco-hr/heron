@@ -1,5 +1,5 @@
 {
-  Object ret=reducer.extractResult(accumulator);
+  V ret=reducer.extractResult(accumulator);
   accumulator=reducer.init();
   return ret;
 }
