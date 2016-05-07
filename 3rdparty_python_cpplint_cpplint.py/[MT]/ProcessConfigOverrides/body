@@ -11,8 +11,9 @@ def ProcessConfigOverrides(filename):
         abs_filename = abs_path
         if (not os.path.isfile(cfg_file)):
             continue
+        file_handle = open(cfg_file)
         try:
-            with open(cfg_file) as file_handle:
+            try:
                 for line in file_handle:
                     (line, _, _) = line.partition('#')
                     if (not line.strip()):
@@ -38,9 +39,11 @@ def ProcessConfigOverrides(filename):
                             sys.stderr.write('Line length must be numeric.')
                     else:
                         sys.stderr.write(('Invalid configuration option (%s) in file %s\n' % (name, cfg_file)))
-        except IOError:
-            sys.stderr.write(("Skipping config file '%s': Can't open for reading\n" % cfg_file))
-            keep_looking = False
+            except IOError:
+                sys.stderr.write(("Skipping config file '%s': Can't open for reading\n" % cfg_file))
+                keep_looking = False
+        finally:
+            file_handle.close()
     for filter in reversed(cfg_filters):
         _AddFilters(filter)
     return True
