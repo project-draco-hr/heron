@@ -43,7 +43,7 @@
   LOG.fine("Static config loaded successfully ");
   LOG.fine(config.toString());
   String statemgrClass=Context.stateManagerClass(config);
-  IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
+  IStateManager statemgr=ReflectionUtils.newInstance(statemgrClass);
   boolean isSuccessful=false;
   try {
     statemgr.initialize(config);

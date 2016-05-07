@@ -1,4 +1,3 @@
 {
-  final SchedulerServer schedulerServer=new SchedulerServer(runtime,scheduler,port);
-  return schedulerServer;
+  return new SchedulerServer(runtime,scheduler,port);
 }

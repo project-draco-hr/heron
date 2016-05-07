@@ -1,0 +1,6 @@
+{
+  Mockito.doThrow(new RuntimeException()).when(schedulerServer).start();
+  exception.expect(RuntimeException.class);
+  schedulerMain.runScheduler();
+  Assert.fail();
+}

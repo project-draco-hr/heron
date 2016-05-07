@@ -1,0 +1,7 @@
+{
+  PowerMockito.doReturn(stateManager).when(ReflectionUtils.class,"newInstance",STATE_MANAGER_CLASS);
+  Mockito.doThrow(new RuntimeException()).when(stateManager).initialize(Mockito.any(Config.class));
+  exception.expect(RuntimeException.class);
+  schedulerMain.runScheduler();
+  Assert.fail();
+}

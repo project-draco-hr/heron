@@ -36,13 +36,13 @@
   LOG.fine("Static config loaded successfully ");
   LOG.fine(config.toString());
   String statemgrClass=Context.stateManagerClass(config);
-  IStateManager statemgr=(IStateManager)Class.forName(statemgrClass).newInstance();
+  IStateManager statemgr=ReflectionUtils.newInstance(statemgrClass);
   String launcherClass=Context.launcherClass(config);
-  ILauncher launcher=(ILauncher)Class.forName(launcherClass).newInstance();
+  ILauncher launcher=ReflectionUtils.newInstance(launcherClass);
   String packingClass=Context.packingClass(config);
-  IPacking packing=(IPacking)Class.forName(packingClass).newInstance();
+  IPacking packing=ReflectionUtils.newInstance(packingClass);
   String uploaderClass=Context.uploaderClass(config);
-  IUploader uploader=(IUploader)Class.forName(uploaderClass).newInstance();
+  IUploader uploader=ReflectionUtils.newInstance(uploaderClass);
   String topologyName=topology.getName();
   boolean isSuccessful=false;
   URI packageURI=null;
