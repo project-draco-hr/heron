@@ -1,0 +1,4 @@
+String topologyName
+String role
+String tag
+int version

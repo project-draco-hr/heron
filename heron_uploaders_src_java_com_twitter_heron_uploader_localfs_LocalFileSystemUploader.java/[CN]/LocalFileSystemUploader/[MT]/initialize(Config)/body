@@ -1,7 +1,7 @@
 {
   this.config=ipconfig;
   this.destTopologyDirectory=LocalFileSystemContext.fileSystemDirectory(config);
-  String fileName=new File(LocalFileSystemContext.topologyPackageFile(config)).getName();
+  String fileName=UploaderUtils.generateFilename(Context.topologyName(config),Context.role(config));
   this.destTopologyFile=Paths.get(destTopologyDirectory,fileName).toString();
   this.topologyPackageLocation=LocalFileSystemContext.topologyPackageFile(config);
 }

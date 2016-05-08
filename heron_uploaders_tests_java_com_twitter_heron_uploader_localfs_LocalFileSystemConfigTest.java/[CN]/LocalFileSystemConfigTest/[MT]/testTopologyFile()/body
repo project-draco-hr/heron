@@ -2,6 +2,5 @@
   Config config=Config.expand(getDefaultConfig());
   LocalFileSystemUploader uploader=new LocalFileSystemUploader();
   uploader.initialize(config);
-  String destFile=Paths.get(LocalFileSystemContext.fileSystemDirectory(config),new File(TOPOLOGY_PACKAGE_FILE).getName()).toString();
-  Assert.assertEquals(uploader.getTopologyFile(),destFile);
+  Assert.assertEquals(Paths.get(uploader.getTopologyFile()).getParent().toString(),LocalFileSystemContext.fileSystemDirectory(config));
 }
