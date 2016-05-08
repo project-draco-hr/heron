@@ -1,3 +1,2 @@
 String configDir
-String dir
 boolean isVerbose

@@ -1,0 +1,3 @@
+{
+  return new HdfsController(HdfsContext.hadoopConfigDirectory(config),Context.verbose(config));
+}

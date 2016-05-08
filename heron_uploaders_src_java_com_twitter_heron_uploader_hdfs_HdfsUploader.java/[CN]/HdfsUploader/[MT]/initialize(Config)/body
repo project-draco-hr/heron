@@ -1,6 +1,6 @@
 {
   this.config=ipconfig;
-  this.hadoopConfdir=HdfsContext.hadoopConfigDirectory(config);
+  this.controller=getHdfsController();
   this.destTopologyDirectoryURI=HdfsContext.hdfsTopologiesDirectoryURI(config);
   this.topologyPackageLocation=Context.topologyPackageFile(config);
   String fileName=UploaderUtils.generateFilename(Context.topologyName(config),Context.role(config));

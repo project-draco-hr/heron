@@ -1,0 +1,17 @@
+{
+  Mockito.doReturn(false).when(uploader).isLocalFileExists(Mockito.anyString());
+  Assert.assertNull(uploader.uploadPackage());
+  Mockito.verify(controller,Mockito.never()).copyFromLocalFile(Mockito.anyString(),Mockito.anyString());
+  Mockito.doReturn(true).when(uploader).isLocalFileExists(Mockito.anyString());
+  Mockito.doReturn(false).when(controller).exists(Mockito.anyString());
+  Mockito.doReturn(false).when(controller).mkdirs(Mockito.anyString());
+  Assert.assertNull(uploader.uploadPackage());
+  Mockito.verify(controller,Mockito.never()).copyFromLocalFile(Mockito.anyString(),Mockito.anyString());
+  Mockito.doReturn(true).when(controller).mkdirs(Mockito.anyString());
+  Mockito.doReturn(false).when(controller).copyFromLocalFile(Mockito.anyString(),Mockito.anyString());
+  Assert.assertNull(uploader.uploadPackage());
+  Mockito.verify(controller).copyFromLocalFile(Mockito.anyString(),Mockito.anyString());
+  Mockito.doReturn(true).when(controller).copyFromLocalFile(Mockito.anyString(),Mockito.anyString());
+  Assert.assertNotNull(uploader.uploadPackage());
+  Mockito.verify(controller,Mockito.atLeastOnce()).copyFromLocalFile(Mockito.anyString(),Mockito.anyString());
+}

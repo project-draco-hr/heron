@@ -1,4 +1,0 @@
-{
-  String command=String.format("hadoop --config %s fs -copyFromLocal -f %s %s",configDir,source,target);
-  return 0 == ShellUtils.runProcess(isVerbose,command,null,null);
-}

@@ -1,3 +1,3 @@
 {
-  return HdfsUtils.remove(hadoopConfdir,packageURI.toString(),true);
+  return controller.delete(packageURI.toString());
 }

@@ -1,0 +1,7 @@
+{
+  Config config=Mockito.mock(Config.class);
+  uploader=Mockito.spy(new HdfsUploader());
+  controller=Mockito.mock(HdfsController.class);
+  Mockito.doReturn(controller).when(uploader).getHdfsController();
+  uploader.initialize(config);
+}

@@ -1,0 +1,4 @@
+{
+  this.configDir=configDir;
+  this.isVerbose=isVerbose;
+}
