@@ -1,6 +1,0 @@
-def main(argv):
-    host = argv[1]
-    port = int(argv[2])
-    url = argv[3]
-    topologyid = argv[4]
-    make_request(host, port, url, topologyid)
