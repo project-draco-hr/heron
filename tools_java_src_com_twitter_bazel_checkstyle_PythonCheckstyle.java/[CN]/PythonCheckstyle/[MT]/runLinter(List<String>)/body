@@ -1,0 +1,20 @@
+{
+  LOG.finer("checkstyle command: " + command);
+  ProcessBuilder processBuilder=new ProcessBuilder(command);
+  processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+  processBuilder.redirectError(ProcessBuilder.Redirect.INHERIT);
+  Process pylint=processBuilder.start();
+  try {
+    pylint.waitFor();
+  }
+ catch (  InterruptedException e) {
+    throw new RuntimeException("python checkstyle command was interrupted: " + command,e);
+  }
+  if (pylint.exitValue() == 30) {
+    LOG.warning("python checkstyle detected bad styles.");
+    System.exit(1);
+  }
+  if (pylint.exitValue() != 0) {
+    throw new RuntimeException("python checkstyle command failed with status " + pylint.exitValue());
+  }
+}

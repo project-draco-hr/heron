@@ -1,0 +1,5 @@
+{
+  ExtraActionInfo info=ExtraActionUtils.getExtraActionInfo(extraActionFile);
+  SpawnInfo spawnInfo=info.getExtension(SpawnInfo.spawnInfo);
+  return Collections2.filter(spawnInfo.getInputFileList(),Predicates.and(Predicates.containsPattern(".*/src/.+\\.py[c]{0,1}$"),Predicates.not(Predicates.containsPattern("3rdparty/"))));
+}
