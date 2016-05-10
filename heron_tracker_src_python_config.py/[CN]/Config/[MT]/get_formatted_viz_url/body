@@ -1,3 +1,7 @@
 def get_formatted_viz_url(self, execution_state):
     '\n    @param execution_state: The python dict representing JSON execution_state\n    @return Formatted viz url\n    '
-    return self.viz_url_format.format(**execution_state)
+    valid_parameters = {'${CLUSTER}': execution_state['cluster'], '${ENVIRON}': execution_state['environ'], '${TOPOLOGY}': execution_state['jobname'], '${ROLE}': execution_state['role'], '${USER}': execution_state['submission_user'], }
+    formatted_viz_url = self.viz_url_format
+    for (key, value) in valid_parameters.iteritems():
+        formatted_viz_url = formatted_viz_url.replace(key, value)
+    return formatted_viz_url
