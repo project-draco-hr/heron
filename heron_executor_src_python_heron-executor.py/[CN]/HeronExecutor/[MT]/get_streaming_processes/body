@@ -20,6 +20,6 @@ def get_streaming_processes(self):
         instance_cmd = (instance_cmd + self.instance_jvm_opts.split())
         if (component_name in self.component_jvm_opts):
             instance_cmd = (instance_cmd + self.component_jvm_opts[component_name].split())
-        instance_cmd.extend(['-Djava.util.logging.config.file=aurora_logging.properties', '-Djava.net.preferIPv4Stack=true', '-cp', ('%s:%s' % (self.instance_classpath, self.classpath)), 'com.twitter.heron.instance.HeronInstance', self.topology_name, self.topology_id, instance_id, component_name, global_task_id, component_index, self.stmgr_ids[(self.shard - 1)], self.port1, self.port2, self.heron_internals_config_file])
+        instance_cmd.extend(['-Djava.net.preferIPv4Stack=true', '-cp', ('%s:%s' % (self.instance_classpath, self.classpath)), 'com.twitter.heron.instance.HeronInstance', self.topology_name, self.topology_id, instance_id, component_name, global_task_id, component_index, self.stmgr_ids[(self.shard - 1)], self.port1, self.port2, self.heron_internals_config_file])
         retval[instance_id] = instance_cmd
     return retval

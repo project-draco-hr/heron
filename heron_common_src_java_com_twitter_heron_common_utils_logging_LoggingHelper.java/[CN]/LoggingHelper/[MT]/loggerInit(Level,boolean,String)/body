@@ -1,0 +1,23 @@
+{
+  setLoggingFormat(format);
+  Logger rootLogger=Logger.getLogger("");
+  for (  Handler handler : rootLogger.getHandlers()) {
+    handler.setLevel(level);
+  }
+  rootLogger.setLevel(level);
+  if (isRedirectStdOutErr) {
+    for (    Handler handler : rootLogger.getHandlers()) {
+      if (handler instanceof ConsoleHandler) {
+        rootLogger.removeHandler(handler);
+      }
+    }
+    Logger logger;
+    LoggingOutputStream los;
+    logger=Logger.getLogger("stdout");
+    los=new LoggingOutputStream(logger,StdOutErrLevel.STDOUT);
+    System.setOut(new PrintStream(los,true));
+    logger=Logger.getLogger("stderr");
+    los=new LoggingOutputStream(logger,StdOutErrLevel.STDERR);
+    System.setErr(new PrintStream(los,true));
+  }
+}

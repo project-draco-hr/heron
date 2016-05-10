@@ -1,0 +1,3 @@
+{
+  System.setProperty(FORMAT_PROP_KEY,format);
+}
