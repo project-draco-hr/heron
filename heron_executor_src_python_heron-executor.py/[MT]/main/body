@@ -1,5 +1,5 @@
 def main():
-    if (len(sys.argv) != 33):
+    if (len(sys.argv) != 32):
         print_usage()
         sys.exit(1)
     executor = HeronExecutor(sys.argv)

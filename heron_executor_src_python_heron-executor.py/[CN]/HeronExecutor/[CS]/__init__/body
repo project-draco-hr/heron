@@ -33,14 +33,17 @@ def __init__(self, args):
     self.heron_shell_ids = heron_shell_list(len(self.instance_distribution))
     self.heron_java_home = args[21]
     self.shell_port = args[22]
-    self.log_dir = args[23]
-    self.heron_shell_binary = args[24]
-    self.port4 = args[25]
-    self.cluster = args[26]
-    self.role = args[27]
-    self.environ = args[28]
-    self.instance_classpath = args[29]
-    self.metrics_sinks_config_file = args[30]
-    self.scheduler_classpath = args[31]
-    self.scheduler_port = args[32]
+    self.heron_shell_binary = args[23]
+    self.port4 = args[24]
+    self.cluster = args[25]
+    self.role = args[26]
+    self.environ = args[27]
+    self.instance_classpath = args[28]
+    self.metrics_sinks_config_file = args[29]
+    self.scheduler_classpath = args[30]
+    self.scheduler_port = args[31]
+    self.heron_internals_config = {}
+    with open(self.heron_internals_config_file, 'r') as stream:
+        self.heron_internals_config = yaml.load(stream)
+    self.log_dir = self.heron_internals_config['heron.logging.directory']
     log_pid_for_process(get_heron_executor_process_name(self.shard), os.getpid())

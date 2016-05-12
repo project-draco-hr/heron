@@ -9,6 +9,7 @@ import base64
 import signal
 import string
 import random
+import yaml
 if (__name__ == '__main__'):
     setup()
     main()
