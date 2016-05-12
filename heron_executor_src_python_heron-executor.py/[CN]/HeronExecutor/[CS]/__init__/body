@@ -15,9 +15,9 @@ def __init__(self, args):
     self.metricsmgr_classpath = args[10]
     self.instance_jvm_opts = base64.b64decode(args[11].lstrip('"').rstrip('"').replace('&equals;', '='))
     self.classpath = args[12]
-    self.port1 = args[13]
-    self.port2 = args[14]
-    self.port3 = args[15]
+    self.master_port = args[13]
+    self.tmaster_controller_port = args[14]
+    self.tmaster_stats_port = args[15]
     self.heron_internals_config_file = args[16]
     self.component_rammap = map((lambda x: {x.split(':')[0]: int(x.split(':')[1]), }), args[17].split(','))
     self.component_rammap = reduce((lambda x, y: dict((x.items() + y.items()))), self.component_rammap)
@@ -34,7 +34,7 @@ def __init__(self, args):
     self.heron_java_home = args[21]
     self.shell_port = args[22]
     self.heron_shell_binary = args[23]
-    self.port4 = args[24]
+    self.metricsmgr_port = args[24]
     self.cluster = args[25]
     self.role = args[26]
     self.environ = args[27]
