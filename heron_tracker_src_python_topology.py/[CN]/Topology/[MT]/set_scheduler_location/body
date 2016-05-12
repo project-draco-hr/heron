@@ -1,4 +1,3 @@
 def set_scheduler_location(self, scheduler_location):
     self.scheduler_location = scheduler_location
-    self.job_page_links = scheduler_location.job_page_link
     self.trigger_watches()
