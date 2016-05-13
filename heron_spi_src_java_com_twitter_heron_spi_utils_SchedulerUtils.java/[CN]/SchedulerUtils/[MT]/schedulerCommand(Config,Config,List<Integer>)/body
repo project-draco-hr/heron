@@ -1,0 +1,31 @@
+{
+  if (freePorts.size() < PORTS_REQUIRED_FOR_SCHEDULER) {
+    throw new RuntimeException("Failed to find enough ports for executor");
+  }
+  for (  int port : freePorts) {
+    if (port == -1) {
+      throw new RuntimeException("Failed to find available ports for executor");
+    }
+  }
+  int httpPort=freePorts.get(0);
+  List<String> commands=new ArrayList<>();
+  String javaExecutable=String.format("%s/%s",Context.javaSandboxHome(config),"bin/java");
+  commands.add(javaExecutable);
+  commands.add("-cp");
+  String completeSchedulerProcessClassPath=new StringBuilder().append(Context.schedulerSandboxClassPath(config)).append(":").append(Context.packingSandboxClassPath(config)).append(":").append(Context.stateManagerSandboxClassPath(config)).toString();
+  commands.add(completeSchedulerProcessClassPath);
+  commands.add("com.twitter.heron.scheduler.SchedulerMain");
+  commands.add("--cluster");
+  commands.add(Context.cluster(config));
+  commands.add("--role");
+  commands.add(Context.role(config));
+  commands.add("--environment");
+  commands.add(Context.environ(config));
+  commands.add("--topology_name");
+  commands.add(Context.topologyName(config));
+  commands.add("--topology_jar");
+  commands.add(Context.topologyJarFile(config));
+  commands.add("--http_port");
+  commands.add(Integer.toString(httpPort));
+  return commands.toArray(new String[0]);
+}

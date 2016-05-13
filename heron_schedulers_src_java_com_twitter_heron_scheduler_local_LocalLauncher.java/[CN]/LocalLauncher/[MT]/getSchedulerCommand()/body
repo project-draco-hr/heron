@@ -1,4 +1,7 @@
 {
-  String javaBinary=String.format("%s/%s",Context.javaHome(config),"bin/java");
-  return SchedulerUtils.schedulerCommand(config,javaBinary,SysUtils.getFreePort());
+  List<Integer> freePorts=new ArrayList<>(SchedulerUtils.PORTS_REQUIRED_FOR_SCHEDULER);
+  for (int i=0; i < SchedulerUtils.PORTS_REQUIRED_FOR_SCHEDULER; i++) {
+    freePorts.add(SysUtils.getFreePort());
+  }
+  return SchedulerUtils.schedulerCommand(config,runtime,freePorts);
 }
