@@ -1,5 +1,5 @@
 {
-  int freePort=NetworkUtils.getFreePort();
+  int freePort=SysUtils.getFreePort();
   IScheduler scheduler=Mockito.mock(IScheduler.class);
   Config runtime=Mockito.mock(Config.class);
   SchedulerServer schedulerServer=Mockito.spy(new SchedulerServer(runtime,scheduler,freePort));

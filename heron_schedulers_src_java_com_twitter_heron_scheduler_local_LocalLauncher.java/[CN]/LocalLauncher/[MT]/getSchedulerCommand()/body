@@ -1,4 +1,4 @@
 {
   String javaBinary=String.format("%s/%s",Context.javaHome(config),"bin/java");
-  return SchedulerUtils.schedulerCommand(config,javaBinary,NetworkUtils.getFreePort());
+  return SchedulerUtils.schedulerCommand(config,javaBinary,SysUtils.getFreePort());
 }

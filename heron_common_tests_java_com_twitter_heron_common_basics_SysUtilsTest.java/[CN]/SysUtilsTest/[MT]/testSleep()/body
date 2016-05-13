@@ -1,0 +1,9 @@
+{
+  for (int i=0; i < NUM_ATTEMPTS; i++) {
+    long expectedSleepTimeMs=new Random().nextInt(100);
+    long start=System.currentTimeMillis();
+    SysUtils.sleep(expectedSleepTimeMs);
+    long end=System.currentTimeMillis();
+    Assert.assertTrue((end - start) >= expectedSleepTimeMs);
+  }
+}

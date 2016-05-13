@@ -6,5 +6,5 @@
  else {
     status.setStatus(Common.StatusCode.NOTOK);
   }
-  return status.build();
+  return Scheduler.SchedulerResponse.newBuilder().setStatus(status).build();
 }
