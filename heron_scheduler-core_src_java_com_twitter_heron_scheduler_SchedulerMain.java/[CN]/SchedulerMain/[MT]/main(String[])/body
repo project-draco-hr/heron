@@ -15,12 +15,7 @@
     throw new RuntimeException("Error parsing command line options: ",e);
   }
   String topologyName=cmd.getOptionValue("topology_name");
-  String topologyDefnFile=TopologyUtils.lookUpTopologyDefnFile(".",topologyName);
-  TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
-  Config schedulerConfig=SchedulerConfig.loadConfig(cmd.getOptionValue("cluster"),cmd.getOptionValue("role"),cmd.getOptionValue("environment"),cmd.getOptionValue("topology_jar"),topologyDefnFile,topology);
-  setupLogging(schedulerConfig);
-  SchedulerMain schedulerMain=new SchedulerMain(schedulerConfig,topology,Integer.parseInt(cmd.getOptionValue("http_port")));
-  LOG.log(Level.INFO,"Loaded scheduler config: {0}",schedulerMain.config);
+  SchedulerMain schedulerMain=createInstance(cmd.getOptionValue("cluster"),cmd.getOptionValue("role"),cmd.getOptionValue("environment"),cmd.getOptionValue("topology_jar"),topologyName,Integer.parseInt(cmd.getOptionValue("http_port")));
   boolean ret=schedulerMain.runScheduler();
   if (!ret) {
     throw new RuntimeException("Failed to schedule topology: " + topologyName);

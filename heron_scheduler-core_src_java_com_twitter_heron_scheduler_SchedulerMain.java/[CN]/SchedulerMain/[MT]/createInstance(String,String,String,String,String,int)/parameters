@@ -1,0 +1,6 @@
+String cluster
+String role
+String env
+String topologyJar
+String topologyName
+int httpPort
