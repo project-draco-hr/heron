@@ -6,6 +6,6 @@
   config=conf;
   sinkContext=context;
   topologyName=context.getTopologyName();
-  connectRetryAttempts=TypeUtils.getInt(config.get(KEY_SCRIBE_CONNECT_SERVER_ATTEMPTS));
+  connectRetryAttempts=TypeUtils.getInteger(config.get(KEY_SCRIBE_CONNECT_SERVER_ATTEMPTS));
   open();
 }

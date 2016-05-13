@@ -1,4 +1,4 @@
 {
   Object value=get(key);
-  return TypeUtils.getInt(value);
+  return TypeUtils.getInteger(value);
 }

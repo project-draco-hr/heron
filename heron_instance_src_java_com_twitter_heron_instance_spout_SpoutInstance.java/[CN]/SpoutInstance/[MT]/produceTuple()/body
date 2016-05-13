@@ -1,5 +1,5 @@
 {
-  int maxSpoutPending=TypeUtils.getInt(config.get(Config.TOPOLOGY_MAX_SPOUT_PENDING));
+  int maxSpoutPending=TypeUtils.getInteger(config.get(Config.TOPOLOGY_MAX_SPOUT_PENDING));
   long totalTuplesEmitted=collector.getTotalTuplesEmitted();
   long totalDataEmittedInBytesBeforeCycle=collector.getTotalDataEmittedInBytes();
   long instanceEmitBatchTime=systemConfig.getInstanceEmitBatchTimeMs() * Constants.MILLISECONDS_TO_NANOSECONDS;

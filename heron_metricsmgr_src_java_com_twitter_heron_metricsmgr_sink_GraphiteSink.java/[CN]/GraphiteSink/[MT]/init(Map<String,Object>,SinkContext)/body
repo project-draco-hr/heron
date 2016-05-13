@@ -1,11 +1,11 @@
 {
   LOG.info("Configuration: " + conf.toString());
   final String serverHost=(String)conf.get(SERVER_HOST_KEY);
-  final int serverPort=TypeUtils.getInt(conf.get(SERVER_PORT_KEY));
+  final int serverPort=TypeUtils.getInteger(conf.get(SERVER_PORT_KEY));
   if (conf.get(SERVER_HOST_KEY) == null || conf.get(SERVER_PORT_KEY) == null) {
     throw new IllegalArgumentException("Server's host or port could not fetch from config");
   }
-  int maxServerReconnectAttempts=conf.get(SERVER_HOST_KEY) == null ? DEFAULT_MAX_CONNECTION_FAILURES : TypeUtils.getInt(conf.get(SERVER_MAX_RECONNECT_ATTEMPTS));
+  int maxServerReconnectAttempts=conf.get(SERVER_HOST_KEY) == null ? DEFAULT_MAX_CONNECTION_FAILURES : TypeUtils.getInteger(conf.get(SERVER_MAX_RECONNECT_ATTEMPTS));
   metricsPrefix=(String)conf.get(METRICS_PREFIX);
   if (metricsPrefix == null) {
     metricsPrefix="";

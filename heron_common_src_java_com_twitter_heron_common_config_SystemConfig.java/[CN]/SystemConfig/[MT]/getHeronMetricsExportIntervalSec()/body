@@ -1,3 +1,3 @@
 {
-  return TypeUtils.getInt(this.config.get(SystemConfig.HERON_METRICS_EXPORT_INTERVAL_SEC));
+  return TypeUtils.getInteger(this.config.get(SystemConfig.HERON_METRICS_EXPORT_INTERVAL_SEC));
 }

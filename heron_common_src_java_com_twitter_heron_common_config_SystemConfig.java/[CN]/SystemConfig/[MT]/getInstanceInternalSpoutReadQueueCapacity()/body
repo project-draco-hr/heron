@@ -1,3 +1,3 @@
 {
-  return TypeUtils.getInt(this.config.get(SystemConfig.INSTANCE_INTERNAL_SPOUT_READ_QUEUE_CAPACITY));
+  return TypeUtils.getInteger(this.config.get(SystemConfig.INSTANCE_INTERNAL_SPOUT_READ_QUEUE_CAPACITY));
 }

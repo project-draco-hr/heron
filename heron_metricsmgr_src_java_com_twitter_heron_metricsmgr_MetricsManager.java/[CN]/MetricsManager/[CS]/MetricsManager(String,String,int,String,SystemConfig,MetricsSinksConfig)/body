@@ -22,7 +22,7 @@
     SinkExecutor sinkExecutor=initSinkExecutor(sinkId);
     sinkExecutors.put(sinkId,sinkExecutor);
     Object restartAttempts=config.getConfigForSink(sinkId).get(MetricsSinksConfig.CONFIG_KEY_SINK_RESTART_ATTEMPTS);
-    sinksRetryAttempts.put(sinkId,restartAttempts == null ? MetricsSinksConfig.DEFAULT_SINK_RESTART_ATTEMPTS : TypeUtils.getInt(restartAttempts));
+    sinksRetryAttempts.put(sinkId,restartAttempts == null ? MetricsSinksConfig.DEFAULT_SINK_RESTART_ATTEMPTS : TypeUtils.getInteger(restartAttempts));
     metricsManagerServer.addSinkCommunicator(sinkExecutor.getCommunicator());
   }
 }
