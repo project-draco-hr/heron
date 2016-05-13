@@ -1,7 +1,7 @@
 from __future__ import print_function
 import os
 import sys
-import json
+import functools
 import shutil
 import tempfile
 import optparse
@@ -24,6 +24,8 @@ else:
     pkg_resources_py_tmp.write(pkg_resources.resource_string(__name__, 'pkg_resources.py'))
     pkg_resources_py_tmp.flush()
     pkg_resources_py = pkg_resources_py_tmp.name
-from pex.pex_builder import PEXBuilder
+from pex.bin.pex import build_pex, configure_clp, resolve_interpreter, CANNOT_SETUP_INTERPRETER
+from pex.common import die
 from pex.interpreter import PythonInterpreter
+from pex.version import SETUPTOOLS_REQUIREMENT, WHEEL_REQUIREMENT
 sys.exit(main())

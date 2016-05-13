@@ -1,8 +1,10 @@
 def main():
     parser = optparse.OptionParser(usage='usage: %prog [options] output')
     parser.add_option('--entry-point', default='__main__')
-    parser.add_option('--no-zip-safe', action='store_false', dest='zip_safe', default=True)
-    parser.add_option('--python', default=sys.executable)
+    parser.add_option('--no-pypi', action='store_false', dest='pypi', default=True)
+    parser.add_option('--not-zip-safe', action='store_false', dest='zip_safe', default=True)
+    parser.add_option('--python', default='/usr/bin/python2.7')
+    parser.add_option('--find-links', dest='find_links', default='')
     (options, args) = parser.parse_args()
     if (len(args) == 2):
         output = args[0]
@@ -20,8 +22,23 @@ def main():
     manifest = parse_manifest(manifest_text)
     tmp_dir = tempfile.mkdtemp()
     try:
-        interpreter = PythonInterpreter(options.python, PythonInterpreter.from_binary(options.python).identity, extras={('setuptools', '>1.0'): '3rdparty/eggs/setuptools-18.0.1-py2.py3-none-any.whl', })
-        pex_builder = PEXBuilder(path=tmp_dir, interpreter=interpreter)
+        (pparser, resolver_options_builder) = configure_clp()
+        (poptions, preqs) = pparser.parse_args((['--no-use-wheel'] + sys.argv))
+        poptions.entry_point = options.entry_point
+        poptions.find_links = options.find_links
+        poptions.pypi = options.pypi
+        poptions.python = options.python
+        poptions.zip_safe = options.zip_safe
+        print(('pex options: %s' % poptions))
+        os.environ['PATH'] = poptions.python
+        interpreter = PythonInterpreter(poptions.python, PythonInterpreter.from_binary(options.python).identity, extras={('setuptools', '18.0.1'): '3rdparty/eggs/setuptools-18.0.1-py2.py3-none-any.whl', ('wheel', '0.23.0'): '3rdparty/eggs/wheel-0.23.0-py2.7.egg', })
+        interpreter = resolve_or_die(interpreter, SETUPTOOLS_REQUIREMENT, poptions)
+        if (interpreter and poptions.use_wheel):
+            interpreter = resolve_or_die(interpreter, WHEEL_REQUIREMENT, poptions)
+        reqs = manifest.get('requirements', {}).keys()
+        if (len(reqs) > 0):
+            print(('pex requirements: %s' % reqs))
+        pex_builder = build_pex(reqs, poptions, resolver_options_builder, interpreter=interpreter)
         pex_builder.info.zip_safe = options.zip_safe
         pex_builder.info.entry_point = options.entry_point
         pex_builder.add_source(dereference_symlinks(pkg_resources_py), os.path.join(pex_builder.BOOTSTRAP_DIR, 'pkg_resources.py'))

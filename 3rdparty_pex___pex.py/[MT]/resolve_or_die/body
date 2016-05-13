@@ -1,0 +1,6 @@
+def resolve_or_die(interpreter, requirement, options):
+    resolve = functools.partial(resolve_interpreter, options.interpreter_cache_dir, options.repos)
+    interpreter = resolve(interpreter, requirement)
+    if (interpreter is None):
+        die(('Could not find compatible interpreter that meets requirement %s' % requirement), CANNOT_SETUP_INTERPRETER)
+    return interpreter
