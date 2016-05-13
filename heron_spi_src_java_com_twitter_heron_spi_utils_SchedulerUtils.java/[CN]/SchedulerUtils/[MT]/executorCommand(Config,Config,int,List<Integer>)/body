@@ -1,0 +1,52 @@
+{
+  if (freePorts.size() < PORTS_REQUIRED_FOR_EXECUTOR) {
+    throw new RuntimeException("Failed to find enough ports for executor");
+  }
+  for (  int port : freePorts) {
+    if (port == -1) {
+      throw new RuntimeException("Failed to find available ports for executor");
+    }
+  }
+  int masterPort=freePorts.get(0);
+  int tmasterControllerPort=freePorts.get(1);
+  int tmasterStatsPort=freePorts.get(2);
+  int shellPort=freePorts.get(3);
+  int metricsmgrPort=freePorts.get(4);
+  int schedulerPort=freePorts.get(5);
+  TopologyAPI.Topology topology=Runtime.topology(runtime);
+  List<String> commands=new ArrayList<>();
+  commands.add(Context.executorSandboxBinary(config));
+  commands.add(Integer.toString(containerIndex));
+  commands.add(topology.getName());
+  commands.add(topology.getId());
+  commands.add(FileUtils.getBaseName(Context.topologyDefinitionFile(config)));
+  commands.add(Runtime.instanceDistribution(runtime));
+  commands.add(Context.stateManagerConnectionString(config));
+  commands.add(Context.stateManagerRootPath(config));
+  commands.add(Context.tmasterSandboxBinary(config));
+  commands.add(Context.stmgrSandboxBinary(config));
+  commands.add(Context.metricsManagerSandboxClassPath(config));
+  commands.add(encodeJavaOpts(TopologyUtils.getInstanceJvmOptions(topology)));
+  commands.add(TopologyUtils.makeClassPath(topology,Context.topologyJarFile(config)));
+  commands.add(Integer.toString(masterPort));
+  commands.add(Integer.toString(tmasterControllerPort));
+  commands.add(Integer.toString(tmasterStatsPort));
+  commands.add(Context.systemConfigSandboxFile(config));
+  commands.add(TopologyUtils.formatRamMap(TopologyUtils.getComponentRamMap(topology,Context.instanceRam(config))));
+  commands.add(encodeJavaOpts(TopologyUtils.getComponentJvmOptions(topology)));
+  commands.add(Context.topologyPackageType(config));
+  commands.add(Context.topologyJarFile(config));
+  commands.add(Context.javaSandboxHome(config));
+  commands.add(Integer.toString(shellPort));
+  commands.add(Context.shellSandboxBinary(config));
+  commands.add(Integer.toString(metricsmgrPort));
+  commands.add(Context.cluster(config));
+  commands.add(Context.role(config));
+  commands.add(Context.environ(config));
+  commands.add(Context.instanceSandboxClassPath(config));
+  commands.add(Context.metricsSinksSandboxFile(config));
+  String completeSchedulerProcessClassPath=new StringBuilder().append(Context.schedulerSandboxClassPath(config)).append(":").append(Context.packingSandboxClassPath(config)).append(":").append(Context.stateManagerSandboxClassPath(config)).toString();
+  commands.add(completeSchedulerProcessClassPath);
+  commands.add(Integer.toString(schedulerPort));
+  return commands.toArray(new String[0]);
+}
