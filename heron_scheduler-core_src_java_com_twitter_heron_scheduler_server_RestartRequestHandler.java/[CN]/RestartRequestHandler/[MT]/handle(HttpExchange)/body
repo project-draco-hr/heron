@@ -1,7 +1,7 @@
 {
-  byte[] requestBody=HttpUtils.readHttpRequestBody(exchange);
+  byte[] requestBody=NetworkUtils.readHttpRequestBody(exchange);
   Scheduler.RestartTopologyRequest restartTopologyRequest=Scheduler.RestartTopologyRequest.newBuilder().mergeFrom(requestBody).build();
   boolean isRestartSuccessfully=scheduler.onRestart(restartTopologyRequest);
   Scheduler.SchedulerResponse response=SchedulerUtils.constructSchedulerResponse(isRestartSuccessfully);
-  HttpUtils.sendHttpResponse(exchange,response.toByteArray());
+  NetworkUtils.sendHttpResponse(exchange,response.toByteArray());
 }

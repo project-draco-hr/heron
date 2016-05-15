@@ -5,14 +5,14 @@
     return false;
   }
   try {
-    if (!HttpUtils.sendHttpPostRequest(connection,data)) {
+    if (!NetworkUtils.sendHttpPostRequest(connection,data)) {
       LOG.log(Level.SEVERE,"Failed to send http request to scheduler");
       return false;
     }
     Common.StatusCode statusCode;
     LOG.fine("Receiving response from scheduler...");
     try {
-      statusCode=Scheduler.SchedulerResponse.newBuilder().mergeFrom(HttpUtils.readHttpResponse(connection)).build().getStatus().getStatus();
+      statusCode=Scheduler.SchedulerResponse.newBuilder().mergeFrom(NetworkUtils.readHttpResponse(connection)).build().getStatus().getStatus();
     }
  catch (    InvalidProtocolBufferException e) {
       LOG.log(Level.SEVERE,"Failed to parse response",e);

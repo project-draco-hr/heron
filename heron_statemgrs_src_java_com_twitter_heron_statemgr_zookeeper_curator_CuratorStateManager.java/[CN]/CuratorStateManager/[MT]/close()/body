@@ -3,4 +3,8 @@
     LOG.info("Closing the CuratorClient to: " + connectionString);
     client.close();
   }
+  LOG.info("Closing the tunnel processes");
+  for (  Process process : tunnelProcesses) {
+    process.destroy();
+  }
 }

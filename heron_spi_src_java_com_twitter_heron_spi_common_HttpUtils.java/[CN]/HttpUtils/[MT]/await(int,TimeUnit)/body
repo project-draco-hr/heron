@@ -1,8 +1,0 @@
-{
-  try {
-    Thread.sleep(unit.toMillis(time));
-  }
- catch (  InterruptedException e) {
-    LOG.log(Level.SEVERE,"Sleep interrupted ",e);
-  }
-}

@@ -1,0 +1,17 @@
+{
+  int retryLeft=retryCount;
+  while (retryLeft > 0) {
+    try (Socket s=new Socket()){
+      s.connect(endpoint,timeout);
+      return true;
+    }
+ catch (    IOException e) {
+    }
+ finally {
+      SysUtils.sleep(retryIntervalMs);
+      retryLeft--;
+    }
+  }
+  LOG.log(Level.FINE,"Failed to connect to: {0}",endpoint.toString());
+  return false;
+}

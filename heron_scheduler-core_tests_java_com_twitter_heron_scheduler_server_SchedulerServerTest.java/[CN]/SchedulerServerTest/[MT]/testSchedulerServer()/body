@@ -3,6 +3,6 @@
   IScheduler scheduler=Mockito.mock(IScheduler.class);
   Config runtime=Mockito.mock(Config.class);
   SchedulerServer schedulerServer=Mockito.spy(new SchedulerServer(runtime,scheduler,freePort));
-  Assert.assertEquals(HttpUtils.getHostName(),schedulerServer.getHost());
+  Assert.assertEquals(NetworkUtils.getHostName(),schedulerServer.getHost());
   Assert.assertEquals(freePort,schedulerServer.getPort());
 }

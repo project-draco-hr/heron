@@ -1,0 +1,3 @@
+{
+  return config.getIntegerValue(TUNNEL_CONNECTION_RETRY_COUNT,2);
+}

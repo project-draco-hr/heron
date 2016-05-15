@@ -17,7 +17,7 @@
     return false;
   }
   LOG.info("Successfully opened HTTP connection to TMaster");
-  HttpUtils.sendHttpGetRequest(connection);
+  NetworkUtils.sendHttpGetRequest(connection);
   LOG.info("Sent the HTTP payload to TMaster");
   boolean success=false;
   try {

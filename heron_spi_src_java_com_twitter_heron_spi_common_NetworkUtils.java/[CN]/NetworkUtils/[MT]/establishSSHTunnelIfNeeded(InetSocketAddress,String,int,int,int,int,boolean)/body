@@ -1,0 +1,17 @@
+{
+  if (NetworkUtils.isLocationReachable(endpoint,timeout,retryCount,retryIntervalMs)) {
+    return new Pair<InetSocketAddress,Process>(endpoint,null);
+  }
+ else {
+    int localFreePort=SysUtils.getFreePort();
+    InetSocketAddress newEndpoint=new InetSocketAddress(LOCAL_HOST,localFreePort);
+    LOG.log(Level.FINE,"Trying to opening up tunnel to {0} from {1}",new Object[]{endpoint.toString(),newEndpoint.toString()});
+    Process tunnelProcess=ShellUtils.establishSSHTunnelProcess(tunnelHost,localFreePort,endpoint.getHostString(),endpoint.getPort(),isVerbose);
+    if (tunnelProcess != null && tunnelProcess.isAlive() && NetworkUtils.isLocationReachable(newEndpoint,timeout,verifyCount,retryIntervalMs)) {
+      return new Pair<InetSocketAddress,Process>(newEndpoint,tunnelProcess);
+    }
+    LOG.log(Level.FINE,"Failed to opening up tunnel to {0} from {1}. Releasing process..",new Object[]{endpoint,newEndpoint});
+    tunnelProcess.destroy();
+  }
+  return new Pair<InetSocketAddress,Process>(null,null);
+}

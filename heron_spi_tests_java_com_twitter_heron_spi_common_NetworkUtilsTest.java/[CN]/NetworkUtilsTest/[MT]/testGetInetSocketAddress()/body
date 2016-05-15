@@ -1,0 +1,9 @@
+{
+  String host="host";
+  int port=999;
+  String endpoint=String.format("%s:%d",host,port);
+  InetSocketAddress address=NetworkUtils.getInetSocketAddress(endpoint);
+  Assert.assertEquals(host,address.getHostString());
+  Assert.assertEquals(port,address.getPort());
+  Assert.assertEquals(endpoint,address.toString());
+}

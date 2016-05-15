@@ -1,6 +1,0 @@
-int timeout
-int retry
-int retryInterval
-String host
-int port
-boolean verbose

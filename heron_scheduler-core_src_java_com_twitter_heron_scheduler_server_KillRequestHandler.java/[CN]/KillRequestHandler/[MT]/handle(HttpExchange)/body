@@ -1,9 +1,9 @@
 {
-  byte[] requestBody=HttpUtils.readHttpRequestBody(exchange);
+  byte[] requestBody=NetworkUtils.readHttpRequestBody(exchange);
   Scheduler.KillTopologyRequest killTopologyRequest=Scheduler.KillTopologyRequest.newBuilder().mergeFrom(requestBody).build();
   boolean isKillSuccessfully=scheduler.onKill(killTopologyRequest);
   Scheduler.SchedulerResponse response=SchedulerUtils.constructSchedulerResponse(isKillSuccessfully);
-  HttpUtils.sendHttpResponse(exchange,response.toByteArray());
+  NetworkUtils.sendHttpResponse(exchange,response.toByteArray());
   LOG.info("Kill request handler issuing a terminate request to scheduler");
   Runtime.schedulerShutdown(runtime).terminate();
 }

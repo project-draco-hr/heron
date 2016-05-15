@@ -1,0 +1,9 @@
+{
+  StringBuilder sb=new StringBuilder();
+  sb.append("<");
+  sb.append(this.first == null ? "null" : this.first.toString());
+  sb.append(", ");
+  sb.append(this.second == null ? "null" : this.second.toString());
+  sb.append(">");
+  return sb.toString();
+}

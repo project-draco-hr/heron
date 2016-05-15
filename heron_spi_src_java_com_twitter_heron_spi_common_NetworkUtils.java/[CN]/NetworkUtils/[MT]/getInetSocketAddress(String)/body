@@ -1,0 +1,4 @@
+{
+  String[] array=endpoint.split(":");
+  return new InetSocketAddress(array[0],Integer.parseInt(array[1]));
+}

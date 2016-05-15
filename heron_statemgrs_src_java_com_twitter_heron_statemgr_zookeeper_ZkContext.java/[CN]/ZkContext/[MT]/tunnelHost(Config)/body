@@ -1,0 +1,3 @@
+{
+  return config.getStringValue(TUNNEL_HOST,"no.tunnel.host.specified");
+}

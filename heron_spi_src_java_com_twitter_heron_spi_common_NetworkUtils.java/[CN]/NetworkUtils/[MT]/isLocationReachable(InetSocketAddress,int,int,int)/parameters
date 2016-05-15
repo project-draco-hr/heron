@@ -1,0 +1,4 @@
+InetSocketAddress endpoint
+int timeout
+int retryCount
+int retryIntervalMs
