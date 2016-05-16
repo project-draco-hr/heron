@@ -67,10 +67,10 @@
         uploader.undo();
       }
     }
-    uploader.close();
-    packing.close();
-    launcher.close();
-    statemgr.close();
+    SysUtils.closeIgnoringExceptions(uploader);
+    SysUtils.closeIgnoringExceptions(packing);
+    SysUtils.closeIgnoringExceptions(launcher);
+    SysUtils.closeIgnoringExceptions(statemgr);
   }
   if (!isSuccessful) {
     throw new RuntimeException(String.format("Failed to submit topology %s",topologyName));

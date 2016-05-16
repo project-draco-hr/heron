@@ -45,9 +45,9 @@
     if (server != null) {
       server.stop();
     }
-    scheduler.close();
-    packing.close();
-    statemgr.close();
+    SysUtils.closeIgnoringExceptions(scheduler);
+    SysUtils.closeIgnoringExceptions(packing);
+    SysUtils.closeIgnoringExceptions(statemgr);
   }
   return isSuccessful;
 }

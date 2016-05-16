@@ -55,7 +55,7 @@
     }
   }
   finally {
-    statemgr.close();
+    SysUtils.closeIgnoringExceptions(statemgr);
   }
   if (!isSuccessful) {
     throw new RuntimeException(String.format("Failed to %s topology %s",command,topologyName));

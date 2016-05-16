@@ -5,7 +5,7 @@
   int thisSinkRetryAttempts=sinksRetryAttempts.remove(sinkId);
   SinkExecutor oldSinkExecutor=sinkExecutors.remove(sinkId);
   metricsManagerServer.removeSinkCommunicator(oldSinkExecutor.getCommunicator());
-  oldSinkExecutor.close();
+  SysUtils.closeIgnoringExceptions(oldSinkExecutor);
   if (oldSinkExecutor != null && thisSinkRetryAttempts != 0) {
     LOG.info(String.format("Restarting IMetricsSink: %s with %d available retries",sinkId,thisSinkRetryAttempts));
     SinkExecutor newSinkExecutor=initSinkExecutor(sinkId);

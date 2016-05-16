@@ -1,0 +1,10 @@
+{
+  Closeable closeable=new Closeable(){
+    @Override public void close() throws IOException {
+      throw new RuntimeException("Deliberate exception to be ignored.");
+    }
+  }
+;
+  SysUtils.closeIgnoringExceptions(closeable);
+  Assert.assertTrue(true);
+}

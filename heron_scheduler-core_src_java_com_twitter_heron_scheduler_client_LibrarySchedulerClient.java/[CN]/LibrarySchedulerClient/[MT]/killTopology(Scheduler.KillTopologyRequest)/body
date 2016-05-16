@@ -5,7 +5,7 @@
     ret=scheduler.onKill(killTopologyRequest);
   }
   finally {
-    scheduler.close();
+    SysUtils.closeIgnoringExceptions(scheduler);
   }
   return ret;
 }

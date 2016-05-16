@@ -5,7 +5,7 @@
     ret=scheduler.onRestart(restartTopologyRequest);
   }
   finally {
-    scheduler.close();
+    SysUtils.closeIgnoringExceptions(scheduler);
   }
   return ret;
 }

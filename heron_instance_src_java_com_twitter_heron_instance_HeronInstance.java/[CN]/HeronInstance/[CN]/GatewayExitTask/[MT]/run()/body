@@ -1,4 +1,4 @@
 {
-  gateway.close();
+  SysUtils.closeIgnoringExceptions(gateway);
   stop();
 }
