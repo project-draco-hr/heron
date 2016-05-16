@@ -2,12 +2,17 @@ def runAllTests(conf, args):
     successes = []
     failures = []
     timestamp = str(int(time.time()))
+    total = len(conf['topologies'])
+    current = 1
     for topologyConf in conf['topologies']:
         topologyName = ('%s_%s_%s' % (timestamp, topologyConf['topologyName'], str(uuid.uuid4())))
         classPath = (conf['topologyClasspathPrefix'] + topologyConf['classPath'])
         expectedResultFilePath = ((args.topologiesPath + '/') + topologyConf['expectedResultRelativePath'])
+        logging.info(('==== Starting test %s of %s: %s ====' % (current, total, topologyName)))
+        start_secs = int(time.time())
         if (runTest(topologyName, classPath, expectedResultFilePath, args) == 'success'):
-            successes += [topologyName]
+            successes += [(topologyName, (int(time.time()) - start_secs))]
         else:
-            failures += [topologyName]
+            failures += [(topologyName, (int(time.time()) - start_secs))]
+        current += 1
     return (successes, failures)
