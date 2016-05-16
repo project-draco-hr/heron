@@ -1,5 +1,5 @@
 def create_parsers():
-    parser = argparse.ArgumentParser(epilog='For detailed documentation, go to http://go/heron', usage='%(prog)s [options] [help]', add_help=False)
+    parser = argparse.ArgumentParser(epilog='For detailed documentation, go to http://heronstreaming.io', usage='%(prog)s [options] [help]', add_help=False)
     parser = add_titles(parser)
     parser = add_arguments(parser)
     child_parser = argparse.ArgumentParser(parents=[parser], formatter_class=SubcommandHelpFormatter, add_help=False)
