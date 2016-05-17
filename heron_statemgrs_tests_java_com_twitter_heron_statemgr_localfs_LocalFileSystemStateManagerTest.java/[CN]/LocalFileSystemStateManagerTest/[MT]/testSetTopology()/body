@@ -5,8 +5,8 @@
   PowerMockito.spy(FileUtils.class);
   PowerMockito.doReturn(true).when(FileUtils.class,"createDirectory",Matchers.anyString());
   Assert.assertTrue(manager.initTree());
-  PowerMockito.doReturn(true).when(FileUtils.class,"writeToFile",Matchers.anyString(),Matchers.any(byte[].class));
+  PowerMockito.doReturn(true).when(FileUtils.class,"writeToFile",Mockito.anyString(),Mockito.any(byte[].class),Mockito.anyBoolean());
   Assert.assertTrue(manager.setTopology(topology,TOPOLOGY_NAME).get());
   PowerMockito.verifyStatic();
-  FileUtils.writeToFile(Matchers.eq(String.format("%s/%s/%s",ROOT_ADDR,"topologies",TOPOLOGY_NAME)),Matchers.eq(topology.toByteArray()));
+  FileUtils.writeToFile(Matchers.eq(String.format("%s/%s/%s",ROOT_ADDR,"topologies",TOPOLOGY_NAME)),Matchers.eq(topology.toByteArray()),Mockito.eq(false));
 }

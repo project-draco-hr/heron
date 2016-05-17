@@ -1,0 +1,7 @@
+{
+  LocalFileSystemStateManager manager=Mockito.spy(new LocalFileSystemStateManager());
+  manager.initialize(getConfig());
+  Mockito.doReturn(Mockito.mock(ListenableFuture.class)).when(manager).setData(Mockito.anyString(),Mockito.any(byte[].class),Mockito.anyBoolean());
+  manager.setSchedulerLocation(Scheduler.SchedulerLocation.getDefaultInstance(),"");
+  Mockito.verify(manager).setData(Mockito.anyString(),Mockito.any(byte[].class),Mockito.eq(true));
+}

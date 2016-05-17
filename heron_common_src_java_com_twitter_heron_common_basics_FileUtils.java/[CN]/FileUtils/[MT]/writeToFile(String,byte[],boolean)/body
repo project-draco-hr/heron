@@ -1,6 +1,6 @@
 {
   File f=new File(filename);
-  if (f.exists()) {
+  if (!overwrite && f.exists()) {
     LOG.severe("File exists. Topology exists: " + filename);
     return false;
   }

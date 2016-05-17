@@ -1,3 +1,3 @@
 {
-  return setData(getSchedulerLocationPath(topologyName),location.toByteArray());
+  return setData(getSchedulerLocationPath(topologyName),location.toByteArray(),true);
 }

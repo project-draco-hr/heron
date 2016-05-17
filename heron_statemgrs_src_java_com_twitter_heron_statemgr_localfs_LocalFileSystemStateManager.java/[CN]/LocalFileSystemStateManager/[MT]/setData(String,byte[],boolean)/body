@@ -1,6 +1,6 @@
 {
   final SettableFuture<Boolean> future=SettableFuture.create();
-  boolean ret=FileUtils.writeToFile(path,data);
+  boolean ret=FileUtils.writeToFile(path,data,overwrite);
   future.set(ret);
   return future;
 }
