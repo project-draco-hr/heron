@@ -1,0 +1,12 @@
+{
+  Config config=Mockito.mock(Config.class);
+  Config runtime=Mockito.mock(Config.class);
+  Mockito.when(config.getStringValue(ConfigKeys.get("SCHEDULER_CLASS"))).thenReturn(NullScheduler.class.getName());
+  Mockito.when(config.getBooleanValue(ConfigKeys.get("SCHEDULER_IS_SERVICE"))).thenReturn(false);
+  Assert.assertNotNull(new SchedulerClientFactory(config,runtime).getSchedulerClient());
+  final String SCHEDULER_CLASS_NOT_EXIST="class_not_exist";
+  Mockito.when(config.getStringValue(ConfigKeys.get("SCHEDULER_CLASS"))).thenReturn(SCHEDULER_CLASS_NOT_EXIST);
+  exception.expect(ClassNotFoundException.class);
+  new SchedulerClientFactory(config,runtime).getSchedulerClient();
+  Assert.assertFalse(false);
+}

@@ -1,0 +1,13 @@
+{
+  Config config=Mockito.mock(Config.class);
+  Config runtime=Mockito.mock(Config.class);
+  SchedulerStateManagerAdaptor statemgr=Mockito.mock(SchedulerStateManagerAdaptor.class);
+  Mockito.when(config.getBooleanValue(ConfigKeys.get("SCHEDULER_IS_SERVICE"))).thenReturn(true);
+  Mockito.when(runtime.get(Keys.schedulerStateManagerAdaptor())).thenReturn(statemgr);
+  Mockito.when(runtime.getStringValue(Keys.topologyName())).thenReturn(TOPOLOGY_NAME);
+  Mockito.when(statemgr.getSchedulerLocation(Mockito.eq(TOPOLOGY_NAME))).thenReturn(null);
+  Assert.assertNull(new SchedulerClientFactory(config,runtime).getSchedulerClient());
+  Mockito.verify(statemgr).getSchedulerLocation(Mockito.eq(TOPOLOGY_NAME));
+  Mockito.when(statemgr.getSchedulerLocation(Mockito.eq(TOPOLOGY_NAME))).thenReturn(Scheduler.SchedulerLocation.getDefaultInstance());
+  Assert.assertNotNull(new SchedulerClientFactory(config,runtime).getSchedulerClient());
+}
