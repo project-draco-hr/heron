@@ -1,0 +1,26 @@
+{
+  final String CLUSTER="cluster";
+  final String ROLE="role";
+  final String ENVIRON="env";
+  Config config=Mockito.mock(Config.class);
+  Mockito.when(config.getStringValue(ConfigKeys.get("CLUSTER"))).thenReturn(CLUSTER);
+  Mockito.when(config.getStringValue(ConfigKeys.get("ROLE"))).thenReturn(ROLE);
+  Mockito.when(config.getStringValue(ConfigKeys.get("ENVIRON"))).thenReturn(ENVIRON);
+  SchedulerStateManagerAdaptor adaptor=Mockito.mock(SchedulerStateManagerAdaptor.class);
+  RuntimeManagerMain runtimeManagerMain=new RuntimeManagerMain(config,MOCK_COMMAND);
+  Mockito.when(adaptor.isTopologyRunning(Mockito.eq(TOPOLOGY_NAME))).thenReturn(false);
+  Assert.assertFalse(runtimeManagerMain.validateRuntimeManage(adaptor,TOPOLOGY_NAME));
+  Mockito.when(adaptor.isTopologyRunning(Mockito.eq(TOPOLOGY_NAME))).thenReturn(null);
+  Assert.assertFalse(runtimeManagerMain.validateRuntimeManage(adaptor,TOPOLOGY_NAME));
+  Mockito.when(adaptor.isTopologyRunning(Mockito.eq(TOPOLOGY_NAME))).thenReturn(true);
+  ExecutionEnvironment.ExecutionState.Builder stateBuilder=ExecutionEnvironment.ExecutionState.newBuilder().setTopologyName(TOPOLOGY_NAME).setTopologyId(TOPOLOGY_ID).setCluster(CLUSTER).setEnviron(ENVIRON);
+  final String WRONG_ROLE="wrong";
+  ExecutionEnvironment.ExecutionState wrongState=stateBuilder.setRole(WRONG_ROLE).build();
+  Mockito.when(adaptor.getExecutionState(Mockito.eq(TOPOLOGY_NAME))).thenReturn(null);
+  Assert.assertFalse(runtimeManagerMain.validateRuntimeManage(adaptor,TOPOLOGY_NAME));
+  Mockito.when(adaptor.getExecutionState(Mockito.eq(TOPOLOGY_NAME))).thenReturn(wrongState);
+  Assert.assertFalse(runtimeManagerMain.validateRuntimeManage(adaptor,TOPOLOGY_NAME));
+  ExecutionEnvironment.ExecutionState correctState=stateBuilder.setRole(ROLE).build();
+  Mockito.when(adaptor.getExecutionState(Mockito.eq(TOPOLOGY_NAME))).thenReturn(correctState);
+  Assert.assertTrue(runtimeManagerMain.validateRuntimeManage(adaptor,TOPOLOGY_NAME));
+}

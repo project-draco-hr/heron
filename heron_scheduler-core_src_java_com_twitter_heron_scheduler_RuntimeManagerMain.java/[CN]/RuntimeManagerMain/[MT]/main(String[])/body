@@ -36,27 +36,14 @@
   }
   Command command=Command.makeCommand(commandOption);
   Config.Builder defaultsConfig=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,configPath,releaseFile));
-  Config.Builder commandLineConfig=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ).put(Keys.topologyContainerId(),containerId);
+  Config.Builder commandLineConfig=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ).put(Keys.verbose(),verbose).put(Keys.topologyContainerId(),containerId);
   Config.Builder topologyConfig=Config.newBuilder().put(Keys.topologyName(),topologyName);
   Config.Builder overrideConfig=Config.newBuilder().putAll(ClusterConfig.loadOverrideConfig(overrideConfigFile));
   Config config=Config.expand(Config.newBuilder().putAll(defaultsConfig.build()).putAll(overrideConfig.build()).putAll(commandLineConfig.build()).putAll(topologyConfig.build()).build());
   LOG.fine("Static config loaded successfully ");
   LOG.fine(config.toString());
-  String statemgrClass=Context.stateManagerClass(config);
-  IStateManager statemgr=ReflectionUtils.newInstance(statemgrClass);
-  boolean isSuccessful=false;
-  try {
-    statemgr.initialize(config);
-    SchedulerStateManagerAdaptor adaptor=new SchedulerStateManagerAdaptor(statemgr,5000);
-    boolean isValid=validateRuntimeManage(config,adaptor,topologyName);
-    if (isValid) {
-      LOG.log(Level.FINE,"Topology: {0} to be {1}ed",new Object[]{topologyName,command});
-      isSuccessful=manageTopology(config,command,adaptor);
-    }
-  }
-  finally {
-    SysUtils.closeIgnoringExceptions(statemgr);
-  }
+  RuntimeManagerMain runtimeManagerMain=new RuntimeManagerMain(config,command);
+  boolean isSuccessful=runtimeManagerMain.manageTopology();
   if (!isSuccessful) {
     throw new RuntimeException(String.format("Failed to %s topology %s",command,topologyName));
   }

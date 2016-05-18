@@ -13,7 +13,14 @@
   }
  else {
     final String schedulerClass=Context.schedulerClass(config);
-    final IScheduler scheduler=ReflectionUtils.newInstance(schedulerClass);
+    final IScheduler scheduler;
+    try {
+      scheduler=ReflectionUtils.newInstance(schedulerClass);
+    }
+ catch (    ClassNotFoundException|InstantiationException|IllegalAccessException e) {
+      LOG.log(Level.SEVERE,"Failed to reflect new instance",e);
+      return null;
+    }
     LOG.fine("Invoke scheduler as a library");
     schedulerClient=new LibrarySchedulerClient(config,runtime,scheduler);
   }

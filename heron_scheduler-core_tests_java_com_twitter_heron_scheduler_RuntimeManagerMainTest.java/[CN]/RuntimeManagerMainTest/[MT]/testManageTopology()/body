@@ -1,0 +1,20 @@
+{
+  Config config=Mockito.mock(Config.class);
+  Mockito.when(config.getStringValue(ConfigKeys.get("TOPOLOGY_NAME"))).thenReturn(TOPOLOGY_NAME);
+  RuntimeManagerMain runtimeManagerMain=Mockito.spy(new RuntimeManagerMain(config,MOCK_COMMAND));
+  final String CLASS_NOT_EXIST="class_not_exist";
+  Mockito.when(config.getStringValue(ConfigKeys.get("STATE_MANAGER_CLASS"))).thenReturn(CLASS_NOT_EXIST);
+  Assert.assertFalse(runtimeManagerMain.manageTopology());
+  Mockito.when(config.getStringValue(ConfigKeys.get("STATE_MANAGER_CLASS"))).thenReturn(NullStateManager.class.getName());
+  Mockito.doReturn(false).when(runtimeManagerMain).validateRuntimeManage(Mockito.any(SchedulerStateManagerAdaptor.class),Mockito.eq(TOPOLOGY_NAME));
+  Assert.assertFalse(runtimeManagerMain.manageTopology());
+  Mockito.doReturn(true).when(runtimeManagerMain).validateRuntimeManage(Mockito.any(SchedulerStateManagerAdaptor.class),Mockito.eq(TOPOLOGY_NAME));
+  Mockito.doReturn(null).when(runtimeManagerMain).getSchedulerClient();
+  Assert.assertFalse(runtimeManagerMain.manageTopology());
+  ISchedulerClient client=Mockito.mock(ISchedulerClient.class);
+  Mockito.doReturn(client).when(runtimeManagerMain).getSchedulerClient();
+  Mockito.doReturn(false).when(runtimeManagerMain).callRuntimeManagerRunner(client);
+  Assert.assertFalse(runtimeManagerMain.manageTopology());
+  Mockito.doReturn(true).when(runtimeManagerMain).callRuntimeManagerRunner(client);
+  Assert.assertTrue(runtimeManagerMain.manageTopology());
+}

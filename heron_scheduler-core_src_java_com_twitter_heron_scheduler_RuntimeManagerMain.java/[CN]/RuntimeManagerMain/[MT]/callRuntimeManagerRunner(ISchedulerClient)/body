@@ -1,0 +1,5 @@
+{
+  RuntimeManagerRunner runtimeManagerRunner=new RuntimeManagerRunner(config,runtime,command,schedulerClient);
+  boolean ret=runtimeManagerRunner.call();
+  return ret;
+}

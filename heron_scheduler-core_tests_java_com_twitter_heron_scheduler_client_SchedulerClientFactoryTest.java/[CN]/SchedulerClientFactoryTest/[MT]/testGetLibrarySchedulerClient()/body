@@ -6,7 +6,5 @@
   Assert.assertNotNull(new SchedulerClientFactory(config,runtime).getSchedulerClient());
   final String SCHEDULER_CLASS_NOT_EXIST="class_not_exist";
   Mockito.when(config.getStringValue(ConfigKeys.get("SCHEDULER_CLASS"))).thenReturn(SCHEDULER_CLASS_NOT_EXIST);
-  exception.expect(ClassNotFoundException.class);
-  new SchedulerClientFactory(config,runtime).getSchedulerClient();
-  Assert.assertFalse(false);
+  Assert.assertNull(new SchedulerClientFactory(config,runtime).getSchedulerClient());
 }
