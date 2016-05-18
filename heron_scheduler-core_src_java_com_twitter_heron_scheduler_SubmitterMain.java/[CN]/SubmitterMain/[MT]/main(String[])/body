@@ -35,47 +35,12 @@
   Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath,releaseFile)).putAll(overrideConfigs(overrideConfigFile)).putAll(commandLineConfigs(cluster,role,environ,verbose)).putAll(topologyConfigs(topologyPackage,topologyJarFile,topologyDefnFile,topology)).build());
   LOG.fine("Static config loaded successfully ");
   LOG.fine(config.toString());
-  String statemgrClass=Context.stateManagerClass(config);
-  IStateManager statemgr=ReflectionUtils.newInstance(statemgrClass);
-  String launcherClass=Context.launcherClass(config);
-  ILauncher launcher=ReflectionUtils.newInstance(launcherClass);
-  String packingClass=Context.packingClass(config);
-  IPacking packing=ReflectionUtils.newInstance(packingClass);
-  String uploaderClass=Context.uploaderClass(config);
-  IUploader uploader=ReflectionUtils.newInstance(uploaderClass);
-  String topologyName=topology.getName();
-  boolean isSuccessful=false;
-  URI packageURI=null;
-  try {
-    statemgr.initialize(config);
-    SchedulerStateManagerAdaptor adaptor=new SchedulerStateManagerAdaptor(statemgr,5000);
-    boolean isValid=validateSubmit(adaptor,topologyName);
-    if (isValid) {
-      LOG.log(Level.FINE,"Topology {0} to be submitted",topologyName);
-      packageURI=uploadPackage(config,uploader);
-      if (packageURI == null) {
-        LOG.severe("Failed to upload package.");
-      }
- else {
-        isSuccessful=submitTopology(config,topology,adaptor,launcher,packing,packageURI);
-      }
-    }
-  }
-  finally {
-    if (!isSuccessful) {
-      if (packageURI != null) {
-        uploader.undo();
-      }
-    }
-    SysUtils.closeIgnoringExceptions(uploader);
-    SysUtils.closeIgnoringExceptions(packing);
-    SysUtils.closeIgnoringExceptions(launcher);
-    SysUtils.closeIgnoringExceptions(statemgr);
-  }
+  SubmitterMain submitterMain=new SubmitterMain(config,topology);
+  boolean isSuccessful=submitterMain.submitTopology();
   if (!isSuccessful) {
-    throw new RuntimeException(String.format("Failed to submit topology %s",topologyName));
+    throw new RuntimeException(String.format("Failed to submit topology %s",topology.getName()));
   }
  else {
-    LOG.log(Level.FINE,"Topology {0} submitted successfully",topologyName);
+    LOG.log(Level.FINE,"Topology {0} submitted successfully",topology.getName());
   }
 }

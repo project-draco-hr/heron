@@ -1,0 +1,9 @@
+{
+  LaunchRunner launchRunner=new LaunchRunner(config,runtime);
+  boolean result=launchRunner.call();
+  if (!result) {
+    LOG.severe("Failed to launch topology. Attempting to roll back upload.");
+    return false;
+  }
+  return true;
+}

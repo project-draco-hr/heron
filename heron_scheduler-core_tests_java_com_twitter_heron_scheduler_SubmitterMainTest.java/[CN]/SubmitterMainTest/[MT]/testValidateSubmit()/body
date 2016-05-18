@@ -1,0 +1,12 @@
+{
+  Config config=Mockito.mock(Config.class);
+  SchedulerStateManagerAdaptor adaptor=Mockito.mock(SchedulerStateManagerAdaptor.class);
+  TopologyAPI.Topology topology=TopologyAPI.Topology.getDefaultInstance();
+  SubmitterMain submitterMain=new SubmitterMain(config,topology);
+  Mockito.when(adaptor.isTopologyRunning(Mockito.eq(TOPOLOGY_NAME))).thenReturn(true);
+  Assert.assertFalse(submitterMain.validateSubmit(adaptor,TOPOLOGY_NAME));
+  Mockito.when(adaptor.isTopologyRunning(Mockito.eq(TOPOLOGY_NAME))).thenReturn(null);
+  Assert.assertTrue(submitterMain.validateSubmit(adaptor,TOPOLOGY_NAME));
+  Mockito.when(adaptor.isTopologyRunning(Mockito.eq(TOPOLOGY_NAME))).thenReturn(false);
+  Assert.assertTrue(submitterMain.validateSubmit(adaptor,TOPOLOGY_NAME));
+}
