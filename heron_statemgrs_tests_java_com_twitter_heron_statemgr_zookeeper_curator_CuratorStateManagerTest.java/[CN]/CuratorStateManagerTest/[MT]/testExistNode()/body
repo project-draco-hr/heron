@@ -1,0 +1,19 @@
+{
+  CuratorStateManager spyStateManager=Mockito.spy(new CuratorStateManager());
+  CuratorFramework mockClient=Mockito.mock(CuratorFramework.class);
+  ExistsBuilder mockExistsBuilder=Mockito.mock(ExistsBuilder.class);
+  final String correctPath="/correct/path";
+  final String wrongPath="/wrong/path";
+  Mockito.doReturn(mockClient).when(spyStateManager).getCuratorClient();
+  Mockito.doReturn(true).when(mockClient).blockUntilConnected(Mockito.anyInt(),Mockito.any(TimeUnit.class));
+  Mockito.doReturn(mockExistsBuilder).when(mockClient).checkExists();
+  Mockito.doReturn(new Stat()).when(mockExistsBuilder).forPath(correctPath);
+  Mockito.doReturn(null).when(mockExistsBuilder).forPath(wrongPath);
+  spyStateManager.initialize(config);
+  ListenableFuture<Boolean> result1=spyStateManager.existNode(correctPath);
+  Mockito.verify(mockExistsBuilder).forPath(correctPath);
+  Assert.assertTrue(result1.get());
+  ListenableFuture<Boolean> result2=spyStateManager.existNode(wrongPath);
+  Mockito.verify(mockExistsBuilder).forPath(wrongPath);
+  Assert.assertFalse(result2.get());
+}

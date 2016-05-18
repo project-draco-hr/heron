@@ -1,0 +1,13 @@
+{
+  CuratorStateManager spyStateManager=Mockito.spy(new CuratorStateManager());
+  CuratorFramework mockClient=Mockito.mock(CuratorFramework.class);
+  Mockito.doReturn(mockClient).when(spyStateManager).getCuratorClient();
+  Mockito.doReturn(new Pair<String,List<Process>>(TUNNEL_STRING,new ArrayList<Process>())).when(spyStateManager).setupZkTunnel();
+  Mockito.doReturn(true).when(mockClient).blockUntilConnected(Mockito.anyInt(),Mockito.any(TimeUnit.class));
+  spyStateManager.initialize(tunnelingConfig);
+  Assert.assertTrue(spyStateManager.getConnectionString().equals(TUNNEL_STRING));
+  Mockito.verify(mockClient).start();
+  Mockito.verify(mockClient).blockUntilConnected(Mockito.anyInt(),Mockito.any(TimeUnit.class));
+  Mockito.verify(mockClient,Mockito.times(5)).createContainers(Mockito.anyString());
+  Mockito.verify(spyStateManager).initTree();
+}

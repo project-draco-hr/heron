@@ -1,2 +1,3 @@
 Config runtime
 IScheduler scheduler
+boolean isService

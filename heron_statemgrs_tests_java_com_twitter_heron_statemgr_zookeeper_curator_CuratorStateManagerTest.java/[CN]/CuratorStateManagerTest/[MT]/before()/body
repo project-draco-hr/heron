@@ -1,0 +1,5 @@
+{
+  Config.Builder builder=Config.newBuilder().put(Keys.stateManagerRootPath(),ROOT_ADDR).put(Keys.topologyName(),TOPOLOGY_NAME).put(Keys.stateManagerConnectionString(),CONNECTION_STRING);
+  config=builder.build();
+  tunnelingConfig=builder.put(ZkContext.IS_INITIALIZE_TREE,true).put(ZkContext.IS_TUNNEL_NEEDED,true).put(Keys.schedulerService(),false).build();
+}

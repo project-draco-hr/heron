@@ -1,10 +1,12 @@
 {
-  super.initialize(config);
-  this.connectionString=Context.stateManagerConnectionString(config);
+  super.initialize(newConfig);
+  this.config=newConfig;
+  this.connectionString=Context.stateManagerConnectionString(newConfig);
+  this.isSchedulerService=Context.schedulerService(newConfig);
   this.tunnelProcesses=new ArrayList<>();
-  boolean isTunnelWhenNeeded=ZkContext.isTunnelNeeded(config);
+  boolean isTunnelWhenNeeded=ZkContext.isTunnelNeeded(newConfig);
   if (isTunnelWhenNeeded) {
-    Pair<String,List<Process>> tunneledResults=setupZkTunnel(config);
+    Pair<String,List<Process>> tunneledResults=setupZkTunnel();
     String newConnectionString=tunneledResults.first;
     if (newConnectionString.isEmpty()) {
       throw new IllegalArgumentException("Bad connectionString: " + connectionString);
@@ -12,19 +14,18 @@
     connectionString=newConnectionString;
     tunnelProcesses.addAll(tunneledResults.second);
   }
-  ExponentialBackoffRetry retryPolicy=new ExponentialBackoffRetry(ZkContext.retryIntervalMs(config),ZkContext.retryCount(config));
-  client=CuratorFrameworkFactory.builder().connectString(connectionString).retryPolicy(retryPolicy).connectionTimeoutMs(ZkContext.connectionTimeoutMs(config)).sessionTimeoutMs(ZkContext.sessionTimeoutMs(config)).build();
+  client=getCuratorClient();
   LOG.info("Starting client to: " + connectionString);
   client.start();
   try {
-    if (!client.blockUntilConnected(ZkContext.connectionTimeoutMs(config),TimeUnit.MILLISECONDS)) {
+    if (!client.blockUntilConnected(ZkContext.connectionTimeoutMs(newConfig),TimeUnit.MILLISECONDS)) {
       throw new RuntimeException("Failed to initialize CuratorClient");
     }
   }
  catch (  InterruptedException e) {
     throw new RuntimeException("Failed to initialize CuratorClient",e);
   }
-  if (ZkContext.isInitializeTree(config)) {
+  if (ZkContext.isInitializeTree(newConfig)) {
     initTree();
   }
 }

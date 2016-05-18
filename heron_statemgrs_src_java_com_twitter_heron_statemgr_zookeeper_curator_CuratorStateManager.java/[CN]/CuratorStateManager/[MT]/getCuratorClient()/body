@@ -1,0 +1,4 @@
+{
+  ExponentialBackoffRetry retryPolicy=new ExponentialBackoffRetry(ZkContext.retryIntervalMs(config),ZkContext.retryCount(config));
+  return CuratorFrameworkFactory.builder().connectString(connectionString).retryPolicy(retryPolicy).connectionTimeoutMs(ZkContext.connectionTimeoutMs(config)).sessionTimeoutMs(ZkContext.sessionTimeoutMs(config)).build();
+}

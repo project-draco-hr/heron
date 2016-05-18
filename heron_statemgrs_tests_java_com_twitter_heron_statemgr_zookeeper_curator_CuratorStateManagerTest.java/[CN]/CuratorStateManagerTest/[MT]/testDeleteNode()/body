@@ -1,0 +1,14 @@
+{
+  CuratorStateManager spyStateManager=Mockito.spy(new CuratorStateManager());
+  CuratorFramework mockClient=Mockito.mock(CuratorFramework.class);
+  DeleteBuilder mockDeleteBuilder=Mockito.mock(DeleteBuilder.class);
+  @SuppressWarnings("rawtypes") BackgroundPathable mockBackPathable=Mockito.mock(BackgroundPathable.class);
+  Mockito.doReturn(mockClient).when(spyStateManager).getCuratorClient();
+  Mockito.doReturn(true).when(mockClient).blockUntilConnected(Mockito.anyInt(),Mockito.any(TimeUnit.class));
+  Mockito.doReturn(mockDeleteBuilder).when(mockClient).delete();
+  Mockito.doReturn(mockBackPathable).when(mockDeleteBuilder).withVersion(-1);
+  spyStateManager.initialize(config);
+  ListenableFuture<Boolean> result=spyStateManager.deleteExecutionState(PATH);
+  Mockito.verify(mockDeleteBuilder).withVersion(-1);
+  Assert.assertTrue(result.get());
+}

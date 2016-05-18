@@ -1,0 +1,12 @@
+{
+  CuratorStateManager spyStateManager=Mockito.spy(new CuratorStateManager());
+  CuratorFramework mockClient=Mockito.mock(CuratorFramework.class);
+  Mockito.doReturn(mockClient).when(spyStateManager).getCuratorClient();
+  Mockito.doReturn(true).when(mockClient).blockUntilConnected(Mockito.anyInt(),Mockito.any(TimeUnit.class));
+  spyStateManager.initialize(config);
+  final SettableFuture<Boolean> fakeResult=SettableFuture.create();
+  fakeResult.set(false);
+  Mockito.doReturn(fakeResult).when(spyStateManager).deleteNode(Mockito.anyString());
+  ListenableFuture<Boolean> result=spyStateManager.deleteSchedulerLocation(TOPOLOGY_NAME);
+  Assert.assertTrue(result.get());
+}

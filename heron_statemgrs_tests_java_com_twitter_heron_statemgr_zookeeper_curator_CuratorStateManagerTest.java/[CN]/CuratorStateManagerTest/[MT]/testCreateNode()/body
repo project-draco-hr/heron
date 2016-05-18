@@ -1,0 +1,16 @@
+{
+  CuratorStateManager spyStateManager=Mockito.spy(new CuratorStateManager());
+  CuratorFramework mockClient=Mockito.mock(CuratorFramework.class);
+  CreateBuilder mockCreateBuilder=Mockito.mock(CreateBuilder.class);
+  @SuppressWarnings("rawtypes") ACLBackgroundPathAndBytesable mockPath=Mockito.spy(ACLBackgroundPathAndBytesable.class);
+  final byte[] data=new byte[10];
+  Mockito.doReturn(mockClient).when(spyStateManager).getCuratorClient();
+  Mockito.doReturn(true).when(mockClient).blockUntilConnected(Mockito.anyInt(),Mockito.any(TimeUnit.class));
+  Mockito.doReturn(mockCreateBuilder).when(mockClient).create();
+  Mockito.doReturn(mockPath).when(mockCreateBuilder).withMode(Mockito.any(CreateMode.class));
+  spyStateManager.initialize(config);
+  ListenableFuture<Boolean> result=spyStateManager.createNode(PATH,data,false);
+  Mockito.verify(mockCreateBuilder).withMode(Mockito.any(CreateMode.class));
+  Mockito.verify(mockPath).forPath(PATH,data);
+  Assert.assertTrue(result.get());
+}
