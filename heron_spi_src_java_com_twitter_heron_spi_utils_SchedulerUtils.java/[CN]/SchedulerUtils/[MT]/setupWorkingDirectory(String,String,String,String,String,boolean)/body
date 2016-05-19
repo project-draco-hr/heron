@@ -1,0 +1,11 @@
+{
+  if (!FileUtils.isDirectoryExists(workingDirectory)) {
+    LOG.fine("The working directory does not exist; creating it.");
+    if (!FileUtils.createDirectory(workingDirectory)) {
+      LOG.severe("Failed to create directory: " + workingDirectory);
+      return false;
+    }
+  }
+  boolean ret=curlAndExtractPackage(workingDirectory,coreReleasePackageURL,coreReleaseDestination,true,isVerbose) && curlAndExtractPackage(workingDirectory,topologyPackageURL,topologyPackageDestination,true,isVerbose);
+  return ret;
+}

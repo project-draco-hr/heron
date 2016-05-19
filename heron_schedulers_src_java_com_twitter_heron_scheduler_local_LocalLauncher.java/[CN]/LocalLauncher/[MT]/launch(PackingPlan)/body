@@ -1,7 +1,7 @@
 {
   LOG.log(Level.FINE,"Launching topology for local cluster {0}",LocalContext.cluster(config));
-  if (!downloadAndExtractPackages()) {
-    LOG.severe("Failed to download the core and topology packages");
+  if (!setupWorkingDirectory()) {
+    LOG.severe("Failed to setup working directory");
     return false;
   }
   String[] schedulerCmd=getSchedulerCommand();

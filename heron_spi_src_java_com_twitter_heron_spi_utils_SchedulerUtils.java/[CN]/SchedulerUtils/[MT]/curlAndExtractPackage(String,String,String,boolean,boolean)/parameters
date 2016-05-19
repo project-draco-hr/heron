@@ -1,0 +1,5 @@
+String workingDirectory
+String packageURI
+String packageDestination
+boolean isDeletePackage
+boolean isVerbose

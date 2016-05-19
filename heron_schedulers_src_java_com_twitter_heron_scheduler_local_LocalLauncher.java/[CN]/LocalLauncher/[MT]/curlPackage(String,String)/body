@@ -1,7 +1,0 @@
-{
-  Path filePath=Paths.get(targetFile);
-  File parentDirectory=filePath.getParent().toFile();
-  String cmd=String.format("curl %s -o %s",corePackageURI,targetFile);
-  int ret=ShellUtils.runSyncProcess(LocalContext.verbose(config),LocalContext.verbose(config),cmd,new StringBuilder(),new StringBuilder(),parentDirectory);
-  return ret == 0;
-}

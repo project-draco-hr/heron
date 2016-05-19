@@ -1,15 +1,16 @@
 {
   Config config=createRunnerConfig();
   Config runtime=Mockito.mock(Config.class);
+  URI mockURI=new URI("h:a");
+  Mockito.doReturn(mockURI).when(runtime).get(Keys.topologyPackageUri());
   PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
   PowerMockito.spy(LocalContext.class);
   PowerMockito.doReturn(WORKING_DIRECTORY).when(LocalContext.class,"workingDirectory",config);
   LocalLauncher localLauncher=Mockito.spy(new LocalLauncher());
   localLauncher.initialize(config,runtime);
-  Mockito.doReturn(false).when(localLauncher).downloadAndExtractPackages();
+  Mockito.doReturn(false).when(localLauncher).setupWorkingDirectory();
   Assert.assertFalse(localLauncher.launch(packingPlan));
-  Mockito.verify(localLauncher).downloadAndExtractPackages();
-  Mockito.doReturn(true).when(localLauncher).downloadAndExtractPackages();
+  Mockito.doReturn(true).when(localLauncher).setupWorkingDirectory();
   String[] expectedSchedulerCommand={"expected","scheduler","command"};
   Mockito.doReturn(expectedSchedulerCommand).when(localLauncher).getSchedulerCommand();
   Mockito.doReturn(null).when(localLauncher).startScheduler(Mockito.any(String[].class));

@@ -1,0 +1,4 @@
+String uri
+String destination
+boolean isVerbose
+boolean isInheritIO

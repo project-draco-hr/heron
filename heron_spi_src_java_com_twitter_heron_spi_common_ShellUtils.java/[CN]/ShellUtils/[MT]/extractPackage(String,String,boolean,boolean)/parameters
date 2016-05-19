@@ -1,2 +1,4 @@
 String packageName
 String targetFolder
+boolean isVerbose
+boolean isInheritIO

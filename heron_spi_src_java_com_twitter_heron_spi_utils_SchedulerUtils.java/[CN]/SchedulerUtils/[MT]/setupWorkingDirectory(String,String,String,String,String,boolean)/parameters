@@ -1,0 +1,6 @@
+String workingDirectory
+String coreReleasePackageURL
+String coreReleaseDestination
+String topologyPackageURL
+String topologyPackageDestination
+boolean isVerbose
