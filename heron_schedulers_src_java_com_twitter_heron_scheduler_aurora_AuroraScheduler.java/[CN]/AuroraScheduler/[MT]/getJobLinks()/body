@@ -1,3 +1,9 @@
 {
-  return new ArrayList<>();
+  List<String> jobLinks=new ArrayList<>();
+  String jobLinkFormat=AuroraContext.getJobLinkTemplate(config);
+  if (jobLinkFormat != null && !jobLinkFormat.isEmpty()) {
+    String jobLink=Misc.substitute(config,jobLinkFormat);
+    jobLinks.add(jobLink);
+  }
+  return jobLinks;
 }

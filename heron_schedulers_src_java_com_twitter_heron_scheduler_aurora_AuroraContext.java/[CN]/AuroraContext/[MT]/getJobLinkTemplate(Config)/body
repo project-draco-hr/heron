@@ -1,0 +1,3 @@
+{
+  return config.getStringValue(JOB_LINK_TEMPLATE);
+}
