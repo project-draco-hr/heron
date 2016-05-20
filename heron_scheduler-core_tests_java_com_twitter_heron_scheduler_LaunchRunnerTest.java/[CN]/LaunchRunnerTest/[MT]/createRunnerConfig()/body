@@ -4,5 +4,7 @@
   Mockito.when(config.getStringValue(ConfigKeys.get("CLUSTER"))).thenReturn(CLUSTER);
   Mockito.when(config.getStringValue(ConfigKeys.get("ROLE"))).thenReturn(ROLE);
   Mockito.when(config.getStringValue(ConfigKeys.get("ENVIRON"))).thenReturn(ENVIRON);
+  Mockito.when(config.getStringValue(ConfigKeys.get("BUILD_VERSION"))).thenReturn(BUILD_VERSION);
+  Mockito.when(config.getStringValue(ConfigKeys.get("BUILD_USER"))).thenReturn(BUILD_USER);
   return config;
 }

@@ -1,7 +1,7 @@
 {
-  String releaseUsername="heron";
-  String releaseTag="heron-core";
-  String releaseVersion="live";
+  String releaseUsername=Context.buildUser(config);
+  String releaseTag="";
+  String releaseVersion=Context.buildVersion(config);
   TopologyAPI.Topology topology=Runtime.topology(runtime);
   ExecutionEnvironment.ExecutionState.Builder builder=ExecutionEnvironment.ExecutionState.newBuilder();
   builder.setTopologyName(topology.getName()).setTopologyId(topology.getId()).setSubmissionTime(System.currentTimeMillis() / 1000).setSubmissionUser(System.getProperty("user.name")).setCluster(Context.cluster(config)).setRole(Context.role(config)).setEnviron(Context.environ(config));
