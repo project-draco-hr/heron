@@ -1,6 +1,6 @@
 {
-  StringBuilder[] containerBuilder=new StringBuilder[packing.containers.size()];
-  for (  PackingPlan.ContainerPlan container : packing.containers.values()) {
+  StringBuilder[] containerBuilder=new StringBuilder[this.containers.size()];
+  for (  PackingPlan.ContainerPlan container : this.containers.values()) {
     int index=Integer.parseInt(container.id);
     containerBuilder[index - 1]=new StringBuilder();
     for (    PackingPlan.InstancePlan instance : container.instances.values()) {

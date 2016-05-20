@@ -7,11 +7,12 @@
   int iSchedulerServerPort=0;
   TopologyAPI.Topology topology=TopologyTests.createTopology(iTopologyName,new com.twitter.heron.api.Config(),new HashMap<String,Integer>(),new HashMap<String,Integer>());
   String packingString="dummyPackingString";
-  PowerMockito.spy(TopologyUtils.class);
-  PowerMockito.doReturn(packingString).when(TopologyUtils.class,"packingToString",Mockito.any(PackingPlan.class));
   stateManager=Mockito.mock(IStateManager.class);
   packing=Mockito.mock(IPacking.class);
   scheduler=Mockito.mock(IScheduler.class);
+  PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
+  Mockito.when(packing.pack()).thenReturn(packingPlan);
+  Mockito.when(packingPlan.getInstanceDistribution()).thenReturn(packingString);
   PowerMockito.spy(ReflectionUtils.class);
   PowerMockito.doReturn(stateManager).when(ReflectionUtils.class,"newInstance",STATE_MANAGER_CLASS);
   PowerMockito.doReturn(packing).when(ReflectionUtils.class,"newInstance",PACKING_CLASS);

@@ -4,7 +4,8 @@
   String topologyName=Context.topologyName(config);
   packing.initialize(config,runtime);
   PackingPlan packedPlan=packing.pack();
-  launcher.initialize(config,runtime);
+  Config ytruntime=Config.newBuilder().putAll(runtime).put(Keys.instanceDistribution(),packedPlan.getInstanceDistribution()).build();
+  launcher.initialize(config,ytruntime);
   Boolean result;
   result=statemgr.setTopology(trimTopology(topology),topologyName);
   if (result == null || !result) {
