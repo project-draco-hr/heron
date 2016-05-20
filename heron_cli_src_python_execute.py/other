@@ -1,4 +1,8 @@
+import contextlib
+import os
 import subprocess
+import tarfile
+import tempfile
 import heron.cli.src.python.opts as opts
 import heron.cli.src.python.utils as utils
-import heron.cli.src.python.utils as jars
+import heron.cli.src.python.jars as jars
