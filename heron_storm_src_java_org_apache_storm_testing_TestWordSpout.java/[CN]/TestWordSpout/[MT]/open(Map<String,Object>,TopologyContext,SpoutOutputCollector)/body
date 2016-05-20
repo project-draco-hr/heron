@@ -1,0 +1,5 @@
+{
+  collector=aCollector;
+  words=new String[]{"Africa","Europe","Asia","America","Antarctica","Australia"};
+  rand=new Random();
+}
