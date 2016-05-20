@@ -1,3 +1,0 @@
-{
-  throw new IllegalStateException("Transfer collectors are not to transfer error messages");
-}

@@ -1,8 +1,0 @@
-{
-  this.hosts=hosts;
-  this.topic=topic;
-  if (zkRoot != null) {
-    this.zkRoot=zkRoot;
-  }
-  this.id=id;
-}

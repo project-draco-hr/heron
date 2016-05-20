@@ -1,7 +1,0 @@
-Map stormConf
-SpoutConfig spoutConfig
-int taskIndex
-int totalTasks
-String topologyInstanceId
-MetadataStore storage
-KafkaMetric.OffsetMetric kafkaOffsetMetric

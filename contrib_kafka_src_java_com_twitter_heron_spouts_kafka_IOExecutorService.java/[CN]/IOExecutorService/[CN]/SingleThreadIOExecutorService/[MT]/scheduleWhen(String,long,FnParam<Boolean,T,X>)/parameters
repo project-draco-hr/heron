@@ -1,3 +1,0 @@
-String name
-long millis
-FnParam<Boolean,T,X> condition

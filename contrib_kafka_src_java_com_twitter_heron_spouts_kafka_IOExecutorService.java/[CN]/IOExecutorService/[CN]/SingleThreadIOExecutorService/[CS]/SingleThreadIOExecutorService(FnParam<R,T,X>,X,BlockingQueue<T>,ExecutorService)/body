@@ -1,6 +1,0 @@
-{
-  this.readFn=readFn;
-  this.ctx=ctx;
-  this.stream=stream;
-  this.threadPool=threadpool;
-}

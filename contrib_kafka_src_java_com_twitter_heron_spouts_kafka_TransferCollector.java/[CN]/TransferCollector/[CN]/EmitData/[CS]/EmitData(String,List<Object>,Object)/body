@@ -1,5 +1,0 @@
-{
-  this.streamId=streamId;
-  this.messageId=messageId;
-  this.tuple=tuple;
-}

@@ -1,6 +1,0 @@
-{
-  if (isLogged) {
-    logger.log(level,msg);
-    isLogged=false;
-  }
-}

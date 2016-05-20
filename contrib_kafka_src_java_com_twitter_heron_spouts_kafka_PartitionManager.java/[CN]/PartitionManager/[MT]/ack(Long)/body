@@ -1,5 +1,0 @@
-{
-synchronized (pendingOffsets) {
-    pendingOffsets.remove(offset);
-  }
-}
