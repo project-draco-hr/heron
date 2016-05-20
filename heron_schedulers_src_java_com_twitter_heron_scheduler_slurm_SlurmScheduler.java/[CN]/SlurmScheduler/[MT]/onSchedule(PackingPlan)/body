@@ -1,0 +1,16 @@
+{
+  if (packing == null || packing.containers.isEmpty()) {
+    LOG.log(Level.SEVERE,"No container requested. Can't schedule");
+    return false;
+  }
+  LOG.info("Launching topology in Slurm scheduler");
+  long containers=Runtime.numContainers(runtime);
+  boolean jobCreated=controller.createJob(getHeronSlurmPath(),SlurmContext.executorSandboxBinary(this.config),getExecutorCommand(packing),this.workingDirectory,containers);
+  if (!jobCreated) {
+    LOG.log(Level.SEVERE,"Failed to create job");
+  }
+ else {
+    LOG.log(Level.FINE,"Job created successfully");
+  }
+  return jobCreated;
+}

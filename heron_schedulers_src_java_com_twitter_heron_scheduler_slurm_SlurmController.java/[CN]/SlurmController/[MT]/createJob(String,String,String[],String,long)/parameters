@@ -1,0 +1,5 @@
+String slurmScript
+String heronExec
+String[] commandArgs
+String topologyWorkingDirectory
+long containers

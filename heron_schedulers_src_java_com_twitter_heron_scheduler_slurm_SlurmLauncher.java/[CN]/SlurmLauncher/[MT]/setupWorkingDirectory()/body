@@ -1,0 +1,7 @@
+{
+  String coreReleasePackageURI=SlurmContext.corePackageUri(config);
+  String coreReleaseFileDestination=Paths.get(topologyWorkingDirectory,"heron-core.tar.gz").toString();
+  String topologyPackageURI=Runtime.topologyPackageUri(runtime).toString();
+  String topologyPackageDestination=Paths.get(topologyWorkingDirectory,"topology.tar.gz").toString();
+  return SchedulerUtils.setupWorkingDirectory(topologyWorkingDirectory,coreReleasePackageURI,coreReleaseFileDestination,topologyPackageURI,topologyPackageDestination,Context.verbose(config));
+}

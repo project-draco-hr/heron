@@ -1,0 +1,11 @@
+{
+  String nTasks=String.format("--ntasks=%d",containers);
+  List<String> slurmCmd;
+  if (partition != null) {
+    slurmCmd=new ArrayList<>(Arrays.asList("sbatch","-N",Long.toString(containers),nTasks,"-p",partition,slurmScript,heronExec));
+  }
+ else {
+    slurmCmd=new ArrayList<>(Arrays.asList("sbatch","-N",Long.toString(containers),nTasks,slurmScript,heronExec));
+  }
+  return slurmCmd;
+}

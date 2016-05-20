@@ -1,0 +1,22 @@
+{
+  List<String> slurmCmd=slurmCommand(slurmScript,heronExec,containers,partition);
+  List<String> transformedArgs=new ArrayList<>();
+  for (int i=0; i < commandArgs.length; i++) {
+    String arg=commandArgs[i];
+    if (arg == null || arg.trim().equals("")) {
+      transformedArgs.add("\"\"");
+    }
+ else {
+      transformedArgs.add(arg);
+    }
+  }
+  slurmCmd.addAll(transformedArgs);
+  String[] slurmCmdArray=slurmCmd.toArray(new String[0]);
+  LOG.log(Level.INFO,"Executing job [" + topologyWorkingDirectory + "]:",Arrays.toString(slurmCmdArray));
+  StringBuilder stdout=new StringBuilder();
+  StringBuilder stderr=new StringBuilder();
+  boolean ret=runProcess(topologyWorkingDirectory,slurmCmdArray,stdout,stderr);
+  LOG.log(Level.FINE,"Stdout for Slurm script: ",stdout);
+  LOG.log(Level.FINE,"Stderror for Slurm script: ",stderr);
+  return ret;
+}

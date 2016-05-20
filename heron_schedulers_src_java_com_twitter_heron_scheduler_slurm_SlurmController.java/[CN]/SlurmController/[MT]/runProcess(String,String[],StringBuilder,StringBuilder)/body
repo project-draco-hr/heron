@@ -1,0 +1,4 @@
+{
+  File file=topologyWorkingDirectory == null ? null : new File(topologyWorkingDirectory);
+  return 0 == ShellUtils.runSyncProcess(isVerbose,false,slurmCmd,stdout,stderr,file);
+}

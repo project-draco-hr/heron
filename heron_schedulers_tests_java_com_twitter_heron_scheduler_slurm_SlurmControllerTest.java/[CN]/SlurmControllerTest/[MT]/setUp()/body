@@ -1,0 +1,3 @@
+{
+  controller=Mockito.spy(new SlurmController(IS_VERBOSE));
+}

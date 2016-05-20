@@ -1,0 +1,8 @@
+{
+  LOG.log(Level.FINE,"Launching topology for local cluster {0}",SlurmContext.cluster(config));
+  if (!setupWorkingDirectory()) {
+    LOG.log(Level.SEVERE,"Failed to download the core and topology packages");
+    return false;
+  }
+  return SchedulerUtils.onScheduleAsLibrary(config,runtime,new SlurmScheduler(topologyWorkingDirectory),packing);
+}

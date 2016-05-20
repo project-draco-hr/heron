@@ -1,0 +1,5 @@
+{
+  this.config=mConfig;
+  this.runtime=mRuntime;
+  this.topologyWorkingDirectory=SlurmContext.workingDirectory(mConfig);
+}

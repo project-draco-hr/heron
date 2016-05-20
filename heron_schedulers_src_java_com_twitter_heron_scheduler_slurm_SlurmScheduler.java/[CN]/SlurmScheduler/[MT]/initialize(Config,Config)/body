@@ -1,0 +1,6 @@
+{
+  this.config=mConfig;
+  this.runtime=mRuntime;
+  this.controller=getController();
+  this.workingDirectory=SlurmContext.workingDirectory(config);
+}

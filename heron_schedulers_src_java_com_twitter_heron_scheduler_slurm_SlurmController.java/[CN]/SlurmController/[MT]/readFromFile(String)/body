@@ -1,0 +1,14 @@
+{
+  Path path=new File(filename).toPath();
+  List<String> result=new ArrayList<>();
+  try {
+    List<String> tempResult=Files.readAllLines(path);
+    if (tempResult != null) {
+      result.addAll(tempResult);
+    }
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to read from file. ",e);
+  }
+  return result;
+}

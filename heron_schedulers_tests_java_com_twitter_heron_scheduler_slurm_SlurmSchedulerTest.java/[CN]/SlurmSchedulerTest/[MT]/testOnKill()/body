@@ -1,0 +1,16 @@
+{
+  SlurmController controller=Mockito.mock(SlurmController.class);
+  Mockito.doReturn(controller).when(scheduler).getController();
+  Mockito.doReturn(SLURM_ID_FILE).when(scheduler).getJobIdFilePath();
+  Config config=createRunnerConfig();
+  Config runtime=Mockito.mock(Config.class);
+  PowerMockito.spy(SlurmContext.class);
+  PowerMockito.doReturn(WORKING_DIRECTORY).when(SlurmContext.class,"workingDirectory",config);
+  scheduler.initialize(config,runtime);
+  Mockito.doReturn(false).when(controller).killJob(Mockito.anyString());
+  Assert.assertFalse(scheduler.onKill(Scheduler.KillTopologyRequest.getDefaultInstance()));
+  Mockito.verify(controller).killJob(Mockito.anyString());
+  Mockito.doReturn(true).when(controller).killJob(Mockito.anyString());
+  Assert.assertTrue(scheduler.onKill(Scheduler.KillTopologyRequest.getDefaultInstance()));
+  Mockito.verify(controller,Mockito.times(2)).killJob(Mockito.anyString());
+}

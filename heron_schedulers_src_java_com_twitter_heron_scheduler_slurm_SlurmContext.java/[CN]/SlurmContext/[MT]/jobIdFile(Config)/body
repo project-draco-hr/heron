@@ -1,0 +1,3 @@
+{
+  return config.getStringValue(SLURM_JOB_ID,"slurm-job.pid");
+}

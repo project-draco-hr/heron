@@ -1,0 +1,23 @@
+{
+  Config config=createRunnerConfig();
+  Config runtime=Mockito.mock(Config.class);
+  PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
+  PackingPlan plan=new PackingPlan("plan.id",new HashMap<String,PackingPlan.ContainerPlan>(),Mockito.mock(PackingPlan.Resource.class));
+  PowerMockito.spy(SlurmContext.class);
+  PowerMockito.doReturn(WORKING_DIRECTORY).when(SlurmContext.class,"workingDirectory",config);
+  SlurmLauncher slurmLauncher=Mockito.spy(new SlurmLauncher());
+  slurmLauncher.initialize(config,runtime);
+  SlurmScheduler slurmScheduler=Mockito.spy(new SlurmScheduler());
+  PowerMockito.doReturn(true).when(slurmScheduler).onSchedule(plan);
+  Mockito.doReturn(false).when(slurmLauncher).setupWorkingDirectory();
+  Assert.assertFalse(slurmLauncher.launch(packingPlan));
+  Mockito.verify(slurmLauncher).setupWorkingDirectory();
+  PowerMockito.spy(SchedulerUtils.class);
+  PowerMockito.doReturn(false).when(SchedulerUtils.class,"onScheduleAsLibrary",Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(PackingPlan.class));
+  Assert.assertFalse(slurmLauncher.launch(Mockito.mock(PackingPlan.class)));
+  PowerMockito.doReturn(true).when(slurmLauncher).setupWorkingDirectory();
+  PowerMockito.mockStatic(SchedulerUtils.class);
+  PowerMockito.doReturn(true).when(SchedulerUtils.class,"onScheduleAsLibrary",Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(PackingPlan.class));
+  Mockito.verify(slurmLauncher,Mockito.times(2)).launch(Mockito.any(PackingPlan.class));
+  slurmLauncher.close();
+}

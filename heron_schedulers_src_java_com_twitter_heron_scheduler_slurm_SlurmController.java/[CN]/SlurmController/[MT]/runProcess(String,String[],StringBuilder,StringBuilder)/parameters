@@ -1,0 +1,4 @@
+String topologyWorkingDirectory
+String[] slurmCmd
+StringBuilder stdout
+StringBuilder stderr

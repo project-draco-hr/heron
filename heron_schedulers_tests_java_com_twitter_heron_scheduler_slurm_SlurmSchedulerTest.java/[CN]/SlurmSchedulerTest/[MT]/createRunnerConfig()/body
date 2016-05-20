@@ -1,0 +1,8 @@
+{
+  Config config=Mockito.mock(Config.class);
+  Mockito.when(config.getStringValue(ConfigKeys.get("TOPOLOGY_NAME"))).thenReturn(TOPOLOGY_NAME);
+  Mockito.when(config.getStringValue(ConfigKeys.get("CLUSTER"))).thenReturn(CLUSTER);
+  Mockito.when(config.getStringValue(ConfigKeys.get("ROLE"))).thenReturn(ROLE);
+  Mockito.when(config.getStringValue(ConfigKeys.get("ENVIRON"))).thenReturn(ENVIRON);
+  return config;
+}

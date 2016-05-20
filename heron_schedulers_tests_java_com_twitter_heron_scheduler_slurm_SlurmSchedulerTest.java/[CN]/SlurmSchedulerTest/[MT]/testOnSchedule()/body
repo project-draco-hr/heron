@@ -1,0 +1,22 @@
+{
+  SlurmController controller=Mockito.mock(SlurmController.class);
+  Mockito.doReturn(controller).when(scheduler).getController();
+  Config config=createRunnerConfig();
+  Config runtime=Mockito.mock(Config.class);
+  PowerMockito.spy(SlurmContext.class);
+  PowerMockito.doReturn(WORKING_DIRECTORY).when(SlurmContext.class,"workingDirectory",config);
+  scheduler.initialize(config,runtime);
+  Assert.assertFalse(scheduler.onSchedule(null));
+  PackingPlan plan=new PackingPlan(PACKING_PLAN_ID,new HashMap<String,PackingPlan.ContainerPlan>(),Mockito.mock(PackingPlan.Resource.class));
+  Assert.assertTrue(plan.containers.isEmpty());
+  Assert.assertFalse(scheduler.onSchedule(plan));
+  Map<String,PackingPlan.ContainerPlan> containers=new HashMap<>();
+  containers.put(CONTAINER_ID,Mockito.mock(PackingPlan.ContainerPlan.class));
+  PackingPlan validPlan=new PackingPlan(PACKING_PLAN_ID,containers,Mockito.mock(PackingPlan.Resource.class));
+  Mockito.doReturn(false).when(controller).createJob(Mockito.anyString(),Mockito.anyString(),Matchers.any(String[].class),Mockito.anyString(),Mockito.anyInt());
+  Assert.assertFalse(scheduler.onSchedule(validPlan));
+  Mockito.verify(controller).createJob(Mockito.eq(SLURM_PATH),Mockito.anyString(),Matchers.any(String[].class),Mockito.anyString(),Mockito.anyInt());
+  Mockito.doReturn(true).when(controller).createJob(Mockito.anyString(),Mockito.anyString(),Matchers.any(String[].class),Mockito.anyString(),Mockito.anyInt());
+  Assert.assertTrue(scheduler.onSchedule(validPlan));
+  Mockito.verify(controller,Mockito.times(2)).createJob(Mockito.anyString(),Mockito.anyString(),Matchers.any(String[].class),Mockito.anyString(),Mockito.anyInt());
+}

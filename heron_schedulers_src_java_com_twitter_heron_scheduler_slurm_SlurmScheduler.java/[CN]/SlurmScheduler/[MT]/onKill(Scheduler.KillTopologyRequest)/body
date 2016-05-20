@@ -1,0 +1,4 @@
+{
+  String file=getJobIdFilePath();
+  return controller.killJob(file);
+}

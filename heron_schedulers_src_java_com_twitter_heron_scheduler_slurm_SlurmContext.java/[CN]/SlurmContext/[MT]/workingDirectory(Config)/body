@@ -1,0 +1,4 @@
+{
+  String workingDirectory=config.getStringValue(WORKING_DIRECTORY,"${HOME}/.herondata/topologies/${CLUSTER}/${ROLE}/${TOPOLOGY}");
+  return Misc.substitute(config,workingDirectory);
+}

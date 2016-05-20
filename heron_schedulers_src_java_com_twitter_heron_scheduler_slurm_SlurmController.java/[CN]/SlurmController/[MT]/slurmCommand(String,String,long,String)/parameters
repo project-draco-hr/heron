@@ -1,0 +1,4 @@
+String slurmScript
+String heronExec
+long containers
+String partition
