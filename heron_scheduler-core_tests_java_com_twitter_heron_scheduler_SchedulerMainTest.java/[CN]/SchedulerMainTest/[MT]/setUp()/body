@@ -22,7 +22,7 @@
   Mockito.doReturn(schedulerServer).when(schedulerMain).getServer(Mockito.any(Config.class),Mockito.eq(scheduler),Mockito.eq(iSchedulerServerPort));
   Mockito.doReturn(true).when(scheduler).onSchedule(Mockito.any(PackingPlan.class));
   PowerMockito.spy(SchedulerUtils.class);
-  PowerMockito.doReturn(true).when(SchedulerUtils.class,"setSchedulerLocation",Mockito.any(Config.class),Mockito.anyString(),Mockito.anyInt(),Mockito.eq(scheduler));
+  PowerMockito.doReturn(true).when(SchedulerUtils.class,"setSchedulerLocation",Mockito.any(Config.class),Mockito.anyString(),Mockito.eq(scheduler));
   Shutdown shutdown=Mockito.mock(Shutdown.class);
   Mockito.doReturn(shutdown).when(schedulerMain).getShutdown();
 }

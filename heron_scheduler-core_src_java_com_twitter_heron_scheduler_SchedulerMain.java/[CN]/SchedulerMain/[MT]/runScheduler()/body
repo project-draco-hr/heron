@@ -31,7 +31,7 @@
     }
     server=getServer(ytruntime,scheduler,schedulerServerPort);
     server.start();
-    isSuccessful=SchedulerUtils.setSchedulerLocation(runtime,server.getHost(),server.getPort(),scheduler);
+    isSuccessful=SchedulerUtils.setSchedulerLocation(runtime,String.format("%s:%d",server.getHost(),server.getPort()),scheduler);
     if (isSuccessful) {
       LOG.info("Waiting for termination... ");
       Runtime.schedulerShutdown(ytruntime).await();

@@ -1,5 +1,5 @@
 {
-  Scheduler.SchedulerLocation.Builder builder=Scheduler.SchedulerLocation.newBuilder().setTopologyName(Runtime.topologyName(runtime)).setHttpEndpoint(String.format("%s:%d",schedulerServerHost,schedulerServerPort));
+  Scheduler.SchedulerLocation.Builder builder=Scheduler.SchedulerLocation.newBuilder().setTopologyName(Runtime.topologyName(runtime)).setHttpEndpoint(schedulerEndpoint);
   List<String> jobLinks=scheduler.getJobLinks();
   if (jobLinks != null) {
     builder.addAllJobPageLink(jobLinks);

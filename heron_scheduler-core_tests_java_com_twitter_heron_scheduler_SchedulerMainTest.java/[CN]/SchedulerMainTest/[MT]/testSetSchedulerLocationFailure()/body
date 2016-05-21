@@ -1,5 +1,5 @@
 {
-  PowerMockito.doReturn(false).when(SchedulerUtils.class,"setSchedulerLocation",Mockito.any(Config.class),Mockito.anyString(),Mockito.anyInt(),Mockito.eq(scheduler));
+  PowerMockito.doReturn(false).when(SchedulerUtils.class,"setSchedulerLocation",Mockito.any(Config.class),Mockito.anyString(),Mockito.eq(scheduler));
   Assert.assertFalse(schedulerMain.runScheduler());
   Mockito.verify(stateManager).close();
   Mockito.verify(packing).close();

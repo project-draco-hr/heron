@@ -1,5 +1,4 @@
 {
-  final String serverHost="scheduling_as_library";
-  final int serverPort=-1;
-  return setSchedulerLocation(runtime,serverHost,serverPort,scheduler);
+  final String endpoint="scheduler_as_lib_no_endpoint";
+  return setSchedulerLocation(runtime,endpoint,scheduler);
 }
