@@ -1,3 +1,0 @@
-Map<String,Object> stormConf
-TopologyContext context
-OutputCollector newCollector

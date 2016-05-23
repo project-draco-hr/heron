@@ -1,3 +1,0 @@
-{
-  delegate=new com.twitter.heron.api.metric.AssignableMetric<>(value);
-}

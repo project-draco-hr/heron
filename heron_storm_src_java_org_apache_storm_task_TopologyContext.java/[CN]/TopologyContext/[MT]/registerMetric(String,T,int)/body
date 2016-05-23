@@ -1,5 +1,5 @@
 {
-  MetricDelegate<T,U> d=new MetricDelegate<>(metric);
+  MetricDelegate d=new MetricDelegate(metric);
   delegate.registerMetric(name,d,timeBucketSizeInSecs);
   return metric;
 }

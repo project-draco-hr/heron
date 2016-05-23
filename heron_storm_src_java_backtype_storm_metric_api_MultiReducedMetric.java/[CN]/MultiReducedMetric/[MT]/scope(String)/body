@@ -1,6 +1,7 @@
 {
-  if (value.get(key) == null) {
-    value.put(key,new ReducedMetric<>(reducer));
+  ReducedMetric val=value.get(key);
+  if (val == null) {
+    value.put(key,val=new ReducedMetric(reducer));
   }
-  return value.get(key);
+  return val;
 }

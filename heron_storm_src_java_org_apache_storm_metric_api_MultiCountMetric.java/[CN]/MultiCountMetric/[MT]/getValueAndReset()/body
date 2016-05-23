@@ -1,7 +1,7 @@
 {
-  Map<String,Long> ret=new HashMap<>();
-  for (  String key : value.keySet()) {
-    ret.put(key,value.get(key).getValueAndReset());
+  Map<String,Object> ret=new HashMap<>();
+  for (  Map.Entry<String,CountMetric> e : value.entrySet()) {
+    ret.put(e.getKey(),e.getValue().getValueAndReset());
   }
   return ret;
 }

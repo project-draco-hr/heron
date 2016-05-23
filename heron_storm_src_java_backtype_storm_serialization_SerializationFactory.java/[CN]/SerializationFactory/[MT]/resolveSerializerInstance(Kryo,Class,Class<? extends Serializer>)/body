@@ -1,0 +1,22 @@
+{
+  Constructor<? extends Serializer> ctor;
+  try {
+    ctor=serializerClass.getConstructor(Kryo.class,Class.class);
+    return ctor.newInstance(k,superClass);
+  }
+ catch (  NoSuchMethodException|InvocationTargetException|InstantiationException|IllegalAccessException ex) {
+  }
+  try {
+    ctor=serializerClass.getConstructor(Kryo.class);
+    return ctor.newInstance(k);
+  }
+ catch (  NoSuchMethodException|InvocationTargetException|InstantiationException|IllegalAccessException ex) {
+  }
+  try {
+    ctor=serializerClass.getConstructor(Class.class);
+    return ctor.newInstance(k);
+  }
+ catch (  NoSuchMethodException|InvocationTargetException|InstantiationException|IllegalAccessException ex) {
+  }
+  throw new IllegalArgumentException(String.format("Unable to create serializer \"%s\" for class: %s",serializerClass.getName(),superClass.getName()));
+}
