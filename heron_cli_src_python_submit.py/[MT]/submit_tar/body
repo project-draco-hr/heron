@@ -1,6 +1,7 @@
 def submit_tar(cl_args, unknown_args, tmp_dir):
     topology_file = cl_args['topology-file-name']
-    execute.heron_tar(cl_args['topology-class-name'], topology_file, tuple(unknown_args), tmp_dir, cl_args['javaDefines'])
+    javaDefines = cl_args['topology_main_jvm_property']
+    execute.heron_tar(cl_args['topology-class-name'], topology_file, tuple(unknown_args), tmp_dir, javaDefines)
     try:
         try:
             launch_topologies(cl_args, topology_file, tmp_dir)

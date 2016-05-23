@@ -22,6 +22,8 @@ def main():
             return 1
         files.append(command_line_args['override_config_file'])
     atexit.register(cleanup, files)
+    if opts.verbose():
+        print command_line_args
     start = time.time()
     retcode = run(command, parser, command_line_args, unknown_args)
     end = time.time()
