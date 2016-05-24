@@ -1,4 +1,4 @@
 {
-  this.localMode=new LocalMode();
+  this.simulator=new Simulator();
   resetFields();
 }

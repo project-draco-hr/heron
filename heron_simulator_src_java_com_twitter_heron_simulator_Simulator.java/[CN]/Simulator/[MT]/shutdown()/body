@@ -1,0 +1,7 @@
+{
+  LOG.info("To shutdown thread pool");
+  if (threadsPool.isShutdown()) {
+    threadsPool.shutdownNow();
+  }
+  LOG.info("Heron simulator exited.");
+}

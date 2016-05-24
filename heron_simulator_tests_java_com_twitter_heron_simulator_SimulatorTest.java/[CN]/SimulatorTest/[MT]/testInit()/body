@@ -1,0 +1,10 @@
+{
+  clearSingletonRegistry();
+  Simulator spySimulator=Mockito.spy(new Simulator(false));
+  spySimulator.init();
+  Mockito.verify(spySimulator,Mockito.times(1)).isSystemConfigExisted();
+  Mockito.verify(spySimulator,Mockito.times(1)).registerSystemConfig(Mockito.any(SystemConfig.class));
+  spySimulator.init();
+  Mockito.verify(spySimulator,Mockito.times(2)).isSystemConfigExisted();
+  Mockito.verify(spySimulator,Mockito.times(1)).registerSystemConfig(Mockito.any(SystemConfig.class));
+}

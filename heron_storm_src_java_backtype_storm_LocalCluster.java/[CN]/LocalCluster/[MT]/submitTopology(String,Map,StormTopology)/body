@@ -3,5 +3,5 @@
   this.topologyName=topoName;
   this.conf=config;
   this.topology=stormTopology;
-  localMode.submitTopology(topoName,ConfigUtils.translateConfig(config),stormTopology.getStormTopology());
+  simulator.submitTopology(topoName,ConfigUtils.translateConfig(config),stormTopology.getStormTopology());
 }

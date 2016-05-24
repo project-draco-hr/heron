@@ -1,5 +1,5 @@
 {
   assertAlive(topoName);
-  localMode.killTopology(topoName);
+  simulator.killTopology(topoName);
   resetFields();
 }

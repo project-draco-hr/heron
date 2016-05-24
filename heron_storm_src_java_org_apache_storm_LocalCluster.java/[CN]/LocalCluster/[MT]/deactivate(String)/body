@@ -1,4 +1,4 @@
 {
   assertAlive(topoName);
-  localMode.deactivate(topoName);
+  simulator.deactivate(topoName);
 }
