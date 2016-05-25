@@ -8,18 +8,23 @@ def parse_cluster_role_env(cluster_role_env, config_path):
             if (len(parts) == 2):
                 parts.append(ENVIRON)
         else:
+            cli_confs = {}
             with open(cli_conf_file, 'r') as conf_file:
-                cli_confs = yaml.load(conf_file)
-                if (len(parts) == 1):
-                    if ((ROLE_REQUIRED in cli_confs) and (cli_confs[ROLE_REQUIRED] == True)):
-                        raise Exception('role required but not provided')
-                    else:
-                        parts.append(getpass.getuser())
-                if (len(parts) == 2):
-                    if ((ENV_REQUIRED in cli_confs) and (cli_confs[ENV_REQUIRED] == True)):
-                        raise Exception('environ required but not provided')
-                    else:
-                        parts.append(ENVIRON)
+                tmp_confs = yaml.load(conf_file)
+                if (tmp_confs is not None):
+                    cli_confs = tmp_confs
+                else:
+                    print ('Failed to read: %s due to it is empty' % CLIENT_YAML)
+            if (len(parts) == 1):
+                if ((IS_ROLE_REQUIRED in cli_confs) and (cli_confs[IS_ROLE_REQUIRED] == True)):
+                    raise Exception('role required but not provided')
+                else:
+                    parts.append(getpass.getuser())
+            if (len(parts) == 2):
+                if ((IS_ENV_REQUIRED in cli_confs) and (cli_confs[IS_ENV_REQUIRED] == True)):
+                    raise Exception('environ required but not provided')
+                else:
+                    parts.append(ENVIRON)
     if ((len(parts[0]) == 0) or (len(parts[1]) == 0) or (len(parts[2]) == 0)):
         print ('Failed to parse %s: %s' % (argstr, namespace[argstr]))
         sys.exit(1)
