@@ -1,2 +1,2 @@
 def discover_processor():
-    return subprocess.check_output('uname -m', shell=True).strip('\n')
+    return platform.uname().machine

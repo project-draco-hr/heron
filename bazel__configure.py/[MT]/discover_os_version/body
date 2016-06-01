@@ -1,2 +1,2 @@
 def discover_os_version():
-    return subprocess.check_output('uname -r', shell=True).strip('\n')
+    return platform.uname().release

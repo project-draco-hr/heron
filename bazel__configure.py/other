@@ -1,5 +1,11 @@
-import os, sys
-import re, subprocess, shutil
+import os
+import re
+import sys
+import shutil
+import getpass
+import datetime
+import platform
+import subprocess
 sys.path.append('3rdparty/python/semver')
 import semver
 ARCH_AND_SYS = {('x86_64', 'Darwin'): ('IS_I386_MACOSX', 'IS_MACOSX'), ('x86_64', 'Linux'): ('IS_I386_LINUX', 'IS_LINUX'), }
