@@ -1,3 +1,5 @@
 def run_blocking_process(self, cmd, is_shell):
-    do_print(('Running process as %s' % cmd))
-    return subprocess.call(cmd, shell=is_shell)
+    do_print(('Running blocking process as %s' % cmd))
+    process = subprocess.Popen(cmd, shell=is_shell, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    self.wait_process_std_out_err('', process)
+    return process.returncode

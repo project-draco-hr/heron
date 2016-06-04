@@ -8,6 +8,7 @@ def do_run_and_wait(self, commands):
         (pid, status) = os.wait()
         (old_p, name, nattempts) = process_dict[pid]
         do_print(('%s exited with status %d' % (name, status)))
+        self.wait_process_std_out_err(name, old_p)
         if os.path.isfile(('core.%d' % pid)):
             os.system(('chmod a+r core.%d' % pid))
         if (nattempts > self.max_runs):
