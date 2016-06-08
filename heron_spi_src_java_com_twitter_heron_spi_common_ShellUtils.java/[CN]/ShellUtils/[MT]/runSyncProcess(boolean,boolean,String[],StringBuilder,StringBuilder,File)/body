@@ -2,9 +2,7 @@
   StringBuilder pStdOut=stdout;
   StringBuilder pStdErr=stderr;
   try {
-    if (verbose) {
-      LOG.info("$> " + Arrays.toString(cmdline));
-    }
+    LOG.log(Level.FINE,"$> {0}",Arrays.toString(cmdline));
     Process process=getProcessBuilder(isInheritIO,cmdline,workingDirectory).start();
     int exitValue=process.waitFor();
     if (pStdOut == null) {
@@ -15,10 +13,8 @@
     }
     pStdOut.append(inputstreamToString(process.getInputStream()));
     pStdErr.append(inputstreamToString(process.getErrorStream()));
-    if (verbose) {
-      LOG.info(pStdOut.toString());
-      LOG.info(pStdErr.toString());
-    }
+    LOG.log(Level.FINE,"\tSTDOUT: {0}",pStdOut.toString());
+    LOG.log(Level.SEVERE,"\tSTDERR: {0}",pStdErr.toString());
     return exitValue;
   }
  catch (  IOException|InterruptedException e) {

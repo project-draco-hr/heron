@@ -1,7 +1,5 @@
 {
-  if (verbose) {
-    LOG.info("$> " + Arrays.toString(command));
-  }
+  LOG.log(Level.FINE,"$> {0}",Arrays.toString(command));
   ProcessBuilder pb=getProcessBuilder(false,command,workingDirectory);
   Process process=null;
   try {
