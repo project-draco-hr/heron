@@ -4,7 +4,7 @@
   if (inAvgSize < expectedQueueSize && availableCapacity < capacity) {
     expectedAvailableCapacity=availableCapacity + 1;
   }
-  if (inAvgSize > expectedQueueSize && availableCapacity > 0) {
+  if (inAvgSize > expectedQueueSize && availableCapacity > 1) {
     expectedAvailableCapacity=availableCapacity / 2;
   }
   averageSize=inAvgSize;
