@@ -9,6 +9,11 @@ def discover_version(path):
     version = get_trailing_version(first_line)
     if version:
         return version
+    debian_line = re.search('.*?Debian.*?\\s(\\d[\\d\\.]+\\d+)\\s.*', first_line)
+    if debian_line:
+        version = get_trailing_version(debian_line.group(1))
+        if version:
+            return version
     redhat_line = re.search('(.*)\\s+[0-9]+\\s+\\(Red Hat .*\\)$', first_line)
     if redhat_line:
         version = get_trailing_version(redhat_line.group(1))
@@ -32,6 +37,11 @@ def discover_version(path):
     anaconda_line = re.search('.*\\s+Anaconda\\s+.*\\s', first_line)
     if anaconda_line:
         version = anaconda_line.group(0).split(' ')[1]
+        if version:
+            return version
+    python_line = re.search('^Python\\s+(\\d[\\d\\.]+)\\+{0,1}.*', first_line)
+    if python_line:
+        version = python_line.group(1)
         if version:
             return version
     fail(('Could not determine the version of %s from the following output\n%s\n%s' % (path, command, version_output)))
