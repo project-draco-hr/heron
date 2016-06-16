@@ -1,0 +1,11 @@
+{
+  for (  PackingPlan.ContainerPlan containerPlan : plan.containers.values()) {
+    for (    PackingPlan.InstancePlan instancePlan : containerPlan.instances.values()) {
+      if (instancePlan.resource.ram < MIN_RAM_PER_INSTANCE) {
+        LOG.severe(String.format("Require at least %dMB ram. Given on %d MB",MIN_RAM_PER_INSTANCE / Constants.MB,instancePlan.resource.ram / Constants.MB));
+        return false;
+      }
+    }
+  }
+  return true;
+}

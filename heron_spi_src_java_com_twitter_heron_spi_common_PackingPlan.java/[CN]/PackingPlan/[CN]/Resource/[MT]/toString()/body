@@ -1,0 +1,3 @@
+{
+  return String.format("{cpu: %f, ram: %d, disk: %d}",cpu,ram,disk);
+}

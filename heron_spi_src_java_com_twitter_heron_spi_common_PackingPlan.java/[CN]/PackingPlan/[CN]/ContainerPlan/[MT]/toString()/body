@@ -1,0 +1,3 @@
+{
+  return String.format("{container-id: %s, instances-list: %s, container-resource: %s}",id,instances.toString(),resource);
+}

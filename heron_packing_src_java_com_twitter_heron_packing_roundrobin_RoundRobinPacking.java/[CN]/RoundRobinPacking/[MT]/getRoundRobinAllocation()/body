@@ -1,0 +1,23 @@
+{
+  Map<String,List<String>> allocation=new HashMap<>();
+  int numContainer=TopologyUtils.getNumContainers(topology);
+  int totalInstance=TopologyUtils.getTotalInstance(topology);
+  if (numContainer > totalInstance) {
+    throw new RuntimeException("More containers allocated than instance.");
+  }
+  for (int i=1; i <= numContainer; ++i) {
+    allocation.put(getContainerId(i),new ArrayList<String>());
+  }
+  int index=1;
+  int globalTaskIndex=1;
+  Map<String,Integer> parallelismMap=TopologyUtils.getComponentParallelism(topology);
+  for (  String component : parallelismMap.keySet()) {
+    int numInstance=parallelismMap.get(component);
+    for (int i=0; i < numInstance; ++i) {
+      allocation.get(getContainerId(index)).add(getInstanceId(index,component,globalTaskIndex,i));
+      index=(index == numContainer) ? 1 : index + 1;
+      globalTaskIndex++;
+    }
+  }
+  return allocation;
+}

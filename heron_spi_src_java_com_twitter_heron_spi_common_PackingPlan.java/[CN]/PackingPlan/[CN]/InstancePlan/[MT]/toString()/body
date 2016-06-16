@@ -1,0 +1,3 @@
+{
+  return String.format("{instance-id: %s, componentName: %s, instance-resource: %s}",id,componentName,resource.toString());
+}

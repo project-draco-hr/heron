@@ -1,4 +1,0 @@
-{
-  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
-  return Integer.parseInt(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_STMGRS,"1").trim());
-}

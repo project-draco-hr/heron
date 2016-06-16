@@ -1,6 +1,6 @@
 {
   int max=0;
-  for (  List<String> instances : packing.values()) {
+  for (  List<String> instances : allocation.values()) {
     if (instances.size() > max) {
       max=instances.size();
     }

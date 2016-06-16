@@ -3,22 +3,14 @@
   int componentParallelism=4;
   com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
   topologyConfig.put(com.twitter.heron.api.Config.TOPOLOGY_STMGRS,numContainers);
-  Map<String,Integer> spouts=new HashMap<>();
-  spouts.put("spout",componentParallelism);
-  Map<String,Integer> bolts=new HashMap<>();
-  bolts.put("bolt",componentParallelism);
-  TopologyAPI.Topology topology=TopologyTests.createTopology("testTopology",topologyConfig,spouts,bolts);
+  TopologyAPI.Topology topology=getTopology(componentParallelism,componentParallelism,topologyConfig);
   int numInstance=TopologyUtils.getTotalInstance(topology);
-  Assert.assertEquals((spouts.size() + bolts.size()) * componentParallelism,numInstance);
-  Config config=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).putAll(ClusterDefaults.getDefaults()).build();
-  Config runtime=Config.newBuilder().put(Keys.topologyDefinition(),topology).build();
-  RoundRobinPacking packing=RoundRobinPacking.class.newInstance();
-  packing.initialize(config,runtime);
-  PackingPlan output=packing.pack();
+  Assert.assertEquals(2 * componentParallelism,numInstance);
+  PackingPlan output=getRoundRobinPackingPlan(topology);
   Assert.assertEquals(numContainers,output.containers.size());
   for (  PackingPlan.ContainerPlan container : output.containers.values()) {
     Assert.assertEquals(numInstance / numContainers,container.instances.size());
-    Assert.assertEquals(2,countCompoment("spout",container.instances,packing));
-    Assert.assertEquals(2,countCompoment("bolt",container.instances,packing));
+    Assert.assertEquals(2,countCompoment("spout",container.instances));
+    Assert.assertEquals(2,countCompoment("bolt",container.instances));
   }
 }

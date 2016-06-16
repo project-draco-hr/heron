@@ -1,0 +1,3 @@
+{
+  return (Long.hashCode(ram) << 2) & (Long.hashCode(disk) << 1) & (Double.hashCode(cpu));
+}

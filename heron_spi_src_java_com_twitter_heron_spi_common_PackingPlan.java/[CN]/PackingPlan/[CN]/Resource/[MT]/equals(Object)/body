@@ -1,0 +1,9 @@
+{
+  if (obj instanceof Resource) {
+    Resource r=(Resource)obj;
+    return (this.cpu == r.cpu) && (this.ram == r.ram) && (this.disk == r.disk);
+  }
+ else {
+    return false;
+  }
+}
