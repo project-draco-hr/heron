@@ -9,7 +9,7 @@
   long spoutRam=2 * Constants.GB;
   topologyConfig.setComponentRam("spout",spoutRam);
   topologyConfig.setComponentRam("bolt",boltRam);
-  Map<String,Long> ramMap=new TreeMap<>(TopologyUtils.getComponentRamMap(TopologyTests.createTopology("test",topologyConfig,spouts,bolts),0));
+  Map<String,Long> ramMap=new TreeMap<>(TopologyUtils.getComponentRamMapConfig(TopologyTests.createTopology("test",topologyConfig,spouts,bolts)));
   Assert.assertArrayEquals(new String[]{"bolt","spout"},ramMap.keySet().toArray());
   Assert.assertArrayEquals(new Long[]{boltRam,spoutRam},ramMap.values().toArray());
 }

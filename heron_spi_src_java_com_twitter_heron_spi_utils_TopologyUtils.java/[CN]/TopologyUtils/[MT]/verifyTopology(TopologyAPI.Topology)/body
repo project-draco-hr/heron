@@ -7,7 +7,7 @@
     LOG.severe("Invalid topology name. Topology name shouldn't have . or /");
     return false;
   }
-  getComponentRamMap(topology,-1);
+  getComponentRamMapConfig(topology);
   Set<String> outputStreams=new HashSet<>();
   for (  TopologyAPI.Spout spout : topology.getSpoutsList()) {
     for (    TopologyAPI.OutputStream stream : spout.getOutputsList()) {

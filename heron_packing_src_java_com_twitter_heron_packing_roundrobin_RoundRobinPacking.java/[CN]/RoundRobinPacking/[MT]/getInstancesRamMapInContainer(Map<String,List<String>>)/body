@@ -1,5 +1,5 @@
 {
-  Map<String,Long> ramMap=TopologyUtils.getComponentRamMap(topology,Long.parseLong(NOT_SPECIFIED_NUMBER_VALUE));
+  Map<String,Long> ramMap=TopologyUtils.getComponentRamMapConfig(topology);
   Map<String,Map<String,Long>> instancesRamMapInContainer=new HashMap<>();
   for (  Map.Entry<String,List<String>> entry : allocation.entrySet()) {
     String containerId=entry.getKey();
@@ -8,8 +8,8 @@
     long usedRam=0;
     for (    String instanceId : entry.getValue()) {
       String componentName=getComponentName(instanceId);
-      long ram=ramMap.get(componentName);
-      if (ram != Long.parseLong(NOT_SPECIFIED_NUMBER_VALUE)) {
+      if (ramMap.containsKey(componentName)) {
+        long ram=ramMap.get(componentName);
         ramInsideContainer.put(instanceId,ram);
         usedRam+=ram;
       }

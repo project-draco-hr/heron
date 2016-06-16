@@ -30,7 +30,7 @@
   commands.add(Integer.toString(tmasterControllerPort));
   commands.add(Integer.toString(tmasterStatsPort));
   commands.add(Context.systemConfigSandboxFile(config));
-  commands.add(TopologyUtils.formatRamMap(TopologyUtils.getComponentRamMap(topology,Context.instanceRam(config))));
+  commands.add(Runtime.componentRamMap(runtime));
   commands.add(SchedulerUtils.encodeJavaOpts(TopologyUtils.getComponentJvmOptions(topology)));
   commands.add(Context.topologyPackageType(config));
   commands.add(Context.topologyJarFile(config));

@@ -8,7 +8,7 @@
     LOG.severe("Failed to pack a valid PackingPlan. Check the config.");
     return false;
   }
-  Config ytruntime=Config.newBuilder().putAll(runtime).put(Keys.instanceDistribution(),packedPlan.getInstanceDistribution()).build();
+  Config ytruntime=Config.newBuilder().putAll(runtime).put(Keys.instanceDistribution(),packedPlan.getInstanceDistribution()).put(Keys.componentRamMap(),packedPlan.getComponentRamDistribution()).build();
   launcher.initialize(config,ytruntime);
   Boolean result;
   result=statemgr.setTopology(trimTopology(topology),topologyName);
