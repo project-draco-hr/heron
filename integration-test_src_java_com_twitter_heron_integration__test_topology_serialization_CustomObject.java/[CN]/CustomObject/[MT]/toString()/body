@@ -1,0 +1,3 @@
+{
+  return "CustomObject{" + "name='" + name + '\''+ ", age="+ age+ '}';
+}

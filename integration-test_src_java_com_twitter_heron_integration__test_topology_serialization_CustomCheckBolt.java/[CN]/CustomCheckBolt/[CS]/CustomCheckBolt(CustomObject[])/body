@@ -1,0 +1,4 @@
+{
+  this.nItems=0;
+  this.inputObjects=inputObjects;
+}

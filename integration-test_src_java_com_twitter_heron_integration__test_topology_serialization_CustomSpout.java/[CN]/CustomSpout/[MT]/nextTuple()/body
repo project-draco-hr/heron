@@ -1,0 +1,4 @@
+{
+  CustomObject obj=inputObjects[(emitted++) % inputObjects.length];
+  collector.emit(new Values(obj));
+}

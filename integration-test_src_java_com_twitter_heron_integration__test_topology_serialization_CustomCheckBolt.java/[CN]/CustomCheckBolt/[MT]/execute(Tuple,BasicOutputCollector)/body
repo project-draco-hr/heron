@@ -1,0 +1,6 @@
+{
+  System.out.println("Received input tuple: " + input.getValueByField("custom").toString());
+  if (input.getValueByField("custom").equals(inputObjects[(nItems++) % inputObjects.length])) {
+    collector.emit(input.getValues());
+  }
+}

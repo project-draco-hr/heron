@@ -1,0 +1,13 @@
+{
+  if (this == o) {
+    return true;
+  }
+  if (o == null || getClass() != o.getClass()) {
+    return false;
+  }
+  CustomObject that=(CustomObject)o;
+  if (name != null ? !name.equals(that.name) : that.name != null) {
+    return false;
+  }
+  return age != null ? age.equals(that.age) : that.age == null;
+}
