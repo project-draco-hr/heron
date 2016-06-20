@@ -1,0 +1,7 @@
+{
+  boolean result=addActiveContext(context);
+  if (!result) {
+    return;
+  }
+  submitHeronExecutorTask(context);
+}

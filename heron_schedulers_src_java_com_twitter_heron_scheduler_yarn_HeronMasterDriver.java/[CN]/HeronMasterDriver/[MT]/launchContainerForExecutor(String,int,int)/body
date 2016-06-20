@@ -1,0 +1,13 @@
+{
+  executor.submit(new Callable<AllocatedEvaluator>(){
+    @Override public AllocatedEvaluator call() throws Exception {
+      AllocatedEvaluator evaluator=allocateContainer(executorId,cpu,mem);
+      Configuration context=createContextConfig(executorId);
+      LOG.log(Level.INFO,"Activating container {0} for heron executor, id: {1}",new Object[]{evaluator.getId(),executorId});
+      evaluator.submitContext(context);
+      reefContainerToHeronExecutorMap.put(evaluator.getId(),executorId);
+      return evaluator;
+    }
+  }
+);
+}

@@ -1,0 +1,24 @@
+{
+  String executorId=reefContainerToHeronExecutorMap.get(evaluator.getId());
+  LOG.log(Level.WARNING,"Container:{0} executor:{1} failed",new Object[]{evaluator.getId(),executorId});
+  if (executorId == null) {
+    LOG.log(Level.SEVERE,"Unknown executorId for failed container: {0}, skip renew action",evaluator.getId());
+    return;
+  }
+  try {
+    if (executorId.equals(TMASTER_CONTAINER_ID)) {
+      launchContainerForExecutor(TMASTER_CONTAINER_ID,1,TM_MEM_SIZE_MB);
+    }
+ else {
+      if (packing.containers.get(executorId) == null) {
+        LOG.log(Level.SEVERE,"Missing container {0} in packing, skipping container request",executorId);
+        return;
+      }
+      Resource reqResource=packing.containers.get(executorId).resource;
+      launchContainerForExecutor(executorId,getCpuForExecutor(reqResource),getMemInMBForExecutor(reqResource));
+    }
+  }
+ catch (  InterruptedException e) {
+    LOG.log(Level.WARNING,"Error waiting for container allocation for failed executor; " + "Assuming request was submitted and continuing" + executorId,e);
+  }
+}

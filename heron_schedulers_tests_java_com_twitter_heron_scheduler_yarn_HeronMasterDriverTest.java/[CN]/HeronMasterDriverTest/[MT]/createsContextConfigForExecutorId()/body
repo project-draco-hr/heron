@@ -1,0 +1,8 @@
+{
+  Configuration config=driver.createContextConfig("4");
+  for (  NamedParameterNode<?> namedParameterNode : config.getNamedParameters()) {
+    if (namedParameterNode.getName().equals(ContextIdentifier.class.getName())) {
+      Assert.assertEquals(4,config.getNamedParameter(namedParameterNode));
+    }
+  }
+}

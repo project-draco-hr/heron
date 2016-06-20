@@ -1,0 +1,8 @@
+{
+  LOG.log(Level.INFO,"Kill topology: {0}",topologyName);
+  Map<String,ActiveContext> contexts=clearActiveContexts();
+  for (  Entry<String,ActiveContext> entry : contexts.entrySet()) {
+    LOG.log(Level.INFO,"Close context: {0}",entry.getKey());
+    entry.getValue().close();
+  }
+}

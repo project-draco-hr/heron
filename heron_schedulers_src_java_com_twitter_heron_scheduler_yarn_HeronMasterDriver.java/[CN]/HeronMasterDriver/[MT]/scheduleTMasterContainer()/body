@@ -1,0 +1,9 @@
+{
+  LOG.log(Level.INFO,"Scheduling container for TM: {0}",topologyName);
+  try {
+    launchContainerForExecutor(TMASTER_CONTAINER_ID,1,TM_MEM_SIZE_MB);
+  }
+ catch (  InterruptedException e) {
+    throw new RuntimeException("Error while waiting for topology master container allocation",e);
+  }
+}

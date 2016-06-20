@@ -1,0 +1,8 @@
+{
+  EvaluatorRequest evaluatorRequest=createEvaluatorRequest(cpu,mem);
+  LOG.log(Level.INFO,"Requesting container for executor, id: {0}, mem: {1}, cpu: {2}",new Object[]{id,mem,cpu});
+  requestor.submit(evaluatorRequest);
+  AllocatedEvaluator evaluator=allocatedContainerQ.take();
+  LOG.log(Level.INFO,"Container {0} is allocated for executor, id: {1}",new Object[]{evaluator.getId(),id});
+  return evaluator;
+}

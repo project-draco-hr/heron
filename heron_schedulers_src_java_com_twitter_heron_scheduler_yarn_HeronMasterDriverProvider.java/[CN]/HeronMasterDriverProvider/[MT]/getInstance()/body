@@ -1,0 +1,6 @@
+{
+  if (instance == null) {
+    throw new IllegalStateException("Heron Master Driver is not initialized yet");
+  }
+  return instance;
+}

@@ -1,0 +1,10 @@
+{
+  counter.countDown();
+  try {
+    TimeUnit.MILLISECONDS.sleep(100);
+  }
+ catch (  InterruptedException e) {
+    throw new RuntimeException(e);
+  }
+  activeContext.close();
+}

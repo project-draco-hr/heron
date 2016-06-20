@@ -1,0 +1,3 @@
+String srcFolder
+String fileName
+String dstDir

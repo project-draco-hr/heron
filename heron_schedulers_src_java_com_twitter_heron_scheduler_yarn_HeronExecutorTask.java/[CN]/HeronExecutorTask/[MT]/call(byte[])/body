@@ -1,0 +1,18 @@
+{
+  String globalFolder=reefFileNames.getGlobalFolder().getPath();
+  HeronReefUtils.extractPackageInSandbox(globalFolder,topologyPackageName,localHeronConfDir);
+  HeronReefUtils.extractPackageInSandbox(globalFolder,heronCorePackageName,localHeronConfDir);
+  LOG.log(Level.INFO,"Preparing evaluator for running executor-id: {0}",heronExecutorId);
+  String[] executorCmd=getExecutorCommand();
+  processTarget=Thread.currentThread();
+  final Process regularExecutor=ShellUtils.runASyncProcess(true,executorCmd,new File("."));
+  LOG.log(Level.INFO,"Started heron executor-id: {0}",heronExecutorId);
+  try {
+    regularExecutor.waitFor();
+  }
+ catch (  InterruptedException e) {
+    LOG.log(Level.INFO,"Destroy heron executor-id: {0}",heronExecutorId);
+    regularExecutor.destroy();
+  }
+  return null;
+}

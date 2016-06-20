@@ -1,0 +1,3 @@
+{
+  return HeronClientConfiguration.CONF.set(ClientConfiguration.ON_JOB_RUNNING,ReefClientSideHandlers.RunningJobHandler.class).set(ClientConfiguration.ON_JOB_FAILED,ReefClientSideHandlers.FailedJobHandler.class).set(ClientConfiguration.ON_RUNTIME_ERROR,ReefClientSideHandlers.RuntimeErrorHandler.class).set(HeronClientConfiguration.TOPOLOGY_NAME,topologyName).build();
+}

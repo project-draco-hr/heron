@@ -1,0 +1,18 @@
+{
+  AllocatedEvaluator mockEvaluator1=Mockito.mock(AllocatedEvaluator.class);
+  Mockito.when(mockEvaluator1.getId()).thenReturn("testEvaluatorId1");
+  Mockito.doReturn(mockEvaluator1).when(spyDriver).allocateContainer("1",2,2048);
+  AllocatedEvaluator mockEvaluator2=Mockito.mock(AllocatedEvaluator.class);
+  Mockito.when(mockEvaluator2.getId()).thenReturn("testEvaluatorId2");
+  Mockito.doReturn(mockEvaluator2).when(spyDriver).allocateContainer("2",4,2050);
+  Configuration mockConfig=Mockito.mock(Configuration.class);
+  Mockito.doReturn(mockConfig).when(spyDriver).createContextConfig("1");
+  Mockito.doReturn(mockConfig).when(spyDriver).createContextConfig("2");
+  Map<String,PackingPlan.ContainerPlan> containers=new HashMap<>();
+  addContainer("1",2.0,2048L,containers);
+  addContainer("2",4.0,2050L,containers);
+  PackingPlan packing=new PackingPlan("packingId",containers,null);
+  spyDriver.scheduleHeronWorkers(packing);
+  Mockito.verify(mockEvaluator1,Mockito.timeout(1000).times(1)).submitContext(mockConfig);
+  Mockito.verify(mockEvaluator2,Mockito.timeout(1000).times(1)).submitContext(mockConfig);
+}

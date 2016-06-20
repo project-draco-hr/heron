@@ -1,0 +1,10 @@
+{
+  try {
+    LOG.log(Level.INFO,"Launching Heron scheduler");
+    SchedulerMain schedulerMain=SchedulerMain.createInstance(cluster,role,env,topologyJar,topologyName,httpPort);
+    schedulerMain.runScheduler();
+  }
+ catch (  IOException e) {
+    throw new RuntimeException("Failed to launch Heron Scheduler",e);
+  }
+}

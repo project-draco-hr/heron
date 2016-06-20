@@ -1,0 +1,10 @@
+{
+  HeronMasterDriver mockHeronDriver=Mockito.mock(HeronMasterDriver.class);
+  HeronMasterDriverProvider.setInstance(mockHeronDriver);
+  IScheduler scheduler=new YarnScheduler();
+  PackingPlan mockPacking=Mockito.mock(PackingPlan.class);
+  scheduler.onSchedule(mockPacking);
+  InOrder invocationOrder=Mockito.inOrder(mockHeronDriver);
+  invocationOrder.verify(mockHeronDriver).scheduleTMasterContainer();
+  invocationOrder.verify(mockHeronDriver).scheduleHeronWorkers(mockPacking);
+}

@@ -1,0 +1,10 @@
+{
+  EvaluatorRequest evaluatorRequest=driver.createEvaluatorRequest(7,234);
+  Mockito.doReturn(evaluatorRequest).when(spyDriver).createEvaluatorRequest(7,234);
+  AllocatedEvaluator mockEvaluator=Mockito.mock(AllocatedEvaluator.class);
+  Mockito.when(mockEvaluator.getId()).thenReturn("testEvaluatorId");
+  spyDriver.new HeronContainerAllocationHandler().onNext(mockEvaluator);
+  AllocatedEvaluator evaluator=spyDriver.allocateContainer("5",7,234);
+  Mockito.verify(mockRequestor).submit(evaluatorRequest);
+  Assert.assertEquals(evaluator,mockEvaluator);
+}

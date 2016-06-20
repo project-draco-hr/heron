@@ -1,0 +1,4 @@
+{
+  Long ram=resource.ram / MB;
+  return ram.intValue();
+}

@@ -1,0 +1,3 @@
+{
+  return EvaluatorRequest.newBuilder().setNumber(1).setMemory(mem).setNumberOfCores(cpu).build();
+}

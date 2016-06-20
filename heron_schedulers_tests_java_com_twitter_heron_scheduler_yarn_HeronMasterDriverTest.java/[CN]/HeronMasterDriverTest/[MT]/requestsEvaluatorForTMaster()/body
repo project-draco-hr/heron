@@ -1,0 +1,9 @@
+{
+  AllocatedEvaluator mockEvaluator=Mockito.mock(AllocatedEvaluator.class);
+  Mockito.when(mockEvaluator.getId()).thenReturn("testEvaluatorId");
+  Mockito.doReturn(mockEvaluator).when(spyDriver).allocateContainer("0",1,1024);
+  Configuration mockConfig=Mockito.mock(Configuration.class);
+  Mockito.doReturn(mockConfig).when(spyDriver).createContextConfig("0");
+  spyDriver.scheduleTMasterContainer();
+  Mockito.verify(mockEvaluator,Mockito.timeout(1000).times(1)).submitContext(mockConfig);
+}

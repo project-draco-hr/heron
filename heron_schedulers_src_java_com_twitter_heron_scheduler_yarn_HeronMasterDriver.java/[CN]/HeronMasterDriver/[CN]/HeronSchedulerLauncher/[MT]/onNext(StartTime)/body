@@ -1,0 +1,6 @@
+{
+  String globalFolder=reefFileNames.getGlobalFolder().getPath();
+  HeronReefUtils.extractPackageInSandbox(globalFolder,topologyPackageName,localHeronConfDir);
+  HeronReefUtils.extractPackageInSandbox(globalFolder,heronCorePackageName,localHeronConfDir);
+  launchScheduler();
+}

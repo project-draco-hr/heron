@@ -1,0 +1,10 @@
+{
+  int containerId=request.getContainerIndex();
+  if (containerId == -1) {
+    HeronMasterDriverProvider.getInstance().restartTopology();
+  }
+ else {
+    HeronMasterDriverProvider.getInstance().restartContainer(String.valueOf(containerId));
+  }
+  return true;
+}

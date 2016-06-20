@@ -1,0 +1,5 @@
+{
+  LOG.log(Level.SEVERE,"Failed to start topology: " + topologyName,job.getReason());
+  result=false;
+  jobStatusWatcher.countDown();
+}

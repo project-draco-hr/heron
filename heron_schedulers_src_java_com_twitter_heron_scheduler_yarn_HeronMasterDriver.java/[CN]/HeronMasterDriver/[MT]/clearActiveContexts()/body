@@ -1,0 +1,5 @@
+{
+  Map<String,ActiveContext> result=activeContexts;
+  activeContexts=null;
+  return result;
+}

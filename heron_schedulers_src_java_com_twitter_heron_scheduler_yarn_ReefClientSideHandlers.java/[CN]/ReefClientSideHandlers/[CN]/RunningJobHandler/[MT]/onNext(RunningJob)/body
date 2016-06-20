@@ -1,0 +1,5 @@
+{
+  LOG.log(Level.INFO,"Topology {0} is running, jobId {1}.",new Object[]{topologyName,job.getId()});
+  result=true;
+  jobStatusWatcher.countDown();
+}

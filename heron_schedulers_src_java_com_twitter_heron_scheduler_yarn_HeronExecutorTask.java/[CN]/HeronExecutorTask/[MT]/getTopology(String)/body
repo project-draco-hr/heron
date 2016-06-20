@@ -1,0 +1,3 @@
+{
+  return TopologyUtils.getTopology(topologyDefFile);
+}

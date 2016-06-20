@@ -1,0 +1,5 @@
+{
+  PackingPlan.Resource resource=new PackingPlan.Resource(cpu,mem * 1024 * 1024,0L);
+  PackingPlan.ContainerPlan container=new PackingPlan.ContainerPlan(id,null,resource);
+  containers.put(container.id,container);
+}

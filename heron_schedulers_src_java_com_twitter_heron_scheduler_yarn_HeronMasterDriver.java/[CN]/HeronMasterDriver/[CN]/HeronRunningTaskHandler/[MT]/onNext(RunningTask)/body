@@ -1,0 +1,4 @@
+{
+  LOG.log(Level.INFO,"Task, id:{0}, has started. Count of running tasks: {1}",new Object[]{runningTask.getId(),runningTaskToContextMap.size() + 1});
+  runningTaskToContextMap.put(runningTask,runningTask.getActiveContext());
+}

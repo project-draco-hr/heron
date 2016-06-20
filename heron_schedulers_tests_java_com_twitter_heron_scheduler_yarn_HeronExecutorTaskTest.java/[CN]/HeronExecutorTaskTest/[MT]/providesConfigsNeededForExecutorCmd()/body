@@ -1,0 +1,15 @@
+{
+  Topology testTopology=createTestTopology("testTopology");
+  HeronExecutorTask task=new HeronExecutorTask(null,"5","cluster","role","testTopology","env","package","core","jar","packedPlan","componentRamMap");
+  HeronExecutorTask spyTask=Mockito.spy(task);
+  Mockito.doReturn("file").when(spyTask).getTopologyDefnFile();
+  Mockito.doReturn(testTopology).when(spyTask).getTopology("file");
+  String[] command=spyTask.getExecutorCommand();
+  int nullCounter=2;
+  for (  String subCommand : command) {
+    if (subCommand == null) {
+      nullCounter--;
+    }
+  }
+  Assert.assertEquals(0,nullCounter);
+}

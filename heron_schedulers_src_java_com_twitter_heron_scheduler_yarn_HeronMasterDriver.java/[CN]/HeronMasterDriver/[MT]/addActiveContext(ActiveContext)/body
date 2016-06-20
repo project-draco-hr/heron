@@ -1,0 +1,15 @@
+{
+  if (activeContexts == null) {
+    LOG.log(Level.WARNING,"Topology has been killed, new context ignored and closed.");
+    context.close();
+    return false;
+  }
+  String key=context.getId();
+  ActiveContext orphanedContext=activeContexts.get(key);
+  if (orphanedContext != null) {
+    LOG.log(Level.WARNING,"Found orphaned context for id: {0}, will close it",key);
+    orphanedContext.close();
+  }
+  activeContexts.put(key,context);
+  return true;
+}

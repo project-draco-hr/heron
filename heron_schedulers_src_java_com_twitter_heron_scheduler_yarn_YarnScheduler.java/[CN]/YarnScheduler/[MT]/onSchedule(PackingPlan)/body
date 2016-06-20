@@ -1,0 +1,7 @@
+{
+  LOG.log(Level.INFO,"Launching topology master for packing: {0}",packing.id);
+  HeronMasterDriver driver=HeronMasterDriverProvider.getInstance();
+  driver.scheduleTMasterContainer();
+  driver.scheduleHeronWorkers(packing);
+  return true;
+}

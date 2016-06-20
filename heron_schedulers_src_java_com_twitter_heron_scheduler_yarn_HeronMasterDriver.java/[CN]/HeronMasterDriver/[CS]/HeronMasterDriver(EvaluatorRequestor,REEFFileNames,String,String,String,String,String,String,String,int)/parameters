@@ -1,0 +1,10 @@
+EvaluatorRequestor requestor
+REEFFileNames fileNames
+String cluster
+String role
+String topologyName
+String env
+String topologyJar
+String topologyPackageName
+String heronCorePackageName
+int httpPort

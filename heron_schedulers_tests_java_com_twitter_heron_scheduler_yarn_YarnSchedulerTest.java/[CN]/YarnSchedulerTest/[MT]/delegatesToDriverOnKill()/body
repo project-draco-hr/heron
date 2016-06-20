@@ -1,0 +1,7 @@
+{
+  HeronMasterDriver mockHeronDriver=Mockito.mock(HeronMasterDriver.class);
+  HeronMasterDriverProvider.setInstance(mockHeronDriver);
+  IScheduler scheduler=new YarnScheduler();
+  scheduler.onKill(null);
+  Mockito.verify(mockHeronDriver).killTopology();
+}

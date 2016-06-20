@@ -1,0 +1,4 @@
+{
+  HeronMasterDriverProvider.getInstance().killTopology();
+  return true;
+}

@@ -1,0 +1,4 @@
+{
+  LOG.log(Level.INFO,"Received request to terminate executor-id: {0}",heronExecutorId);
+  processTarget.interrupt();
+}

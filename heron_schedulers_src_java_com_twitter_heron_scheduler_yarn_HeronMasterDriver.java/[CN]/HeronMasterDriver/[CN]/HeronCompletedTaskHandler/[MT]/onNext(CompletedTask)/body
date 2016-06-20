@@ -1,0 +1,3 @@
+{
+  LOG.log(Level.INFO,"Task/executor completed, id:{0}. Count of running tasks: {1}",new Object[]{completedTask.getId(),runningTaskToContextMap.size() + 1});
+}

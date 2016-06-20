@@ -1,0 +1,4 @@
+{
+  LOG.log(Level.INFO,"Initializing REEF client handlers for Heron, topology: {0}",topologyName);
+  this.topologyName=topologyName;
+}

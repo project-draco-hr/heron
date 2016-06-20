@@ -1,0 +1,14 @@
+{
+  this.requestor=requestor;
+  this.reefFileNames=fileNames;
+  this.localHeronConfDir=".";
+  this.cluster=cluster;
+  this.role=role;
+  this.topologyName=topologyName;
+  this.topologyPackageName=topologyPackageName;
+  this.heronCorePackageName=heronCorePackageName;
+  this.env=env;
+  this.topologyJar=topologyJar;
+  this.httpPort=httpPort;
+  HeronMasterDriverProvider.setInstance(this);
+}

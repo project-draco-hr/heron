@@ -1,0 +1,18 @@
+{
+  Configuration reefRuntimeConf=getRuntimeConf();
+  Configuration reefDriverConf=getHMDriverConf();
+  Configuration reefClientConf=getClientConf();
+  boolean ret;
+  try {
+    final Injector injector=Tang.Factory.getTang().newInjector(reefRuntimeConf,reefClientConf);
+    final REEF reef=injector.getInstance(REEF.class);
+    final ReefClientSideHandlers client=injector.getInstance(ReefClientSideHandlers.class);
+    reef.submit(reefDriverConf);
+    ret=client.waitForSchedulerJobResponse();
+  }
+ catch (  InjectionException|InterruptedException e) {
+    LOG.log(Level.WARNING,"Failed to launch REEF app",e);
+    return false;
+  }
+  return ret;
+}

@@ -1,0 +1,11 @@
+{
+  Configuration runtimeConf=LocalRuntimeConfiguration.CONF.build();
+  Configuration reefClientConf=ClientConfiguration.CONF.set(ClientConfiguration.ON_JOB_RUNNING,ClientListener.JobRunning.class).build();
+  Configuration driverConf=DriverConfiguration.CONF.set(DriverConfiguration.ON_DRIVER_STARTED,DriverStarter.class).set(DriverConfiguration.ON_EVALUATOR_ALLOCATED,Allocated.class).set(DriverConfiguration.ON_CONTEXT_ACTIVE,Activated.class).build();
+  final Injector injector=Tang.Factory.getTang().newInjector(runtimeConf,reefClientConf);
+  final REEF reef=injector.getInstance(REEF.class);
+  final ClientListener clientListener=injector.getInstance(ClientListener.class);
+  clientListener.jobWatcher=new CountDownLatch(1);
+  reef.submit(driverConf);
+  clientListener.jobWatcher.await(1,TimeUnit.SECONDS);
+}

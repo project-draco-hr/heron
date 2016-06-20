@@ -1,0 +1,9 @@
+{
+  String packagePath=Paths.get(srcFolder,fileName).toString();
+  LOG.log(Level.INFO,"Extracting package: {0} at: {1}",new Object[]{packagePath,dstDir});
+  boolean result=ShellUtils.extractPackage(packagePath,dstDir,false,true);
+  if (!result) {
+    String msg="Failed to extract package:" + packagePath + " at: "+ dstDir;
+    throw new RuntimeException(msg);
+  }
+}
