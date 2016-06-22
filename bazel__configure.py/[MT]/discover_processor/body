@@ -1,2 +1,2 @@
 def discover_processor():
-    return platform.uname().machine
+    return platform.machine()

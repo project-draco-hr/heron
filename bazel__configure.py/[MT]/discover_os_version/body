@@ -1,2 +1,2 @@
 def discover_os_version():
-    return platform.uname().release
+    return platform.release()

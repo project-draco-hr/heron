@@ -1,4 +1,3 @@
 def make_executable(path):
-    mode = os.stat(path).st_mode
-    mode |= ((mode & 292) >> 2)
-    os.chmod(path, mode)
+    st_mode = os.stat(path).st_mode
+    os.chmod(path, (st_mode | stat.S_IXUSR))

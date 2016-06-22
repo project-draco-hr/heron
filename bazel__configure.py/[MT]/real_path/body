@@ -1,2 +1,0 @@
-def real_path(apath):
-    return os.path.realpath(apath)

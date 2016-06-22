@@ -1,2 +1,2 @@
 def discover_host():
-    return platform.uname().node
+    return platform.node()

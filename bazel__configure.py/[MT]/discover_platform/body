@@ -1,3 +1,2 @@
 def discover_platform():
-    output = subprocess.Popen(['uname'], stdout=subprocess.PIPE).communicate()
-    return output[0].strip('\n')
+    return discover_os()
