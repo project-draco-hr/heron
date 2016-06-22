@@ -1,5 +1,6 @@
 {
   flushRemaining();
+  currentDataTupleSizeInBytes=0;
   TopologyAPI.StreamId.Builder sbldr=TopologyAPI.StreamId.newBuilder();
   sbldr.setId(streamId);
   sbldr.setComponentName(helper.getMyComponent());

@@ -1,7 +1,8 @@
 {
-  if (currentDataTuple == null || !currentDataTuple.getStream().getId().equals(streamId) || currentDataTuple.getTuplesCount() > dataTupleSetCapacity) {
+  if (currentDataTuple == null || !currentDataTuple.getStream().getId().equals(streamId) || currentDataTuple.getTuplesCount() >= dataTupleSetCapacity || currentDataTupleSizeInBytes >= maxDataTupleSizeInBytes) {
     initNewDataTuple(streamId);
   }
   currentDataTuple.addTuples(newTuple);
+  currentDataTupleSizeInBytes+=tupleSizeInBytes;
   totalDataEmittedInBytes+=tupleSizeInBytes;
 }

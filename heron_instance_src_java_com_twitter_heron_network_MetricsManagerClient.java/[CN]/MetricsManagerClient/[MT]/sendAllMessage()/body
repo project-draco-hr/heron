@@ -1,4 +1,7 @@
 {
+  if (!isConnected()) {
+    return;
+  }
   LOG.info("Flushing all pending data in MetricsManagerClient");
   for (  Communicator<Metrics.MetricPublisherPublishMessage> c : outMetricsQueues) {
     int size=c.size();

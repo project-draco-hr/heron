@@ -1,0 +1,4 @@
+{
+  Object value=this.config.get(SystemConfig.INSTANCE_SET_DATA_TUPLE_SIZE_BYTES);
+  return value == null ? Long.MAX_VALUE : TypeUtils.getLong(value);
+}

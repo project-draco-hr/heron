@@ -1,5 +1,5 @@
 {
-  if (currentControlTuple == null || currentControlTuple.getFailsCount() > 0 || currentControlTuple.getAcksCount() > controlTupleSetCapacity) {
+  if (currentControlTuple == null || currentControlTuple.getFailsCount() > 0 || currentControlTuple.getAcksCount() >= controlTupleSetCapacity) {
     initNewControlTuple();
   }
   currentControlTuple.addAcks(newTuple);
