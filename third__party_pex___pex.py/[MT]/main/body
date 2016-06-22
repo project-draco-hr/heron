@@ -31,7 +31,7 @@ def main():
         poptions.zip_safe = options.zip_safe
         print(('pex options: %s' % poptions))
         os.environ['PATH'] = ('.:%s:/bin:/usr/bin' % poptions.python)
-        interpreter = PythonInterpreter(poptions.python, PythonInterpreter.from_binary(options.python).identity, extras={('setuptools', '18.0.1'): '3rdparty/pex/setuptools-18.0.1-py2.py3-none-any.whl', ('wheel', '0.23.0'): '3rdparty/pex/wheel-0.23.0-py2.7.egg', })
+        interpreter = PythonInterpreter(poptions.python, PythonInterpreter.from_binary(options.python).identity, extras={('setuptools', '18.0.1'): 'third_party/pex/setuptools-18.0.1-py2.py3-none-any.whl', ('wheel', '0.23.0'): 'third_party/pex/wheel-0.23.0-py2.7.egg', })
         interpreter = resolve_or_die(interpreter, SETUPTOOLS_REQUIREMENT, poptions)
         if (interpreter and poptions.use_wheel):
             interpreter = resolve_or_die(interpreter, WHEEL_REQUIREMENT, poptions)

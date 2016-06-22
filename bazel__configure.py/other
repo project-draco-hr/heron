@@ -6,7 +6,7 @@ import getpass
 import datetime
 import platform
 import subprocess
-sys.path.append('3rdparty/python/semver')
+sys.path.append('third_party/python/semver')
 import semver
 ARCH_AND_SYS = {('x86_64', 'Darwin'): ('IS_I386_MACOSX', 'IS_MACOSX'), ('x86_64', 'Linux'): ('IS_I386_LINUX', 'IS_LINUX'), }
 if (__name__ == '__main__'):
