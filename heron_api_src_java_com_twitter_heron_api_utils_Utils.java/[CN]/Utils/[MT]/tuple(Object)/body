@@ -1,5 +1,5 @@
 {
   List<Object> ret=new ArrayList<>();
-  Collections.addAll(ret,Arrays.asList(values));
+  Collections.addAll(ret,values);
   return ret;
 }
