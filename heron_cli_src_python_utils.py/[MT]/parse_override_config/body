@@ -6,5 +6,5 @@ def parse_override_config(namespace):
             for config in namespace:
                 f.write(('%s\n' % config.replace('=', ': ')))
         return override_config_file
-    except e:
+    except Exception as e:
         raise Exception(('Failed to parse override config: %s' % str(e)))
