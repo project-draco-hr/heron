@@ -5,7 +5,7 @@
         produceTuple();
         collector.sendOutTuples();
       }
- else {
+      if (!collector.isOutQueuesAvailable()) {
         spoutMetrics.updateOutQueueFullCount();
       }
       if (ackEnabled) {
