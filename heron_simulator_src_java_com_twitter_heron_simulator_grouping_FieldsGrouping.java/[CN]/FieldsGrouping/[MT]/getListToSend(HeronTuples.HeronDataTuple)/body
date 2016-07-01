@@ -3,10 +3,10 @@
   int taskIndex=0;
   int primeNumber=633910111;
   for (  Integer indices : fieldsGroupingIndices) {
-    int hash=tuple.getValues(indices).hashCode();
-    taskIndex+=(hash % primeNumber + primeNumber) % primeNumber;
+    taskIndex+=getHashCode(tuple.getValues(indices)) % primeNumber;
   }
   taskIndex=taskIndex % taskIds.size();
+  taskIndex=taskIndex >= 0 ? taskIndex : taskIndex + taskIds.size();
   res.add(taskIds.get(taskIndex));
   return res;
 }

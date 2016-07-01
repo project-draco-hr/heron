@@ -1,0 +1,14 @@
+{
+  List<Integer> taskIds=new LinkedList<>();
+  for (int i=0; i < 100; i++) {
+    taskIds.add(i);
+  }
+  TopologyAPI.StreamSchema.KeyType kt=TopologyAPI.StreamSchema.KeyType.newBuilder().setType(TopologyAPI.Type.OBJECT).setKey("field1").build();
+  TopologyAPI.StreamSchema schema=TopologyAPI.StreamSchema.newBuilder().addKeys(kt).build();
+  TopologyAPI.InputStream is=TopologyAPI.InputStream.newBuilder().setGroupingFields(schema).setGtype(TopologyAPI.Grouping.FIELDS).setStream(TopologyAPI.StreamId.newBuilder().setComponentName("componentName").setId("id")).build();
+  HeronTuples.HeronDataTuple tuple=HeronTuples.HeronDataTuple.newBuilder().setKey(-1).addValues(ByteString.copyFromUtf8("")).build();
+  FieldsGrouping g=Mockito.spy(new FieldsGrouping(is,schema,taskIds));
+  Mockito.doReturn(Integer.MIN_VALUE).when(g).getHashCode(Mockito.any(ByteString.class));
+  g.getListToSend(tuple);
+  Assert.assertTrue(true);
+}
