@@ -1,0 +1,10 @@
+{
+  fileSink=new FileSink();
+  Map<String,Object> conf=new HashMap<>();
+  tmpDir=Files.createTempDirectory("filesink").toFile();
+  conf.put("filename-output",tmpDir.getAbsolutePath() + "/filesink");
+  conf.put("file-maximum",100);
+  SinkContext context=Mockito.mock(SinkContext.class);
+  Mockito.when(context.getMetricsMgrId()).thenReturn("test");
+  fileSink.init(conf,context);
+}

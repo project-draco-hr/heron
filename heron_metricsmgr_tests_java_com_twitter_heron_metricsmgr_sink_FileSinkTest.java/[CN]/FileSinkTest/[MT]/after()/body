@@ -1,0 +1,7 @@
+{
+  fileSink.close();
+  for (  File file : tmpDir.listFiles()) {
+    file.delete();
+  }
+  tmpDir.delete();
+}

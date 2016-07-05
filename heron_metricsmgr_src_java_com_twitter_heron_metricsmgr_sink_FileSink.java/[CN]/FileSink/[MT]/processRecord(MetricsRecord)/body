@@ -1,6 +1,6 @@
 {
   if (isFileStart) {
-    openNewFile(String.format("%s.%s",filenamePrefix,currentFileIndex));
+    writer=openNewFile(String.format("%s.%d",filenamePrefix,currentFileIndex));
     writer.print("[");
     isFileStart=false;
   }

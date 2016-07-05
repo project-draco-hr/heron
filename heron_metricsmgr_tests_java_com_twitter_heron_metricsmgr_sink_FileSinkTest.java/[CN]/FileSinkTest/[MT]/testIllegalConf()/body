@@ -1,0 +1,21 @@
+{
+  FileSink sink=new FileSink();
+  Map<String,Object> conf=new HashMap<>();
+  SinkContext context=Mockito.mock(SinkContext.class);
+  try {
+    sink.init(conf,context);
+    Assert.fail("Expected IllegalArgumentException.");
+  }
+ catch (  IllegalArgumentException e) {
+    Assert.assertEquals("Require: filename-output",e.getMessage());
+  }
+  sink=new FileSink();
+  conf.put("filename-output",tmpDir.getAbsolutePath() + "/filesink");
+  try {
+    sink.init(conf,context);
+    Assert.fail("Expected IllegalArgumentException.");
+  }
+ catch (  IllegalArgumentException e) {
+    Assert.assertEquals("Require: file-maximum",e.getMessage());
+  }
+}

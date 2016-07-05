@@ -1,6 +1,6 @@
 {
-  filenamePrefix=(String)conf.get(FILENAME_KEY) + "." + context.getMetricsMgrId();
+  verifyConf(conf);
+  filenamePrefix=conf.get(FILENAME_KEY) + "." + context.getMetricsMgrId();
   fileMaximum=TypeUtils.getInteger(conf.get(MAXIMUM_FILE_COUNT_KEY));
   sinkContext=context;
-  writer=System.out;
 }

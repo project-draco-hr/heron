@@ -1,0 +1,5 @@
+{
+  fileSink.flush();
+  String content=new String(FileUtils.readFromFile(new File(tmpDir,"/filesink.test.0").getAbsolutePath()),StandardCharsets.UTF_8);
+  Assert.assertEquals("[]",content);
+}
