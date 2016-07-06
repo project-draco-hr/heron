@@ -1,0 +1,10 @@
+@tornado.gen.coroutine
+def _get_topologies(cluster, role=None, env=None):
+    endpoint = create_url(TOPOLOGIES_URL_FMT)
+    params = dict(cluster=cluster)
+    if (role is not None):
+        params['role'] = role
+    if (env is not None):
+        params['environ'] = env
+    request_url = tornado.httputil.url_concat(endpoint, params)
+    raise tornado.gen.Return(yield fetch_url_as_json(request_url))

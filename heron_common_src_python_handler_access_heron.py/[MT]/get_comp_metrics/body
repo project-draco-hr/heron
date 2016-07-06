@@ -1,0 +1,12 @@
+@tornado.gen.coroutine
+def get_comp_metrics(cluster, environ, topology, component, instances, metricnames, time_range, role=None):
+    params = dict(cluster=cluster, environ=environ, topology=topology, component=component)
+    if (role is not None):
+        params['role'] = role
+    request_url = tornado.httputil.url_concat(create_url(METRICS_URL_FMT))
+    for metric_name in metricnames:
+        request_url = tornado.httputil.url_concat(request_url, dict(metricname=metric_name))
+    for instance in instances:
+        request_url = tornado.httputil.url_concat(request_url, dict(instance=instance))
+    request_url = tornado.httputil.url_concat(request_url, dict(interval=time_range[1]))
+    raise tornado.gen.Return(yield fetch_url_as_json(request_url))

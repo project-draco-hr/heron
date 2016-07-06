@@ -1,0 +1,6 @@
+def get_argument_role(self):
+    '\n    Helper function to get request argument.\n    Raises exception if argument is missing.\n    Returns the role argument.\n    '
+    try:
+        return self.get_argument(constants.PARAM_ROLE, default=None)
+    except tornado.web.MissingArgumentError as e:
+        raise Exception(e.log_message)

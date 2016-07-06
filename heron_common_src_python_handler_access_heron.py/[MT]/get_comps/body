@@ -1,0 +1,9 @@
+@tornado.gen.coroutine
+def get_comps(cluster, environ, topology, role=None):
+    params = dict(cluster=cluster, environ=environ, topology=topology)
+    if (role is not None):
+        params['role'] = role
+    request_url = tornado.httputil.url_concat(create_url(lOGICALPLAN_URL_FMT), params)
+    lplan = yield fetch_url_as_json(request_url)
+    comps = (lplan['spouts'].keys() + lplan['bolts'].keys())
+    raise tornado.gen.Return(comps)

@@ -1,0 +1,2 @@
+def get_cluster_topologies(cluster):
+    return _get_topologies(cluster)

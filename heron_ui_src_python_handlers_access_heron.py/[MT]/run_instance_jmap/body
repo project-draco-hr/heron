@@ -1,4 +1,0 @@
-@tornado.gen.coroutine
-def run_instance_jmap(cluster, environ, topology, instance):
-    request_url = tornado.httputil.url_concat(create_url(JMAP_URL_FMT), dict(cluster=cluster, environ=environ, topology=topology, instance=instance))
-    raise tornado.gen.Return(yield fetch_url_as_json(request_url))

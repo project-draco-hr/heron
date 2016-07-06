@@ -1,4 +1,0 @@
-@tornado.gen.coroutine
-def get_scheduler_location(cluster, environ, topology):
-    request_url = tornado.httputil.url_concat(create_url(SCHEDULER_LOCATION_URL_FMT), dict(cluster=cluster, environ=environ, topology=topology))
-    raise tornado.gen.Return(yield fetch_url_as_json(request_url))

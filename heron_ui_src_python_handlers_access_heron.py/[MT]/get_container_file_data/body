@@ -1,4 +1,0 @@
-@tornado.gen.coroutine
-def get_container_file_data(cluster, environ, topology, container, path, offset, length):
-    request_url = tornado.httputil.url_concat(create_url(FILE_DATA_URL_FMT), dict(cluster=cluster, environ=environ, topology=topology, container=container, path=path, offset=offset, length=length))
-    raise tornado.gen.Return(yield fetch_url_as_json(request_url))

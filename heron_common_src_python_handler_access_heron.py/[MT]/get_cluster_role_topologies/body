@@ -1,0 +1,2 @@
+def get_cluster_role_topologies(cluster, role):
+    return _get_topologies(cluster, role=role)

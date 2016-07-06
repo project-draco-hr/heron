@@ -1,5 +1,0 @@
-@tornado.gen.coroutine
-def get_cluster_topologies(cluster):
-    endpoint = create_url(TOPOLOGIES_URL_FMT)
-    request_url = tornado.httputil.url_concat(endpoint, dict(cluster=cluster))
-    raise tornado.gen.Return(yield fetch_url_as_json(request_url))
