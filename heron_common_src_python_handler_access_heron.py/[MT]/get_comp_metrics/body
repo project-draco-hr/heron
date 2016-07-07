@@ -3,7 +3,7 @@ def get_comp_metrics(cluster, environ, topology, component, instances, metricnam
     params = dict(cluster=cluster, environ=environ, topology=topology, component=component)
     if (role is not None):
         params['role'] = role
-    request_url = tornado.httputil.url_concat(create_url(METRICS_URL_FMT))
+    request_url = tornado.httputil.url_concat(create_url(METRICS_URL_FMT), params)
     for metric_name in metricnames:
         request_url = tornado.httputil.url_concat(request_url, dict(metricname=metric_name))
     for instance in instances:
