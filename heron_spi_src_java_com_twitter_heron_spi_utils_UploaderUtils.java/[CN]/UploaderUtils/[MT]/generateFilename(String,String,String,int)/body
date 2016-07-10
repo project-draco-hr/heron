@@ -1,3 +1,0 @@
-{
-  return String.format("%s-%s-%s-%d-%d",topologyName,role,tag,version,new Random().nextLong());
-}

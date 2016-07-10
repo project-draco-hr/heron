@@ -6,7 +6,7 @@
   int version=-1;
   Set<String> filenames=new HashSet<>();
   for (int i=0; i < expectedUniqueFilename; i++) {
-    filenames.add(UploaderUtils.generateFilename(topologyName,role,tag,version));
+    filenames.add(UploaderUtils.generateFilename(topologyName,role,tag,version,""));
   }
   Assert.assertEquals(expectedUniqueFilename,filenames.size());
 }

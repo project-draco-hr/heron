@@ -1,0 +1,11 @@
+{
+  String topologyName="topologyName";
+  String role="role";
+  String filename=UploaderUtils.generateFilename(topologyName,role);
+  Assert.assertTrue(filename.endsWith(UploaderUtils.DEFAULT_FILENAME_EXTENSION));
+  String tag="";
+  int version=-1;
+  String extension=".extension";
+  String customizedFilename=UploaderUtils.generateFilename(topologyName,role,tag,version,extension);
+  Assert.assertTrue(customizedFilename.endsWith(extension));
+}
