@@ -1,0 +1,14 @@
+{
+  String[] command={"printenv"};
+  Map<String,String> env=new HashMap<>();
+  String key="heron-shell-utils-test-env-key";
+  String value="heron-shell-utils-test-env-value";
+  env.put(key,value);
+  ProcessBuilder pb=ShellUtils.getProcessBuilder(false,command,new File("."),env);
+  Process p=pb.start();
+  wait(10,TimeUnit.MILLISECONDS);
+  Assert.assertTrue(p.getInputStream().available() > 0);
+  String output=ShellUtils.inputstreamToString(p.getInputStream());
+  String entry=String.format("%s=%s",key,value);
+  Assert.assertTrue(output.contains(entry));
+}

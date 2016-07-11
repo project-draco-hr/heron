@@ -1,24 +1,3 @@
 {
-  StringBuilder pStdOut=stdout;
-  StringBuilder pStdErr=stderr;
-  try {
-    LOG.log(Level.FINE,"$> {0}",Arrays.toString(cmdline));
-    Process process=getProcessBuilder(isInheritIO,cmdline,workingDirectory).start();
-    int exitValue=process.waitFor();
-    if (pStdOut == null) {
-      pStdOut=new StringBuilder();
-    }
-    if (pStdErr == null) {
-      pStdErr=new StringBuilder();
-    }
-    pStdOut.append(inputstreamToString(process.getInputStream()));
-    pStdErr.append(inputstreamToString(process.getErrorStream()));
-    LOG.log(Level.FINE,"\tSTDOUT: {0}",pStdOut.toString());
-    LOG.log(Level.SEVERE,"\tSTDERR: {0}",pStdErr.toString());
-    return exitValue;
-  }
- catch (  IOException|InterruptedException e) {
-    LOG.severe("Failed to check status of packer " + e);
-  }
-  return -1;
+  return runSyncProcess(verbose,isInheritIO,cmdline,stdout,stderr,workingDirectory,new HashMap<String,String>());
 }

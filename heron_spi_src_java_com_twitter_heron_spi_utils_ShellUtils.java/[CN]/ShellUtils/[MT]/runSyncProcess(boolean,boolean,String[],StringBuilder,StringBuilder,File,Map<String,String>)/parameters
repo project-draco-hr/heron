@@ -1,0 +1,7 @@
+boolean verbose
+boolean isInheritIO
+String[] cmdline
+StringBuilder stdout
+StringBuilder stderr
+File workingDirectory
+Map<String,String> envs

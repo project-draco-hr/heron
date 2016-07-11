@@ -3,5 +3,9 @@
   if (isInheritIO) {
     pb.inheritIO();
   }
+  Map<String,String> env=pb.environment();
+  for (  String envKey : envs.keySet()) {
+    env.put(envKey,envs.get(envKey));
+  }
   return pb;
 }
