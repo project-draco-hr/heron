@@ -19,7 +19,7 @@
   try {
     statemgr.initialize(config);
     SchedulerStateManagerAdaptor adaptor=new SchedulerStateManagerAdaptor(statemgr,5000);
-    Config runtime=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).put(Keys.topologyDefinition(),topology).put(Keys.schedulerStateManagerAdaptor(),adaptor).put(Keys.numContainers(),1 + TopologyUtils.getNumContainers(topology)).put(Keys.schedulerShutdown(),getShutdown()).build();
+    Config runtime=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).put(Keys.topologyDefinition(),topology).put(Keys.schedulerStateManagerAdaptor(),adaptor).put(Keys.numContainers(),1 + TopologyUtils.getNumContainers(topology)).put(Keys.schedulerShutdown(),getShutdown()).put(Keys.SCHEDULER_PROPERTIES,properties).build();
     packing.initialize(config,runtime);
     PackingPlan packedPlan=packing.pack();
     if (packedPlan == null) {

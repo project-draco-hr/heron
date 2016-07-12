@@ -1,9 +1,3 @@
 {
-  String topologyDefnFile=TopologyUtils.lookUpTopologyDefnFile(".",topologyName);
-  TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
-  Config schedulerConfig=SchedulerConfig.loadConfig(cluster,role,env,topologyJar,topologyDefnFile,topology);
-  setupLogging(schedulerConfig);
-  SchedulerMain schedulerMain=new SchedulerMain(schedulerConfig,topology,httpPort);
-  LOG.log(Level.INFO,"Loaded scheduler config: {0}",schedulerMain.config);
-  return schedulerMain;
+  return createInstance(cluster,role,env,topologyJar,topologyName,httpPort,new Properties());
 }

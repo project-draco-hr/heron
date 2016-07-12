@@ -17,7 +17,7 @@
   PowerMockito.doReturn(stateManager).when(ReflectionUtils.class,"newInstance",STATE_MANAGER_CLASS);
   PowerMockito.doReturn(packing).when(ReflectionUtils.class,"newInstance",PACKING_CLASS);
   PowerMockito.doReturn(scheduler).when(ReflectionUtils.class,"newInstance",SCHEDULER_CLASS);
-  schedulerMain=Mockito.spy(new SchedulerMain(config,topology,iSchedulerServerPort));
+  schedulerMain=Mockito.spy(new SchedulerMain(config,topology,iSchedulerServerPort,Mockito.mock(Properties.class)));
   schedulerServer=Mockito.mock(SchedulerServer.class);
   Mockito.doReturn(schedulerServer).when(schedulerMain).getServer(Mockito.any(Config.class),Mockito.eq(scheduler),Mockito.eq(iSchedulerServerPort));
   Mockito.doReturn(true).when(scheduler).onSchedule(Mockito.any(PackingPlan.class));

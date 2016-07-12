@@ -1,0 +1,3 @@
+{
+  return (Properties)runtime.get(Keys.SCHEDULER_PROPERTIES);
+}
