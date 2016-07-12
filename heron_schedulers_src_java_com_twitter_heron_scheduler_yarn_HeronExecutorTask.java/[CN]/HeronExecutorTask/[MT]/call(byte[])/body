@@ -5,7 +5,9 @@
   LOG.log(Level.INFO,"Preparing evaluator for running executor-id: {0}",heronExecutorId);
   String[] executorCmd=getExecutorCommand();
   processTarget=Thread.currentThread();
-  final Process regularExecutor=ShellUtils.runASyncProcess(true,executorCmd,new File("."));
+  File workingDirectory=new File(".");
+  LOG.log(Level.INFO,"working dir: {0}",workingDirectory.getAbsolutePath());
+  final Process regularExecutor=ShellUtils.runASyncProcess(true,executorCmd,workingDirectory);
   LOG.log(Level.INFO,"Started heron executor-id: {0}",heronExecutorId);
   try {
     regularExecutor.waitFor();
