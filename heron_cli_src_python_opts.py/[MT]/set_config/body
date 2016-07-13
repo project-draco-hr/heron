@@ -1,3 +1,4 @@
 def set_config(k, v):
+    '\n  Store a config opt in the config map\n  :param k:\n  :param v:\n  :return:\n  '
     global config_opts
     config_opts[k] = v

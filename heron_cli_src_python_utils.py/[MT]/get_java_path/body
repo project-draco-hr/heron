@@ -1,3 +1,4 @@
 def get_java_path():
+    '\n  Get the path of java executable\n  :return:\n  '
     java_home = os.environ.get('JAVA_HOME')
     return os.path.join(java_home, BIN_DIR, 'java')

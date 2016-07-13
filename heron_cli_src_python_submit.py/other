@@ -1,11 +1,11 @@
+' submit.py '
 import glob
 import os
 import shutil
-import sys
 import tempfile
 from heron.common.src.python.color import Log
 from heron.proto import topology_pb2
-import heron.cli.src.python.args as args
+import heron.cli.src.python.args as cli_args
 import heron.cli.src.python.execute as execute
 import heron.cli.src.python.jars as jars
 import heron.cli.src.python.opts as opts

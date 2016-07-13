@@ -1,6 +1,7 @@
 @tornado.gen.coroutine
 def fetch(self, cluster, metric, topology, component, instance, timerange, environ=None):
-    components = ([component] if ('*' != component) else yield get_comps(cluster, environ, topology))
+    '\n    :param cluster:\n    :param metric:\n    :param topology:\n    :param component:\n    :param instance:\n    :param timerange:\n    :param environ:\n    :return:\n    '
+    components = ([component] if (component != '*') else yield get_comps(cluster, environ, topology))
     futures = []
     for comp in components:
         query = self.get_query(metric, comp, instance)

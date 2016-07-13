@@ -1,6 +1,7 @@
 def get_heron_config():
+    '\n  Get config opts from the global variable\n  :return:\n  '
     opt_list = []
-    for (k, v) in config_opts.items():
-        opt_list.append(('%s=%s' % (k, v)))
+    for (key, value) in config_opts.items():
+        opt_list.append(('%s=%s' % (key, value)))
     all_opts = ('-Dheron.options=' + ','.join(opt_list).replace(' ', '%%%%'))
     return all_opts

@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get_comp_metrics(cluster, environ, topology, component, instances, metricnames, time_range, role=None):
+    '\n  Get the metrics for all the instances of a topology from Heron Nest\n  :param cluster:\n  :param environ:\n  :param topology:\n  :param component:\n  :param instances:\n  :param metricnames:   dict of display name to cuckoo name\n  :param time_range:    2-tuple consisting of start and end of range\n  :param role:\n  :return:\n  '
     params = dict(cluster=cluster, environ=environ, topology=topology, component=component)
     if (role is not None):
         params['role'] = role

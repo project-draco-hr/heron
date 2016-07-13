@@ -1,4 +1,5 @@
 def extract_common_args(command, parser, cl_args):
+    '\n  Extract all the common args for all commands\n  :param command:\n  :param parser:\n  :param cl_args:\n  :return:\n  '
     try:
         cluster_role_env = cl_args.pop('cluster/[role]/[env]')
         config_path = cl_args['config_path']
@@ -20,8 +21,8 @@ def extract_common_args(command, parser, cl_args):
         new_cl_args['environ'] = cluster_tuple[2]
         new_cl_args['config_path'] = config_path
         new_cl_args['override_config_file'] = override_config_file
-    except Exception as e:
-        Log.error(('Argument cluster/[role]/[env] is not correct: %s' % str(e)))
+    except Exception as ex:
+        Log.error(('Argument cluster/[role]/[env] is not correct: %s' % str(ex)))
         return dict()
     cl_args.update(new_cl_args)
     return cl_args

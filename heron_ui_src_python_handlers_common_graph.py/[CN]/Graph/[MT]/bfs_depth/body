@@ -1,4 +1,5 @@
 def bfs_depth(self, U):
+    '\n    Returns the maximum distance between any vertex and U in the connected\n    component containing U\n    :param U:\n    :return:\n    '
     bfs_queue = [[U, 0]]
     visited = set()
     max_depth = 0

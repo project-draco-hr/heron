@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get(self, cluster, environ, topology):
+    '\n    :param cluster:\n    :param environ:\n    :param topology:\n    :return:\n    '
     estate = yield access.get_execution_state(cluster, environ, topology)
     scheduler_location = yield access.get_scheduler_location(cluster, environ, topology)
     job_page_link = scheduler_location['job_page_link']

@@ -1,4 +1,5 @@
 def insert_bool(param, command_args):
+    '\n  :param param:\n  :param command_args:\n  :return:\n  '
     index = 0
     found = False
     for lelem in command_args:

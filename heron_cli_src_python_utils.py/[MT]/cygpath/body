@@ -1,6 +1,7 @@
-def cygpath(x):
-    command = ['cygpath', '-wp', x]
-    p = subprocess.Popen(command, stdout=subprocess.PIPE)
-    (output, errors) = p.communicate()
+def cygpath(x_val):
+    '\n  :param x_val:\n  :return:\n  '
+    command = ['cygpath', '-wp', x_val]
+    proc = subprocess.Popen(command, stdout=subprocess.PIPE)
+    (output, _) = proc.communicate()
     lines = output.split('\n')
     return lines[0]

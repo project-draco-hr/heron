@@ -1,2 +1,3 @@
-def identity(x):
-    return x
+def identity(x_val):
+    '\n  Get normalized class path depending on platform\n  :param x_val:\n  :return:\n  '
+    return x_val

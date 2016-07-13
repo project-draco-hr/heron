@@ -1,7 +1,4 @@
-import os, signal, sys
-import time, random
-import logging
-import json
+' metrics.py '
 from heron.ui.src.python.handlers import base
 from heron.common.src.python.handler import access
 import tornado.gen

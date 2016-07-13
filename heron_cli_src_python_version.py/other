@@ -1,3 +1,3 @@
-import heron.cli.src.python.args as args
+' version.py '
+import heron.cli.src.python.args as cli_args
 import heron.cli.src.python.utils as utils
-from heron.common.src.python.color import Log

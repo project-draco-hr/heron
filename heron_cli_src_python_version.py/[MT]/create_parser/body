@@ -1,5 +1,6 @@
 def create_parser(subparsers):
+    '\n  :param subparsers:\n  :return:\n  '
     parser = subparsers.add_parser('version', help='Print version of heron-cli', usage='%(prog)s', add_help=False)
-    args.add_titles(parser)
+    cli_args.add_titles(parser)
     parser.set_defaults(subcommand='version')
     return parser

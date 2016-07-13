@@ -1,2 +1,4 @@
-import os, fnmatch
+' jars.py '
+import os
+import fnmatch
 import heron.cli.src.python.utils as utils

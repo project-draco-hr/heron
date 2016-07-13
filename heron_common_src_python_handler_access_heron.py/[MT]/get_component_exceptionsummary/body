@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get_component_exceptionsummary(cluster, environ, topology, component, role=None):
+    '\n  Get summary of exception for a component\n  :param cluster:\n  :param environ:\n  :param topology:\n  :param component:\n  :param role:\n  :return:\n  '
     params = dict(cluster=cluster, environ=environ, topology=topology, component=component)
     if (role is not None):
         params['role'] = role

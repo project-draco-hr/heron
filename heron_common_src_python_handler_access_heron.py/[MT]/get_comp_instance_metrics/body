@@ -1,11 +1,12 @@
 @tornado.gen.coroutine
 def get_comp_instance_metrics(cluster, environ, topology, component, metrics, instances, time_range, role=None):
+    '\n  Get the metrics for some instances of a topology from tracker\n  :param cluster:\n  :param environ:\n  :param topology:\n  :param component:\n  :param metrics:     dict of display name to cuckoo name\n  :param instances:\n  :param time_range:  2-tuple consisting of start and end of range\n  :param role:\n  :return:\n  '
     params = dict(cluster=cluster, environ=environ, topology=topology, component=component)
     if (role is not None):
         params['role'] = role
     request_url = tornado.httputil.url_concat(create_url(METRICS_URL_FMT), params)
     all_instances = (instances if isinstance(instances, list) else [instances])
-    for (display_name, metric_name) in metrics.iteritems():
+    for (_, metric_name) in metrics.iteritems():
         request_url = tornado.httputil.url_concat(request_url, dict(metricname=metric_name[0]))
     for i in all_instances:
         request_url = tornado.httputil.url_concat(request_url, dict(instance=i))

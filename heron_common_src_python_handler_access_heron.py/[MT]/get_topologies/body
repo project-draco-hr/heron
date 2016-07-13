@@ -1,4 +1,5 @@
 @tornado.gen.coroutine
 def get_topologies():
+    '\n  Get the list of topologies given a data center from heron tracker\n  :return:\n  '
     request_url = create_url(TOPOLOGIES_URL_FMT)
     raise tornado.gen.Return(yield fetch_url_as_json(request_url))

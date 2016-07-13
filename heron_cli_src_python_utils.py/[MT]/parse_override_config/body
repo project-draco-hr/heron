@@ -1,10 +1,11 @@
 def parse_override_config(namespace):
+    '\n  Parse the command line for overriding the defaults\n  :param namespace:\n  :return:\n  '
     try:
         tmp_dir = tempfile.mkdtemp()
         override_config_file = os.path.join(tmp_dir, OVERRIDE_YAML)
-        with open(override_config_file, 'w') as f:
+        with open(override_config_file, 'w') as handle:
             for config in namespace:
-                f.write(('%s\n' % config.replace('=', ': ')))
+                handle.write(('%s\n' % config.replace('=', ': ')))
         return override_config_file
-    except Exception as e:
-        raise Exception(('Failed to parse override config: %s' % str(e)))
+    except Exception as ex:
+        raise Exception(('Failed to parse override config: %s' % str(ex)))

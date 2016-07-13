@@ -1,9 +1,3 @@
 def create_parser(subparsers):
-    parser = subparsers.add_parser('kill', help='Kill a topology', usage='%(prog)s [options] cluster/[role]/[env] topology-name', add_help=False)
-    args.add_titles(parser)
-    args.add_cluster_role_env(parser)
-    args.add_topology(parser)
-    args.add_config(parser)
-    args.add_verbose(parser)
-    parser.set_defaults(subcommand='kill')
-    return parser
+    '\n  :param subparsers:\n  :return:\n  '
+    return cli_helper.create_parser(subparsers, 'kill', 'Kill a topology')

@@ -1,4 +1,5 @@
 def main(argv):
+    '\n  :param argv:\n  :return:\n  '
     log.configure(log.logging.DEBUG)
     tornado.log.enable_pretty_logging()
     (parser, child_parser) = args.create_parsers()

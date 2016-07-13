@@ -1,3 +1,4 @@
 def get(self, cluster, environ, topology, comp_name, instance):
+    '\n    :param cluster:\n    :param environ:\n    :param topology:\n    :param comp_name:\n    :param instance:\n    :return:\n    '
     options = dict(cluster=cluster, environ=environ, topology=topology, comp_name=comp_name, instance=instance, active='topologies', function=common.className)
     self.render('exception.html', **options)

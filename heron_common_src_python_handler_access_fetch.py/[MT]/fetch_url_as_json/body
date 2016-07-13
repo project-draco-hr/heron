@@ -1,5 +1,8 @@
 @tornado.gen.coroutine
-def fetch_url_as_json(fetch_url, default_value=dict()):
+def fetch_url_as_json(fetch_url, default_value=None):
+    '\n  Fetch the given url and convert the response to json.\n  :param fetch_url: URL to fetch\n  :param default_value: value to return in case of failure\n  :return:\n  '
+    if (default_value is None):
+        default_value = dict()
     logging.info('fetching url %s', fetch_url)
     ret = default_value
     start = time.time()
@@ -15,6 +18,6 @@ def fetch_url_as_json(fetch_url, default_value=dict()):
     execution = (1000 * response['executiontime'])
     end = time.time()
     duration = (1000 * (end - start))
-    logging.info(('TIME: url fetch took %.2f ms server time %s' % (execution, fetch_url)))
-    logging.info(('TIME: url fetch took %.2f ms round trip  %s' % (duration, fetch_url)))
+    logging.info('TIME: url fetch took %.2f ms server time %s', execution, fetch_url)
+    logging.info('TIME: url fetch took %.2f ms round trip  %s', duration, fetch_url)
     raise tornado.gen.Return(ret)

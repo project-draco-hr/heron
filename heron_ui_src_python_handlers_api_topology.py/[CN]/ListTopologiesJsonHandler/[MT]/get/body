@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get(self):
+    '\n    :return:\n    '
     topologies = yield access.get_topologies_states()
     result = dict()
     for (cluster, cluster_value) in topologies.iteritems():

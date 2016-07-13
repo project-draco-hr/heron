@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get_execution_state(cluster, environ, topology, role=None):
+    '\n  Get the execution state of a topology in a cluster\n  :param cluster:\n  :param environ:\n  :param topology:\n  :param role:\n  :return:\n  '
     params = dict(cluster=cluster, environ=environ, topology=topology)
     if (role is not None):
         params['role'] = role

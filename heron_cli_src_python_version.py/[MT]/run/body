@@ -1,4 +1,5 @@
 def run(command, parser, args, unknown_args):
+    '\n  :param command:\n  :param parser:\n  :param args:\n  :param unknown_args:\n  :return:\n  '
     release_file = utils.get_heron_release_file()
     with open(release_file) as release_info:
         for line in release_info:

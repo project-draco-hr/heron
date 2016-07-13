@@ -1,4 +1,5 @@
 def run(command, parser, args, unknown_args):
+    '\n  :param command:\n  :param parser:\n  :param args:\n  :param unknown_args:\n  :return:\n  '
     command_help = args['help-command']
     if (command_help == 'help'):
         parser.print_help()

@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get_scheduler_location(cluster, environ, topology, role=None):
+    '\n  Get the scheduler location of a topology in a cluster from tracker\n  :param cluster:\n  :param environ:\n  :param topology:\n  :param role:\n  :return:\n  '
     params = dict(cluster=cluster, environ=environ, topology=topology)
     if (role is not None):
         params['role'] = role

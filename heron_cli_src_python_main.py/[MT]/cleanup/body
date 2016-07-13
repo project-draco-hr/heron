@@ -1,3 +1,4 @@
 def cleanup(files):
-    for file in files:
-        shutil.rmtree(os.path.dirname(file))
+    '\n  :param files:\n  :return:\n  '
+    for cur_file in files:
+        shutil.rmtree(os.path.dirname(cur_file))

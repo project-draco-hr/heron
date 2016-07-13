@@ -1,16 +1,18 @@
 def run(command, parser, command_args, unknown_args):
+    '\n  Run the command\n  :param command:\n  :param parser:\n  :param command_args:\n  :param unknown_args:\n  :return:\n  '
+    status = 1
     if (command == 'activate'):
-        return activate.run(command, parser, command_args, unknown_args)
+        status = activate.run(command, parser, command_args, unknown_args)
     elif (command == 'deactivate'):
-        return deactivate.run(command, parser, command_args, unknown_args)
+        status = deactivate.run(command, parser, command_args, unknown_args)
     elif (command == 'kill'):
-        return kill.run(command, parser, command_args, unknown_args)
+        status = kill.run(command, parser, command_args, unknown_args)
     elif (command == 'restart'):
-        return restart.run(command, parser, command_args, unknown_args)
+        status = restart.run(command, parser, command_args, unknown_args)
     elif (command == 'submit'):
-        return submit.run(command, parser, command_args, unknown_args)
+        status = submit.run(command, parser, command_args, unknown_args)
     elif (command == 'help'):
-        return help.run(command, parser, command_args, unknown_args)
+        status = cli_help.run(command, parser, command_args, unknown_args)
     elif (command == 'version'):
-        return version.run(command, parser, command_args, unknown_args)
-    return 1
+        status = version.run(command, parser, command_args, unknown_args)
+    return status

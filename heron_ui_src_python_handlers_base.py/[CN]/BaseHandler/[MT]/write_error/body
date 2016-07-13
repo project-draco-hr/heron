@@ -1,4 +1,5 @@
 def write_error(self, status_code, **kwargs):
+    '\n    :param status_code:\n    :param kwargs:\n    :return:\n    '
     if ('exc_info' in kwargs):
         exc_info = kwargs['exc_info']
         error = exc_info[1]

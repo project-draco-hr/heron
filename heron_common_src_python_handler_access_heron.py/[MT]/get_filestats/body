@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get_filestats(cluster, environ, topology, container, path, role=None):
+    '\n  :param cluster:\n  :param environ:\n  :param topology:\n  :param container:\n  :param path:\n  :param role:\n  :return:\n  '
     params = dict(cluster=cluster, environ=environ, topology=topology, container=container, path=path)
     if (role is not None):
         params['role'] = role

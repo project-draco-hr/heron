@@ -1,4 +1,5 @@
 def insert_bool_values(command_line_args):
+    '\n  :param command_line_args:\n  :return:\n  '
     args1 = insert_bool('--verbose', command_line_args)
     args2 = insert_bool('--deploy-deactivated', args1)
     return args2

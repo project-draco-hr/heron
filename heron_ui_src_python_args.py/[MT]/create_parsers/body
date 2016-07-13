@@ -1,4 +1,5 @@
 def create_parsers():
+    '\n  :return:\n  '
     parser = argparse.ArgumentParser(epilog='For detailed documentation, go to http://heronstreaming.io', usage='%(prog)s [options] [help]', add_help=False)
     parser = add_titles(parser)
     parser = add_arguments(parser)

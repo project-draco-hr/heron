@@ -1,4 +1,5 @@
 def get_config(k):
+    '\n  Get config opts from the config map\n  :param k:\n  :return:\n  '
     global config_opts
     if config_opts.has_key(k):
         return config_opts[k]

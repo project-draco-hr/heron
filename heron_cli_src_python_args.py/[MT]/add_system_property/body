@@ -1,3 +1,4 @@
 def add_system_property(parser):
+    '\n  :param parser:\n  :return:\n  '
     parser.add_argument('--topology-main-jvm-property', metavar='(property=value; JVM system property for executing topology main; default: [])', action='append', default=[])
     return parser

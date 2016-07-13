@@ -1,4 +1,5 @@
 def main():
+    '\n  Run the command\n  :return:\n  '
     check_environment()
     parser = create_parser()
     if (len(sys.argv[1:]) == 0):
@@ -30,4 +31,4 @@ def main():
     if (command != 'help'):
         sys.stdout.flush()
         Log.info(('Elapsed time: %.3fs.' % (end - start)))
-    return (0 if (retcode == True) else 1)
+    return (0 if retcode else 1)

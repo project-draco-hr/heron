@@ -1,2 +1,3 @@
 def get_cluster_role_topologies(cluster, role):
+    '\n  Get the list of topologies given a cluster submitted by a given role\n  :param cluster:\n  :param role:\n  :return:\n  '
     return _get_topologies(cluster, role=role)

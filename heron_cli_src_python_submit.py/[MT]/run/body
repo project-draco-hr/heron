@@ -1,4 +1,5 @@
 def run(command, parser, cl_args, unknown_args):
+    '\n  Submits the topology to the scheduler\n    * Depending on the topology file name extension, we treat the file as a\n      fatjar (if the ext is .jar) or a tar file (if the ext is .tar/.tar.gz).\n    * We upload the topology file to the packer, update zookeeper and launch\n      scheduler jobs representing that topology\n    * You can see your topology in Heron UI\n  :param command:\n  :param parser:\n  :param cl_args:\n  :param unknown_args:\n  :return:\n  '
     topology_file = cl_args['topology-file-name']
     if (not os.path.isfile(topology_file)):
         Log.error(('Topology jar|tar file %s does not exist' % topology_file))

@@ -1,2 +1,3 @@
 def get(self):
+    '\n    :return:\n    '
     self.redirect(u'/topologies')

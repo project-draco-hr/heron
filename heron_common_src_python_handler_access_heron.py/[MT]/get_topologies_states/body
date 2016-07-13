@@ -1,4 +1,5 @@
 @tornado.gen.coroutine
 def get_topologies_states():
+    '\n  Get the list of topologies and their states\n  :return:\n  '
     request_url = (create_url(TOPOLOGIES_URL_FMT) + '/states')
     raise tornado.gen.Return(yield fetch_url_as_json(request_url))

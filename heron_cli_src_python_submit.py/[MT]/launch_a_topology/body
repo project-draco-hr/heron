@@ -1,4 +1,5 @@
 def launch_a_topology(cl_args, tmp_dir, topology_file, topology_defn_file):
+    '\n  Launch a topology given topology jar, its definition file and configurations\n  :param cl_args:\n  :param tmp_dir:\n  :param topology_file:\n  :param topology_defn_file:\n  :return:\n  '
     topology_pkg_path = utils.normalized_class_path(os.path.join(tmp_dir, 'topology.tar.gz'))
     release_yaml_file = utils.get_heron_release_file()
     config_path = cl_args['config_path']
@@ -9,4 +10,4 @@ def launch_a_topology(cl_args, tmp_dir, topology_file, topology_defn_file):
     if opts.verbose():
         args.append('--verbose')
     lib_jars = utils.get_heron_libs((((jars.scheduler_jars() + jars.uploader_jars()) + jars.statemgr_jars()) + jars.packing_jars()))
-    execute.heron_class('com.twitter.heron.scheduler.SubmitterMain', lib_jars, extra_jars=[], args=args, javaDefines=[])
+    execute.heron_class('com.twitter.heron.scheduler.SubmitterMain', lib_jars, extra_jars=[], args=args, java_defines=[])

@@ -1,3 +1,4 @@
 def add_verbose(parser):
+    '\n  :param parser:\n  :return:\n  '
     parser.add_argument('--verbose', metavar='(a boolean; default: "false")', default=False)
     return parser

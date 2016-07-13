@@ -1,4 +1,5 @@
 def check_java_home_set():
+    '\n  Check if the java home set\n  :return:\n  '
     if (not os.environ.has_key('JAVA_HOME')):
         Log.error('JAVA_HOME not set')
         return False

@@ -1,3 +1,4 @@
 def verbose():
+    '\n  :return:\n  '
     global verbose_flag
     return verbose_flag

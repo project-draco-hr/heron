@@ -1,3 +1,4 @@
 def topology_jars():
+    '\n  Get the topology jars\n  :return:\n  '
     jars = [os.path.join(utils.get_heron_lib_dir(), 'third_party', '*')]
     return jars

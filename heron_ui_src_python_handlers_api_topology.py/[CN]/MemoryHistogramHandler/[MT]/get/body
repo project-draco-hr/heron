@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get(self, cluster, environ, topology, instance):
+    '\n    :param cluster:\n    :param environ:\n    :param topology:\n    :param instance:\n    :return:\n    '
     pplan = yield access.get_physical_plan(cluster, environ, topology)
     host = pplan['stmgrs'][pplan['instances'][instance]['stmgrId']]['host']
     result = json.loads(yield access.get_instance_mem_histogram(cluster, environ, topology, instance))

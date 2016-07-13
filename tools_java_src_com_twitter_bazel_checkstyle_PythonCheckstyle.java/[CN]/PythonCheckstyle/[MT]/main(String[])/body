@@ -15,6 +15,7 @@
     LOG.info(sourceFiles.size() + " python files found by checkstyle");
     List<String> commandBuilder=new ArrayList<>();
     commandBuilder.add(pylintFile);
+    commandBuilder.add("--rcfile=" + PYLINT_RCFILE);
     commandBuilder.addAll(sourceFiles);
     runLinter(commandBuilder);
   }

@@ -1,2 +1,3 @@
 def get_tracker_endpoint():
+    '\n  Get the endpoint for heron tracker\n  :return:\n  '
     return options.tracker_url

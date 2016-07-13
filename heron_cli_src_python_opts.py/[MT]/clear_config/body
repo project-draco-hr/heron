@@ -1,3 +1,4 @@
 def clear_config():
+    '\n  Clear all the config in the config map\n  :return:\n  '
     global config_opts
     config_opts = dict()

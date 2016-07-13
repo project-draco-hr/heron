@@ -1,3 +1,4 @@
 def get(self, *args, **kwargs):
+    '\n    :param args:\n    :param kwargs:\n    :return:\n    '
     errormessage = 'Sorry, we could not find this page'
     self.render('error.html', errormessage=errormessage)

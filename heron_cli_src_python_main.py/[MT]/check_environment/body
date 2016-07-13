@@ -1,4 +1,5 @@
 def check_environment():
+    '\n  Check whether the environment variables are set\n  :return:\n  '
     if (not utils.check_java_home_set()):
         sys.exit(1)
     if (not utils.check_release_file_exists()):

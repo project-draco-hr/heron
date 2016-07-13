@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def run_instance_jmap(cluster, environ, topology, instance, role=None):
+    '\n  :param cluster:\n  :param environ:\n  :param topology:\n  :param instance:\n  :param role:\n  :return:\n  '
     params = dict(cluster=cluster, environ=environ, topology=topology, instance=instance)
     if (role is not None):
         params['role'] = role

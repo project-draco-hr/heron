@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get(self, cluster, environ, topology, container):
+    '\n    :param cluster:\n    :param environ:\n    :param topology:\n    :param container:\n    :return:\n    '
     path = self.get_argument('path', default='.')
     data = yield access.get_filestats(cluster, environ, topology, container, path)
     options = dict(cluster=cluster, environ=environ, topology=topology, container=container, path=path, filestats=data)

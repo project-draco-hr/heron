@@ -1,3 +1,4 @@
 def trace_execution():
+    '\n  :return:\n  '
     global trace_execution_flag
     return trace_execution_flag

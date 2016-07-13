@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get_container_file_data(cluster, environ, topology, container, path, offset, length, role=None):
+    '\n  :param cluster:\n  :param environ:\n  :param topology:\n  :param container:\n  :param path:\n  :param offset:\n  :param length:\n  :param role:\n  :return:\n  '
     params = dict(cluster=cluster, environ=environ, topology=topology, container=container, path=path, offset=offset, length=length)
     if (role is not None):
         params['role'] = role

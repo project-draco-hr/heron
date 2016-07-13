@@ -1,4 +1,5 @@
 def diameter(self):
+    '\n    Returns the maximum distance between any vertex and U in the connected\n    component containing U\n    :return:\n    '
     diameter = 0
     for U in self.edges:
         depth = self.bfs_depth(U)

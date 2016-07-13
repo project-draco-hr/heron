@@ -1,3 +1,4 @@
 def get(self, cluster, environ, topology):
+    '\n    :param cluster:\n    :param environ:\n    :param topology:\n    :return:\n    '
     options = dict(cluster=cluster, environ=environ, topology=topology, active='topologies', function=common.className)
     self.render('config.html', **options)

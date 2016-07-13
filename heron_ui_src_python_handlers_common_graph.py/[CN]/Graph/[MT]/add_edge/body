@@ -1,4 +1,5 @@
 def add_edge(self, U, V):
+    '\n    :param U:\n    :param V:\n    :return:\n    '
     if (not (U in self.edges)):
         self.edges[U] = set()
     if (not (V in self.edges)):

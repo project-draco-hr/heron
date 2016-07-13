@@ -1,2 +1,3 @@
 def fetch_max(self, cluster, metric, topology, component, instance, timerange, envirn=None):
+    '\n    :param cluster:\n    :param metric:\n    :param topology:\n    :param component:\n    :param instance:\n    :param timerange:\n    :param envirn:\n    :return:\n    '
     pass
