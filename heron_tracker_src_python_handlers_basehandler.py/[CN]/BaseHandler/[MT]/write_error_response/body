@@ -5,4 +5,4 @@ def write_error_response(self, message):
     now = time.time()
     spent = (now - self.basehandler_starttime)
     response[constants.RESPONSE_KEY_EXECUTION_TIME] = spent
-    self.write(tornado.escape.json_encode(response))
+    self.write_json_response(response)
