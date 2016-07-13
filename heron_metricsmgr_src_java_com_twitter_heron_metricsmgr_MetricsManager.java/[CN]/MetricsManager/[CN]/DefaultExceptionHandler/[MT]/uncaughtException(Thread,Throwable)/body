@@ -2,9 +2,11 @@
   String threadName=thread.getName();
   LOG.log(Level.SEVERE,"Exception caught in thread: " + threadName + " with thread id: "+ thread.getId(),exception);
   String sinkId=threadName;
-  int thisSinkRetryAttempts=sinksRetryAttempts.remove(sinkId);
+  Integer thisSinkRetryAttempts=sinksRetryAttempts.remove(sinkId);
   SinkExecutor oldSinkExecutor=sinkExecutors.remove(sinkId);
-  metricsManagerServer.removeSinkCommunicator(oldSinkExecutor.getCommunicator());
+  if (oldSinkExecutor != null) {
+    metricsManagerServer.removeSinkCommunicator(oldSinkExecutor.getCommunicator());
+  }
   SysUtils.closeIgnoringExceptions(oldSinkExecutor);
   if (oldSinkExecutor != null && thisSinkRetryAttempts != 0) {
     LOG.info(String.format("Restarting IMetricsSink: %s with %d available retries",sinkId,thisSinkRetryAttempts));
