@@ -1,7 +1,7 @@
 def _collapse(self):
     resolvables = {}
     for resolved_packages in self.__tuples:
-        key = resolved_packages.resolvable.name
+        key = self.normalize(resolved_packages.resolvable.name)
         previous = resolvables.get(key, _ResolvedPackages.empty())
         if (previous.resolvable is None):
             resolvables[key] = resolved_packages

@@ -1,0 +1,6 @@
+def unescape(s):
+    'Unescapes html. Taken from https://wiki.python.org/moin/EscapingHtml'
+    s = s.replace('&lt;', '<')
+    s = s.replace('&gt;', '>')
+    s = s.replace('&amp;', '&')
+    return s

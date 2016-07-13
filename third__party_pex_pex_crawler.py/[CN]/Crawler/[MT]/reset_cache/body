@@ -1,0 +1,4 @@
+@classmethod
+def reset_cache(cls):
+    'Reset the internal crawl cache. This is intended primarily for tests.'
+    cls._CRAWL_CACHE = Memoizer()

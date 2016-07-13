@@ -3,4 +3,4 @@ def href_match_to_url(cls, match):
 
     def pick(group):
         return ('' if (group is None) else group)
-    return (pick(match.group(1)) or pick(match.group(2)) or pick(match.group(3)))
+    return unescape((pick(match.group(1)) or pick(match.group(2)) or pick(match.group(3))))

@@ -1,0 +1,3 @@
+def make_relative_to_root(path):
+    'Update options so that defaults are user relative to specified pex_root.'
+    return os.path.normpath(path.format(pex_root=ENV.PEX_ROOT))

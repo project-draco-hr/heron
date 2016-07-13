@@ -1,7 +1,7 @@
 def build(self, package, options):
     if package.remote:
         package = Package.from_href(options.get_context().fetch(package, into=self.__cache))
-        os.utime(package.path, None)
+        os.utime(package.local_path, None)
     dist = super(CachingResolver, self).build(package, options)
     target = os.path.join(self.__cache, os.path.basename(dist.location))
     if (not os.path.exists(target)):

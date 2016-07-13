@@ -6,7 +6,7 @@ def translate(self, package, into=None):
         raise ValueError('SourceTranslator cannot translate remote packages.')
     installer = None
     version = self._interpreter.version
-    unpack_path = Archiver.unpack(package.path)
+    unpack_path = Archiver.unpack(package.local_path)
     into = (into or safe_mkdtemp())
     try:
         try:

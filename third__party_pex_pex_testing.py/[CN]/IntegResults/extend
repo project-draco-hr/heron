@@ -1,0 +1,1 @@
+namedtuple('results', 'output return_code exception')

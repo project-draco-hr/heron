@@ -1,0 +1,7 @@
+@contextlib.contextmanager
+def temporary_filename():
+    'Creates a temporary filename.\n\n  This is useful when you need to pass a filename to an API. Windows requires all\n  handles to a file be closed before deleting/renaming it, so this makes it a bit\n  simpler.'
+    with named_temporary_file() as fp:
+        fp.write('')
+        fp.close()
+        yield fp.name

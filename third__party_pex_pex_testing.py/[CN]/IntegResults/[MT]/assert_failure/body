@@ -1,0 +1,2 @@
+def assert_failure(self):
+    assert (self.exception or self.return_code)

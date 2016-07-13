@@ -1,2 +1,2 @@
 def copy(self):
-    return PexInfo(info=self._pex_info.copy())
+    return self.from_json(self.dump())

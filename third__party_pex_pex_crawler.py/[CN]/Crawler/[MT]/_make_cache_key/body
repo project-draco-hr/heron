@@ -1,0 +1,2 @@
+def _make_cache_key(self, links, follow_links):
+    return ((follow_links,) + tuple(links))

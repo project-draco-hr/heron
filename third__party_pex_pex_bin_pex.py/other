@@ -30,5 +30,6 @@ CANNOT_DISTILL = 101
 CANNOT_SETUP_INTERPRETER = 102
 INVALID_OPTIONS = 103
 INVALID_ENTRY_POINT = 104
+log = Logger()
 if (__name__ == '__main__'):
     main()

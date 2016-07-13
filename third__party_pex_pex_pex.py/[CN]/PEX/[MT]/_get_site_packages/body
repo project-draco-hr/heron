@@ -1,0 +1,7 @@
+@classmethod
+def _get_site_packages(cls):
+    try:
+        from site import getsitepackages
+        return set(getsitepackages())
+    except ImportError:
+        return set()

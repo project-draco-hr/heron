@@ -1,0 +1,2 @@
+def assert_success(self):
+    assert ((self.exception is None) and (self.return_code is None))

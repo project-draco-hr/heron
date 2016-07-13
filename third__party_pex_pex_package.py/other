@@ -1,5 +1,5 @@
 import os
-from pkg_resources import EGG_NAME, parse_version, safe_name
+from pkg_resources import EGG_NAME, parse_version, safe_name, safe_version
 from .archiver import Archiver
 from .base import maybe_requirement
 from .interpreter import PythonInterpreter

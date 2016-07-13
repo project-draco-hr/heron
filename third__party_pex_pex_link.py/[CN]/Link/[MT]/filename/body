@@ -1,4 +1,4 @@
 @property
 def filename(self):
     'The basename of this url.'
-    return posixpath.basename(self._url.path)
+    return urlparse.unquote(posixpath.basename(self._url.path))

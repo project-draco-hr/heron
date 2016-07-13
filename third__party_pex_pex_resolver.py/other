@@ -3,6 +3,7 @@ import os
 import shutil
 import time
 from collections import namedtuple
+from pkg_resources import safe_name
 from .common import safe_mkdir
 from .fetcher import Fetcher
 from .interpreter import PythonInterpreter

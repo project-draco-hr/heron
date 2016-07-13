@@ -2,8 +2,10 @@
 def _iter_supported_tags(cls, impl, version, platform):
     "Given a set of tags, iterate over supported tags.\n\n    :param impl: Python implementation tag e.g. cp, jy, pp.\n    :param version: E.g. '26', '33'\n    :param platform: Platform as from :function:`pkg_resources.get_supported_platform`,\n    for example 'linux-x86_64' or 'macosx-10.4-x86_64'.\n    :returns: Iterator over (pyver, abi, platform) tuples.\n    "
     abis = []
-    if ((impl == 'cp') and version.startswith('3')):
-        abis.extend([('cp%s' % version), ('cp%sdmu' % version), ('cp%sdm' % version), ('cp%sdu' % version), ('cp%sd' % version), ('cp%smu' % version), ('cp%sm' % version), ('cp%su' % version), 'abi3'])
+    if ((impl == 'cp') and (version.startswith('2') or version.startswith('3'))):
+        abis.extend([('cp%s' % version), ('cp%sdmu' % version), ('cp%sdm' % version), ('cp%sdu' % version), ('cp%sd' % version), ('cp%smu' % version), ('cp%sm' % version), ('cp%su' % version)])
+        if version.startswith('3'):
+            abis.extend(['abi3'])
     major_version = int(version[0])
     minor_versions = []
     for minor in range(int(version[1]), (-1), (-1)):

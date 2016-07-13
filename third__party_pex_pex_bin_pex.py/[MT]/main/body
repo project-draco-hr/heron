@@ -1,12 +1,19 @@
-def main():
+def main(args=None):
+    args = (args or sys.argv[1:])
     (parser, resolver_options_builder) = configure_clp()
-    args = sys.argv[1:]
     try:
         separator = args.index('--')
         (args, cmdline) = (args[:separator], args[(separator + 1):])
     except ValueError:
         (args, cmdline) = (args, [])
     (options, reqs) = parser.parse_args(args=args)
+    if options.pex_root:
+        ENV.set('PEX_ROOT', options.pex_root)
+    else:
+        options.pex_root = ENV.PEX_ROOT
+    if options.cache_dir:
+        options.cache_dir = make_relative_to_root(options.cache_dir)
+    options.interpreter_cache_dir = make_relative_to_root(options.interpreter_cache_dir)
     with ENV.patch(PEX_VERBOSE=str(options.verbosity)):
         with TRACER.timed('Building pex'):
             pex_builder = build_pex(reqs, options, resolver_options_builder)

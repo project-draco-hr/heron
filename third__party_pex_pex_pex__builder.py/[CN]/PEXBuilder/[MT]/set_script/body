@@ -10,4 +10,4 @@ def set_script(self, script):
             raise self.InvalidExecutableSpecification('Cannot set both entry point and script of PEX!')
         self._pex_info.script = script
         return
-    raise self.InvalidExecutableSpecification(('Could not find script %s in PEX!' % script))
+    raise self.InvalidExecutableSpecification(('Could not find script %r in any distribution %s within PEX!' % (script, ', '.join((str(d) for d in self._distributions)))))

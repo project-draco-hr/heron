@@ -9,6 +9,7 @@ from .common import safe_mkdtemp, safe_open
 from .compatibility import PY3, AbstractClass
 from .tracer import TRACER
 from .variables import ENV
+from .version import __version__ as PEX_VERSION
 try:
     import requests
 except ImportError:
