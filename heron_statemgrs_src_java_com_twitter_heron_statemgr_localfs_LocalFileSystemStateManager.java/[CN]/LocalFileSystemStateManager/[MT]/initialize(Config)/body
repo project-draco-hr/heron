@@ -1,7 +1,6 @@
 {
   super.initialize(ipconfig);
-  this.config=ipconfig;
-  boolean isInitLocalFileTree=LocalFileSystemContext.initLocalFileTree(config);
+  boolean isInitLocalFileTree=LocalFileSystemContext.initLocalFileTree(ipconfig);
   if (isInitLocalFileTree && !initTree()) {
     throw new IllegalArgumentException("Failed to initialize Local State manager. " + "Check rootAddress: " + rootAddress);
   }

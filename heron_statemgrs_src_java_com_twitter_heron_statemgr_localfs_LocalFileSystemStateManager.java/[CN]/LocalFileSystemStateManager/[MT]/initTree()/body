@@ -9,8 +9,5 @@
   boolean physicalPlanDir=FileUtils.isDirectoryExists(getPhysicalPlanDir()) || FileUtils.createDirectory(getPhysicalPlanDir());
   boolean executionStateDir=FileUtils.isDirectoryExists(getExecutionStateDir()) || FileUtils.createDirectory(getExecutionStateDir());
   boolean schedulerLocationDir=FileUtils.isDirectoryExists(getSchedulerLocationDir()) || FileUtils.createDirectory(getSchedulerLocationDir());
-  if (topologyDir && tmasterLocationDir && physicalPlanDir&& executionStateDir&& schedulerLocationDir) {
-    return true;
-  }
-  return false;
+  return topologyDir && tmasterLocationDir && physicalPlanDir&& executionStateDir&& schedulerLocationDir;
 }
