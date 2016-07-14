@@ -1,3 +1,0 @@
-{
-  return getData(getTopologyPath(topologyName),TopologyAPI.Topology.newBuilder());
-}

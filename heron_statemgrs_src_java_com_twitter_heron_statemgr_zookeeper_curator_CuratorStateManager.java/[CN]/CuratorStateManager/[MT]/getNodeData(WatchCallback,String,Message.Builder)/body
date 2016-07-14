@@ -18,7 +18,7 @@
     client.getData().usingWatcher(wc).inBackground(cb).forPath(path);
   }
  catch (  Exception e) {
-    future.setException(new RuntimeException("Could not getData",e));
+    future.setException(new RuntimeException("Could not getNodeData",e));
   }
   return future;
 }

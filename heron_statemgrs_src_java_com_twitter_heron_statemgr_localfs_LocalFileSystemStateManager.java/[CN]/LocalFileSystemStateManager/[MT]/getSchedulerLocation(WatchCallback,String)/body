@@ -1,3 +1,0 @@
-{
-  return getData(getSchedulerLocationPath(topologyName),Scheduler.SchedulerLocation.newBuilder());
-}

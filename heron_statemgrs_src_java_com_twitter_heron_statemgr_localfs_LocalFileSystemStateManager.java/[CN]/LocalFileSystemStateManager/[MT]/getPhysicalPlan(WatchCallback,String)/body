@@ -1,3 +1,0 @@
-{
-  return getData(getPhysicalPlanPath(topologyName),PhysicalPlans.PhysicalPlan.newBuilder());
-}

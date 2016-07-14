@@ -10,10 +10,10 @@
   Mockito.doReturn(new Stat()).when(mockExistsBuilder).forPath(correctPath);
   Mockito.doReturn(null).when(mockExistsBuilder).forPath(wrongPath);
   spyStateManager.initialize(config);
-  ListenableFuture<Boolean> result1=spyStateManager.existNode(correctPath);
+  ListenableFuture<Boolean> result1=spyStateManager.nodeExists(correctPath);
   Mockito.verify(mockExistsBuilder).forPath(correctPath);
   Assert.assertTrue(result1.get());
-  ListenableFuture<Boolean> result2=spyStateManager.existNode(wrongPath);
+  ListenableFuture<Boolean> result2=spyStateManager.nodeExists(wrongPath);
   Mockito.verify(mockExistsBuilder).forPath(wrongPath);
   Assert.assertFalse(result2.get());
 }
