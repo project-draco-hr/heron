@@ -4,5 +4,4 @@
   }
   auroraCmd.add("--batch-size");
   auroraCmd.add("" + Integer.MAX_VALUE);
-  return;
 }
