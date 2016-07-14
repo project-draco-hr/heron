@@ -1,0 +1,5 @@
+def test_topo_result_to_table(self):
+    (d, told) = self.sample_topo_result()
+    (tnew, header, rc) = topologies.to_table(d)
+    (told.sort(), tnew.sort())
+    self.assertEqual(told, tnew)

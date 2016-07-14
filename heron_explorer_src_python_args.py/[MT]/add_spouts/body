@@ -1,0 +1,3 @@
+def add_spouts(parser):
+    parser.add_argument('--spout', help='display spout', action='store_true')
+    return parser

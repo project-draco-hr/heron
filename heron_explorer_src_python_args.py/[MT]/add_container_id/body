@@ -1,0 +1,3 @@
+def add_container_id(parser):
+    parser.add_argument('--id', help='container ID', type=int, metavar='ID')
+    return parser

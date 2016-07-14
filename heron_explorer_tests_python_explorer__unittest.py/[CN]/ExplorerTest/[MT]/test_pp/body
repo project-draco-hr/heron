@@ -1,0 +1,5 @@
+def test_pp(self):
+    (good, bad) = self.sample_pp_cls()
+    for cl in good:
+        self.assertEqual(0, main.main(cl))
+    self.assertEqual(1, main.main(bad))

@@ -1,0 +1,11 @@
+def run(command, parser, cl_args, unknown_args):
+    location = cl_args['cluster/[role]/[env]'].split('/')
+    if (len(location) == 1):
+        return show_cluster(*location)
+    elif (len(location) == 2):
+        return show_cluster_role(*location)
+    elif (len(location) == 3):
+        return show_cluster_role_env(*location)
+    else:
+        Log.error('Invalid topologies selection')
+        return False

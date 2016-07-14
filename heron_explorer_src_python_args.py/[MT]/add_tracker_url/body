@@ -1,0 +1,3 @@
+def add_tracker_url(parser):
+    parser.add_argument('--tracker_url', metavar=(('(tracker url; default: "' + DEFAULT_TRACKER_URL) + '")'), type=str, default=DEFAULT_TRACKER_URL)
+    return parser

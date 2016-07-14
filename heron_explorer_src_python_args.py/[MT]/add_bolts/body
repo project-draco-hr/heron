@@ -1,0 +1,3 @@
+def add_bolts(parser):
+    parser.add_argument('--bolt', help='display bolt', action='store_true')
+    return parser

@@ -1,0 +1,18 @@
+def sample_topo_result(self):
+    info = []
+    info.append(['a1', 'a2', 'a3'])
+    info.append(['a1', 'a3', 'a5'])
+    info.append(['a1', 'a3', 'a6'])
+    info.append(['a2', 'a3', 'a6'])
+    info.append(['b1', 'b2', 'b3'])
+    info.append(['c1', 'c2', 'c3'])
+    d = {}
+    for row in info:
+        tmp = d
+        if (row[0] not in tmp):
+            tmp[row[0]] = {}
+        tmp = tmp[row[0]]
+        if (row[1] not in tmp):
+            tmp[row[1]] = []
+        tmp[row[1]].append(row[2])
+    return (d, info)

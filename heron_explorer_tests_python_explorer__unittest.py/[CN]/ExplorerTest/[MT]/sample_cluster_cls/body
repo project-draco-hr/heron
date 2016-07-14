@@ -1,0 +1,5 @@
+def sample_cluster_cls(self):
+    cl = ['clusters']
+    good_cls = []
+    self.acc_with_optional_args(cl, good_cls)
+    return good_cls

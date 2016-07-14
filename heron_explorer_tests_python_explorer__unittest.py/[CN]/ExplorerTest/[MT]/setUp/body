@@ -1,0 +1,19 @@
+def setUp(self):
+    base_path = os.path.dirname(os.path.realpath(__file__))
+    info_path = os.path.join(base_path, 'info.json')
+    lp_path = os.path.join(base_path, 'logicalplan.json')
+    topo_path = os.path.join(base_path, 'topologies.json')
+    metrics_path = os.path.join(base_path, 'metrics.json')
+    with open(info_path) as f:
+        utils.get_topology_info = Mock(return_value=json.load(f))
+    with open(lp_path) as f:
+        utils.get_logical_plan = Mock(return_value=json.load(f))
+    with open(topo_path) as f:
+        j = json.load(f)
+        utils.get_cluster_topologies = Mock(return_value=j)
+        utils.get_cluster_role_topologies = Mock(return_value=j)
+        utils.get_cluster_role_env_topologies = Mock(return_value=j)
+    with open(metrics_path) as f:
+        utils.get_topology_metrics = Mock(return_value=json.load(f))
+    clusters = ['nyc', 'london', 'tokyo']
+    utils.get_clusters = Mock(return_value=clusters)

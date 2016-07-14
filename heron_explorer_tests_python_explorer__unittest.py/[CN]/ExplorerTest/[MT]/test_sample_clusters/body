@@ -1,0 +1,4 @@
+def test_sample_clusters(self):
+    good = self.sample_cluster_cls()
+    for cl in good:
+        self.assertEqual(0, main.main(cl))

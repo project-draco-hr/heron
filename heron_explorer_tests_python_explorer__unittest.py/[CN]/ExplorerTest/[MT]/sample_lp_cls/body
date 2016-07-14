@@ -1,0 +1,9 @@
+def sample_lp_cls(self):
+    clco = ['components', 'local/rli/default', 'ExclamationTopology']
+    clsp = ['components', 'local/rli/default', 'ExclamationTopology', '--spout']
+    clbo = ['components', 'local/rli/default', 'ExclamationTopology', '--bolt']
+    good_cls = []
+    for cl in (clsp, clbo, clco):
+        self.acc_with_optional_args(cl, good_cls)
+    bad_cl1 = ['spouts', 'local/rli/defult', 'ExclamationTopology']
+    return (good_cls, bad_cl1)

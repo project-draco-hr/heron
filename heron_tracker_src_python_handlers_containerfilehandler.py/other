@@ -1,5 +1,4 @@
 import json
-import os
 import tornado.gen
 import traceback
 from heron.tracker.src.python.handlers import BaseHandler

@@ -1,0 +1,7 @@
+def get_component_metrics(component, cluster, env, topology, role):
+    all_queries = metric_queries()
+    try:
+        result = get_topology_metrics(cluster, env, topology, component, [], all_queries, [0, (-1)], role)
+        return result['metrics']
+    except:
+        raise

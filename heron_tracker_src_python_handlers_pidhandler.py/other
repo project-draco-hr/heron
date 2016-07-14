@@ -2,7 +2,6 @@ import logging
 import tornado.gen
 import tornado.web
 import traceback
-from heron.tracker.src.python import constants
 from heron.tracker.src.python import utils
 from heron.tracker.src.python.handlers import BaseHandler
 LOG = logging.getLogger(__name__)

@@ -1,0 +1,6 @@
+def test_help(self):
+    all_cl = []
+    for sub in ['clusters', 'topologies', 'metrics', 'components', 'containers', 'help']:
+        all_cl.append(['help', sub])
+    for cl in all_cl:
+        self.assertEqual(0, main.main(cl))

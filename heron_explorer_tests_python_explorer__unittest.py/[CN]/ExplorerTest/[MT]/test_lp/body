@@ -1,0 +1,4 @@
+def test_lp(self):
+    (good, bad) = self.sample_lp_cls()
+    for cl in good:
+        self.assertEqual(0, main.main(cl))

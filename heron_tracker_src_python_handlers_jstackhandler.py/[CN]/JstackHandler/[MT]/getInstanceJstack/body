@@ -4,7 +4,6 @@ def getInstanceJstack(self, topology_info, instance_id):
     pid_response = yield getInstancePid(topology_info, instance_id)
     try:
         http_client = tornado.httpclient.AsyncHTTPClient()
-        component_id = instance_id.split('_')[1]
         pid_json = json.loads(pid_response)
         pid = pid_json['stdout'].strip()
         if (pid == ''):

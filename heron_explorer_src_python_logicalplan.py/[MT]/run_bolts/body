@@ -1,0 +1,2 @@
+def run_bolts(command, parser, cl_args, unknown_args):
+    return run(cl_args, 'bolts')

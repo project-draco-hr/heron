@@ -1,0 +1,5 @@
+def set_verbose(cl_args):
+    if cl_args['verbose']:
+        Log.setLevel(logging.INFO)
+    else:
+        Log.setLevel(logging.WARNING)

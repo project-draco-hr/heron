@@ -1,0 +1,8 @@
+def get_topology_metrics(*args):
+    instance = tornado.ioloop.IOLoop.instance()
+    try:
+        return instance.run_sync((lambda : API.get_comp_metrics(*args)))
+    except Exception as ex:
+        Log.error(str(ex))
+        Log.error(("Failed to retrive metrics of component '%s'" % args[3]))
+        raise

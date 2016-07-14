@@ -1,0 +1,8 @@
+def get_logical_plan(cluster, env, topology, role):
+    instance = tornado.ioloop.IOLoop.instance()
+    try:
+        return instance.run_sync((lambda : API.get_logical_plan(cluster, env, topology, role)))
+    except Exception as ex:
+        Log.error(('Error: %s' % str(ex)))
+        Log.error(("Failed to retrive logical plan info of topology '%s'" % '/'.join([cluster, role, env, topology])))
+        raise

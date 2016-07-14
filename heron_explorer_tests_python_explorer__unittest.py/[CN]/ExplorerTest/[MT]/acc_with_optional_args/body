@@ -1,0 +1,6 @@
+def acc_with_optional_args(self, cl, acc):
+    clv = (cl + ['--verbose'])
+    clt = (cl + ['--tracker-url="http://a.com"'])
+    cltv = (clv + ['--tracker-url="http://a.com"'])
+    for cl in (clv, clt, cltv):
+        acc.append(args.insert_bool_values(cl))

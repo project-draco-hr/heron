@@ -1,0 +1,8 @@
+def sample_topo_cls(self):
+    clt1 = ['topologies', 'local']
+    clt2 = ['topologies', 'local/foo']
+    clt3 = ['topologies', 'local/foo/bar']
+    all_cl = []
+    for cl in (clt1, clt2, clt3):
+        self.acc_with_optional_args(cl, all_cl)
+    return all_cl

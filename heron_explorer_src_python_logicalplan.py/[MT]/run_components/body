@@ -1,0 +1,2 @@
+def run_components(command, parser, cl_args, unknown_args):
+    return run(cl_args, 'all')

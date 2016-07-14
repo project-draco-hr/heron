@@ -1,0 +1,3 @@
+def metric_queries():
+    qs = _all_metric_queries()
+    return (qs[0] + qs[2])

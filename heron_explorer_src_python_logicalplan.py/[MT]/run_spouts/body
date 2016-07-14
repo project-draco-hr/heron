@@ -1,0 +1,2 @@
+def run_spouts(command, parser, cl_args, unknown_args):
+    return run(cl_args, 'spouts')

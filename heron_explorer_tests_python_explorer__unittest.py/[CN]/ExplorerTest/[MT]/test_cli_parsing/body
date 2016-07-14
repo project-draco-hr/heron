@@ -1,0 +1,6 @@
+def test_cli_parsing(self):
+    parser = main.create_parser()
+    clis = self.sample_cli()
+    for cli in clis:
+        (known_args, unknown_args) = parser.parse_known_args(cli)
+        self.assertTrue((unknown_args is not None))

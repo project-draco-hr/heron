@@ -1,0 +1,10 @@
+def parse_topo_loc(cl_args):
+    try:
+        topo_loc = cl_args['cluster/[role]/[env]'].split('/')
+        topo_loc.append(cl_args['topology-name'])
+        if (len(topo_loc) != 4):
+            raise
+        return topo_loc
+    except Exception:
+        Log.error('Error: invalid topology location')
+        raise

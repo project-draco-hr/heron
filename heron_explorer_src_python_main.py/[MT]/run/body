@@ -1,0 +1,20 @@
+def run(command, *args):
+    if (command == 'clusters'):
+        return clusters.run(command, *args)
+    elif (command == 'topologies'):
+        return topologies.run(command, *args)
+    elif (command == 'containers'):
+        return physicalplan.run_containers(command, *args)
+    elif (command == 'metrics'):
+        return physicalplan.run_metrics(command, *args)
+    elif (command == 'components'):
+        return logicalplan.run_components(command, *args)
+    elif (command == 'spouts'):
+        return logicalplan.run_spouts(command, *args)
+    elif (command == 'bolts'):
+        return logicalplan.run_bolts(command, *args)
+    elif (command == 'help'):
+        return help.run(command, *args)
+    elif (command == 'version'):
+        return version.run(command, *args)
+    return 1

@@ -1,0 +1,12 @@
+def run(command, parser, args, unknown_args):
+    command_help = args['help-command']
+    if (command_help == 'help'):
+        parser.print_help()
+        return True
+    subparser = utils.get_subparser(parser, command_help)
+    if subparser:
+        print subparser.format_help()
+        return True
+    else:
+        Log.error(("Unknown subcommand '%s'" % command_help))
+        return False

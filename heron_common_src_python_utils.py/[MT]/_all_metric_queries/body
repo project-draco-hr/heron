@@ -1,0 +1,6 @@
+def _all_metric_queries():
+    queries_normal = ['complete-latency', 'execute-latency', 'process-latency', 'jvm-uptime-secs', 'jvm-process-cpu-load', 'jvm-memory-used-mb']
+    queries = [('__%s' % m) for m in queries_normal]
+    count_queries_normal = ['emit-count', 'execute-count', 'ack-count', 'fail-count']
+    count_queries = [('__%s/default' % m) for m in count_queries_normal]
+    return (queries, queries_normal, count_queries, count_queries_normal)

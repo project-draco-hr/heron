@@ -1,0 +1,31 @@
+def run_metrics(command, parser, cl_args, unknown_args):
+    (cluster, role, env) = (cl_args['cluster'], cl_args['role'], cl_args['environ'])
+    topology = cl_args['topology-name']
+    try:
+        result = utils.get_topology_info(cluster, env, topology, role)
+        spouts = result['physical_plan']['spouts'].keys()
+        bolts = result['physical_plan']['bolts'].keys()
+        components = (spouts + bolts)
+        cname = cl_args['component']
+        if cname:
+            if (cname in components):
+                components = [cname]
+            else:
+                Log.error(("Unknown component: '%s'" % cname))
+                raise
+    except Exception:
+        return False
+    cresult = []
+    for comp in components:
+        try:
+            metrics = utils.get_component_metrics(comp, cluster, env, topology, role)
+            (stat, header) = to_table(metrics)
+            cresult.append((comp, stat, header))
+        except:
+            return False
+    for (i, (comp, stat, header)) in enumerate(cresult):
+        if (i != 0):
+            print ''
+        print ("'%s' metrics:" % comp)
+        print tabulate(stat, headers=header)
+    return True

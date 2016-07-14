@@ -1,0 +1,16 @@
+def sample_cli(self):
+    clt1 = ['topologies', 'local']
+    clt2 = ['topologies', 'local/foo']
+    clt3 = ['topologies', 'local/foo/bar']
+    clb2 = ['metrics', 'local/foo/bar', 'topo']
+    clc1 = ['components', 'local/foo/bar', 'topo']
+    clc1 = ['components', 'local/foo/bar', 'topo', '--spout']
+    clc1 = ['components', 'local/foo/bar', 'topo', '--bolt']
+    clc2 = ['containers', 'local/foo/bar', 'topo']
+    cll = [clt1, clt2, clt3, clb2, clc1, clc2]
+    all_cl = []
+    for cl in cll:
+        self.acc_with_optional_args(cl, all_cl)
+    for sub in ['clusters', 'topologies', 'metrics', 'components', 'containers', 'help']:
+        all_cl.append(['help', sub])
+    return all_cl

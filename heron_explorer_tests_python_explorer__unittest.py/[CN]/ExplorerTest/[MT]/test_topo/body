@@ -1,0 +1,3 @@
+def test_topo(self):
+    for cl in self.sample_topo_cls():
+        self.assertEqual(0, main.main(cl))
