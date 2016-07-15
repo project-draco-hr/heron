@@ -1,9 +1,9 @@
 ' topology.py '
 import random
+from datetime import datetime
 import tornado.escape
 import tornado.web
 import tornado.gen
-from datetime import datetime
 import heron.common.src.python.handler.access as access
 import base
 import common

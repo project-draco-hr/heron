@@ -1,4 +1,4 @@
-def main(argv):
+def main():
     '\n  :param argv:\n  :return:\n  '
     log.configure(log.logging.DEBUG)
     tornado.log.enable_pretty_logging()
