@@ -1,5 +1,0 @@
-def normalized_class_path(x_val):
-    '\n  :param x_val:\n  :return:\n  '
-    if (sys.platform == 'cygwin'):
-        return cygpath(x_val)
-    return identity(x_val)

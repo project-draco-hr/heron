@@ -1,3 +1,0 @@
-def get_heron_cluster_conf_dir(cluster, default_config_path):
-    '\n  This will provide heron cluster config directory, if config path is default\n  :return: absolute path of heron cluster conf directory\n  '
-    return os.path.join(default_config_path, cluster)

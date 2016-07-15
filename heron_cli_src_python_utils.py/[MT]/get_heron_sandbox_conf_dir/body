@@ -1,3 +1,0 @@
-def get_heron_sandbox_conf_dir():
-    '\n  This will provide heron conf directory in the sandbox\n  :return: relative path of heron sandbox conf directory\n  '
-    return SANDBOX_CONF_DIR

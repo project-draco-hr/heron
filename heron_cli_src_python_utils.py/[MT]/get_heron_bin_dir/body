@@ -1,4 +1,0 @@
-def get_heron_bin_dir():
-    '\n  This will provide heron bin directory from .pex file.\n  :return: absolute path of heron lib directory\n  '
-    bin_path = os.path.join(get_heron_dir(), BIN_DIR)
-    return bin_path

@@ -1,3 +1,0 @@
-def get_classpath(jars):
-    '\n  Get the normalized class path of all jars\n  :param jars:\n  :return:\n  '
-    return ':'.join([normalized_class_path(jar) for jar in jars])
