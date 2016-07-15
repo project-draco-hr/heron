@@ -1,3 +1,4 @@
 def add_component_name(parser):
+    ' add optional argument that specifies component name '
     parser.add_argument('--component', help='Component name', metavar='COMP', type=str)
     return parser

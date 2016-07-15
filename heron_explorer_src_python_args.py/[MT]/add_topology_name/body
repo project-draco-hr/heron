@@ -1,3 +1,4 @@
 def add_topology_name(parser):
+    ' add argument that specifies topology name '
     parser.add_argument('topology-name', help='Topology name')
     return parser

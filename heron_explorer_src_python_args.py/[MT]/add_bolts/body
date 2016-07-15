@@ -1,3 +1,4 @@
 def add_bolts(parser):
+    ' add optional argument that displays bolts only '
     parser.add_argument('--bolt', help='display bolt', action='store_true')
     return parser

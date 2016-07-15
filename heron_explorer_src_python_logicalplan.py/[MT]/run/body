@@ -1,4 +1,5 @@
 def run(cl_args, compo_type):
+    ' run command '
     (cluster, role, env) = (cl_args['cluster'], cl_args['role'], cl_args['environ'])
     topology = cl_args['topology-name']
     (spouts_only, bolts_only) = (cl_args['spout'], cl_args['bolt'])

@@ -1,3 +1,4 @@
 def add_cluster_role_env(parser):
+    ' add argument that specifies topologies location '
     parser.add_argument('cluster/[role]/[env]', help='Topologies location', type=str, metavar='CLUSTER/[ROLE]/[ENV]')
     return parser

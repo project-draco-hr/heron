@@ -1,4 +1,5 @@
 def insert_bool(param, command_args):
+    ' insert boolean '
     index = 0
     found = False
     for lelem in command_args:

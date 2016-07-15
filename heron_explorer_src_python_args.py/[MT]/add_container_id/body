@@ -1,3 +1,4 @@
 def add_container_id(parser):
+    ' add optional argument that specifies container id '
     parser.add_argument('--id', help='container ID', type=int, metavar='ID')
     return parser

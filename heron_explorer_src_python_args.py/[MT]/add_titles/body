@@ -1,4 +1,5 @@
 def add_titles(parser):
+    ' add titles '
     parser._positionals.title = 'Required arguments'
     parser._optionals.title = 'Optional arguments'
     return parser

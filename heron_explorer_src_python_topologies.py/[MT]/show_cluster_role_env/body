@@ -1,4 +1,5 @@
 def show_cluster_role_env(cluster, role, env):
+    ' print topologies information to stdout '
     try:
         result = utils.get_cluster_role_env_topologies(cluster, role, env)
         if (not result):

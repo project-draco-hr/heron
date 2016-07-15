@@ -1,4 +1,5 @@
 def run_metrics(command, parser, cl_args, unknown_args):
+    ' run metrics subcommand '
     (cluster, role, env) = (cl_args['cluster'], cl_args['role'], cl_args['environ'])
     topology = cl_args['topology-name']
     try:

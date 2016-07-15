@@ -1,4 +1,5 @@
 def to_table(result):
+    ' normalize raw result to table '
     max_count = 20
     (table, count) = ([], 0)
     for (role, envs_topos) in result.iteritems():

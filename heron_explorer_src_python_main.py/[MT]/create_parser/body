@@ -1,4 +1,5 @@
 def create_parser():
+    ' create parser '
     help_epilog = 'Getting more help:\n  heron-explorer help <command>     Disply help and options for <command>\n\n  For detailed documentation, go to http://heronstreaming.io'
     parser = argparse.ArgumentParser(prog='heron-explorer', epilog=help_epilog, formatter_class=SubcommandHelpFormatter, add_help=False)
     subparsers = parser.add_subparsers(title='Available commands', metavar='<command> <options>')

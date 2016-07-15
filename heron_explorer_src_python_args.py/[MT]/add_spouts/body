@@ -1,3 +1,4 @@
 def add_spouts(parser):
+    ' add optional argument that displays spout only '
     parser.add_argument('--spout', help='display spout', action='store_true')
     return parser

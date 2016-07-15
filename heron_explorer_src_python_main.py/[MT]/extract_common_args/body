@@ -1,4 +1,5 @@
 def extract_common_args(command, parser, cl_args):
+    ' extract common args '
     try:
         cluster_role_env = cl_args['cluster/[role]/[env]']
         config_path = cl_args['config_path']

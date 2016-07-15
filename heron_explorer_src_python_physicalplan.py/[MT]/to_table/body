@@ -1,4 +1,5 @@
 def to_table(metrics):
+    ' normalize raw metrics API result to table '
     all_queries = utils.metric_queries()
     m = utils.queries_map()
     names = metrics.values()[0].keys()

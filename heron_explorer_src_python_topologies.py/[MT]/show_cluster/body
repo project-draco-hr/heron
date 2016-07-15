@@ -1,4 +1,5 @@
 def show_cluster(cluster):
+    ' print topologies information to stdout '
     try:
         result = utils.get_cluster_topologies(cluster)
         if (not result):

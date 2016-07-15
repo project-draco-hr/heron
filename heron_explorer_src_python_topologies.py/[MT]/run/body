@@ -1,4 +1,5 @@
 def run(command, parser, cl_args, unknown_args):
+    ' run command '
     location = cl_args['cluster/[role]/[env]'].split('/')
     if (len(location) == 1):
         return show_cluster(*location)

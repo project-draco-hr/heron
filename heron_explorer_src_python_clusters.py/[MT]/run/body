@@ -1,4 +1,5 @@
 def run(command, parser, cl_args, unknown_args):
+    ' run command '
     clusters = utils.get_clusters()
     print 'Available clusters:'
     for cluster in clusters:

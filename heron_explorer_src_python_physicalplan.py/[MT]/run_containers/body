@@ -1,13 +1,14 @@
 def run_containers(command, parser, cl_args, unknown_args):
+    ' run containers subcommand '
     (cluster, role, env) = (cl_args['cluster'], cl_args['role'], cl_args['environ'])
     topology = cl_args['topology-name']
     container_id = cl_args['id']
     result = utils.get_topology_info(cluster, env, topology, role)
     containers = result['physical_plan']['stmgrs']
     (all_bolts, all_spouts) = (set(), set())
-    for (container, bolts) in result['physical_plan']['bolts'].items():
+    for (_, bolts) in result['physical_plan']['bolts'].items():
         all_bolts = (all_bolts | set(bolts))
-    for (container, spouts) in result['physical_plan']['spouts'].items():
+    for (_, spouts) in result['physical_plan']['spouts'].items():
         all_spouts = (all_spouts | set(spouts))
     stmgrs = containers.keys()
     stmgrs.sort()
@@ -21,8 +22,8 @@ def run_containers(command, parser, cl_args, unknown_args):
             Log.error(('Invalid container id: %d' % container_id))
             return False
     table = []
-    for (id, name) in enumerate(stmgrs):
-        cid = (id + 1)
+    for (sid, name) in enumerate(stmgrs):
+        cid = (sid + 1)
         host = containers[name]['host']
         port = containers[name]['port']
         pid = containers[name]['pid']

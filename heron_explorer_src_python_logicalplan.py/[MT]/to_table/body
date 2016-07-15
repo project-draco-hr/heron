@@ -1,4 +1,5 @@
 def to_table(components, topo_info):
+    ' normalize raw logical plan info to table '
     (inputs, outputs) = (defaultdict(list), defaultdict(list))
     for (ctype, component) in components.iteritems():
         if (ctype == 'bolts'):
