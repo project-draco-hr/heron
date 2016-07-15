@@ -1,5 +1,6 @@
 @tornado.web.asynchronous
 def get(self, pid):
+    ' get method '
     str_cmd(['rm', '-rf', '/tmp/heap.bin'])
     body = str_cmd(['jmap', '-dump:format=b,file=/tmp/heap.bin', pid])
     str_cmd(['chmod', '+r', '/tmp/heap.bin'])

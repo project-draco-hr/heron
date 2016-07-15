@@ -1,5 +1,6 @@
 @tornado.web.asynchronous
 def get(self, path):
+    ' get method '
     if (path is None):
         return {}
     if path.startswith('/'):

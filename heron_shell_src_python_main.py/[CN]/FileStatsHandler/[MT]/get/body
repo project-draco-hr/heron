@@ -1,7 +1,7 @@
 @tornado.web.asynchronous
 def get(self, path):
+    ' get method '
     path = tornado.escape.url_unescape(path)
-    logger = logging.getLogger(__file__)
     if (not path):
         path = '.'
     if (path.startswith('/') or ('..' in path)):

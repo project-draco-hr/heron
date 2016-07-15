@@ -1,2 +1,3 @@
 def get_container_id(instance_id):
+    ' get container id '
     return instance_id.split('_')[1]

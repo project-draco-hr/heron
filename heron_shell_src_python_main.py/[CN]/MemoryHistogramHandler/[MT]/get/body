@@ -1,5 +1,6 @@
 @tornado.web.asynchronous
 def get(self, pid):
+    ' get method '
     body = str_cmd(['jmap', '-histo', pid])
     self.content_type = 'application/json'
     self.write(json.dumps(body))

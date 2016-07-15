@@ -1,5 +1,6 @@
 @tornado.web.asynchronous
 def get(self, path):
+    ' get method '
     t = Template(get_asset('file.html'))
     if (path is None):
         self.set_status(404)

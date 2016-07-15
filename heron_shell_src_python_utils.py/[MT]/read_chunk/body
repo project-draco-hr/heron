@@ -11,7 +11,7 @@ def read_chunk(filename, offset=None, length=None):
         return {}
     try:
         fstat = os.stat(filename)
-    except Exception as e:
+    except Exception:
         return {}
     if (offset == (-1)):
         offset = fstat.st_size
@@ -21,7 +21,7 @@ def read_chunk(filename, offset=None, length=None):
         fp.seek(offset)
         try:
             data = fp.read(length)
-        except IOError as e:
+        except IOError:
             return {}
     if data:
         return dict(offset=offset, length=len(data), data=escape(data.decode('utf8', 'replace')))

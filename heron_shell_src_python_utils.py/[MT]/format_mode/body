@@ -6,6 +6,7 @@ def format_mode(sres):
     user = (mode & 7)
 
     def stat_type(md):
+        ' stat type'
         if stat.S_ISDIR(md):
             return 'd'
         elif stat.S_ISSOCK(md):
@@ -14,5 +15,6 @@ def format_mode(sres):
             return '-'
 
     def triple(md):
+        ' triple '
         return ('%c%c%c' % (('r' if (md & 4) else '-'), ('w' if (md & 2) else '-'), ('x' if (md & 1) else '-')))
     return ''.join([stat_type(mode), triple(root), triple(group), triple(user)])
