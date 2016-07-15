@@ -6,6 +6,7 @@ def _get_pplan_with_watch(self, topologyName, callback, isWatching):
 
     @self.client.DataWatch(path)
     def watch_pplan(data, stats):
+        ' invoke callback to watch physical plan '
         if data:
             pplan = PhysicalPlan()
             pplan.ParseFromString(data)

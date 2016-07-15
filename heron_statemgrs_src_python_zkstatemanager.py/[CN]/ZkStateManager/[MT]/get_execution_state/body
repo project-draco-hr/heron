@@ -1,4 +1,5 @@
 def get_execution_state(self, topologyName, callback=None):
+    ' get execution state '
     isWatching = False
     ret = {'result': None, }
     if callback:
@@ -6,6 +7,7 @@ def get_execution_state(self, topologyName, callback=None):
     else:
 
         def callback(data):
+            '\n        Custom callback to get the topologies right now.\n        '
             ret['result'] = data
     self._get_execution_state_with_watch(topologyName, callback, isWatching)
     return ret['result']

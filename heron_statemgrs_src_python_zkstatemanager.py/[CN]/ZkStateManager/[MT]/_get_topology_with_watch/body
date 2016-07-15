@@ -6,6 +6,7 @@ def _get_topology_with_watch(self, topologyName, callback, isWatching):
 
     @self.client.DataWatch(path)
     def watch_topology(data, stats):
+        ' watch topology '
         if data:
             topology = Topology()
             topology.ParseFromString(data)

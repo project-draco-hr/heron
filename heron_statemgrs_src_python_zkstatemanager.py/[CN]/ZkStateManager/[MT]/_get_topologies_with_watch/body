@@ -6,5 +6,6 @@ def _get_topologies_with_watch(self, callback, isWatching):
 
     @self.client.ChildrenWatch(path)
     def watch_topologies(topologies):
+        ' callback to watch topologies '
         callback(topologies)
         return isWatching

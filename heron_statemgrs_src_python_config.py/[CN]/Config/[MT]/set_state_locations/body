@@ -1,3 +1,4 @@
 def set_state_locations(self, state_locations):
+    ' set state locations '
     self.locations = state_locations
     self.validate_state_locations()

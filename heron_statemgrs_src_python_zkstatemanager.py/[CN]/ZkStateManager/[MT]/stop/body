@@ -1,3 +1,4 @@
 def stop(self):
+    ' stop Zookeeper '
     self.client.stop()
     self.terminate_ssh_tunnel()

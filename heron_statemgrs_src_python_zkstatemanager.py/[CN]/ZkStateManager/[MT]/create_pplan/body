@@ -1,4 +1,5 @@
 def create_pplan(self, topologyName, pplan):
+    ' create physical plan '
     if ((not pplan) or (not pplan.IsInitialized())):
         raise StateException('Physical Plan protobuf not init properly', StateException.EX_TYPE_PROTOBUF_ERROR), None, sys.exc_info()[2]
     path = self.get_pplan_path(topologyName)
@@ -7,11 +8,11 @@ def create_pplan(self, topologyName, pplan):
     try:
         self.client.create(path, value=pplanString, makepath=True)
         return True
-    except NoNodeError as e:
+    except NoNodeError:
         raise StateException('NoNodeError while creating pplan', StateException.EX_TYPE_NO_NODE_ERROR), None, sys.exc_info()[2]
-    except NodeExistsError as e:
+    except NodeExistsError:
         raise StateException('NodeExistsError while creating pplan', StateException.EX_TYPE_NODE_EXISTS_ERROR), None, sys.exc_info()[2]
-    except ZookeeperError as e:
+    except ZookeeperError:
         raise StateException('Zookeeper while creating pplan', StateException.EX_TYPE_ZOOKEEPER_ERROR), None, sys.exc_info()[2]
-    except Exception as e:
+    except Exception:
         raise

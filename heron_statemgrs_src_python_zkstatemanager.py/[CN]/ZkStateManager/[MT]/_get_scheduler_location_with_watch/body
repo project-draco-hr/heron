@@ -6,6 +6,7 @@ def _get_scheduler_location_with_watch(self, topologyName, callback, isWatching)
 
     @self.client.DataWatch(path)
     def watch_scheduler_location(data, stats):
+        ' invoke callback to watch scheduler location '
         if data:
             scheduler_location = SchedulerLocation()
             scheduler_location.ParseFromString(data)

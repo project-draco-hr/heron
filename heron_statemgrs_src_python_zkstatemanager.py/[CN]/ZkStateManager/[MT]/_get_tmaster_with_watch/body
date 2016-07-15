@@ -6,6 +6,7 @@ def _get_tmaster_with_watch(self, topologyName, callback, isWatching):
 
     @self.client.DataWatch(path)
     def watch_tmaster(data, stats):
+        ' invoke callback to watch tmaster '
         if data:
             tmaster = TMasterLocation()
             tmaster.ParseFromString(data)

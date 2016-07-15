@@ -1,4 +1,5 @@
 def get_pplan(self, topologyName, callback=None):
+    '\n    Get physical plan of a topology\n    '
     if callback:
         self.pplan_watchers[topologyName].append(callback)
     else:

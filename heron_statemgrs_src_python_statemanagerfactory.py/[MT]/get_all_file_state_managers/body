@@ -9,7 +9,7 @@ def get_all_file_state_managers(conf):
         state_manager = FileStateManager(name, rootpath)
         try:
             state_manager.start()
-        except Exception as e:
+        except Exception:
             LOG.error('Exception while connecting to state_manager.')
             traceback.print_exc()
         state_managers.append(state_manager)

@@ -1,14 +1,15 @@
 def delete_pplan(self, topologyName):
+    ' delete physical plan info '
     path = self.get_pplan_path(topologyName)
     LOG.info('Removing topology: {0} from path: {1}'.format(topologyName, path))
     try:
         self.client.delete(path)
         return True
-    except NoNodeError as e:
+    except NoNodeError:
         raise StateException('NoNodeError while deleting pplan', StateException.EX_TYPE_NO_NODE_ERROR), None, sys.exc_info()[2]
-    except NotEmptyError as e:
+    except NotEmptyError:
         raise StateException('NotEmptyError while deleting pplan', StateException.EX_TYPE_NOT_EMPTY_ERROR), None, sys.exc_info()[2]
-    except ZookeeperError as e:
+    except ZookeeperError:
         raise StateException('Zookeeper while deleting pplan', StateException.EX_TYPE_ZOOKEEPER_ERROR), None, sys.exc_info()[2]
-    except Exception as e:
+    except Exception:
         raise

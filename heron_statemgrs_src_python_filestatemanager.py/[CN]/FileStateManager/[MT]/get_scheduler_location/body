@@ -1,4 +1,5 @@
 def get_scheduler_location(self, topologyName, callback=None):
+    '\n    Get scheduler location\n    '
     if callback:
         self.scheduler_location_watchers[topologyName].append(callback)
     else:

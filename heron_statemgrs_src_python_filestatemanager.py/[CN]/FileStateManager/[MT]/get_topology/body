@@ -1,4 +1,5 @@
 def get_topology(self, topologyName, callback=None):
+    'get topology'
     if callback:
         self.topology_watchers[topologyName].append(callback)
     else:

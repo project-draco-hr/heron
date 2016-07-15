@@ -6,6 +6,7 @@ def _get_execution_state_with_watch(self, topologyName, callback, isWatching):
 
     @self.client.DataWatch(path)
     def watch_execution_state(data, stats):
+        ' invoke callback to watch execute state '
         if data:
             executionState = ExecutionState()
             executionState.ParseFromString(data)
