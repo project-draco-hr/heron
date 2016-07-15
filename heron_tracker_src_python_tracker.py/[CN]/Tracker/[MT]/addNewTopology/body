@@ -1,29 +1,33 @@
 def addNewTopology(self, state_manager, topologyName):
     '\n    Adds a topology in the local cache, and sets a watch\n    on any changes on the topology.\n    '
     topology = Topology(topologyName, state_manager.name)
-    LOG.info('Adding new topology: {0}, state_manager: {1}'.format(topologyName, state_manager.name))
+    LOG.info('Adding new topology: %s, state_manager: %s', topologyName, state_manager.name)
     self.topologies.append(topology)
     topology.register_watch(self.setTopologyInfo)
 
     def on_topology_pplan(data):
+        'watch physical plan'
         LOG.info(('Watch triggered for topology pplan: ' + topologyName))
         topology.set_physical_plan(data)
         if (not data):
             LOG.debug('No data to be set')
 
     def on_topology_execution_state(data):
+        'watch execution state'
         LOG.info(('Watch triggered for topology execution state: ' + topologyName))
         topology.set_execution_state(data)
         if (not data):
             LOG.debug('No data to be set')
 
     def on_topology_tmaster(data):
+        'set tmaster'
         LOG.info(('Watch triggered for topology tmaster: ' + topologyName))
         topology.set_tmaster(data)
         if (not data):
             LOG.debug('No data to be set')
 
     def on_topology_scheduler_location(data):
+        'set scheduler location'
         LOG.info(('Watch triggered for topology scheduler location: ' + topologyName))
         topology.set_scheduler_location(data)
         if (not data):

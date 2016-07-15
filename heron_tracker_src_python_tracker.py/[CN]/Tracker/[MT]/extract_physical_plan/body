@@ -7,7 +7,6 @@ def extract_physical_plan(self, topology):
     bolts = topology.bolts()
     stmgrs = None
     instances = None
-    configs = {}
     stmgrs = list(topology.physical_plan.stmgrs)
     instances = list(topology.physical_plan.instances)
     if topology.physical_plan.topology.topology_config:
@@ -18,7 +17,7 @@ def extract_physical_plan(self, topology):
                 try:
                     pobj = javaobj.loads(kvs.java_serialized_value)
                     physicalPlan['config'][kvs.key] = {'value': json.dumps(pobj, default=(lambda custom_field: custom_field.__dict__), sort_keys=True, indent=2), 'raw': utils.hex_escape(kvs.java_serialized_value), }
-                except Exception as e:
+                except Exception:
                     physicalPlan['config'][kvs.key] = {'value': 'A Java Object', 'raw': utils.hex_escape(kvs.java_serialized_value), }
     for spout in spouts:
         spout_name = spout.comp.name
@@ -32,7 +31,6 @@ def extract_physical_plan(self, topology):
         shell_port = (stmgr.shell_port if stmgr.HasField('shell_port') else None)
         physicalPlan['stmgrs'][stmgr.id] = {'id': stmgr.id, 'host': host, 'port': stmgr.data_port, 'shell_port': shell_port, 'cwd': cwd, 'pid': stmgr.pid, 'joburl': utils.make_shell_job_url(host, shell_port, cwd), 'logfiles': utils.make_shell_logfiles_url(host, shell_port, cwd), 'instance_ids': [], }
     for instance in instances:
-        taskId = str(instance.info.task_id)
         instance_id = instance.instance_id
         stmgrId = instance.stmgr_id
         name = instance.info.component_name

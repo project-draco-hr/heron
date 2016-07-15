@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def execute_query(self, tmaster, query_string, start, end):
+    ' execute query '
     if (not tmaster):
         raise Exception('No tmaster found')
     self.tmaster = tmaster

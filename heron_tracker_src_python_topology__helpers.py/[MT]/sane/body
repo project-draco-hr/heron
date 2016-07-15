@@ -1,4 +1,5 @@
 def sane(topology):
+    ' First check if topology name is ok '
     if (topology.name == ''):
         print 'Topology name cannot be empty'
         return False
@@ -43,7 +44,7 @@ def sane(topology):
             all_outputs.add((outputstream.stream.id, outputstream.stream.component_name))
     for bolt in topology.bolts:
         for inputstream in bolt.inputs:
-            if (not ((inputstream.stream.id, inputstream.stream.component_name) in all_outputs)):
+            if ((inputstream.stream.id, inputstream.stream.component_name) not in all_outputs):
                 print (('Bolt ' + bolt.comp.name) + ' has an input stream that no one emits')
                 return False
     return True

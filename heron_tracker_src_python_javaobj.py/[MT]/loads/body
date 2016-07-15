@@ -1,5 +1,5 @@
 def loads(string):
-    '\n    Deserializes Java objects and primitive data serialized by ObjectOutputStream\n    from a string.\n    '
+    '\n  Deserializes Java objects and primitive data serialized by ObjectOutputStream\n  from a string.\n  '
     f = StringIO.StringIO(string)
     marshaller = JavaObjectUnmarshaller(f)
     marshaller.add_transformer(DefaultObjectTransformer())

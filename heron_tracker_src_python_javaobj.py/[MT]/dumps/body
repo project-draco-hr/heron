@@ -1,4 +1,4 @@
-def dumps(object):
-    '\n    Serializes Java primitive data and objects unmarshaled by load(s) before into string.\n    '
+def dumps(obj):
+    '\n  Serializes Java primitive data and objects unmarshaled by load(s) before into string.\n  '
     marshaller = JavaObjectMarshaller()
-    return marshaller.dump(object)
+    return marshaller.dump(obj)

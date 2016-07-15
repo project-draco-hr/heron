@@ -1,6 +1,6 @@
 def do_array(self, parent=None, ident=0):
     log_debug('[array]', ident)
-    (opcode, classdesc) = self._read_and_exec_opcode(ident=(ident + 1), expect=[self.TC_CLASSDESC, self.TC_PROXYCLASSDESC, self.TC_NULL, self.TC_REFERENCE])
+    (_, classdesc) = self._read_and_exec_opcode(ident=(ident + 1), expect=[self.TC_CLASSDESC, self.TC_PROXYCLASSDESC, self.TC_NULL, self.TC_REFERENCE])
     array = []
     self._add_reference(array)
     (size,) = self._readStruct('>i')
@@ -9,12 +9,12 @@ def do_array(self, parent=None, ident=0):
     assert (type_char == self.TYPE_ARRAY)
     type_char = classdesc.name[1]
     if ((type_char == self.TYPE_OBJECT) or (type_char == self.TYPE_ARRAY)):
-        for i in range(size):
-            (opcode, res) = self._read_and_exec_opcode(ident=(ident + 1))
+        for _ in range(size):
+            (_, res) = self._read_and_exec_opcode(ident=(ident + 1))
             log_debug(('Object value: %s' % str(res)), ident)
             array.append(res)
     else:
-        for i in range(size):
+        for _ in range(size):
             res = self._read_value(type_char, ident)
             log_debug(('Native value: %s' % str(res)), ident)
             array.append(res)

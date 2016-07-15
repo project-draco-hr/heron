@@ -1,5 +1,5 @@
 def write_blockdata(self, obj, parent=None):
     self._writeStruct('>B', 1, (self.TC_BLOCKDATA,))
-    if (type(obj) is str):
+    if isinstance(obj, str):
         self._writeStruct('>B', 1, (len(obj),))
         self.object_stream.write(obj)

@@ -1,6 +1,5 @@
 @tornado.gen.coroutine
 def execute(self, tracker, tmaster, start, end):
-    constants = filter((lambda ts: isinstance(ts, float)), self.timeSeriesList)
     leftOverTimeSeries = filter((lambda ts: (not isinstance(ts, float))), self.timeSeriesList)
     futureMetrics = []
     for timeseries in leftOverTimeSeries:

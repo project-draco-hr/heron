@@ -1,5 +1,4 @@
-'Provides functions for reading and writing (writing is WIP currently) Java objects\nserialized or will be deserialized by ObjectOutputStream. This form of object\nrepresentation is a standard data interchange format in Java world.\n\njavaobj module exposes an API familiar to users of the standard library marshal, pickle and json modules.\n\nSee: http://download.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html\n'
-import StringIO
+'Provides functions for reading and writing (writing is WIP currently) Java objects\nserialized or will be deserialized by ObjectOutputStream. This form of object\nrepresentation is a standard data interchange format in Java world.\n\njavaobj module exposes an API familiar to users of the standard\nlibrary marshal, pickle and json modules.\n\nSee: http://download.oracle.com/javase/6/docs/platform/serialization/spec/protocol.html\n'
 import logging
 import struct
 LOG = logging.getLogger(__name__)

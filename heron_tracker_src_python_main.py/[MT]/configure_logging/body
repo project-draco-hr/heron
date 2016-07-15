@@ -1,4 +1,5 @@
 def configure_logging(level):
+    ' configure logging format '
     log_format = '%(asctime)s-%(levelname)s:%(filename)s:%(lineno)s: %(message)s'
     date_format = '%d %b %Y %H:%M:%S'
     logging.basicConfig(format=log_format, datefmt=date_format, level=level)

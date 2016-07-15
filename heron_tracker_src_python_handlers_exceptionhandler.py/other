@@ -1,7 +1,8 @@
+' exceptionhandler.py '
 import logging
+import traceback
 import tornado.gen
 import tornado.web
-import traceback
 from heron.proto import common_pb2
 from heron.proto import tmaster_pb2
 from heron.tracker.src.python import constants

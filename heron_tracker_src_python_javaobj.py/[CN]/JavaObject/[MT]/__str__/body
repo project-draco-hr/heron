@@ -1,2 +1,3 @@
 def __str__(self):
+    'get reprensentation in string'
     return self.__repr__()

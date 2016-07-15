@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get(self):
+    ' get method '
     try:
         cluster = self.get_argument_cluster()
         role = self.get_argument_role()

@@ -1,3 +1,4 @@
 @tornado.gen.coroutine
 def get(self, url):
+    ' get method '
     self.write_error_response(('URL not supported: ' + url))

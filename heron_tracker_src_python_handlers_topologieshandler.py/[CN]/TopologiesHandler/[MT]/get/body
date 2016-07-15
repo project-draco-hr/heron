@@ -1,5 +1,6 @@
 @tornado.gen.coroutine
 def get(self):
+    ' get method '
     clusters = self.get_arguments(constants.PARAM_CLUSTER)
     environs = self.get_arguments(constants.PARAM_ENVIRON)
     role = self.get_argument_role()

@@ -17,7 +17,7 @@ def _read_value(self, field_type, ident, name=''):
     elif (field_type == self.TYPE_DOUBLE):
         (res,) = self._readStruct('>d')
     elif ((field_type == self.TYPE_OBJECT) or (field_type == self.TYPE_ARRAY)):
-        (opcode, res) = self._read_and_exec_opcode(ident=(ident + 1))
+        (_, res) = self._read_and_exec_opcode(ident=(ident + 1))
     else:
         raise RuntimeError(('Unknown typecode: %s' % field_type))
     log_debug((('* %s %s: ' % (field_type, name)) + str(res)), ident)

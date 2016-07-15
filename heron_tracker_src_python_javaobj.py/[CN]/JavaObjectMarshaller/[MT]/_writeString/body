@@ -1,4 +1,4 @@
 def _writeString(self, string):
-    len = len(string)
-    self._writeStruct('>H', 2, (len,))
+    l = len(string)
+    self._writeStruct('>H', 2, (l,))
     self.object_stream.write(string)

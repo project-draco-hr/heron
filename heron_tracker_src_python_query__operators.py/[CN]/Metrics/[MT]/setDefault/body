@@ -1,4 +1,5 @@
 def setDefault(self, constant, start, end):
+    ' set default time '
     starttime = ((start / 60) * 60)
     if (starttime < start):
         starttime += 60

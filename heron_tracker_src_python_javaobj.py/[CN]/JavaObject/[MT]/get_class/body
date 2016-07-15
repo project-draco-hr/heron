@@ -1,2 +1,3 @@
 def get_class(self):
+    'get class'
     return self.classdesc

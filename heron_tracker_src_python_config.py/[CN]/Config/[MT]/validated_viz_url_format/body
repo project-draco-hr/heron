@@ -1,4 +1,5 @@
 def validated_viz_url_format(self, viz_url_format):
+    'validate visualization url format'
     valid_parameters = {'${CLUSTER}': 'cluster', '${ENVIRON}': 'environ', '${TOPOLOGY}': 'topology', '${ROLE}': 'role', '${USER}': 'user', }
     dummy_formatted_viz_url = viz_url_format
     for (key, value) in valid_parameters.iteritems():

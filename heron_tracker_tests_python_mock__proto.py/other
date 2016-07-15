@@ -1,3 +1,4 @@
+' mock_proto.py '
 import heron.proto.execution_state_pb2 as protoEState
 import heron.proto.physical_plan_pb2 as protoPPlan
 import heron.proto.tmaster_pb2 as protoTmaster

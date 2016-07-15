@@ -12,7 +12,7 @@ def getComponentException(self, tmaster, component_name, instances=[], callback=
     host = tmaster.host
     url = 'http://{0}:{1}/exceptions'.format(host, port)
     request = tornado.httpclient.HTTPRequest(url, body=request_str, method='POST', request_timeout=5)
-    LOG.debug(('Making HTTP call to fetch exceptions url: %s' % url))
+    LOG.debug('Making HTTP call to fetch exceptions url: %s', url)
     try:
         client = tornado.httpclient.AsyncHTTPClient()
         result = yield client.fetch(request)

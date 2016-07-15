@@ -1,11 +1,10 @@
+' main.py '
 import argparse
 import logging
 import os
-import sys
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
-from tornado.escape import json_encode, utf8
 from tornado.options import define, options
 from heron.tracker.src.python import constants
 from heron.tracker.src.python import handlers

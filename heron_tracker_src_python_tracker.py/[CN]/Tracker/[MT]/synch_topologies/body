@@ -3,6 +3,7 @@ def synch_topologies(self):
     self.state_managers = statemanagerfactory.get_all_state_managers(self.config.statemgr_config)
 
     def on_topologies_watch(state_manager, topologies):
+        'watch topologies'
         LOG.info('State watch triggered for topologies.')
         LOG.debug(('Topologies: ' + str(topologies)))
         existingTopologies = self.getTopologiesForStateLocation(state_manager.name)
@@ -10,7 +11,7 @@ def synch_topologies(self):
         LOG.debug(('Existing topologies: ' + str(existingTopNames)))
         for name in existingTopNames:
             if (name not in topologies):
-                LOG.info('Removing topology: {0} in rootpath: {1}'.format(name, state_manager.rootpath))
+                LOG.info('Removing topology: %s in rootpath: %s', name, state_manager.rootpath)
                 self.removeTopology(name, state_manager.name)
         for name in topologies:
             if (name not in existingTopNames):

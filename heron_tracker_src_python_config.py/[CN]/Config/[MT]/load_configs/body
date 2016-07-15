@@ -1,4 +1,5 @@
 def load_configs(self):
+    'load config files'
     self.statemgr_config.set_state_locations(self.configs[STATEMGRS_KEY])
     if (VIZ_URL_FORMAT_KEY in self.configs):
         self.viz_url_format = self.validated_viz_url_format(self.configs[VIZ_URL_FORMAT_KEY])

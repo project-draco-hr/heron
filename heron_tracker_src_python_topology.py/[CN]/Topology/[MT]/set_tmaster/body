@@ -1,3 +1,4 @@
 def set_tmaster(self, tmaster):
+    ' set exectuion state '
     self.tmaster = tmaster
     self.trigger_watches()

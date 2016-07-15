@@ -1,4 +1,4 @@
-def make_shell_job_url(host, shell_port, cwd):
+def make_shell_job_url(host, shell_port, _):
     '\n  Make the job url from the info\n  stored in stmgr. This points to dir from where\n  all the processes are started.\n  If shell port is not present, it returns None.\n  '
     if (not shell_port):
         return None

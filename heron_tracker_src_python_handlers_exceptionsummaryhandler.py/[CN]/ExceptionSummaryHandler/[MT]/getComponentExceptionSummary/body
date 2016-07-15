@@ -13,7 +13,7 @@ def getComponentExceptionSummary(self, tmaster, component_name, instances=[], ca
     url = 'http://{0}:{1}/exceptionsummary'.format(host, port)
     LOG.debug('Creating request object.')
     request = tornado.httpclient.HTTPRequest(url, body=request_str, method='POST', request_timeout=5)
-    LOG.debug(('Making HTTP call to fetch exceptionsummary url: %s' % url))
+    LOG.debug('Making HTTP call to fetch exceptionsummary url: %s', url)
     try:
         client = tornado.httpclient.AsyncHTTPClient()
         result = yield client.fetch(request)

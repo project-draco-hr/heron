@@ -1,6 +1,5 @@
 def make_shell_endpoint(topologyInfo, instance_id):
     '\n  Makes the http endpoint for the heron shell\n  if shell port is present, otherwise returns None.\n  '
-    component_id = instance_id.split('_')[1]
     pplan = topologyInfo['physical_plan']
     stmgrId = pplan['instances'][instance_id]['stmgrId']
     host = pplan['stmgrs'][stmgrId]['host']

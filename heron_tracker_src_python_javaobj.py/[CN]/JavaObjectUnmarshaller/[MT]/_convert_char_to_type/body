@@ -1,6 +1,6 @@
 def _convert_char_to_type(self, type_char):
     typecode = type_char
-    if (type(type_char) is int):
+    if isinstance(type_char, int):
         typecode = chr(type_char)
     if (typecode in self.TYPECODES_LIST):
         return typecode

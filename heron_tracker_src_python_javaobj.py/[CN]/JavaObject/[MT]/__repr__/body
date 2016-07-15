@@ -1,4 +1,5 @@
 def __repr__(self):
+    'get reprensentation'
     name = 'UNKNOWN'
     if self.classdesc:
         name = self.classdesc.name

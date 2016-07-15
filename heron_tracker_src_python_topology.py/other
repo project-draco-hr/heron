@@ -1,6 +1,6 @@
+' topology.py '
 import logging
 import traceback
-import urllib2
 import uuid
 from heron.common.src.python import constants
 LOG = logging.getLogger(__name__)

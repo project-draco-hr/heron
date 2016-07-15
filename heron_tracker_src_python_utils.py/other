@@ -1,8 +1,9 @@
+' utils.py '
 '\nContains utility functions used by tracker.\n'
 import os
 import string
 import sys
-from heron.proto.execution_state_pb2 import ExecutionState
+import subprocess
 BIN_DIR = 'bin'
 CONF_DIR = 'conf'
 LIB_DIR = 'lib'

@@ -1,4 +1,5 @@
 def parse_config_file(self, conf_file):
+    'parse config files'
     expanded_conf_file_path = os.path.expanduser(conf_file)
     assert os.path.lexists(expanded_conf_file_path), ('Config file does not exists: %s' % conf_file)
     with open(expanded_conf_file_path, 'r') as f:

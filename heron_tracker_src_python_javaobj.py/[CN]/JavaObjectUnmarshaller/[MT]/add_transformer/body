@@ -1,2 +1,3 @@
 def add_transformer(self, transformer):
+    'add to object transformer'
     self.object_transformers.append(transformer)

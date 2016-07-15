@@ -1,2 +1,3 @@
 def set_default_headers(self):
+    ' Allow any domain to make queries to tracker. '
     self.set_header('Access-Control-Allow-Origin', '*')

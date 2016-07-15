@@ -1,3 +1,3 @@
-def _writeStruct(self, unpack, length, args):
+def _writeStruct(self, unpack, _, args):
     ba = struct.pack(unpack, *args)
     self.object_stream.write(ba)
