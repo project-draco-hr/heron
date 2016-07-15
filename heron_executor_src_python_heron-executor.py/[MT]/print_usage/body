@@ -1,2 +1,3 @@
 def print_usage():
+    'print usage'
     print './heron-executor <shardid> <topname> <topid> <topdefnfile>  <instance_distribution> <zknode> <zkroot> <tmaster_binary> <stmgr_binary>  <metricsmgr_classpath> <instance_jvm_opts_in_base64> <classpath>  <master_port> <tmaster_controller_port> <tmaster_stats_port> <heron_internals_config_file>  <component_rammap> <component_jvm_opts_in_base64> <pkg_type> <topology_jar_file> <heron_java_home> <shell-port> <heron_shell_binary> <metricsmgr_port> <cluster> <role> <environ> <instance_classpath> <metrics_sinks_config_file>  <scheduler_classpath> <scheduler_port>'

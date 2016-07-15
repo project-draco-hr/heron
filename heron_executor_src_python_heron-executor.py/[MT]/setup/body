@@ -1,4 +1,5 @@
 def setup():
+    ' setup '
     sys.stdout = open('heron-executor.stdout', 'a')
     sys.stderr = open('heron-executor.stderr', 'a')
     do_print('Set up process group; executor becomes leader')

@@ -1,2 +1,3 @@
 def signal_handler(signal_to_handle, frame):
+    ' signal handler '
     sys.exit(signal_to_handle)

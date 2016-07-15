@@ -1,4 +1,5 @@
 def do_run_and_wait(self, commands):
+    ' run commands and wait'
     process_dict = {}
     for (name, cmd) in commands.items():
         p = self.run_process(name, cmd)

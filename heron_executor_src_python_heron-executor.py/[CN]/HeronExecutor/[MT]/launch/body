@@ -1,4 +1,5 @@
 def launch(self):
+    ' launch '
     commands = {}
     if (self.shard == 0):
         commands = self.get_tmaster_processes()

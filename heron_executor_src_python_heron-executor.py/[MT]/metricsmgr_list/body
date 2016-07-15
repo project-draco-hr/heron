@@ -1,2 +1,3 @@
 def metricsmgr_list(count):
+    ' prepend metricmgr '
     return id_list('metricsmgr-', 0, count)

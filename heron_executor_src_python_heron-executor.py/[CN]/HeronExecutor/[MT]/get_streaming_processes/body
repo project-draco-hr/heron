@@ -1,4 +1,5 @@
 def get_streaming_processes(self):
+    '\n    Returns the processes to handle streams, including the stream-mgr and the user code containing\n    the stream logic of the topology\n    '
     retval = {}
     assert (self.shard in self.instance_distribution)
     my_instances = self.instance_distribution[self.shard]

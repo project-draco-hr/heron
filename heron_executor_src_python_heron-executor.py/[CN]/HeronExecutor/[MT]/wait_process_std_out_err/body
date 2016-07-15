@@ -1,4 +1,5 @@
 def wait_process_std_out_err(self, name, process):
+    '\n    Wait for the termination of a process and log its stdout & stderr\n    '
     (process_stdout, process_stderr) = process.communicate()
     do_print(('%s stdout: %s' % (name, process_stdout)))
     do_print(('%s stderr: %s' % (name, process_stderr)))

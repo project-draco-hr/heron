@@ -1,4 +1,5 @@
 def prepareLaunch(self):
+    ' prepare launch '
     create_folders = ('mkdir -p %s' % self.log_dir)
     chmod_binaries = ('chmod a+rx . && chmod a+x %s && chmod +x %s && chmod +x %s && chmod +x %s' % (self.log_dir, self.tmaster_binary, self.stmgr_binary, self.heron_shell_binary))
     commands = [create_folders, chmod_binaries]
