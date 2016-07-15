@@ -1,2 +1,3 @@
 def get_heron_cluster(cluster_role_env):
+    'Get the cluster to which topology is submitted'
     return cluster_role_env.split('/')[0]

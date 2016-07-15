@@ -1,4 +1,5 @@
 def parse_cluster_role_env(cluster_role_env, config_path):
+    'Parse cluster/[role]/[environ], supply default, if not provided, not required'
     parts = cluster_role_env.split('/')[:3]
     Log.info(('Using config file under %s' % config_path))
     if (not os.path.isdir(config_path)):

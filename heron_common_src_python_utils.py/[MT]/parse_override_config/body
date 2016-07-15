@@ -1,4 +1,5 @@
 def parse_override_config(namespace):
+    'Parse the command line for overriding the defaults'
     try:
         tmp_dir = tempfile.mkdtemp()
         override_config_file = os.path.join(tmp_dir, OVERRIDE_YAML)

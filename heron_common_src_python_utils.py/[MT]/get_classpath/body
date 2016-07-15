@@ -1,2 +1,3 @@
 def get_classpath(jars):
+    '\n  Get the normalized class path of all jars\n  '
     return ':'.join(map(normalized_class_path, jars))
