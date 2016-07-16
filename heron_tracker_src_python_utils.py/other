@@ -1,5 +1,4 @@
-' utils.py '
-'\nContains utility functions used by tracker.\n'
+'\nutils.py\nContains utility functions used by tracker.\n'
 import os
 import string
 import sys

@@ -2,6 +2,6 @@
 def get(self, cluster, environ, topology):
     '\n    :param cluster:\n    :param environ:\n    :param topology:\n    :return:\n    '
     start_time = time.time()
-    scheduler_location = yield access.get_scheduler_location(cluster, environ, topology)
+    estate = yield access.get_execution_state(cluster, environ, topology)
     result_map = dict(status='success', message='', version=common.VERSION, executiontime=(time.time() - start_time), result=estate)
     self.write(result_map)

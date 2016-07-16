@@ -27,7 +27,7 @@ def get(self, cluster, environ, topology, comp_name):
                     aggregate_exceptions[class_name] = 0
                 aggregate_exceptions[class_name] += int(exception_log['count'])
     aggregate_exceptions_table = []
-    for key in aggregate_exceptions.keys():
+    for key in aggregate_exceptions:
         aggregate_exceptions_table.append([key, str(aggregate_exceptions[key])])
     result = dict(status='success', executiontime=(time.time() - start_time), result=aggregate_exceptions_table)
     self.write(result)
