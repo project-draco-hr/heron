@@ -1,4 +1,5 @@
 def restartShard(heronCliPath, testCluster, topologyName, shardNum):
+    ' restart tmaster '
     logging.info('Killing topology TMaster')
     splitcmd = [('%s' % heronCliPath), 'restart', '--verbose', ('%s' % testCluster), ('%s' % topologyName), ('%d' % shardNum)]
     logging.info('Killing TMaster command:')

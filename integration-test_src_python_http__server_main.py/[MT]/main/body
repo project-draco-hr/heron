@@ -1,4 +1,5 @@
 def main():
+    '\n  Runs a tornado http server that listens for any\n  integration test josn result get/post requests\n  '
     root = logging.getLogger()
     root.setLevel(logging.DEBUG)
     if (not os.path.exists(RESULTS_DIRECTORY)):
@@ -10,7 +11,7 @@ def main():
     try:
         port = int(sys.argv[1])
     except Exception as e:
-        logging.error(('Exception: %s \nprovide a valid port address' % e))
+        logging.error('Exception: %s \nprovide a valid port address', e)
         sys.exit(1)
     logging.info(('Starting server at port ' + str(port)))
     application.listen(port)

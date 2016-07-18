@@ -1,4 +1,5 @@
 def main():
+    ' main '
     root = logging.getLogger()
     root.setLevel(logging.DEBUG)
     print (os.path.join(os.path.dirname(sys.modules[__name__].__file__), DEFAULT_TEST_CONF_FILE), 'rb')
@@ -20,12 +21,12 @@ def main():
     (successes, failures) = runAllTests(conf, args)
     total = (len(failures) + len(successes))
     if (not failures):
-        logging.info(('SUCCESS: %s (all) tests passed:' % len(successes)))
+        logging.info('SUCCESS: %s (all) tests passed:', len(successes))
         for test in successes:
-            logging.info(('  - %s: %s' % (('[%ss]' % test[1]).ljust(8), test[0])))
+            logging.info('  - %s: %s', ('[%ss]' % test[1]).ljust(8), test[0])
         sys.exit(0)
     else:
-        logging.error(('FAILURE: %s/%s tests failed:' % (len(failures), total)))
+        logging.error('FAILURE: %s/%s tests failed:', len(failures), total)
         for test in failures:
-            logging.error(('  - %s: %s' % (('[%ss]' % test[1]).ljust(8), test[0])))
+            logging.error('  - %s: %s', ('[%ss]' % test[1]).ljust(8), test[0])
         sys.exit(1)

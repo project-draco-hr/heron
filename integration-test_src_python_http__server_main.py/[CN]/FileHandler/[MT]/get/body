@@ -1,4 +1,5 @@
 def get(self, fileName):
+    ' get method'
     jsonFilePath = (((RESULTS_DIRECTORY + '/') + fileName) + '.json')
     if (not os.path.exists(jsonFilePath)):
         self.clear()

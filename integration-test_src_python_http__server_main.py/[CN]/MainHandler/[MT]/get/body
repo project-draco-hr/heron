@@ -1,2 +1,3 @@
 def get(self):
+    ' get method'
     self.write('Heron integration-test helper')

@@ -1,4 +1,5 @@
 def submitTopology(heronCliPath, testCluster, testJarPath, topologyClassPath, topologyName, inputFile, outputFile):
+    ' Submit topology using heron-cli '
     logging.info('Submitting topology')
     splitcmd = [('%s' % heronCliPath), 'submit', '--verbose', '--', ('%s' % testCluster), ('%s' % testJarPath), ('%s' % topologyClassPath), ('%s' % topologyName), ('%s' % inputFile), ('%s' % outputFile), ('%d' % len(TEST_INPUT))]
     logging.info('Submitting topology: ')

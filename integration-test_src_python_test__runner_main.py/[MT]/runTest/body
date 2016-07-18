@@ -1,17 +1,18 @@
 def runTest(topologyName, classPath, expectedResultFilePath, params):
+    ' Runs the test for one topology '
     httpServerUrl = (((('http://' + params.resultsServerHostname) + ':') + params.resultsServerPort) + '/results')
     try:
         args = ((httpServerUrl + ' ') + topologyName)
         submitTopology(params.heronCliPath, params.cluster, params.role, params.env, params.testsJarPath, classPath, params.releasePackageUri, args)
     except Exception as e:
-        logging.error(('Failed to submit %s topology: %s' % (topologyName, str(e))))
+        logging.error('Failed to submit %s topology: %s', topologyName, str(e))
         return 'fail'
-    logging.info(('Successfully submitted %s topology' % topologyName))
+    logging.info('Successfully submitted %s topology', topologyName)
     try:
         try:
-            (httpResponseCode, actualResult) = fetchResultFromServer(params.resultsServerHostname, params.resultsServerPort, topologyName)
+            (_, actualResult) = fetchResultFromServer(params.resultsServerHostname, params.resultsServerPort, topologyName)
         except Exception as e:
-            logging.error(('Fetching result failed for %s topology: %s' % (topologyName, str(e))))
+            logging.error('Fetching result failed for %s topology: %s', topologyName, str(e))
             return 'fail'
     finally:
         killTopology(params.heronCliPath, params.cluster, params.role, params.env, topologyName)
@@ -22,13 +23,13 @@ def runTest(topologyName, classPath, expectedResultFilePath, params):
             with open(expectedResultFilePath, 'r') as expectedResultFile:
                 expectedResult = expectedResultFile.read().rstrip()
     except Exception as e:
-        logging.error(('Failed to read expected result file %s: %s' % (expectedResultFilePath, str(e))))
+        logging.error('Failed to read expected result file %s: %s', expectedResultFilePath, str(e))
         return 'fail'
     decoder = json.JSONDecoder(strict=False)
     actualResult = sorted(decoder.decode(actualResult))
     expectedResult = sorted(decoder.decode(expectedResult))
     if (actualResult == expectedResult):
-        logging.info(('Topology %s result matches expected result' % topologyName))
+        logging.info('Topology %s result matches expected result', topologyName)
         return 'success'
     else:
         logging.error('Actual result did not match expected result')

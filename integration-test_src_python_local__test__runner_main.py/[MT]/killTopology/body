@@ -1,4 +1,5 @@
 def killTopology(heronCliPath, testCluster, topologyName):
+    ' Kill a topology using heron-cli '
     logging.info('Killing topology')
     splitcmd = [('%s' % heronCliPath), 'kill', '--verbose', ('%s' % testCluster), ('%s' % topologyName)]
     logging.info('Killing topology:')

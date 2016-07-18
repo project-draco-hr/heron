@@ -1,4 +1,5 @@
 def runAllTests(conf, args):
+    ' Run the test for each topology specified in the conf file '
     successes = []
     failures = []
     timestamp = str(int(time.time()))
@@ -8,7 +9,7 @@ def runAllTests(conf, args):
         topologyName = ('%s_%s_%s' % (timestamp, topologyConf['topologyName'], str(uuid.uuid4())))
         classPath = (conf['topologyClasspathPrefix'] + topologyConf['classPath'])
         expectedResultFilePath = ((args.topologiesPath + '/') + topologyConf['expectedResultRelativePath'])
-        logging.info(('==== Starting test %s of %s: %s ====' % (current, total, topologyName)))
+        logging.info('==== Starting test %s of %s: %s ====', current, total, topologyName)
         start_secs = int(time.time())
         if (runTest(topologyName, classPath, expectedResultFilePath, args) == 'success'):
             successes += [(topologyName, (int(time.time()) - start_secs))]

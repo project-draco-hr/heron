@@ -1,13 +1,14 @@
 def killTopology(heronCliPath, cluster, role, env, topologyName):
+    ' Kill a topology using heron-cli '
     logging.info('Killing topology')
     cmd = ('%s kill %s/%s/%s %s --verbose' % (heronCliPath, cluster, role, env, topologyName))
-    logging.info(('Submitting command: %s' % cmd))
+    logging.info('Submitting command: %s', cmd)
     for i in range(0, RETRY_ATTEMPTS):
         if (os.system(cmd) != 0):
             time.sleep(RETRY_INTERVAL)
-            logging.warning(('killing topology %s with %d attempts' % (topologyName, i)))
+            logging.warning('killing topology %s with %d attempts', topologyName, i)
         else:
-            logging.info(('Successfully killed topology %s' % topologyName))
+            logging.info('Successfully killed topology %s', topologyName)
             return
-    logging.error(('Failed to kill topology %s' % topologyName))
+    logging.error('Failed to kill topology %s', topologyName)
     raise RuntimeError('Unable to kill the topology')

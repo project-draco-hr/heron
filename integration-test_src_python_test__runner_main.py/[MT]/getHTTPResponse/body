@@ -1,4 +1,5 @@
 def getHTTPResponse(serverAddress, serverPort, topologyName):
+    ' get HTTP response '
     for i in range(0, RETRY_ATTEMPTS):
         try:
             connection = HTTPConnection(serverAddress, int(serverPort))
@@ -8,5 +9,5 @@ def getHTTPResponse(serverAddress, serverPort, topologyName):
         except Exception:
             time.sleep(RETRY_INTERVAL)
             continue
-    logging.error(('Failed to get HTTP Response after %d attempts' % RETRY_ATTEMPTS))
+    logging.error('Failed to get HTTP Response after %d attempts', RETRY_ATTEMPTS)
     raise RuntimeError('Failed to get HTTP response')

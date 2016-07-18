@@ -1,4 +1,5 @@
 def processExists(processList, processCmd):
+    ' check if a process is running '
     for process in processList:
         if (processCmd in process.cmd):
             return True

@@ -1,4 +1,4 @@
-import argparse
+' main.py '
 import getpass
 import json
 import logging
@@ -9,7 +9,6 @@ import signal
 import subprocess
 import sys
 from collections import namedtuple
-from httplib import *
 DEFAULT_TEST_CONF_FILE = 'resources/test.conf'
 TEST_INPUT = ['1\n', '2\n', '3\n', '4\n', '5\n', '6\n', '7\n', '8\n', '9\n', '10\n', '11\n', '12\n']
 TEST_CASES = ['KILL_TMASTER', 'KILL_STMGR', 'KILL_METRICSMGR', 'KILL_STMGR_METRICSMGR']

@@ -1,8 +1,9 @@
 def runAllTests(args):
+    ' Run the test for each topology specified in the conf file '
     successes = []
     failures = []
     for test in TEST_CASES:
-        if (runTest(test, test, args) == True):
+        if runTest(test, test, args):
             successes += [test]
         else:
             failures += [test]

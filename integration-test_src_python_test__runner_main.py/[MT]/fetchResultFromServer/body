@@ -1,11 +1,12 @@
 def fetchResultFromServer(serverAddress, serverPort, topologyName):
+    ' Make a http get request to fetch actual results from http server '
     for i in range(0, RETRY_ATTEMPTS):
-        logging.info(('Fetching results for topology %s, retry count: %d' % (topologyName, i)))
+        logging.info('Fetching results for topology %s, retry count: %d', topologyName, i)
         response = getHTTPResponse(serverAddress, int(serverPort), topologyName)
         if (response.status == 200):
             return (response.status, response.read())
         elif (i != RETRY_ATTEMPTS):
-            logging.info(('Fetching results failed with status: %s; reason: %s; body: %s' % (response.status, response.reason, response.read())))
+            logging.info('Fetching results failed with status: %s; reason: %s; body: %s', response.status, response.reason, response.read())
             time.sleep(RETRY_INTERVAL)
-    logging.error(('Failed to fetch results after %d attempts' % RETRY_ATTEMPTS))
+    logging.error('Failed to fetch results after %d attempts', RETRY_ATTEMPTS)
     raise RuntimeError('exceeded fetching result retry attempts')
