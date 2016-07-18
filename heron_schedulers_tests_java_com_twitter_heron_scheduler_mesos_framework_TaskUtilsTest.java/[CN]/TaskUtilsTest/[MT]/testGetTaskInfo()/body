@@ -1,0 +1,13 @@
+{
+  final int CONTAINER_INDEX=1;
+  final int ATTEMPT=1;
+  String taskName=TaskUtils.getTaskNameForContainerIndex(CONTAINER_INDEX);
+  Assert.assertTrue(taskName.startsWith(String.format("container_%d",CONTAINER_INDEX)));
+  String taskId=TaskUtils.getTaskId(taskName,ATTEMPT);
+  Assert.assertEquals(String.format(TaskUtils.TASK_ID_TEMPLATE,taskName,ATTEMPT),taskId);
+  Assert.assertEquals(taskName,TaskUtils.getTaskNameForTaskId(taskId));
+  Assert.assertEquals(CONTAINER_INDEX,TaskUtils.getContainerIndexForTaskId(taskId));
+  Assert.assertEquals(ATTEMPT,TaskUtils.getAttemptForTaskId(taskId));
+  Assert.assertTrue(TaskUtils.isValidTaskId(taskId));
+  Assert.assertFalse(TaskUtils.isValidTaskId("invalidTaskId"));
+}

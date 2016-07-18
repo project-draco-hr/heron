@@ -1,0 +1,4 @@
+{
+  scheduler.onKill(Scheduler.KillTopologyRequest.getDefaultInstance());
+  Mockito.verify(mesosFramework).killJob();
+}

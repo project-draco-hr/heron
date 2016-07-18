@@ -1,0 +1,6 @@
+{
+  this.taskId=taskId;
+  this.baseContainer=container;
+  this.offer=offer;
+  this.freePorts=freePorts;
+}

@@ -1,0 +1,10 @@
+{
+  String taskId="task_id";
+  mesosFramework.getToScheduleTasks().add(taskId);
+  mesosFramework.getTasksId().put(CONTAINER_INDEX,taskId);
+  Assert.assertTrue(mesosFramework.killJob());
+  Assert.assertTrue(mesosFramework.getToScheduleTasks().isEmpty());
+  Assert.assertTrue(mesosFramework.getTasksId().isEmpty());
+  Assert.assertTrue(mesosFramework.isTerminated());
+  Mockito.verify(mesosFramework.getSchedulerDriver()).killTask(Protos.TaskID.newBuilder().setValue(taskId).build());
+}

@@ -1,0 +1,9 @@
+{
+  this.cpu=cpu;
+  this.mem=mem;
+  this.disk=disk;
+  this.portsHold=portsResources;
+  for (  Range r : portsResources) {
+    this.ports+=r.rangeEnd - r.rangeStart + 1;
+  }
+}

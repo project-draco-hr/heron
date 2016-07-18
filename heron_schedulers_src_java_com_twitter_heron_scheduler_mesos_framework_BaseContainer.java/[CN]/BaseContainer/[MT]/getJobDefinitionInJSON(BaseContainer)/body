@@ -1,0 +1,8 @@
+{
+  try {
+    return new ObjectMapper().writeValueAsString(job);
+  }
+ catch (  JsonProcessingException e) {
+    throw new IllegalArgumentException("Unable to convert to JSON string",e);
+  }
+}

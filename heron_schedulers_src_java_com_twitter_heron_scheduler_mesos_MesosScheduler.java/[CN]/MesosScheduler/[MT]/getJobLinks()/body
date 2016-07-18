@@ -1,0 +1,7 @@
+{
+  Protos.FrameworkID frameworkID=mesosFramework.getFrameworkId();
+  String jobLink=String.format("%s/#/frameworks/%s",MesosContext.getHeronMesosMasterUri(config),frameworkID.getValue());
+  List<String> jobLinks=new ArrayList<>();
+  jobLinks.add(jobLink);
+  return jobLinks;
+}

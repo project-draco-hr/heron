@@ -1,0 +1,10 @@
+{
+  Protos.Environment.Builder builder=Protos.Environment.newBuilder();
+  for (  Map.Entry<String,String> kv : var.entrySet()) {
+    String key=kv.getKey();
+    String value=kv.getValue();
+    Protos.Environment.Variable variable=Protos.Environment.Variable.newBuilder().setName(key).setValue(value).build();
+    builder.addVariables(variable);
+  }
+  return builder.build();
+}

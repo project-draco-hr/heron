@@ -1,0 +1,4 @@
+{
+  int containerId=request.getContainerIndex();
+  return mesosFramework.restartJob(containerId);
+}

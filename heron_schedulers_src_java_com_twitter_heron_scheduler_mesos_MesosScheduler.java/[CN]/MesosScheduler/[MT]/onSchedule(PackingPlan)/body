@@ -1,0 +1,7 @@
+{
+  Map<Integer,BaseContainer> jobDefinition=new HashMap<>();
+  for (int containerIndex=0; containerIndex < Runtime.numContainers(runtime); containerIndex++) {
+    jobDefinition.put(containerIndex,getBaseContainer(containerIndex,packing));
+  }
+  return mesosFramework.createJob(jobDefinition);
+}

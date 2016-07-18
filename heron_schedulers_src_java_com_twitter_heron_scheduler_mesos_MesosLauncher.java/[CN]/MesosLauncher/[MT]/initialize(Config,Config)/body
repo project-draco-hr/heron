@@ -1,0 +1,5 @@
+{
+  this.config=mConfig;
+  this.runtime=mRuntime;
+  this.schedulerWorkingDirectory=MesosContext.getSchedulerWorkingDirectory(config);
+}

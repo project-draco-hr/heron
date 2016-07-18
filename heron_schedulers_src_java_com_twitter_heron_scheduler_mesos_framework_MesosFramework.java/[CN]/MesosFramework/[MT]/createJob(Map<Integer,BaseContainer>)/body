@@ -1,0 +1,16 @@
+{
+synchronized (this) {
+    if (isTerminated) {
+      LOG.severe("Job has been killed");
+      return false;
+    }
+    containersInfo.putAll(jobDefinition);
+    for (    Map.Entry<Integer,BaseContainer> entry : jobDefinition.entrySet()) {
+      Integer containerIndex=entry.getKey();
+      BaseContainer container=entry.getValue();
+      String taskId=TaskUtils.getTaskId(container.name,0);
+      scheduleNewTask(taskId);
+    }
+  }
+  return true;
+}

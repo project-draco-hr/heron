@@ -1,0 +1,26 @@
+{
+  double cpu=0;
+  double mem=0;
+  double disk=0;
+  List<Range> portsResource=new ArrayList<>();
+  for (  Protos.Resource r : offer.getResourcesList()) {
+    if (!r.hasRole() || r.getRole().equals("*") || r.getRole().equals(role)) {
+      if (r.getName().equals(CPUS_RESOURCE_NAME)) {
+        cpu=r.getScalar().getValue();
+      }
+      if (r.getName().equals(MEM_RESOURCE_NAME)) {
+        mem=r.getScalar().getValue();
+      }
+      if (r.getName().equals(DISK_RESOURCE_NAME)) {
+        disk=r.getScalar().getValue();
+      }
+      if (r.getName().equals(PORT_RESOURCE_NAME)) {
+        Protos.Value.Ranges ranges=r.getRanges();
+        for (        Protos.Value.Range range : ranges.getRangeList()) {
+          portsResource.add(new Range(range.getBegin(),range.getEnd()));
+        }
+      }
+    }
+  }
+  return new TaskResources(cpu,mem,disk,portsResource);
+}

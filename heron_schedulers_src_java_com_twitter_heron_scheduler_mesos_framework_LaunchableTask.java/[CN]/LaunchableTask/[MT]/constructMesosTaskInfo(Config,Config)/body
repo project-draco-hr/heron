@@ -1,0 +1,27 @@
+{
+  String taskIdStr=this.taskId;
+  Protos.TaskID mesosTaskID=Protos.TaskID.newBuilder().setValue(taskIdStr).build();
+  Protos.TaskInfo.Builder taskInfo=Protos.TaskInfo.newBuilder().setName(baseContainer.name).setTaskId(mesosTaskID);
+  Protos.Environment.Builder environment=Protos.Environment.newBuilder();
+  Set<String> builtinEnvNames=new HashSet<>();
+  for (  Protos.Environment.Variable variable : environment.getVariablesList()) {
+    builtinEnvNames.add(variable.getName());
+  }
+  for (  BaseContainer.EnvironmentVariable ev : baseContainer.environmentVariables) {
+    environment.addVariables(Protos.Environment.Variable.newBuilder().setName(ev.name).setValue(ev.value));
+  }
+  taskInfo.addResources(scalarResource(TaskResources.CPUS_RESOURCE_NAME,baseContainer.cpu)).addResources(scalarResource(TaskResources.MEM_RESOURCE_NAME,baseContainer.memInMB)).addResources(scalarResource(TaskResources.DISK_RESOURCE_NAME,baseContainer.diskInMB)).addResources(rangeResource(TaskResources.PORT_RESOURCE_NAME,this.freePorts.get(0),this.freePorts.get(this.freePorts.size() - 1))).setSlaveId(this.offer.getSlaveId());
+  int containerIndex=TaskUtils.getContainerIndexForTaskId(taskIdStr);
+  String commandStr=executorCommand(heronConfig,heronRuntime,containerIndex);
+  Protos.CommandInfo.Builder command=Protos.CommandInfo.newBuilder();
+  List<Protos.CommandInfo.URI> uriProtos=new ArrayList<>();
+  for (  String uri : baseContainer.dependencies) {
+    uriProtos.add(Protos.CommandInfo.URI.newBuilder().setValue(uri).setExtract(true).build());
+  }
+  command.setValue(commandStr).setShell(baseContainer.shell).setEnvironment(environment).addAllUris(uriProtos);
+  if (!baseContainer.runAsUser.isEmpty()) {
+    command.setUser(baseContainer.runAsUser);
+  }
+  taskInfo.setCommand(command);
+  return taskInfo.build();
+}

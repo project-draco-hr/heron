@@ -1,0 +1,9 @@
+{
+  this.heronConfig=heronConfig;
+  this.heronRuntime=heronRuntime;
+  this.containersInfo=new ConcurrentHashMap<>();
+  this.tasksId=new ConcurrentHashMap<>();
+  this.toScheduleTasks=new LinkedTransferQueue<>();
+  this.registeredLatch=new CountDownLatch(1);
+  this.isTerminated=false;
+}

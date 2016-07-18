@@ -1,0 +1,11 @@
+{
+  BaseContainer container=new BaseContainer();
+  container.name=TaskUtils.getTaskNameForContainerIndex(CONTAINER_INDEX);
+  Map<Integer,BaseContainer> jobDef=new HashMap<>();
+  jobDef.put(CONTAINER_INDEX,container);
+  Assert.assertTrue(mesosFramework.createJob(jobDef));
+  Assert.assertEquals(1,mesosFramework.getContainersInfo().size());
+  Assert.assertEquals(1,mesosFramework.getTasksId().size());
+  Assert.assertEquals(1,mesosFramework.getToScheduleTasks().size());
+  Assert.assertTrue(mesosFramework.getToScheduleTasks().peek().startsWith(String.format("container_%d",CONTAINER_INDEX)));
+}

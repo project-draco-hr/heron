@@ -1,0 +1,6 @@
+{
+  LOG.info("Registered! ID = " + frameworkID.getValue());
+  this.driver=schedulerDriver;
+  this.frameworkId=frameworkID;
+  this.registeredLatch.countDown();
+}

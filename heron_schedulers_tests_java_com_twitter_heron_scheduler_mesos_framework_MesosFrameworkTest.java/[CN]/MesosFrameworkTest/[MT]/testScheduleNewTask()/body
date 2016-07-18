@@ -1,0 +1,9 @@
+{
+  String taskName=TaskUtils.getTaskNameForContainerIndex(CONTAINER_INDEX);
+  String newTaskId=TaskUtils.getTaskId(taskName,0);
+  mesosFramework.scheduleNewTask(newTaskId);
+  Assert.assertEquals(1,mesosFramework.getTasksId().size());
+  Assert.assertEquals(newTaskId,mesosFramework.getTasksId().get(CONTAINER_INDEX));
+  Assert.assertEquals(1,mesosFramework.getToScheduleTasks().size());
+  Assert.assertEquals(newTaskId,mesosFramework.getToScheduleTasks().peek());
+}

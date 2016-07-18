@@ -1,0 +1,21 @@
+{
+synchronized (this) {
+    LOG.fine("Received Resource Offers: " + offers.toString());
+    Map<Protos.Offer,TaskResources> offerResources=new HashMap<>();
+    for (    Protos.Offer offer : offers) {
+      offerResources.put(offer,TaskResources.apply(offer,Context.role(heronConfig)));
+    }
+    List<LaunchableTask> tasksToLaunch=generateLaunchableTasks(offerResources);
+    launchTasks(tasksToLaunch);
+    LOG.fine("Declining unused offers.");
+    Set<String> usedOffers=new HashSet<>();
+    for (    LaunchableTask task : tasksToLaunch) {
+      usedOffers.add(task.offer.getId().getValue());
+    }
+    for (    Protos.Offer offer : offers) {
+      if (!usedOffers.contains(offer.getId().getValue())) {
+        schedulerDriver.declineOffer(offer.getId());
+      }
+    }
+  }
+}

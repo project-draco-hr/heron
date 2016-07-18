@@ -1,0 +1,37 @@
+{
+switch (status.getState()) {
+case TASK_STAGING:
+    LOG.info(String.format("Task with id '%s' STAGING",status.getTaskId().getValue()));
+  LOG.severe("Framework status updates should not use");
+break;
+case TASK_STARTING:
+LOG.info(String.format("Task with id '%s' STARTING",status.getTaskId().getValue()));
+break;
+case TASK_RUNNING:
+LOG.info(String.format("Task with id '%s' RUNNING",status.getTaskId().getValue()));
+break;
+case TASK_FINISHED:
+LOG.info(String.format("Task with id '%s' FINISHED",status.getTaskId().getValue()));
+LOG.severe("Heron job should not finish!");
+break;
+case TASK_FAILED:
+LOG.info(String.format("Task with id '%s' FAILED",status.getTaskId().getValue()));
+handleMesosFailure(taskId);
+break;
+case TASK_KILLED:
+LOG.info("Task killed which is supported running. " + "It could be triggered by manual restart command");
+handleMesosFailure(taskId);
+break;
+case TASK_LOST:
+LOG.info(String.format("Task with id '%s' LOST",status.getTaskId().getValue()));
+handleMesosFailure(taskId);
+break;
+case TASK_ERROR:
+LOG.info(String.format("Task with id '%s' ERROR",status.getTaskId().getValue()));
+handleMesosFailure(taskId);
+break;
+default :
+LOG.severe("Unknown TaskState:" + status.getState() + " for taskId: "+ status.getTaskId().getValue());
+break;
+}
+}

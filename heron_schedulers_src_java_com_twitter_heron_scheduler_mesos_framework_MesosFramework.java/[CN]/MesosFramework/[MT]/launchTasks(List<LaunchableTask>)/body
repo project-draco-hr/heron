@@ -1,0 +1,31 @@
+{
+  Map<Protos.Offer,List<LaunchableTask>> tasksGroupByOffer=new HashMap<>();
+  for (  LaunchableTask task : tasks) {
+    List<LaunchableTask> subTasks=tasksGroupByOffer.get(task.offer);
+    if (subTasks == null) {
+      subTasks=new LinkedList<>();
+    }
+    subTasks.add(task);
+    tasksGroupByOffer.put(task.offer,subTasks);
+  }
+  for (  Map.Entry<Protos.Offer,List<LaunchableTask>> kv : tasksGroupByOffer.entrySet()) {
+    Protos.Offer offer=kv.getKey();
+    List<LaunchableTask> subTasks=kv.getValue();
+    List<Protos.TaskInfo> mesosTasks=new LinkedList<>();
+    for (    LaunchableTask task : subTasks) {
+      Protos.TaskInfo pTask=task.constructMesosTaskInfo(heronConfig,heronRuntime);
+      mesosTasks.add(pTask);
+    }
+    LOG.info("Launching tasks from offer: " + offer + " with tasks: "+ mesosTasks);
+    Protos.Status status=driver.launchTasks(Arrays.asList(new Protos.OfferID[]{offer.getId()}),mesosTasks);
+    if (status == Protos.Status.DRIVER_RUNNING) {
+      LOG.info(String.format("Tasks launched, status: '%s'",status));
+    }
+ else {
+      LOG.severe("Other status returned: " + status);
+      for (      LaunchableTask task : tasks) {
+        handleMesosFailure(task.taskId);
+      }
+    }
+  }
+}

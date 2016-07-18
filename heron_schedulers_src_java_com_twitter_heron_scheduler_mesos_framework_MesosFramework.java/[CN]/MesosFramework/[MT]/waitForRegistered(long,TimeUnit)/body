@@ -1,0 +1,12 @@
+{
+  try {
+    if (this.registeredLatch.await(timeout,unit)) {
+      return true;
+    }
+  }
+ catch (  InterruptedException e) {
+    LOG.severe("Failed to wait for mesos framework got registered");
+    return false;
+  }
+  return false;
+}

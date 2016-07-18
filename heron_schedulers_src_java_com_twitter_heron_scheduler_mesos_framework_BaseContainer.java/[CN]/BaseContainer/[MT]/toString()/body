@@ -1,0 +1,3 @@
+{
+  return BaseContainer.getJobDefinitionInJSON(this);
+}

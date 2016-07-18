@@ -1,0 +1,18 @@
+{
+  List<Integer> freePorts=new ArrayList<>(SchedulerUtils.PORTS_REQUIRED_FOR_SCHEDULER);
+  for (int i=0; i < SchedulerUtils.PORTS_REQUIRED_FOR_SCHEDULER; i++) {
+    freePorts.add(SysUtils.getFreePort());
+  }
+  List<String> commands=new ArrayList<>();
+  String javaExecutable=String.format("%s/%s",Context.javaHome(config),"bin/java");
+  commands.add(javaExecutable);
+  commands.add(String.format("-Djava.library.path=%s",MesosContext.getHeronMesosNativeLibraryPath(config)));
+  commands.add("-cp");
+  String completeSchedulerProcessClassPath=System.getProperty("java.class.path");
+  commands.add(completeSchedulerProcessClassPath);
+  commands.add("com.twitter.heron.scheduler.SchedulerMain");
+  commands.add(String.format("-%s%s=%s",Keys.SCHEDULER_COMMAND_LINE_PROPERTIES_OVERRIDE_OPTION,Keys.topologyPackageUri(),Runtime.topologyPackageUri(runtime).toString()));
+  String[] commandArgs=schedulerCommandArgs(freePorts);
+  commands.addAll(Arrays.asList(commandArgs));
+  return commands.toArray(new String[0]);
+}

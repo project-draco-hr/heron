@@ -1,0 +1,4 @@
+{
+  Protos.FrameworkInfo.Builder frameworkBuilder=Protos.FrameworkInfo.newBuilder().setUser("").setName("heron_scheduler_" + Context.topologyName(config)).setCheckpoint(true);
+  return new MesosSchedulerDriver(framework,frameworkBuilder.build(),masterURI);
+}

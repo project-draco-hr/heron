@@ -1,0 +1,17 @@
+{
+  final double CPU=0.5;
+  final double MEM=1.6;
+  final double DISK=2.7;
+  Protos.Offer.Builder builder=Protos.Offer.newBuilder().setId(Protos.OfferID.newBuilder().setValue("id")).setFrameworkId(Protos.FrameworkID.newBuilder().setValue("framework-id")).setHostname("hostname").setSlaveId(Protos.SlaveID.newBuilder().setValue("slave-id"));
+  Protos.Resource cpu=Protos.Resource.newBuilder().setType(Protos.Value.Type.SCALAR).setName(TaskResources.CPUS_RESOURCE_NAME).setScalar(Protos.Value.Scalar.newBuilder().setValue(CPU)).build();
+  Protos.Resource mem=Protos.Resource.newBuilder().setType(Protos.Value.Type.SCALAR).setName(TaskResources.MEM_RESOURCE_NAME).setScalar(Protos.Value.Scalar.newBuilder().setValue(MEM)).build();
+  Protos.Resource disk=Protos.Resource.newBuilder().setType(Protos.Value.Type.SCALAR).setName(TaskResources.DISK_RESOURCE_NAME).setScalar(Protos.Value.Scalar.newBuilder().setValue(DISK)).build();
+  builder.addResources(cpu).addResources(mem).addResources(disk);
+  Protos.Offer offer=builder.build();
+  TaskResources resources=TaskResources.apply(offer,"*");
+  Assert.assertEquals(CPU,resources.getCpu(),0.01);
+  Assert.assertEquals(MEM,resources.getMem(),0.01);
+  Assert.assertEquals(DISK,resources.getDisk(),0.01);
+  Assert.assertEquals(0,resources.getPorts());
+  Assert.assertEquals(0,resources.getPortsHold().size());
+}

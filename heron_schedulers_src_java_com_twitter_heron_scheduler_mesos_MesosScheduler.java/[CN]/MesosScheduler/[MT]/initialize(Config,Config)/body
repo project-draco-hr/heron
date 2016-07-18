@@ -1,0 +1,8 @@
+{
+  this.config=mConfig;
+  this.runtime=mRuntime;
+  this.mesosFramework=getMesosFramework();
+  String masterURI=MesosContext.getHeronMesosMasterUri(config);
+  this.driver=getSchedulerDriver(masterURI,mesosFramework);
+  startSchedulerDriver();
+}

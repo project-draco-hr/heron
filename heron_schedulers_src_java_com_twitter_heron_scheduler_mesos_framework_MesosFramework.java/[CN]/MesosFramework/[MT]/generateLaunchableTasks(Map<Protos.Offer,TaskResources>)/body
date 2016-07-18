@@ -1,0 +1,35 @@
+{
+  List<LaunchableTask> tasks=new LinkedList<>();
+  if (isTerminated) {
+    LOG.info("Job has been killed");
+    return tasks;
+  }
+  while (!toScheduleTasks.isEmpty()) {
+    String taskId=toScheduleTasks.poll();
+    BaseContainer baseContainer=containersInfo.get(TaskUtils.getContainerIndexForTaskId(taskId));
+    TaskResources neededResources=new TaskResources(baseContainer.cpu,baseContainer.memInMB,baseContainer.diskInMB,baseContainer.ports);
+    boolean isMatched=false;
+    Iterator<Map.Entry<Protos.Offer,TaskResources>> it=offerResources.entrySet().iterator();
+    while (it.hasNext()) {
+      Map.Entry<Protos.Offer,TaskResources> kv=it.next();
+      Protos.Offer offer=kv.getKey();
+      TaskResources resources=kv.getValue();
+      if (resources.canSatisfy(neededResources)) {
+        resources.consume(neededResources);
+        List<Integer> freePorts=new ArrayList<>();
+        for (int port=(int)(neededResources.getPortsHold().get(0).rangeStart); port <= (int)(neededResources.getPortsHold().get(0).rangeEnd); port++) {
+          freePorts.add(port);
+        }
+        tasks.add(new LaunchableTask(taskId,baseContainer,offer,freePorts));
+        isMatched=true;
+        break;
+      }
+    }
+    if (!isMatched) {
+      LOG.info(String.format("Insufficient resources remaining for baseContainer: %s, " + "will append to queue. Need: [%s]",taskId,neededResources.toString()));
+      toScheduleTasks.add(taskId);
+      break;
+    }
+  }
+  return tasks;
+}

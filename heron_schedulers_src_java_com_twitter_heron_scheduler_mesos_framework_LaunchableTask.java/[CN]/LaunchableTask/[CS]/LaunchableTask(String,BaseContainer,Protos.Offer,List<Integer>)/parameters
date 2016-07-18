@@ -1,0 +1,4 @@
+String taskId
+BaseContainer container
+Protos.Offer offer
+List<Integer> freePorts

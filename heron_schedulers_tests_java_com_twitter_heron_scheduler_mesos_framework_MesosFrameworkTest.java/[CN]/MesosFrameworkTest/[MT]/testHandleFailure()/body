@@ -1,0 +1,11 @@
+{
+  String taskName=TaskUtils.getTaskNameForContainerIndex(CONTAINER_INDEX);
+  String oldTaskId=TaskUtils.getTaskId(taskName,0);
+  BaseContainer baseContainer=new BaseContainer();
+  baseContainer.retries=Integer.MAX_VALUE;
+  baseContainer.name=taskName;
+  mesosFramework.getContainersInfo().put(CONTAINER_INDEX,baseContainer);
+  mesosFramework.handleMesosFailure(oldTaskId);
+  String newTaskId=TaskUtils.getTaskId(taskName,1);
+  Mockito.verify(mesosFramework).scheduleNewTask(newTaskId);
+}

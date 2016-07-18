@@ -1,0 +1,13 @@
+{
+  int attempt=TaskUtils.getAttemptForTaskId(taskId);
+  BaseContainer container=containersInfo.get(TaskUtils.getContainerIndexForTaskId(taskId));
+  boolean hasAttemptsLeft=attempt < container.retries;
+  if (hasAttemptsLeft) {
+    LOG.warning(String.format("Retrying task: %s, attempt: %d",container.name,attempt + 1));
+    String newTaskId=TaskUtils.getTaskId(container.name,attempt + 1);
+    scheduleNewTask(newTaskId);
+  }
+ else {
+    LOG.severe("Would not restart the job since it is beyond retries: " + attempt);
+  }
+}

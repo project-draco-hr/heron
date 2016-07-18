@@ -1,0 +1,19 @@
+{
+synchronized (this) {
+    if (isTerminated) {
+      LOG.severe("Job has been killed");
+      return false;
+    }
+    List<String> tasksToRestart=new ArrayList<>();
+    if (containerIndex == -1) {
+      tasksToRestart.addAll(tasksId.values());
+    }
+ else {
+      tasksToRestart.add(tasksId.get(containerIndex));
+    }
+    for (    String taskId : tasksToRestart) {
+      driver.killTask(Protos.TaskID.newBuilder().setValue(taskId).build());
+    }
+    return true;
+  }
+}

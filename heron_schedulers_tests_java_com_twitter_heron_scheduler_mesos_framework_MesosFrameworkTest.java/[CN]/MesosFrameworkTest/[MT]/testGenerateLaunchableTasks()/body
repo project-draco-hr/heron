@@ -1,0 +1,20 @@
+{
+  Protos.Offer offer=getOffer();
+  Map<Protos.Offer,TaskResources> offerResources=getOfferResources(offer);
+  BaseContainer baseContainer=new BaseContainer();
+  baseContainer.cpu=0.1;
+  baseContainer.memInMB=0;
+  baseContainer.diskInMB=0;
+  baseContainer.ports=0;
+  String taskName=TaskUtils.getTaskNameForContainerIndex(CONTAINER_INDEX);
+  String taskId=TaskUtils.getTaskId(taskName,0);
+  mesosFramework.getToScheduleTasks().add(taskId);
+  mesosFramework.getContainersInfo().put(CONTAINER_INDEX,baseContainer);
+  List<LaunchableTask> tasks=mesosFramework.generateLaunchableTasks(offerResources);
+  Assert.assertEquals(1,tasks.size());
+  LaunchableTask task=tasks.get(0);
+  Assert.assertEquals(offer,task.offer);
+  Assert.assertEquals(baseContainer,task.baseContainer);
+  Assert.assertEquals(taskId,task.taskId);
+  Assert.assertTrue(task.freePorts.isEmpty());
+}

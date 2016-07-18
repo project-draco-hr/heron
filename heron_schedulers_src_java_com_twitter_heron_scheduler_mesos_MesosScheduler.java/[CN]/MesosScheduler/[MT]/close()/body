@@ -1,0 +1,12 @@
+{
+  if (driver != null) {
+    if (this.mesosFramework.isTerminated()) {
+      driver.stop();
+    }
+ else {
+      driver.stop(true);
+    }
+    long stopTimeoutInMs=MesosContext.getHeronMesosSchedulerDriverStopTimeoutMs(config);
+    joinSchedulerDriver(stopTimeoutInMs,TimeUnit.MILLISECONDS);
+  }
+}

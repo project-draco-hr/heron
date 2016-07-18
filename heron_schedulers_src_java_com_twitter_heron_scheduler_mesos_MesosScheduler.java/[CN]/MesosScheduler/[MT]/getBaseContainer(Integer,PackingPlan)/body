@@ -1,0 +1,15 @@
+{
+  BaseContainer container=new BaseContainer();
+  container.name=TaskUtils.getTaskNameForContainerIndex(containerIndex);
+  container.runAsUser=Context.role(config);
+  container.description=String.format("Container %d for topology %s",containerIndex,Context.topologyName(config));
+  fillResourcesRequirementForBaseContainer(container,containerIndex,packing);
+  container.shell=true;
+  container.retries=Integer.MAX_VALUE;
+  container.dependencies=new ArrayList<>();
+  String topologyPath=Runtime.schedulerProperties(runtime).getProperty(Keys.topologyPackageUri());
+  String heronCoreReleasePath=Context.corePackageUri(config);
+  container.dependencies.add(topologyPath);
+  container.dependencies.add(heronCoreReleasePath);
+  return container;
+}

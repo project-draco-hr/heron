@@ -1,0 +1,18 @@
+{
+synchronized (this) {
+    if (isTerminated) {
+      LOG.info("Job has been killed");
+      return false;
+    }
+    isTerminated=true;
+    LOG.info(String.format("Kill job: %s",Context.topologyName(heronConfig)));
+    LOG.info("Remove all tasks to schedule");
+    toScheduleTasks.clear();
+    for (    String taskId : tasksId.values()) {
+      driver.killTask(Protos.TaskID.newBuilder().setValue(taskId).build());
+    }
+    containersInfo.clear();
+    tasksId.clear();
+    return true;
+  }
+}

@@ -1,0 +1,26 @@
+{
+  final double CPU=0.5;
+  final long MEM=100 * Constants.MB;
+  final long DISK=100 * Constants.MB;
+  PackingPlan.Resource containerResources=new PackingPlan.Resource(CPU,MEM,DISK);
+  PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan("id",new HashMap<String,PackingPlan.InstancePlan>(),containerResources);
+  Map<String,PackingPlan.ContainerPlan> map=new HashMap<>();
+  map.put("id",containerPlan);
+  PackingPlan packingPlan=new PackingPlan(TOPOLOGY_NAME,map,containerResources);
+  BaseContainer container=scheduler.getBaseContainer(0,packingPlan);
+  Assert.assertEquals(ROLE,container.runAsUser);
+  Assert.assertEquals(CPU,container.cpu,0.01);
+  Assert.assertEquals(MEM,container.memInMB * Constants.MB,0.01);
+  Assert.assertEquals(DISK,container.diskInMB * Constants.MB,0.01);
+  Assert.assertEquals(SchedulerUtils.PORTS_REQUIRED_FOR_EXECUTOR,container.ports);
+  Assert.assertEquals(2,container.dependencies.size());
+  Assert.assertTrue(container.dependencies.contains(CORE_PACKAGE_URI));
+  Assert.assertTrue(container.dependencies.contains(TOPOLOGY_PACKAGE_URI));
+  Assert.assertTrue(container.environmentVariables.isEmpty());
+  Assert.assertTrue(container.name.startsWith("container_0"));
+  String str=container.toString();
+  String json=BaseContainer.getJobDefinitionInJSON(container);
+  Assert.assertEquals(json,str);
+  BaseContainer newContainer=BaseContainer.getJobFromJSONString(json);
+  Assert.assertEquals(json,BaseContainer.getJobDefinitionInJSON(newContainer));
+}

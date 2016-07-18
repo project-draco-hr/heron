@@ -1,0 +1,16 @@
+{
+  List<Protos.Resource> reservedResources=new LinkedList<>();
+  for (  Protos.Resource resource : offer.getResourcesList()) {
+    if (resource.hasRole() && !resource.getRole().equals("*")) {
+      reservedResources.add(resource);
+    }
+  }
+  String role="*";
+  for (  Protos.Resource resource : reservedResources) {
+    if (resource.getName() == name && resource.getScalar().getValue() >= value) {
+      role=resource.getRole();
+      break;
+    }
+  }
+  return Protos.Resource.newBuilder().setName(name).setType(Protos.Value.Type.SCALAR).setScalar(Protos.Value.Scalar.newBuilder().setValue(value)).setRole(role).build();
+}

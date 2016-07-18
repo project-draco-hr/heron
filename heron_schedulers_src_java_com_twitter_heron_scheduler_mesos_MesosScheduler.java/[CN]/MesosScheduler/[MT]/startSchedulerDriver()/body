@@ -1,0 +1,8 @@
+{
+  driver.start();
+  LOG.info("Waiting for Mesos Framework get registered");
+  long timeout=MesosContext.getHeronMesosFrameworkStagingTimeoutMs(config);
+  if (!mesosFramework.waitForRegistered(timeout,TimeUnit.MILLISECONDS)) {
+    throw new RuntimeException("Failed to register with Mesos Master in time");
+  }
+}

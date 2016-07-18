@@ -1,0 +1,12 @@
+{
+  Protos.Offer offer=getOffer();
+  List<LaunchableTask> tasksToLaunch=new ArrayList<>();
+  LaunchableTask launchableTask=new LaunchableTask("",new BaseContainer(),offer,new ArrayList<Integer>());
+  tasksToLaunch.add(launchableTask);
+  Mockito.doReturn(tasksToLaunch).when(mesosFramework).generateLaunchableTasks(Mockito.any(Map.class));
+  Mockito.doNothing().when(mesosFramework).launchTasks(tasksToLaunch);
+  List<Protos.Offer> offers=new ArrayList<>();
+  offers.add(offer);
+  mesosFramework.resourceOffers(mesosFramework.getSchedulerDriver(),offers);
+  Mockito.verify(mesosFramework.getSchedulerDriver(),Mockito.never()).declineOffer(offer.getId());
+}

@@ -1,0 +1,18 @@
+{
+synchronized (this) {
+    LOG.info(String.format("Received status update [%s]",taskStatus));
+    if (isTerminated) {
+      LOG.info("The framework terminated. Ignoring any status update.");
+      return;
+    }
+    String taskId=taskStatus.getTaskId().getValue();
+    BaseContainer container=containersInfo.get(TaskUtils.getContainerIndexForTaskId(taskId));
+    if (container == null) {
+      LOG.warning("Received a status update from unknown container. ");
+      return;
+    }
+ else {
+      handleMesosStatusUpdate(taskId,taskStatus);
+    }
+  }
+}

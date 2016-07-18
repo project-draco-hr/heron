@@ -1,0 +1,3 @@
+{
+  return config.getStringValue(SCHEDULER_WORKING_DIRECTORY);
+}

@@ -1,0 +1,6 @@
+{
+  TaskResources resources=TaskResources.apply(offer,"*");
+  Map<Protos.Offer,TaskResources> offerResources=new HashMap<>();
+  offerResources.put(offer,resources);
+  return offerResources;
+}

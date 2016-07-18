@@ -1,0 +1,7 @@
+{
+  String taskId="task_id";
+  mesosFramework.getTasksId().put(CONTAINER_INDEX,taskId);
+  Assert.assertTrue(mesosFramework.restartJob(-1));
+  Assert.assertFalse(mesosFramework.isTerminated());
+  Mockito.verify(mesosFramework.getSchedulerDriver()).killTask(Protos.TaskID.newBuilder().setValue(taskId).build());
+}

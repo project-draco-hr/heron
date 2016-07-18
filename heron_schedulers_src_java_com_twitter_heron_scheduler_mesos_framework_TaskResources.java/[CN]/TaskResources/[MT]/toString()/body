@@ -1,0 +1,3 @@
+{
+  return String.format("cpu: %f; mem: %f; disk: %f; ports: %d.",this.cpu,this.mem,this.disk,this.ports);
+}

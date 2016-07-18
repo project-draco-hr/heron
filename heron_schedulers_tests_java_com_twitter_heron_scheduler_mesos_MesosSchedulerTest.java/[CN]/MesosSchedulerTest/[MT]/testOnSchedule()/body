@@ -1,0 +1,9 @@
+{
+  Mockito.doReturn(baseContainer).when(scheduler).getBaseContainer(Mockito.anyInt(),Mockito.any(PackingPlan.class));
+  scheduler.onSchedule(Mockito.mock(PackingPlan.class));
+  Map<Integer,BaseContainer> expectedJobDef=new HashMap<>();
+  for (int containerIndex=0; containerIndex < NUM_CONTAINER; containerIndex++) {
+    expectedJobDef.put(containerIndex,baseContainer);
+  }
+  Mockito.verify(mesosFramework).createJob(Mockito.eq(expectedJobDef));
+}

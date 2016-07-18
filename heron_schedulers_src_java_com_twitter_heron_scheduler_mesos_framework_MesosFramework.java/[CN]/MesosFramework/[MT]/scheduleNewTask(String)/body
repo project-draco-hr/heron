@@ -1,0 +1,8 @@
+{
+  LOG.info(String.format("We are to schedule task: [%s]",taskId));
+  int containerIndex=TaskUtils.getContainerIndexForTaskId(taskId);
+  tasksId.put(containerIndex,taskId);
+  toScheduleTasks.add(taskId);
+  LOG.info(String.format("Added task: %s into the to-schedule-tasks queue: ",taskId));
+  return true;
+}

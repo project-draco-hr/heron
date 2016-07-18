@@ -1,0 +1,18 @@
+{
+  MesosLauncher launcher=Mockito.spy(MesosLauncher.class);
+  PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
+  Config config=Mockito.mock(Config.class);
+  Mockito.doReturn("working-dir").when(config).getStringValue(MesosContext.SCHEDULER_WORKING_DIRECTORY);
+  Config runtime=Mockito.mock(Config.class);
+  launcher.initialize(config,runtime);
+  Mockito.doReturn(false).when(launcher).setupWorkingDirectory();
+  Assert.assertFalse(launcher.launch(packingPlan));
+  Mockito.doReturn(true).when(launcher).setupWorkingDirectory();
+  String[] mockCommand=new String[]{"mock","scheduler","command"};
+  Mockito.doReturn(mockCommand).when(launcher).getSchedulerCommand();
+  Mockito.doReturn(null).when(launcher).startScheduler(mockCommand);
+  Assert.assertFalse(launcher.launch(packingPlan));
+  Process p=Mockito.mock(Process.class);
+  Mockito.doReturn(p).when(launcher).startScheduler(mockCommand);
+  Assert.assertTrue(launcher.launch(packingPlan));
+}

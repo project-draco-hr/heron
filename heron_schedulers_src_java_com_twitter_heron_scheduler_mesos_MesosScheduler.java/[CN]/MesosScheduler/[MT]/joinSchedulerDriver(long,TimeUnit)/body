@@ -1,0 +1,25 @@
+{
+  ExecutorService service=Executors.newFixedThreadPool(1);
+  final CountDownLatch closeLatch=new CountDownLatch(1);
+  Runnable driverJoin=new Runnable(){
+    @Override public void run(){
+      driver.join();
+      closeLatch.countDown();
+    }
+  }
+;
+  service.submit(driverJoin);
+  LOG.info("Waiting for Mesos Driver got stopped");
+  try {
+    if (!closeLatch.await(timeout,unit)) {
+      LOG.severe("Mesos Driver failed to stop in time.");
+    }
+ else {
+      LOG.info("Mesos Driver stopped.");
+    }
+  }
+ catch (  InterruptedException e) {
+    LOG.log(Level.SEVERE,"Close latch thread is interrupted: ",e);
+  }
+  service.shutdownNow();
+}

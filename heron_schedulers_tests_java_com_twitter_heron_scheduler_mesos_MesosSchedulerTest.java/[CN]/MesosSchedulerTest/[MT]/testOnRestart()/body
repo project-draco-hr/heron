@@ -1,0 +1,5 @@
+{
+  Scheduler.RestartTopologyRequest request=Scheduler.RestartTopologyRequest.newBuilder().setContainerIndex(-1).setTopologyName(TOPOLOGY_NAME).build();
+  scheduler.onRestart(request);
+  Mockito.verify(mesosFramework).restartJob(-1);
+}

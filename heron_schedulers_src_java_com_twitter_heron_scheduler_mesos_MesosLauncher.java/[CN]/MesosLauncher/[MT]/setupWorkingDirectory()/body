@@ -1,0 +1,8 @@
+{
+  if (!FileUtils.isDirectoryExists(schedulerWorkingDirectory)) {
+    FileUtils.createDirectory(schedulerWorkingDirectory);
+  }
+  String topologyPackageURL=String.format("file://%s",Context.topologyPackageFile(config));
+  String topologyPackageDestination=Paths.get(schedulerWorkingDirectory,"topology.tar.gz").toString();
+  return SchedulerUtils.curlAndExtractPackage(schedulerWorkingDirectory,topologyPackageURL,topologyPackageDestination,true,Context.verbose(config));
+}
