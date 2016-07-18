@@ -1,0 +1,11 @@
+{
+  if (this.hasSpace(ram,cpuCores,disk)) {
+    usedRam+=ram;
+    usedCpuCores+=cpuCores;
+    usedDisk+=disk;
+    return true;
+  }
+ else {
+    return false;
+  }
+}

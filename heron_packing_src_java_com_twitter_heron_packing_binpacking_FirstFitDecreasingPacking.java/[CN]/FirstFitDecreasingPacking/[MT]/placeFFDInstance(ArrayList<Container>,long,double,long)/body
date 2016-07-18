@@ -1,0 +1,15 @@
+{
+  boolean placed=false;
+  int containerId=0;
+  for (int i=0; i < containers.size() && !placed; i++) {
+    if (containers.get(i).add(ramRequirement,cpuRequirement,diskRequirement)) {
+      placed=true;
+      containerId=i + 1;
+    }
+  }
+  if (!placed) {
+    containerId=allocateNewContainer(containers);
+    containers.get(containerId - 1).add(ramRequirement,cpuRequirement,diskRequirement);
+  }
+  return containerId;
+}

@@ -1,0 +1,15 @@
+{
+  int spoutParallelism=4;
+  int boltParallelism=3;
+  com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
+  topologyConfig.setContainerPaddingPercentage(50);
+  TopologyAPI.Topology topology=getTopology(spoutParallelism,boltParallelism,topologyConfig);
+  PackingPlan packingPlan=getFirstFitDecreasingPackingPlan(topology);
+  Assert.assertEquals(packingPlan.containers.size(),2);
+  long totalRam=(spoutParallelism + boltParallelism + 1) * instanceRamDefault + (50 * (spoutParallelism + boltParallelism) * instanceRamDefault) / 100;
+  Assert.assertEquals(packingPlan.resource.ram,totalRam);
+  double totalCpu=Math.round(spoutParallelism * instanceCpuDefault + (50 * spoutParallelism * instanceCpuDefault) / 100) + Math.round(boltParallelism * instanceCpuDefault + (50 * boltParallelism * instanceCpuDefault) / 100 + instanceCpuDefault);
+  Assert.assertEquals((long)packingPlan.resource.cpu,(long)totalCpu);
+  long totalDisk=(spoutParallelism + boltParallelism + 1) * instanceDiskDefault + (50 * (spoutParallelism + boltParallelism) * instanceDiskDefault) / 100;
+  Assert.assertEquals(packingPlan.resource.disk,totalDisk);
+}

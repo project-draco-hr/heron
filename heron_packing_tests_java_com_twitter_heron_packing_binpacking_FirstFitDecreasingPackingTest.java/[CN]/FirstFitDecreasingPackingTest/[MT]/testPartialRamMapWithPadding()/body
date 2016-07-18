@@ -1,0 +1,26 @@
+{
+  int spoutParallelism=4;
+  int boltParallelism=3;
+  com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
+  topologyConfig.setContainerPaddingPercentage(0);
+  long maxContainerRam=10L * Constants.GB;
+  long boltRam=4L * Constants.GB;
+  topologyConfig.setContainerMaxRamHint(maxContainerRam);
+  topologyConfig.setComponentRam(BOLT_NAME,boltRam);
+  TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
+  PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
+  Assert.assertEquals(packingPlanExplicitRamMap.containers.size(),2);
+  Assert.assertEquals((long)(Math.round(4 * instanceCpuDefault + 0 * (4 * instanceCpuDefault) / 100) + Math.round(3 * instanceCpuDefault + 0 * (3 * instanceCpuDefault) / 100) + instanceCpuDefault),(long)packingPlanExplicitRamMap.resource.cpu);
+  Assert.assertEquals(2 * boltRam + 2 * instanceRamDefault + 0 * (2 * boltRam + 2 * instanceRamDefault) / 100 + boltRam + 2 * instanceRamDefault + 0 * (boltRam + 2 * instanceRamDefault) / 100 + instanceRamDefault,packingPlanExplicitRamMap.resource.ram);
+  Assert.assertEquals(4 * instanceDiskDefault + 0 * (4 * instanceDiskDefault) / 100 + 3 * instanceDiskDefault + 0 * (3 * instanceDiskDefault) / 100 + instanceDiskDefault,packingPlanExplicitRamMap.resource.disk);
+  for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.containers.values()) {
+    for (    PackingPlan.InstancePlan instancePlan : containerPlan.instances.values()) {
+      if (instancePlan.componentName.equals(BOLT_NAME)) {
+        Assert.assertEquals(boltRam,instancePlan.resource.ram);
+      }
+      if (instancePlan.componentName.equals(SPOUT_NAME)) {
+        Assert.assertEquals(instanceRamDefault,instancePlan.resource.ram);
+      }
+    }
+  }
+}

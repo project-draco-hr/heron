@@ -1,0 +1,5 @@
+{
+  int result=componentName.hashCode();
+  result=31 * result + (int)(ramRequirement ^ (ramRequirement >>> 32));
+  return result;
+}

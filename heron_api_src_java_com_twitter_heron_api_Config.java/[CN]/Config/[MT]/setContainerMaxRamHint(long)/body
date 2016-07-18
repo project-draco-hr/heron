@@ -1,0 +1,3 @@
+{
+  setContainerMaxRamHint(this,nbytes);
+}

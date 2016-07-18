@@ -1,0 +1,3 @@
+long maxRam
+double maxCpuCores
+long maxDisk

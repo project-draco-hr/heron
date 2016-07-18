@@ -1,0 +1,8 @@
+{
+  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
+  long maxContainerRam=Long.parseLong(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_MAX_RAM_HINT,Long.toString(instanceRamDefault * 4)));
+  double maxContainerCpu=Double.parseDouble(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_MAX_CPU_HINT,Double.toString(instanceCpuDefault * 4)));
+  long maxContainerDisk=Long.parseLong(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_MAX_DISK_HINT,Long.toString(instanceDiskDefault * 4)));
+  containers.add(new Container(maxContainerRam,maxContainerCpu,maxContainerDisk));
+  return containers.size();
+}

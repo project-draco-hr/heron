@@ -26,7 +26,7 @@
       LOG.severe("Failed to pack a valid PackingPlan. Check the config.");
       return false;
     }
-    Config ytruntime=Config.newBuilder().putAll(runtime).put(Keys.instanceDistribution(),packedPlan.getInstanceDistribution()).put(Keys.componentRamMap(),packedPlan.getComponentRamDistribution()).build();
+    Config ytruntime=Config.newBuilder().putAll(runtime).put(Keys.instanceDistribution(),packedPlan.getInstanceDistribution()).put(Keys.componentRamMap(),packedPlan.getComponentRamDistribution()).put(Keys.numContainers(),1 + packedPlan.getContainers().size()).build();
     scheduler.initialize(config,ytruntime);
     isSuccessful=scheduler.onSchedule(packedPlan);
     if (!isSuccessful) {

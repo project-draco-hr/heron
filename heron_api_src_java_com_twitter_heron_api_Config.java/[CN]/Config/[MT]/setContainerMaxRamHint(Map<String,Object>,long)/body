@@ -1,0 +1,3 @@
+{
+  conf.put(Config.TOPOLOGY_CONTAINER_MAX_RAM_HINT,Long.toString(nbytes));
+}

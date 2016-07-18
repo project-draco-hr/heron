@@ -1,0 +1,10 @@
+{
+  if (o == this) {
+    return true;
+  }
+  if (!(o instanceof RamRequirement)) {
+    return false;
+  }
+  RamRequirement c=(RamRequirement)o;
+  return Long.compare(ramRequirement,c.ramRequirement) == 0;
+}

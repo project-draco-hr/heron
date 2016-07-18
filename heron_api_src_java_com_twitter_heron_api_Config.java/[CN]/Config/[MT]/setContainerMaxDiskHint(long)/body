@@ -1,0 +1,3 @@
+{
+  setContainerMaxDiskHint(this,nbytes);
+}

@@ -1,0 +1,13 @@
+{
+  if (instanceRAM < MIN_RAM_PER_INSTANCE) {
+    LOG.severe(String.format("Require at least %d MB ram per instance",MIN_RAM_PER_INSTANCE / Constants.MB));
+    return false;
+  }
+  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
+  long maxContainerRam=Long.parseLong(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_MAX_RAM_HINT,Long.toString(instanceRamDefault * 4)));
+  if (instanceRAM > maxContainerRam) {
+    LOG.severe(String.format("This instance requires containers of at least %d MB ram. The current max container" + "size is %d MB",instanceRAM,maxContainerRam));
+    return false;
+  }
+  return true;
+}
