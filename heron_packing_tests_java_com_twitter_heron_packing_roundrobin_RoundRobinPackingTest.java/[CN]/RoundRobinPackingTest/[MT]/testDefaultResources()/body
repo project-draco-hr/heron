@@ -7,7 +7,7 @@
   TopologyAPI.Topology topologyNoExplicitResourcesConfig=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanNoExplicitResourcesConfig=getRoundRobinPackingPlan(topologyNoExplicitResourcesConfig);
   Assert.assertEquals((Math.max(spoutParallelism,boltParallelism) + RoundRobinPacking.DEFAULT_CPU_PADDING_PER_CONTAINER) * (numContainers + 1),packingPlanNoExplicitResourcesConfig.resource.cpu,DELTA);
-  Assert.assertEquals((Math.max(spoutParallelism,boltParallelism) * Constants.GB + RoundRobinPacking.DEFAULT_RAM_PADDING_PER_CONTAINER) * (numContainers + 1),packingPlanNoExplicitResourcesConfig.resource.ram);
+  Assert.assertEquals((spoutParallelism + boltParallelism) * Constants.GB + RoundRobinPacking.DEFAULT_RAM_PADDING_PER_CONTAINER * numContainers,packingPlanNoExplicitResourcesConfig.resource.ram);
   Assert.assertEquals((Math.max(spoutParallelism,boltParallelism) * Constants.GB + RoundRobinPacking.DEFAULT_DISK_PADDING_PER_CONTAINER) * (numContainers + 1),packingPlanNoExplicitResourcesConfig.resource.disk);
   Assert.assertEquals(numContainers,packingPlanNoExplicitResourcesConfig.containers.size());
 }

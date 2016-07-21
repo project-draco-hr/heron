@@ -5,6 +5,7 @@
     String containerId=entry.getKey();
     Map<String,Long> ramInsideContainer=new HashMap<>();
     instancesRamMapInContainer.put(containerId,ramInsideContainer);
+    List<String> instancesToBeAccounted=new ArrayList<>();
     long usedRam=0;
     for (    String instanceId : entry.getValue()) {
       String componentName=getComponentName(instanceId);
@@ -13,26 +14,20 @@
         ramInsideContainer.put(instanceId,ram);
         usedRam+=ram;
       }
+ else {
+        instancesToBeAccounted.add(instanceId);
+      }
     }
     long containerRamHint=getContainerRamHint(allocation);
-    int instancesAllocated=ramInsideContainer.size();
-    int instancesToAllocate=entry.getValue().size() - instancesAllocated;
+    int instancesToAllocate=instancesToBeAccounted.size();
     if (instancesToAllocate != 0) {
+      long individualInstanceRam=instanceRamDefault;
       if (containerRamHint != Long.parseLong(NOT_SPECIFIED_NUMBER_VALUE)) {
         long remainingRam=containerRamHint - DEFAULT_RAM_PADDING_PER_CONTAINER - usedRam;
-        long individualInstanceRam=remainingRam / instancesToAllocate;
-        for (        String instanceId : entry.getValue()) {
-          if (!ramInsideContainer.containsKey(instanceId)) {
-            ramInsideContainer.put(instanceId,individualInstanceRam);
-          }
-        }
+        individualInstanceRam=remainingRam / instancesToAllocate;
       }
- else {
-        for (        String instanceId : entry.getValue()) {
-          if (!ramInsideContainer.containsKey(instanceId)) {
-            ramInsideContainer.put(instanceId,instanceRamDefault);
-          }
-        }
+      for (      String instanceId : instancesToBeAccounted) {
+        ramInsideContainer.put(instanceId,individualInstanceRam);
       }
     }
   }
