@@ -1,0 +1,3 @@
+String scpCommand
+String sshCommand
+boolean isVerbose

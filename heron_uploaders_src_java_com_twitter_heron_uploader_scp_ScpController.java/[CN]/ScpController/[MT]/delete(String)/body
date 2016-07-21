@@ -1,0 +1,4 @@
+{
+  String command=String.format("ssh %s rm -rf %s",sshCommand,filePath);
+  return 0 == ShellUtils.runProcess(isVerbose,command,null,null);
+}

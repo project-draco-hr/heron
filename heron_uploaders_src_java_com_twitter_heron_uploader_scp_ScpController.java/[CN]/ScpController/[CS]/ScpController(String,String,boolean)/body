@@ -1,0 +1,5 @@
+{
+  this.scpCommand=scpCommand;
+  this.sshCommand=sshCommand;
+  this.isVerbose=isVerbose;
+}

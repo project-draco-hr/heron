@@ -1,0 +1,9 @@
+{
+  this.config=ipconfig;
+  this.controller=getScpController();
+  this.destTopologyDirectory=ScpContext.uploadDirPath(config);
+  this.topologyPackageLocation=Context.topologyPackageFile(config);
+  String fileName=UploaderUtils.generateFilename(Context.topologyName(config),Context.role(config));
+  this.destTopologyFile=Paths.get(destTopologyDirectory,fileName).toString();
+  packageURI=TypeUtils.getURI(String.format("%s/%s",destTopologyDirectory,fileName));
+}

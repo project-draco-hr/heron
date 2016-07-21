@@ -1,0 +1,11 @@
+{
+  ScpUploader uploader=Mockito.spy(new ScpUploader());
+  ScpController controller=Mockito.mock(ScpController.class);
+  Mockito.doReturn(controller).when(uploader).getScpController();
+  uploader.initialize(config);
+  Mockito.doReturn(false).when(controller).delete(Mockito.anyString());
+  Assert.assertFalse(uploader.undo());
+  Mockito.verify(controller).delete(Mockito.anyString());
+  Mockito.doReturn(true).when(controller).delete(Mockito.anyString());
+  Assert.assertTrue(uploader.undo());
+}

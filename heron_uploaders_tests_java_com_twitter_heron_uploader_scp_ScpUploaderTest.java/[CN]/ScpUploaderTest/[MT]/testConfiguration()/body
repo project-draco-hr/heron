@@ -1,0 +1,12 @@
+{
+  ScpUploader uploader=Mockito.spy(new ScpUploader());
+  Mockito.doReturn(null).when(config).getStringValue(ScpContext.HERON_UPLOADER_SCP_COMMAND);
+  exception.expect(RuntimeException.class);
+  uploader.getScpController();
+  Mockito.doReturn(null).when(config).getStringValue(ScpContext.HERON_UPLOADER_SSH_COMMAND);
+  exception.expect(RuntimeException.class);
+  uploader.getScpController();
+  Mockito.doReturn(Mockito.anyString()).when(config).getStringValue(ScpContext.HERON_UPLOADER_SCP_COMMAND);
+  Mockito.doReturn(Mockito.anyString()).when(config).getStringValue(ScpContext.HERON_UPLOADER_SSH_COMMAND);
+  Assert.assertNotNull(uploader.getScpController());
+}

@@ -1,0 +1,11 @@
+{
+  String scpCommand=ScpContext.scpCommand(config);
+  String sshCommand=ScpContext.sshCommand(config);
+  if (scpCommand == null) {
+    throw new RuntimeException("Missing heron.uploader.scp.command.options config value");
+  }
+  if (sshCommand == null) {
+    throw new RuntimeException("Missing heron.uploader.ssh.command.options config value");
+  }
+  return new ScpController(scpCommand,sshCommand,Context.verbose(config));
+}

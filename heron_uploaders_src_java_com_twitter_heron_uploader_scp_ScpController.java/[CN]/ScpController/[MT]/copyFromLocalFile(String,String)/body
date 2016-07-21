@@ -1,0 +1,4 @@
+{
+  String command=String.format("scp %s %s:%s",source,scpCommand,destination);
+  return 0 == ShellUtils.runProcess(isVerbose,command,null,null);
+}

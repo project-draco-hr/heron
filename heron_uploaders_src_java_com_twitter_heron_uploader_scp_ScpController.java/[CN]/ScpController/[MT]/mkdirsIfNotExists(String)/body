@@ -1,0 +1,4 @@
+{
+  String command=String.format("ssh %s mkdir -p %s",sshCommand,dir);
+  return 0 == ShellUtils.runProcess(isVerbose,command,null,null);
+}
