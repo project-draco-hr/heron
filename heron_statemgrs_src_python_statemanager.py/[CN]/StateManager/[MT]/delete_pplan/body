@@ -1,4 +1,3 @@
 @abc.abstractmethod
 def delete_pplan(self, topologyName):
-    '\n    Removes the topology entry from pplan.\n    '
     pass

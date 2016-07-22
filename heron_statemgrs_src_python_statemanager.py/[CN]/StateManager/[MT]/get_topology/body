@@ -1,4 +1,3 @@
 @abc.abstractmethod
 def get_topology(self, topologyName, callback=None):
-    '\n    Gets the topology.\n    If the callback is provided,\n    sets watch on the path and calls the callback\n    with the new pplan.\n    '
     pass

@@ -1,4 +1,3 @@
 @property
 def hostport(self):
-    ' string of host and port '
     return ((self.host + ':') + str(self.port))

@@ -1,4 +1,2 @@
 def get_tmaster_path(self, topologyName):
-    '\n    Create the path using rootpath and topology name.\n    '
-    path = (HERON_TMASTER_PREFIX.format(self.rootpath) + topologyName)
-    return path
+    return (HERON_TMASTER_PREFIX.format(self.rootpath) + topologyName)

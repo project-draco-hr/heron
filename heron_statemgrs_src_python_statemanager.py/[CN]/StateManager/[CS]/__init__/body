@@ -1,4 +1,4 @@
 @abc.abstractmethod
 def __init__(self, host, port, rootpath, tunnelhost):
-    '\n    @param host - Host where the states are stored\n    @param port - Port to connect to\n    @param rootpath - Path where the heron states are stored\n    @param tunnelhost - Host to which to tunnel through if state\n                        host is not directly accessible\n    '
+    '\n    @param host - Host where the states are stored\n    @param port - Port to connect to\n    @param rootpath - Path where the heron states are stored\n    @param tunnelhost - Host to which to tunnel through if state host is not directly accessible\n    '
     pass

@@ -1,4 +1,3 @@
 @abc.abstractmethod
 def delete_execution_state(self, topologyName):
-    '\n    Removes the topology entry from execution_state.\n    '
     pass

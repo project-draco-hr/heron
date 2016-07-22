@@ -1,5 +1,5 @@
 def is_host_port_reachable(self):
-    '\n    Returns true if the host is reachable.\n    In some cases, it may not be reachable and must\n    establish a tunnel.\n    '
+    '\n    Returns true if the host is reachable. In some cases, it may not be reachable a tunnel\n    must be used.\n    '
     try:
         socket.create_connection((self.host, self.port), 2)
         return True

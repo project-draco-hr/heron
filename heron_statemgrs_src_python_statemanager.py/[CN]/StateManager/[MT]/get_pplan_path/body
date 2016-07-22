@@ -1,4 +1,2 @@
 def get_pplan_path(self, topologyName):
-    '\n    Create the path using rootoath and topology name.\n    '
-    path = (HERON_PPLANS_PREFIX.format(self.rootpath) + topologyName)
-    return path
+    return (HERON_PPLANS_PREFIX.format(self.rootpath) + topologyName)

@@ -1,4 +1,4 @@
 @property
 def tunnelhost(self):
-    '\n    Getter for the tunnelhost to create the tunnel if host is\n    not accessible\n    '
+    ' Getter for the tunnelhost to create the tunnel if host is not accessible '
     return self.__tunnelhost

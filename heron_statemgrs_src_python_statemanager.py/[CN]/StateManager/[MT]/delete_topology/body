@@ -1,4 +1,3 @@
 @abc.abstractmethod
 def delete_topology(self, topologyName):
-    '\n    Removes the topology entry from topologies list.\n    '
     pass
