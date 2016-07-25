@@ -3,6 +3,6 @@ def get_topology_info(*args):
     instance = tornado.ioloop.IOLoop.instance()
     try:
         return instance.run_sync((lambda : API.get_topology_info(*args)))
-    except Exception as ex:
-        Log.error(str(ex))
+    except Exception:
+        Log.info(traceback.format_exc())
         raise

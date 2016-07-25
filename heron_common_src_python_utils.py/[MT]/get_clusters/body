@@ -3,7 +3,6 @@ def get_clusters():
     instance = tornado.ioloop.IOLoop.instance()
     try:
         return instance.run_sync((lambda : API.get_clusters()))
-    except Exception as ex:
-        Log.error(('Error: %s' % str(ex)))
-        Log.error('Failed to retrive clusters')
+    except Exception:
+        Log.info(traceback.format_exc())
         raise
