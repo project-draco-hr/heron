@@ -1,0 +1,5 @@
+def __init__(self):
+    self.should_exit = False
+    self.wakeup_tasks = []
+    self.timer_tasks = []
+    self.exit_tasks = []

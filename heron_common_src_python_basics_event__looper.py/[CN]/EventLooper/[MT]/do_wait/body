@@ -1,0 +1,4 @@
+@abstractmethod
+def do_wait(self):
+    'Blocking operation, should be implemented by a subclass'
+    pass

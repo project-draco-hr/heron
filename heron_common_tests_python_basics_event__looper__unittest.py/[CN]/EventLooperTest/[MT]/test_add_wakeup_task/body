@@ -1,0 +1,8 @@
+def test_add_wakeup_task(self):
+
+    def to_run():
+        self.looper.exit_loop()
+        self.global_value = 10
+    self.looper.add_wakeup_task(to_run)
+    self.looper.loop()
+    self.assertEqual(10, self.global_value)

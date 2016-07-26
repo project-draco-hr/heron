@@ -1,0 +1,5 @@
+def test_wakeup(self):
+    sleep_times = [0.1, 0.3, 0.5, 1.0, 3.0, 5.0]
+    for sleep in sleep_times:
+        (start, end) = self.prepare_wakeup_test(sleep)
+        self.assertAlmostEqual((start + sleep), end, delta=0.01)

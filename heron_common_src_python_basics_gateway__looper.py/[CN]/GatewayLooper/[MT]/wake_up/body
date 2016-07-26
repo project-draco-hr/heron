@@ -1,0 +1,3 @@
+def wake_up(self):
+    os.write(self.pipe_w, '\n')
+    Log.debug('Wake up called')

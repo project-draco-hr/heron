@@ -1,0 +1,3 @@
+def setUp(self):
+    self.looper = EventLooper()
+    self.global_value = 6

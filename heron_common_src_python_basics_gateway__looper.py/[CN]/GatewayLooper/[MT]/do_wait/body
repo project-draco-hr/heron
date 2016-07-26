@@ -1,0 +1,6 @@
+def do_wait(self):
+    next_timeout = self._get_next_timeout_interval()
+    if (next_timeout > 0):
+        self.poll(timeout=next_timeout)
+    else:
+        self.poll(timeout=0.0)

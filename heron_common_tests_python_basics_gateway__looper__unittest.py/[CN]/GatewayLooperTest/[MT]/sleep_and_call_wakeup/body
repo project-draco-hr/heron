@@ -1,0 +1,4 @@
+@staticmethod
+def sleep_and_call_wakeup(sec, looper):
+    time.sleep(sec)
+    looper.wake_up()

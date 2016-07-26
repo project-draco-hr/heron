@@ -1,0 +1,12 @@
+def test_register_timer_task(self):
+
+    def to_run():
+        self.looper.exit_loop()
+        self.global_value = 10
+    start_time = time.time()
+    interval = 1
+    self.looper.register_timer_task_in_sec(to_run, interval)
+    self.looper.loop()
+    end_time = time.time()
+    self.assertAlmostEqual((start_time + interval), end_time, delta=0.01)
+    self.assertEqual(10, self.global_value)

@@ -1,0 +1,5 @@
+def loop(self):
+    'Start loop\n\n    This will start a while loop until ``exit_loop()`` is called.\n    '
+    while (not self.should_exit):
+        self._run_once()
+    self.on_exit()

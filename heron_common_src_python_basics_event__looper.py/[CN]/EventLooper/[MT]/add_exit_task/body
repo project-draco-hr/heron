@@ -1,0 +1,3 @@
+def add_exit_task(self, task):
+    'Add an exit task\n\n    :param task: function to be run as an exit task\n    '
+    self.exit_tasks.append(task)

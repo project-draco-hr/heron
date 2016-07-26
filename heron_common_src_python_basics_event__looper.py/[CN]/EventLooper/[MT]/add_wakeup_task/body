@@ -1,0 +1,4 @@
+def add_wakeup_task(self, task):
+    'Add a wakeup task\n\n    :param task: function to be run as a wakeup task\n    '
+    self.wakeup_tasks.append(task)
+    self.wake_up()

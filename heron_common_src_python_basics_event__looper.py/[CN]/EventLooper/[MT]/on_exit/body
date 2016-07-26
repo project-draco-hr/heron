@@ -1,0 +1,5 @@
+def on_exit(self):
+    'Called when exiting'
+    Log.info('In on_exit() of event_looper')
+    for task in self.exit_tasks:
+        task()

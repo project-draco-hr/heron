@@ -1,0 +1,10 @@
+def test_loop(self):
+
+    def to_run():
+        for _ in range(3):
+            self.global_value += 10
+            self.looper.wake_up()
+        self.looper.exit_loop()
+    self.looper.add_wakeup_task(to_run)
+    self.looper.loop()
+    self.assertEqual(36, self.global_value)

@@ -1,0 +1,4 @@
+def exit_loop(self):
+    'Exits the loop'
+    self.should_exit = True
+    self.wake_up()

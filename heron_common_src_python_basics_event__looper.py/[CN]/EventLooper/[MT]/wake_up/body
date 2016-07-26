@@ -1,0 +1,4 @@
+@abstractmethod
+def wake_up(self):
+    'Wakes up do_wait() operation, should be implemented by a subclass\n\n    Note that this method should be implemented in a thread-safe way.\n    '
+    pass

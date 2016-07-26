@@ -1,0 +1,4 @@
+def on_exit(self):
+    super(GatewayLooper, self).on_exit()
+    os.close(self.pipe_r)
+    os.close(self.pipe_w)

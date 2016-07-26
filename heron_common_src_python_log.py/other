@@ -1,4 +1,4 @@
 ' log.py '
 import logging
-import logging.handlers
+from logging.handlers import RotatingFileHandler
 Log = logging.getLogger('common')

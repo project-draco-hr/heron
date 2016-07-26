@@ -1,0 +1,7 @@
+def __init__(self, socket_map):
+    'Initializes a GatewayLooper instance\n\n    :param socket_map: socket map used for asyncore.dispatcher\n    '
+    super(GatewayLooper, self).__init__()
+    self.sock_map = socket_map
+    (self.pipe_r, self.pipe_w) = os.pipe()
+    self.started = time.time()
+    Log.debug(('Gateway Looper started time: ' + str(time.asctime())))
