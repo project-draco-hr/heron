@@ -1,4 +1,4 @@
-def run_process(self, name, cmd):
+def run_process(self, name, cmd, env_to_exec=None):
     ' run process '
     do_print(('Running %s process as %s' % (name, ' '.join(cmd))))
-    return subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env_to_exec)

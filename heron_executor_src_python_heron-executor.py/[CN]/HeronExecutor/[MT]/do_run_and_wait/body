@@ -2,7 +2,7 @@ def do_run_and_wait(self, commands):
     ' run commands and wait'
     process_dict = {}
     for (name, cmd) in commands.items():
-        p = self.run_process(name, cmd)
+        p = self.run_process(name, cmd, self.shell_env)
         process_dict[p.pid] = (p, name, 1)
         log_pid_for_process(name, p.pid)
     while True:

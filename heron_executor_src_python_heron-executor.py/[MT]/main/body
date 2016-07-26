@@ -3,6 +3,8 @@ def main():
     if (len(sys.argv) != 32):
         print_usage()
         sys.exit(1)
-    executor = HeronExecutor(sys.argv)
+    shell_env = os.environ.copy()
+    shell_env['PEX_ROOT'] = os.path.join(os.path.abspath('.'), '.pex')
+    executor = HeronExecutor(sys.argv, shell_env)
     executor.prepareLaunch()
     executor.launch()

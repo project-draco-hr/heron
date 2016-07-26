@@ -1,4 +1,4 @@
-def __init__(self, args):
+def __init__(self, args, shell_env):
     self.max_runs = 100
     self.interval_between_runs = 10
     self.shard = int(args[1])
@@ -42,6 +42,7 @@ def __init__(self, args):
     self.metrics_sinks_config_file = args[29]
     self.scheduler_classpath = args[30]
     self.scheduler_port = args[31]
+    self.shell_env = shell_env
     self.heron_internals_config = {}
     with open(self.heron_internals_config_file, 'r') as stream:
         self.heron_internals_config = yaml.load(stream)

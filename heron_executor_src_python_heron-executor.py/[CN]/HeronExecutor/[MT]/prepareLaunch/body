@@ -4,6 +4,6 @@ def prepareLaunch(self):
     chmod_binaries = ('chmod a+rx . && chmod a+x %s && chmod +x %s && chmod +x %s && chmod +x %s' % (self.log_dir, self.tmaster_binary, self.stmgr_binary, self.heron_shell_binary))
     commands = [create_folders, chmod_binaries]
     for command in commands:
-        if (self.run_blocking_process(command, True) != 0):
+        if (self.run_blocking_process(command, True, self.shell_env) != 0):
             do_print(('Failed to run command: %s. Exitting' % command))
             sys.exit(1)
