@@ -1,0 +1,11 @@
+def get_mock_bolt(component=get_mock_component(), inputs=[], outputs=[]):
+    'Returns a mock protobuf Bolt object from topology_pb2'
+    bolt = topology_pb2.Bolt()
+    bolt.comp.CopyFrom(component)
+    for i in inputs:
+        added = bolt.inputs.add()
+        added.CopyFrom(i)
+    for o in outputs:
+        added = bolt.outputs.add()
+        added.CopyFrom(o)
+    return bolt

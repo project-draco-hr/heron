@@ -1,0 +1,7 @@
+def get_mock_instance(instance_id='instance_id', stmgr_id='Stmgr_id', info=get_mock_instance_info()):
+    'Returns a mock protobuf Instance object from physical_plan_pb2'
+    instance = physical_plan_pb2.Instance()
+    instance.instance_id = instance_id
+    instance.stmgr_id = stmgr_id
+    instance.info.CopyFrom(info)
+    return instance

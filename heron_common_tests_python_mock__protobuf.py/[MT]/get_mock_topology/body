@@ -1,0 +1,13 @@
+def get_mock_topology(id='topology_id', name='topology_name', state=1, spouts=[], bolts=[]):
+    'Returns a mock protobuf Topology object from topology_pb2'
+    topology = topology_pb2.Topology()
+    topology.id = id
+    topology.name = name
+    topology.state = state
+    for sp in spouts:
+        added = topology.spouts.add()
+        added.CopyFrom(sp)
+    for bl in bolts:
+        added = topology.bolts.add()
+        added.CopyFrom(bl)
+    return topology

@@ -1,0 +1,6 @@
+def get_mock_status(status='OK', message='OK Message'):
+    'Returns a mock protobuf Status object from common_pb2'
+    mock_status = common_pb2.Status()
+    mock_status.status = common_pb2.StatusCode.Value(status)
+    mock_status.message = message
+    return mock_status

@@ -1,0 +1,8 @@
+def get_mock_stmgr(id='Stmgr_id', host='localhost', port=9999, endpoint='hello'):
+    'Returns a mock protobuf StMgr object from physical_plan_pb2'
+    stmgr = physical_plan_pb2.StMgr()
+    stmgr.id = id
+    stmgr.host_name = host
+    stmgr.data_port = port
+    stmgr.local_endpoint = endpoint
+    return stmgr

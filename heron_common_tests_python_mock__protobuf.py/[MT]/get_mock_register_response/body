@@ -1,0 +1,6 @@
+def get_mock_register_response(status=get_mock_status(), pplan=get_mock_pplan()):
+    'Returns a mock protobuf RegisterInstanceResponse object from stmgr_pb2'
+    mock_response = stmgr_pb2.RegisterInstanceResponse()
+    mock_response.status.MergeFrom(status)
+    mock_response.pplan.MergeFrom(pplan)
+    return mock_response

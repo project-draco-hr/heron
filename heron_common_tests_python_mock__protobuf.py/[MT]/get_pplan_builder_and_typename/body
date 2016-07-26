@@ -1,0 +1,5 @@
+def get_pplan_builder_and_typename():
+    "Returns a PhysicalPlan builder callable and typename 'PhysicalPlan'"
+    builder = (lambda : physical_plan_pb2.PhysicalPlan())
+    typename = builder().DESCRIPTOR.full_name
+    return (builder, typename)

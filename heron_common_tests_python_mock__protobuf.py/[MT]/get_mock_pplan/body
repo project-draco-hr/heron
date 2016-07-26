@@ -1,0 +1,15 @@
+def get_mock_pplan(topology=get_mock_topology(), stmgrs=[], instances=[]):
+    'Returns a mock protobuf PhysicalPlan object from physical_plan_pb2'
+    pplan = physical_plan_pb2.PhysicalPlan()
+    pplan.topology.MergeFrom(topology)
+    if (len(stmgrs) == 0):
+        stmgrs.append(get_mock_stmgr())
+    if (len(instances) == 0):
+        instances.append(get_mock_instance())
+    for stmgr in stmgrs:
+        added = pplan.stmgrs.add()
+        added.CopyFrom(stmgr)
+    for instance in instances:
+        added = pplan.instances.add()
+        added.CopyFrom(instance)
+    return pplan

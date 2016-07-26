@@ -1,0 +1,5 @@
+def get_mock_assignment_message(pplan=get_mock_pplan()):
+    'Returns a mock protobuf NewInstanceAssignmentMessage object from stmgr_pb2'
+    mock_message = stmgr_pb2.NewInstanceAssignmentMessage()
+    mock_message.pplan.MergeFrom(pplan)
+    return mock_message

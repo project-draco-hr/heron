@@ -1,0 +1,3 @@
+def get_mock_config():
+    'Returns an empty protobuf Config object from topology_pb2'
+    return topology_pb2.Config()

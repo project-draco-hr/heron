@@ -1,0 +1,8 @@
+def get_mock_spout(component=get_mock_component(), outputs=[]):
+    'Returns a mock protobuf Spout object from topology_pb2'
+    spout = topology_pb2.Spout()
+    spout.comp.CopyFrom(component)
+    for out in outputs:
+        added = spout.outputs.add()
+        added.CopyFrom(out)
+    return spout
