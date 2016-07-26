@@ -10,12 +10,12 @@
   TopologyContextImpl topologyContext=helper.getTopologyContext();
   serializer=SerializeDeSerializeHelper.getSerializer(topologyContext.getTopologyConfig());
   systemConfig=(SystemConfig)SingletonRegistry.INSTANCE.getSingleton(SystemConfig.HERON_SYSTEM_CONFIG);
-  if (helper.getMyBolt().getComp().hasJavaObject()) {
-    bolt=(IBolt)Utils.deserialize(helper.getMyBolt().getComp().getJavaObject().toByteArray());
+  if (helper.getMyBolt().getComp().hasSerializedObject()) {
+    bolt=(IBolt)Utils.deserialize(helper.getMyBolt().getComp().getSerializedObject().toByteArray());
   }
- else   if (helper.getMyBolt().getComp().hasJavaClassName()) {
+ else   if (helper.getMyBolt().getComp().hasClassName()) {
     try {
-      String boltClassName=helper.getMyBolt().getComp().getJavaClassName();
+      String boltClassName=helper.getMyBolt().getComp().getClassName();
       bolt=(IBolt)Class.forName(boltClassName).newInstance();
     }
  catch (    ClassNotFoundException ex) {

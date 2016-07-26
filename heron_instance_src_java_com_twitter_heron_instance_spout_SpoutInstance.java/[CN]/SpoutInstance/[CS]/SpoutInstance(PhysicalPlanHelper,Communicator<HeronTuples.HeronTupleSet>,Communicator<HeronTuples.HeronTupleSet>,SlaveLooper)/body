@@ -15,11 +15,11 @@
     throw new RuntimeException("HeronSpoutInstance has no spout in physical plan");
   }
   serializer=SerializeDeSerializeHelper.getSerializer(config);
-  if (helper.getMySpout().getComp().hasJavaObject()) {
-    spout=(ISpout)Utils.deserialize(helper.getMySpout().getComp().getJavaObject().toByteArray());
+  if (helper.getMySpout().getComp().hasSerializedObject()) {
+    spout=(ISpout)Utils.deserialize(helper.getMySpout().getComp().getSerializedObject().toByteArray());
   }
- else   if (helper.getMySpout().getComp().hasJavaClassName()) {
-    String spoutClassName=helper.getMySpout().getComp().getJavaClassName();
+ else   if (helper.getMySpout().getComp().hasClassName()) {
+    String spoutClassName=helper.getMySpout().getComp().getClassName();
     try {
       spout=(ISpout)Class.forName(spoutClassName).newInstance();
     }
