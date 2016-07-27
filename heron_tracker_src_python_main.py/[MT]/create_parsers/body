@@ -7,4 +7,5 @@ def create_parsers():
     subparsers = ya_parser.add_subparsers(title='Available commands')
     help_parser = subparsers.add_parser('help', help='Prints help', add_help=False)
     help_parser.set_defaults(help=True)
+    subparsers.add_parser('version', help='Prints version', add_help=True)
     return (parser, ya_parser)

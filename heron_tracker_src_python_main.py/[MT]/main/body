@@ -2,9 +2,15 @@ def main():
     ' main '
     (parser, _) = create_parsers()
     (args, remaining) = parser.parse_known_args()
-    if remaining:
+    if (remaining == ['help']):
         parser.print_help()
         parser.exit()
+    elif (remaining == ['version']):
+        common_utils.print_version()
+        parser.exit()
+    elif (remaining != []):
+        LOG.error('Invalid subcommand')
+        sys.exit(1)
     namespace = vars(args)
     if namespace['verbose']:
         configure_logging(logging.DEBUG)
