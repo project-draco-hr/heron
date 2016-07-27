@@ -1,0 +1,3 @@
+def __init__(self):
+    self.pid = MockPOpen.next_pid
+    MockPOpen.next_pid += 1

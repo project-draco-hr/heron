@@ -1,6 +1,0 @@
-def run_blocking_process(self, cmd, is_shell, env_to_exec=None):
-    ' run blocking process '
-    do_print(('Running blocking process as %s' % cmd))
-    process = subprocess.Popen(cmd, shell=is_shell, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env_to_exec)
-    self.wait_process_std_out_err('', process)
-    return process.returncode

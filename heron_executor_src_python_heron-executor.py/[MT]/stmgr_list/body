@@ -1,3 +1,0 @@
-def stmgr_list(count):
-    ' prepend stmgr '
-    return id_list('stmgr-', 1, count)

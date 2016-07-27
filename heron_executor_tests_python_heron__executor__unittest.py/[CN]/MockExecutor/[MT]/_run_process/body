@@ -1,0 +1,4 @@
+def _run_process(self, name, cmd, env=None):
+    popen = MockPOpen()
+    self.processes.append(ProcessInfo(popen, name, cmd))
+    return popen

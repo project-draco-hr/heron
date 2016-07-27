@@ -1,0 +1,3 @@
+def increment_attempts(self):
+    self.attempts += 1
+    return self

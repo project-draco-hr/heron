@@ -1,5 +1,0 @@
-def get_heron_support_processes(self):
-    "\n    Get a map from all daemon services' name to the command to start them\n    "
-    retval = {}
-    retval[self.heron_shell_ids[self.shard]] = [('%s' % self.heron_shell_binary), ('--port=%s' % self.shell_port), ('--log_file_prefix=%s/heron-shell.log' % self.log_dir)]
-    return retval

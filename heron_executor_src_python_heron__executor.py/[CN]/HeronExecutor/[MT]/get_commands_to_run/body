@@ -1,0 +1,8 @@
+def get_commands_to_run(self):
+    if (self.shard == 0):
+        commands = self._get_tmaster_processes()
+    else:
+        self._untar_if_tar()
+        commands = self._get_streaming_processes()
+    commands.update(self._get_heron_support_processes())
+    return commands

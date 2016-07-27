@@ -1,0 +1,2 @@
+def test_launch_container_0(self):
+    self.do_test_launch(self.executor_0, self.expected_processes_container_0)

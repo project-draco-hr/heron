@@ -1,3 +1,0 @@
-def get_heron_executor_process_name(shard_id):
-    ' prepend heron-executor '
-    return ('heron-executor-' + str(shard_id))

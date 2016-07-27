@@ -1,0 +1,3 @@
+@staticmethod
+def set_next_pid(next_pid):
+    MockPOpen.next_pid = next_pid

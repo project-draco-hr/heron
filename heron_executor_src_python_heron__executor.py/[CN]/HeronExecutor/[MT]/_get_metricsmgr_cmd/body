@@ -1,0 +1,5 @@
+def _get_metricsmgr_cmd(self, metricsManagerId, sink_config_file, port):
+    ' get the command to start the metrics manager processes '
+    metricsmgr_main_class = 'com.twitter.heron.metricsmgr.MetricsManager'
+    metricsmgr_cmd = [os.path.join(self.heron_java_home, 'bin/java'), '-Xmx1024M', '-XX:+PrintCommandLineFlags', '-verbosegc', '-XX:+PrintGCDetails', '-XX:+PrintGCTimeStamps', '-XX:+PrintGCDateStamps', '-XX:+PrintGCCause', '-XX:+PrintPromotionFailure', '-XX:+PrintTenuringDistribution', '-XX:+PrintHeapAtGC', '-XX:+HeapDumpOnOutOfMemoryError', '-XX:+UseConcMarkSweepGC', '-XX:+PrintCommandLineFlags', '-Xloggc:log-files/gc.metricsmgr.log', '-Djava.net.preferIPv4Stack=true', '-cp', self.metricsmgr_classpath, metricsmgr_main_class, metricsManagerId, port, self.topology_name, self.topology_id, self.heron_internals_config_file, sink_config_file]
+    return metricsmgr_cmd

@@ -1,0 +1,5 @@
+def update_instance_distribution(self, new_distribution):
+    self.instance_distribution = new_distribution
+    self.stmgr_ids = stmgr_list(len(self.instance_distribution))
+    self.metricsmgr_ids = metricsmgr_list(len(self.instance_distribution))
+    self.heron_shell_ids = heron_shell_list(len(self.instance_distribution))

@@ -1,0 +1,4 @@
+def assert_processes(self, expected_processes, found_processes):
+    self.assertEquals(len(expected_processes), len(found_processes))
+    for expected_process in expected_processes:
+        self.assert_process(expected_process, found_processes)

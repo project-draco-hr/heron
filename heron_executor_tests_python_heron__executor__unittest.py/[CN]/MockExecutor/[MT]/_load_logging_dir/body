@@ -1,0 +1,2 @@
+def _load_logging_dir(self, heron_internals_config_file):
+    return 'fake_dir'

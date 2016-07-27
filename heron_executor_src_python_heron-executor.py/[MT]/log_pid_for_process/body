@@ -1,5 +1,0 @@
-def log_pid_for_process(process_name, pid):
-    ' log pid for process '
-    filename = get_process_pid_filename(process_name)
-    do_print(('Logging pid %d to file %s' % (pid, filename)))
-    atomic_write_file(filename, str(pid))

@@ -1,0 +1,3 @@
+def __init__(self, args):
+    self.processes = []
+    super(MockExecutor, self).__init__(args, None)

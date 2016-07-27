@@ -1,0 +1,12 @@
+def test_change_instance_dist_container_1(self):
+    MockPOpen.set_next_pid(37)
+    self.executor_1.update_instance_distribution(self.dist_expected)
+    current_commands = self.executor_1.get_commands_to_run()
+    self.assertEquals(dict(map((lambda process_info: (process_info.name, process_info.command.split(' '))), self.expected_processes_container_1)), current_commands)
+    new_distribution = self.executor_1.parse_instance_distribution('1:word:3:0:word:2:0:exclaim1:1:0')
+    self.executor_1.update_instance_distribution(new_distribution)
+    updated_commands = self.executor_1.get_commands_to_run()
+    (commands_to_kill, commands_to_keep, commands_to_start) = self.executor_1.get_command_changes(current_commands, updated_commands)
+    self.assertEquals(['container_1_exclaim1_2', 'stmgr-1'], sorted(commands_to_kill.keys()))
+    self.assertEquals(['container_1_exclaim1_1', 'container_1_word_3', 'heron-shell-1', 'metricsmgr-1'], sorted(commands_to_keep.keys()))
+    self.assertEquals(['container_1_word_2', 'stmgr-1'], sorted(commands_to_start.keys()))

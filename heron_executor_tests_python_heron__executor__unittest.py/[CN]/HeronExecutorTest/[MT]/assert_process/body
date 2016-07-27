@@ -1,0 +1,6 @@
+def assert_process(self, expected_process, found_processes):
+    pid = expected_process.pid
+    self.assertTrue(found_processes[pid])
+    self.assertEquals(expected_process.name, found_processes[pid].name)
+    self.assertEquals(expected_process.command, found_processes[pid].command_str)
+    self.assertEquals(1, found_processes[pid].attempts)

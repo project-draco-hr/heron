@@ -1,0 +1,6 @@
+def test_update_instance_distribution(self):
+    self.executor_0.update_instance_distribution(self.dist_expected)
+    self.assertEquals(self.dist_expected, self.executor_0.instance_distribution)
+    self.assertEquals(['stmgr-1'], self.executor_0.stmgr_ids)
+    self.assertEquals(['metricsmgr-0', 'metricsmgr-1'], self.executor_0.metricsmgr_ids)
+    self.assertEquals(['heron-shell-0', 'heron-shell-1'], self.executor_0.heron_shell_ids)

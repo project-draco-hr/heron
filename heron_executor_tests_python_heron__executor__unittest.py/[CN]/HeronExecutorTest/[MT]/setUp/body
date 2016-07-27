@@ -1,0 +1,5 @@
+def setUp(self):
+    MockPOpen.set_next_pid(37)
+    self.maxDiff = None
+    self.executor_0 = MockExecutor(self.get_args(0))
+    self.executor_1 = MockExecutor(self.get_args(1))

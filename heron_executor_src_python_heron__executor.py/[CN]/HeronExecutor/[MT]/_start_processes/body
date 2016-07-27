@@ -1,0 +1,8 @@
+def _start_processes(self, commands):
+    'Start all commands and add them to the dict of processes to be monitored '
+    processes_to_monitor = {}
+    for (name, command) in commands.items():
+        p = self._run_process(name, command, self.shell_env)
+        processes_to_monitor[p.pid] = ProcessInfo(p, name, command)
+        log_pid_for_process(name, p.pid)
+    self.processes_to_monitor.update(processes_to_monitor)

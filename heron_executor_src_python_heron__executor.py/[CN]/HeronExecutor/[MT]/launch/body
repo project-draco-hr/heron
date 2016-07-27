@@ -1,0 +1,12 @@
+def launch(self):
+    current_commands = dict(map((lambda x: (x[1], x[2])), self.processes_to_monitor.values()))
+    updated_commands = self.get_commands_to_run()
+    (commands_to_kill, commands_to_keep, commands_to_start) = self.get_command_changes(current_commands, updated_commands)
+    do_print(('current commands: %s' % sorted(current_commands.keys())))
+    do_print(('new commands    : %s' % sorted(updated_commands.keys())))
+    do_print(('commands_to_kill: %s' % sorted(commands_to_kill.keys())))
+    do_print(('commands_to_keep: %s' % sorted(commands_to_keep.keys())))
+    do_print(('commands_to_start: %s' % sorted(commands_to_start.keys())))
+    self._kill_processes(commands_to_kill)
+    self._start_processes(commands_to_start)
+    do_print(('Launch complete - processes killed=%s kept=%s started=%s monitored=%s' % (len(commands_to_kill), len(commands_to_keep), len(commands_to_start), len(self.processes_to_monitor))))

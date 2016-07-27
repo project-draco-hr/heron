@@ -1,0 +1,9 @@
+def setup():
+    sys.stdout = open('heron-executor.stdout', 'a')
+    sys.stderr = open('heron-executor.stderr', 'a')
+    do_print('Set up process group; executor becomes leader')
+    os.setpgrp()
+    do_print('Register the SIGTERM signal handler')
+    signal.signal(signal.SIGTERM, signal_handler)
+    do_print('Register the atexit clean up')
+    atexit.register(cleanup)

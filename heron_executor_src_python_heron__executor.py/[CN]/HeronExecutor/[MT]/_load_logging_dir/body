@@ -1,0 +1,4 @@
+def _load_logging_dir(self, heron_internals_config_file):
+    with open(heron_internals_config_file, 'r') as stream:
+        heron_internals_config = yaml.load(stream)
+    return heron_internals_config['heron.logging.directory']

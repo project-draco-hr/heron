@@ -1,0 +1,14 @@
+def get_command_changes(self, current_commands, updated_commands):
+    '\n    Compares the current command with updated command to return a 3-tuple of dicts,\n    keyed by command name: commands_to_kill, commands_to_keep and commands_to_start.\n    '
+    commands_to_kill = {}
+    commands_to_keep = {}
+    commands_to_start = {}
+    for (current_name, current_command) in current_commands.iteritems():
+        if ((current_name in updated_commands.keys()) and (current_command == updated_commands[current_name]) and (current_name != 'heron-tmaster')):
+            commands_to_keep[current_name] = current_command
+        else:
+            commands_to_kill[current_name] = current_command
+    for (updated_name, updated_command) in updated_commands.iteritems():
+        if (updated_name not in commands_to_keep.keys()):
+            commands_to_start[updated_name] = updated_command
+    return (commands_to_kill, commands_to_keep, commands_to_start)
