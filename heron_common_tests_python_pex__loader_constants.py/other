@@ -1,0 +1,4 @@
+'Constants for pex_loader unittest testdata'
+TEST_DATA_PATH = 'testdata/pex'
+SAMPLE_PEX = 'sample_pex.pex'
+SAMPLE_PEX_CLASSPATH = 'heron.common.tests.python.pex_loader.testdata.src.sample.SampleClass'

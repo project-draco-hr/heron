@@ -1,0 +1,6 @@
+def test_load_pex(self):
+    test_path = ['sample.pex', 'sample_123.pex', '/tmp/path.pex']
+    for path in test_path:
+        pex_loader.load_pex(path, include_deps=False)
+        abs_path = os.path.abspath(path)
+        self.assertIn(abs_path, sys.path)

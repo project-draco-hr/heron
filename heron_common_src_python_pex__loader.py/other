@@ -1,0 +1,8 @@
+'pex_loader.py: module for dynamically loading pex'
+import os
+import re
+import sys
+import zipimport
+import zipfile
+from heron.common.src.python.log import Log
+egg_regex = '^(\\.deps\\/[^\\/\\s]*\\.(egg|whl))\\/'
