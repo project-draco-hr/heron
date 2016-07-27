@@ -5,5 +5,5 @@ def get_component_metrics(component, cluster, env, topology, role):
         result = get_topology_metrics(cluster, env, topology, component, [], all_queries, [0, (-1)], role)
         return result['metrics']
     except Exception:
-        Log.info(traceback.format_exc())
+        Log.debug(traceback.format_exc())
         raise

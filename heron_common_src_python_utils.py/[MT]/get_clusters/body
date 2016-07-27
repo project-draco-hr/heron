@@ -4,5 +4,5 @@ def get_clusters():
     try:
         return instance.run_sync((lambda : API.get_clusters()))
     except Exception:
-        Log.info(traceback.format_exc())
+        Log.debug(traceback.format_exc())
         raise
