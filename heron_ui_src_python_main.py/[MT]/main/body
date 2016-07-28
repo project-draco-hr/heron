@@ -4,16 +4,10 @@ def main():
     tornado.log.enable_pretty_logging()
     (parser, child_parser) = args.create_parsers()
     (parsed_args, remaining) = parser.parse_known_args()
-    if (remaining == ['help']):
+    if remaining:
         child_parser.parse_args(args=remaining, namespace=parsed_args)
         parser.print_help()
         parser.exit()
-    elif (remaining == ['version']):
-        utils.print_version()
-        parser.exit()
-    elif (remaining != []):
-        LOG.error('Invalid subcommand')
-        sys.exit(1)
     command_line_args = vars(parsed_args)
     address = socket.gethostbyname(socket.gethostname())
     LOG.info('Listening at http://%s:%d', address, command_line_args['port'])

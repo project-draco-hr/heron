@@ -1,7 +1,6 @@
 ' main.py '
 import os
 import socket
-import sys
 import tornado.ioloop
 import tornado.options
 import tornado.web
@@ -12,6 +11,5 @@ from heron.ui.src.python import handlers
 from heron.ui.src.python import args
 from heron.ui.src.python import log
 from heron.ui.src.python.log import Log as LOG
-import heron.common.src.python.utils as utils
 if (__name__ == '__main__'):
     main()
