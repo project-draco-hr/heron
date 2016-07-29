@@ -5,7 +5,7 @@
       retval.put(kv.getKey(),kv.getValue());
     }
  else {
-      retval.put(kv.getKey(),Utils.deserialize(kv.getJavaSerializedValue().toByteArray()));
+      retval.put(kv.getKey(),Utils.deserialize(kv.getSerializedValue().toByteArray()));
     }
   }
   for (  TopologyAPI.Config.KeyValue kv : acomponent.getConfig().getKvsList()) {
@@ -13,7 +13,7 @@
       retval.put(kv.getKey(),kv.getValue());
     }
  else {
-      retval.put(kv.getKey(),Utils.deserialize(kv.getJavaSerializedValue().toByteArray()));
+      retval.put(kv.getKey(),Utils.deserialize(kv.getSerializedValue().toByteArray()));
     }
   }
   return retval;

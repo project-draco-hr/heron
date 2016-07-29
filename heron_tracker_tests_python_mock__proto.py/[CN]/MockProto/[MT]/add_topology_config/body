@@ -1,4 +1,5 @@
 def add_topology_config(self, topology, key, value):
     kv = topology.topology_config.kvs.add()
     kv.key = key
+    kv.type = protoTopology.ConfigValueType.Value('STRING_VALUE')
     kv.value = str(value)
