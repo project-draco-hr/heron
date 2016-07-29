@@ -1,0 +1,16 @@
+def submit_pex(cl_args, unknown_args, tmp_dir):
+    topology_file = cl_args['topology-file-name']
+    topology_class_name = cl_args['topology-class-name']
+    try:
+        execute.heron_pex(topology_file, topology_class_name, tmp_dir)
+    except Exception as ex:
+        Log.error(('Unable to execute topology main class: ' + ex.message))
+        return False
+    try:
+        try:
+            launch_topologies(cl_args, topology_file, tmp_dir)
+        except Exception as ex:
+            return False
+    finally:
+        shutil.rmtree(tmp_dir)
+    return True

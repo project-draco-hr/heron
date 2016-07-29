@@ -1,0 +1,15 @@
+def _gather_one_metric(self, name, message):
+    metric_value = self.metrics_map[name].get_value_and_reset()
+    Log.debug(('In gather_one_metric with name: %s, and value: %s' % (name, str(metric_value))))
+    if (metric_value is None):
+        return
+    elif isinstance(metric_value, dict):
+        for (key, value) in metric_value.iteritems():
+            if ((key is not None) and (value is not None)):
+                self._add_data_to_message(message, ((name + '/') + str(key)), value)
+                self._add_data_to_message(message, ('%s/%s' % (name, str(key))), value)
+            else:
+                Log.info(('When gathering metric: %s, <%s:%s> is not a valid key-value to output as metric. Skipping...' % (name, str(key), str(value))))
+                continue
+    else:
+        self._add_data_to_message(message, name, metric_value)

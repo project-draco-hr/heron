@@ -1,0 +1,4 @@
+@abstractmethod
+def emit(self, emit_info):
+    'Called every time a tuple is emitted in spout/bolt\n\n    :param emit_info: EmitInfo object\n    '
+    pass

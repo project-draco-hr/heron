@@ -1,0 +1,15 @@
+'task_hook.py: modules for supporting task hooks for topology'
+from abc import abstractmethod
+from collections import namedtuple
+EmitInfo = namedtuple('EmitInfo', 'values, stream_id, task_id, out_tasks')
+'Information about emit\n\n:ivar values: (list) values emitted\n:ivar stream_id: (str) stream id into which tuple is emitted\n:ivar task_id: (int) task id on which emit() was called\n:ivar out_tasks: (list) tasks that are emitted\n'
+SpoutAckInfo = namedtuple('SpoutAckInfo', 'message_id, spout_task_id, complete_latency_ms')
+"Information about Spout's Acking of a tuple\n\n:ivar message_id: message id to which an acked tuple was anchored\n:ivar spout_task_id: (int) task id of spout\n:ivar complete_latency_ms: (float) complete latency in ms\n"
+SpoutFailInfo = namedtuple('SpoutFailInfo', 'message_id, spout_task_id, fail_latency_ms')
+"Information about Spout's Failing of a tuple\n\n:ivar message_id: message id to which an acked tuple was anchored\n:ivar spout_task_id: (int) task id of spout\n:ivar fail_latency_ms: (float) fail latency in ms\n"
+BoltExecuteInfo = namedtuple('BoltExecuteInfo', 'heron_tuple, executing_task_id, execute_latency_ms')
+"Information about Bolt's executing of a tuple\n\n:ivar heron_tuple: (HeronTuple) tuple that is executed\n:ivar executing_task_id: (int) task id of bolt\n:ivar execute_latency_ms: (float) execute latency in ms\n"
+BoltAckInfo = namedtuple('BoltAckInfo', 'heron_tuple, acking_task_id, process_latency_ms')
+"Information about Bolt's acking of a tuple\n\n:ivar heron_tuple: (HeronTuple) tuple that is acked\n:ivar acking_task_id: (int) task id of bolt\n:ivar process_latency_ms: (float) process latency in ms\n  "
+BoltFailInfo = namedtuple('BoltFailInfo', 'heron_tuple, failing_task_id, fail_latency_ms')
+"Information about Bolt's failing of a tuple\n\n:ivar heron_tuple: (HeronTuple) tuple that is failed\n:ivar failing_task_id: (int) task id of bolt\n:ivar fail_latency_ms: (float) fail latency in ms\n"

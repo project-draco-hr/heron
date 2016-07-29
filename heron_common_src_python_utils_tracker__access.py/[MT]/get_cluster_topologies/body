@@ -1,0 +1,8 @@
+def get_cluster_topologies(cluster):
+    'Synced API call to get topologies under a cluster'
+    instance = tornado.ioloop.IOLoop.instance()
+    try:
+        return instance.run_sync((lambda : API.get_cluster_topologies(cluster)))
+    except Exception:
+        Log.info(traceback.format_exc())
+        raise

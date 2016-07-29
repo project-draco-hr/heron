@@ -1,0 +1,4 @@
+@abstractmethod
+def bolt_execute(self, bolt_execute_info):
+    'Called in bolt every time a tuple gets executed\n\n    :param bolt_execute_info: BoltExecuteInfo object\n    '
+    pass

@@ -1,4 +1,4 @@
 def uploader_jars():
     '\n  Get the uploader jars\n  :return:\n  '
-    jars = [os.path.join(utils.get_heron_lib_dir(), 'uploader', '*')]
+    jars = [os.path.join(config.get_heron_lib_dir(), 'uploader', '*')]
     return jars

@@ -1,0 +1,4 @@
+@abstractmethod
+def extract(self):
+    'Called to extract the current value'
+    pass

@@ -1,0 +1,3 @@
+def send_out_tuples(self):
+    'Sends out currently buffered tuples into the Out-Stream'
+    self._flush_remaining()

@@ -1,0 +1,14 @@
+def test_sample_success(self):
+    out_helper = mock_generator.MockOutgoingTupleHelper()
+    (prim_data_tuple, size) = mock_generator.make_data_tuple_from_list(mock_generator.prim_list)
+    out_helper.add_data_tuple(self.DEFAULT_STREAM_ID, prim_data_tuple, size)
+    self.assertTrue(out_helper.called_init_new_data)
+    self.assertEqual(out_helper.current_data_tuple_set.stream.id, self.DEFAULT_STREAM_ID)
+    self.assertEqual(out_helper.current_data_tuple_size_in_bytes, size)
+    out_helper.send_out_tuples()
+    self.assertEqual(out_helper.current_data_tuple_size_in_bytes, 0)
+    self.assertEqual(out_helper.total_data_emitted_in_bytes, size)
+    self.assertIsNone(out_helper.current_data_tuple_set)
+    sent_data_tuple_set = out_helper.out_stream.poll().data
+    self.assertEqual(sent_data_tuple_set.stream.id, self.DEFAULT_STREAM_ID)
+    self.assertEqual(sent_data_tuple_set.tuples[0], prim_data_tuple)

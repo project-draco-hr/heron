@@ -1,0 +1,3 @@
+def is_topology_running(self):
+    'Checks whether topology is currently running'
+    return (self.pplan.topology.state == topology_pb2.TopologyState.Value('RUNNING'))

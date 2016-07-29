@@ -1,0 +1,4 @@
+def test_empty(self):
+    communicator = HeronCommunicator(producer_cb=None, consumer_cb=None)
+    with self.assertRaises(Queue.Empty):
+        communicator.poll()

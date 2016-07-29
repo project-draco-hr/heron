@@ -1,0 +1,5 @@
+def __init__(self, looper, out_metrics):
+    self.looper = looper
+    self.metrics_map = dict()
+    self.time_bucket_in_sec_to_metrics_name = dict()
+    self.out_metrics = out_metrics

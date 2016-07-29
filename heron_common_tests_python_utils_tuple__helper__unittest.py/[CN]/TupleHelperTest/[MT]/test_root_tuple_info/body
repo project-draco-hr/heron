@@ -1,0 +1,6 @@
+def test_root_tuple_info(self):
+    STREAM_ID = 'stream id'
+    TUPLE_ID = 'tuple_id'
+    root_info = TupleHelper.make_root_tuple_info(STREAM_ID, TUPLE_ID)
+    self.assertEqual(root_info.stream_id, STREAM_ID)
+    self.assertEqual(root_info.tuple_id, TUPLE_ID)

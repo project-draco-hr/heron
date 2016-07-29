@@ -1,0 +1,12 @@
+def test_normal_tuple(self):
+    STREAM = mock_protobuf.get_mock_stream_id(id='stream_id', component_name='comp_name')
+    TUPLE_KEY = 'tuple_key'
+    VALUES = mock_generator.prim_list
+    tup = TupleHelper.make_tuple(STREAM, TUPLE_KEY, VALUES)
+    self.assertEqual(tup.id, TUPLE_KEY)
+    self.assertEqual(tup.component, STREAM.component_name)
+    self.assertEqual(tup.stream, STREAM.id)
+    self.assertIsNone(tup.task)
+    self.assertEqual(tup.values, VALUES)
+    self.assertAlmostEqual(tup.creation_time, time.time(), delta=0.01)
+    self.assertIsNone(tup.roots)

@@ -1,0 +1,14 @@
+def _get_my_spout_or_bolt(self, topology):
+    my_spbl = None
+    for spbl in (list(topology.spouts) + list(topology.bolts)):
+        if (spbl.comp.name == self.my_component_name):
+            if (my_spbl is not None):
+                raise RuntimeError('Duplicate my component found')
+            my_spbl = spbl
+    if isinstance(my_spbl, topology_pb2.Spout):
+        is_spout = True
+    elif isinstance(my_spbl, topology_pb2.Bolt):
+        is_spout = False
+    else:
+        raise RuntimeError('My component neither spout nor bolt')
+    return (my_spbl, is_spout)

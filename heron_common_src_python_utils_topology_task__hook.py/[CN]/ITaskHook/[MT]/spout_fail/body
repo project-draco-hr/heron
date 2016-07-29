@@ -1,0 +1,4 @@
+@abstractmethod
+def spout_fail(self, spout_fail_info):
+    'Called in spout every time a tuple gets failed\n\n    :param spout_fail_info: SpoutFailInfo object\n    '
+    pass

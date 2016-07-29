@@ -1,0 +1,4 @@
+'metrics.py: common heron metric'
+from abc import abstractmethod
+MeanReducedMetric = (lambda : ReducedMetric(MeanReducer))
+MultiMeanReducedMetric = (lambda : MultiReducedMetric(MeanReducer))

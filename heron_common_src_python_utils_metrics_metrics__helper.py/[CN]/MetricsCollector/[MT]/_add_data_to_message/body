@@ -1,0 +1,15 @@
+@staticmethod
+def _add_data_to_message(message, metric_name, metric_value):
+    if isinstance(metric_value, metrics_pb2.MetricDatum):
+        to_add = message.metrics.add()
+        to_add.CopyFrom(metric_value)
+    elif isinstance(metric_value, metrics_pb2.ExceptionData):
+        to_add = message.exceptions.add()
+        to_add.CopyFrom(metric_value)
+    else:
+        assert (metric_value is not None)
+        datum = metrics_pb2.MetricDatum()
+        datum.name = metric_name
+        datum.value = str(metric_value)
+        to_add = message.metrics.add()
+        to_add.CopyFrom(datum)

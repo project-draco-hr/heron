@@ -1,0 +1,9 @@
+def _gather_metrics(self, time_bucket_in_sec):
+    if (time_bucket_in_sec in self.time_bucket_in_sec_to_metrics_name):
+        message = metrics_pb2.MetricPublisherPublishMessage()
+        for name in self.time_bucket_in_sec_to_metrics_name[time_bucket_in_sec]:
+            Log.debug(('Will call gather_one_metric with %s' % name))
+            self._gather_one_metric(name, message)
+        assert message.IsInitialized()
+        self.out_metrics.offer(message)
+        self._register_timer_task(time_bucket_in_sec)

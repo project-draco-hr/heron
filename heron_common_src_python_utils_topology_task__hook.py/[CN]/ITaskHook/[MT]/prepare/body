@@ -1,0 +1,4 @@
+@abstractmethod
+def prepare(self, conf, context):
+    "Called after the spout/bolt's initialize() method is called\n\n    :param conf: component-specific configuration passed to the topology\n    :param context: topology context\n    "
+    pass

@@ -1,0 +1,3 @@
+def update_pending_tuples_count(self, count):
+    'Apply updates to the pending tuples count'
+    self.update_reduced_metric(self.PENDING_ACKED_COUNT, count)

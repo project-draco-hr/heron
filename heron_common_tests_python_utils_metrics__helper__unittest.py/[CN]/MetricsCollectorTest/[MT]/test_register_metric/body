@@ -1,0 +1,16 @@
+def test_register_metric(self):
+    name1 = 'metric1'
+    metric1 = CountMetric()
+    self.metrics_collector.register_metric(name1, metric1, 60)
+    self.assertEqual(self.metrics_collector.metrics_map[name1], metric1)
+    self.assertIn(60, self.metrics_collector.registered_timers)
+    name2 = 'metric2'
+    metric2 = MeanReducedMetric()
+    self.metrics_collector.register_metric(name2, metric2, 60)
+    self.assertEqual(self.metrics_collector.metrics_map[name2], metric2)
+    self.assertEqual(self.metrics_collector.time_bucket_in_sec_to_metrics_name[60], [name1, name2])
+    name3 = 'metric3'
+    metric3 = MultiMeanReducedMetric()
+    self.metrics_collector.register_metric(name3, metric3, 30)
+    self.assertEqual(self.metrics_collector.metrics_map[name3], metric3)
+    self.assertEqual(self.metrics_collector.registered_timers, [60, 30])

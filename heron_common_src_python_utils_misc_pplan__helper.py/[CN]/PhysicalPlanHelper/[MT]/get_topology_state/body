@@ -1,0 +1,3 @@
+def get_topology_state(self):
+    'Returns the current topology state'
+    return self.pplan.topology.state

@@ -1,0 +1,3 @@
+def update_out_queue_full_count(self):
+    'Apply update to the out-queue full count'
+    self.update_count(self.OUT_QUEUE_FULL_COUNT)

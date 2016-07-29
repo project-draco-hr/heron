@@ -1,0 +1,9 @@
+def _init_new_data_tuple(self, stream_id):
+    self._flush_remaining()
+    self.current_data_tuple_size_in_bytes = 0
+    new_stream_id = self.make_stream_id()
+    new_stream_id.id = stream_id
+    new_stream_id.component_name = self.pplan_helper.my_component_name
+    new_data_tuple_set = self.make_data_tuple_set()
+    new_data_tuple_set.stream.CopyFrom(new_stream_id)
+    self.current_data_tuple_set = new_data_tuple_set

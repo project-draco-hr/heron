@@ -1,0 +1,3 @@
+def get_size(self):
+    'Returns the size of the buffer'
+    return self._buffer.qsize()

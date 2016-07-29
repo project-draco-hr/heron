@@ -1,0 +1,10 @@
+def update_reduced_metric(self, name, value, key=None):
+    'Update the value of ReducedMetric or MultiReducedMetric\n\n    :type name: str\n    :param name: name of the registered metric to be updated.\n    :param value: specifies a value to be reduced.\n    :type key: str or None\n    :param key: specifies a key for MultiReducedMetric. Needs to be `None` for updating\n                ReducedMetric.\n    '
+    if (name not in self.metrics):
+        Log.error(('In update_reduced_metric(): %s is not registered in the metric' % name))
+    if ((key is None) and isinstance(self.metrics[name], ReducedMetric)):
+        self.metrics[name].update(value)
+    elif ((key is not None) and isinstance(self.metrics[name], MultiReducedMetric)):
+        self.metrics[name].update(key, value)
+    else:
+        Log.error(('In update_count(): %s is registered but not supported with this method' % name))

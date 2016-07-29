@@ -1,0 +1,7 @@
+def test_generic(self):
+    'Unittest with no producer, consumer specified'
+    communicator = HeronCommunicator(producer_cb=None, consumer_cb=None)
+    for obj in mock_generator.prim_list:
+        communicator.offer(obj)
+    for obj in mock_generator.prim_list:
+        self.assertEqual(obj, communicator.poll())

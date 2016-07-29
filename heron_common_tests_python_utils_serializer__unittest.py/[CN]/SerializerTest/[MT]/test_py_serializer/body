@@ -1,0 +1,8 @@
+def test_py_serializer(self):
+    serializer = PythonSerializer()
+    serializer.initialize()
+    for obj in mock_generator.prim_list:
+        serialized = serializer.serialize(obj)
+        self.assertIsInstance(serialized, str)
+        deserialized = serializer.deserialize(serialized)
+        self.assertEqual(deserialized, obj)

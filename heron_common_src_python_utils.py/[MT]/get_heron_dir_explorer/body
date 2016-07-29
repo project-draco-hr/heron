@@ -1,6 +1,0 @@
-def get_heron_dir_explorer():
-    "\n  This will extract heron directory from .pex file.\n  From heron-cli with modification since we need to reuse cli's conf\n  :return: root location for heron-cli.\n  "
-    path_list = os.path.realpath(__file__).split('/')[:(-8)]
-    path_list.append(CLI_DIR)
-    path = '/'.join(path_list)
-    return normalized_class_path(path)

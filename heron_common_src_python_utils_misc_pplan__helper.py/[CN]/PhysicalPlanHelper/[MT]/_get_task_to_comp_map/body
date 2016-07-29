@@ -1,0 +1,5 @@
+def _get_task_to_comp_map(self):
+    ret = {}
+    for instance in self.pplan.instances:
+        ret[instance.info.task_id] = instance.info.component_name
+    return ret

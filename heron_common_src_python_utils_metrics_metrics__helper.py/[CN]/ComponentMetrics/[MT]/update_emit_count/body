@@ -1,0 +1,3 @@
+def update_emit_count(self, stream_id):
+    'Apply update to emit count'
+    self.update_count(self.EMIT_COUNT, key=stream_id)

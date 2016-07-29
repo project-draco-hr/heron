@@ -1,0 +1,3 @@
+def __init__(self, pplan_helper):
+    super(BoltMetrics, self).__init__(self.bolt_metrics)
+    self._init_multi_count_metrics(pplan_helper)

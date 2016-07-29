@@ -1,0 +1,13 @@
+@staticmethod
+def _get_output_to_comp_fields(outputs):
+    out_fields = {}
+    for out_stream in outputs:
+        comp_name = out_stream.stream.component_name
+        stream_id = out_stream.stream.id
+        if (comp_name not in out_fields):
+            out_fields[comp_name] = dict()
+        ret = []
+        for kt in out_stream.schema.keys:
+            ret.append(kt.key)
+        out_fields[comp_name][stream_id] = tuple(ret)
+    return out_fields

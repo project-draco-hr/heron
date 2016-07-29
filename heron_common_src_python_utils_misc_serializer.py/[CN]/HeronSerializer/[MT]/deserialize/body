@@ -1,0 +1,4 @@
+@abstractmethod
+def deserialize(self, input_str):
+    'Deserialize an object\n\n    :param input_str: Serialized object as byte string\n    :returns: Deserialized object\n    '
+    pass

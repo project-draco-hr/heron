@@ -1,0 +1,4 @@
+@abstractmethod
+def bolt_fail(self, bolt_fail_info):
+    'Called in bolt every time a tuple gets failed\n\n    :param bolt_fail_info: BoltFailInfo object\n    '
+    pass

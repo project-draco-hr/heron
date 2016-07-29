@@ -1,0 +1,5 @@
+def __init__(self, producer_cb=None, consumer_cb=None):
+    'Initialize HeronCommunicator\n\n    :param producer_cb: Callback function to be called (usually on producer thread)\n           when ``poll()`` is called by the consumer. Default ``None``\n    :param consumer_cb: Callback function to be called (usually on consumer thread)\n           when ``offer()`` is called by the producer. Default ``None``\n    '
+    self._producer_callback = producer_cb
+    self._consumer_callback = consumer_cb
+    self._buffer = Queue.Queue()

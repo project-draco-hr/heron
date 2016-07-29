@@ -1,8 +1,0 @@
-def get_cluster_role_topologies(cluster, role):
-    'Synced API call to get topologies under a cluster submitted by a role'
-    instance = tornado.ioloop.IOLoop.instance()
-    try:
-        return instance.run_sync((lambda : API.get_cluster_role_topologies(cluster, role)))
-    except Exception:
-        Log.debug(traceback.format_exc())
-        raise

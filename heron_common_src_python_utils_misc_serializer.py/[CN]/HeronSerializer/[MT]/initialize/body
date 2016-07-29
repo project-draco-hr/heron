@@ -1,0 +1,4 @@
+@abstractmethod
+def initialize(self, config):
+    'Initializes the serializer'
+    pass

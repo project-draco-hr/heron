@@ -1,0 +1,2 @@
+def setUp(self):
+    self.global_value = 6

@@ -1,0 +1,4 @@
+@abstractmethod
+def reduce(self, value):
+    'Called to reduce the value'
+    pass

@@ -1,0 +1,3 @@
+def __init__(self):
+    'Initializes MultiCountMetric'
+    self.value = {}

@@ -1,7 +1,7 @@
 def show_cluster_role(cl_args, cluster, role):
     ' print topologies information to stdout '
     try:
-        result = utils.get_cluster_role_topologies(cluster, role)
+        result = tracker_access.get_cluster_role_topologies(cluster, role)
         if (not result):
             Log.error(("Unknown cluster/role '%s'" % '/'.join([cluster, role])))
             return False

@@ -1,0 +1,11 @@
+def test_update_reduced_metric(self):
+    for i in range(1, 11):
+        self.metrics_helper.update_reduced_metric('metric3', i)
+    self.assertEqual(self.metrics['metric3'].get_value_and_reset(), 5.5)
+    self.assertIsNone(self.metrics['metric3'].get_value_and_reset())
+    for i in range(1, 11):
+        self.metrics_helper.update_reduced_metric('metric4', i, key='key1')
+        self.metrics_helper.update_reduced_metric('metric4', (i * 2), key='key2')
+        self.metrics_helper.update_reduced_metric('metric4', (i * 3), key='key3')
+    self.assertEqual(self.metrics['metric4'].get_value_and_reset(), {'key1': 5.5, 'key2': 11, 'key3': 16.5, })
+    self.assertEqual(self.metrics['metric4'].get_value_and_reset(), {'key1': None, 'key2': None, 'key3': None, })

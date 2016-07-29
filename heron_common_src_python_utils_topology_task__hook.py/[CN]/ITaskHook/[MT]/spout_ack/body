@@ -1,0 +1,4 @@
+@abstractmethod
+def spout_ack(self, spout_ack_info):
+    'Called in spout every time a tuple gets acked\n\n    :param spout_ack_info: SpoutAckInfo object\n    '
+    pass

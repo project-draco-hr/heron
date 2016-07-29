@@ -1,0 +1,4 @@
+@abstractmethod
+def bolt_ack(self, bolt_ack_info):
+    'Called in bolt every time a tuple gets acked\n\n    :param bolt_ack_info: BoltAckInfo object\n    '
+    pass

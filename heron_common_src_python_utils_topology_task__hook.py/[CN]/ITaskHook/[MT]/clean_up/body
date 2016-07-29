@@ -1,0 +1,4 @@
+@abstractmethod
+def clean_up(self):
+    "Called just before the spout/bolt's cleanup method is called"
+    pass

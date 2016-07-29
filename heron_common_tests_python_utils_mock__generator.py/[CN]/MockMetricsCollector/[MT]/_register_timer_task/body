@@ -1,0 +1,2 @@
+def _register_timer_task(self, time_bucket_in_sec):
+    self.registered_timers.append(time_bucket_in_sec)

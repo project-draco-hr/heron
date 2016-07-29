@@ -1,0 +1,5 @@
+def get_metrics_collector(self):
+    "Returns this context's metrics collector"
+    if ((TopologyContext.METRICS_COLLECTOR not in self) or (not isinstance(self.get(TopologyContext.METRICS_COLLECTOR), MetricsCollector))):
+        raise RuntimeError('Metrics collector is not registered in this context')
+    return self.get(TopologyContext.METRICS_COLLECTOR)

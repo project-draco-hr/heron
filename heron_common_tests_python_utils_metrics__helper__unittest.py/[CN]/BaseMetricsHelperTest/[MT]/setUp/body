@@ -1,0 +1,4 @@
+def setUp(self):
+    self.metrics = {'metric1': CountMetric(), 'metric2': MultiCountMetric(), 'metric3': MeanReducedMetric(), 'metric4': MultiMeanReducedMetric(), }
+    self.metrics_helper = BaseMetricsHelper(self.metrics)
+    self.metrics_collector = mock_generator.MockMetricsCollector()

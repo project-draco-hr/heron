@@ -1,4 +1,4 @@
 def statemgr_jars():
     '\n  Get the statemgr jars\n  :return:\n  '
-    jars = [os.path.join(utils.get_heron_lib_dir(), 'statemgr', '*')]
+    jars = [os.path.join(config.get_heron_lib_dir(), 'statemgr', '*')]
     return jars

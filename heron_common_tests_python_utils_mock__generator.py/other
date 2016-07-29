@@ -1,0 +1,6 @@
+'mock_generator.py: module for creating mock objects for unittesting\n                      mainly for common/tests/python/utils'
+from heron.common.src.python.utils.metrics import MetricsCollector
+from heron.common.src.python.utils.misc import OutgoingTupleHelper, PhysicalPlanHelper, HeronCommunicator, PythonSerializer
+from heron.proto import tuple_pb2
+import heron.common.tests.python.mock_protobuf as mock_protobuf
+prim_list = [1000, (-234), 0.00023, 'string', ['abc', 'def', 'ghi'], True, False, ('tuple', 123, True), None, {}]

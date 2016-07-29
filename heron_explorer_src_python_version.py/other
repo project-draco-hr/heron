@@ -1,3 +1,3 @@
 ' version.py '
 import heron.explorer.src.python.args as args
-import heron.common.src.python.utils as utils
+import heron.common.src.python.utils.config as config

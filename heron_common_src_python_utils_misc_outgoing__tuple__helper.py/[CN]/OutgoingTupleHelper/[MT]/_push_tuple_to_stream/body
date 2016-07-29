@@ -1,0 +1,2 @@
+def _push_tuple_to_stream(self, tuple_set):
+    self.out_stream.offer(tuple_set)

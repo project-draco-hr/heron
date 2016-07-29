@@ -1,0 +1,8 @@
+def test_consumer_callback(self):
+
+    def callback():
+        self.global_value = 10
+    communicator = HeronCommunicator(producer_cb=None, consumer_cb=callback)
+    self.assertEqual(self.global_value, 6)
+    communicator.offer('object')
+    self.assertEqual(self.global_value, 10)

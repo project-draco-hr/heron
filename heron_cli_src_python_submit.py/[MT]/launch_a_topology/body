@@ -1,13 +1,13 @@
 def launch_a_topology(cl_args, tmp_dir, topology_file, topology_defn_file):
     '\n  Launch a topology given topology jar, its definition file and configurations\n  :param cl_args:\n  :param tmp_dir:\n  :param topology_file:\n  :param topology_defn_file:\n  :return:\n  '
-    topology_pkg_path = utils.normalized_class_path(os.path.join(tmp_dir, 'topology.tar.gz'))
-    release_yaml_file = utils.get_heron_release_file()
+    topology_pkg_path = config.normalized_class_path(os.path.join(tmp_dir, 'topology.tar.gz'))
+    release_yaml_file = config.get_heron_release_file()
     config_path = cl_args['config_path']
     tar_pkg_files = [topology_file, topology_defn_file]
     generated_config_files = [release_yaml_file, cl_args['override_config_file']]
-    utils.create_tar(topology_pkg_path, tar_pkg_files, config_path, generated_config_files)
-    args = ['--cluster', cl_args['cluster'], '--role', cl_args['role'], '--environment', cl_args['environ'], '--heron_home', utils.get_heron_dir(), '--config_path', config_path, '--override_config_file', cl_args['override_config_file'], '--release_file', release_yaml_file, '--topology_package', topology_pkg_path, '--topology_defn', topology_defn_file, '--topology_jar', topology_file]
+    config.create_tar(topology_pkg_path, tar_pkg_files, config_path, generated_config_files)
+    args = ['--cluster', cl_args['cluster'], '--role', cl_args['role'], '--environment', cl_args['environ'], '--heron_home', config.get_heron_dir(), '--config_path', config_path, '--override_config_file', cl_args['override_config_file'], '--release_file', release_yaml_file, '--topology_package', topology_pkg_path, '--topology_defn', topology_defn_file, '--topology_jar', topology_file]
     if opts.verbose():
         args.append('--verbose')
-    lib_jars = utils.get_heron_libs((((jars.scheduler_jars() + jars.uploader_jars()) + jars.statemgr_jars()) + jars.packing_jars()))
+    lib_jars = config.get_heron_libs((((jars.scheduler_jars() + jars.uploader_jars()) + jars.statemgr_jars()) + jars.packing_jars()))
     execute.heron_class('com.twitter.heron.scheduler.SubmitterMain', lib_jars, extra_jars=[], args=args, java_defines=[])

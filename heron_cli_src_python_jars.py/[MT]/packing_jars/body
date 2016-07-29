@@ -1,4 +1,4 @@
 def packing_jars():
     '\n  Get the packing algorithm jars\n  :return:\n  '
-    jars = [os.path.join(utils.get_heron_lib_dir(), 'packing', '*')]
+    jars = [os.path.join(config.get_heron_lib_dir(), 'packing', '*')]
     return jars

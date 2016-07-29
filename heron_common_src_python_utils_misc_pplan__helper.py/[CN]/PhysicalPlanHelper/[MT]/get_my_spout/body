@@ -1,0 +1,6 @@
+def get_my_spout(self):
+    'Returns spout instance, or ``None`` if bolt is assigned'
+    if self.is_spout:
+        return self._my_spbl
+    else:
+        return None

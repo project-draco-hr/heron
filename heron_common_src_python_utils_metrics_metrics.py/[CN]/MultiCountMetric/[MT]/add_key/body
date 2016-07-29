@@ -1,0 +1,3 @@
+def add_key(self, key):
+    'Registers a new key'
+    self.incr(key, to_add=0)

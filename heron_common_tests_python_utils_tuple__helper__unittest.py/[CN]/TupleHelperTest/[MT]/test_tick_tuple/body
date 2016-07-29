@@ -1,0 +1,9 @@
+def test_tick_tuple(self):
+    tup = TupleHelper.make_tick_tuple()
+    self.assertEqual(tup.id, '__tick')
+    self.assertEqual(tup.component, '__system')
+    self.assertEqual(tup.stream, '__tick')
+    self.assertIsNone(tup.task)
+    self.assertIsNone(tup.values)
+    self.assertIsNone(tup.roots)
+    self.assertAlmostEqual(tup.creation_time, time.time(), delta=0.01)

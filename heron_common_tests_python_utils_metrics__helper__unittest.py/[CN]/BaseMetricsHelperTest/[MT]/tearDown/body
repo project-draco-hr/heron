@@ -1,0 +1,4 @@
+def tearDown(self):
+    self.metrics = None
+    self.metrics_helper = None
+    self.metrics_collector = None

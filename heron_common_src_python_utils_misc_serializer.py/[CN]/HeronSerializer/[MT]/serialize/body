@@ -1,0 +1,4 @@
+@abstractmethod
+def serialize(self, obj):
+    'Serialize an object\n\n    :param obj: The object to be serialized\n    :returns: Serialized object as byte string\n    '
+    pass

@@ -1,0 +1,10 @@
+def test_sample_success(self):
+    (pplan, instances) = mock_generator.get_a_sample_pplan()
+    instance_1 = instances[0]
+    pplan_helper = PhysicalPlanHelper(pplan, instance_1['instance_id'])
+    self.assertIsNotNone(pplan_helper.my_instance)
+    self.assertTrue(pplan_helper.is_spout)
+    self.assertIsInstance(pplan_helper.get_my_spout(), topology_pb2.Spout)
+    self.assertIsNone(pplan_helper.get_my_bolt())
+    self.assertEqual(instance_1['task_id'], pplan_helper.my_task_id)
+    self.assertEqual(instance_1['comp_name'], pplan_helper.my_component_name)

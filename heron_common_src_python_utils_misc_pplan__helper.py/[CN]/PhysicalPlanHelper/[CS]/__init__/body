@@ -1,0 +1,20 @@
+def __init__(self, pplan, instance_id):
+    self.pplan = pplan
+    self.my_instance_id = instance_id
+    self.my_instance = None
+    for instance in pplan.instances:
+        if (instance.instance_id == self.my_instance_id):
+            self.my_instance = instance
+            break
+    if (self.my_instance is None):
+        raise RuntimeError(('There was no instance that matched my id: %s' % self.my_instance_id))
+    self.my_component_name = self.my_instance.info.component_name
+    self.my_task_id = self.my_instance.info.task_id
+    (self._my_spbl, self.is_spout) = self._get_my_spout_or_bolt(pplan.topology)
+    self._output_schema = dict()
+    outputs = self._my_spbl.outputs
+    for out_stream in outputs:
+        self._output_schema[out_stream.stream.id] = len(out_stream.schema.keys)
+    self.hostname = socket.gethostname()
+    self.my_component = self._my_spbl.comp
+    self.context = None

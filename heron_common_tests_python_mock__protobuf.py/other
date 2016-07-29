@@ -1,2 +1,3 @@
 'mock_protobuf.py: provides methods to create dummy protobuf message for testing\n\nThis module is used mainly for testing Python Heron Instance as well as common modules\nwritten in Python.\n'
 from heron.proto import stmgr_pb2, physical_plan_pb2, topology_pb2, common_pb2
+from heron.common.src.python.utils.misc import PythonSerializer

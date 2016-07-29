@@ -1,0 +1,11 @@
+def __init__(self, config, topology, task_to_component, my_task_id, metrics_collector, **kwargs):
+    super(TopologyContext, self).__init__(**kwargs)
+    self[self.CONFIG] = config
+    self[self.TOPOLOGY] = topology
+    self[self.TASK_TO_COMPONENT_MAP] = task_to_component
+    self[self.TASK_ID] = my_task_id
+    self[self.METRICS_COLLECTOR] = metrics_collector
+    (inputs, outputs, out_fields) = self._get_inputs_and_outputs_and_outfields(topology)
+    self[self.INPUTS] = inputs
+    self[self.OUTPUTS] = outputs
+    self[self.COMPONENT_TO_OUT_FIELDS] = out_fields

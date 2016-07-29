@@ -1,0 +1,3 @@
+def reduce(self, value):
+    self.sum += float(value)
+    self.count += 1

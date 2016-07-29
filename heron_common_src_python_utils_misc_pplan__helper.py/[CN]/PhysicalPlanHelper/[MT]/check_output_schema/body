@@ -1,0 +1,7 @@
+def check_output_schema(self, stream_id, tup):
+    'Checks if a given stream_id and tuple matches with the output schema\n\n    :type stream_id: str\n    :param stream_id: stream id into which tuple is sent\n    :type tup: list\n    :param tup: tuple that is going to be sent\n    '
+    size = self._output_schema.get(stream_id, None)
+    if (size is None):
+        raise RuntimeError(('%s emitting to stream %s but was not declared in output fields' % (self.my_component_name, stream_id)))
+    elif (size != len(tup)):
+        raise RuntimeError(("Number of fields emitted in stream %s does not match what's expected. Expected: %s, Observed: %s" % (stream_id, size, len(tup))))

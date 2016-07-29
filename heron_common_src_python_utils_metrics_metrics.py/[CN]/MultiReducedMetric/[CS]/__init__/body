@@ -1,0 +1,4 @@
+def __init__(self, reducer):
+    'Initializes MultiReducedMetric object\n\n    :param reducer: IReducer class to use\n    '
+    self.value = {}
+    self.reducer = reducer

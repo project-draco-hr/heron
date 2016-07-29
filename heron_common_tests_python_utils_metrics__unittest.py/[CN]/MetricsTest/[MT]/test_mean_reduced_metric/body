@@ -1,0 +1,9 @@
+def test_mean_reduced_metric(self):
+    metric = MeanReducedMetric()
+    for i in range(1, 11):
+        metric.update(i)
+    self.assertEqual(metric.get_value_and_reset(), 5.5)
+    self.assertIsNone(metric.get_value_and_reset())
+    for i in range(1, 11):
+        metric.update((i * 10))
+    self.assertEqual(metric.get_value_and_reset(), 55)

@@ -4,8 +4,8 @@ def run(cl_args, compo_type):
     topology = cl_args['topology-name']
     (spouts_only, bolts_only) = (cl_args['spout'], cl_args['bolt'])
     try:
-        components = utils.get_logical_plan(cluster, env, topology, role)
-        topo_info = utils.get_topology_info(cluster, env, topology, role)
+        components = tracker_access.get_logical_plan(cluster, env, topology, role)
+        topo_info = tracker_access.get_topology_info(cluster, env, topology, role)
         (table, header) = to_table(components, topo_info)
         if (spouts_only == bolts_only):
             print tabulate(table, headers=header)

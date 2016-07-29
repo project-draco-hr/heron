@@ -1,0 +1,3 @@
+def incr(self, to_add=1):
+    'Increments the value by ``to_add``'
+    self.value += to_add

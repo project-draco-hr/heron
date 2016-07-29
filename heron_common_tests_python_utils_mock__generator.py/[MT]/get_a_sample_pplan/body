@@ -1,0 +1,19 @@
+def get_a_sample_pplan():
+    'Returns a legitimate looking physical plan\n\n  This topology has 1 spout and 2 bolts. Currently no input/output streams.\n  There is only one stream manager.\n\n  [Instance 1: spout1]\n    - instance_id = "instance1"\n    - task_id = 100\n    - component_index = 0\n    - component_name = "spout1"\n\n  [Instance 2: bolt1]\n    - instance_id = "instance2"\n    - task_id = 200\n    - component_index = 0\n    - component_name = "bolt1"\n\n  [instance 3: bolt2]\n    - instance_id = "instance3"\n    - task_id = 300\n    - component_index = 0\n    - component_name = "bolt2"\n\n  :returns: PhysicalPlan message and a list of dictionaries for each instance containing\n            (instance_id, task_id, comp_index, comp_name)\n  '
+    spout_1 = mock_protobuf.get_mock_spout(component=mock_protobuf.get_mock_component(name='spout1'))
+    bolt_1 = mock_protobuf.get_mock_bolt(component=mock_protobuf.get_mock_component(name='bolt1'))
+    bolt_2 = mock_protobuf.get_mock_bolt(component=mock_protobuf.get_mock_component(name='bolt2'))
+    topology = mock_protobuf.get_mock_topology(spouts=[spout_1], bolts=[bolt_1, bolt_2])
+    instance_ids = ['instance1', 'instance2', 'instancer3']
+    task_ids = [100, 200, 300]
+    comp_indexes = [0, 0, 0]
+    comp_names = ['spout1', 'bolt1', 'bolt2']
+    instances = []
+    for (i_id, t_id, c_i, c_name) in zip(instance_ids, task_ids, comp_indexes, comp_names):
+        info = mock_protobuf.get_mock_instance_info(task_id=t_id, component_index=c_i, component_name=c_name)
+        instance = mock_protobuf.get_mock_instance(instance_id=i_id, info=info)
+        instances.append(instance)
+    pplan = mock_protobuf.get_mock_pplan(topology=topology, instances=instances)
+    keys = ['instance_id', 'task_id', 'comp_index', 'comp_name']
+    zipped = zip(instance_ids, task_ids, comp_indexes, comp_names)
+    return (pplan, [dict(zip(keys, z)) for z in zipped])

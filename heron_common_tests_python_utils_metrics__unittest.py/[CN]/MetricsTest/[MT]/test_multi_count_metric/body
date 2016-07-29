@@ -1,0 +1,12 @@
+def test_multi_count_metric(self):
+    metric = MultiCountMetric()
+    key_list = ['key1', 'key2', 'key3']
+    for _ in range(10):
+        for key in key_list:
+            metric.incr(key=key)
+    self.assertEqual(metric.get_value_and_reset(), dict(zip(key_list, ([10] * 3))))
+    self.assertEqual(metric.get_value_and_reset(), dict(zip(key_list, ([0] * 3))))
+    metric.add_key('key4')
+    ret = metric.get_value_and_reset()
+    self.assertIn('key4', ret)
+    self.assertEqual(ret['key4'], 0)

@@ -1,0 +1,4 @@
+def __init__(self, metrics_collector, sys_config):
+    super(GatewayMetrics, self).__init__(self.metrics)
+    interval = float(sys_config[constants.HERON_METRICS_EXPORT_INTERVAL_SEC])
+    self.register_metrics(metrics_collector, interval)

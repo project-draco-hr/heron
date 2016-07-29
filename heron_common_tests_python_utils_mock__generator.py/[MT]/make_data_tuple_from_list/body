@@ -1,0 +1,10 @@
+def make_data_tuple_from_list(lst, serializer=PythonSerializer()):
+    'Make HeronDataTuple from a list of objects'
+    data_tuple = tuple_pb2.HeronDataTuple()
+    data_tuple.key = 0
+    tuple_size_in_bytes = 0
+    for obj in lst:
+        serialized = serializer.serialize(obj)
+        data_tuple.values.append(serialized)
+        tuple_size_in_bytes += len(serialized)
+    return (data_tuple, tuple_size_in_bytes)

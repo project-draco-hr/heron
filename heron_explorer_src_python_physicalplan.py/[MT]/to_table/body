@@ -1,7 +1,7 @@
 def to_table(metrics):
     ' normalize raw metrics API result to table '
-    all_queries = utils.metric_queries()
-    m = utils.queries_map()
+    all_queries = tracker_access.metric_queries()
+    m = tracker_access.queries_map()
     names = metrics.values()[0].keys()
     stats = []
     for n in names:

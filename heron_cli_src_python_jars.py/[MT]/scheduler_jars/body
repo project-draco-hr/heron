@@ -1,4 +1,4 @@
 def scheduler_jars():
     '\n  Get the scheduler jars\n  :return:\n  '
-    jars = [os.path.join(utils.get_heron_lib_dir(), 'scheduler', '*')]
+    jars = [os.path.join(config.get_heron_lib_dir(), 'scheduler', '*')]
     return jars

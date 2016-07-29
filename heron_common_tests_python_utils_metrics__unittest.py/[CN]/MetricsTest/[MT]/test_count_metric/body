@@ -1,0 +1,9 @@
+def test_count_metric(self):
+    metric = CountMetric()
+    for _ in range(10):
+        metric.incr()
+    self.assertEqual(metric.get_value_and_reset(), 10)
+    for _ in range(10):
+        metric.incr(to_add=10)
+    self.assertEqual(metric.get_value_and_reset(), 100)
+    self.assertEqual(metric.get_value_and_reset(), 0)

@@ -1,0 +1,2 @@
+def setUp(self):
+    self.metrics_collector = mock_generator.MockMetricsCollector()

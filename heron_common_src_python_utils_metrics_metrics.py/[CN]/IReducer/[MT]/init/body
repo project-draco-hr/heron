@@ -1,0 +1,4 @@
+@abstractmethod
+def init(self):
+    'Called when this reducer is initialized/reinitialized'
+    pass

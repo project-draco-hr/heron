@@ -1,0 +1,4 @@
+def __init__(self, reducer_cls):
+    'Initializes ReducedMetric object\n\n    :param reducer_cls: IReducer class to use\n    '
+    self.reducer = reducer_cls()
+    self.reducer.init()

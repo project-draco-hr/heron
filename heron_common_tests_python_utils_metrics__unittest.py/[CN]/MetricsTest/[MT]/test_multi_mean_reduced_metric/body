@@ -1,0 +1,13 @@
+def test_multi_mean_reduced_metric(self):
+    metric = MultiMeanReducedMetric()
+    key_list = ['key1', 'key2', 'key3']
+    for i in range(1, 11):
+        metric.update(key=key_list[0], value=i)
+        metric.update(key=key_list[1], value=(i * 2))
+        metric.update(key=key_list[2], value=(i * 3))
+    self.assertEqual(metric.get_value_and_reset(), dict(zip(key_list, [5.5, 11, 16.5])))
+    self.assertEqual(metric.get_value_and_reset(), dict(zip(key_list, ([None] * 3))))
+    metric.add_key('key4')
+    ret = metric.get_value_and_reset()
+    self.assertIn('key4', ret)
+    self.assertIsNone(ret['key4'])

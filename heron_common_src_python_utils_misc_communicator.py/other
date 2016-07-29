@@ -1,0 +1,3 @@
+'communicator.py: module responsible for communication between Python heron modules'
+import Queue
+from heron.common.src.python.log import Log

@@ -6,7 +6,7 @@ def main():
         parser.print_help()
         parser.exit()
     elif (remaining == ['version']):
-        common_utils.print_version()
+        common_config.print_version()
         parser.exit()
     elif (remaining != []):
         LOG.error('Invalid subcommand')

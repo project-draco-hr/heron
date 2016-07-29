@@ -1,0 +1,13 @@
+def test_gather_metrics(self):
+    name = 'metric'
+    metric = CountMetric()
+    metric.incr(to_add=10)
+    self.metrics_collector.register_metric(name, metric, 60)
+    self.assertIn(60, self.metrics_collector.time_bucket_in_sec_to_metrics_name)
+    self.metrics_collector._gather_metrics(60)
+    message = self.metrics_collector.out_metrics.poll()
+    self.assertIsNotNone(message)
+    self.assertIsInstance(message, metrics_pb2.MetricPublisherPublishMessage)
+    self.assertEqual(message.metrics[0].name, name)
+    self.assertEqual(message.metrics[0].value, str(10))
+    self.assertEqual(metric.get_value_and_reset(), 0)

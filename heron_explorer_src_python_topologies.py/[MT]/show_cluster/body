@@ -1,7 +1,7 @@
 def show_cluster(cl_args, cluster):
     ' print topologies information to stdout '
     try:
-        result = utils.get_cluster_topologies(cluster)
+        result = tracker_access.get_cluster_topologies(cluster)
         if (not result):
             Log.error(("No topologies in cluster '%s'" % cluster))
             return False
