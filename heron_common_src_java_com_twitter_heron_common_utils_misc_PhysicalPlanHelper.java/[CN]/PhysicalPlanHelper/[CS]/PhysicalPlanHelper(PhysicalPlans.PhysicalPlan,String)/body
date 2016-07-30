@@ -55,7 +55,7 @@
   for (int i=0; i < topo.getBoltsCount(); ++i) {
     for (    TopologyAPI.InputStream inputStream : topo.getBolts(i).getInputsList()) {
       if (inputStream.getStream().getComponentName().equals(myComponent) && inputStream.getGtype() == TopologyAPI.Grouping.CUSTOM) {
-        CustomStreamGrouping customStreamGrouping=(CustomStreamGrouping)Utils.deserialize(inputStream.getCustomGroupingJavaObject().toByteArray());
+        CustomStreamGrouping customStreamGrouping=(CustomStreamGrouping)Utils.deserialize(inputStream.getCustomGroupingObject().toByteArray());
         customGrouper.add(inputStream.getStream().getId(),GetTaskIdsAsListForComponent(topo.getBolts(i).getComp().getName()),customStreamGrouping,myComponent);
       }
     }
