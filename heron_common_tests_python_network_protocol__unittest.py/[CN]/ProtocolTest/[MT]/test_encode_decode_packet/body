@@ -1,0 +1,8 @@
+def test_encode_decode_packet(self):
+    (pkt_list, raw_list) = mock_generator.get_mock_requst_packets(is_message=False)
+    for (pkt, raw) in zip(pkt_list, raw_list):
+        (raw_reqid, raw_message) = raw
+        (typename, reqid, seriazelid_msg) = HeronProtocol.decode_packet(pkt)
+        self.assertEqual(reqid, raw_reqid)
+        self.assertEqual(typename, raw_message.DESCRIPTOR.full_name)
+        self.assertEqual(seriazelid_msg, raw_message.SerializeToString())

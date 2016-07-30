@@ -1,0 +1,2 @@
+def __str__(self):
+    return ('Packet ID: %s, header: %s, complete: %s' % (str(self.id), self.is_header_read, self.is_complete))

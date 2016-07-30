@@ -1,0 +1,3 @@
+def handle_close(self):
+    Log.info(('%s: handle_close() called' % self._get_classname()))
+    self.close()

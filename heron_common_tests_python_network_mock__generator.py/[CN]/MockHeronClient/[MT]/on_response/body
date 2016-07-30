@@ -1,0 +1,2 @@
+def on_response(self, status, context, response):
+    self.on_response_status = status

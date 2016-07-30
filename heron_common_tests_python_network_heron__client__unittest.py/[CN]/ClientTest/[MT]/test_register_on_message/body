@@ -1,0 +1,4 @@
+def test_register_on_message(self):
+    (builder, typename) = mock_protobuf.get_pplan_builder_and_typename()
+    self.mock_client.register_on_message(builder)
+    self.assertTrue((typename in self.mock_client.registered_message_map))

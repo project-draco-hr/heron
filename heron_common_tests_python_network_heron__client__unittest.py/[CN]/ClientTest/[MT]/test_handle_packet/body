@@ -1,0 +1,15 @@
+def test_handle_packet(self):
+    (packet, reqid, message) = mock_generator.get_a_mock_request_packet_and_raw()
+    self.mock_client.context_map[reqid] = None
+    self.mock_client.response_message_map[reqid] = message
+    self.mock_client._handle_packet(packet)
+    self.assertEqual(self.mock_client.on_response_status, StatusCode.OK)
+    self.mock_client.context_map[reqid] = None
+    self.mock_client.response_message_map[reqid] = None
+    self.mock_client._handle_packet(packet)
+    self.assertEqual(self.mock_client.on_response_status, StatusCode.INVALID_PACKET)
+    (pkt_list, msg_list, builder, typename) = mock_generator.get_a_mock_message_list_and_builder()
+    self.mock_client.registered_message_map[typename] = builder
+    for (pkt, msg) in zip(pkt_list, msg_list):
+        self.mock_client._handle_packet(pkt)
+        self.assertEqual(self.mock_client.incoming_msg, msg)

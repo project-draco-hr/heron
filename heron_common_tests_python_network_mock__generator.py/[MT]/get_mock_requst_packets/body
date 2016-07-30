@@ -1,0 +1,14 @@
+def get_mock_requst_packets(is_message):
+    'Returns a list of valid IncomingPackets with non-zero REQID and the corresponding raw data'
+    pkt_list = []
+    raw_list = []
+    message_list = [mock_protobuf.get_mock_register_response(), mock_protobuf.get_mock_config(), mock_protobuf.get_mock_bolt(), mock_protobuf.get_mock_topology()]
+    for message in message_list:
+        if is_message:
+            reqid = REQID.generate_zero()
+        else:
+            reqid = REQID.generate()
+        normal_pkt = convert_to_incoming_packet(reqid, message)
+        pkt_list.append(normal_pkt)
+        raw_list.append((reqid, message))
+    return (pkt_list, raw_list)

@@ -1,0 +1,10 @@
+def test_reqid(self):
+    reqid = REQID.generate()
+    packed_reqid = REQID.pack(reqid)
+    unpacked_reqid = REQID.unpack(packed_reqid)
+    self.assertEqual(reqid, unpacked_reqid)
+    self.assertFalse(reqid.is_zero())
+    zero_reqid = REQID.generate_zero()
+    packed_zero = REQID.pack(zero_reqid)
+    self.assertEqual(packed_zero, bytearray((0 for i in range(32))))
+    self.assertTrue(zero_reqid.is_zero())

@@ -1,0 +1,8 @@
+def __init__(self):
+    socket_options = SocketOptions(32768, 16, 32768, 16, 1024000, 1024000)
+    HeronClient.__init__(self, None, self.HOST, self.PORT, {}, socket_options)
+    self.on_connect_called = False
+    self.on_response_status = None
+    self.called_handle_packet = False
+    self.dispatcher = MockDispatcher()
+    self.incoming_msg = None

@@ -1,0 +1,4 @@
+@abstractmethod
+def on_response(self, status, context, response):
+    'Called when the client receives a response\n\n    Should be implemented by a subclass.\n    '
+    pass

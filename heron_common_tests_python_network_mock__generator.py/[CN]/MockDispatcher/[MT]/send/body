@@ -1,0 +1,3 @@
+def send(self, buf):
+    'mock sends the content of a given buffer'
+    return len(buf)

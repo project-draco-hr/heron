@@ -1,0 +1,4 @@
+def prepare_header_only(self):
+    'a packet with just a header (incomplete packet) will be prepared in the recv buffer'
+    pkt = get_mock_requst_packets(is_message=False)[0][0]
+    self.to_be_received = pkt.header

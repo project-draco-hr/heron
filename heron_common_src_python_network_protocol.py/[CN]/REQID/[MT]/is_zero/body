@@ -1,0 +1,3 @@
+def is_zero(self):
+    'Checks if this REQID is zero'
+    return (self == REQID.generate_zero())

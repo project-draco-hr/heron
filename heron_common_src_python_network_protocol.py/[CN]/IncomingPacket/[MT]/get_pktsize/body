@@ -1,0 +1,3 @@
+def get_pktsize(self):
+    'Returns the size of this packet, including header and data'
+    return (len(self.data) + len(self.header))

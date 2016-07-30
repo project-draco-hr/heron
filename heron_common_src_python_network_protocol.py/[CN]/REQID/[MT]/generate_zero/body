@@ -1,0 +1,5 @@
+@staticmethod
+def generate_zero():
+    'Generates a zero REQID for message'
+    data_bytes = bytearray((0 for i in range(REQID.REQID_SIZE)))
+    return REQID(data_bytes)

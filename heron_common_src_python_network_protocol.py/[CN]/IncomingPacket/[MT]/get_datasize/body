@@ -1,0 +1,5 @@
+def get_datasize(self):
+    'Returns the datasize of the packet\n\n    :returns: (int) datasize of the packet, or -1 if header is incomplete\n    '
+    if (not self.is_header_read):
+        return (-1)
+    return HeronProtocol.unpack_int(self.header)

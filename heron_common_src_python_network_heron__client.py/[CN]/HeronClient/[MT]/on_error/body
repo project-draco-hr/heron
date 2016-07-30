@@ -1,0 +1,4 @@
+@abstractmethod
+def on_error(self):
+    'Called when the client meets errors\n\n    Note that this method is not called when a connection is not yet established.\n    In such a case, ``on_connect()`` with status == StatusCode.CONNECT_ERROR is called.\n    '
+    pass

@@ -1,0 +1,3 @@
+def prepare_eagain(self):
+    'prepare so that EAGAIN error is raised when recv() is called '
+    self.eagain_test = True

@@ -1,0 +1,4 @@
+def prepare_partial_data(self):
+    'a partial data packet will be prepared in the recv buffer'
+    pkt = get_mock_requst_packets(is_message=False)[0][0]
+    self.to_be_received = (pkt.header + pkt.data[:self.PARTIAL_DATA_SIZE])

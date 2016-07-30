@@ -1,0 +1,3 @@
+def pack(self):
+    'Packs this REQID to bytestring'
+    return self.bytes

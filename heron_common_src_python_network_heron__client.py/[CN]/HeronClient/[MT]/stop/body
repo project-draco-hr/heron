@@ -1,0 +1,3 @@
+def stop(self):
+    'Disconnects and stops the client'
+    self.handle_close()

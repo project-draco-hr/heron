@@ -1,0 +1,4 @@
+@abstractmethod
+def on_incoming_message(self, message):
+    'Called when the client receives a message\n\n    Should be implemented by a subclass.\n    '
+    pass

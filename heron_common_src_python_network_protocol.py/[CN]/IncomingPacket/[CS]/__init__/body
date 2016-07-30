@@ -1,0 +1,7 @@
+def __init__(self):
+    'Initializes IncomingPacket object'
+    self.header = ''
+    self.data = ''
+    self.is_header_read = False
+    self.is_complete = False
+    self.id = random.getrandbits(8)

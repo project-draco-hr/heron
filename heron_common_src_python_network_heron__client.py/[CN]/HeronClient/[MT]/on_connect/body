@@ -1,0 +1,4 @@
+@abstractmethod
+def on_connect(self, status):
+    'Called when the client is connected\n\n    Should be implemented by a subclass.\n    '
+    pass

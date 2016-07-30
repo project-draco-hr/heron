@@ -1,0 +1,4 @@
+@staticmethod
+def pack_int(i):
+    'Packs int to bytestring'
+    return struct.pack(HeronProtocol.INT_PACK_FMT, i)

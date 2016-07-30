@@ -1,0 +1,9 @@
+def convert_to_incoming_packet(reqid, message):
+    'Convert (reqid, message) pair to IncomingPacket object'
+    raw = OutgoingPacket.create_packet(reqid, message).raw
+    dispatcher = MockDispatcher()
+    dispatcher.prepare_with_raw(raw)
+    packet = IncomingPacket()
+    packet.read(dispatcher)
+    packet.data = packet.data
+    return packet

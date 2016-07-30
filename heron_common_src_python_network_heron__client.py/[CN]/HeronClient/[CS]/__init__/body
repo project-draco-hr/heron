@@ -1,0 +1,18 @@
+def __init__(self, looper, hostname, port, socket_map, socket_options):
+    'Initializes HeronClient\n\n    :type looper: ``GatewayLooper`` (heron.common.src.python.basics)\n    :param looper: looper object\n    :type hostname: str\n    :param hostname: endpoint hostname\n    :type port: int\n    :param port: endpoint port\n    :type socket_map: dict\n    :param socket_map: socket map used for asyncore.dispatcher\n    :type socket_options: ``SocketOptions`` (heron.common.src.python.network)\n    :param socket_options: options for the socket and this client\n    '
+    asyncore.dispatcher.__init__(self, map=socket_map)
+    self.looper = looper
+    self.hostname = hostname
+    self.port = int(port)
+    self.endpoint = (self.hostname, self.port)
+    self.out_buffer = []
+    self.socket_options = socket_options
+    self.registered_message_map = dict()
+    self.response_message_map = dict()
+    self.context_map = dict()
+    self.incomplete_pkt = None
+    self.total_bytes_written = 0
+    self.total_pkt_written = 0
+    self.total_bytes_received = 0
+    self.total_pkt_received = 0
+    Log.debug(('Initializing %s with endpoint: %s, \nsocket_map: %s, \nsocket_options: %s' % (self._get_classname(), str(self.endpoint), str(socket_map), str(self.socket_options))))

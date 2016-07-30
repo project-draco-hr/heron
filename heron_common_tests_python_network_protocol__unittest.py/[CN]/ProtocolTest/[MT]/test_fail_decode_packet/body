@@ -1,0 +1,4 @@
+def test_fail_decode_packet(self):
+    packet = mock_generator.get_fail_packet()
+    with self.assertRaises(RuntimeError):
+        HeronProtocol.decode_packet(packet)

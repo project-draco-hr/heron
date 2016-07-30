@@ -1,0 +1,5 @@
+'module for generating mock classes/objects for testing purposes'
+import socket
+from heron.common.src.python.network import HeronClient, REQID, OutgoingPacket, IncomingPacket, StatusCode, SocketOptions
+import heron.common.tests.python.mock_protobuf as mock_protobuf
+prim_list = [1000, (-234), 0.00023, 'string', ['abc', 'def', 'ghi'], True, False, ('tuple', 123, True), None, {}]

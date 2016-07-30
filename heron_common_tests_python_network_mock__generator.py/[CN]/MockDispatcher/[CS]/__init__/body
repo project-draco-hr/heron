@@ -1,0 +1,4 @@
+def __init__(self):
+    self.to_be_received = ''
+    self.eagain_test = False
+    self.fatal_error_test = False

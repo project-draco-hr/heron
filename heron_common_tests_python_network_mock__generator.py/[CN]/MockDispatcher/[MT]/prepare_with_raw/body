@@ -1,0 +1,3 @@
+def prepare_with_raw(self, raw):
+    'the content of ``raw`` will be prepared in the recv buffer'
+    self.to_be_received = raw

@@ -1,0 +1,4 @@
+@property
+def sent_complete(self):
+    'Indicates whether this packet is successfully sent'
+    return (len(self.to_send) == 0)

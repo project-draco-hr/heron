@@ -1,0 +1,3 @@
+def on_connect(self, status):
+    if (status == StatusCode.OK):
+        self.on_connect_called = True

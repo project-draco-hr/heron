@@ -1,0 +1,3 @@
+def test_handle_connect(self):
+    self.mock_client.handle_connect()
+    self.assertTrue(self.mock_client.on_connect_called)

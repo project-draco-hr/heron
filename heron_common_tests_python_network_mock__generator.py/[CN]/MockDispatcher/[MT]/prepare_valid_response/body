@@ -1,0 +1,5 @@
+def prepare_valid_response(self):
+    'a number of valid packets will be prepared in the recv buffer'
+    (pkt_list, _) = get_mock_requst_packets(is_message=False)
+    for pkt in pkt_list:
+        self.to_be_received += pkt.convert_to_raw()

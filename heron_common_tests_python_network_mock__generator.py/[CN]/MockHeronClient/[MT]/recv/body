@@ -1,0 +1,2 @@
+def recv(self, numbytes):
+    return self.dispatcher.recv(numbytes)

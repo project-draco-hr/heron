@@ -1,0 +1,32 @@
+def _handle_packet(self, packet):
+    (typename, reqid, serialized_msg) = HeronProtocol.decode_packet(packet)
+    if self.context_map.has_key(reqid):
+        context = self.context_map.pop(reqid)
+        response_msg = self.response_message_map.pop(reqid)
+        try:
+            response_msg.ParseFromString(serialized_msg)
+        except Exception as e:
+            Log.error(('Invalid Packet Error: %s' % e.message))
+            self.on_response(StatusCode.INVALID_PACKET, context, None)
+            return
+        if response_msg.IsInitialized():
+            self.on_response(StatusCode.OK, context, response_msg)
+        else:
+            Log.error('Response not initialized')
+            self.on_response(StatusCode.INVALID_PACKET, context, None)
+    elif reqid.is_zero():
+        try:
+            if (typename not in self.registered_message_map):
+                raise ValueError(('%s is not registered in message map' % typename))
+            msg_builder = self.registered_message_map[typename]
+            message = msg_builder()
+            message.ParseFromString(serialized_msg)
+            if message.IsInitialized():
+                self.on_incoming_message(message)
+            else:
+                raise RuntimeError('Message not initialized')
+        except Exception as e:
+            Log.error(('Error when handling message packet: %s' % e.message))
+            Log.error(traceback.format_exc())
+    else:
+        Log.info(('In handle_packet(): Received message whose REQID is not registered: %s' % str(reqid)))

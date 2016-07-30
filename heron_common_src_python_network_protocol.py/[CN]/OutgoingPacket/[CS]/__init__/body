@@ -1,0 +1,3 @@
+def __init__(self, raw_data):
+    self.raw = str(raw_data)
+    self.to_send = str(raw_data)

@@ -1,0 +1,6 @@
+@staticmethod
+def read_new_packet(dispatcher):
+    "Reads new packet and returns an IncomingPacket object\n\n    :param dispatcher: asyncore's dispatcher class from which packets is read\n    "
+    packet = IncomingPacket()
+    packet.read(dispatcher)
+    return packet

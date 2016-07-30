@@ -1,0 +1,28 @@
+def handle_read(self):
+    start_cycle_time = time.time()
+    bytes_read = 0
+    num_pkt_read = 0
+    read_pkt_list = []
+    read_batch_time_sec = (self.socket_options.nw_read_batch_time_ms * constants.MS_TO_SEC)
+    read_batch_size_bytes = self.socket_options.nw_read_batch_size_bytes
+    while ((((time.time() - start_cycle_time) - read_batch_time_sec) < 0) and (bytes_read < read_batch_size_bytes)):
+        if (self.incomplete_pkt is None):
+            pkt = HeronProtocol.read_new_packet(self)
+        else:
+            Log.debug('In handle_read(): Continue reading')
+            pkt = self.incomplete_pkt
+            pkt.read(self)
+        if pkt.is_complete:
+            num_pkt_read += 1
+            bytes_read += pkt.get_pktsize()
+            Log.debug(('Read a complete packet of size %d' % bytes_read))
+            self.incomplete_pkt = None
+            read_pkt_list.append(pkt)
+        else:
+            Log.debug('In handle_read(): Packet read not yet complete')
+            self.incomplete_pkt = pkt
+            break
+    self.total_bytes_received += bytes_read
+    self.total_pkt_received += num_pkt_read
+    for pkt in read_pkt_list:
+        self._handle_packet(pkt)

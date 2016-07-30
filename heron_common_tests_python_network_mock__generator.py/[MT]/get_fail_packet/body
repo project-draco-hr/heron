@@ -1,0 +1,6 @@
+def get_fail_packet():
+    'Returns an incomplete IncomingPacket object'
+    raw = OutgoingPacket.create_packet(REQID.generate(), mock_protobuf.get_mock_pplan()).raw
+    packet = IncomingPacket.create_packet(raw[:4], raw[4:])
+    packet.is_complete = False
+    return packet

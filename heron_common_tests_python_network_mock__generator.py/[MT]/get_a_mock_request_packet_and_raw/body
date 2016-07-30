@@ -1,0 +1,6 @@
+def get_a_mock_request_packet_and_raw():
+    'Returns a tuple of mock (IncomingPacket, REQID, RegisterResponse message)'
+    reqid = REQID.generate()
+    message = mock_protobuf.get_mock_register_response()
+    pkt = convert_to_incoming_packet(reqid, message)
+    return (pkt, reqid, message)

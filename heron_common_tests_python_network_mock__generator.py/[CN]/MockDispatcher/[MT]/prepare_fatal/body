@@ -1,0 +1,3 @@
+def prepare_fatal(self):
+    'prepare so that RuntimeError is raised when recv() is called'
+    self.fatal_error_test = True

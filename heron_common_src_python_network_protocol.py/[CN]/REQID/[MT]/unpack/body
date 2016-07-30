@@ -1,0 +1,4 @@
+@staticmethod
+def unpack(raw_data):
+    'Unpacks a given bytestring and returns REQID object'
+    return REQID(bytearray(raw_data))

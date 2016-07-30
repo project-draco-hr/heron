@@ -1,0 +1,9 @@
+def test_handle_read(self):
+    self.mock_client.dispatcher.prepare_valid_response()
+    self.mock_client.handle_read()
+    self.assertTrue(self.mock_client.called_handle_packet)
+    self.mock_client.dispatcher.prepare_header_only()
+    self.mock_client.handle_read()
+    self.assertIsNotNone(self.mock_client.incomplete_pkt)
+    self.assertTrue(self.mock_client.incomplete_pkt.is_header_read)
+    self.assertFalse(self.mock_client.incomplete_pkt.is_complete)

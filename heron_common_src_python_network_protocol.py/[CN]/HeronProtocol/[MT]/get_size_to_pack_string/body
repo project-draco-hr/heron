@@ -1,0 +1,4 @@
+@staticmethod
+def get_size_to_pack_string(string):
+    'Get size to pack string, four byte used for specifying length of the string'
+    return (4 + len(string))
