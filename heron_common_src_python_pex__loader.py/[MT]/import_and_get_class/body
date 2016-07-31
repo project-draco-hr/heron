@@ -1,15 +1,15 @@
 def import_and_get_class(path_to_pex, python_class_name):
     'Imports and load a class from a given pex file path and python class name\n\n  For example, if you want to get a class called `Sample` in\n  /some-path/sample.pex/heron/examples/src/python/sample.py,\n  ``path_to_pex`` needs to be ``/some-path/sample.pex``, and\n  ``python_class_name`` needs to be ``heron.examples.src.python.sample.Sample``\n  '
     abs_path_to_pex = os.path.abspath(path_to_pex)
-    Log.debug(('Add a pex to the path: ' + abs_path_to_pex))
-    Log.debug(('In import_and_get_class with cls_name: ' + python_class_name))
+    Log.debug(('Add a pex to the path: %s' % abs_path_to_pex))
+    Log.debug(('In import_and_get_class with cls_name: %s' % python_class_name))
     split = python_class_name.split('.')
     from_path = '.'.join(split[:(-1)])
     import_name = python_class_name.split('.')[(-1)]
-    Log.debug((((('From path: ' + from_path) + ' -- ') + 'Import name: ') + import_name))
+    Log.debug(('From path: %s, import name: %s' % (from_path, import_name)))
     if python_class_name.startswith('heron.'):
         mod = resolve_heron_suffix_issue(abs_path_to_pex, python_class_name)
         return getattr(mod, import_name)
     mod = __import__(from_path, fromlist=[import_name], level=(-1))
-    Log.debug(('Imported module: ' + str(mod)))
+    Log.debug(('Imported module: %s' % str(mod)))
     return getattr(mod, import_name)
