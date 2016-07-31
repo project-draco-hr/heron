@@ -13,3 +13,4 @@ def __init__(self, name, rootpath):
     self.tmaster_watchers = defaultdict((lambda : []))
     self.scheduler_location_watchers = defaultdict((lambda : []))
     self.monitoring_thread = threading.Thread(target=self.monitor)
+    self.event = threading.Event()

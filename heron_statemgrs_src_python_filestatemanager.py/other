@@ -1,7 +1,6 @@
 ' filestatemanager.py '
 import os
 import threading
-import time
 from collections import defaultdict
 from heron.statemgrs.src.python.statemanager import StateManager
 from heron.proto.execution_state_pb2 import ExecutionState

@@ -15,4 +15,11 @@ def main():
     define_options(command_line_args['port'], command_line_args['tracker_url'])
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(command_line_args['port'])
+
+    def signal_handler(signum, frame):
+        print '\n',
+        LOG.debug('SIGINT received. Stopping UI')
+        tornado.ioloop.IOLoop.instance().stop()
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
     tornado.ioloop.IOLoop.instance().start()

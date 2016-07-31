@@ -1,3 +1,4 @@
 def stop(self):
     '" stop monitoring thread '
     self.monitoring_thread_stop_signal = True
+    self.event.set()

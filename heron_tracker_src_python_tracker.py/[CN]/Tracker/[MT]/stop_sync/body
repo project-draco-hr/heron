@@ -1,0 +1,3 @@
+def stop_sync(self):
+    for state_manager in self.state_managers:
+        state_manager.stop()
