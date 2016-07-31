@@ -1,6 +1,5 @@
 ' metricstimeline.py '
-import logging
 import tornado.gen
 from heron.proto import common_pb2
 from heron.proto import tmaster_pb2
-LOG = logging.getLogger(__name__)
+from heron.common.src.python.color import Log

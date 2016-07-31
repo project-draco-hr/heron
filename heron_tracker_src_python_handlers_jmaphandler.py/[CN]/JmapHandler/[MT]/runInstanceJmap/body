@@ -11,7 +11,7 @@ def runInstanceJmap(self, topology_info, instance_id):
         endpoint = utils.make_shell_endpoint(topology_info, instance_id)
         url = ('%s/jmap/%s' % (endpoint, pid))
         response = yield http_client.fetch(url)
-        LOG.debug('HTTP call for url: %s', url)
+        Log.debug('HTTP call for url: %s', url)
         raise tornado.gen.Return(response.body)
     except tornado.httpclient.HTTPError as e:
         raise Exception(str(e))

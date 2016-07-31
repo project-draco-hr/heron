@@ -10,5 +10,5 @@ def get(self):
         scheduler_location = topology_info['scheduler_location']
         self.write_success_response(scheduler_location)
     except Exception as e:
-        traceback.print_exc()
+        Log.debug(traceback.format_exc())
         self.write_error_response(e)

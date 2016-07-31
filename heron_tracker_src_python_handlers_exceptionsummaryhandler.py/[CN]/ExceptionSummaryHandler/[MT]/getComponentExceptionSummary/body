@@ -11,19 +11,19 @@ def getComponentExceptionSummary(self, tmaster, component_name, instances=[], ca
     port = str(tmaster.stats_port)
     host = tmaster.host
     url = 'http://{0}:{1}/exceptionsummary'.format(host, port)
-    LOG.debug('Creating request object.')
+    Log.debug('Creating request object.')
     request = tornado.httpclient.HTTPRequest(url, body=request_str, method='POST', request_timeout=5)
-    LOG.debug('Making HTTP call to fetch exceptionsummary url: %s', url)
+    Log.debug('Making HTTP call to fetch exceptionsummary url: %s', url)
     try:
         client = tornado.httpclient.AsyncHTTPClient()
         result = yield client.fetch(request)
-        LOG.debug('HTTP call complete.')
+        Log.debug('HTTP call complete.')
     except tornado.httpclient.HTTPError as e:
         raise Exception(str(e))
     responseCode = result.code
     if (responseCode >= 400):
         message = ('Error in getting exceptions from Tmaster, code: ' + responseCode)
-        LOG.error(message)
+        Log.error(message)
         raise tornado.gen.Return({'message': message, })
     exception_response = tmaster_pb2.ExceptionLogResponse()
     exception_response.ParseFromString(result.body)

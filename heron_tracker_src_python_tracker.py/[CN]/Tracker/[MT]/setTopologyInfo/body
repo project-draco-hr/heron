@@ -1,9 +1,9 @@
 def setTopologyInfo(self, topology):
     '\n    Extracts info from the stored proto states and\n    convert it into representation that is exposed using\n    the API.\n    This method is called on any change for the topology.\n    For example, when a container moves and its host or some\n    port changes. All the information is parsed all over\n    again and cache is updated.\n    '
     if (not topology.execution_state):
-        LOG.info(('No execution state found for: ' + topology.name))
+        Log.info(('No execution state found for: ' + topology.name))
         return
-    LOG.info(('Setting topology info for topology: ' + topology.name))
+    Log.info(('Setting topology info for topology: ' + topology.name))
     has_physical_plan = True
     if (not topology.physical_plan):
         has_physical_plan = False

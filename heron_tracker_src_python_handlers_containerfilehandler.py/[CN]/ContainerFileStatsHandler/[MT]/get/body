@@ -19,5 +19,5 @@ def get(self):
         self.write_success_response(json.loads(response.body))
         self.finish()
     except Exception as e:
-        traceback.print_exc()
+        Log.debug(traceback.format_exc())
         self.write_error_response(e)

@@ -1,3 +1,3 @@
 def log_debug(message, ident=0):
     'log debugging info'
-    LOG.debug(((' ' * (ident * 2)) + str(message)))
+    Log.debug(((' ' * (ident * 2)) + str(message)))

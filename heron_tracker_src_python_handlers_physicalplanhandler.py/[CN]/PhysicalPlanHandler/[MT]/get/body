@@ -10,5 +10,5 @@ def get(self):
         physical_plan = topology_info['physical_plan']
         self.write_success_response(physical_plan)
     except Exception as e:
-        traceback.print_exc()
+        Log.debug(traceback.format_exc())
         self.write_error_response(e)

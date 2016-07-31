@@ -16,8 +16,8 @@ def main():
         configure_logging(logging.DEBUG)
     else:
         configure_logging(logging.INFO)
-    LOG.info('Running on port: %d', namespace['port'])
-    LOG.info('Using config file: %s', namespace['config_file'])
+    Log.info('Running on port: %d', namespace['port'])
+    Log.info('Using config file: %s', namespace['config_file'])
     define_options(namespace['port'], namespace['config_file'])
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(namespace['port'])

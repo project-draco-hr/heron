@@ -4,14 +4,14 @@ def synch_topologies(self):
 
     def on_topologies_watch(state_manager, topologies):
         'watch topologies'
-        LOG.info('State watch triggered for topologies.')
-        LOG.debug(('Topologies: ' + str(topologies)))
+        Log.info('State watch triggered for topologies.')
+        Log.debug(('Topologies: ' + str(topologies)))
         existingTopologies = self.getTopologiesForStateLocation(state_manager.name)
         existingTopNames = map((lambda t: t.name), existingTopologies)
-        LOG.debug(('Existing topologies: ' + str(existingTopNames)))
+        Log.debug(('Existing topologies: ' + str(existingTopNames)))
         for name in existingTopNames:
             if (name not in topologies):
-                LOG.info('Removing topology: %s in rootpath: %s', name, state_manager.rootpath)
+                Log.info('Removing topology: %s in rootpath: %s', name, state_manager.rootpath)
                 self.removeTopology(name, state_manager.name)
         for name in topologies:
             if (name not in existingTopNames):

@@ -6,7 +6,7 @@ def getTopologyInfo(self, topologyName, cluster, role, environ):
             if ((not role) or (executionState.get('role') == role)):
                 return topologyInfo
     if (role is not None):
-        LOG.info('Could not find topology info for topology: %s,cluster: %s, role: %s, and environ: %s', topologyName, cluster, role, environ)
+        Log.info('Could not find topology info for topology: %s,cluster: %s, role: %s, and environ: %s', topologyName, cluster, role, environ)
     else:
-        LOG.info('Could not find topology info for topology: %s,cluster: %s and environ: %s', topologyName, cluster, environ)
+        Log.info('Could not find topology info for topology: %s,cluster: %s and environ: %s', topologyName, cluster, environ)
     raise Exception('No topology found')

@@ -4,12 +4,12 @@ def register_watch(self, callback):
     for _ in range(RETRY_COUNT):
         uid = uuid.uuid4()
         if (uid not in self.watches):
-            LOG.info(('Registering a watch with uid: ' + str(uid)))
+            Log.info(('Registering a watch with uid: ' + str(uid)))
             try:
                 callback(self)
             except Exception as e:
-                LOG.error(('Caught exception while triggering callback: ' + str(e)))
-                traceback.print_exc()
+                Log.error(('Caught exception while triggering callback: ' + str(e)))
+                Log.debug(traceback.format_exc())
                 return None
             self.watches[uid] = callback
             return uid
