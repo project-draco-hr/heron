@@ -13,11 +13,16 @@
   Assert.assertFalse(slurmLauncher.launch(packingPlan));
   Mockito.verify(slurmLauncher).setupWorkingDirectory();
   PowerMockito.spy(SchedulerUtils.class);
-  PowerMockito.doReturn(false).when(SchedulerUtils.class,"onScheduleAsLibrary",Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(PackingPlan.class));
-  Assert.assertFalse(slurmLauncher.launch(Mockito.mock(PackingPlan.class)));
+  PowerMockito.doReturn(false).when(SchedulerUtils.class,"onScheduleAsLibrary",Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
   PowerMockito.doReturn(true).when(slurmLauncher).setupWorkingDirectory();
+  Assert.assertFalse(slurmLauncher.launch(Mockito.mock(PackingPlan.class)));
+  PowerMockito.verifyStatic();
+  SchedulerUtils.onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
   PowerMockito.mockStatic(SchedulerUtils.class);
-  PowerMockito.doReturn(true).when(SchedulerUtils.class,"onScheduleAsLibrary",Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(PackingPlan.class));
-  Mockito.verify(slurmLauncher,Mockito.times(2)).launch(Mockito.any(PackingPlan.class));
+  PowerMockito.doReturn(true).when(SchedulerUtils.class,"onScheduleAsLibrary",Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
+  Assert.assertTrue(slurmLauncher.launch(Mockito.mock(PackingPlan.class)));
+  Mockito.verify(slurmLauncher,Mockito.times(3)).launch(Mockito.any(PackingPlan.class));
+  PowerMockito.verifyStatic();
+  SchedulerUtils.onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
   slurmLauncher.close();
 }
