@@ -2,7 +2,7 @@
   final double CPU=0.5;
   final long MEM=100 * Constants.MB;
   final long DISK=100 * Constants.MB;
-  PackingPlan.Resource containerResources=new PackingPlan.Resource(CPU,MEM,DISK);
+  Resource containerResources=new Resource(CPU,MEM,DISK);
   PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan("id",new HashMap<String,PackingPlan.InstancePlan>(),containerResources);
   Map<String,PackingPlan.ContainerPlan> map=new HashMap<>();
   map.put("id",containerPlan);

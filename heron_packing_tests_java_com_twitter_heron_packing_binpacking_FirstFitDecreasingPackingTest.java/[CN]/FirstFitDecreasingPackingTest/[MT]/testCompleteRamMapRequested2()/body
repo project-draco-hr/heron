@@ -11,9 +11,9 @@
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
   Assert.assertEquals(packingPlanExplicitRamMap.containers.size(),2);
-  Assert.assertEquals((long)(Math.round(4 * instanceCpuDefault + 10 * (4 * instanceCpuDefault) / 100) + Math.round(3 * instanceCpuDefault + 10 * (3 * instanceCpuDefault) / 100) + instanceCpuDefault),(long)packingPlanExplicitRamMap.resource.cpu);
-  Assert.assertEquals((4 * spoutRam) + 10 * (4 * spoutRam) / 100 + 3 * boltRam + 10 * (3 * boltRam) / 100 + instanceRamDefault,packingPlanExplicitRamMap.resource.ram);
-  Assert.assertEquals(4 * instanceDiskDefault + 10 * (4 * instanceDiskDefault) / 100 + 3 * instanceDiskDefault + 10 * (3 * instanceDiskDefault) / 100 + instanceDiskDefault,packingPlanExplicitRamMap.resource.disk);
+  Assert.assertEquals((long)(Math.round(spoutParallelism * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * instanceCpuDefault)) + Math.round(boltParallelism * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * instanceCpuDefault)) + instanceCpuDefault),(long)packingPlanExplicitRamMap.resource.cpu);
+  Assert.assertEquals((spoutParallelism * spoutRam) + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * spoutRam)) + boltParallelism * boltRam + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * boltRam)) + instanceRamDefault,packingPlanExplicitRamMap.resource.ram);
+  Assert.assertEquals(spoutParallelism * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * instanceDiskDefault)) + boltParallelism * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * instanceDiskDefault)) + instanceDiskDefault,packingPlanExplicitRamMap.resource.disk);
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.containers.values()) {
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.instances.values()) {
       if (instancePlan.componentName.equals(BOLT_NAME)) {

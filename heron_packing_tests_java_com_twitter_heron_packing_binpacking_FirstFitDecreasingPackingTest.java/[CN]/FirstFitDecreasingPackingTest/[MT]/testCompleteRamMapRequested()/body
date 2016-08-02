@@ -1,6 +1,7 @@
 {
   int spoutParallelism=4;
   int boltParallelism=3;
+  int totalInstances=spoutParallelism + boltParallelism;
   com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
   long maxContainerRam=15L * Constants.GB;
   long maxContainerDisk=20L * Constants.GB;
@@ -15,9 +16,9 @@
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
   Assert.assertEquals(packingPlanExplicitRamMap.containers.size(),1);
-  Assert.assertEquals(Math.round(7 * instanceCpuDefault + 10 * (7 * instanceCpuDefault) / 100 + instanceCpuDefault),(long)packingPlanExplicitRamMap.resource.cpu);
-  Assert.assertEquals(4 * spoutRam + 3 * boltRam + 10 * (4 * spoutRam + 3 * boltRam) / 100 + instanceRamDefault,packingPlanExplicitRamMap.resource.ram);
-  Assert.assertEquals(7 * instanceDiskDefault + 10 * (7 * instanceDiskDefault) / 100 + instanceDiskDefault,packingPlanExplicitRamMap.resource.disk);
+  Assert.assertEquals(Math.round(totalInstances * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (totalInstances * instanceCpuDefault) + instanceCpuDefault),(long)packingPlanExplicitRamMap.resource.cpu);
+  Assert.assertEquals(spoutParallelism * spoutRam + boltParallelism * boltRam + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * spoutRam + boltParallelism * boltRam)) + instanceRamDefault,packingPlanExplicitRamMap.resource.ram);
+  Assert.assertEquals(totalInstances * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (totalInstances * instanceDiskDefault)) + instanceDiskDefault,packingPlanExplicitRamMap.resource.disk);
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.containers.values()) {
     Assert.assertNotEquals(maxContainerRam,containerPlan.resource.ram);
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.instances.values()) {

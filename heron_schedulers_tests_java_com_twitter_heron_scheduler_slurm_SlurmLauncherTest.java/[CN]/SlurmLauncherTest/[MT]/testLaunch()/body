@@ -2,7 +2,7 @@
   Config config=createRunnerConfig();
   Config runtime=Mockito.mock(Config.class);
   PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
-  PackingPlan plan=new PackingPlan("plan.id",new HashMap<String,PackingPlan.ContainerPlan>(),Mockito.mock(PackingPlan.Resource.class));
+  PackingPlan plan=new PackingPlan("plan.id",new HashMap<String,PackingPlan.ContainerPlan>(),Mockito.mock(Resource.class));
   PowerMockito.spy(SlurmContext.class);
   PowerMockito.doReturn(WORKING_DIRECTORY).when(SlurmContext.class,"workingDirectory",config);
   LauncherUtils mockLauncherUtils=Mockito.mock(LauncherUtils.class);

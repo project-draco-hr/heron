@@ -14,7 +14,7 @@
   Mockito.when(packing.pack()).thenReturn(packingPlan);
   Mockito.when(packingPlan.getInstanceDistribution()).thenReturn(packingString);
   Map<String,PackingPlan.ContainerPlan> containers=new HashMap<>();
-  containers.put("dummy",new PackingPlan.ContainerPlan("dummy",null,new PackingPlan.Resource(1,1,1)));
+  containers.put("dummy",new PackingPlan.ContainerPlan("dummy",null,new Resource(1,1,1)));
   Mockito.when(packingPlan.getContainers()).thenReturn(containers);
   PowerMockito.spy(ReflectionUtils.class);
   PowerMockito.doReturn(stateManager).when(ReflectionUtils.class,"newInstance",STATE_MANAGER_CLASS);

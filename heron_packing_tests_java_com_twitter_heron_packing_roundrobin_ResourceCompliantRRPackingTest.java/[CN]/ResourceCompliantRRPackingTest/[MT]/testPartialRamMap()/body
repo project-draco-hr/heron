@@ -1,0 +1,26 @@
+{
+  int numContainers=2;
+  int spoutParallelism=4;
+  int boltParallelism=3;
+  com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
+  topologyConfig.put(com.twitter.heron.api.Config.TOPOLOGY_STMGRS,numContainers);
+  long containerRam=10L * Constants.GB;
+  long boltRam=1L * Constants.GB;
+  long spoutRam=2L * Constants.GB;
+  topologyConfig.setContainerRamRequested(containerRam);
+  topologyConfig.setComponentRam(BOLT_NAME,boltRam);
+  topologyConfig.setComponentRam(SPOUT_NAME,spoutRam);
+  TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
+  PackingPlan packingPlanExplicitRamMap=getResourceCompliantRRPackingPlan(topologyExplicitRamMap);
+  for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.containers.values()) {
+    Assert.assertNotEquals(containerRam,containerPlan.resource.ram);
+    for (    PackingPlan.InstancePlan instancePlan : containerPlan.instances.values()) {
+      if (instancePlan.componentName.equals(BOLT_NAME)) {
+        Assert.assertEquals(boltRam,instancePlan.resource.ram);
+      }
+      if (instancePlan.componentName.equals(SPOUT_NAME)) {
+        Assert.assertEquals(spoutRam,instancePlan.resource.ram);
+      }
+    }
+  }
+}

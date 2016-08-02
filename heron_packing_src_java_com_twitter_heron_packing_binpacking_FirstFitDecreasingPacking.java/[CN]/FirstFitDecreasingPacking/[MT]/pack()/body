@@ -30,14 +30,14 @@
       containerDiskInBytes+=instanceDisk;
       double instanceCpu=instanceCpuDefault;
       containerCpu+=instanceCpu;
-      PackingPlan.Resource resource=new PackingPlan.Resource(instanceCpu,instanceRam,instanceDisk);
+      Resource resource=new Resource(instanceCpu,instanceRam,instanceDisk);
       PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,getComponentName(instanceId),resource);
       instancePlanMap.put(instanceId,instancePlan);
     }
     containerCpu+=(paddingPercentage * containerCpu) / 100;
     containerRam+=(paddingPercentage * containerRam) / 100;
     containerDiskInBytes+=(paddingPercentage * containerDiskInBytes) / 100;
-    PackingPlan.Resource resource=new PackingPlan.Resource(Math.round(containerCpu),containerRam,containerDiskInBytes);
+    Resource resource=new Resource(Math.round(containerCpu),containerRam,containerDiskInBytes);
     PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlanMap,resource);
     containerPlanMap.put(containerId,containerPlan);
     topologyRam+=containerRam;
@@ -47,7 +47,7 @@
   topologyRam+=instanceRamDefault;
   topologyDisk+=instanceDiskDefault;
   topologyCpu+=instanceCpuDefault;
-  PackingPlan.Resource resource=new PackingPlan.Resource(topologyCpu,topologyRam,topologyDisk);
+  Resource resource=new Resource(topologyCpu,topologyRam,topologyDisk);
   PackingPlan plan=new PackingPlan(topology.getId(),containerPlanMap,resource);
   return plan;
 }
