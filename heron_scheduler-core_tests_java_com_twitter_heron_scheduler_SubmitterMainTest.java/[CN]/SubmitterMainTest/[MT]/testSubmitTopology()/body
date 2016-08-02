@@ -19,14 +19,12 @@
   Mockito.when(config.getStringValue(ConfigKeys.get(UPLOADER_CLASS))).thenReturn(CLASS_NOT_EXIST);
   Assert.assertFalse(submitterMain.submitTopology());
   Mockito.verify(uploader,Mockito.never()).close();
-  Mockito.verify(packing,Mockito.never()).close();
   Mockito.verify(launcher,Mockito.never()).close();
   Mockito.verify(statemgr,Mockito.never()).close();
   Mockito.when(config.getStringValue(ConfigKeys.get(UPLOADER_CLASS))).thenReturn(UPLOADER_CLASS);
   Mockito.doReturn(false).when(submitterMain).validateSubmit(Mockito.any(SchedulerStateManagerAdaptor.class),Mockito.anyString());
   Assert.assertFalse(submitterMain.submitTopology());
   Mockito.verify(uploader,Mockito.atLeastOnce()).close();
-  Mockito.verify(packing,Mockito.atLeastOnce()).close();
   Mockito.verify(launcher,Mockito.atLeastOnce()).close();
   Mockito.verify(statemgr,Mockito.atLeastOnce()).close();
   Mockito.doReturn(true).when(submitterMain).validateSubmit(Mockito.any(SchedulerStateManagerAdaptor.class),Mockito.anyString());

@@ -3,14 +3,11 @@
   IStateManager statemgr;
   String launcherClass=Context.launcherClass(config);
   ILauncher launcher;
-  String packingClass=Context.packingClass(config);
-  IPacking packing;
   String uploaderClass=Context.uploaderClass(config);
   IUploader uploader;
   try {
     statemgr=ReflectionUtils.newInstance(statemgrClass);
     launcher=ReflectionUtils.newInstance(launcherClass);
-    packing=ReflectionUtils.newInstance(packingClass);
     uploader=ReflectionUtils.newInstance(uploaderClass);
   }
  catch (  IllegalAccessException|InstantiationException|ClassNotFoundException e) {
@@ -31,7 +28,7 @@
         return false;
       }
  else {
-        Config runtime=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).put(Keys.topologyDefinition(),topology).put(Keys.schedulerStateManagerAdaptor(),adaptor).put(Keys.numContainers(),1 + TopologyUtils.getNumContainers(topology)).put(Keys.topologyPackageUri(),packageURI).put(Keys.launcherClassInstance(),launcher).put(Keys.packingClassInstance(),packing).build();
+        Config runtime=Config.newBuilder().putAll(LauncherUtils.getInstance().getPrimaryRuntime(topology,adaptor)).put(Keys.topologyPackageUri(),packageURI).put(Keys.launcherClassInstance(),launcher).build();
         isSuccessful=callLauncherRunner(runtime);
       }
     }
@@ -43,7 +40,6 @@
       }
     }
     SysUtils.closeIgnoringExceptions(uploader);
-    SysUtils.closeIgnoringExceptions(packing);
     SysUtils.closeIgnoringExceptions(launcher);
     SysUtils.closeIgnoringExceptions(statemgr);
   }

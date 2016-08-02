@@ -12,13 +12,8 @@
     schedulerClient=new HttpServiceSchedulerClient(config,runtime,schedulerLocation.getHttpEndpoint());
   }
  else {
-    final String schedulerClass=Context.schedulerClass(config);
-    final IScheduler scheduler;
-    try {
-      scheduler=ReflectionUtils.newInstance(schedulerClass);
-    }
- catch (    ClassNotFoundException|InstantiationException|IllegalAccessException e) {
-      LOG.log(Level.SEVERE,"Failed to reflect new instance",e);
+    final IScheduler scheduler=LauncherUtils.getInstance().getSchedulerInstance(config,runtime);
+    if (scheduler == null) {
       return null;
     }
     LOG.fine("Invoke scheduler as a library");

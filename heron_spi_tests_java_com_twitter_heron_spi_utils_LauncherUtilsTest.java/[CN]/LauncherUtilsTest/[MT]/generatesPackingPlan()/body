@@ -1,0 +1,15 @@
+{
+  final String PACKING_CLASS="nonExistingTestPackingClass";
+  final PackingPlan mockPackingPlan=Mockito.mock(PackingPlan.class);
+  IPacking mockPacking=Mockito.mock(IPacking.class);
+  Mockito.when(mockPacking.pack()).thenReturn(mockPackingPlan);
+  PowerMockito.spy(ReflectionUtils.class);
+  PowerMockito.doReturn(mockPacking).when(ReflectionUtils.class,"newInstance",PACKING_CLASS);
+  Config mockConfig=Mockito.mock(Config.class);
+  Mockito.when(mockConfig.getStringValue(Keys.packingClass())).thenReturn(PACKING_CLASS);
+  PackingPlan resultPacking=LauncherUtils.getInstance().createPackingPlan(mockConfig,null);
+  Assert.assertEquals(mockPackingPlan,resultPacking);
+  Mockito.verify(mockPacking).initialize(Mockito.any(Config.class),Mockito.any(Config.class));
+  Mockito.verify(mockPacking).pack();
+  Mockito.verify(mockPacking).close();
+}

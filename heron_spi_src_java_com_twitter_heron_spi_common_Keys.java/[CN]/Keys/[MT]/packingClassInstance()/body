@@ -1,3 +1,0 @@
-{
-  return ConfigKeys.get("PACKING_CLASS_INSTANCE");
-}

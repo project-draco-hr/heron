@@ -1,14 +1,15 @@
 {
+  Config config=Config.newBuilder().build();
   AuroraLauncher launcher=Mockito.spy(AuroraLauncher.class);
-  PowerMockito.spy(SchedulerUtils.class);
-  PowerMockito.doReturn(false).when(SchedulerUtils.class,"onScheduleAsLibrary",Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
+  launcher.initialize(config,config);
+  LauncherUtils mockLauncherUtils=Mockito.mock(LauncherUtils.class);
+  PowerMockito.spy(LauncherUtils.class);
+  PowerMockito.doReturn(mockLauncherUtils).when(LauncherUtils.class,"getInstance");
+  Mockito.when(mockLauncherUtils.onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class))).thenReturn(false);
   Assert.assertFalse(launcher.launch(Mockito.mock(PackingPlan.class)));
-  PowerMockito.verifyStatic();
-  SchedulerUtils.onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
-  PowerMockito.spy(SchedulerUtils.class);
-  PowerMockito.doReturn(true).when(SchedulerUtils.class,"onScheduleAsLibrary",Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
+  Mockito.verify(mockLauncherUtils).onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
+  Mockito.when(mockLauncherUtils.onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class))).thenReturn(true);
   Assert.assertTrue(launcher.launch(Mockito.mock(PackingPlan.class)));
-  PowerMockito.verifyStatic();
-  SchedulerUtils.onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
+  Mockito.verify(mockLauncherUtils,Mockito.times(2)).onScheduleAsLibrary(Mockito.any(Config.class),Mockito.any(Config.class),Mockito.any(IScheduler.class),Mockito.any(PackingPlan.class));
   launcher.close();
 }

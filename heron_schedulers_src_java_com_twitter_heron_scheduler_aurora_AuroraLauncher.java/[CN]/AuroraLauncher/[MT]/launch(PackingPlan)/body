@@ -1,3 +1,5 @@
 {
-  return SchedulerUtils.onScheduleAsLibrary(config,runtime,getScheduler(),packing);
+  LauncherUtils launcherUtils=LauncherUtils.getInstance();
+  Config ytruntime=launcherUtils.createConfigWithPackingDetails(runtime,packing);
+  return launcherUtils.onScheduleAsLibrary(config,ytruntime,getScheduler(),packing);
 }

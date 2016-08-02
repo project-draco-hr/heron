@@ -1,0 +1,3 @@
+{
+  return Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).put(Keys.topologyDefinition(),topology).put(Keys.schedulerStateManagerAdaptor(),adaptor).put(Keys.numContainers(),1 + TopologyUtils.getNumContainers(topology)).build();
+}
