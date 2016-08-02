@@ -1,5 +1,15 @@
 {
-  String pkgType=FileUtils.isOriginalPackageJar(FileUtils.getBaseName(topologyJarFile)) ? "jar" : "tar";
+  String basename=FileUtils.getBaseName(topologyJarFile);
+  String pkgType;
+  if (FileUtils.isOriginalPackagePex(basename)) {
+    pkgType="pex";
+  }
+ else   if (FileUtils.isOriginalPackageJar(basename)) {
+    pkgType="jar";
+  }
+ else {
+    pkgType="tar";
+  }
   Config config=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).put(Keys.topologyDefinitionFile(),topologyDefnFile).put(Keys.topologyJarFile(),topologyJarFile).put(Keys.topologyPackageType(),pkgType).build();
   return config;
 }

@@ -46,5 +46,6 @@
   String completeSchedulerProcessClassPath=new StringBuilder().append(Context.schedulerSandboxClassPath(config)).append(":").append(Context.packingSandboxClassPath(config)).append(":").append(Context.stateManagerSandboxClassPath(config)).toString();
   commands.add(completeSchedulerProcessClassPath);
   commands.add(Integer.toString(schedulerPort));
+  commands.add(Context.pyheronInstanceSandboxBinary(config));
   return commands.toArray(new String[0]);
 }
