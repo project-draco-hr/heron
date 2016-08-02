@@ -1,0 +1,12 @@
+def _send_register_req(self):
+    hostname = socket.gethostname()
+    metric_publisher = metrics_pb2.MetricPublisher()
+    metric_publisher.hostname = hostname
+    metric_publisher.port = self.instance.info.task_id
+    metric_publisher.component_name = self.instance.info.component_name
+    metric_publisher.instance_id = self.instance.instance_id
+    metric_publisher.instance_index = self.instance.info.component_index
+    request = metrics_pb2.MetricPublisherRegisterRequest()
+    request.publisher.CopyFrom(metric_publisher)
+    Log.debug(('Sending MetricsCli register request: \n' + str(request)))
+    self.send_request(request, 'MetricsClientContext', metrics_pb2.MetricPublisherRegisterResponse(), 10)

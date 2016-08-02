@@ -1,0 +1,2 @@
+def _add_metrics_client_tasks(self):
+    self.looper.add_wakeup_task(self._send_metrics_messages)

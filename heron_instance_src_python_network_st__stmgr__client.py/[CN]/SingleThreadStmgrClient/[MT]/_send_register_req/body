@@ -1,0 +1,6 @@
+def _send_register_req(self):
+    request = stmgr_pb2.RegisterInstanceRequest()
+    request.instance.MergeFrom(self.instance)
+    request.topology_name = self.topology_name
+    request.topology_id = self.topology_id
+    self.send_request(request, 'Context', stmgr_pb2.RegisterInstanceResponse(), 10)

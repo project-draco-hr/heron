@@ -1,0 +1,7 @@
+def _send_metrics_messages(self):
+    if self.connected:
+        while (not self.out_queue.is_empty()):
+            message = self.out_queue.poll()
+            assert isinstance(message, metrics_pb2.MetricPublisherPublishMessage)
+            Log.debug(('Sending metric message: ' + str(message)))
+            self.send_message(message)

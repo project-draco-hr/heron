@@ -1,0 +1,5 @@
+def _register_msg_to_handle(self):
+    new_instance_builder = (lambda : stmgr_pb2.NewInstanceAssignmentMessage())
+    tuple_msg_builder = (lambda : stmgr_pb2.TupleMessage())
+    self.register_on_message(new_instance_builder)
+    self.register_on_message(tuple_msg_builder)

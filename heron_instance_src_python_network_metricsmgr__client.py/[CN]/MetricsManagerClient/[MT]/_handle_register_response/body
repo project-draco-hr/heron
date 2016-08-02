@@ -1,0 +1,4 @@
+def _handle_register_response(self, response):
+    if (response.status.status != common_pb2.StatusCode.Value('OK')):
+        raise RuntimeError('Metrics Manager returned a not OK response for register')
+    Log.info('We registered ourselves to the Metrics Manager')

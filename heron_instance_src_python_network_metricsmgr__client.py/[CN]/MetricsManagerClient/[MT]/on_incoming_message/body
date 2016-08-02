@@ -1,0 +1,2 @@
+def on_incoming_message(self, message):
+    raise RuntimeError(('Metrics Client got an unknown message from Metrics Manager: %s' % str(message)))

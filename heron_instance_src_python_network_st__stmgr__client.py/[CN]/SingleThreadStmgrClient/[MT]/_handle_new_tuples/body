@@ -1,0 +1,3 @@
+def _handle_new_tuples(self, tuple_msg):
+    'Called when new TupleMessage arrives'
+    self.heron_instance_cls.handle_new_tuple_set(tuple_msg.set)

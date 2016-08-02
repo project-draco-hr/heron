@@ -1,0 +1,9 @@
+def on_connect(self, status):
+    Log.debug('In on_connect of STStmgrClient')
+    if (status != StatusCode.OK):
+        Log.error(('Error connecting to Stream Manager with status: ' + str(status)))
+        retry_interval = float(self.sys_config[constants.INSTANCE_RECONNECT_STREAMMGR_INTERVAL_SEC])
+        self.looper.register_timer_task_in_sec(self.start_connect, retry_interval)
+        return
+    self._register_msg_to_handle()
+    self._send_register_req()

@@ -1,0 +1,3 @@
+def on_error(self):
+    Log.error('Disconnected from Metrics Manager')
+    self.on_connect(StatusCode.CONNECT_ERROR)

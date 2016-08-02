@@ -1,0 +1,4 @@
+def on_error(self):
+    Log.error('Disconnected from Stream Manager')
+    self._pplan_helper = None
+    self.on_connect(StatusCode.CONNECT_ERROR)

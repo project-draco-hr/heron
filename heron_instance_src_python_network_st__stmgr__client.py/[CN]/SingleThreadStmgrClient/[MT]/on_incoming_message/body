@@ -1,0 +1,9 @@
+def on_incoming_message(self, message):
+    self.gateway_metrics.received_packet(message.ByteSize())
+    if isinstance(message, stmgr_pb2.NewInstanceAssignmentMessage):
+        Log.info('Handling assignment message from direct NewInstanceAssignmentMessage')
+        self._handle_assignment_message(message.pplan)
+    elif isinstance(message, stmgr_pb2.TupleMessage):
+        self._handle_new_tuples(message)
+    else:
+        raise RuntimeError('Unknown kind of message received from Stream Manager')
