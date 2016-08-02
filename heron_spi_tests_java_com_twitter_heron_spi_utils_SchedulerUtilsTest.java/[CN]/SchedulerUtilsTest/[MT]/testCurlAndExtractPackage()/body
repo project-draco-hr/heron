@@ -1,12 +1,13 @@
 {
   PowerMockito.mockStatic(ShellUtils.class);
   PowerMockito.mockStatic(FileUtils.class);
-  PowerMockito.when(ShellUtils.curlPackage(TOPOLOGY_URI,TOPOLOGY_DEST,IS_VERBOSE,true)).thenReturn(false);
+  PowerMockito.when(ShellUtils.curlPackage(TOPOLOGY_URI,TOPOLOGY_DEST,IS_VERBOSE,false)).thenReturn(false);
   Assert.assertFalse(SchedulerUtils.curlAndExtractPackage(WORKING_DIR,TOPOLOGY_URI,TOPOLOGY_DEST,IS_DELETE_PACKAGE,IS_VERBOSE));
-  PowerMockito.when(ShellUtils.curlPackage(TOPOLOGY_URI,TOPOLOGY_DEST,IS_VERBOSE,true)).thenReturn(true);
-  PowerMockito.when(ShellUtils.extractPackage(TOPOLOGY_DEST,WORKING_DIR,IS_VERBOSE,true)).thenReturn(false);
+  PowerMockito.when(ShellUtils.curlPackage(TOPOLOGY_URI,TOPOLOGY_DEST,IS_VERBOSE,false)).thenReturn(true);
+  PowerMockito.when(ShellUtils.extractPackage(TOPOLOGY_DEST,WORKING_DIR,IS_VERBOSE,false)).thenReturn(false);
   Assert.assertFalse(SchedulerUtils.curlAndExtractPackage(WORKING_DIR,TOPOLOGY_URI,TOPOLOGY_DEST,IS_DELETE_PACKAGE,IS_VERBOSE));
-  PowerMockito.when(ShellUtils.extractPackage(TOPOLOGY_DEST,WORKING_DIR,IS_VERBOSE,true)).thenReturn(true);
+  PowerMockito.when(ShellUtils.curlPackage(TOPOLOGY_URI,TOPOLOGY_DEST,IS_VERBOSE,false)).thenReturn(true);
+  PowerMockito.when(ShellUtils.extractPackage(TOPOLOGY_DEST,WORKING_DIR,IS_VERBOSE,false)).thenReturn(true);
   boolean isToDeletePackage=false;
   Assert.assertTrue(SchedulerUtils.curlAndExtractPackage(WORKING_DIR,TOPOLOGY_URI,TOPOLOGY_DEST,isToDeletePackage,IS_VERBOSE));
   PowerMockito.verifyStatic(Mockito.never());
