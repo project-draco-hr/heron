@@ -1,6 +1,6 @@
 {
   File parentDirectory=Paths.get(destination).getParent().toFile();
-  String cmd=String.format("curl %s -o %s",uri,destination);
+  String cmd=String.format("curl -s %s -o %s",uri,destination);
   int ret=runSyncProcess(isVerbose,isInheritIO,cmd,new StringBuilder(),new StringBuilder(),parentDirectory);
   return ret == 0;
 }

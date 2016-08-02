@@ -1,7 +1,7 @@
 {
   try {
     LOG.log(Level.INFO,"Launching Heron scheduler");
-    SchedulerMain schedulerMain=SchedulerMain.createInstance(cluster,role,env,topologyJar,topologyName,httpPort);
+    SchedulerMain schedulerMain=SchedulerMain.createInstance(cluster,role,env,topologyJar,topologyName,httpPort,false);
     schedulerMain.runScheduler();
   }
  catch (  IOException e) {

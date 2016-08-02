@@ -4,4 +4,5 @@ String env
 String topologyJar
 String topologyName
 int httpPort
+Boolean verbose
 Properties schedulerProperties
