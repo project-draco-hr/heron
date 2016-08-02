@@ -1,5 +1,5 @@
 def _run_process(self, name, cmd, env_to_exec=None):
-    if (self.pyheron_instance_binary in cmd[0]):
+    if (self.python_instance_binary in cmd[0]):
         if (env_to_exec is None):
             env = {}
         else:

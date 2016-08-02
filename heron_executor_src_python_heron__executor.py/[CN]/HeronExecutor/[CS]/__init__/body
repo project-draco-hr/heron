@@ -37,7 +37,7 @@ def __init__(self, args, shell_env):
     self.metrics_sinks_config_file = args[29]
     self.scheduler_classpath = args[30]
     self.scheduler_port = args[31]
-    self.pyheron_instance_binary = args[32]
+    self.python_instance_binary = args[32]
     self.log_dir = self._load_logging_dir(self.heron_internals_config_file)
     self.instance_distribution = {}
     self.stmgr_ids = []
