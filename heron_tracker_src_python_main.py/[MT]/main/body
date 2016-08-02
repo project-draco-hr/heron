@@ -12,7 +12,7 @@ def main():
         Log.error('Invalid subcommand')
         sys.exit(1)
     namespace = vars(args)
-    log.set_verbose(namespace)
+    log.set_logging_level(namespace)
     define_options(namespace['port'], namespace['config_file'])
     application = Application()
 
