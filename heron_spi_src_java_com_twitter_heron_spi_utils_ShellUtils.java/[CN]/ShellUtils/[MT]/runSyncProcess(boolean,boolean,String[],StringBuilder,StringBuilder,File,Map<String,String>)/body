@@ -33,7 +33,7 @@
     LOG.log(Level.FINE,"\nSTDOUT:\n {0}",stdoutString);
   }
   if (!stderrString.isEmpty()) {
-    LOG.log(Level.SEVERE,"\nSTDERR:\n {0}",stderrString.toString());
+    LOG.log(Level.FINE,"\nSTDERR:\n {0}",stderrString);
   }
   return exitValue;
 }

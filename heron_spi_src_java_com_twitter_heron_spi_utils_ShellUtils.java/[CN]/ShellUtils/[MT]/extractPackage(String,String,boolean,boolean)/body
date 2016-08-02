@@ -1,5 +1,5 @@
 {
-  String cmd=String.format("tar -xf %s",packageName);
+  String cmd=String.format("tar -xvf %s",packageName);
   int ret=runSyncProcess(isVerbose,isInheritIO,cmd,new StringBuilder(),new StringBuilder(),new File(targetFolder));
   return ret == 0;
 }
