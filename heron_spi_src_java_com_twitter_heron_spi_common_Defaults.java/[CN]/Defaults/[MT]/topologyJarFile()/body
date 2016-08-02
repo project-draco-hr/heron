@@ -1,3 +1,0 @@
-{
-  return ConfigDefaults.get("TOPOLOGY_JAR_FILE");
-}

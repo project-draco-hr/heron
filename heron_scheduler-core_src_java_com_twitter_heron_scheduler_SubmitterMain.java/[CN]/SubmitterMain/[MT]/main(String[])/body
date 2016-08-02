@@ -30,9 +30,9 @@
   String releaseFile=cmd.getOptionValue("release_file");
   String topologyPackage=cmd.getOptionValue("topology_package");
   String topologyDefnFile=cmd.getOptionValue("topology_defn");
-  String topologyJarFile=cmd.getOptionValue("topology_jar");
+  String topologyBinaryFile=cmd.getOptionValue("topology_bin");
   TopologyAPI.Topology topology=TopologyUtils.getTopology(topologyDefnFile);
-  Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath,releaseFile)).putAll(overrideConfigs(overrideConfigFile)).putAll(commandLineConfigs(cluster,role,environ,verbose)).putAll(topologyConfigs(topologyPackage,topologyJarFile,topologyDefnFile,topology)).build());
+  Config config=Config.expand(Config.newBuilder().putAll(defaultConfigs(heronHome,configPath,releaseFile)).putAll(overrideConfigs(overrideConfigFile)).putAll(commandLineConfigs(cluster,role,environ,verbose)).putAll(topologyConfigs(topologyPackage,topologyBinaryFile,topologyDefnFile,topology)).build());
   LOG.fine("Static config loaded successfully ");
   LOG.fine(config.toString());
   SubmitterMain submitterMain=new SubmitterMain(config,topology);

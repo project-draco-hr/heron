@@ -6,7 +6,7 @@ def launch_a_topology(cl_args, tmp_dir, topology_file, topology_defn_file):
     tar_pkg_files = [topology_file, topology_defn_file]
     generated_config_files = [release_yaml_file, cl_args['override_config_file']]
     config.create_tar(topology_pkg_path, tar_pkg_files, config_path, generated_config_files)
-    args = ['--cluster', cl_args['cluster'], '--role', cl_args['role'], '--environment', cl_args['environ'], '--heron_home', config.get_heron_dir(), '--config_path', config_path, '--override_config_file', cl_args['override_config_file'], '--release_file', release_yaml_file, '--topology_package', topology_pkg_path, '--topology_defn', topology_defn_file, '--topology_jar', topology_file]
+    args = ['--cluster', cl_args['cluster'], '--role', cl_args['role'], '--environment', cl_args['environ'], '--heron_home', config.get_heron_dir(), '--config_path', config_path, '--override_config_file', cl_args['override_config_file'], '--release_file', release_yaml_file, '--topology_package', topology_pkg_path, '--topology_defn', topology_defn_file, '--topology_bin', topology_file]
     if (Log.getEffectiveLevel() == logging.DEBUG):
         args.append('--verbose')
     lib_jars = config.get_heron_libs((((jars.scheduler_jars() + jars.uploader_jars()) + jars.statemgr_jars()) + jars.packing_jars()))

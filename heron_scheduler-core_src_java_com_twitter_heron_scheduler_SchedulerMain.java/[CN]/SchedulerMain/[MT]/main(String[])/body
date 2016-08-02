@@ -16,7 +16,7 @@
   }
   Properties schedulerProperties=cmd.getOptionProperties(Keys.SCHEDULER_COMMAND_LINE_PROPERTIES_OVERRIDE_OPTION);
   String topologyName=cmd.getOptionValue("topology_name");
-  SchedulerMain schedulerMain=createInstance(cmd.getOptionValue("cluster"),cmd.getOptionValue("role"),cmd.getOptionValue("environment"),cmd.getOptionValue("topology_jar"),topologyName,Integer.parseInt(cmd.getOptionValue("http_port")),(Boolean)cmd.hasOption("verbose"),schedulerProperties);
+  SchedulerMain schedulerMain=createInstance(cmd.getOptionValue("cluster"),cmd.getOptionValue("role"),cmd.getOptionValue("environment"),cmd.getOptionValue("topology_bin"),topologyName,Integer.parseInt(cmd.getOptionValue("http_port")),(Boolean)cmd.hasOption("verbose"),schedulerProperties);
   LOG.info("Scheduler command line properties override: " + schedulerProperties.toString());
   boolean ret=schedulerMain.runScheduler();
   if (!ret) {

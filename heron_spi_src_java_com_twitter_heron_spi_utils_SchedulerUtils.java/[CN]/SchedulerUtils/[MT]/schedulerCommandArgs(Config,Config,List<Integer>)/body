@@ -17,8 +17,8 @@
   commands.add(Context.environ(config));
   commands.add("--topology_name");
   commands.add(Context.topologyName(config));
-  commands.add("--topology_jar");
-  commands.add(Context.topologyJarFile(config));
+  commands.add("--topology_bin");
+  commands.add(Context.topologyBinaryFile(config));
   commands.add("--http_port");
   commands.add(Integer.toString(httpPort));
   return commands.toArray(new String[0]);

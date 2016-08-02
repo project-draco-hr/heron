@@ -1,3 +1,0 @@
-{
-  return ConfigKeys.get("SANDBOX_PYHERON_INSTANCE_BINARY");
-}

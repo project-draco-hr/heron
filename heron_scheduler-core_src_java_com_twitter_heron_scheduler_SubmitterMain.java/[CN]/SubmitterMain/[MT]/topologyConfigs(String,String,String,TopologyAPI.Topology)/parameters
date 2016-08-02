@@ -1,4 +1,4 @@
 String topologyPackage
-String topologyJarFile
+String topologyBinaryFile
 String topologyDefnFile
 TopologyAPI.Topology topology

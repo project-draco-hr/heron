@@ -1,0 +1,3 @@
+{
+  return ConfigDefaults.get("TOPOLOGY_BINARY_FILE");
+}
