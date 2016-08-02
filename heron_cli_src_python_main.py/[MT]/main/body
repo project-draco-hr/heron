@@ -8,27 +8,20 @@ def main():
     sys.argv = parse.insert_bool_values(sys.argv)
     (args, unknown_args) = parser.parse_known_args()
     command_line_args = vars(args)
-    try:
-        if command_line_args['verbose']:
-            opts.set_verbose()
-        if command_line_args['trace_execution']:
-            opts.set_trace_execution()
-    except:
-        pass
     command = command_line_args['subcommand']
     files = []
-    if ((command != 'help') and (command != 'version')):
+    if (command not in ('help', 'version')):
+        log.set_verbose(command_line_args)
         command_line_args = extract_common_args(command, parser, command_line_args)
         if (not command_line_args):
             return 1
         files.append(command_line_args['override_config_file'])
     atexit.register(cleanup, files)
-    if opts.verbose():
-        print command_line_args
+    Log.debug(command_line_args)
     start = time.time()
     retcode = run(command, parser, command_line_args, unknown_args)
     end = time.time()
-    if (command != 'help'):
+    if (command not in ('help', 'version')):
         sys.stdout.flush()
         Log.info(('Elapsed time: %.3fs.' % (end - start)))
     return (0 if retcode else 1)
