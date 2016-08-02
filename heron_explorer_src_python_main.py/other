@@ -12,5 +12,6 @@ import heron.explorer.src.python.topologies as topologies
 import heron.common.src.python.utils.config as config
 import heron.explorer.src.python.version as version
 import heron.common.src.python.utils.log as log
+Log = log.Log
 if (__name__ == '__main__'):
     sys.exit(main(sys.argv[1:]))
