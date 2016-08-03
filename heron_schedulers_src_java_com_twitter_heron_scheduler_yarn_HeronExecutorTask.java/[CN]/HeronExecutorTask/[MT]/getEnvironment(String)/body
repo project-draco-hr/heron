@@ -1,0 +1,5 @@
+{
+  HashMap<String,String> envs=new HashMap<>();
+  envs.put("PEX_ROOT",cwdPath);
+  return envs;
+}

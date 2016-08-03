@@ -6,8 +6,10 @@
   String[] executorCmd=getExecutorCommand();
   processTarget=Thread.currentThread();
   File workingDirectory=new File(".");
-  LOG.log(Level.INFO,"working dir: {0}",workingDirectory.getAbsolutePath());
-  final Process regularExecutor=ShellUtils.runASyncProcess(true,executorCmd,workingDirectory);
+  String cwdPath=workingDirectory.getAbsolutePath();
+  LOG.log(Level.INFO,"Working dir: {0}",cwdPath);
+  HashMap<String,String> executorEnvironment=getEnvironment(cwdPath);
+  final Process regularExecutor=ShellUtils.runASyncProcess(true,executorCmd,workingDirectory,executorEnvironment);
   LOG.log(Level.INFO,"Started heron executor-id: {0}",heronExecutorId);
   try {
     regularExecutor.waitFor();

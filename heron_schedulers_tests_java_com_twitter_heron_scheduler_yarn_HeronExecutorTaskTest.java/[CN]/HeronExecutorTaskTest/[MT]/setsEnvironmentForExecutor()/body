@@ -1,0 +1,22 @@
+{
+  PowerMockito.spy(HeronReefUtils.class);
+  PowerMockito.doNothing().when(HeronReefUtils.class,"extractPackageInSandbox",Mockito.anyString(),Mockito.anyString(),Mockito.anyString());
+  REEFFileNames mockFiles=PowerMockito.mock(REEFFileNames.class);
+  File global=new File(".");
+  PowerMockito.when(mockFiles.getGlobalFolder()).thenReturn(global);
+  HeronExecutorTask spyTask=getSpyOnHeronExecutorTask(mockFiles);
+  String[] testCmd={"cmd"};
+  Mockito.doReturn(testCmd).when(spyTask).getExecutorCommand();
+  HashMap<String,String> env=spyTask.getEnvironment("testCWD");
+  Assert.assertEquals(1,env.size());
+  String pexRoot=env.get("PEX_ROOT");
+  Assert.assertNotNull(pexRoot);
+  Assert.assertEquals("testCWD",pexRoot);
+  Mockito.when(spyTask.getEnvironment(Mockito.anyString())).thenReturn(env);
+  Process mockProcess=Mockito.mock(Process.class);
+  Mockito.doReturn(0).when(mockProcess).waitFor();
+  PowerMockito.spy(ShellUtils.class);
+  PowerMockito.doReturn(mockProcess).when(ShellUtils.class,"runASyncProcess",Mockito.eq(true),Mockito.eq(testCmd),Mockito.any(File.class),Mockito.eq(env));
+  spyTask.call(null);
+  Mockito.verify(mockProcess).waitFor();
+}

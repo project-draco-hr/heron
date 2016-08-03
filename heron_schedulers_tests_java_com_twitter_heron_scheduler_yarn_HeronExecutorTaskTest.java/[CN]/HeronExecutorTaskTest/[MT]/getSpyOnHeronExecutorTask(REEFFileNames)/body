@@ -1,0 +1,4 @@
+{
+  HeronExecutorTask task=new HeronExecutorTask(mockFiles,"5","cluster","role","testTopology","env","package","core","jar","packedPlan","componentRamMap");
+  return Mockito.spy(task);
+}
