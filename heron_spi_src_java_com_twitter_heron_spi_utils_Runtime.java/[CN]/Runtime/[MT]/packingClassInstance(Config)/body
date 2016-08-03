@@ -1,3 +1,0 @@
-{
-  return (IPacking)runtime.get(Keys.packingClassInstance());
-}

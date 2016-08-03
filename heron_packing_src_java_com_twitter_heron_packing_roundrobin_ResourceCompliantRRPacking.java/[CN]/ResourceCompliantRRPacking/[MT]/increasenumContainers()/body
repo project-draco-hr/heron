@@ -1,0 +1,4 @@
+{
+  this.numContainers++;
+  this.numAdjustments++;
+}

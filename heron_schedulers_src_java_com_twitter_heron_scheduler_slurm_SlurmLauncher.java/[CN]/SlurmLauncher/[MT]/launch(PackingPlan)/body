@@ -4,5 +4,7 @@
     LOG.log(Level.SEVERE,"Failed to download the core and topology packages");
     return false;
   }
-  return SchedulerUtils.onScheduleAsLibrary(config,runtime,new SlurmScheduler(topologyWorkingDirectory),packing);
+  LauncherUtils launcherUtils=LauncherUtils.getInstance();
+  Config ytruntime=launcherUtils.createConfigWithPackingDetails(runtime,packing);
+  return launcherUtils.onScheduleAsLibrary(config,ytruntime,new SlurmScheduler(topologyWorkingDirectory),packing);
 }

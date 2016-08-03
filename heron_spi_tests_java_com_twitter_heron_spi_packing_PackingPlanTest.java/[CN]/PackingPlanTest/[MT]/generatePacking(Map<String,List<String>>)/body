@@ -1,5 +1,5 @@
 {
-  PackingPlan.Resource resource=new PackingPlan.Resource(1.0,1 * Constants.GB,10 * Constants.GB);
+  Resource resource=new Resource(1.0,1 * Constants.GB,10 * Constants.GB);
   Map<String,PackingPlan.ContainerPlan> containerPlanMap=new HashMap<>();
   for (  Map.Entry<String,List<String>> entry : basePacking.entrySet()) {
     String containerId=entry.getKey();

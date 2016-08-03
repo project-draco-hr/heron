@@ -1,0 +1,16 @@
+{
+  int numContainers=2;
+  int spoutParallelism=4;
+  int boltParallelism=3;
+  int padding=50;
+  int totalInstances=spoutParallelism + boltParallelism;
+  com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
+  topologyConfig.put(com.twitter.heron.api.Config.TOPOLOGY_STMGRS,numContainers);
+  topologyConfig.setContainerPaddingPercentage(padding);
+  TopologyAPI.Topology topology=getTopology(spoutParallelism,boltParallelism,topologyConfig);
+  PackingPlan packingPlan=getResourceCompliantRRPackingPlan(topology);
+  Assert.assertEquals(packingPlan.containers.size(),numContainers);
+  Assert.assertEquals((long)(Math.round(4 * instanceCpuDefault + padding / 100.0 * (4 * instanceCpuDefault)) + Math.round(3 * instanceCpuDefault + padding / 100.0 * (3 * instanceCpuDefault)) + instanceCpuDefault),(long)packingPlan.resource.cpu);
+  Assert.assertEquals((4 * instanceRamDefault) + (long)((padding / 100.0) * (4 * instanceRamDefault)) + 3 * instanceRamDefault + (long)((padding / 100.0) * (3 * instanceRamDefault)) + instanceRamDefault,packingPlan.resource.ram);
+  Assert.assertEquals(4 * instanceDiskDefault + (long)((padding / 100.0) * (4 * instanceDiskDefault)) + 3 * instanceDiskDefault + (long)((padding / 100.0) * (3 * instanceDiskDefault)) + instanceDiskDefault,packingPlan.resource.disk);
+}

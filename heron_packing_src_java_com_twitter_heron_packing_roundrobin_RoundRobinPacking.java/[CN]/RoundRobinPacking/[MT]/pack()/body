@@ -14,12 +14,12 @@
       long instanceRam=instancesRamMap.get(containerId).get(instanceId);
       long instanceDisk=instanceDiskDefault;
       double instanceCpu=instanceCpuDefault;
-      PackingPlan.Resource resource=new PackingPlan.Resource(instanceCpu,instanceRam,instanceDisk);
+      Resource resource=new Resource(instanceCpu,instanceRam,instanceDisk);
       PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,getComponentName(instanceId),resource);
       instancePlanMap.put(instanceId,instancePlan);
       containerRam+=instanceRam;
     }
-    PackingPlan.Resource resource=new PackingPlan.Resource(containerCpu,containerRam,containerDiskInBytes);
+    Resource resource=new Resource(containerCpu,containerRam,containerDiskInBytes);
     PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlanMap,resource);
     containerPlanMap.put(containerId,containerPlan);
     topologyRam+=containerRam;
@@ -27,7 +27,7 @@
   int totalContainer=containerPlanMap.size() + 1;
   long topologyDisk=totalContainer * containerDiskInBytes;
   double topologyCpu=totalContainer * containerCpu;
-  PackingPlan.Resource resource=new PackingPlan.Resource(topologyCpu,topologyRam,topologyDisk);
+  Resource resource=new Resource(topologyCpu,topologyRam,topologyDisk);
   PackingPlan plan=new PackingPlan(topology.getId(),containerPlanMap,resource);
   if (!isValidPackingPlan(plan)) {
     return null;

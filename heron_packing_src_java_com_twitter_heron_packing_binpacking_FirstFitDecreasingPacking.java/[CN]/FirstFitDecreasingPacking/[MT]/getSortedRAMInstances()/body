@@ -4,7 +4,7 @@
   Map<String,Long> ramMap=TopologyUtils.getComponentRamMapConfig(topology);
   for (  String component : parallelismMap.keySet()) {
     if (ramMap.containsKey(component)) {
-      if (!isValidInstance(ramMap.get(component))) {
+      if (!isValidInstance(new Resource(instanceCpuDefault,ramMap.get(component),instanceDiskDefault))) {
         return null;
       }
  else {
@@ -12,7 +12,12 @@
       }
     }
  else {
-      ramRequirements.add(new RamRequirement(component,instanceRamDefault));
+      if (!isValidInstance(new Resource(instanceCpuDefault,instanceRamDefault,instanceDiskDefault))) {
+        return null;
+      }
+ else {
+        ramRequirements.add(new RamRequirement(component,instanceRamDefault));
+      }
     }
   }
   Collections.sort(ramRequirements,Collections.reverseOrder());

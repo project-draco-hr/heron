@@ -1,14 +1,9 @@
 {
+  IScheduler scheduler=null;
   String statemgrClass=Context.stateManagerClass(config);
   IStateManager statemgr;
-  String packingClass=Context.packingClass(config);
-  IPacking packing;
-  String schedulerClass=Context.schedulerClass(config);
-  IScheduler scheduler;
   try {
     statemgr=ReflectionUtils.newInstance(statemgrClass);
-    packing=ReflectionUtils.newInstance(packingClass);
-    scheduler=ReflectionUtils.newInstance(schedulerClass);
   }
  catch (  IllegalAccessException|InstantiationException|ClassNotFoundException e) {
     LOG.log(Level.SEVERE,"Failed to instantiate instances",e);
@@ -19,15 +14,18 @@
   try {
     statemgr.initialize(config);
     SchedulerStateManagerAdaptor adaptor=new SchedulerStateManagerAdaptor(statemgr,5000);
-    Config runtime=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).put(Keys.topologyDefinition(),topology).put(Keys.schedulerStateManagerAdaptor(),adaptor).put(Keys.numContainers(),1 + TopologyUtils.getNumContainers(topology)).put(Keys.schedulerShutdown(),getShutdown()).put(Keys.SCHEDULER_PROPERTIES,properties).build();
-    packing.initialize(config,runtime);
-    PackingPlan packedPlan=packing.pack();
+    LauncherUtils launcherUtils=LauncherUtils.getInstance();
+    Config runtime=Config.newBuilder().putAll(launcherUtils.getPrimaryRuntime(topology,adaptor)).put(Keys.schedulerShutdown(),getShutdown()).put(Keys.SCHEDULER_PROPERTIES,properties).build();
+    PackingPlan packedPlan=launcherUtils.createPackingPlan(config,runtime);
     if (packedPlan == null) {
       LOG.severe("Failed to pack a valid PackingPlan. Check the config.");
       return false;
     }
-    Config ytruntime=Config.newBuilder().putAll(runtime).put(Keys.instanceDistribution(),packedPlan.getInstanceDistribution()).put(Keys.componentRamMap(),packedPlan.getComponentRamDistribution()).put(Keys.numContainers(),1 + packedPlan.getContainers().size()).build();
-    scheduler.initialize(config,ytruntime);
+    Config ytruntime=launcherUtils.createConfigWithPackingDetails(runtime,packedPlan);
+    scheduler=launcherUtils.getSchedulerInstance(config,ytruntime);
+    if (scheduler == null) {
+      return false;
+    }
     isSuccessful=scheduler.onSchedule(packedPlan);
     if (!isSuccessful) {
       LOG.severe("Failed to schedule topology");
@@ -50,7 +48,6 @@
       server.stop();
     }
     SysUtils.closeIgnoringExceptions(scheduler);
-    SysUtils.closeIgnoringExceptions(packing);
     SysUtils.closeIgnoringExceptions(statemgr);
   }
   return isSuccessful;

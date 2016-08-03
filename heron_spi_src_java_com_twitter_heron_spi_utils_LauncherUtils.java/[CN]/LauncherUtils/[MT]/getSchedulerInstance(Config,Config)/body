@@ -1,0 +1,13 @@
+{
+  String schedulerClass=Context.schedulerClass(config);
+  IScheduler scheduler;
+  try {
+    scheduler=ReflectionUtils.newInstance(schedulerClass);
+  }
+ catch (  IllegalAccessException|InstantiationException|ClassNotFoundException e) {
+    LOG.log(Level.SEVERE,"Failed to instantiate scheduler",e);
+    return null;
+  }
+  scheduler.initialize(config,runtime);
+  return scheduler;
+}

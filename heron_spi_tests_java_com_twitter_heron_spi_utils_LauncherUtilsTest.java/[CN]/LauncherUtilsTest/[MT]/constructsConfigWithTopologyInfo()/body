@@ -1,0 +1,14 @@
+{
+  TopologyAPI.Topology mockTopology=PowerMockito.mock(TopologyAPI.Topology.class);
+  PowerMockito.when(mockTopology.getId()).thenReturn("testTopologyId");
+  PowerMockito.when(mockTopology.getName()).thenReturn("testTopologyName");
+  SchedulerStateManagerAdaptor mockStMgr=Mockito.mock(SchedulerStateManagerAdaptor.class);
+  PowerMockito.spy(TopologyUtils.class);
+  PowerMockito.doReturn(456).when(TopologyUtils.class,"getNumContainers",mockTopology);
+  Config runtime=LauncherUtils.getInstance().getPrimaryRuntime(mockTopology,mockStMgr);
+  Assert.assertEquals("testTopologyId",Runtime.topologyId(runtime));
+  Assert.assertEquals("testTopologyName",Runtime.topologyName(runtime));
+  Assert.assertEquals(mockTopology,Runtime.topology(runtime));
+  Assert.assertEquals(mockStMgr,Runtime.schedulerStateManagerAdaptor(runtime));
+  Assert.assertEquals(456 + 1,Runtime.numContainers(runtime).longValue());
+}

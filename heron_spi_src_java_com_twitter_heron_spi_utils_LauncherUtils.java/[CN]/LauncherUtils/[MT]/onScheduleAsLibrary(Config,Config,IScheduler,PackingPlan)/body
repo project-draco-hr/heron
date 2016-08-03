@@ -1,0 +1,17 @@
+{
+  boolean ret=false;
+  try {
+    scheduler.initialize(config,runtime);
+    ret=scheduler.onSchedule(packing);
+    if (ret) {
+      ret=SchedulerUtils.setLibSchedulerLocation(runtime,scheduler,false);
+    }
+ else {
+      LOG.severe("Failed to invoke IScheduler as library");
+    }
+  }
+  finally {
+    scheduler.close();
+  }
+  return ret;
+}

@@ -1,0 +1,19 @@
+{
+  String packingClass=Context.packingClass(config);
+  IPacking packing;
+  try {
+    packing=ReflectionUtils.newInstance(packingClass);
+  }
+ catch (  IllegalAccessException|InstantiationException|ClassNotFoundException e) {
+    LOG.log(Level.SEVERE,"Failed to instantiate packing instance",e);
+    return null;
+  }
+  try {
+    packing.initialize(config,runtime);
+    PackingPlan packedPlan=packing.pack();
+    return packedPlan;
+  }
+  finally {
+    SysUtils.closeIgnoringExceptions(packing);
+  }
+}
