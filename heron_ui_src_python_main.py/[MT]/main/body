@@ -1,6 +1,6 @@
 def main():
     '\n  :param argv:\n  :return:\n  '
-    log.configure(log.logging.DEBUG)
+    log.configure(logging.DEBUG, with_time=True)
     tornado.log.enable_pretty_logging()
     (parser, child_parser) = args.create_parsers()
     (parsed_args, remaining) = parser.parse_known_args()
@@ -10,15 +10,15 @@ def main():
         parser.exit()
     command_line_args = vars(parsed_args)
     address = socket.gethostbyname(socket.gethostname())
-    LOG.info('Listening at http://%s:%d', address, command_line_args['port'])
-    LOG.info('Using tracker url: %s', command_line_args['tracker_url'])
+    Log.info('Listening at http://%s:%d', address, command_line_args['port'])
+    Log.info('Using tracker url: %s', command_line_args['tracker_url'])
     define_options(command_line_args['port'], command_line_args['tracker_url'])
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(command_line_args['port'])
 
     def signal_handler(signum, frame):
         print '\n',
-        LOG.debug('SIGINT received. Stopping UI')
+        Log.debug('SIGINT received. Stopping UI')
         tornado.ioloop.IOLoop.instance().stop()
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)

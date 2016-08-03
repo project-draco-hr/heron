@@ -1,6 +1,6 @@
-def set_logging_level(cl_args):
-    'Set verbose level based on command-line args\n\n  :param cl_args: CLI arguments\n  :type cl_args: dict\n  :return: None\n  :rtype: None\n  '
+def set_logging_level(cl_args, with_time=False):
+    'simply set verbose level based on command-line args\n\n  :param cl_args: CLI arguments\n  :type cl_args: dict\n  :return: None\n  :rtype: None\n  '
     if cl_args['verbose']:
-        configure(logging.DEBUG)
+        configure(logging.DEBUG, with_time=with_time)
     else:
-        configure(logging.INFO)
+        configure(logging.INFO, with_time=with_time)
