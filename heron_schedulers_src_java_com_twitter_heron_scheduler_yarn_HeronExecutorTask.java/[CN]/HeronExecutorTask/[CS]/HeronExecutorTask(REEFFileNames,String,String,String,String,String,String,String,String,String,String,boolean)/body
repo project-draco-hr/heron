@@ -9,6 +9,7 @@
   this.topologyJar=topologyJar;
   this.packedPlan=packedPlan;
   this.componentRamMap=componentRamMap;
+  this.verboseMode=verboseMode;
   reefFileNames=fileNames;
   localHeronConfDir=".";
 }

@@ -10,5 +10,6 @@
   this.env=env;
   this.topologyJar=topologyJar;
   this.httpPort=httpPort;
+  this.verboseMode=verboseMode;
   HeronMasterDriverProvider.setInstance(this);
 }

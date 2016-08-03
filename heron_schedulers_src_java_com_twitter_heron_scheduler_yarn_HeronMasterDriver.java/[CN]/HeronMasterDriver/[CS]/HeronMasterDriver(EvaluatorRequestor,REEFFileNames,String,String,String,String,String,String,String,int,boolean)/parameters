@@ -8,3 +8,4 @@ String topologyJar
 String topologyPackageName
 String heronCorePackageName
 int httpPort
+boolean verboseMode

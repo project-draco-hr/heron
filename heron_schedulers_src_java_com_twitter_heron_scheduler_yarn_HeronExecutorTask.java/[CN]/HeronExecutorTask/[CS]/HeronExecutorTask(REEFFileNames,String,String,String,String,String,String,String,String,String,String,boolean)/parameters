@@ -9,3 +9,4 @@ String heronCorePackageName
 String topologyJar
 String packedPlan
 String componentRamMap
+boolean verboseMode
