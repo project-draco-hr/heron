@@ -1,5 +1,6 @@
 ' restart.py '
-from heron.common.src.python.color import Log
+import traceback
+from heron.common.src.python.utils.log import Log
 import heron.cli.src.python.args as args
 import heron.cli.src.python.execute as execute
 import heron.cli.src.python.jars as jars

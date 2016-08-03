@@ -1,6 +1,7 @@
 ' fetch.py '
 import json
 import time
-import logging
 import tornado.httpclient
 import tornado.gen
+from ...utils import log
+Log = log.Log

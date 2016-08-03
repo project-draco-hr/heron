@@ -1,0 +1,21 @@
+def configure(level, logfile=None, with_time=False):
+    ' Configure logger which dumps log on terminal\n\n  :param level: logging level: info, warning, verbose...\n  :type level: logging level\n  :param logfile: log file name, default to None\n  :type logfile: string\n  :return: None\n  :rtype: None\n  '
+    Log.setLevel(level)
+    if (logfile is not None):
+        if with_time:
+            log_format = '%(asctime)s:%(levelname)s: %(message)s'
+        else:
+            log_format = '%(levelname)s: %(message)s'
+        formatter = logging.Formatter(fmt=log_format, datefmt=date_format)
+        file_handler = logging.FileHandler(logfile)
+        file_handler.setFormatter(formatter)
+        Log.addHandler(file_handler)
+    else:
+        if with_time:
+            log_format = '%(log_color)s%(levelname)s:%(reset)s %(asctime)s %(message)s'
+        else:
+            log_format = '%(log_color)s%(levelname)s:%(reset)s %(message)s'
+        formatter = colorlog.ColoredFormatter(fmt=log_format, datefmt=date_format)
+        stream_handler = logging.StreamHandler()
+        stream_handler.setFormatter(formatter)
+        Log.addHandler(stream_handler)

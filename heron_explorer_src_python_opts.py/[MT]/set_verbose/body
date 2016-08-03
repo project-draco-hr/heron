@@ -1,6 +1,0 @@
-def set_verbose(cl_args):
-    ' set verbose level '
-    if cl_args['verbose']:
-        Log.setLevel(logging.DEBUG)
-    else:
-        Log.setLevel(logging.INFO)

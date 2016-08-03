@@ -3,7 +3,7 @@ def run(command, parser, cl_args, unknown_args, action):
     try:
         topology_name = cl_args['topology-name']
         new_args = ['--cluster', cl_args['cluster'], '--role', cl_args['role'], '--environment', cl_args['environ'], '--heron_home', config.get_heron_dir(), '--config_path', cl_args['config_path'], '--override_config_file', cl_args['override_config_file'], '--release_file', config.get_heron_release_file(), '--topology_name', topology_name, '--command', command]
-        if opts.verbose():
+        if (Log.getEffectiveLevel() == logging.DEBUG):
             new_args.append('--verbose')
         lib_jars = config.get_heron_libs((jars.scheduler_jars() + jars.statemgr_jars()))
         execute.heron_class('com.twitter.heron.scheduler.RuntimeManagerMain', lib_jars, extra_jars=[], args=new_args)

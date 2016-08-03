@@ -10,6 +10,6 @@
     LOG.severe("Failed to start SchedulerMain using: " + Arrays.toString(schedulerCmd));
     return false;
   }
-  LOG.info(String.format("For checking the status and logs of the topology, use the working directory %s",LocalContext.workingDirectory(config)));
+  LOG.info(String.format("To check the status and logs of the topology, use the working directory %s",LocalContext.workingDirectory(config)));
   return true;
 }

@@ -1,6 +1,5 @@
 def heron_pex(topology_pex, topology_class_name, tmp_dir):
-    if opts.verbose():
-        print ((('Importing ' + topology_class_name) + ' from ') + topology_pex)
+    Log.debug(('Importing %s from %s' % (topology_class_name, topology_pex)))
     try:
         pex_loader.load_pex(topology_pex)
         topology_class = pex_loader.import_and_get_class(topology_pex, topology_class_name)
