@@ -5,7 +5,7 @@ def _get_streaming_processes(self):
     my_instances = self.instance_distribution[self.shard]
     instance_info = []
     for (component_name, global_task_id, component_index) in my_instances:
-        instance_id = ((((('container_' + str(self.shard)) + '_') + component_name) + '_') + str(global_task_id))
+        instance_id = ('container_%s_%s_%s' % (str(self.shard), component_name, str(global_task_id)))
         instance_info.append((instance_id, component_name, global_task_id, component_index))
     stmgr_cmd = [self.stmgr_binary, self.topology_name, self.topology_id, self.topology_defn_file, self.zknode, self.zkroot, self.stmgr_ids[(self.shard - 1)], ','.join(map((lambda x: x[0]), instance_info)), self.master_port, self.metricsmgr_port, self.shell_port, self.heron_internals_config_file]
     retval[self.stmgr_ids[(self.shard - 1)]] = stmgr_cmd
