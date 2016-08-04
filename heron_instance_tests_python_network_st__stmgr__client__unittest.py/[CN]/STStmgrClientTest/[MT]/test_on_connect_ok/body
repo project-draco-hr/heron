@@ -1,0 +1,4 @@
+def test_on_connect_ok(self):
+    self.stmgr_client.on_connect(StatusCode.OK)
+    self.assertTrue(self.stmgr_client.register_msg_called)
+    self.assertEqual(len(self.stmgr_client.looper.timer_tasks), 1)

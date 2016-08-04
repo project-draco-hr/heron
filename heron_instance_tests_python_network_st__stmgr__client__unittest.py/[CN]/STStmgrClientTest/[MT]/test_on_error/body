@@ -1,0 +1,4 @@
+def test_on_error(self):
+    self.stmgr_client.on_error()
+    self.assertEqual(len(self.stmgr_client.looper.timer_tasks), 1)
+    self.assertEqual(self.stmgr_client.looper.timer_tasks[0][1].__name__, 'start_connect')

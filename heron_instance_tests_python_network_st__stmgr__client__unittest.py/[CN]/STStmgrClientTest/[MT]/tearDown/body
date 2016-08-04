@@ -1,0 +1,2 @@
+def tearDown(self):
+    self.stmgr_client = None

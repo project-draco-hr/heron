@@ -1,0 +1,6 @@
+def __init__(self):
+    socket_options = SocketOptions(32768, 16, 32768, 16, 1024000, 1024000)
+    sys_config = {constants.INSTANCE_RECONNECT_STREAMMGR_INTERVAL_SEC: 10, }
+    SingleThreadStmgrClient.__init__(self, EventLooper(), None, self.HOST, self.PORT, 'topology_name', 'topology_id', mock_protobuf.get_mock_instance(), {}, None, socket_options, sys_config)
+    self.register_msg_called = False
+    self.handle_register_response_called = False

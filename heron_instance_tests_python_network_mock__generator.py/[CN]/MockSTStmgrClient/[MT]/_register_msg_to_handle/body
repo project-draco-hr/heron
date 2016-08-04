@@ -1,0 +1,2 @@
+def _register_msg_to_handle(self):
+    self.register_msg_called = True

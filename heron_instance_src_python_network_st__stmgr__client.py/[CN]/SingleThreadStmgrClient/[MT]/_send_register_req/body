@@ -3,4 +3,5 @@ def _send_register_req(self):
     request.instance.MergeFrom(self.instance)
     request.topology_name = self.topology_name
     request.topology_id = self.topology_id
-    self.send_request(request, 'Context', stmgr_pb2.RegisterInstanceResponse(), 10)
+    timeout_sec = float(self.sys_config[constants.INSTANCE_RECONNECT_STREAMMGR_INTERVAL_SEC])
+    self.send_request(request, 'Context', stmgr_pb2.RegisterInstanceResponse(), timeout_sec)
