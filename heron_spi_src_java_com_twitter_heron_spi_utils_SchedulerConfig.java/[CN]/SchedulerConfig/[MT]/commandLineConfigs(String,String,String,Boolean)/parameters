@@ -1,0 +1,4 @@
+String cluster
+String role
+String environ
+Boolean verbose

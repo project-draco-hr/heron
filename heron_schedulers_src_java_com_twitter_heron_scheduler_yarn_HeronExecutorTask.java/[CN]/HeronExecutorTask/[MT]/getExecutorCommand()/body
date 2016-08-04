@@ -1,7 +1,7 @@
 {
   String topologyDefFile=getTopologyDefnFile();
   Topology topology=getTopology(topologyDefFile);
-  Config config=SchedulerConfig.loadConfig(cluster,role,env,topologyJar,topologyDefFile,topology);
+  Config config=SchedulerConfig.loadConfig(cluster,role,env,topologyJar,topologyDefFile,verboseMode,topology);
   List<Integer> freePorts=new ArrayList<>(SchedulerUtils.PORTS_REQUIRED_FOR_EXECUTOR);
   for (int i=0; i < SchedulerUtils.PORTS_REQUIRED_FOR_EXECUTOR; i++) {
     freePorts.add(SysUtils.getFreePort());

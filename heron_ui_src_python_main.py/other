@@ -1,4 +1,5 @@
 ' main.py '
+import logging
 import os
 import signal
 import socket
@@ -10,7 +11,7 @@ import tornado.template
 from tornado.options import define
 from heron.ui.src.python import handlers
 from heron.ui.src.python import args
-from heron.ui.src.python import log
-from heron.ui.src.python.log import Log as LOG
+import heron.common.src.python.utils.log as log
+Log = log.Log
 if (__name__ == '__main__'):
     main()

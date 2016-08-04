@@ -7,7 +7,7 @@ def run(command, parser, cl_args, unknown_args):
         lib_jars = config.get_heron_libs((jars.scheduler_jars() + jars.statemgr_jars()))
         execute.heron_class('com.twitter.heron.scheduler.RuntimeManagerMain', lib_jars, extra_jars=[], args=new_args)
     except Exception as ex:
-        print ('Error: %s' % str(ex))
+        Log.debug(traceback.format_exc(ex))
         Log.error(("Failed to restart topology '%s'" % topology_name))
         return False
     Log.info(("Successfully restarted topology '%s'" % topology_name))

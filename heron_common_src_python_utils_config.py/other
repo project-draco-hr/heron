@@ -8,7 +8,7 @@ import subprocess
 import tarfile
 import tempfile
 import yaml
-from heron.common.src.python.color import Log
+from .log import Log
 ENVIRON = 'default'
 BIN_DIR = 'bin'
 CONF_DIR = 'conf'

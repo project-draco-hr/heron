@@ -1,0 +1,15 @@
+{
+  this.heronExecutorId=Integer.valueOf(heronExecutorId);
+  this.cluster=cluster;
+  this.role=role;
+  this.topologyName=topologyName;
+  this.topologyPackageName=topologyPackageName;
+  this.heronCorePackageName=heronCorePackageName;
+  this.env=env;
+  this.topologyJar=topologyJar;
+  this.packedPlan=packedPlan;
+  this.componentRamMap=componentRamMap;
+  this.verboseMode=verboseMode;
+  reefFileNames=fileNames;
+  localHeronConfDir=".";
+}

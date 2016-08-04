@@ -1,0 +1,6 @@
+' log.py '
+import logging
+from logging.handlers import RotatingFileHandler
+import colorlog
+Log = logging.getLogger()
+date_format = '%m/%d/%Y %H:%M:%S %z'

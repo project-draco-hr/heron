@@ -1,0 +1,3 @@
+{
+  return createInstance(cluster,role,env,topologyJar,topologyName,httpPort,verbose,new Properties());
+}

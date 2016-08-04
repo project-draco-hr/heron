@@ -5,7 +5,7 @@
   String logFilePath=workingDirectory + "/" + commandFileName+ "-"+ uuid+ "-started.stderr";
   File logFile=new File(logFilePath);
   ProcessBuilder pb=getProcessBuilder(false,command,workingDirectory,envs);
-  pb.redirectErrorStream(true);
+  pb.redirectErrorStream();
   pb.redirectOutput(ProcessBuilder.Redirect.appendTo(logFile));
   Process process=null;
   try {

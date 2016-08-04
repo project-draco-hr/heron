@@ -1,0 +1,7 @@
+String cluster
+String role
+String environ
+String topologyJarFile
+String topologyDefnFile
+Boolean verbose
+TopologyAPI.Topology topology

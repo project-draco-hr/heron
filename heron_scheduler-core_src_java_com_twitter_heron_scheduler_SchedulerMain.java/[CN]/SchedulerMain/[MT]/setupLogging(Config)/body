@@ -2,6 +2,9 @@
   String systemConfigFilename=Context.systemConfigSandboxFile(config);
   SystemConfig systemConfig=new SystemConfig(systemConfigFilename,true);
   Level loggingLevel=Level.INFO;
+  if (Context.verbose(config).booleanValue()) {
+    loggingLevel=Level.FINE;
+  }
   String loggingDir=systemConfig.getHeronLoggingDirectory();
   if (!FileUtils.isDirectoryExists(loggingDir)) {
     FileUtils.createDirectory(loggingDir);

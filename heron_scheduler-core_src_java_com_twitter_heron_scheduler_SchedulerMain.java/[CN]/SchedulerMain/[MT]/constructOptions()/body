@@ -7,6 +7,7 @@
   Option topologyJar=Option.builder("f").desc("Topology jar file path").longOpt("topology_jar").hasArgs().argName("topology jar file").required().build();
   Option schedulerHTTPPort=Option.builder("p").desc("Http Port number on which the scheduler listens for requests").longOpt("http_port").hasArgs().argName("http port").required().build();
   Option property=Option.builder(Keys.SCHEDULER_COMMAND_LINE_PROPERTIES_OVERRIDE_OPTION).desc("use value for given property").longOpt("property_override").hasArgs().valueSeparator().argName("property=value").build();
+  Option verbose=Option.builder("v").desc("Enable debug logs").longOpt("verbose").build();
   options.addOption(cluster);
   options.addOption(role);
   options.addOption(environment);
@@ -14,5 +15,6 @@
   options.addOption(topologyJar);
   options.addOption(schedulerHTTPPort);
   options.addOption(property);
+  options.addOption(verbose);
   return options;
 }

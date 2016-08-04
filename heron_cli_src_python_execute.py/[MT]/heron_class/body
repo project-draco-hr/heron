@@ -9,10 +9,8 @@ def heron_class(class_name, lib_jars, extra_jars=None, args=None, java_defines=N
     java_opts = [('-D' + opt) for opt in java_defines]
     all_args = (([config.get_java_path(), '-client', '-Xmx1g', opts.get_heron_config()] + java_opts) + ['-cp', config.get_classpath((lib_jars + extra_jars))])
     all_args += ([class_name] + list(args))
-    if opts.verbose():
-        print ('$> %s' % ' '.join(all_args))
-    if (not opts.trace_execution()):
-        status = subprocess.call(all_args)
-        if (status != 0):
-            err_str = ('User main failed with status %d. Bailing out...' % status)
-            raise RuntimeError(err_str)
+    Log.debug(('$> %s' % ' '.join(all_args)))
+    status = subprocess.call(all_args)
+    if (status != 0):
+        err_str = ('User main failed with status %d. Bailing out...' % status)
+        raise RuntimeError(err_str)

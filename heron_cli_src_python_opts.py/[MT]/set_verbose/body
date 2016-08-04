@@ -1,4 +1,0 @@
-def set_verbose():
-    '\n  Methods to get and set verbose levels\n  :return:\n  '
-    global verbose_flag
-    verbose_flag = True

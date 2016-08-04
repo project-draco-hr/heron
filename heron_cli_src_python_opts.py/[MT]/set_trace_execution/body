@@ -2,4 +2,3 @@ def set_trace_execution():
     '\n  Methods to get and set trace execution\n  :return:\n  '
     global trace_execution_flag
     trace_execution_flag = True
-    set_verbose()
