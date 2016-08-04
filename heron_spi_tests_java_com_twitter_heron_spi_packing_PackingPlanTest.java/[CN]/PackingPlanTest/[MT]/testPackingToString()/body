@@ -1,21 +1,25 @@
 {
   Map<String,List<String>> packing=new HashMap<>();
   packing.put("1",Arrays.asList("1:spout:1:0","1:bolt:3:0"));
-  String packingStr=generatePacking(packing).getInstanceDistribution();
   String expectedStr0="1:spout:1:0:bolt:3:0";
   String expectedStr1="1:bolt:3:0:spout:1:0";
+  PackingPlan packingPlan=generatePacking(packing);
+  String packingStr=packingPlan.getInstanceDistribution();
   Assert.assertTrue(packingStr.equals(expectedStr0) || packingStr.equals(expectedStr1));
   packing.put("2",Arrays.asList("2:spout:2:1"));
-  packingStr=generatePacking(packing).getInstanceDistribution();
-  for (  String str : packingStr.split(",")) {
-    if (str.startsWith("1:")) {
-      Assert.assertTrue(str.equals(expectedStr0) || str.equals(expectedStr1));
+  packingPlan=generatePacking(packing);
+  packingStr=packingPlan.getInstanceDistribution();
+  for (  String component : packingStr.split(",")) {
+    if (component.startsWith("1:")) {
+      Assert.assertTrue(component.equals(expectedStr0) || component.equals(expectedStr1));
     }
- else     if (str.startsWith("2:")) {
-      Assert.assertEquals("2:spout:2:1",str);
+ else     if (component.startsWith("2:")) {
+      Assert.assertEquals("2:spout:2:1",component);
     }
  else {
-      throw new RuntimeException("Unexpected results");
+      throw new RuntimeException(String.format("Unexpected component id found in instance distribution: %s",component));
     }
   }
+  String ramDistStr=packingPlan.getComponentRamDistribution();
+  Assert.assertEquals("spout:3221225472,bolt:2147483648",ramDistStr);
 }
