@@ -1,0 +1,2 @@
+def spout_fail(self, spout_fail_info):
+    self.spout_fail_called = True

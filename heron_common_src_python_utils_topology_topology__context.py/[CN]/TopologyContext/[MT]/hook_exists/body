@@ -1,0 +1,4 @@
+@property
+def hook_exists(self):
+    'Returns whether Task Hook is registered'
+    return (len(self[self.TASK_HOOKS]) != 0)

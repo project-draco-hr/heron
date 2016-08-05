@@ -1,0 +1,2 @@
+def bolt_fail(self, bolt_fail_info):
+    self.bolt_fail_called = True

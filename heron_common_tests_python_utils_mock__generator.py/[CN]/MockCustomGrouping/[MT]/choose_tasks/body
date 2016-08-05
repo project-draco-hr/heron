@@ -1,0 +1,16 @@
+def choose_tasks(self, values):
+    if (self.mode == self.ALL_TARGET_MODE):
+        return self.target_tasks
+    elif (self.mode == self.RANDOM_TARGET_MODE):
+        return [task for task in self.target_tasks if bool(random.getrandbits(1))]
+    elif (self.mode == self.WRONG_RETURN_TYPE_MODE):
+        return 'string'
+    elif (self.mode == self.WRONG_CHOOSE_TASK_MODE):
+        ret = []
+        while (len(ret) < 5):
+            i = random.randint(1, 1000)
+            if ((i not in self.target_tasks) and (i not in ret)):
+                ret.append(i)
+            else:
+                continue
+        return ret

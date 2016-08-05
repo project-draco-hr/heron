@@ -1,0 +1,4 @@
+@abstractmethod
+def choose_tasks(self, values):
+    'Implements a custom stream grouping\n\n    :param values: the values to group on\n    :rtype: list of int\n    :return: list of task ids to which these values are emitted\n    '
+    pass

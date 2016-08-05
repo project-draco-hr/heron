@@ -1,7 +1,8 @@
-def __init__(self, pplan, instance_id):
+def __init__(self, pplan, instance_id, topology_pex_abs_path):
     self.pplan = pplan
     self.my_instance_id = instance_id
     self.my_instance = None
+    self.topology_pex_abs_path = topology_pex_abs_path
     for instance in pplan.instances:
         if (instance.instance_id == self.my_instance_id):
             self.my_instance = instance
@@ -18,3 +19,5 @@ def __init__(self, pplan, instance_id):
     self.hostname = socket.gethostname()
     self.my_component = self._my_spbl.comp
     self.context = None
+    self.custom_grouper = CustomGroupingHelper()
+    self._setup_custom_grouping(pplan.topology)

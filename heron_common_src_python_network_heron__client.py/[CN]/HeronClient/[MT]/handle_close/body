@@ -1,3 +1,4 @@
 def handle_close(self):
     Log.info(('%s: handle_close() called' % self._get_classname()))
+    self._clean_up_state()
     self.close()

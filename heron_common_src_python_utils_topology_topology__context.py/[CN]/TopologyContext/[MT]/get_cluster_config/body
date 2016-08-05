@@ -1,0 +1,3 @@
+def get_cluster_config(self):
+    'Returns the cluster config for this component\n\n    Note that the returned config is auto-typed map: <str -> any Python object>.\n    '
+    return self[self.CONFIG]

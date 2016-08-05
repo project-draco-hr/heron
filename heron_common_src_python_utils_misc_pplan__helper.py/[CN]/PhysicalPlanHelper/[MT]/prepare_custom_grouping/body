@@ -1,0 +1,3 @@
+def prepare_custom_grouping(self, context):
+    'Prepares for custom grouping for this component\n\n    :param context: Topology context\n    '
+    self.custom_grouper.prepare(context)

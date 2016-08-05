@@ -1,0 +1,4 @@
+def invoke_hook_prepare(self):
+    "invoke task hooks for after the spout/bolt's initialize() method"
+    for task_hook in self[self.TASK_HOOKS]:
+        task_hook.prepare(self.get_cluster_config(), self)

@@ -1,0 +1,2 @@
+'custom_grouping.py: interface module for custom grouping'
+from abc import abstractmethod

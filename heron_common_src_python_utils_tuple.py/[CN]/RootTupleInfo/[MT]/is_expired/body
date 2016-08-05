@@ -1,0 +1,2 @@
+def is_expired(self, current_time, timeout_sec):
+    return (((self.insertion_time + timeout_sec) - current_time) <= 0)

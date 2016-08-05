@@ -1,0 +1,5 @@
+def add_task_hook(self, task_hook):
+    'Registers a specified task hook to this context\n\n    :type task_hook: heron.common.src.python.utils.topology.ITaskHook\n    :param task_hook: Implementation of ITaskHook\n    '
+    if (not isinstance(task_hook, ITaskHook)):
+        raise TypeError(('In add_task_hook(): attempt to add non ITaskHook instance, given: %s' % str(type(task_hook))))
+    self[self.TASK_HOOKS].append(task_hook)

@@ -4,3 +4,4 @@ try:
     import cPickle as pickle
 except:
     import pickle
+default_serializer = PythonSerializer()

@@ -1,0 +1,1 @@
+namedtuple('Target', 'task_ids, grouping, source_comp_name')

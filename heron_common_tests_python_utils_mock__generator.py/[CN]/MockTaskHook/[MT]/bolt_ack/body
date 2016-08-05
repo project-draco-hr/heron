@@ -1,0 +1,2 @@
+def bolt_ack(self, bolt_ack_info):
+    self.bolt_ack_called = True

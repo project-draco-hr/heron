@@ -2,7 +2,7 @@
 from abc import abstractmethod
 from collections import namedtuple
 EmitInfo = namedtuple('EmitInfo', 'values, stream_id, task_id, out_tasks')
-'Information about emit\n\n:ivar values: (list) values emitted\n:ivar stream_id: (str) stream id into which tuple is emitted\n:ivar task_id: (int) task id on which emit() was called\n:ivar out_tasks: (list) tasks that are emitted\n'
+'Information about emit\n\n:ivar values: (list) values emitted\n:ivar stream_id: (str) stream id into which tuple is emitted\n:ivar task_id: (int) task id on which emit() was called\n:ivar out_tasks: (list) list of custom grouping target task id\n'
 SpoutAckInfo = namedtuple('SpoutAckInfo', 'message_id, spout_task_id, complete_latency_ms')
 "Information about Spout's Acking of a tuple\n\n:ivar message_id: message id to which an acked tuple was anchored\n:ivar spout_task_id: (int) task id of spout\n:ivar complete_latency_ms: (float) complete latency in ms\n"
 SpoutFailInfo = namedtuple('SpoutFailInfo', 'message_id, spout_task_id, fail_latency_ms')

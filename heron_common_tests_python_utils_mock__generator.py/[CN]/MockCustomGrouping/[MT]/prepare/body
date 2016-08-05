@@ -1,0 +1,2 @@
+def prepare(self, context, component, stream, target_tasks):
+    self.target_tasks = target_tasks

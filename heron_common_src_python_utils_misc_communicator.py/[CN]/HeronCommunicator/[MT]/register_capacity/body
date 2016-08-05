@@ -1,0 +1,3 @@
+def register_capacity(self, capacity):
+    'Registers the capacity of this communicator\n\n    By default, the capacity of HeronCommunicator is set to be ``sys.maxint``\n    '
+    self.capacity = capacity

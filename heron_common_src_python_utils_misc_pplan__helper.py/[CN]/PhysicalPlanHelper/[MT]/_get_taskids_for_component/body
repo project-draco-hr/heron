@@ -1,0 +1,2 @@
+def _get_taskids_for_component(self, component_name):
+    return [instance.info.task_id for instance in self.pplan.instances if (instance.info.component_name == component_name)]

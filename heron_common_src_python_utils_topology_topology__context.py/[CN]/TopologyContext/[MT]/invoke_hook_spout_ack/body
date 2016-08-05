@@ -1,0 +1,6 @@
+def invoke_hook_spout_ack(self, message_id, complete_latency_ns):
+    'invoke task hooks for every time spout acks a tuple\n\n    :type message_id: str\n    :param message_id: message id to which an acked tuple was anchored\n    :type complete_latency_ns: float\n    :param complete_latency_ns: complete latency in nano seconds\n    '
+    if self.hook_exists:
+        spout_ack_info = SpoutAckInfo(message_id=message_id, spout_task_id=self.task_id, complete_latency_ms=(complete_latency_ns * constants.NS_TO_MS))
+        for task_hook in self[self.TASK_HOOKS]:
+            task_hook.spout_ack(spout_ack_info)

@@ -1,0 +1,4 @@
+def invoke_hook_cleanup(self):
+    "invoke task hooks for just before the spout/bolt's cleanup method"
+    for task_hook in self[self.TASK_HOOKS]:
+        task_hook.clean_up()

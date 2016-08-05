@@ -1,0 +1,7 @@
+def test_random_target(self):
+    random_grouping = MockCustomGrouping(MockCustomGrouping.RANDOM_TARGET_MODE)
+    self.grouper.add(self.STREAM_ID, self.TASK_IDS, random_grouping, self.SRC_COMP_NAME)
+    self.grouper.prepare(None)
+    ret = self.grouper.choose_tasks(self.STREAM_ID, self.VALUES)
+    self.assertEqual(len(set(ret)), len(ret))
+    self.assertTrue((set(ret) <= set(self.TASK_IDS)))

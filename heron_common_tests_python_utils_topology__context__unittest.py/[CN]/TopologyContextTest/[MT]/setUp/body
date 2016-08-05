@@ -1,0 +1,2 @@
+def setUp(self):
+    self.context = TopologyContext(config={}, topology=mock_protobuf.get_mock_topology(), task_to_component={}, my_task_id='task_id', metrics_collector=None, topo_pex_path='path.to.pex')

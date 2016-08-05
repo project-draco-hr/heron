@@ -1,0 +1,2 @@
+def is_out_queue_available(self):
+    return (self.out_stream.get_available_capacity() > 0)

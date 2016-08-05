@@ -1,0 +1,6 @@
+def invoke_hook_bolt_fail(self, heron_tuple, fail_latency_ns):
+    'invoke task hooks for every time bolt fails a tuple\n\n    :type heron_tuple: HeronTuple\n    :param heron_tuple: tuple that is failed\n    :type fail_latency_ns: float\n    :param fail_latency_ns: fail latency in nano seconds\n    '
+    if self.hook_exists:
+        bolt_fail_info = BoltFailInfo(heron_tuple=heron_tuple, failing_task_id=self.task_id, fail_latency_ms=(fail_latency_ns * constants.NS_TO_MS))
+        for task_hook in self[self.TASK_HOOKS]:
+            task_hook.bolt_fail(bolt_fail_info)

@@ -1,0 +1,3 @@
+def is_topology_paused(self):
+    'Checks whether topology is currently paused'
+    return (self.pplan.topology.state == topology_pb2.TopologyState.Value('PAUSED'))

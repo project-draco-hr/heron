@@ -1,0 +1,6 @@
+def test_wrong_return_value(self):
+    wrong_retvalue = MockCustomGrouping(MockCustomGrouping.WRONG_CHOOSE_TASK_MODE)
+    self.grouper.add(self.STREAM_ID, self.TASK_IDS, wrong_retvalue, self.SRC_COMP_NAME)
+    self.grouper.prepare(None)
+    with self.assertRaises(ValueError):
+        self.grouper.choose_tasks(self.STREAM_ID, self.VALUES)

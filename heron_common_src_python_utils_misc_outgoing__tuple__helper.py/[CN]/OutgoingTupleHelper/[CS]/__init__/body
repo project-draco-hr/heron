@@ -1,7 +1,10 @@
-def __init__(self, pplan_helper, out_stream):
+def __init__(self, pplan_helper, out_stream, sys_config):
     self.out_stream = out_stream
     self.pplan_helper = pplan_helper
     self.current_data_tuple_set = None
     self.current_control_tuple_set = None
     self.current_data_tuple_size_in_bytes = 0
     self.total_data_emitted_in_bytes = 0
+    self.data_tuple_set_capacity = sys_config[constants.INSTANCE_SET_DATA_TUPLE_CAPACITY]
+    self.max_data_tuple_size_in_bytes = sys_config.get(constants.INSTANCE_SET_DATA_TUPLE_SIZE_BYTES, sys.maxint)
+    self.control_tuple_set_capacity = sys_config[constants.INSTANCE_SET_CONTROL_TUPLE_CAPACITY]

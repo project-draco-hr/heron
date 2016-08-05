@@ -1,0 +1,1 @@
+namedtuple('RootTupleInfo', 'stream_id tuple_id insertion_time key')

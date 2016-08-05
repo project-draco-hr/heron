@@ -1,0 +1,2 @@
+def emit(self, emit_info):
+    self.emit_called = True

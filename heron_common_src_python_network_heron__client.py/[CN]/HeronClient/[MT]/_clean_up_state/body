@@ -1,0 +1,10 @@
+def _clean_up_state(self):
+    self.out_buffer = []
+    self.total_bytes_written = 0
+    self.total_pkt_written = 0
+    self.total_bytes_received = 0
+    self.total_pkt_received = 0
+    self.registered_message_map = dict()
+    self.response_message_map = dict()
+    self.context_map = dict()
+    self.incomplete_pkt = None

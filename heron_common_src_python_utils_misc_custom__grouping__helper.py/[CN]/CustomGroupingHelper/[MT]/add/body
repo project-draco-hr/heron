@@ -1,0 +1,5 @@
+def add(self, stream_id, task_ids, grouping, source_comp_name):
+    'Adds the target component\n\n    :type stream_id: str\n    :param stream_id: stream id into which tuples are emitted\n    :type task_ids: list of str\n    :param task_ids: list of task ids to which tuples are emitted\n    :type grouping: ICustomStreamGrouping object\n    :param grouping: custom grouping to use\n    :type source_comp_name: str\n    :param source_comp_name: source component name\n    '
+    if (stream_id not in self.targets):
+        self.targets[stream_id] = []
+    self.targets[stream_id].append(Target(task_ids, grouping, source_comp_name))

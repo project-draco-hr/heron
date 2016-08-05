@@ -1,0 +1,11 @@
+def test_all_target(self):
+    all_grouping = MockCustomGrouping(MockCustomGrouping.ALL_TARGET_MODE)
+    self.grouper.add(self.STREAM_ID, self.TASK_IDS, all_grouping, self.SRC_COMP_NAME)
+    self.assertIn(self.STREAM_ID, self.grouper.targets)
+    self.grouper.prepare(None)
+    ret = self.grouper.choose_tasks(self.STREAM_ID, self.VALUES)
+    self.assertEqual(ret, self.TASK_IDS)
+    ret2 = self.grouper.choose_tasks('not_registered_stream', self.VALUES)
+    self.assertIsNotNone(ret2)
+    self.assertIsInstance(ret2, list)
+    self.assertEqual(len(ret2), 0)

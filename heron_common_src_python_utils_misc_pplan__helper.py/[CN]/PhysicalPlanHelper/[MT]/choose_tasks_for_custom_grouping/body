@@ -1,0 +1,3 @@
+def choose_tasks_for_custom_grouping(self, stream_id, values):
+    'Choose target task ids for custom grouping\n\n    :return: task ids\n    '
+    return self.custom_grouper.choose_tasks(stream_id, values)

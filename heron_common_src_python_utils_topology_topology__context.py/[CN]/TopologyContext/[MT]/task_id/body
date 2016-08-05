@@ -1,0 +1,4 @@
+@property
+def task_id(self):
+    'Property to get the task id of this component'
+    return self[self.TASK_ID]

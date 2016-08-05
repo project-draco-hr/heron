@@ -1,0 +1,4 @@
+@abstractmethod
+def prepare(self, context, component, stream, target_tasks):
+    'Tells the stream grouping at runtime the tasks in the target bolt\n\n    This information should be used in ``choose_tasks()`` to determine the target tasks.\n\n    :param context: topology-worker context\n    :param component: source component name\n    :param stream: stream id used for this grouping\n    :type target_tasks: list of int\n    :param target_tasks: list of target task ids\n    '
+    pass

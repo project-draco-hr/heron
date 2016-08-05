@@ -1,0 +1,16 @@
+def _init_task_hooks(self):
+    task_hooks_cls_list = self.get_cluster_config().get(constants.TOPOLOGY_AUTO_TASK_HOOKS, None)
+    if (task_hooks_cls_list is None):
+        return
+    topo_pex_path = self[self.TOPOLOGY_PEX_PATH]
+    pex_loader.load_pex(topo_pex_path)
+    for class_name in task_hooks_cls_list:
+        try:
+            task_hook_cls = pex_loader.import_and_get_class(topo_pex_path, class_name)
+            task_hook_instance = task_hook_cls()
+            assert isinstance(task_hook_instance, ITaskHook)
+            self[self.TASK_HOOKS].append(task_hook_instance)
+        except AssertionError:
+            raise RuntimeError('Auto-registered task hook not instance of ITaskHook')
+        except Exception as e:
+            raise RuntimeError(('Error with loading task hook class: %s, with error message: %s' % (class_name, e.message)))

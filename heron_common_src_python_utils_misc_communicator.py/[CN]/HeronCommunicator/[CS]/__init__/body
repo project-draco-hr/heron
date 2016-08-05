@@ -3,3 +3,4 @@ def __init__(self, producer_cb=None, consumer_cb=None):
     self._producer_callback = producer_cb
     self._consumer_callback = consumer_cb
     self._buffer = Queue.Queue()
+    self.capacity = sys.maxint

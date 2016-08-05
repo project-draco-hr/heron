@@ -1,0 +1,3 @@
+def timeout_tuple(self, stream_id):
+    'Apply updates to the timeout count'
+    self.update_count(self.TIMEOUT_COUNT, key=stream_id)

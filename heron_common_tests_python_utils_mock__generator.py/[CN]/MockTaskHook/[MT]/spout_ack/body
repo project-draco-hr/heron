@@ -1,0 +1,2 @@
+def spout_ack(self, spout_ack_info):
+    self.spout_ack_called = True
