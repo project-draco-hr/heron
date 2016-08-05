@@ -1,3 +1,4 @@
+'mock_generator for instance/network'
 from heron.common.src.python.basics import EventLooper
 from heron.common.src.python.network import SocketOptions
 from heron.common.src.python.utils.misc import HeronCommunicator
