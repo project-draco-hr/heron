@@ -1,0 +1,3 @@
+{
+  return new MarathonController(MarathonContext.getSchedulerURI(config),Runtime.topologyName(runtime),Context.verbose(config));
+}

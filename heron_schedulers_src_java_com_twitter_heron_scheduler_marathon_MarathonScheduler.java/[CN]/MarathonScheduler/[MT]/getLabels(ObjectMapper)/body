@@ -1,0 +1,5 @@
+{
+  ObjectNode labelNode=mapper.createObjectNode();
+  labelNode.put(MarathonConstants.ENVIRONMENT,Context.environ(config));
+  return labelNode;
+}

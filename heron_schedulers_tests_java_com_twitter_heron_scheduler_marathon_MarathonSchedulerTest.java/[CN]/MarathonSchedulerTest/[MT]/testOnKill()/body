@@ -1,0 +1,11 @@
+{
+  MarathonController controller=Mockito.mock(MarathonController.class);
+  Mockito.doReturn(controller).when(scheduler).getController();
+  scheduler.initialize(Mockito.mock(Config.class),Mockito.mock(Config.class));
+  Mockito.doReturn(false).when(controller).killTopology();
+  Assert.assertFalse(scheduler.onKill(Mockito.any(Scheduler.KillTopologyRequest.class)));
+  Mockito.verify(controller).killTopology();
+  Mockito.doReturn(true).when(controller).killTopology();
+  Assert.assertTrue(scheduler.onKill(Mockito.any(Scheduler.KillTopologyRequest.class)));
+  Mockito.verify(controller,Mockito.times(2)).killTopology();
+}

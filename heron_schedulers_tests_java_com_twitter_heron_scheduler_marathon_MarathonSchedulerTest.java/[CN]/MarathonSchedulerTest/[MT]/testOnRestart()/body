@@ -1,0 +1,12 @@
+{
+  MarathonController controller=Mockito.mock(MarathonController.class);
+  Mockito.doReturn(controller).when(scheduler).getController();
+  scheduler.initialize(Mockito.mock(Config.class),Mockito.mock(Config.class));
+  Scheduler.RestartTopologyRequest restartTopologyRequest=Scheduler.RestartTopologyRequest.newBuilder().setTopologyName(TOPOLOGY_NAME).setContainerIndex(CONTAINER_INDEX).build();
+  Mockito.doReturn(false).when(controller).restartApp(Mockito.anyInt());
+  Assert.assertFalse(scheduler.onRestart(restartTopologyRequest));
+  Mockito.verify(controller).restartApp(Matchers.anyInt());
+  Mockito.doReturn(true).when(controller).restartApp(Mockito.anyInt());
+  Assert.assertTrue(scheduler.onRestart(restartTopologyRequest));
+  Mockito.verify(controller,Mockito.times(2)).restartApp(Matchers.anyInt());
+}

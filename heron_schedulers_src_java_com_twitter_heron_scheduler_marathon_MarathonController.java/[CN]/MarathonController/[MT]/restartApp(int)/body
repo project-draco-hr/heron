@@ -1,0 +1,32 @@
+{
+  if (appId == -1) {
+    String message="Restarting the whole topology is not supported yet. " + "Please kill and resubmit the topology.";
+    LOG.log(Level.SEVERE,message);
+    return false;
+  }
+  String restartRequest=String.format("%s/v2/apps/%s/%d/restart",this.marathonURI,this.topologyName,appId);
+  HttpURLConnection conn=NetworkUtils.getHttpConnection(restartRequest);
+  if (conn == null) {
+    LOG.log(Level.SEVERE,"Failed to find marathon scheduler");
+    return false;
+  }
+  try {
+    byte[] empty=new byte[0];
+    if (!NetworkUtils.sendHttpPostRequest(conn,NetworkUtils.JSON_TYPE,empty)) {
+      LOG.log(Level.SEVERE,"Failed to send post request");
+      return false;
+    }
+    boolean success=NetworkUtils.checkHttpResponseCode(conn,HttpURLConnection.HTTP_OK);
+    if (success) {
+      LOG.log(Level.INFO,"Successfully restarted container {0}",appId);
+      return true;
+    }
+ else {
+      LOG.log(Level.SEVERE,"Failed to restart container {0}",appId);
+      return false;
+    }
+  }
+  finally {
+    conn.disconnect();
+  }
+}

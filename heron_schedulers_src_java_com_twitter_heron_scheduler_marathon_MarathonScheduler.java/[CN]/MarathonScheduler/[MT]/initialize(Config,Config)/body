@@ -1,0 +1,5 @@
+{
+  this.config=aConfig;
+  this.runtime=aRuntime;
+  this.controller=getController();
+}

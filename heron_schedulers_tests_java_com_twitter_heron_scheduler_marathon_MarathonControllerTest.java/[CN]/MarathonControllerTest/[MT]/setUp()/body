@@ -1,0 +1,3 @@
+{
+  controller=Mockito.spy(new MarathonController(MARATHON_URI,TOPOLOGY_NAME,IS_VERBOSE));
+}

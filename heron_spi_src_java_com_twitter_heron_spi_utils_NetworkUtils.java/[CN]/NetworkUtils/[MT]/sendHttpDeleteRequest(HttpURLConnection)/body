@@ -1,0 +1,10 @@
+{
+  try {
+    connection.setRequestMethod("DELETE");
+  }
+ catch (  ProtocolException e) {
+    LOG.log(Level.SEVERE,"Failed to send http delete request: " + connection);
+    return false;
+  }
+  return true;
+}

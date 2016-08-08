@@ -1,0 +1,37 @@
+{
+  try {
+    connection.setRequestMethod("POST");
+  }
+ catch (  ProtocolException e) {
+    LOG.log(Level.SEVERE,"Failed to set post request: ",e);
+    return false;
+  }
+  if (data.length > 0) {
+    connection.setRequestProperty(CONTENT_TYPE,contentType);
+    connection.setRequestProperty(CONTENT_LENGTH,Integer.toString(data.length));
+    connection.setUseCaches(false);
+    connection.setDoOutput(true);
+    OutputStream os=null;
+    try {
+      os=connection.getOutputStream();
+      os.write(data);
+      os.flush();
+    }
+ catch (    IOException e) {
+      LOG.log(Level.SEVERE,"Failed to send request: ",e);
+      return false;
+    }
+ finally {
+      try {
+        if (os != null) {
+          os.close();
+        }
+      }
+ catch (      IOException e) {
+        LOG.log(Level.SEVERE,"Failed to close OutputStream: ",e);
+        return false;
+      }
+    }
+  }
+  return true;
+}

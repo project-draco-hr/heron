@@ -1,0 +1,4 @@
+{
+  int appId=request.getContainerIndex();
+  return controller.restartApp(appId);
+}

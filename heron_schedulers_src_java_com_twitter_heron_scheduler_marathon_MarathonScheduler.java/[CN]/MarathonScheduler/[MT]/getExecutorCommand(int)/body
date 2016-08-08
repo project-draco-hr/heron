@@ -1,0 +1,4 @@
+{
+  String[] commands=SchedulerUtils.getExecutorCommand(config,runtime,containerIndex,Arrays.asList(MarathonConstants.PORT_LIST));
+  return Joiner.on(" ").join(commands);
+}

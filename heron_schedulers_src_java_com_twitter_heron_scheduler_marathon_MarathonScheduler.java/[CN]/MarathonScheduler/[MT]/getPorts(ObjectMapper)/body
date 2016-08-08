@@ -1,0 +1,11 @@
+{
+  ArrayNode ports=mapper.createArrayNode();
+  for (  String portName : MarathonConstants.PORT_NAMES) {
+    ObjectNode port=mapper.createObjectNode();
+    port.put(MarathonConstants.PORT,0);
+    port.put(MarathonConstants.PROTOCOL,MarathonConstants.TCP);
+    port.put(MarathonConstants.PORT_NAME,portName);
+    ports.add(port);
+  }
+  return ports;
+}

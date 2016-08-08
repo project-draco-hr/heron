@@ -1,0 +1,5 @@
+{
+  this.marathonURI=marathonURI;
+  this.topologyName=topologyName;
+  this.isVerbose=isVerbose;
+}

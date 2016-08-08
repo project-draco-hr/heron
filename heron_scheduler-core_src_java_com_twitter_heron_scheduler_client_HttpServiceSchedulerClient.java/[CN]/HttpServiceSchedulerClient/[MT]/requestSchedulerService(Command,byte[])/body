@@ -1,11 +1,12 @@
 {
-  final HttpURLConnection connection=createHttpConnection(command);
+  String endpoint=getCommandEndpoint(schedulerHttpEndpoint,command);
+  final HttpURLConnection connection=NetworkUtils.getHttpConnection(endpoint);
   if (connection == null) {
     LOG.severe("Scheduler not found.");
     return false;
   }
   try {
-    if (!NetworkUtils.sendHttpPostRequest(connection,data)) {
+    if (!NetworkUtils.sendHttpPostRequest(connection,NetworkUtils.URL_ENCODE_TYPE,data)) {
       LOG.log(Level.SEVERE,"Failed to send http request to scheduler");
       return false;
     }

@@ -1,8 +1,15 @@
 {
-  List<String> commands=new ArrayList<>();
-  commands.add(Context.executorSandboxBinary(config));
-  commands.add(Integer.toString(containerIndex));
-  String[] commandArgs=executorCommandArgs(config,runtime,freePorts);
-  commands.addAll(Arrays.asList(commandArgs));
-  return commands.toArray(new String[0]);
+  if (freePorts.size() < PORTS_REQUIRED_FOR_EXECUTOR) {
+    throw new RuntimeException("Failed to find enough ports for executor");
+  }
+  for (  int port : freePorts) {
+    if (port == -1) {
+      throw new RuntimeException("Failed to find available ports for executor");
+    }
+  }
+  List<String> ports=new LinkedList<>();
+  for (  int port : freePorts) {
+    ports.add(Integer.toString(port));
+  }
+  return getExecutorCommand(config,runtime,containerIndex,ports);
 }

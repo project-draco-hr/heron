@@ -1,0 +1,4 @@
+{
+  this.config=aConfig;
+  this.runtime=aRuntime;
+}

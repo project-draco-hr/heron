@@ -1,0 +1,6 @@
+{
+  List<String> jobLinks=new LinkedList<>();
+  String marathonGroupLink=MarathonContext.getSchedulerURI(config) + MarathonConstants.JOB_LINK + Runtime.topologyName(runtime);
+  jobLinks.add(marathonGroupLink);
+  return jobLinks;
+}

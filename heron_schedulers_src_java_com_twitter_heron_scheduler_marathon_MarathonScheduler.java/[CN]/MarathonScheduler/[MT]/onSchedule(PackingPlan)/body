@@ -1,0 +1,9 @@
+{
+  if (packing == null || packing.containers.isEmpty()) {
+    LOG.severe("No container requested. Can't schedule");
+    return false;
+  }
+  LOG.info("Submitting topology to Marathon Scheduler");
+  String topologyConf=getTopologyConf(packing);
+  return controller.submitTopology(topologyConf);
+}

@@ -5,7 +5,7 @@
   OutputStream os=Mockito.mock(OutputStream.class);
   Mockito.doReturn(os).when(connection).getOutputStream();
   byte[] data=new byte[dataLength];
-  Assert.assertTrue(NetworkUtils.sendHttpPostRequest(connection,data));
+  Assert.assertTrue(NetworkUtils.sendHttpPostRequest(connection,NetworkUtils.URL_ENCODE_TYPE,data));
   Assert.assertEquals("POST",connection.getRequestMethod());
   Assert.assertEquals("application/x-www-form-urlencoded",connection.getRequestProperty("Content-Type"));
   Assert.assertEquals(false,connection.getUseCaches());

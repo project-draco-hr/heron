@@ -1,0 +1,3 @@
+HttpURLConnection connection
+String contentType
+byte[] data

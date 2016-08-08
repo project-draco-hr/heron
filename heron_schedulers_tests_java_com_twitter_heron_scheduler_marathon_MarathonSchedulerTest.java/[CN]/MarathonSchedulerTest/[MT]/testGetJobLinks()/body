@@ -1,0 +1,14 @@
+{
+  final String SCHEDULER_URI="http://marathon.scheduler.uri";
+  final String JOB_LINK=SCHEDULER_URI + MarathonConstants.JOB_LINK + TOPOLOGY_NAME;
+  Config mockConfig=Mockito.mock(Config.class);
+  Mockito.when(mockConfig.getStringValue(MarathonContext.HERON_MARATHON_SCHEDULER_URI)).thenReturn(SCHEDULER_URI);
+  Config mockRuntime=Mockito.mock(Config.class);
+  Mockito.when(mockRuntime.getStringValue(Keys.topologyName())).thenReturn(TOPOLOGY_NAME);
+  scheduler.initialize(mockConfig,mockRuntime);
+  List<String> links=scheduler.getJobLinks();
+  Assert.assertEquals(1,links.size());
+  System.out.println(links.get(0));
+  System.out.println(JOB_LINK);
+  Assert.assertTrue(links.get(0).equals(JOB_LINK));
+}

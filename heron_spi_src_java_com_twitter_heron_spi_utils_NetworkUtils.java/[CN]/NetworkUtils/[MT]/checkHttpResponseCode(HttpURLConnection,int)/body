@@ -1,0 +1,9 @@
+{
+  try {
+    return connection.getResponseCode() == expectedCode;
+  }
+ catch (  IOException ex) {
+    LOG.log(Level.SEVERE,"Failed to get response code");
+    return false;
+  }
+}
