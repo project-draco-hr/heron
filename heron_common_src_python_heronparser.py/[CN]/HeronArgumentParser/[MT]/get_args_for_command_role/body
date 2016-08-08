@@ -1,0 +1,6 @@
+@classmethod
+def get_args_for_command_role(cls, app, command, role):
+    args_for_command_role = ''
+    if ((app in cls.cmdmap) and (command in cls.cmdmap[app]) and (role in cls.cmdmap[app][command])):
+        args_for_command_role = (cls.cmdmap[app][command][role], args_for_command_role)[(cls.cmdmap[app][command][role] is None)]
+    return args_for_command_role.split()

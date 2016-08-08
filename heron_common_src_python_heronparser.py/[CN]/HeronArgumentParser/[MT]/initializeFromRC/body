@@ -1,0 +1,34 @@
+@classmethod
+def initializeFromRC(cls, rcfile):
+    if (len(cls.cmdmap) > 0):
+        return
+    effective_rc = (rcfile, HERON_RC)[(rcfile is None)]
+    Log.debug('Effective RC file is %s', effective_rc)
+    if os.path.exists(effective_rc):
+        with open(effective_rc) as f:
+            cls.cmdmap['*']['*'] = collections.defaultdict(dict)
+            cls.cmdmap['*']['*']['*'] = ''
+            for line in f:
+                m = heron_command_pattern.match(line)
+                (app, value, command, env) = ('', '', '', '')
+                if (m is not None):
+                    value = cls.remove_comments(m.group(4).rstrip(os.linesep))
+                    app = (m.group(1), '')[((m.group(1) is None) or (m.group(1) == ''))]
+                    command = (m.group(2), '')[((m.group(2) is None) or (m.group(1) == ''))]
+                    env = (m.group(3), '')[((m.group(3) is None) or (m.group(2) == ''))]
+                else:
+                    continue
+                args_list = config.insert_bool_values(value.split())
+                args_list_string = ' '.join(args_list)
+                if ((not command) or (not app) or (not env)):
+                    Log.warn('heronrc config entry %s does not have key parameters (command:app:env) ', line)
+                    continue
+                if (app not in cls.cmdmap):
+                    cls.cmdmap[app] = collections.defaultdict(dict)
+                if ((command in cls.cmdmap[app]) and (env in cls.cmdmap[app][command])):
+                    cls.cmdmap[app][command][env] = ((cls.cmdmap[app][command][env] + ' ') + args_list_string)
+                else:
+                    cls.cmdmap[app][command][env] = args_list_string
+        Log.debug('RC cmdmap %s', json.dumps(cls.cmdmap))
+    else:
+        Log.debug('%s is not an existing file', effective_rc)

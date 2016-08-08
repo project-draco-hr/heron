@@ -1,0 +1,8 @@
+def test_parser_norcfile(self):
+    sys.argv = []
+    parser = hr_argparser.HeronArgumentParser(prog='heron', epilog=help_epilog, formatter_class=config.SubcommandHelpFormatter, fromfile_prefix_chars='@', add_help=False, rcfile='INVALID', rccommand='activate', rcclusterrole='devcluster/ads/PROD')
+    subparsers = parser.add_subparsers(title='Available commands', metavar='<command> <options>')
+    activate.create_parser(subparsers)
+    (args, _) = parser.parse_known_args(['activate', 'devcluster/ads/PROD', '12313', '--config-property', 'this-is-it'])
+    self.assertEqual('this-is-it', args.config_property)
+    hr_argparser.HeronArgumentParser.clear()

@@ -1,0 +1,2 @@
+def tearDown(self):
+    hr_argparser.HeronArgumentParser.clear()

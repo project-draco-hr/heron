@@ -1,0 +1,15 @@
+' opts_unittest.py '
+import argparse as argparser
+import logging
+import os
+import sys
+import unittest2 as unittest
+import heron.cli.src.python.activate as activate
+import heron.common.src.python.heronparser as hr_argparser
+import heron.common.src.python.utils.config as config
+import heron.cli.src.python.submit as submit
+logging.basicConfig(level=logging.INFO)
+help_epilog = 'Getting more help:\n  heron help <command> Prints help and options for <command>\n\nFor detailed documentation, go to http://heronstreaming.io'
+if (__name__ == '__main__'):
+    suite = unittest.TestLoader().loadTestsFromTestCase(HeronParserTest)
+    unittest.TextTestRunner(verbosity=2).run(suite)

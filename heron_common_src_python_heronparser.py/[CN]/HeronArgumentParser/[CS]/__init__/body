@@ -1,0 +1,6 @@
+def __init__(self, *args, **kwargs):
+    rcfile = HeronArgumentParser.getAndRemoveKey(kwargs, 'rcfile')
+    self.rccommand = HeronArgumentParser.getAndRemoveKey(kwargs, 'rccommand')
+    self.rcclusterrole = HeronArgumentParser.getAndRemoveKey(kwargs, 'rcclusterrole')
+    HeronArgumentParser.initializeFromRC(rcfile)
+    super(HeronArgumentParser, self).__init__(*args, **kwargs)

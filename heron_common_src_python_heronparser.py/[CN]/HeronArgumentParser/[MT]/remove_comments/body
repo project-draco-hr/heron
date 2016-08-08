@@ -1,0 +1,11 @@
+@classmethod
+def remove_comments(cls, string):
+    pattern = '(\\#.*$)'
+    regex = re.compile(pattern, (re.MULTILINE | re.DOTALL))
+
+    def _replacer(match):
+        if (match.group(1) is not None):
+            return ''
+        else:
+            return match.group(1)
+    return regex.sub(_replacer, string)

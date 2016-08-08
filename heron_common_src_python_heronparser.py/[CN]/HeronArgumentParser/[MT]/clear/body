@@ -1,0 +1,3 @@
+@classmethod
+def clear(cls):
+    cls.cmdmap.clear()

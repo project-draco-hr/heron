@@ -1,0 +1,5 @@
+def main():
+    parser = HeronArgumentParser(prog='heron', epilog=help_epilog, formatter_class=config.SubcommandHelpFormatter, fromfile_prefix_chars='@', add_help=False, rcfile='./.heronrc')
+    parser.add_subparsers(title='Available commands', metavar='<command> <options>')
+    (args, unknown_args) = parser.parse_known_args()
+    Log.info('parse results args: %s  unknown: %s ', args, unknown_args)

@@ -5,8 +5,13 @@ def main():
     if (len(sys.argv[1:]) == 0):
         parser.print_help()
         return 0
-    sys.argv = parse.insert_bool_values(sys.argv)
-    (args, unknown_args) = parser.parse_known_args()
+    sys.argv = config.insert_bool_values(sys.argv)
+    try:
+        (args, unknown_args) = parser.parse_known_args()
+    except ValueError as ex:
+        Log.error('Error while parsing arguments: %s', str(ex))
+        Log.debug(traceback.format_exc())
+        sys.exit(1)
     command_line_args = vars(args)
     command = command_line_args['subcommand']
     files = []
@@ -23,5 +28,5 @@ def main():
     end = time.time()
     if (command not in ('help', 'version')):
         sys.stdout.flush()
-        Log.info(('Elapsed time: %.3fs.' % (end - start)))
+        Log.info('Elapsed time: %.3fs.', (end - start))
     return (0 if retcode else 1)

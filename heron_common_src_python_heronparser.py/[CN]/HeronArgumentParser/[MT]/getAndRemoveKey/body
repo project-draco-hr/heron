@@ -1,0 +1,7 @@
+@classmethod
+def getAndRemoveKey(cls, dictionary, key):
+    val = None
+    if (key in dictionary):
+        val = dictionary[key]
+        del dictionary[key]
+    return val

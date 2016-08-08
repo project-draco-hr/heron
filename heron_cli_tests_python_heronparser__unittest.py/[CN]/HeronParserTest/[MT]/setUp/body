@@ -1,0 +1,4 @@
+def setUp(self):
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    self.testrcfile = (dir_path + '/heronrc.test')
+    self.testrc_submit_file = (dir_path + '/heronrc.test.submit')

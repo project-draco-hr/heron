@@ -1,0 +1,8 @@
+def test_parser_commandline_positional_withrc(self):
+    sys.argv = []
+    parser = hr_argparser.HeronArgumentParser(prog='heron', epilog=help_epilog, formatter_class=config.SubcommandHelpFormatter, fromfile_prefix_chars='@', add_help=False, rcfile=self.testrcfile, rccommand='submit', rcclusterrole='local')
+    subparsers = parser.add_subparsers(title='Available commands', metavar='<command> <options>')
+    submit.create_parser(subparsers)
+    (args, _) = parser.parse_known_args(['submit', 'local', '~/.heron/examples/heron-examples.jar', 'com.twitter.heron.examples.ExclamationTopology', 'ExclamationTopology'])
+    self.assertEqual('True', args.__dict__['verbose'])
+    hr_argparser.HeronArgumentParser.clear()

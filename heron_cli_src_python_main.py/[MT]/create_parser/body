@@ -1,6 +1,6 @@
 def create_parser():
     '\n  Main parser\n  :return:\n  '
-    parser = argparse.ArgumentParser(prog='heron', epilog=HELP_EPILOG, formatter_class=SubcommandHelpFormatter, add_help=False)
+    parser = hrc_parse.HeronArgumentParser(prog='heron', epilog=HELP_EPILOG, formatter_class=config.SubcommandHelpFormatter, add_help=False, fromfile_prefix_chars='@')
     subparsers = parser.add_subparsers(title='Available commands', metavar='<command> <options>')
     activate.create_parser(subparsers)
     deactivate.create_parser(subparsers)

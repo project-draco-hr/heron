@@ -1,0 +1,9 @@
+def get_positional_args(self):
+    positional_args_map = collections.defaultdict(dict)
+    for key in self._actions:
+        if (isinstance(key, argparse._StoreAction) and (len(key.option_strings) == 0)):
+            if (key.dest == 'cluster/[role]/[env]'):
+                continue
+            positional_args_map[('--' + key.dest)] = key.dest
+            Log.debug('get_positional_args : key: %s, dest : %s', key, key.dest)
+    return positional_args_map
