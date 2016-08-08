@@ -1,0 +1,9 @@
+def on_response(self, status, context, response):
+    Log.debug(('In on_response with status: %s, with context: %s' % (str(status), str(context))))
+    if (status != StatusCode.OK):
+        raise RuntimeError('Response from Stream Manager not OK')
+    if isinstance(response, stmgr_pb2.RegisterInstanceResponse):
+        self._handle_register_response(response)
+    else:
+        Log.error(('Unknown kind of response received: %s' % response.DESCRIPTOR.full_name))
+        raise RuntimeError('Unknown kind of response received from Stream Manager')

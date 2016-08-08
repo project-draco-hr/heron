@@ -1,0 +1,2 @@
+def _send_register_req(self):
+    self.register_req_called = True

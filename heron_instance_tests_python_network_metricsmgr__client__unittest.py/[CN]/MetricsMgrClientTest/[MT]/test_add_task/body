@@ -1,0 +1,3 @@
+def test_add_task(self):
+    self.assertEqual(len(self.metrics_client.looper.wakeup_tasks), 1)
+    self.assertEqual(self.metrics_client.looper.wakeup_tasks[0].__name__, '_send_metrics_messages')

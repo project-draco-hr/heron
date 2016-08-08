@@ -1,0 +1,3 @@
+def test_on_connect_ok(self):
+    self.metrics_client.on_connect(StatusCode.OK)
+    self.assertTrue(self.metrics_client.register_req_called)

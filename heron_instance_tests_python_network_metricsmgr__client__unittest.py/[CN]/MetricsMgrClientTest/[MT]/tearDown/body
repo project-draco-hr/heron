@@ -1,0 +1,2 @@
+def tearDown(self):
+    self.metrics_client = None

@@ -1,0 +1,4 @@
+def test_on_error(self):
+    self.metrics_client.on_error()
+    self.assertEqual(len(self.metrics_client.looper.timer_tasks), 1)
+    self.assertEqual(self.metrics_client.looper.timer_tasks[0][1].__name__, 'start_connect')

@@ -1,0 +1,2 @@
+def _handle_register_response(self, response):
+    self.handle_register_response_called = True

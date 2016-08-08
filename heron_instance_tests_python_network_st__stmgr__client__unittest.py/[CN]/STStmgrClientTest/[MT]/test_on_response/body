@@ -1,0 +1,7 @@
+def test_on_response(self):
+    with self.assertRaises(RuntimeError):
+        self.stmgr_client.on_response(StatusCode.INVALID_PACKET, None, None)
+    with self.assertRaises(RuntimeError):
+        self.stmgr_client.on_response(StatusCode.OK, None, mock_protobuf.get_mock_instance())
+    self.stmgr_client.on_response(StatusCode.OK, None, mock_protobuf.get_mock_register_response())
+    self.assertTrue(self.stmgr_client.handle_register_response_called)
