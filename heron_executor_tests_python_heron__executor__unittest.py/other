@@ -1,3 +1,6 @@
+'heron executor unittest'
+import os
 import unittest2 as unittest
 from heron.executor.src.python.heron_executor import ProcessInfo
 from heron.executor.src.python.heron_executor import HeronExecutor
+INTERNAL_CONF_PATH = get_test_heron_internal_yaml()

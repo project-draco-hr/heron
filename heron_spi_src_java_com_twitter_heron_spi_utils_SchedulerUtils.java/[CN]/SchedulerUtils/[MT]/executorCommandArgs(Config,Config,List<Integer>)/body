@@ -25,7 +25,7 @@
   commands.add(Context.stmgrSandboxBinary(config));
   commands.add(Context.metricsManagerSandboxClassPath(config));
   commands.add(SchedulerUtils.encodeJavaOpts(TopologyUtils.getInstanceJvmOptions(topology)));
-  commands.add(TopologyUtils.makeClassPath(topology,Context.topologyJarFile(config)));
+  commands.add(TopologyUtils.makeClassPath(topology,Context.topologyBinaryFile(config)));
   commands.add(Integer.toString(masterPort));
   commands.add(Integer.toString(tmasterControllerPort));
   commands.add(Integer.toString(tmasterStatsPort));
@@ -33,7 +33,7 @@
   commands.add(Runtime.componentRamMap(runtime));
   commands.add(SchedulerUtils.encodeJavaOpts(TopologyUtils.getComponentJvmOptions(topology)));
   commands.add(Context.topologyPackageType(config));
-  commands.add(Context.topologyJarFile(config));
+  commands.add(Context.topologyBinaryFile(config));
   commands.add(Context.javaSandboxHome(config));
   commands.add(Integer.toString(shellPort));
   commands.add(Context.shellSandboxBinary(config));
@@ -46,5 +46,6 @@
   String completeSchedulerProcessClassPath=new StringBuilder().append(Context.schedulerSandboxClassPath(config)).append(":").append(Context.packingSandboxClassPath(config)).append(":").append(Context.stateManagerSandboxClassPath(config)).toString();
   commands.add(completeSchedulerProcessClassPath);
   commands.add(Integer.toString(schedulerPort));
+  commands.add(Context.pythonInstanceSandboxBinary(config));
   return commands.toArray(new String[0]);
 }

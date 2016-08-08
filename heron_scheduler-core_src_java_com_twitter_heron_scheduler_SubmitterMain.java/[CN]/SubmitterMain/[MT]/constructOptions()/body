@@ -9,7 +9,7 @@
   Option releaseFile=Option.builder("b").desc("Release file name").longOpt("release_file").hasArgs().argName("release information").build();
   Option topologyPackage=Option.builder("y").desc("tar ball containing user submitted jar/tar, defn and config").longOpt("topology_package").hasArgs().argName("topology package").required().build();
   Option topologyDefn=Option.builder("f").desc("serialized file containing Topology protobuf").longOpt("topology_defn").hasArgs().argName("topology definition").required().build();
-  Option topologyJar=Option.builder("j").desc("user heron topology jar").longOpt("topology_jar").hasArgs().argName("topology jar").required().build();
+  Option topologyJar=Option.builder("j").desc("user heron topology jar/pex file path").longOpt("topology_bin").hasArgs().argName("topology binary file").required().build();
   Option verbose=Option.builder("v").desc("Enable debug logs").longOpt("verbose").build();
   options.addOption(cluster);
   options.addOption(role);

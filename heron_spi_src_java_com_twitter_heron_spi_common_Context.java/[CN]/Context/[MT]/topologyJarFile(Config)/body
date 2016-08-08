@@ -1,3 +1,0 @@
-{
-  return cfg.getStringValue(ConfigKeys.get("TOPOLOGY_JAR_FILE"));
-}

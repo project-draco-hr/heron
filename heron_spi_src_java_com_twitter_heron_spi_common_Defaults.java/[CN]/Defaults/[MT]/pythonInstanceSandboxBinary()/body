@@ -1,0 +1,3 @@
+{
+  return ConfigDefaults.get("SANDBOX_PYTHON_INSTANCE_BINARY");
+}

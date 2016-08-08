@@ -1,0 +1,5 @@
+def get_test_heron_internal_yaml():
+    'Get the path to test_heron_internal.yaml\n\n  For example, __file__ would be\n  /tmp/_bazel_heron/randgen_dir/heron/heron/executor/tests/python/heron_executor_unittest.py\n  '
+    heron_dir = '/'.join(__file__.split('/')[:(-5)])
+    yaml_path = os.path.join(heron_dir, 'heron/config/src/yaml/conf/test/test_heron_internals.yaml')
+    return yaml_path
