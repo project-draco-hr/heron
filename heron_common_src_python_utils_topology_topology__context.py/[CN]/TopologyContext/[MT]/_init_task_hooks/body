@@ -2,7 +2,7 @@ def _init_task_hooks(self):
     task_hooks_cls_list = self.get_cluster_config().get(constants.TOPOLOGY_AUTO_TASK_HOOKS, None)
     if (task_hooks_cls_list is None):
         return
-    topo_pex_path = self[self.TOPOLOGY_PEX_PATH]
+    topo_pex_path = self.get_topology_pex_path()
     pex_loader.load_pex(topo_pex_path)
     for class_name in task_hooks_cls_list:
         try:

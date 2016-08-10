@@ -1,0 +1,3 @@
+def get_topology_pex_path(self):
+    "Returns the topology's pex file path"
+    return self[self.TOPOLOGY_PEX_PATH]
