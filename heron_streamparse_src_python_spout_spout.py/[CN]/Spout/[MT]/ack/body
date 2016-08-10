@@ -1,0 +1,4 @@
+@abstractmethod
+def ack(self, tup_id):
+    'Determine that the tuple emitted by this spout with the tup_id has been fully processed\n\n    It is compatible with StreamParse API.\n\n    Heron has determined that the tuple emitted by this spout with the tup_id identifier\n    has been fully processed. Typically, an implementation of this method will take that\n    message off the queue and prevent it from being replayed.\n\n    *Should be implemented by a subclass.*\n    '
+    pass

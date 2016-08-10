@@ -1,0 +1,5 @@
+def set_config(self, config):
+    'Set topology-wide configuration to the topology\n\n    :type config: dict\n    :param config: topology-wide config\n    '
+    if (not isinstance(config, dict)):
+        raise TypeError(('Argument to set_config needs to be dict, given: %s' % str(config)))
+    self._topology_config = config

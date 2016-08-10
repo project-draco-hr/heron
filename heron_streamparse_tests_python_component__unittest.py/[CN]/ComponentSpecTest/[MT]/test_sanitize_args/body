@@ -1,0 +1,25 @@
+def test_sanitize_args(self):
+    spec = HeronComponentSpec(name='string', python_class_path='string.path', is_spout=True, par=1)
+    self.assertIsNotNone(spec)
+    name_none_spec = HeronComponentSpec(name=None, python_class_path='string.path', is_spout=True, par=1)
+    self.assertIsNotNone(name_none_spec)
+    with self.assertRaises(AssertionError):
+        HeronComponentSpec(123, 'classpath', True, 1)
+    with self.assertRaises(AssertionError):
+        HeronComponentSpec(False, 'classpath', True, 1)
+    with self.assertRaises(AssertionError):
+        HeronComponentSpec('name', {}, True, 1)
+    with self.assertRaises(AssertionError):
+        HeronComponentSpec('name', None, True, 1)
+    with self.assertRaises(AssertionError):
+        HeronComponentSpec('name', 'classpath', 1, 1)
+    with self.assertRaises(AssertionError):
+        HeronComponentSpec('name', 'classpath', None, 1)
+    with self.assertRaises(AssertionError):
+        HeronComponentSpec('name', 'classpath', True, '1')
+    with self.assertRaises(AssertionError):
+        HeronComponentSpec('name', 'classpath', True, 1.35)
+    with self.assertRaises(AssertionError):
+        HeronComponentSpec('name', 'classpath', True, (-21))
+    with self.assertRaises(AssertionError):
+        HeronComponentSpec('name', 'classpath', True, None)

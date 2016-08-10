@@ -1,0 +1,6 @@
+@staticmethod
+def _sanitize_args(name, py_class_path, is_spout, par):
+    assert ((name is None) or isinstance(name, str))
+    assert isinstance(py_class_path, str)
+    assert isinstance(is_spout, bool)
+    assert (isinstance(par, int) and (par > 0))

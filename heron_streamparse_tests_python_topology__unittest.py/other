@@ -1,0 +1,9 @@
+import os
+import unittest
+from heron.common.src.python.utils.misc import default_serializer
+from heron.streamparse.src.python import Topology, Stream, Grouping, TopologyBuilder
+from heron.streamparse.src.python.component import HeronComponentSpec
+from heron.streamparse.src.python.topology import TopologyType
+from heron.proto import topology_pb2
+heron_options = 'cmdline.topologydefn.tmpdirectory=/tmp,cmdline.topology.initial.state=RUNNING'
+os.environ['HERON_OPTIONS'] = heron_options

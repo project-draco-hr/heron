@@ -1,0 +1,4 @@
+def test_add_bolt_specs(self):
+    spec = HeronComponentSpec('bolt', 'bl_cls', False, 1)
+    with self.assertRaises(ValueError):
+        TopologyType.add_bolt_specs(spec, {})

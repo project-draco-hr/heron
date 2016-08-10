@@ -1,0 +1,5 @@
+@classmethod
+def add_bolt_specs(mcs, spec, bolt_specs):
+    if (not spec.inputs):
+        raise ValueError(('%s: %s requires at least one input, because it is a bolt' % (spec.python_class_path, spec.name)))
+    bolt_specs[spec.name] = spec.get_protobuf()

@@ -1,0 +1,8 @@
+def __init__(self, componentId, streamId):
+    '\n    :type componentId: str or HeronComponentSpec\n    :param componentId: component id from which the tuple is emitted, or HeronComponentSpec object.\n    :type streamId: str\n    :param streamId: stream id through which the tuple is transmitted\n    '
+    if (not isinstance(componentId, (str, HeronComponentSpec))):
+        raise TypeError('GlobalStreamId: componentId must be either string or HeronComponentSpec')
+    if (not isinstance(streamId, str)):
+        raise TypeError('GlobalStreamId: streamId must be string type')
+    self._component_id = componentId
+    self.stream_id = streamId

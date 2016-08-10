@@ -1,0 +1,20 @@
+def test_sanitize_outputs(self):
+    spec = HeronComponentSpec('spout', 'class', True, 1)
+    ret = spec._sanitize_outputs()
+    self.assertIsNone(ret)
+    spec = HeronComponentSpec('spout', 'class', True, 1)
+    spec.outputs = 'string'
+    with self.assertRaises(TypeError):
+        spec._sanitize_outputs()
+    spec = HeronComponentSpec('spout', 'class', True, 1)
+    spec.outputs = ['string', False, 123]
+    with self.assertRaises(TypeError):
+        spec._sanitize_outputs()
+    spec = HeronComponentSpec('spout', 'class', True, 1)
+    spec.outputs = ['string', 'hello', 'heron']
+    ret = spec._sanitize_outputs()
+    self.assertEqual(ret, {'default': ['string', 'hello', 'heron'], })
+    spec = HeronComponentSpec('spout', 'class', True, 1)
+    spec.outputs = ['string', 'hello', Stream(fields=['abc', 'def'], name='another_stream'), Stream(fields=['another', 'default'], name='default')]
+    ret = spec._sanitize_outputs()
+    self.assertEqual(ret, {'default': ['string', 'hello', 'another', 'default'], 'another_stream': ['abc', 'def'], })

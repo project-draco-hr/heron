@@ -1,0 +1,11 @@
+def test_is_grouping_sane(self):
+    self.assertTrue(Grouping.is_grouping_sane(Grouping.ALL))
+    self.assertTrue(Grouping.is_grouping_sane(Grouping.SHUFFLE))
+    self.assertTrue(Grouping.is_grouping_sane(Grouping.LOWEST))
+    self.assertTrue(Grouping.is_grouping_sane(Grouping.NONE))
+    self.assertFalse(Grouping.is_grouping_sane(Grouping.FIELDS))
+    sane_fields = Grouping.fields(['hello', 'world'])
+    self.assertTrue(Grouping.is_grouping_sane(sane_fields))
+    self.assertFalse(Grouping.is_grouping_sane(Grouping.CUSTOM))
+    sane_custom = Grouping.custom('class.path')
+    self.assertTrue(Grouping.is_grouping_sane(sane_custom))

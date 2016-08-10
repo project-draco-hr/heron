@@ -1,0 +1,4 @@
+def test_add_spout_specs(self):
+    spec = HeronComponentSpec('spout', 'sp_cls', True, 1)
+    with self.assertRaises(ValueError):
+        TopologyType.add_spout_specs(spec, {})

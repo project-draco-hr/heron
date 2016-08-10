@@ -1,0 +1,19 @@
+def __new__(mcs, classname, bases, class_dict):
+    bolt_specs = {}
+    spout_specs = {}
+    specs = TopologyType.class_dict_to_specs(class_dict)
+    for spec in specs.itervalues():
+        if spec.is_spout:
+            TopologyType.add_spout_specs(spec, spout_specs)
+        else:
+            TopologyType.add_bolt_specs(spec, bolt_specs)
+    if ((classname != 'Topology') and (not spout_specs)):
+        raise ValueError('A Topology requires at least one Spout')
+    topology_config = TopologyType.class_dict_to_topo_config(class_dict)
+    if (classname != 'Topology'):
+        class_dict['_topo_config'] = topology_config
+        class_dict['_protobuf_bolts'] = bolt_specs
+        class_dict['_protobuf_spouts'] = spout_specs
+        class_dict['_heron_specs'] = list(specs.values())
+        TopologyType.init_topology(classname, class_dict)
+    return type.__new__(mcs, classname, bases, class_dict)

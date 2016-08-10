@@ -1,0 +1,16 @@
+@classmethod
+def get_topology_config_protobuf(mcs, class_dict):
+    config = topology_pb2.Config()
+    conf_dict = class_dict['_topo_config']
+    for (key, value) in conf_dict.iteritems():
+        if isinstance(value, str):
+            kvs = config.kvs.add()
+            kvs.key = key
+            kvs.value = value
+            kvs.type = topology_pb2.ConfigValueType.Value('STRING_VALUE')
+        else:
+            kvs = config.kvs.add()
+            kvs.key = key
+            kvs.serialized_value = default_serializer.serialize(value)
+            kvs.type = topology_pb2.ConfigValueType.Value('PYTHON_SERIALIZED_VALUE')
+    return config

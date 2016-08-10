@@ -1,0 +1,2 @@
+def __eq__(self, other):
+    return (hasattr(other, 'component_id') and (self.component_id == other.component_id) and hasattr(other, 'stream_id') and (self.stream_id == other.stream_id))

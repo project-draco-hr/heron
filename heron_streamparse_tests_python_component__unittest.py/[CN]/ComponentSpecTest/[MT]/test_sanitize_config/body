@@ -1,0 +1,29 @@
+def test_sanitize_config(self):
+    ret = HeronComponentSpec._sanitize_config({})
+    self.assertEqual(ret, {})
+    with self.assertRaises(TypeError):
+        HeronComponentSpec._sanitize_config('{key: value}')
+    with self.assertRaises(TypeError):
+        HeronComponentSpec._sanitize_config(True)
+    with self.assertRaises(TypeError):
+        HeronComponentSpec._sanitize_config(None)
+    with self.assertRaises(TypeError):
+        HeronComponentSpec._sanitize_config({['k', 'e', 'y']: 'value', })
+    with self.assertRaises(TypeError):
+        HeronComponentSpec._sanitize_config({None: 'value', })
+    ret = HeronComponentSpec._sanitize_config({'key': True, })
+    self.assertEqual(ret['key'], 'true')
+    ret = HeronComponentSpec._sanitize_config({'key': False, })
+    self.assertEqual(ret['key'], 'false')
+    ret = HeronComponentSpec._sanitize_config({'key': 10, })
+    self.assertEqual(ret['key'], '10')
+    ret = HeronComponentSpec._sanitize_config({'key': (-2400000), })
+    self.assertEqual(ret['key'], '-2400000')
+    ret = HeronComponentSpec._sanitize_config({'key': 1e-07, })
+    self.assertEqual(ret['key'], '1e-07')
+    ret = HeronComponentSpec._sanitize_config({'key': (-15.33333), })
+    self.assertEqual(ret['key'], '-15.33333')
+    ret = HeronComponentSpec._sanitize_config({'key': ['v', 'a', 'l', 'u', 'e'], })
+    self.assertEqual(ret['key'], ['v', 'a', 'l', 'u', 'e'])
+    ret = HeronComponentSpec._sanitize_config({'key': None, })
+    self.assertEqual(ret['key'], None)

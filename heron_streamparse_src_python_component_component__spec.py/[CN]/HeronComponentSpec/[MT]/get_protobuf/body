@@ -1,0 +1,6 @@
+def get_protobuf(self):
+    'Returns protobuf message (Spout or Bolt) of this component'
+    if self.is_spout:
+        return self._get_spout()
+    else:
+        return self._get_bolt()

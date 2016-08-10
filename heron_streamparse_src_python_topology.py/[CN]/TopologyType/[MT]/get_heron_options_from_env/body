@@ -1,0 +1,13 @@
+@staticmethod
+def get_heron_options_from_env():
+    'Retrieves heron options from environment variable HERON_OPTIONS\n    It has the following format:\n    cmdline.topologydefn.tmpdirectory=/var/folders/tmpdir,cmdline.topology.initial.state=PAUSED\n\n    In this case, the returned map will contain:\n    {"cmdline.topologydefn.tmpdirectory": "/var/folders/tmpdir",\n     "cmdline.topology.initial.state": "PAUSED"}\n\n    :return: map mapping from key to value\n    '
+    heron_options_raw = os.environ.get('HERON_OPTIONS', None)
+    if (heron_options_raw is None):
+        raise RuntimeError('HERON_OPTIONS environment variable not found')
+    ret = {}
+    heron_opt_list = heron_options_raw.replace('%%%%', ' ').split(',')
+    for opt_raw in heron_opt_list:
+        opt = opt_raw.split('=')
+        if (len(opt) == 2):
+            ret[opt[0]] = opt[1]
+    return ret

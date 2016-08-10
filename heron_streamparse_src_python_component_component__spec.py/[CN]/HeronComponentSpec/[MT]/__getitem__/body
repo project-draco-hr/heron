@@ -1,0 +1,6 @@
+def __getitem__(self, stream_id):
+    'Get GlobalStreamId for a given stream_id'
+    if (stream_id not in self.get_out_streamids()):
+        raise ValueError(('A given stream id does not exist on this component: %s' % stream_id))
+    component_id = (self.name or self)
+    return GlobalStreamId(componentId=component_id, streamId=stream_id)

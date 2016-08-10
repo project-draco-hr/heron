@@ -1,0 +1,10 @@
+def __init__(self, name, python_class_path, is_spout, par, inputs=None, outputs=None, config=None):
+    self._sanitize_args(name, python_class_path, is_spout, par)
+    self.name = name
+    self.python_class_path = python_class_path
+    self.is_spout = is_spout
+    self.parallelism = par
+    self.inputs = inputs
+    self.outputs = outputs
+    self.custom_config = config
+    self.uuid = str(uuid.uuid4())

@@ -1,0 +1,2 @@
+def setUp(self):
+    os.environ['HERON_OPTIONS'] = heron_options

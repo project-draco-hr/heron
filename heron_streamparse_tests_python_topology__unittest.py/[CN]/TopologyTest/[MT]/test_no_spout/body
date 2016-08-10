@@ -1,0 +1,6 @@
+def test_no_spout(self):
+    with self.assertRaises(ValueError):
+
+
+        class JustBolt(Topology):
+            bolt = HeronComponentSpec(None, 'bl_class', False, 4)

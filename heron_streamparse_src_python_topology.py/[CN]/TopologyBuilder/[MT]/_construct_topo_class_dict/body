@@ -1,0 +1,9 @@
+def _construct_topo_class_dict(self):
+    class_dict = {}
+    for spec in self._specs:
+        name = spec.name
+        if (name in class_dict):
+            raise ValueError(('Duplicate spec names: %s' % name))
+        class_dict[name] = spec
+    class_dict['config'] = self._topology_config
+    return class_dict

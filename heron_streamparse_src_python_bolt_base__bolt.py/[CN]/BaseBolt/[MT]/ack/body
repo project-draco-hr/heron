@@ -1,0 +1,3 @@
+def ack(self, tup):
+    'Indicate that processing of a Tuple has succeeded\n\n    It is compatible with StreamParse API.\n    '
+    self.delegate.ack(tup)

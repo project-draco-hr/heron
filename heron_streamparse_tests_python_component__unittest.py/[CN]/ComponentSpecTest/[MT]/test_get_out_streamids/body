@@ -1,0 +1,12 @@
+def test_get_out_streamids(self):
+    spec = HeronComponentSpec('spout', 'class', True, 1)
+    ret = spec.get_out_streamids()
+    self.assertEqual(ret, set())
+    spec = HeronComponentSpec('spout', 'class', True, 1)
+    spec.outputs = 'string'
+    with self.assertRaises(TypeError):
+        spec.get_out_streamids()
+    spec = HeronComponentSpec('spout', 'class', True, 1)
+    spec.outputs = ['string', 'hello', Stream(fields=['abc', 'def'], name='another_stream'), Stream(fields=['another', 'default'], name='default')]
+    ret = spec.get_out_streamids()
+    self.assertEqual(ret, {'default', 'another_stream'})

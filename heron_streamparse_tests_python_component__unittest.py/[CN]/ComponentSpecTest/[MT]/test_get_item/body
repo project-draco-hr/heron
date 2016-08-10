@@ -1,0 +1,13 @@
+def test_get_item(self):
+    spec = HeronComponentSpec('spout', 'class', True, 1)
+    spec.outputs = ['string', 'hello', Stream(fields=['abc', 'def'], name='another_stream'), Stream(fields=['another', 'default'], name='default')]
+    ret = spec['another_stream']
+    self.assertEqual(ret, GlobalStreamId('spout', 'another_stream'))
+    spec = HeronComponentSpec(None, 'class', True, 1)
+    spec.outputs = ['string', 'hello', Stream(fields=['abc', 'def'], name='another_stream'), Stream(fields=['another', 'default'], name='default')]
+    ret = spec['default']
+    self.assertEqual(ret, GlobalStreamId(spec, 'default'))
+    spec = HeronComponentSpec(None, 'class', True, 1)
+    spec.outputs = ['string', 'hello', Stream(fields=['abc', 'def'], name='another_stream'), Stream(fields=['another', 'default'], name='default')]
+    with self.assertRaises(ValueError):
+        spec['non_existent_stream']

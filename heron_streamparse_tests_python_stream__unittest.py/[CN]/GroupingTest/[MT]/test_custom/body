@@ -1,0 +1,8 @@
+def test_custom(self):
+    sane = Grouping.custom('class.path')
+    self.assertEqual(sane.gtype, topology_pb2.Grouping.Value('CUSTOM'))
+    self.assertTrue(isinstance(sane.python_serialized, bytes))
+    with self.assertRaises(TypeError):
+        Grouping.custom(None)
+    with self.assertRaises(TypeError):
+        Grouping.custom(True)

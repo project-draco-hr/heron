@@ -1,0 +1,3 @@
+def test_sparse_compatibility(self):
+    self.assertEqual(Grouping.GLOBAL, Grouping.LOWEST)
+    self.assertEqual(Grouping.LOCAL_OR_SHUFFLE, Grouping.SHUFFLE)

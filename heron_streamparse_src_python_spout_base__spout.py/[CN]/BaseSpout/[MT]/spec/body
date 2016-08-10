@@ -1,0 +1,9 @@
+@classmethod
+def spec(cls, name=None, par=1, config=None):
+    'Register this spout to the topology and create ``HeronComponentSpec``\n\n    The usage of this method is compatible with StreamParse API, although it does not create\n    ``ShellBoltSpec`` but instead directly registers to a ``Topology`` class.\n\n    Note that this method does not take a ``outputs`` arguments because ``outputs`` should be\n    an attribute of your ``Spout`` subclass.\n\n    :type name: str\n    :param name: Name of this spout.\n    :type par: int\n    :param par: Parallelism hint for this spout.\n    :type config: dict\n    :param config: Component-specific config settings.\n    '
+    python_class_path = ('%s.%s' % (cls.__module__, cls.__name__))
+    if hasattr(cls, 'outputs'):
+        _outputs = cls.outputs
+    else:
+        _outputs = None
+    return HeronComponentSpec(name, python_class_path, is_spout=True, par=par, inputs=None, outputs=_outputs, config=config)

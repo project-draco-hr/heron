@@ -1,0 +1,24 @@
+def __init__(self, fields=None, name=DEFAULT_STREAM_ID, direct=False):
+    '\n    :type fields: `list` or `tuple` of `str`\n    :param fields: field names for this stream\n    :type name: str\n    :param name: name of stream. Defaults to ``default``\n    :type direct: bool\n    :param direct: whether or not this stream is direct. Default is ``False``\n    '
+    if (fields is None):
+        fields = []
+    elif isinstance(fields, (list, tuple)):
+        fields = list(fields)
+        for field in fields:
+            if (not isinstance(field, str)):
+                raise TypeError(('All field names must be strings, given: %s' % str(field)))
+    else:
+        raise TypeError(('Stream fields must be a list, tuple or None, given: %s' % str(fields)))
+    self.fields = fields
+    if (name is None):
+        raise TypeError("Stream's name cannot be None")
+    elif isinstance(name, str):
+        self.stream_id = name
+    else:
+        raise TypeError(('Stream name must be a string, given: %s' % str(name)))
+    if isinstance(direct, bool):
+        self.direct = direct
+        if self.direct:
+            raise NotImplementedError('Direct stream is not supported yet.')
+    else:
+        raise TypeError(("'direct' must be either True or False, given: %s" % str(direct)))

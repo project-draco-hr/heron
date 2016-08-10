@@ -1,0 +1,5 @@
+def test_constructor(self):
+    with self.assertRaises(TypeError):
+        GlobalStreamId(componentId=123, streamId='default')
+    with self.assertRaises(TypeError):
+        GlobalStreamId(componentId='component', streamId=12345)

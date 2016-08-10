@@ -1,0 +1,9 @@
+def test_component_id_property(self):
+    gsi = GlobalStreamId(componentId='component', streamId='stream')
+    self.assertEqual(gsi.component_id, 'component')
+    spec = HeronComponentSpec('spout', 'class', True, 1)
+    gsi = GlobalStreamId(spec, 'stream')
+    self.assertEqual(gsi.component_id, 'spout')
+    spec = HeronComponentSpec(None, 'class', True, 1)
+    gsi = GlobalStreamId(spec, 'stream')
+    self.assertIn(spec.uuid, gsi.component_id)

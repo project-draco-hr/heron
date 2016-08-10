@@ -1,0 +1,5 @@
+def add_spout(self, name, spout_cls, par, config=None):
+    'Add a spout to the topology'
+    spout_spec = spout_cls.spec(name=name, par=par, config=config)
+    self.add_spec(spout_spec)
+    return spout_spec

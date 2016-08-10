@@ -1,0 +1,3 @@
+def deactivate(self):
+    'Called when a spout has been deactivated\n\n    next_tuple() will not be called while a spout is deactivated.\n    The spout may or may not be reactivated in the future.\n    '
+    pass

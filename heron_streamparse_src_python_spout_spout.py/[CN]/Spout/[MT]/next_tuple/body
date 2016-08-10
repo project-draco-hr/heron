@@ -1,0 +1,4 @@
+@abstractmethod
+def next_tuple(self):
+    'When this method is called, Heron is requesting that the Spout emit tuples\n\n    It is compatible with StreamParse API.\n\n    This method should be non-blocking, so if the Spout has no tuples to emit,\n    this method should return; next_tuple(), ack(), and fail() are all called in a tight\n    loop in a single thread in the spout task. WHen there are no tuples to emit, it is\n    courteous to have next_tuple sleep for a short amount of time (like a single millisecond)\n    so as not to waste too much CPU.\n\n    **Must be implemented by a subclass, otherwise NotImplementedError is raised.**\n    '
+    raise NotImplementedError('Spout not implementing next_tuple() method')

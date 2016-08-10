@@ -1,0 +1,2 @@
+def tearDown(self):
+    os.environ.pop('HERON_OPTIONS', None)

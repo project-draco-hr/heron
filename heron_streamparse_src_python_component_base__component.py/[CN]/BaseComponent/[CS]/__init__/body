@@ -1,0 +1,4 @@
+def __init__(self, delegate):
+    'Initializes BaseComponent\n\n    :param delegate: SpoutInstance or BoltInstance\n    '
+    self.delegate = delegate
+    self.logger = self.delegate.logger

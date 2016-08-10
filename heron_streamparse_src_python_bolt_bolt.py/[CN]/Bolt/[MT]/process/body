@@ -1,0 +1,4 @@
+@abstractmethod
+def process(self, tup):
+    'Process a single tuple of input\n\n    The Tuple object contains metadata on it about which component/stream/task it came from.\n    To emit a tuple, call ``self.emit(tuple)``.\n\n    **Must be implemented by a subclass, otherwise NotImplementedError is raised.**\n\n    :type tup: heron.common.src.python.utils.tuple.HeronTuple\n    :param tup: HeronTuple to process\n    '
+    raise NotImplementedError('Bolt not implementing process() method.')

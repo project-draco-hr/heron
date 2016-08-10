@@ -1,0 +1,12 @@
+def test_add_spec(self):
+    builder = TopologyBuilder('Test')
+    with self.assertRaises(ValueError):
+        builder.add_spec(HeronComponentSpec(None, 'path', True, 1))
+    with self.assertRaises(TypeError):
+        builder.add_spec(None)
+    self.assertEqual(len(builder._specs), 0)
+    specs = []
+    for i in range(10):
+        specs.append(HeronComponentSpec(str(i), 'path', True, 1))
+    builder.add_spec(*specs)
+    self.assertEqual(len(builder._specs), 10)

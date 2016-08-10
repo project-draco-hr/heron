@@ -1,0 +1,18 @@
+def test_constructor(self):
+    stream = Stream(fields=['word', 'count'])
+    self.assertEqual(stream.fields, ['word', 'count'])
+    self.assertEqual(stream.stream_id, 'default')
+    stream = Stream(fields=['error', 'message'], name='error_stream')
+    self.assertEqual(stream.fields, ['error', 'message'])
+    self.assertEqual(stream.stream_id, 'error_stream')
+    stream = Stream()
+    self.assertEqual(stream.fields, [])
+    self.assertEqual(stream.stream_id, 'default')
+    with self.assertRaises(TypeError):
+        Stream(fields={'key': 'value', })
+    with self.assertRaises(TypeError):
+        Stream(fields=['hello', 123, 'world'])
+    with self.assertRaises(TypeError):
+        Stream(fields=['hello', 'world'], name=True)
+    with self.assertRaises(TypeError):
+        Stream(fields=['hello', 'world'], name=None)

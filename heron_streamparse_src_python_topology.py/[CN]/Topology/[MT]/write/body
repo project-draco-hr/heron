@@ -1,0 +1,9 @@
+@classmethod
+def write(cls):
+    'Writes the Topology .defn file to ``dest``\n\n    This classmethod is meant be used by heron-cli when submitting a topology.\n    '
+    if (cls.__name__ == 'Topology'):
+        raise ValueError('The base Topology class cannot be writable')
+    filename = ('%s.defn' % cls.topology_name)
+    path = os.path.join(cls.topologydefn_tmpdir, filename)
+    with open(path, 'wb') as f:
+        f.write(cls.protobuf_topology.SerializeToString())

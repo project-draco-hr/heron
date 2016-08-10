@@ -1,0 +1,7 @@
+@classmethod
+def custom(cls, classpath):
+    'Custom grouping from a given classpath\n\n    :param classpath: classpath to the ICustomGrouping class to use\n    '
+    if ((classpath is None) or (not isinstance(classpath, str))):
+        raise TypeError(('Argument to custom() must be classpath string to custom grouping, given: %s' % str(classpath)))
+    serialized = default_serializer.serialize(classpath)
+    return cls.custom_serialized(serialized, is_java=False)

@@ -1,0 +1,21 @@
+def _get_comp_config(self):
+    'Returns component-specific Config protobuf message\n\n    It first adds ``topology.component.parallelism``, and is overriden by\n    a user-defined component-specific configuration, specified by spec().\n    '
+    proto_config = topology_pb2.Config()
+    key = proto_config.kvs.add()
+    key.key = constants.TOPOLOGY_COMPONENT_PARALLELISM
+    key.value = str(self.parallelism)
+    key.type = topology_pb2.ConfigValueType.Value('STRING_VALUE')
+    if (self.custom_config is not None):
+        sanitized = self._sanitize_config(self.custom_config)
+        for (key, value) in sanitized.iteritems():
+            if isinstance(value, str):
+                kvs = proto_config.kvs.add()
+                kvs.key = key
+                kvs.value = value
+                kvs.type = topology_pb2.ConfigValueType.Value('STRING_VALUE')
+            else:
+                kvs = proto_config.kvs.add()
+                kvs.key = key
+                kvs.serialized_value = default_serializer.serialize(value)
+                kvs.type = topology_pb2.ConfigValueType.Value('PYTHON_SERIALIZED_VALUE')
+    return proto_config

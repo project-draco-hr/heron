@@ -1,0 +1,10 @@
+@classmethod
+def add_bolts_and_spouts(mcs, topology, class_dict):
+    spouts = list(class_dict['_protobuf_spouts'].values())
+    bolts = list(class_dict['_protobuf_bolts'].values())
+    for spout in spouts:
+        added = topology.spouts.add()
+        added.CopyFrom(spout)
+    for bolt in bolts:
+        added = topology.bolts.add()
+        added.CopyFrom(bolt)

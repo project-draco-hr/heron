@@ -1,0 +1,5 @@
+@classmethod
+def add_spout_specs(mcs, spec, spout_specs):
+    if (not spec.outputs):
+        raise ValueError(('%s: %s requires at least one output, because it is a spout' % (spec.python_class_path, spec.name)))
+    spout_specs[spec.name] = spec.get_protobuf()

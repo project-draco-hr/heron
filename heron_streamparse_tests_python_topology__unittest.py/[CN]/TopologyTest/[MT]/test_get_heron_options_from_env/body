@@ -1,0 +1,9 @@
+def test_get_heron_options_from_env(self):
+    test_value = 'cmdline.key.1=/tmp/directory,cmdline.with.space=hello%%%%world'
+    expecting = {'cmdline.key.1': '/tmp/directory', 'cmdline.with.space': 'hello world', }
+    os.environ['HERON_OPTIONS'] = test_value
+    ret = TopologyType.get_heron_options_from_env()
+    self.assertEqual(ret, expecting)
+    os.environ.pop('HERON_OPTIONS')
+    with self.assertRaises(RuntimeError):
+        TopologyType.get_heron_options_from_env()

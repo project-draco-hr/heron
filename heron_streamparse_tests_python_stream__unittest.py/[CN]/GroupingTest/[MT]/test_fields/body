@@ -1,0 +1,15 @@
+def test_fields(self):
+    sane = Grouping.fields(['word', 'count'])
+    self.assertEqual(sane.gtype, topology_pb2.Grouping.Value('FIELDS'))
+    self.assertEqual(sane.fields, ['word', 'count'])
+    sane = Grouping.fields('just_a_word')
+    self.assertEqual(sane.gtype, topology_pb2.Grouping.Value('FIELDS'))
+    self.assertEqual(sane.fields, ['just_a_word'])
+    with self.assertRaises(TypeError):
+        Grouping.fields(['word', 'count', True])
+    with self.assertRaises(TypeError):
+        Grouping.fields(123)
+    with self.assertRaises(TypeError):
+        Grouping.fields(None)
+    with self.assertRaises(ValueError):
+        Grouping.fields()

@@ -1,0 +1,41 @@
+def test_sanitize_inputs(self):
+    invalid_spec = HeronComponentSpec('name', 'classpath', True, 1, inputs='string')
+    with self.assertRaises(TypeError):
+        invalid_spec._sanitize_inputs()
+    invalid_spec = HeronComponentSpec('name', 'classpath', True, 1, inputs=100)
+    with self.assertRaises(TypeError):
+        invalid_spec._sanitize_inputs()
+    from_spec = HeronComponentSpec('spout', 'sp_clspath', True, 1)
+    to_spec = HeronComponentSpec('bolt', 'bl_clspath', False, 1, inputs={from_spec: Grouping.SHUFFLE, })
+    ret = to_spec._sanitize_inputs()
+    self.assertEqual(ret, {GlobalStreamId('spout', 'default'): Grouping.SHUFFLE, })
+    from_spec = HeronComponentSpec('spout', 'sp_clspath', True, 1)
+    from_spec.outputs = [Stream(name='another_stream')]
+    to_spec = HeronComponentSpec('bolt', 'bl_clspath', False, 1, inputs={from_spec['another_stream']: Grouping.ALL, })
+    ret = to_spec._sanitize_inputs()
+    self.assertEqual(ret, {GlobalStreamId('spout', 'another_stream'): Grouping.ALL, })
+    from_spec = HeronComponentSpec(None, 'sp_clspath', True, 1)
+    to_spec = HeronComponentSpec('bolt', 'bl_clspath', False, 1, inputs={from_spec: Grouping.ALL, })
+    with self.assertRaises(RuntimeError):
+        to_spec._sanitize_inputs()
+    inputs_dict = {GlobalStreamId('some_spout', 'some_stream'): Grouping.NONE, GlobalStreamId('another_spout', 'default'): Grouping.fields(['word', 'count']), }
+    spec = HeronComponentSpec('bolt', 'classpath', False, 1, inputs=inputs_dict)
+    ret = spec._sanitize_inputs()
+    self.assertEqual(ret, inputs_dict)
+    from_spec1 = HeronComponentSpec('spout1', 'sp1_cls', True, 1)
+    from_spec2 = HeronComponentSpec('spout2', 'sp2_cls', True, 1)
+    to_spec = HeronComponentSpec('bolt', 'bl_cls', False, 1, inputs=[from_spec1, from_spec2])
+    ret = to_spec._sanitize_inputs()
+    self.assertEqual(ret, {GlobalStreamId('spout1', 'default'): Grouping.SHUFFLE, GlobalStreamId('spout2', 'default'): Grouping.SHUFFLE, })
+    from_spec = HeronComponentSpec(None, 'sp_clspath', True, 1)
+    to_spec = HeronComponentSpec('bolt', 'bl_clspath', False, 1, inputs=[from_spec])
+    with self.assertRaises(RuntimeError):
+        to_spec._sanitize_inputs()
+    inputs_list = [GlobalStreamId('spout1', 'default'), GlobalStreamId('spout2', 'some_stream')]
+    spec = HeronComponentSpec('bolt', 'bl_cls', False, 1, inputs=inputs_list)
+    ret = spec._sanitize_inputs()
+    self.assertEqual(ret, dict(zip(inputs_list, ([Grouping.SHUFFLE] * 2))))
+    inputs_list = [None, 123, 'string', [GlobalStreamId('sp', 'default')]]
+    spec = HeronComponentSpec('bolt', 'bl_cls', False, 1, inputs=inputs_list)
+    with self.assertRaises(ValueError):
+        spec._sanitize_inputs()

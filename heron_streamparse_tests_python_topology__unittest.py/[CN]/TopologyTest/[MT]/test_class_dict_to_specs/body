@@ -1,0 +1,4 @@
+def test_class_dict_to_specs(self):
+    class_dict = {'spout': HeronComponentSpec('same_name', 'sp_cls', True, 1), 'bolt': HeronComponentSpec('same_name', 'bl_cls', False, 2), }
+    with self.assertRaises(ValueError):
+        TopologyType.class_dict_to_specs(class_dict)

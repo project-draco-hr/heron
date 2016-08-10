@@ -1,0 +1,3 @@
+def fail(self, tup):
+    'Indicate that processing of a Tuple has failed\n\n    It is compatible with StreamParse API.\n    '
+    self.delegate.fail(tup)
