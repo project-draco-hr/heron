@@ -1,0 +1,4 @@
+@abstractmethod
+def process_incoming_tuples(self):
+    'Should be called when a tuple was buffered into in_stream'
+    raise NotImplementedError()

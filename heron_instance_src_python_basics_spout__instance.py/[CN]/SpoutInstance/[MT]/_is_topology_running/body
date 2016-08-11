@@ -1,0 +1,2 @@
+def _is_topology_running(self):
+    return (self.topology_state == topology_pb2.TopologyState.Value('RUNNING'))

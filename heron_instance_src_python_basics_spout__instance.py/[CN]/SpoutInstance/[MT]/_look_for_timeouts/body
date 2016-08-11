@@ -1,0 +1,16 @@
+def _look_for_timeouts(self):
+    spout_config = self.pplan_helper.context.get_cluster_config()
+    timeout_sec = spout_config.get(constants.TOPOLOGY_MESSAGE_TIMEOUT_SECS)
+    n_bucket = self.sys_config.get(constants.INSTANCE_ACKNOWLEDGEMENT_NBUCKETS)
+    now = time.time()
+    timeout_lst = []
+    for (key, tuple_info) in self.in_flight_tuples.iteritems():
+        if tuple_info.is_expired(now, timeout_sec):
+            timeout_lst.append(tuple_info)
+            self.in_flight_tuples.pop(key)
+        else:
+            break
+    for tuple_info in timeout_lst:
+        self.spout_metrics.timeout_tuple(tuple_info.stream_id)
+        self._invoke_fail(tuple_info.tuple_id, tuple_info.stream_id, (timeout_sec * constants.SEC_TO_NS))
+    self.looper.register_timer_task_in_sec(self._look_for_timeouts, (float(timeout_sec) / n_bucket))

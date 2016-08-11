@@ -1,0 +1,2 @@
+def process_incoming_tuples(self):
+    Log.debug("In spout, process_incoming_tuples() don't do anything")

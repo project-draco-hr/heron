@@ -1,0 +1,4 @@
+@abstractmethod
+def start(self):
+    'Do the basic setup for Heron Instance'
+    raise NotImplementedError()

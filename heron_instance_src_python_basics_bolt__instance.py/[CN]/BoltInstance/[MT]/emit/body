@@ -1,0 +1,36 @@
+def emit(self, tup, stream=Stream.DEFAULT_STREAM_ID, anchors=None, direct_task=None, need_task_ids=False):
+    'Emits a new tuple from this Bolt\n\n    It is compatible with StreamParse API.\n\n    :type tup: list or tuple\n    :param tup: the new output Tuple to send from this bolt,\n                should only contain only serializable data.\n    :type stream: str\n    :param stream: the ID of the stream to emit this Tuple to.\n                   Leave empty to emit to the default stream.\n    :type anchors: list\n    :param anchors: a list of HeronTuples to which the emitted Tuples should be anchored.\n    :type direct_task: int\n    :param direct_task: the task to send the Tupel to if performing a direct emit.\n    :type need_task_ids: bool\n    :param need_task_ids: indicate whether or not you would like the task IDs the Tuple was emitted.\n    '
+    self.pplan_helper.check_output_schema(stream, tup)
+    custom_target_task_ids = self.pplan_helper.choose_tasks_for_custom_grouping(stream, tup)
+    self.pplan_helper.context.invoke_hook_emit(tup, stream, None)
+    data_tuple = tuple_pb2.HeronDataTuple()
+    data_tuple.key = 0
+    if (direct_task is not None):
+        if (not isinstance(direct_task, int)):
+            raise TypeError(('direct_task argument needs to be an integer, given: %s' % str(type(direct_task))))
+        data_tuple.dest_task_ids.append(direct_task)
+    elif (custom_target_task_ids is not None):
+        for task_id in custom_target_task_ids:
+            data_tuple.dest_task_ids.append(task_id)
+    if (anchors is not None):
+        merged_roots = set()
+        for tup in [t for t in anchors if (isinstance(t, HeronTuple) and (t.roots is not None))]:
+            merged_roots.update(tup.roots)
+        for rt in merged_roots:
+            to_add = data_tuple.roots.add()
+            to_add.CopyFrom(rt)
+    tuple_size_in_bytes = 0
+    start_time = time.time()
+    for obj in tup:
+        serialized = self.serializer.serialize(obj)
+        data_tuple.values.append(serialized)
+        tuple_size_in_bytes += len(serialized)
+    serialize_latency_ns = ((time.time() - start_time) * constants.SEC_TO_NS)
+    self.bolt_metrics.serialize_data_tuple(stream, serialize_latency_ns)
+    super(BoltInstance, self).admit_data_tuple(stream_id=stream, data_tuple=data_tuple, tuple_size_in_bytes=tuple_size_in_bytes)
+    self.bolt_metrics.update_emit_count(stream)
+    if need_task_ids:
+        sent_task_ids = (custom_target_task_ids or [])
+        if (direct_task is not None):
+            sent_task_ids.append(direct_task)
+        return sent_task_ids

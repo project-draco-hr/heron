@@ -1,0 +1,22 @@
+def _add_spout_task(self):
+    Log.info('Adding spout task...')
+
+    def spout_task():
+        if (not self._is_topology_running()):
+            return
+        if self._should_produce_tuple():
+            self._produce_tuple()
+            self.output_helper.send_out_tuples()
+            self.looper.wake_up()
+        else:
+            self.spout_metrics.update_out_queue_full_count()
+        if self.acking_enabled:
+            self._read_tuples_and_execute()
+            self.spout_metrics.update_pending_tuples_count(len(self.in_flight_tuples))
+        else:
+            self._do_immediate_acks()
+        if self._is_continue_to_work():
+            self.looper.wake_up()
+    self.looper.add_wakeup_task(spout_task)
+    if self.enable_message_timeouts:
+        self._look_for_timeouts()

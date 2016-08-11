@@ -1,0 +1,3 @@
+def _should_produce_tuple(self):
+    'Checks whether we could produce tuples, i.e. invoke spout.next_tuple()'
+    return (self._is_topology_running() and self.output_helper.is_out_queue_available())

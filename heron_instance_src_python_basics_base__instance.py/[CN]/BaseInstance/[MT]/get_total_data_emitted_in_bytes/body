@@ -1,0 +1,2 @@
+def get_total_data_emitted_in_bytes(self):
+    return self.output_helper.total_data_emitted_in_bytes

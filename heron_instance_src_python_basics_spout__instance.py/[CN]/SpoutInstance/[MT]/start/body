@@ -1,0 +1,8 @@
+def start(self):
+    context = self.pplan_helper.context
+    self.spout_metrics.register_metrics(context, self.sys_config)
+    self.spout_impl.initialize(config=context.get_cluster_config(), context=context)
+    context.invoke_hook_prepare()
+    self.pplan_helper.prepare_custom_grouping(context)
+    self._add_spout_task()
+    self.topology_state = topology_pb2.TopologyState.Value('RUNNING')

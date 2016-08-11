@@ -1,0 +1,4 @@
+@abstractmethod
+def invoke_activate(self):
+    'Activate the instance'
+    raise NotImplementedError()

@@ -1,0 +1,15 @@
+def _produce_tuple(self):
+    max_spout_pending = self.pplan_helper.context.get_cluster_config().get(constants.TOPOLOGY_MAX_SPOUT_PENDING)
+    total_tuples_emitted_before = self.total_tuples_emitted
+    total_data_emitted_bytes_before = self.get_total_data_emitted_in_bytes()
+    emit_batch_time = (float(self.sys_config[constants.INSTANCE_EMIT_BATCH_TIME_MS]) * constants.MS_TO_SEC)
+    emit_batch_size = int(self.sys_config[constants.INSTANCE_EMIT_BATCH_SIZE_BYTES])
+    start_cycle_time = time.time()
+    while ((self.acking_enabled and (max_spout_pending > len(self.in_flight_tuples))) or (not self.acking_enabled)):
+        start_time = time.time()
+        self.spout_impl.next_tuple()
+        next_tuple_latency_ns = ((time.time() - start_time) * constants.SEC_TO_NS)
+        self.spout_metrics.next_tuple(next_tuple_latency_ns)
+        if ((self.total_tuples_emitted == total_tuples_emitted_before) or (((time.time() - start_cycle_time) - emit_batch_time) > 0) or ((self.get_total_data_emitted_in_bytes() - total_data_emitted_bytes_before) > emit_batch_size)):
+            break
+        total_tuples_emitted_before = self.total_tuples_emitted

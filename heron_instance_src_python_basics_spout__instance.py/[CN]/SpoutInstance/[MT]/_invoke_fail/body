@@ -1,0 +1,5 @@
+def _invoke_fail(self, tuple_id, stream_id, fail_latency_ns):
+    Log.debug(('In invoke_fail(): Failing %s from stream: %s' % (str(tuple_id), stream_id)))
+    self.spout_impl.fail(tuple_id)
+    self.pplan_helper.context.invoke_hook_spout_fail(tuple_id, fail_latency_ns)
+    self.spout_metrics.failed_tuple(stream_id, fail_latency_ns)

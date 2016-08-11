@@ -1,0 +1,17 @@
+def __init__(self, pplan_helper, in_stream, out_stream, looper, sys_config):
+    super(SpoutInstance, self).__init__(pplan_helper, in_stream, out_stream, looper, sys_config)
+    self.topology_state = topology_pb2.TopologyState.Value('PAUSED')
+    if (not self.pplan_helper.is_spout):
+        raise RuntimeError('No spout in physicial plan')
+    context = self.pplan_helper.context
+    self.spout_metrics = SpoutMetrics(self.pplan_helper)
+    self.serializer = SerializerHelper.get_serializer(context)
+    self.acking_enabled = context.get_cluster_config().get(constants.TOPOLOGY_ENABLE_ACKING, False)
+    self.enable_message_timeouts = context.get_cluster_config().get(constants.TOPOLOGY_ENABLE_MESSAGE_TIMEOUTS)
+    Log.info(('Enable ACK: %s' % str(self.acking_enabled)))
+    Log.info(('Enable Message Timeouts: %s' % str(self.enable_message_timeouts)))
+    self.in_flight_tuples = collections.OrderedDict()
+    self.immediate_acks = collections.deque()
+    self.total_tuples_emitted = 0
+    spout_impl_class = super(SpoutInstance, self).load_py_instance(is_spout=True)
+    self.spout_impl = spout_impl_class(delegate=self)

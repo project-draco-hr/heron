@@ -1,0 +1,22 @@
+def _read_tuples_and_execute(self):
+    start_cycle_time = time.time()
+    ack_batch_time = (self.sys_config[constants.INSTANCE_ACK_BATCH_TIME_MS] * constants.MS_TO_SEC)
+    while (not self.in_stream.is_empty()):
+        try:
+            tuples = self.in_stream.poll()
+        except Queue.Empty:
+            break
+        if isinstance(tuples, tuple_pb2.HeronTupleSet):
+            if tuples.HasField('data'):
+                raise RuntimeError('Spout cannot get incoming data tuples from other components')
+            elif tuples.HasField('control'):
+                for ack_tuple in tuples.control.acks:
+                    self._handle_ack_tuple(ack_tuple, True)
+                for fail_tuple in tuples.control.fails:
+                    self._handle_ack_tuple(fail_tuple, False)
+            else:
+                Log.error('Received tuple neither data nor control')
+        else:
+            Log.error('Received tuple not instance of HeronTupleSet')
+        if (((time.time() - start_cycle_time) - ack_batch_time) > 0):
+            break

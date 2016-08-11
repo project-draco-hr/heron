@@ -1,0 +1,5 @@
+def _invoke_ack(self, tuple_id, stream_id, complete_latency_ns):
+    Log.debug(('In invoke_ack(): Acking %s from stream: %s' % (str(tuple_id), stream_id)))
+    self.spout_impl.ack(tuple_id)
+    self.pplan_helper.context.invoke_hook_spout_ack(tuple_id, complete_latency_ns)
+    self.spout_metrics.acked_tuple(stream_id, complete_latency_ns)

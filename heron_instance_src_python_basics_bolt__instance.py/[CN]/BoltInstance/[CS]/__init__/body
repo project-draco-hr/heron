@@ -1,0 +1,11 @@
+def __init__(self, pplan_helper, in_stream, out_stream, looper, sys_config):
+    super(BoltInstance, self).__init__(pplan_helper, in_stream, out_stream, looper, sys_config)
+    if self.pplan_helper.is_spout:
+        raise RuntimeError('No bolt in physical plan')
+    context = self.pplan_helper.context
+    self.bolt_metrics = BoltMetrics(self.pplan_helper)
+    self.serializer = SerializerHelper.get_serializer(context)
+    self.acking_enabled = context.get_cluster_config().get(constants.TOPOLOGY_ENABLE_ACKING, False)
+    Log.info(('Enable ACK: %s' % str(self.acking_enabled)))
+    bolt_impl_class = super(BoltInstance, self).load_py_instance(is_spout=False)
+    self.bolt_impl = bolt_impl_class(delegate=self)

@@ -1,0 +1,4 @@
+@abstractmethod
+def _read_tuples_and_execute(self):
+    'Read tuples from a queue and process the tuples'
+    raise NotImplementedError()

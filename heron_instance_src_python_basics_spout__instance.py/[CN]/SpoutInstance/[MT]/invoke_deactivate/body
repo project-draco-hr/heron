@@ -1,0 +1,4 @@
+def invoke_deactivate(self):
+    Log.info('Spout is deactivated')
+    self.spout_impl.deactivate()
+    self.topology_state = topology_pb2.TopologyState.Value('PAUSED')

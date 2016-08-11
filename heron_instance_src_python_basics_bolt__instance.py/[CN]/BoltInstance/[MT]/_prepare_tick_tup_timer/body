@@ -1,0 +1,16 @@
+def _prepare_tick_tup_timer(self):
+    cluster_config = self.pplan_helper.context.get_cluster_config()
+    if (constants.TOPOLOGY_TICK_TUPLE_FREQ_SECS in cluster_config):
+        tick_freq_sec = cluster_config[constants.TOPOLOGY_TICK_TUPLE_FREQ_SECS]
+        Log.debug(('Tick Tuple Frequency: %s sec.' % str(tick_freq_sec)))
+
+        def send_tick():
+            tick = TupleHelper.make_tick_tuple()
+            start_time = time.time()
+            self.bolt_impl.process(tick)
+            tick_execute_latency_ns = ((time.time() - start_time) * constants.SEC_TO_NS)
+            self.bolt_metrics.execute_tuple(tick.id, tick.component, tick_execute_latency_ns)
+            self.output_helper.send_out_tuples()
+            self.looper.wake_up()
+            self._prepare_tick_tup_timer()
+        self.looper.register_timer_task_in_sec(send_tick, tick_freq_sec)

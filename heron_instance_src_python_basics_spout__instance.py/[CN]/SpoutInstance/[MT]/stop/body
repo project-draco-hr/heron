@@ -1,0 +1,4 @@
+def stop(self):
+    self.pplan_helper.context.invoke_hook_cleanup()
+    self.spout_impl.close()
+    self.looper.exit_loop()

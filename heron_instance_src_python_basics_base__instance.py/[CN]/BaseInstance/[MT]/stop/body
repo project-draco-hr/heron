@@ -1,0 +1,4 @@
+@abstractmethod
+def stop(self):
+    'Do the basic clean for Heron Instance\n\n    Note that this method is not guaranteed to be invoked\n    '
+    raise NotImplementedError()

@@ -1,0 +1,13 @@
+def _handle_data_tuple(self, data_tuple, stream):
+    start_time = time.time()
+    values = []
+    for value in data_tuple.values:
+        values.append(self.serializer.deserialize(value))
+    tup = TupleHelper.make_tuple(stream, data_tuple.key, values, roots=data_tuple.roots)
+    deserialized_time = time.time()
+    self.bolt_impl.process(tup)
+    execute_latency_ns = ((time.time() - deserialized_time) * constants.SEC_TO_NS)
+    deserialize_latency_ns = ((deserialized_time - start_time) * constants.SEC_TO_NS)
+    self.pplan_helper.context.invoke_hook_bolt_execute(tup, execute_latency_ns)
+    self.bolt_metrics.deserialize_data_tuple(stream.id, stream.component_name, deserialize_latency_ns)
+    self.bolt_metrics.execute_tuple(stream.id, stream.component_name, execute_latency_ns)

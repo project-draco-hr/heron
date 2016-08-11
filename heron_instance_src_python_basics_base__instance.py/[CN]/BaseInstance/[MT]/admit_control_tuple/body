@@ -1,0 +1,2 @@
+def admit_control_tuple(self, control_tuple, tuple_size_in_bytes, is_ack):
+    self.output_helper.add_control_tuple(control_tuple, tuple_size_in_bytes, is_ack)

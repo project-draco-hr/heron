@@ -1,0 +1,5 @@
+def _do_immediate_acks(self):
+    size = len(self.immediate_acks)
+    for _ in range(size):
+        tuple_info = self.immediate_acks.pop()
+        self._invoke_ack(tuple_info.tuple_id, tuple_info.stream_id, 0)

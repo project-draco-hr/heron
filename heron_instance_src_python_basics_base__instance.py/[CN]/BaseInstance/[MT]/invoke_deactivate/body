@@ -1,0 +1,4 @@
+@abstractmethod
+def invoke_deactivate(self):
+    'Deactivate the instance'
+    raise NotImplementedError()

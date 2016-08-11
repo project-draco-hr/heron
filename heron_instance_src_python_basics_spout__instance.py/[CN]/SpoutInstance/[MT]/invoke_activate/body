@@ -1,0 +1,4 @@
+def invoke_activate(self):
+    Log.info('Spout is activated')
+    self.spout_impl.activate()
+    self.topology_state = topology_pb2.TopologyState.Value('RUNNING')

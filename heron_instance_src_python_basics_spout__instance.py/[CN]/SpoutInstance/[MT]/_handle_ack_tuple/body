@@ -1,0 +1,14 @@
+def _handle_ack_tuple(self, tup, is_success):
+    for rt in tup.roots:
+        if (rt.taskid != self.pplan_helper.my_task_id):
+            raise RuntimeError(('Receiving tuple for task: %s in task: %s' % (str(rt.taskid), str(self.pplan_helper.my_task_id))))
+        try:
+            tuple_info = self.in_flight_tuples.pop(rt.key)
+        except KeyError:
+            return
+        if (tuple_info.tuple_id is not None):
+            latency_ns = ((time.time() - tuple_info.insertion_time) * constants.SEC_TO_NS)
+            if is_success:
+                self._invoke_ack(tuple_info.tuple_id, tuple_info.stream_id, latency_ns)
+            else:
+                self._invoke_fail(tuple_info.tuple_id, tuple_info.stream_id, latency_ns)
