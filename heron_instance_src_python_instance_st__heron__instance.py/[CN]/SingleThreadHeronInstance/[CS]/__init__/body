@@ -1,0 +1,28 @@
+def __init__(self, topology_name, topology_id, instance, stream_port, metrics_port, topo_pex_file_path, sys_config):
+    self.topology_name = topology_name
+    self.topology_id = topology_id
+    self.instance = instance
+    self.stream_port = stream_port
+    self.metrics_port = metrics_port
+    self.topo_pex_file_abs_path = os.path.abspath(topo_pex_file_path)
+    self.sys_config = sys_config
+    self.in_stream = HeronCommunicator(producer_cb=None, consumer_cb=None)
+    self.out_stream = HeronCommunicator(producer_cb=None, consumer_cb=None)
+    self.socket_map = dict()
+    self.looper = GatewayLooper(self.socket_map)
+    self.out_metrics = HeronCommunicator()
+    self.out_metrics.register_capacity(self.sys_config[constants.INSTANCE_INTERNAL_METRICS_WRITE_QUEUE_CAPACITY])
+    self.metrics_collector = MetricsCollector(self.looper, self.out_metrics)
+    self.gateway_metrics = GatewayMetrics(self.metrics_collector, sys_config)
+    socket_options = create_socket_options(self.sys_config)
+    self._stmgr_client = SingleThreadStmgrClient(self.looper, self, self.STREAM_MGR_HOST, stream_port, topology_name, topology_id, instance, self.socket_map, self.gateway_metrics, socket_options, self.sys_config)
+    self._metrics_client = MetricsManagerClient(self.looper, self.METRICS_MGR_HOST, metrics_port, instance, self.out_metrics, self.socket_map, socket_options, self.sys_config)
+    self.my_pplan_helper = None
+    self.my_instance = None
+    self.is_instance_started = False
+
+    def go_trace(_, stack):
+        with open('/tmp/trace.log', 'w') as f:
+            traceback.print_stack(stack, file=f)
+        self.looper.register_timer_task_in_sec(self.looper.exit_loop, 0.0)
+    signal.signal(signal.SIGUSR1, go_trace)

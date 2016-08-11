@@ -1,0 +1,5 @@
+def start(self):
+    self._stmgr_client.start_connect()
+    self._metrics_client.start_connect()
+    self.looper.add_wakeup_task(self.send_buffered_messages)
+    self.looper.loop()

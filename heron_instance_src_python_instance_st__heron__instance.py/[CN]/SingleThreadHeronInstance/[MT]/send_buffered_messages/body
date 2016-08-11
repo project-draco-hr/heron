@@ -1,0 +1,7 @@
+def send_buffered_messages(self):
+    'Send messages in out_stream to the Stream Manager'
+    while (not self.out_stream.is_empty()):
+        tuple_set = self.out_stream.poll()
+        msg = stmgr_pb2.TupleMessage()
+        msg.set.CopyFrom(tuple_set)
+        self._stmgr_client.send_message(msg)

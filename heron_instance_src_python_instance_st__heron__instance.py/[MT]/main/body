@@ -1,0 +1,32 @@
+def main():
+    if (len(sys.argv) != 12):
+        print_usage(sys.argv[0])
+        sys.exit(1)
+    topology_name = sys.argv[1]
+    topology_id = sys.argv[2]
+    instance_id = sys.argv[3]
+    component_name = sys.argv[4]
+    task_id = sys.argv[5]
+    component_index = sys.argv[6]
+    stmgr_id = sys.argv[7]
+    stmgr_port = sys.argv[8]
+    metrics_port = sys.argv[9]
+    system_config = yaml_config_reader(sys.argv[10])
+    topology_pex_file_path = sys.argv[11]
+    instance_info = physical_plan_pb2.InstanceInfo()
+    instance_info.task_id = int(task_id)
+    instance_info.component_index = int(component_index)
+    instance_info.component_name = component_name
+    instance = physical_plan_pb2.Instance()
+    instance.instance_id = instance_id
+    instance.stmgr_id = stmgr_id
+    instance.info.MergeFrom(instance_info)
+    log_dir = os.path.abspath(system_config[constants.HERON_LOGGING_DIRECTORY])
+    max_log_files = system_config[constants.HERON_LOGGING_MAXIMUM_FILES]
+    max_log_bytes = (system_config[constants.HERON_LOGGING_MAXIMUM_SIZE_MB] * constants.MB)
+    log_file = os.path.join(log_dir, (instance_id + '.log.0'))
+    log.init_rotating_logger(level=logging.INFO, logfile=log_file, max_files=max_log_files, max_bytes=max_log_bytes)
+    Log.info(((((((((((((((((((('\nStarting instance: ' + instance_id) + ' for topology: ') + topology_name) + ' and topologyId: ') + topology_id) + ' for component: ') + component_name) + ' with taskId: ') + task_id) + ' and componentIndex: ') + component_index) + ' and stmgrId: ') + stmgr_id) + ' and stmgrPort: ') + stmgr_port) + ' and metricsManagerPort: ') + metrics_port) + '\n **Topology Pex file located at: ') + topology_pex_file_path))
+    Log.debug(('System config: ' + str(system_config)))
+    heron_instance = SingleThreadHeronInstance(topology_name, topology_id, instance, stmgr_port, metrics_port, topology_pex_file_path, system_config)
+    heron_instance.start()

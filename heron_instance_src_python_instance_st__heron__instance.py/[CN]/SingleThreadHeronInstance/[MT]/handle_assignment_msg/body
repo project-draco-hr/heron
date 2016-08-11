@@ -1,0 +1,26 @@
+def handle_assignment_msg(self, pplan_helper):
+    'Called when new NewInstanceAssignmentMessage arrives\n\n    Tells this instance to become either spout/bolt.\n\n    :param pplan_helper: PhysicalPlanHelper class to become\n    '
+    self.my_pplan_helper = pplan_helper
+    self.my_pplan_helper.set_topology_context(self.metrics_collector)
+    if pplan_helper.is_spout:
+        my_spout = pplan_helper.get_my_spout()
+        Log.info(('Incarnating ourselves as spout: %s with task id %s' % (pplan_helper.my_component_name, str(pplan_helper.my_task_id))))
+        self.in_stream.register_capacity(self.sys_config[constants.INSTANCE_INTERNAL_SPOUT_READ_QUEUE_CAPACITY])
+        self.out_stream.register_capacity(self.sys_config[constants.INSTANCE_INTERNAL_SPOUT_WRITE_QUEUE_CAPACITY])
+        py_spout_instance = SpoutInstance(self.my_pplan_helper, self.in_stream, self.out_stream, self.looper, self.sys_config)
+        self.my_instance = AssignedInstance(is_spout=True, protobuf=my_spout, py_class=py_spout_instance)
+    else:
+        my_bolt = pplan_helper.get_my_bolt()
+        Log.info(('Incarnating ourselves as bolt: %s with task id %s' % (pplan_helper.my_component_name, str(pplan_helper.my_task_id))))
+        self.in_stream.register_capacity(self.sys_config[constants.INSTANCE_INTERNAL_BOLT_READ_QUEUE_CAPACITY])
+        self.out_stream.register_capacity(self.sys_config[constants.INSTANCE_INTERNAL_BOLT_WRITE_QUEUE_CAPACITY])
+        py_bolt_instance = BoltInstance(self.my_pplan_helper, self.in_stream, self.out_stream, self.looper, self.sys_config)
+        self.my_instance = AssignedInstance(is_spout=False, protobuf=my_bolt, py_class=py_bolt_instance)
+    if pplan_helper.is_topology_running():
+        try:
+            self.start_instance()
+        except Exception as e:
+            Log.error(('Error with starting bolt/spout instance: ' + e.message))
+            Log.error(traceback.format_exc())
+    else:
+        Log.info('The instance is deployed in deactivated state')
