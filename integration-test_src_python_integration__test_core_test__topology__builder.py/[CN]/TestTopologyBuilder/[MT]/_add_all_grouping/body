@@ -1,0 +1,12 @@
+def _add_all_grouping(self, child, parent, stream_id):
+    "Adds all grouping between child component and parent component with a given stream id\n\n    :type child: str\n    :param child: child's component name\n    :type parent: str\n    :param parent: parent's component name\n    :type stream_id: str\n    :param stream_id: stream id\n    "
+    child_component_spec = self.bolts[child]
+    child_inputs = child_component_spec.inputs
+    if (parent in self.bolts):
+        parent_component_spec = self.bolts[parent]
+    else:
+        parent_component_spec = self.spouts[parent]
+    if (stream_id == Stream.DEFAULT_STREAM_ID):
+        child_inputs[parent_component_spec] = Grouping.ALL
+    else:
+        child_inputs[parent_component_spec[stream_id]] = Grouping.ALL

@@ -1,0 +1,5 @@
+def fail(self, tup):
+    Log.info(('Trying to do a fail. tuples processed: %d, received: %d' % (self.tuples_processed, self.tuple_received)))
+    if (self.tuples_processed < self.tuple_received):
+        super(IntegrationTestBolt, self).fail(tup)
+        self.tuples_processed += 1

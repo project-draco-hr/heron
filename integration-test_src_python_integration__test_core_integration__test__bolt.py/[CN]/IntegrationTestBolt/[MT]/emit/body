@@ -1,0 +1,5 @@
+def emit(self, tup, stream=Stream.DEFAULT_STREAM_ID, anchors=None, direct_task=None, need_task_ids=False):
+    if (tup is None):
+        super(IntegrationTestBolt, self).emit(list(self.current_tuple_processing), stream=stream, anchors=anchors, direct_task=direct_task, need_task_ids=need_task_ids)
+    else:
+        super(IntegrationTestBolt, self).emit(tup, stream, anchors, direct_task, need_task_ids)

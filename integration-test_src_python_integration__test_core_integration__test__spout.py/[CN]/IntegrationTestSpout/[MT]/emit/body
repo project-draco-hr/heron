@@ -1,0 +1,9 @@
+def emit(self, tup, tup_id=None, stream=Stream.DEFAULT_STREAM_ID, direct_task=None, need_task_ids=None):
+    "Emits from this integration test spout\n\n    Overriden method which will be called when user's spout calls emit()\n    "
+    self.tuples_to_complete += 1
+    if (tup_id is None):
+        Log.info(('Add tup_id for tuple: %s' % str(tup)))
+        _tup_id = integ_const.INTEGRATION_TEST_MOCK_MESSAGE_ID
+    else:
+        _tup_id = tup_id
+    super(IntegrationTestSpout, self).emit(tup, _tup_id, stream, direct_task, need_task_ids)

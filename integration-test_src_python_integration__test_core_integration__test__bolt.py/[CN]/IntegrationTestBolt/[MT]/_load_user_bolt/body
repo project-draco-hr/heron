@@ -1,0 +1,5 @@
+@staticmethod
+def _load_user_bolt(pex_file, classpath):
+    pex_loader.load_pex(pex_file)
+    cls = pex_loader.import_and_get_class(pex_file, classpath)
+    return cls

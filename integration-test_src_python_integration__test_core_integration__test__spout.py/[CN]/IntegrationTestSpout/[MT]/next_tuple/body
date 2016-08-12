@@ -1,0 +1,9 @@
+def next_tuple(self):
+    if self.is_done:
+        return
+    self.max_executions -= 1
+    Log.info(('max executions: %d' % self.max_executions))
+    self.user_spout.next_tuple()
+    if self.is_done:
+        self._emit_terminal_if_needed()
+        Log.info('This topology is finished.')

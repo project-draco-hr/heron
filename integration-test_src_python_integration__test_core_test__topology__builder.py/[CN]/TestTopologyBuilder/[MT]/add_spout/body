@@ -1,0 +1,20 @@
+def add_spout(self, name, spout_cls, par, config=None, optional_outputs=None, max_executions=None):
+    'Add an integration-test sput'
+    user_spec = spout_cls.spec(name)
+    spout_classpath = user_spec.python_class_path
+    if hasattr(spout_cls, 'outputs'):
+        user_outputs = spout_cls.outputs
+    else:
+        user_outputs = []
+    if (optional_outputs is not None):
+        user_outputs.extend(optional_outputs)
+    if (config is None):
+        _config = {}
+    else:
+        _config = copy.copy(config)
+    if (max_executions is not None):
+        _config[integ_const.USER_MAX_EXECUTIONS] = max_executions
+    test_spec = IntegrationTestSpout.spec(name, par, _config, user_spout_classpath=spout_classpath, user_output_fields=user_outputs)
+    self.add_spec(test_spec)
+    self.spouts[name] = test_spec
+    return test_spec

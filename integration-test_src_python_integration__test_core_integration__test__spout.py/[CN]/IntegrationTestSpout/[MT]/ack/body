@@ -1,0 +1,6 @@
+def ack(self, tup_id):
+    Log.info(('Received an ack with tuple id: %s' % str(tup_id)))
+    self.tuples_to_complete -= 1
+    if (tup_id != integ_const.INTEGRATION_TEST_MOCK_MESSAGE_ID):
+        self.user_spout.ack(tup_id)
+    self._emit_terminal_if_needed()

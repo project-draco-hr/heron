@@ -1,0 +1,6 @@
+def fail(self, tup_id):
+    Log.info(('Received a fail message with tuple id: %s' % str(tup_id)))
+    self.tuples_to_complete -= 1
+    if (tup_id != integ_const.INTEGRATION_TEST_MOCK_MESSAGE_ID):
+        self.user_spout.fail(tup_id)
+    self._emit_terminal_if_needed()

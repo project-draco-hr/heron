@@ -1,0 +1,8 @@
+@classmethod
+def spec(cls, name, par, config, user_spout_classpath, user_output_fields=None):
+    python_class_path = ('%s.%s' % (cls.__module__, cls.__name__))
+    config[integ_const.USER_SPOUT_CLASSPATH] = user_spout_classpath
+    _outputs = copy.copy(cls.outputs)
+    if (user_output_fields is not None):
+        _outputs.extend(user_output_fields)
+    return HeronComponentSpec(name, python_class_path, is_spout=True, par=par, inputs=None, outputs=_outputs, config=config)

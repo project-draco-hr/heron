@@ -1,0 +1,16 @@
+def process(self, tup):
+    self.tuple_received += 1
+    stream_id = tup.stream
+    Log.info(('Received a tuple: %s from %s' % (tup, stream_id)))
+    if (stream_id == integ_const.INTEGRATION_TEST_CONTROL_STREAM_ID):
+        self.terminal_to_receive -= 1
+        if self.is_done:
+            if isinstance(self.user_bolt, BatchBolt):
+                Log.info('Invoke bolt to do finish batch')
+                self.user_bolt.finish_batch()
+            Log.info('Populating the terminals to downstream')
+            super(IntegrationTestBolt, self).emit([integ_const.INTEGRATION_TEST_TERMINAL], stream=integ_const.INTEGRATION_TEST_CONTROL_STREAM_ID)
+    else:
+        self.current_tuple_processing = tup
+        self.user_bolt.process(tup)
+        self.ack(tup)

@@ -1,0 +1,3 @@
+@property
+def is_done(self):
+    return (self.terminal_to_receive == 0)

@@ -1,0 +1,17 @@
+def initialize(self, config, context):
+    user_bolt_classpath = config.get(integ_const.USER_BOLT_CLASSPATH, None)
+    if (user_bolt_classpath is None):
+        raise RuntimeError('User defined integration bolt was not found')
+    user_bolt_cls = self._load_user_bolt(context.get_topology_pex_path(), user_bolt_classpath)
+    self.user_bolt = user_bolt_cls(delegate=self)
+    upstream_components = set()
+    self.terminal_to_receive = 0
+    for streamId in context.get_this_sources().keys():
+        upstream_components.add(streamId.component_name)
+    for comp_name in upstream_components:
+        self.terminal_to_receive += len(context.get_component_tasks(comp_name))
+    self.tuple_received = 0
+    self.tuples_processed = 0
+    self.current_tuple_processing = None
+    Log.info(('Terminals to receive: %d' % self.terminal_to_receive))
+    self.user_bolt.initialize(config, context)

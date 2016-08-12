@@ -1,0 +1,2 @@
+def process(self, tup):
+    self.result.append(tup.values[0])

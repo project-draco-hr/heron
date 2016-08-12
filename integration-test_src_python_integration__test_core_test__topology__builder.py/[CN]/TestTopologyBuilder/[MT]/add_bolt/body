@@ -1,0 +1,19 @@
+def add_bolt(self, name, bolt_cls, par, inputs, config=None, optional_outputs=None):
+    'Add an integration-test bolt\n\n    Only dict based inputs is supported\n    '
+    assert isinstance(inputs, dict)
+    user_spec = bolt_cls.spec(name)
+    bolt_classpath = user_spec.python_class_path
+    if hasattr(bolt_cls, 'outputs'):
+        user_outputs = bolt_cls.outputs
+    else:
+        user_outputs = []
+    if (optional_outputs is not None):
+        user_outputs.extend(optional_outputs)
+    if (config is None):
+        _config = {}
+    else:
+        _config = config
+    test_spec = IntegrationTestBolt.spec(name, par, inputs, _config, user_bolt_classpath=bolt_classpath, user_output_fields=user_outputs)
+    self.add_spec(test_spec)
+    self.bolts[name] = test_spec
+    return test_spec

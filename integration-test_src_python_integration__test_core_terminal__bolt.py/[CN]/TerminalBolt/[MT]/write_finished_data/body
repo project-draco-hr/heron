@@ -1,0 +1,3 @@
+@abstractmethod
+def write_finished_data(self):
+    pass

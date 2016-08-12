@@ -1,0 +1,5 @@
+def initialize(self, config, context):
+    self.http_post_url = config[integ_constants.HTTP_POST_URL_KEY]
+    self.result = []
+    Log.info(('HTTP post url: %s' % self.http_post_url))
+    self.parsed_url = urlparse(self.http_post_url)

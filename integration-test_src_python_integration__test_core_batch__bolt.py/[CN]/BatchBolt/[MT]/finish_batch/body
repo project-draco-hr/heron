@@ -1,0 +1,3 @@
+@abstractmethod
+def finish_batch(self):
+    pass

@@ -1,0 +1,9 @@
+'constants.py: constants for integration test for pyheron'
+INTEGRATION_TEST_MOCK_MESSAGE_ID = '__integration_test_mock_message_id'
+INTEGRATION_TEST_TERMINAL = '__integration_test_mock_terminal'
+INTEGRATION_TEST_CONTROL_STREAM_ID = '__integration_test_control_stream_id'
+MAX_EXECUTIONS = 10
+HTTP_POST_URL_KEY = 'http.post.url'
+USER_SPOUT_CLASSPATH = 'user.spout.classpath'
+USER_BOLT_CLASSPATH = 'user.bolt.classpath'
+USER_MAX_EXECUTIONS = 'user.max.exec'
