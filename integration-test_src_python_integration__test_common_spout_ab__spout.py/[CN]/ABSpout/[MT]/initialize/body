@@ -1,0 +1,3 @@
+def initialize(self, config, context):
+    self.to_send = ['A', 'B']
+    self.emitted = 0

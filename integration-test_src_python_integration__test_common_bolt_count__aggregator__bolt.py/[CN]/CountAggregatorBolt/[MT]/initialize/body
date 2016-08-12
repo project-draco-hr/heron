@@ -1,0 +1,2 @@
+def initialize(self, config, context):
+    self.sum = 0

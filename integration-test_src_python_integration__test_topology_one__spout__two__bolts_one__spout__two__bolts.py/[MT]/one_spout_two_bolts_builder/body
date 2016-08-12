@@ -1,0 +1,6 @@
+def one_spout_two_bolts_builder(topology_name, http_server_url):
+    builder = TestTopologyBuilder(topology_name, http_server_url)
+    ab_spout = builder.add_spout('ab-spout', ABSpout, 1)
+    builder.add_bolt('identity-bolt-1', IdentityBolt, inputs={ab_spout: Grouping.SHUFFLE, }, par=1, optional_outputs=['word'])
+    builder.add_bolt('identity-bolt-2', IdentityBolt, inputs={ab_spout: Grouping.SHUFFLE, }, par=1, optional_outputs=['word'])
+    return builder.create_topology()

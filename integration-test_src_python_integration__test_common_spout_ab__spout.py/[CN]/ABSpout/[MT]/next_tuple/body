@@ -1,0 +1,4 @@
+def next_tuple(self):
+    word = self.to_send[(self.emitted % len(self.to_send))]
+    self.emitted += 1
+    self.emit([word])

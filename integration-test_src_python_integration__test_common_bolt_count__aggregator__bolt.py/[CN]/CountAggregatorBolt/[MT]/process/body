@@ -1,0 +1,2 @@
+def process(self, tup):
+    self.sum += int(tup.values[0])

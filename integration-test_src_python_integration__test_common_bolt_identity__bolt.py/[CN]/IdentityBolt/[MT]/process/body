@@ -1,0 +1,2 @@
+def process(self, tup):
+    self.emit(tup.values)
