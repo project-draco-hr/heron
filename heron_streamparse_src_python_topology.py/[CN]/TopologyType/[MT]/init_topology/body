@@ -8,7 +8,7 @@ def init_topology(mcs, classname, class_dict):
     tmp_directory = heron_options.get('cmdline.topologydefn.tmpdirectory', None)
     if (tmp_directory is None):
         raise RuntimeError('Topology definition temp directory not specified')
-    topology_name = (classname + 'Topology')
+    topology_name = heron_options.get('cmdline.topology.name', classname)
     topology_id = (topology_name + str(uuid.uuid4()))
     topology = topology_pb2.Topology()
     topology.id = topology_id

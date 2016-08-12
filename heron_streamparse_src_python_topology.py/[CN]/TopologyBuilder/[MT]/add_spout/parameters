@@ -3,3 +3,4 @@ name
 spout_cls
 par
 config
+optional_outputs

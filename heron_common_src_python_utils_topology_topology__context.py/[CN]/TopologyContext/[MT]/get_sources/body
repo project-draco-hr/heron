@@ -1,0 +1,11 @@
+def get_sources(self, component_id):
+    'Returns the declared inputs to specified component\n\n    :return: map <streamId namedtuple (same structure as protobuf msg) -> gtype>, or\n             None if not found\n    '
+    StreamId = namedtuple('StreamId', 'id, component_name')
+    if (component_id in self[self.INPUTS]):
+        ret = {}
+        for istream in self[self.INPUTS].get(component_id):
+            key = StreamId(id=istream.stream.id, component_name=istream.stream.component_name)
+            ret[key] = istream.gtype
+        return ret
+    else:
+        return None

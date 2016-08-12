@@ -1,0 +1,2 @@
+def get_this_sources(self):
+    return self.get_sources(self.component_id)

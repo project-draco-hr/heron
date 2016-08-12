@@ -1,5 +1,5 @@
 def test_sane_topology(self):
-    self.assertEqual(TestSane.topology_name, 'TestSaneTopology')
+    self.assertEqual(TestSane.topology_name, 'TestSane')
     expecting_topo_config = TopologyType.DEFAULT_TOPOLOGY_CONFIG
     expecting_topo_config.update({'topology.wide.config.1': 'value', 'spout.overriden.config': 'true', })
     self.assertEqual(TestSane._topo_config, expecting_topo_config)

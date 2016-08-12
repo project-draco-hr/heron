@@ -1,4 +1,5 @@
 'base_bolt.py'
+import copy
 from heron.common.src.python.utils.tuple import TupleHelper
 from ..component import HeronComponentSpec, BaseComponent
 from ..stream import Stream

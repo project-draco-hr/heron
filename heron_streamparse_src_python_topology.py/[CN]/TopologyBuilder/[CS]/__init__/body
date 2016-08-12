@@ -1,9 +1,6 @@
 def __init__(self, name):
-    'Initialize this TopologyBuilder\n\n    :type name: str\n    :param name: topology name. if it doesn\'t end with \'Topology\', it\'s added later. For example, if\n                 ``name = "WordCount"``, the topology name will be ``WordCountTopology``. Note that,\n                 "Topology" cannot be used as name.\n    '
+    'Initialize this TopologyBuilder\n\n    :type name: str\n    :param name: topology name\n    '
     assert ((name is not None) and isinstance(name, str) and (name != 'Topology'))
-    if name.endswith('Topology'):
-        self.topology_name = name[:(-8)]
-    else:
-        self.topology_name = name
+    self.topology_name = name
     self._specs = []
     self._topology_config = {}

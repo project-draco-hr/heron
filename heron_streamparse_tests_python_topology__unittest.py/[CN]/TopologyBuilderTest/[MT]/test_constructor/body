@@ -1,10 +1,6 @@
 def test_constructor(self):
     builder = TopologyBuilder('WordCount')
     self.assertEqual(builder.topology_name, 'WordCount')
-    builder = TopologyBuilder('WordCountTopology')
-    self.assertEqual(builder.topology_name, 'WordCount')
-    builder = TopologyBuilder('WordCountTopologyTopology')
-    self.assertEqual(builder.topology_name, 'WordCountTopology')
     with self.assertRaises(AssertionError):
         TopologyBuilder('Topology')
     with self.assertRaises(AssertionError):

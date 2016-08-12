@@ -1,5 +1,6 @@
 'base_instance.py: module for base component (base for spout/bolt) and its spec'
 import logging
+import traceback
 from abc import abstractmethod
 from heron.common.src.python.utils.misc import OutgoingTupleHelper
 from heron.proto import tuple_pb2
