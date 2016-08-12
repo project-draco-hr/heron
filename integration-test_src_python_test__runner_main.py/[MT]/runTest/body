@@ -3,7 +3,7 @@ def runTest(topologyName, classPath, expectedResultFilePath, params):
     httpServerUrl = (((('http://' + params.resultsServerHostname) + ':') + params.resultsServerPort) + '/results')
     try:
         args = ((httpServerUrl + ' ') + topologyName)
-        submitTopology(params.heronCliPath, params.cluster, params.role, params.env, params.testsJarPath, classPath, params.releasePackageUri, args)
+        submitTopology(params.heronCliPath, params.cluster, params.role, params.env, params.testsBinPath, classPath, params.releasePackageUri, args)
     except Exception as e:
         logging.error('Failed to submit %s topology: %s', topologyName, str(e))
         return 'fail'
@@ -33,6 +33,6 @@ def runTest(topologyName, classPath, expectedResultFilePath, params):
         return 'success'
     else:
         logging.error('Actual result did not match expected result')
-        logging.info(('Actual result ---------- \n' + actualResult))
-        logging.info(('Expected result ---------- \n' + expectedResult))
+        logging.info(('Actual result ---------- \n' + str(actualResult)))
+        logging.info(('Expected result ---------- \n' + str(expectedResult)))
         return 'fail'

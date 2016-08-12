@@ -9,7 +9,7 @@ def main():
     conf = decoder.decode(confString)
     parser = argparse.ArgumentParser(description='This is the heron integration test framework')
     parser.add_argument('-hc', '--heron-cli-path', dest='heronCliPath', default=conf['heronCliPath'])
-    parser.add_argument('-tj', '--tests-jar-path', dest='testsJarPath')
+    parser.add_argument('-tb', '--tests-bin-path', dest='testsBinPath')
     parser.add_argument('-cl', '--cluster', dest='cluster', default=conf['cluster'])
     parser.add_argument('-ev', '--env', dest='env', default=conf['env'])
     parser.add_argument('-rl', '--role', dest='role', default=conf['role'])
