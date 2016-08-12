@@ -3,5 +3,5 @@ def _kill_processes(self, commands):
         for process_info in self.processes_to_monitor.values():
             if (process_info.name == command_name):
                 del self.processes_to_monitor[process_info.pid]
-                do_print(('Killing %s process with pid %s: %s' % (process_info.name, process_info.pid, ' '.join(command))))
+                Log.info(('Killing %s process with pid %s: %s' % (process_info.name, process_info.pid, ' '.join(command))))
                 process_info.process.kill()

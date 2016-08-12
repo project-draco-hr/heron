@@ -1,6 +1,5 @@
 ' heron-executor '
 import atexit
-import datetime
 import os
 import sys
 import signal
@@ -11,6 +10,8 @@ import base64
 import string
 import random
 import yaml
+from heron.common.src.python.utils import log
+Log = log.Log
 if (__name__ == '__main__'):
     setup()
     main()

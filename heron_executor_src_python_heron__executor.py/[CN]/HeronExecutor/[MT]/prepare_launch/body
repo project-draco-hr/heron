@@ -4,5 +4,5 @@ def prepare_launch(self):
     commands = [create_folders, chmod_binaries]
     for command in commands:
         if (self._run_blocking_process(command, True, self.shell_env) != 0):
-            do_print(('Failed to run command: %s. Exiting' % command))
+            Log.info(('Failed to run command: %s. Exiting' % command))
             sys.exit(1)

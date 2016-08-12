@@ -1,4 +1,0 @@
-def do_print(statement):
-    timestr = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
-    print ('%s: %s' % (timestr, statement))
-    sys.stdout.flush()

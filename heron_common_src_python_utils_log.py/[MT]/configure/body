@@ -1,4 +1,4 @@
-def configure(level, logfile=None, with_time=False):
+def configure(level=logging.INFO, logfile=None, with_time=False):
     ' Configure logger which dumps log on terminal\n\n  :param level: logging level: info, warning, verbose...\n  :type level: logging level\n  :param logfile: log file name, default to None\n  :type logfile: string\n  :return: None\n  :rtype: None\n  '
     Log.setLevel(level)
     if (logfile is not None):

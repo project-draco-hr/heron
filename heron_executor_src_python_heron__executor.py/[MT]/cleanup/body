@@ -1,4 +1,4 @@
 def cleanup():
     'Handler to trigger when receiving the SIGTERM signal\n  Do cleanup inside this method, including:\n  1. Terminate all children processes\n  '
-    do_print('Executor terminated; exiting all process in executor.')
+    Log.info('Executor terminated; exiting all process in executor.')
     os.killpg(0, signal.SIGTERM)
