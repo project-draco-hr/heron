@@ -1,4 +1,4 @@
 def writable(self):
-    if self.connecting:
+    if self._connecting:
         return True
     return (len(self.out_buffer) != 0)

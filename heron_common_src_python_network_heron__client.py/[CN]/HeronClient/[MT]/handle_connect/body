@@ -1,3 +1,4 @@
 def handle_connect(self):
     Log.info(('Connected to %s:%d' % (self.hostname, self.port)))
+    self._connecting = False
     self.on_connect(StatusCode.OK)

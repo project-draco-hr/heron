@@ -8,3 +8,4 @@ def _clean_up_state(self):
     self.response_message_map = dict()
     self.context_map = dict()
     self.incomplete_pkt = None
+    self._connecting = False

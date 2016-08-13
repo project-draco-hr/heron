@@ -2,7 +2,7 @@ def handle_error(self):
     (_, t, v, tbinfo) = asyncore.compact_traceback()
     self_msg = ('%s failed for object at %0x' % (self._get_classname(), id(self)))
     Log.error(('Uncaptured python exception, closing channel %s (%s:%s %s)' % (self_msg, t, v, tbinfo)))
-    if self.connecting:
+    if self._connecting:
         self.handle_close()
         self.on_connect(StatusCode.CONNECT_ERROR)
     else:

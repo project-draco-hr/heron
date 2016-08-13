@@ -15,4 +15,5 @@ def __init__(self, looper, hostname, port, socket_map, socket_options):
     self.total_pkt_written = 0
     self.total_bytes_received = 0
     self.total_pkt_received = 0
+    self._connecting = False
     Log.debug(('Initializing %s with endpoint: %s, \nsocket_map: %s, \nsocket_options: %s' % (self._get_classname(), str(self.endpoint), str(socket_map), str(self.socket_options))))

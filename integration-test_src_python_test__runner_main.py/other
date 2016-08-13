@@ -9,7 +9,7 @@ import time
 import uuid
 from httplib import *
 DEFAULT_TEST_CONF_FILE = 'integration-test/src/python/test_runner/resources/test.conf'
-RETRY_ATTEMPTS = 15
-RETRY_INTERVAL = 30
+RETRY_ATTEMPTS = 25
+RETRY_INTERVAL = 10
 if (__name__ == '__main__'):
     main()
