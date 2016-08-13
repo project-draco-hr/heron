@@ -5,7 +5,6 @@ import json
 import os
 import re
 import sys
-import traceback
 import heron.common.src.python.utils.config as config
 from heron.common.src.python.utils.log import Log
 HERON_RC = os.path.join(os.path.expanduser('~'), '.heronrc')

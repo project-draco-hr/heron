@@ -3,5 +3,5 @@ def test_parser_rolecmdspecific(self):
     subparsers = parser.add_subparsers(title='Available commands', metavar='<command> <options>')
     activate.create_parser(subparsers)
     (args, _) = parser.parse_known_args(['activate', 'devcluster/ads/PROD', '12313'])
-    self.assertEqual('test-cmd-activate-role', args.config_property)
+    self.assertEqual(['e=f', 'ooo=ppp', 'hi=wee', 'foo=bar'], args.config_property)
     hr_argparser.HeronArgumentParser.clear()
