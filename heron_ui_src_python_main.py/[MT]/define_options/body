@@ -1,4 +1,5 @@
-def define_options(port, tracker_url):
-    '\n  :param port:\n  :param tracker_url:\n  :return:\n  '
+def define_options(address, port, tracker_url):
+    '\n  :param address:\n  :param port:\n  :param tracker_url:\n  :return:\n  '
+    define('address', default=address)
     define('port', default=port)
     define('tracker_url', default=tracker_url)
