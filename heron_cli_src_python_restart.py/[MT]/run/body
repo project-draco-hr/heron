@@ -1,7 +1,7 @@
 def run(command, parser, cl_args, unknown_args):
     '\n  :param command:\n  :param parser:\n  :param cl_args:\n  :param unknown_args:\n  :return:\n  '
+    topology_name = cl_args['topology-name']
     try:
-        topology_name = cl_args['topology-name']
         container_id = cl_args['container-id']
         new_args = ['--cluster', cl_args['cluster'], '--role', cl_args['role'], '--environment', cl_args['environ'], '--heron_home', config.get_heron_dir(), '--config_path', cl_args['config_path'], '--override_config_file', cl_args['override_config_file'], '--release_file', config.get_heron_release_file(), '--topology_name', topology_name, '--command', command, '--container_id', str(container_id)]
         lib_jars = config.get_heron_libs((jars.scheduler_jars() + jars.statemgr_jars()))
