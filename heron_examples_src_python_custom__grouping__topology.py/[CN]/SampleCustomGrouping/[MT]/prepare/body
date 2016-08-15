@@ -1,0 +1,3 @@
+def prepare(self, context, component, stream, target_tasks):
+    Log.info(('In prepare of SampleCustomGrouping, with src component: %s, with stream id: %s, with target tasks: %s' % (component, stream, str(target_tasks))))
+    self.target_tasks = target_tasks

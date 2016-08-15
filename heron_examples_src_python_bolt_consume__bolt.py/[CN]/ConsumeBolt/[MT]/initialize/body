@@ -1,0 +1,3 @@
+def initialize(self, config, context):
+    self.logger.info('In prepare() of ConsumerBolt')
+    self.total = 0

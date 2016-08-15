@@ -1,0 +1,2 @@
+def clean_up(self):
+    Log.info('In clean_up of TestTaskHook')

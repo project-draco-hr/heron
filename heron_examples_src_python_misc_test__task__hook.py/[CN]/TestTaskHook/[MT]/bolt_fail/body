@@ -1,0 +1,4 @@
+def bolt_fail(self, bolt_fail_info):
+    self.counter['bl_fail'] += 1
+    if ((self.counter['bl_fail'] % self.CONST) == 0):
+        Log.info(('TestTaskHook: bolt failed %s tuples' % str(self.counter['bl_fail'])))

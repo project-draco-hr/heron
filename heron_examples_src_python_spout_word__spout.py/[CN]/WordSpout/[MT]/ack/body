@@ -1,0 +1,4 @@
+def ack(self, tup_id):
+    self.ack_count += 1
+    if ((self.ack_count % 100000) == 0):
+        self.logger.info(('Acked %sth tuples, tup_id: %s' % (str(self.ack_count), str(tup_id))))

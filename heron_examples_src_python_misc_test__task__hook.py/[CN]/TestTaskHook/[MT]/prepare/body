@@ -1,0 +1,3 @@
+def prepare(self, conf, context):
+    Log.info('In prepare of TestTaskHook')
+    self.counter = Counter()

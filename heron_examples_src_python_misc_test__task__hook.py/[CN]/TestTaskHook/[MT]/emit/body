@@ -1,0 +1,4 @@
+def emit(self, emit_info):
+    self.counter['emit'] += 1
+    if ((self.counter['emit'] % self.CONST) == 0):
+        Log.info(('TestTaskHook: emitted %s tuples' % str(self.counter['emit'])))

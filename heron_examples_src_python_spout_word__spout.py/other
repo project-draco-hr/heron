@@ -1,0 +1,3 @@
+'module for example spout: WordSpout'
+from itertools import cycle
+from heron.streamparse.src.python import Spout

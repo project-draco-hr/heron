@@ -1,0 +1,8 @@
+def next_tuple(self):
+    word = next(self.words)
+    self.emit([word])
+    self.emit_count += 1
+    if ((self.emit_count % 100000) == 0):
+        self.logger.info(('Emitted %s' % str(self.emit_count)))
+        self.logger.info('Emitting to error stream')
+        self.emit(['test error message'], stream='error')

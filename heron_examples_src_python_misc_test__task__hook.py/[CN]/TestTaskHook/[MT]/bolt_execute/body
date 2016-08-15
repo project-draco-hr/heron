@@ -1,0 +1,4 @@
+def bolt_execute(self, bolt_execute_info):
+    self.counter['bl_exec'] += 1
+    if ((self.counter['bl_exec'] % self.CONST) == 0):
+        Log.info(('TestTaskHook: bolt executed %s tuples' % str(self.counter['bl_exec'])))

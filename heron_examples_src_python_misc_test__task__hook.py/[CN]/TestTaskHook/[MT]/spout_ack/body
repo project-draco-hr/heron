@@ -1,0 +1,4 @@
+def spout_ack(self, spout_ack_info):
+    self.counter['sp_ack'] += 1
+    if ((self.counter['sp_ack'] % self.CONST) == 0):
+        Log.info(('TestTaskHook: spout acked %s tuples' % str(self.counter['sp_ack'])))

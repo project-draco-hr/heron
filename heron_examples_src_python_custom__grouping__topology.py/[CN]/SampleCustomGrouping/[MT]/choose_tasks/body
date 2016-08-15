@@ -1,0 +1,2 @@
+def choose_tasks(self, values):
+    return [self.target_tasks[0]]

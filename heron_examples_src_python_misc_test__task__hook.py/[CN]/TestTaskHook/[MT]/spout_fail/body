@@ -1,0 +1,4 @@
+def spout_fail(self, spout_fail_info):
+    self.counter['sp_fail'] += 1
+    if ((self.counter['sp_fail'] % self.CONST) == 0):
+        Log.info(('TestTaskHook: spout failed %s tuples' % str(self.counter['sp_fail'])))

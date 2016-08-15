@@ -1,0 +1,6 @@
+def next_tuple(self):
+    word = next(self.words)
+    self.emit([word], tup_id='message id')
+    self.emit_count += 1
+    if ((self.emit_count % 100000) == 0):
+        self.logger.info(('Emitted ' + str(self.emit_count)))

@@ -1,0 +1,3 @@
+'Word spout with error streams'
+from itertools import cycle
+from heron.streamparse.src.python import Spout, Stream

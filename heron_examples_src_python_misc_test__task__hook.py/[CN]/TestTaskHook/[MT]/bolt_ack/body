@@ -1,0 +1,4 @@
+def bolt_ack(self, bolt_ack_info):
+    self.counter['bl_ack'] += 1
+    if ((self.counter['bl_ack'] % self.CONST) == 0):
+        Log.info(('TestTaskHook: bolt acked %s tuples' % str(self.counter['bl_ack'])))

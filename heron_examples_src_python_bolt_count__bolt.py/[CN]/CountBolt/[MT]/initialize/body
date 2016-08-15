@@ -1,0 +1,6 @@
+def initialize(self, config, context):
+    self.logger.info('In prepare() of CountBolt')
+    self.counter = Counter()
+    self.total = 0
+    self.logger.info(('Component-specific config: \n%s' % str(config)))
+    self.logger.info(('Context: \n%s' % str(context)))
