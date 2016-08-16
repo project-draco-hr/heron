@@ -2,9 +2,9 @@
   physicalPlan=UnitTestHelper.getPhysicalPlan(true,-1);
   PhysicalPlanHelper physicalPlanHelper=new PhysicalPlanHelper(physicalPlan,SPOUT_INSTANCE_ID);
   InstanceControlMsg instanceControlMsg=InstanceControlMsg.newBuilder().setNewPhysicalPlanHelper(physicalPlanHelper).build();
-  inControlQueue.offer(instanceControlMsg);
   SingletonRegistry.INSTANCE.registerSingleton(Constants.ACK_COUNT,ackCount);
   SingletonRegistry.INSTANCE.registerSingleton(Constants.FAIL_COUNT,failCount);
+  inControlQueue.offer(instanceControlMsg);
   Runnable task=new Runnable(){
     @Override public void run(){
       while (outStreamQueue.size() != 0) {
