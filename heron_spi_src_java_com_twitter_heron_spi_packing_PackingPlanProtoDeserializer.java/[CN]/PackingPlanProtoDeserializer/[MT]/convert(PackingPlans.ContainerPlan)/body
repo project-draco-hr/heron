@@ -1,0 +1,7 @@
+{
+  Map<String,PackingPlan.InstancePlan> instances=new HashMap<>();
+  for (  PackingPlans.InstancePlan instancePlan : containerPlan.getInstancePlansList()) {
+    instances.put(instancePlan.getId(),convert(instancePlan));
+  }
+  return new PackingPlan.ContainerPlan(containerPlan.getId(),instances,convert(containerPlan.getResource()));
+}

@@ -1,0 +1,3 @@
+{
+  return PackingPlans.Resource.newBuilder().setCpu(resource.cpu).setRam(resource.ram).setDisk(resource.disk);
+}

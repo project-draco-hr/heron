@@ -1,0 +1,7 @@
+{
+  PackingPlans.ContainerPlan.Builder builder=PackingPlans.ContainerPlan.newBuilder().setId(containerPlan.id).setResource(builder(containerPlan.resource));
+  for (  PackingPlan.InstancePlan instancePlan : containerPlan.instances.values()) {
+    builder.addInstancePlans(builder(instancePlan));
+  }
+  return builder;
+}

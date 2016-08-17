@@ -1,0 +1,7 @@
+{
+  Integer totalInstances=0;
+  for (  Integer count : getComponentCounts().values()) {
+    totalInstances+=count;
+  }
+  return totalInstances;
+}

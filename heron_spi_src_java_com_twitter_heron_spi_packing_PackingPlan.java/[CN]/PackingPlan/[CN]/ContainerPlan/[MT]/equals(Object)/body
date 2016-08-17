@@ -1,0 +1,10 @@
+{
+  if (this == o) {
+    return true;
+  }
+  if (o == null || getClass() != o.getClass()) {
+    return false;
+  }
+  ContainerPlan that=(ContainerPlan)o;
+  return id.equals(that.id) && instances.equals(that.instances) && resource.equals(that.resource);
+}

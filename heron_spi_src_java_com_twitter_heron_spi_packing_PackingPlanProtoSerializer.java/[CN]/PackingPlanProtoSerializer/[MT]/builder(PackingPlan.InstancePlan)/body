@@ -1,0 +1,3 @@
+{
+  return PackingPlans.InstancePlan.newBuilder().setId(instancePlan.id).setComponentName(instancePlan.componentName).setResource(builder(instancePlan.resource));
+}

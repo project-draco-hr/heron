@@ -1,0 +1,6 @@
+{
+  int result=getId().hashCode();
+  result=31 * result + getContainers().hashCode();
+  result=31 * result + getResource().hashCode();
+  return result;
+}

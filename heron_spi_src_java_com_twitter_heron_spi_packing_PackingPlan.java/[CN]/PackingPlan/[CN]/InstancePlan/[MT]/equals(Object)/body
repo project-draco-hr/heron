@@ -1,0 +1,10 @@
+{
+  if (this == o) {
+    return true;
+  }
+  if (o == null || getClass() != o.getClass()) {
+    return false;
+  }
+  InstancePlan that=(InstancePlan)o;
+  return id.equals(that.id) && componentName.equals(that.componentName) && resource.equals(that.resource);
+}
