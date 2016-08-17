@@ -1,0 +1,4 @@
+{
+  PowerMockito.verifyStatic();
+  FileUtils.writeToFile(Matchers.eq(path),Matchers.eq(bytes),Mockito.eq(overwrite));
+}

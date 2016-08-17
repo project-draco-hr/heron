@@ -1,0 +1,4 @@
+{
+  PowerMockito.verifyStatic();
+  FileUtils.deleteFile(Matchers.eq(path));
+}

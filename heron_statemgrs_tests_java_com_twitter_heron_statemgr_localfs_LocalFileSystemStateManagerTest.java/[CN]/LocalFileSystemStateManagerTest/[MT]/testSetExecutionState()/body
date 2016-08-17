@@ -1,12 +1,6 @@
 {
-  LocalFileSystemStateManager manager=Mockito.spy(new LocalFileSystemStateManager());
-  manager.initialize(getConfig());
-  PowerMockito.spy(FileUtils.class);
-  PowerMockito.doReturn(true).when(FileUtils.class,"createDirectory",Matchers.anyString());
-  Assert.assertTrue(manager.initTree());
+  initMocks();
   ExecutionEnvironment.ExecutionState defaultState=ExecutionEnvironment.ExecutionState.getDefaultInstance();
-  PowerMockito.doReturn(true).when(FileUtils.class,"writeToFile",Mockito.anyString(),Mockito.any(byte[].class),Mockito.anyBoolean());
   Assert.assertTrue(manager.setExecutionState(defaultState,"").get());
-  PowerMockito.verifyStatic();
-  FileUtils.writeToFile(Matchers.eq(String.format("%s/%s/%s",ROOT_ADDR,"executionstate",defaultState.getTopologyName())),Matchers.eq(defaultState.toByteArray()),Mockito.eq(false));
+  assertWriteToFile(String.format("%s/%s/%s",ROOT_ADDR,"executionstate",defaultState.getTopologyName()),defaultState.toByteArray(),false);
 }

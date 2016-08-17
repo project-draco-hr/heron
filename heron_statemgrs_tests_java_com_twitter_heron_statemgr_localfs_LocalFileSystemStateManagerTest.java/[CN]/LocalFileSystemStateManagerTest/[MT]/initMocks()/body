@@ -1,0 +1,7 @@
+{
+  PowerMockito.spy(FileUtils.class);
+  PowerMockito.doReturn(true).when(FileUtils.class,"createDirectory",Matchers.anyString());
+  Assert.assertTrue(manager.initTree());
+  PowerMockito.doReturn(true).when(FileUtils.class,"writeToFile",Mockito.anyString(),Mockito.any(byte[].class),Mockito.anyBoolean());
+  PowerMockito.doReturn(true).when(FileUtils.class,"deleteFile",Matchers.anyString());
+}

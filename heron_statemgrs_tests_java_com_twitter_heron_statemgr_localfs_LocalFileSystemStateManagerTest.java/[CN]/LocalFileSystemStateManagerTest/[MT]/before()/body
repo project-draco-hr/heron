@@ -1,3 +1,5 @@
 {
-  config=Config.newBuilder().put(Keys.stateManagerRootPath(),ROOT_ADDR).put(LocalFileSystemKeys.initializeFileTree(),false).build();
+  Config config=Config.newBuilder().put(Keys.stateManagerRootPath(),ROOT_ADDR).put(LocalFileSystemKeys.initializeFileTree(),false).build();
+  manager=Mockito.spy(new LocalFileSystemStateManager());
+  manager.initialize(config);
 }
