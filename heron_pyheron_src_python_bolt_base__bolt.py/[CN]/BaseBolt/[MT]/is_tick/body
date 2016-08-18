@@ -1,4 +1,4 @@
 @staticmethod
 def is_tick(tup):
-    'Returns whether or not the given HeronTuple is a tick Tuple\n\n    It is compatible with StreamParse API.\n    '
+    'Returns whether or not a given HeronTuple is a tick Tuple\n\n    It is compatible with StreamParse API.\n    '
     return (tup.stream == TupleHelper.TICK_TUPLE_ID)

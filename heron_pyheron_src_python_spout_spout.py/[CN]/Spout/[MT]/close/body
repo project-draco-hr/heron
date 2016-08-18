@@ -1,3 +1,4 @@
+@abstractmethod
 def close(self):
     'Called when this spout is going to be shutdown\n\n    There is no guarantee that close() will be called.\n    '
     pass
