@@ -1,3 +1,1 @@
 import unittest
-from heron.common.src.python.network import StatusCode
-from heron.instance.src.python.basics import BoltInstance

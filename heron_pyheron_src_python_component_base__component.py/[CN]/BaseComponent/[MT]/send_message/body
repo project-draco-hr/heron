@@ -1,0 +1,3 @@
+def send_message(self, message):
+    'Streamparse API that is not applicable for PyHeron'
+    raise NotCompatibleError('send_message() method is not applicable in Heron.')

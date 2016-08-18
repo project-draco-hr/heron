@@ -1,0 +1,3 @@
+def read_handshake(self):
+    'Streamparse API that is not applicable for PyHeron'
+    raise NotCompatibleError('read_handshake() method is not applicable in Heron.')

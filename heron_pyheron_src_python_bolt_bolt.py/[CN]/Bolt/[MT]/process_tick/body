@@ -1,0 +1,4 @@
+@abstractmethod
+def process_tick(self, tup):
+    'Process special tick tuple\n\n    It is compatible with StreamParse API.\n\n    Tick tuples allow time-based behavior to be included in bolts. They will be sent to the bolts\n    for which `topology.tick.tuple.freq.secs``\n    (or, ``pyheron.constants.TOPOLOGY_TICK_TUPLE_FREQ_SECS`` key) is set to an integer value, the\n    number of seconds.\n\n    Default behavior is to ignore tick tuples. This method should be overridden by subclasses\n    if you want to react to timer events via tick tuples.\n\n    :type tup: :class:`pyheron.HeronTuple`\n    :param tup: the tick tuple to be processed\n    '
+    pass

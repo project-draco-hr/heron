@@ -1,5 +1,5 @@
 'base_bolt.py'
 import copy
 from heron.common.src.python.utils.tuple import TupleHelper
-from ..component import HeronComponentSpec, BaseComponent
+from ..component import HeronComponentSpec, BaseComponent, NotCompatibleError
 from ..stream import Stream

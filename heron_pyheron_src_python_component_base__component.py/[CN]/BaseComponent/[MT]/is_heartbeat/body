@@ -1,0 +1,4 @@
+@staticmethod
+def is_heartbeat(tup):
+    'Streamparse API that is not applicable for PyHeron'
+    raise NotCompatibleError('is_heartbeat() method is not applicable in Heron.')

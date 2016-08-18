@@ -1,4 +1,4 @@
 @abstractmethod
 def fail(self, tup_id):
-    'Determine that the tuple emitted by this spout with the tup_id has failed to be processed\n\n    It is compatible with StreamParse API.\n\n    The tuple emitted by this spout with the tup_id identifier has failed to be\n    fully processed. Typically, an implementation of this method will put that\n    message back on the queue to be replayed at a later time.\n\n    *Should be implemented by a subclass.*\n    '
+    'Determine that the tuple emitted by this spout with the tup_id has failed to be processed\n\n    It is compatible with StreamParse API.\n\n    The tuple emitted by this spout with the tup_id identifier has failed to be\n    fully processed. Typically, an implementation of this method will put that\n    message back on the queue to be replayed at a later time.\n\n    *Should be implemented by a subclass.*\n\n    :param tup_id: the ID of the HeronTuple that has failed either due to a bolt calling ``fail()``\n                   or timeout\n    '
     pass

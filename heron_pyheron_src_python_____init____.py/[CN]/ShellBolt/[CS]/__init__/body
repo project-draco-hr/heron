@@ -1,0 +1,2 @@
+def __init__(self, *args, **kwargs):
+    raise NotImplementedError('ShellBolt is not yet implemented in PyHeron')

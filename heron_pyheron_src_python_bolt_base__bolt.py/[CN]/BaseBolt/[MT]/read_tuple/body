@@ -1,0 +1,3 @@
+def read_tuple(self):
+    'Streamparse API that is not applicable for PyHeron'
+    raise NotCompatibleError('run() method is not applicable in Heron.')

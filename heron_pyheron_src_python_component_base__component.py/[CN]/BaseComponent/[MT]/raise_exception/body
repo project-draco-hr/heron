@@ -1,0 +1,3 @@
+def raise_exception(self, exception, tup=None):
+    'Streamparse API that is not applicable for PyHeron'
+    raise NotCompatibleError('raise_exception() method is not applicable in Heron.')

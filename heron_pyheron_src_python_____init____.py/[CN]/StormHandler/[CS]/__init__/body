@@ -1,0 +1,2 @@
+def __init__(self, serializer):
+    raise NotImplementedError('StormHandler is not yet implemented in PyHeron')

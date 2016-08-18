@@ -1,0 +1,3 @@
+def process_tick(self, tup):
+    self.log('Got tick tuple!')
+    self.log(('Total received data tuple: %d' % self.total))

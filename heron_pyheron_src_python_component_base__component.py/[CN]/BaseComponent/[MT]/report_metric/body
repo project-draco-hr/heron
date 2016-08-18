@@ -1,0 +1,3 @@
+def report_metric(self, name, value):
+    'Streamparse API that is not applicable for PyHeron'
+    raise NotCompatibleError('report_metric() method is not applicable in Heron.\nPlease use a metrics collector instead.')
