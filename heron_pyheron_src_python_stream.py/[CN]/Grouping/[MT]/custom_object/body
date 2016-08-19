@@ -1,0 +1,4 @@
+@classmethod
+def custom_object(cls, java_class_name, arg_list):
+    'Tuples will be assigned to tasks by the given Java class.'
+    raise NotImplementedError('custom_object() method is not yet implemented')

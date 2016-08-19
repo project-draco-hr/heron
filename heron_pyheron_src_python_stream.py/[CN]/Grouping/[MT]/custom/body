@@ -1,6 +1,6 @@
 @classmethod
 def custom(cls, classpath):
-    'Custom grouping from a given classpath\n\n    :param classpath: classpath to the ICustomGrouping class to use\n    '
+    'Custom grouping from a given classpath to an implementation of ICustomGrouping\n\n    This method does not exist in the Streamparse API.\n\n    :param classpath: classpath to the ICustomGrouping class to use\n    '
     if ((classpath is None) or (not isinstance(classpath, str))):
         raise TypeError(('Argument to custom() must be classpath string to custom grouping, given: %s' % str(classpath)))
     serialized = default_serializer.serialize(classpath)
