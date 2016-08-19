@@ -1,3 +1,0 @@
-' opts_unittest.py '
-import unittest2 as unittest
-import heron.cli.src.python.opts as opts

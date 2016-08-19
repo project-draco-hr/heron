@@ -2,5 +2,6 @@
 import logging
 from logging.handlers import RotatingFileHandler
 import colorlog
+logging.basicConfig()
 Log = logging.getLogger()
 date_format = '%m/%d/%Y %H:%M:%S %z'

@@ -1,6 +1,0 @@
-' physicalplanhandler.py '
-import traceback
-import tornado.gen
-import tornado.web
-from heron.tracker.src.python.handlers import BaseHandler
-from heron.common.src.python.utils.log import Log

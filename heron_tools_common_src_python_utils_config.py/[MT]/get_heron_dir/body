@@ -1,0 +1,4 @@
+def get_heron_dir():
+    "\n  This will extract heron directory from .pex file.\n\n  For example,\n  when __file__ is '/Users/heron-user/bin/heron/heron/tools/common/src/python/utils/config.pyc', and\n  its real path is '/Users/heron-user/.heron/bin/heron/tools/common/src/python/utils/config.pyc',\n  the internal variable ``path`` would be '/Users/heron-user/.heron', which is the heron directory\n\n  :return: root location for heron-cli.\n  "
+    path = '/'.join(os.path.realpath(__file__).split('/')[:(-9)])
+    return normalized_class_path(path)

@@ -1,0 +1,19 @@
+' main.py '
+import argparse
+import os
+import signal
+import sys
+import tornado.httpserver
+import tornado.ioloop
+import tornado.web
+from tornado.options import define, options
+import heron.tools.common.src.python.utils.config as common_config
+import heron.common.src.python.utils.log as log
+from heron.tools.tracker.src.python import constants
+from heron.tools.tracker.src.python import handlers
+from heron.tools.tracker.src.python import utils
+from heron.tools.tracker.src.python.config import Config
+from heron.tools.tracker.src.python.tracker import Tracker
+Log = log.Log
+if (__name__ == '__main__'):
+    main()

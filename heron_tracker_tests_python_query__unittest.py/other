@@ -1,4 +1,0 @@
-' query_unittest.py '
-import unittest2 as unittest
-from mock import Mock
-from heron.tracker.src.python.query import *

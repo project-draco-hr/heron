@@ -1,4 +1,0 @@
-' query.py '
-import tornado.httpclient
-import tornado.gen
-from heron.tracker.src.python.query_operators import *

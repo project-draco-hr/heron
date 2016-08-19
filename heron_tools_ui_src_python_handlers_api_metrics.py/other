@@ -1,0 +1,6 @@
+' metrics.py '
+from heron.tools.ui.src.python.handlers import base
+import heron.tools.common.src.python.access as access
+import tornado.gen
+ALL_INSTANCES = '*'
+query_handler = access.HeronQueryHandler()

@@ -1,4 +1,0 @@
-def get_heron_tracker_dir():
-    '\n  This will extract heron tracker directory from .pex file.\n  :return: root location for heron-tools.\n  '
-    path = '/'.join(os.path.realpath(__file__).split('/')[:(-7)])
-    return normalized_class_path(path)

@@ -1,4 +1,0 @@
-' jars.py '
-import os
-import fnmatch
-import heron.common.src.python.utils.config as config

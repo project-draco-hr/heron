@@ -1,3 +1,0 @@
-' help.py '
-import heron.common.src.python.utils.config as config
-from heron.common.src.python.utils.log import Log

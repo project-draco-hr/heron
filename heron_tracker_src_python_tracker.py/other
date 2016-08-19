@@ -1,9 +1,0 @@
-' tracker.py '
-import json
-from functools import partial
-from heron.proto import topology_pb2
-from heron.statemgrs.src.python import statemanagerfactory
-from heron.tracker.src.python.topology import Topology
-from heron.tracker.src.python import javaobj
-from heron.tracker.src.python import utils
-from heron.common.src.python.utils.log import Log

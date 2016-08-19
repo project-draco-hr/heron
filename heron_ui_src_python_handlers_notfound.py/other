@@ -1,2 +1,0 @@
-' notfound.py '
-from heron.ui.src.python.handlers import base

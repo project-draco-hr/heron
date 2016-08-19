@@ -1,3 +1,0 @@
-' version.py '
-import heron.cli.src.python.args as cli_args
-import heron.common.src.python.utils.config as config

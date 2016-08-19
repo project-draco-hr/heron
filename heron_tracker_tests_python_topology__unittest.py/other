@@ -1,4 +1,0 @@
-' topology_unittest.py '
-import unittest2 as unittest
-from mock_proto import MockProto
-from heron.tracker.src.python.topology import Topology
