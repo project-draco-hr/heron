@@ -1,0 +1,9 @@
+{
+  if (args.length < 2) {
+    throw new RuntimeException("Expects arguments: <topology_name> <zookeeper_hostname>");
+  }
+  String zookeeperHostname=args[1];
+  Config config=Config.newBuilder().put(Keys.stateManagerRootPath(),"/storm/heron/states").put(Keys.stateManagerConnectionString(),zookeeperHostname).build();
+  CuratorStateManager stateManager=new CuratorStateManager();
+  stateManager.doMain(args,config);
+}

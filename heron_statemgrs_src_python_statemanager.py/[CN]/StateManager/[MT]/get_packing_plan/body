@@ -1,0 +1,4 @@
+@abc.abstractmethod
+def get_packing_plan(self, topologyName, callback=None):
+    '\n    Gets the packing_plan for the topology.\n    If the callback is provided,\n    sets watch on the path and calls the callback\n    with the new packing_plan.\n    '
+    pass

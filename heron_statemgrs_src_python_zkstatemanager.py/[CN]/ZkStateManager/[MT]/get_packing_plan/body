@@ -1,0 +1,13 @@
+def get_packing_plan(self, topologyName, callback=None):
+    ' get packing plan '
+    isWatching = False
+    ret = {'result': None, }
+    if callback:
+        isWatching = True
+    else:
+
+        def callback(data):
+            ' Custom callback to get the topologies right now. '
+            ret['result'] = data
+    self._get_packing_plan_with_watch(topologyName, callback, isWatching)
+    return ret['result']

@@ -1,0 +1,2 @@
+def get_packing_plan_path(self, topologyName):
+    return (HERON_PACKING_PLANS_PREFIX.format(self.rootpath) + topologyName)

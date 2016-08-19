@@ -1,13 +1,16 @@
 {
-  LOG.log(Level.FINE,"Topologies directory: {0}",getTopologyDir());
-  LOG.log(Level.FINE,"Tmaster location directory: {0}",getTMasterLocationDir());
-  LOG.log(Level.FINE,"Physical plan directory: {0}",getPhysicalPlanDir());
-  LOG.log(Level.FINE,"Execution state directory: {0}",getExecutionStateDir());
-  LOG.log(Level.FINE,"Scheduler location directory: {0}",getSchedulerLocationDir());
-  boolean topologyDir=FileUtils.isDirectoryExists(getTopologyDir()) || FileUtils.createDirectory(getTopologyDir());
-  boolean tmasterLocationDir=FileUtils.isDirectoryExists(getTMasterLocationDir()) || FileUtils.createDirectory(getTMasterLocationDir());
-  boolean physicalPlanDir=FileUtils.isDirectoryExists(getPhysicalPlanDir()) || FileUtils.createDirectory(getPhysicalPlanDir());
-  boolean executionStateDir=FileUtils.isDirectoryExists(getExecutionStateDir()) || FileUtils.createDirectory(getExecutionStateDir());
-  boolean schedulerLocationDir=FileUtils.isDirectoryExists(getSchedulerLocationDir()) || FileUtils.createDirectory(getSchedulerLocationDir());
-  return topologyDir && tmasterLocationDir && physicalPlanDir&& executionStateDir&& schedulerLocationDir;
+  List<Pair<String,String>> dirNamesAndPaths=new ArrayList<>();
+  dirNamesAndPaths.add(Pair.create("Topologies",getTopologyDir()));
+  dirNamesAndPaths.add(Pair.create("Tmaster location",getTMasterLocationDir()));
+  dirNamesAndPaths.add(Pair.create("Packing plan",getPackingPlanDir()));
+  dirNamesAndPaths.add(Pair.create("Physical plan",getPhysicalPlanDir()));
+  dirNamesAndPaths.add(Pair.create("Execution state",getExecutionStateDir()));
+  dirNamesAndPaths.add(Pair.create("Scheduler location",getSchedulerLocationDir()));
+  for (  Pair<String,String> dirNamesAndPath : dirNamesAndPaths) {
+    LOG.log(Level.FINE,String.format("%s directory: %s",dirNamesAndPath.first,dirNamesAndPath.second));
+    if (!FileUtils.isDirectoryExists(dirNamesAndPath.second) && !FileUtils.createDirectory(dirNamesAndPath.second)) {
+      return false;
+    }
+  }
+  return true;
 }

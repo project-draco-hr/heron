@@ -1,0 +1,6 @@
+{
+  initMocks();
+  PackingPlans.PackingPlan packingPlan=PackingPlans.PackingPlan.getDefaultInstance();
+  Assert.assertTrue(manager.setPackingPlan(packingPlan,TOPOLOGY_NAME).get());
+  assertWriteToFile(String.format("%s/%s/%s",ROOT_ADDR,"packingplans",TOPOLOGY_NAME),packingPlan.toByteArray(),true);
+}

@@ -1,0 +1,5 @@
+{
+  initMocks();
+  Assert.assertTrue(manager.deletePackingPlan(TOPOLOGY_NAME).get());
+  assertDeleteFile(String.format("%s/%s/%s",ROOT_ADDR,"packingplans",TOPOLOGY_NAME));
+}

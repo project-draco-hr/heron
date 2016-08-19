@@ -3,6 +3,7 @@ import abc
 import socket
 import subprocess
 HERON_EXECUTION_STATE_PREFIX = '{0}/executionstate/'
+HERON_PACKING_PLANS_PREFIX = '{0}/packingplans/'
 HERON_PPLANS_PREFIX = '{0}/pplans/'
 HERON_SCHEDULER_LOCATION_PREFIX = '{0}/schedulers/'
 HERON_TMASTER_PREFIX = '{0}/tmasters/'

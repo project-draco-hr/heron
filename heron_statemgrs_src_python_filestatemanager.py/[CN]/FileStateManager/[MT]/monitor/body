@@ -25,6 +25,8 @@ def monitor(self):
         trigger_watches_based_on_files(self.topology_watchers, topologies_path, self.topologies_directory, Topology)
         execution_state_path = os.path.dirname(self.get_execution_state_path(''))
         trigger_watches_based_on_files(self.execution_state_watchers, execution_state_path, self.execution_state_directory, ExecutionState)
+        packing_plan_path = os.path.dirname(self.get_packing_plan_path(''))
+        trigger_watches_based_on_files(self.packing_plan_watchers, packing_plan_path, self.packing_plan_directory, PackingPlan)
         pplan_path = os.path.dirname(self.get_pplan_path(''))
         trigger_watches_based_on_files(self.pplan_watchers, pplan_path, self.pplan_directory, PhysicalPlan)
         tmaster_path = os.path.dirname(self.get_tmaster_path(''))

@@ -1,0 +1,3 @@
+{
+  return getNodeData(watcher,getPackingPlanPath(topologyName),PackingPlans.PackingPlan.newBuilder());
+}
