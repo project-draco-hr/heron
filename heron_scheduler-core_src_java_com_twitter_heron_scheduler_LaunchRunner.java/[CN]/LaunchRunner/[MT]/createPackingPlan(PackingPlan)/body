@@ -1,0 +1,4 @@
+{
+  PackingPlanProtoSerializer serializer=new PackingPlanProtoSerializer();
+  return serializer.toProto(packingPlan);
+}

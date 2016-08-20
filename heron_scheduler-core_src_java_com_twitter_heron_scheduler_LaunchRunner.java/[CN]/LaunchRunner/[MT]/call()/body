@@ -14,15 +14,23 @@
     LOG.severe("Failed to set topology definition");
     return false;
   }
+  result=statemgr.setPackingPlan(createPackingPlan(packedPlan),topologyName);
+  if (result == null || !result) {
+    LOG.severe("Failed to set packing plan");
+    statemgr.deleteTopology(topologyName);
+    return false;
+  }
   ExecutionEnvironment.ExecutionState executionState=createExecutionState();
   result=statemgr.setExecutionState(executionState,topologyName);
   if (result == null || !result) {
     LOG.severe("Failed to set execution state");
+    statemgr.deletePackingPlan(topologyName);
     statemgr.deleteTopology(topologyName);
     return false;
   }
   if (!launcher.launch(packedPlan)) {
     statemgr.deleteExecutionState(topologyName);
+    statemgr.deletePackingPlan(topologyName);
     statemgr.deleteTopology(topologyName);
     LOG.log(Level.SEVERE,"Failed to launch topology");
     return false;

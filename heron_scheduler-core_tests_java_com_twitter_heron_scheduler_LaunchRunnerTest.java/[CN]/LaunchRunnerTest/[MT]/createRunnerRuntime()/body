@@ -1,12 +1,18 @@
 {
   Config runtime=Mockito.spy(Config.newBuilder().build());
   ILauncher launcher=Mockito.mock(ILauncher.class);
+  IPacking packing=Mockito.mock(IPacking.class);
   SchedulerStateManagerAdaptor adaptor=Mockito.mock(SchedulerStateManagerAdaptor.class);
   TopologyAPI.Topology topology=createTopology(new com.twitter.heron.api.Config());
   Mockito.doReturn(launcher).when(runtime).get(Keys.launcherClassInstance());
   Mockito.doReturn(adaptor).when(runtime).get(Keys.schedulerStateManagerAdaptor());
   Mockito.doReturn(topology).when(runtime).get(Keys.topologyDefinition());
   PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
+  Mockito.when(packingPlan.getContainers()).thenReturn(new HashMap<String,PackingPlan.ContainerPlan>());
+  Mockito.when(packingPlan.getComponentRamDistribution()).thenReturn("ramdist");
+  Mockito.when(packingPlan.getId()).thenReturn("packing_plan_id");
+  Mockito.when(packingPlan.getResource()).thenReturn(new Resource(0,0,0));
+  Mockito.when(packing.pack()).thenReturn(packingPlan);
   Mockito.when(packingPlan.getInstanceDistribution()).thenReturn(MOCK_PACKING_STRING);
   LauncherUtils mockLauncherUtils=Mockito.mock(LauncherUtils.class);
   Mockito.when(mockLauncherUtils.createPackingPlan(Mockito.any(Config.class),Mockito.any(Config.class))).thenReturn(packingPlan);
