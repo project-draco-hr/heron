@@ -7,10 +7,5 @@
   }
   LOG.log(Level.INFO,"Trying to relaunch executor {0} running on failed container {1}",new Object[]{worker.workerId,evaluator.getId()});
   multiKeyWorkerMap.detachEvaluatorAndRemove(worker);
-  try {
-    launchContainerForExecutor(worker);
-  }
- catch (  InterruptedException e) {
-    LOG.log(Level.WARNING,"Error waiting for container allocation for failed executor; " + "Assuming request was submitted and continuing" + worker.workerId,e);
-  }
+  launchContainerForExecutor(worker);
 }

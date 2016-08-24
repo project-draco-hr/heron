@@ -1,12 +1,12 @@
 {
-  LOG.log(Level.INFO,"Find & restart container for id={0}",topologyName);
+  LOG.log(Level.INFO,"Find & restart container for id={0}",id);
   HeronWorker worker=multiKeyWorkerMap.lookupByWorkerId(id);
   if (worker == null) {
     LOG.log(Level.WARNING,"Active container for {0} not found. Requesting a new one.",id);
     ContainerPlan containerPlan=packing.containers.get(id);
     if (containerPlan == null) {
       LOG.log(Level.WARNING,"There is no container for {0} in packing plan.",id);
-      return;
+      return false;
     }
     Resource resource=containerPlan.resource;
     worker=new HeronWorker(id,getCpuForExecutor(resource),getMemInMBForExecutor(resource));
@@ -16,10 +16,6 @@
     LOG.log(Level.INFO,"Shutting down container {0}",evaluator.getId());
     evaluator.close();
   }
-  try {
-    launchContainerForExecutor(worker);
-  }
- catch (  InterruptedException e) {
-    handleInterruptException(e);
-  }
+  AllocatedEvaluator container=launchContainerForExecutor(worker);
+  return container != null;
 }

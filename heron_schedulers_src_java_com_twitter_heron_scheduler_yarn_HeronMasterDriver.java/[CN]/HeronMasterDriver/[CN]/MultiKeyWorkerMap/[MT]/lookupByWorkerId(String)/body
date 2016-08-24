@@ -1,5 +1,5 @@
 {
-  HeronWorker worker=null;
+  HeronWorker worker;
 synchronized (workerMap) {
     worker=workerMap.get(workerId);
   }

@@ -1,9 +1,5 @@
 {
   LOG.log(Level.INFO,"Scheduling container for TM: {0}",topologyName);
-  try {
-    launchContainerForExecutor(new HeronWorker(TMASTER_CONTAINER_ID,1,TM_MEM_SIZE_MB));
-  }
- catch (  InterruptedException e) {
-    throw new RuntimeException("Error while waiting for topology master container allocation",e);
-  }
+  AllocatedEvaluator container=launchContainerForExecutor(new HeronWorker(TMASTER_CONTAINER_ID,1,TM_MEM_SIZE_MB));
+  return container != null;
 }
