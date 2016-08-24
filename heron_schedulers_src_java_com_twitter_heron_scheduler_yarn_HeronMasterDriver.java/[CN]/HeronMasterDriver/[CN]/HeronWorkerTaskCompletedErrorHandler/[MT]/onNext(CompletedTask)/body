@@ -1,0 +1,9 @@
+{
+  LOG.log(Level.INFO,"Task {0} completed.",task.getId());
+  if (isTopologyKilled.get()) {
+    LOG.info("The topology is killed. Ignore task complete event");
+    return;
+  }
+  LOG.log(Level.WARNING,"Task should not complete, relaunching {0}",task.getId());
+  submitHeronExecutorTask(task.getId());
+}

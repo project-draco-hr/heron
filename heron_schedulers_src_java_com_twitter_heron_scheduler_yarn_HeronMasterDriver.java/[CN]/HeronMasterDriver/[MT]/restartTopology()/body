@@ -1,3 +1,5 @@
 {
-  restartContainer(null);
+  for (  HeronWorker worker : multiKeyWorkerMap.getHeronWorkers()) {
+    restartWorker(worker.workerId);
+  }
 }

@@ -1,0 +1,5 @@
+{
+synchronized (workerMap) {
+    return new ArrayList<>(workerMap.values());
+  }
+}

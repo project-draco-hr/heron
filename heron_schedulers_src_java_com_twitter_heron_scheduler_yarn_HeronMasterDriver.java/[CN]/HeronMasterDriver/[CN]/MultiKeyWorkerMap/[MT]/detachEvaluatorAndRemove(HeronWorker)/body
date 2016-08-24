@@ -1,0 +1,9 @@
+{
+synchronized (workerMap) {
+    workerMap.remove(worker.workerId);
+    evaluatorWorkerMap.remove(worker.evaluator.getId());
+  }
+  AllocatedEvaluator evaluator=worker.evaluator;
+  worker.evaluator=null;
+  return evaluator;
+}

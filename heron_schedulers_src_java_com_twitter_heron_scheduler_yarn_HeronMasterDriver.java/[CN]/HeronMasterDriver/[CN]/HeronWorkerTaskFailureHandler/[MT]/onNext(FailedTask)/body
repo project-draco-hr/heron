@@ -1,0 +1,8 @@
+{
+  LOG.log(Level.WARNING,"Task {0} failed. Relaunching the task",failedTask.getId());
+  if (isTopologyKilled.get()) {
+    LOG.info("The topology is killed. Ignore task fail event");
+    return;
+  }
+  submitHeronExecutorTask(failedTask.getId());
+}

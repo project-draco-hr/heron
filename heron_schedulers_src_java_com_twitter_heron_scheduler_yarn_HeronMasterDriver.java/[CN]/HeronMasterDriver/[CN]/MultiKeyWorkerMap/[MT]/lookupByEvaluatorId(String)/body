@@ -1,0 +1,5 @@
+{
+synchronized (workerMap) {
+    return evaluatorWorkerMap.get(evaluatorId);
+  }
+}

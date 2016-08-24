@@ -3,10 +3,8 @@
   Mockito.when(mockContext1.getId()).thenReturn("0");
   ActiveContext mockContext2=Mockito.mock(ActiveContext.class);
   Mockito.when(mockContext2.getId()).thenReturn("1");
-  Mockito.doReturn("").when(spyDriver).getPackingAsString();
-  Mockito.doReturn("").when(spyDriver).getComponentRamMap();
-  spyDriver.new HeronExecutorLauncher().onNext(mockContext1);
-  spyDriver.new HeronExecutorLauncher().onNext(mockContext2);
+  spyDriver.new HeronWorkerLauncher().onNext(mockContext1);
+  spyDriver.new HeronWorkerLauncher().onNext(mockContext2);
   spyDriver.killTopology();
   Mockito.verify(mockContext1).close();
   Mockito.verify(mockContext2).close();
