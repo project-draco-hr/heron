@@ -1,5 +1,8 @@
 {
   TopologyAPI.Topology topologyToRun=heronTopology.setConfig(heronConfig).setName(name).setState(TopologyAPI.TopologyState.RUNNING).getTopology();
+  if (!TopologyUtils.verifyTopology(topologyToRun)) {
+    throw new RuntimeException("Topology object is Malformed");
+  }
   PhysicalPlans.PhysicalPlan pPlan=PhysicalPlanUtil.getPhysicalPlan(topologyToRun);
   LOG.info("Physical Plan: \n" + pPlan);
   streamExecutor=new StreamExecutor(pPlan);
