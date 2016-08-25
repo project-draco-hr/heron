@@ -1,5 +1,5 @@
-def setup():
-    log.configure(logfile='heron-executor.stdout', with_time=True)
+def setup(shardid):
+    log.configure(logfile=('heron-executor-%s.stdout' % shardid), with_time=True)
     Log.info('Set up process group; executor becomes leader')
     os.setpgrp()
     Log.info('Register the SIGTERM signal handler')

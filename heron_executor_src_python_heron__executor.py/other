@@ -13,5 +13,5 @@ import yaml
 from heron.common.src.python.utils import log
 Log = log.Log
 if (__name__ == '__main__'):
-    setup()
+    setup(sys.argv[1])
     main()

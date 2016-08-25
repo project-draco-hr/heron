@@ -16,7 +16,7 @@
   Process mockProcess=Mockito.mock(Process.class);
   Mockito.doReturn(0).when(mockProcess).waitFor();
   PowerMockito.spy(ShellUtils.class);
-  PowerMockito.doReturn(mockProcess).when(ShellUtils.class,"runASyncProcess",Mockito.eq(true),Mockito.eq(testCmd),Mockito.any(File.class),Mockito.eq(env));
+  PowerMockito.doReturn(mockProcess).when(ShellUtils.class,"runASyncProcess",Mockito.eq(testCmd),Mockito.any(File.class),Mockito.eq(env),Mockito.any(String.class));
   spyTask.call(null);
   Mockito.verify(mockProcess).waitFor();
 }
