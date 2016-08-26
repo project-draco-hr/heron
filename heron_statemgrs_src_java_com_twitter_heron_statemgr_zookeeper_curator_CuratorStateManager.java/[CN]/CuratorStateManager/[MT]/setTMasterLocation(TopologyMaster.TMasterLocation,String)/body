@@ -1,3 +1,3 @@
 {
-  return createNode(getTMasterLocationPath(topologyName),location.toByteArray(),true);
+  return createNode(StateLocation.TMASTER_LOCATION,topologyName,location.toByteArray(),true);
 }

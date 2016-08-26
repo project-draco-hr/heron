@@ -1,14 +1,8 @@
 {
-  List<Pair<String,String>> dirNamesAndPaths=new ArrayList<>();
-  dirNamesAndPaths.add(Pair.create("Topologies",getTopologyDir()));
-  dirNamesAndPaths.add(Pair.create("Tmaster location",getTMasterLocationDir()));
-  dirNamesAndPaths.add(Pair.create("Packing plan",getPackingPlanDir()));
-  dirNamesAndPaths.add(Pair.create("Physical plan",getPhysicalPlanDir()));
-  dirNamesAndPaths.add(Pair.create("Execution state",getExecutionStateDir()));
-  dirNamesAndPaths.add(Pair.create("Scheduler location",getSchedulerLocationDir()));
-  for (  Pair<String,String> dirNamesAndPath : dirNamesAndPaths) {
-    LOG.log(Level.FINE,String.format("%s directory: %s",dirNamesAndPath.first,dirNamesAndPath.second));
-    if (!FileUtils.isDirectoryExists(dirNamesAndPath.second) && !FileUtils.createDirectory(dirNamesAndPath.second)) {
+  for (  StateLocation location : StateLocation.values()) {
+    String dir=getStateDirectory(location);
+    LOG.fine(String.format("%s directory: %s",location.getName(),dir));
+    if (!FileUtils.isDirectoryExists(dir) && !FileUtils.createDirectory(dir)) {
       return false;
     }
   }

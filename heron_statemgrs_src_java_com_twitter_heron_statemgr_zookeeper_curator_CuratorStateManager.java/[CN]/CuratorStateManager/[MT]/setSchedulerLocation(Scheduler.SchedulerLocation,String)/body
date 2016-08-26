@@ -1,3 +1,3 @@
 {
-  return createNode(getSchedulerLocationPath(topologyName),location.toByteArray(),isSchedulerService);
+  return createNode(StateLocation.SCHEDULER_LOCATION,topologyName,location.toByteArray(),isSchedulerService);
 }

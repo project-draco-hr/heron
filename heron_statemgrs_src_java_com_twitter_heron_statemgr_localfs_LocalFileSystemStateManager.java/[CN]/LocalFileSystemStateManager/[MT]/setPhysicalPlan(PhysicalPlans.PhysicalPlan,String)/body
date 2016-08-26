@@ -1,3 +1,3 @@
 {
-  return setData(getPhysicalPlanPath(topologyName),physicalPlan.toByteArray(),false);
+  return setData(StateLocation.PHYSICAL_PLAN,topologyName,physicalPlan.toByteArray(),false);
 }

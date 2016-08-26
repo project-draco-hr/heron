@@ -1,3 +1,3 @@
 {
-  return createNode(getTopologyPath(topologyName),topology.toByteArray(),false);
+  return createNode(StateLocation.TOPOLOGY,topologyName,topology.toByteArray(),false);
 }

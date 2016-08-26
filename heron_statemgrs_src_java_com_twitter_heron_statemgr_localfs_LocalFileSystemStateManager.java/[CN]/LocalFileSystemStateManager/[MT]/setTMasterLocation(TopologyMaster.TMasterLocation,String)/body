@@ -1,3 +1,3 @@
 {
-  return setData(getTMasterLocationPath(topologyName),location.toByteArray(),true);
+  return setData(StateLocation.TMASTER_LOCATION,topologyName,location.toByteArray(),true);
 }

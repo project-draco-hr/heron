@@ -1,3 +1,3 @@
 {
-  return deleteNode(getPackingPlanPath(topologyName));
+  return deleteNode(StateLocation.PACKING_PLAN,topologyName);
 }

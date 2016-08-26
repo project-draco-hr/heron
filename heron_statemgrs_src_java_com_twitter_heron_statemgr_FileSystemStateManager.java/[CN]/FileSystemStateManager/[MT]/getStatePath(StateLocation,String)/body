@@ -1,0 +1,3 @@
+{
+  return location.getNodePath(rootAddress,topologyName);
+}

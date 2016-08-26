@@ -1,0 +1,3 @@
+{
+  return getNodeData(watcher,getStatePath(location,topologyName),builder);
+}
