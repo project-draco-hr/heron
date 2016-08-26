@@ -20,12 +20,13 @@ def main():
     start_time = time.time()
     (successes, failures) = runAllTests(args)
     elapsed_time = (time.time() - start_time)
+    total = (len(failures) + len(successes))
     if (not failures):
         logging.info('Success: %s (all) tests passed', len(successes))
         logging.info('Elapsed time: %s', elapsed_time)
         sys.exit(0)
     else:
-        logging.error('Fail: %s test failed', len(failures))
-        logging.info('Failed Tests: ')
-        logging.info('\n'.join(failures))
+        logging.error('Fail: %s/%s test failed:', len(failures), total)
+        for test in failures:
+            logging.error('  - %s', test)
         sys.exit(1)

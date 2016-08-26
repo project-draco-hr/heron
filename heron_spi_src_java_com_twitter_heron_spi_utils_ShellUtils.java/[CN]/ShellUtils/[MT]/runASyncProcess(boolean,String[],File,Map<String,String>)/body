@@ -1,18 +1,3 @@
 {
-  LOG.log(Level.FINE,"$> {0}",Arrays.toString(command));
-  String commandFileName=Paths.get(command[0]).getFileName().toString();
-  String uuid=UUID.randomUUID().toString().substring(0,8);
-  String logFilePath=workingDirectory + "/" + commandFileName+ "-"+ uuid+ "-started.stderr";
-  File logFile=new File(logFilePath);
-  ProcessBuilder pb=getProcessBuilder(false,command,workingDirectory,envs);
-  pb.redirectErrorStream();
-  pb.redirectOutput(ProcessBuilder.Redirect.appendTo(logFile));
-  Process process=null;
-  try {
-    process=pb.start();
-  }
- catch (  IOException e) {
-    LOG.severe("Failed to run Async Process " + e);
-  }
-  return process;
+  return runASyncProcess(command,workingDirectory,envs,null);
 }

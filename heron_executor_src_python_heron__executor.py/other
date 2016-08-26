@@ -1,17 +1,17 @@
 ' heron-executor '
 import atexit
-import os
-import sys
-import signal
-import subprocess
-import time
-import json
 import base64
-import string
+import json
+import os
 import random
+import signal
+import string
+import subprocess
+import sys
+import threading
+import time
 import yaml
 from heron.common.src.python.utils import log
 Log = log.Log
 if (__name__ == '__main__'):
-    setup()
     main()

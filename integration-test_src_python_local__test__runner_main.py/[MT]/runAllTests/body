@@ -3,6 +3,7 @@ def runAllTests(args):
     successes = []
     failures = []
     for test in TEST_CASES:
+        logging.info('==== Starting test %s of %s: %s ====', ((len(successes) + len(failures)) + 1), len(TEST_CASES), test)
         if runTest(test, test, args):
             successes += [test]
         else:

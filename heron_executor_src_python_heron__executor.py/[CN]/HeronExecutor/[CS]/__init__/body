@@ -44,5 +44,5 @@ def __init__(self, args, shell_env):
     self.metricsmgr_ids = []
     self.heron_shell_ids = []
     self.update_instance_distribution(self.parse_instance_distribution(args[5]))
+    self.process_lock = threading.RLock()
     self.processes_to_monitor = {}
-    log_pid_for_process(get_heron_executor_process_name(self.shard), os.getpid())

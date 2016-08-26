@@ -1,0 +1,4 @@
+boolean verbose
+String[] command
+File workingDirectory
+String logFileUuid

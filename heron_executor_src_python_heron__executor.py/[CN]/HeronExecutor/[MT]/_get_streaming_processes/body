@@ -13,7 +13,7 @@ def _get_streaming_processes(self):
     if ((self.pkg_type == 'jar') or (self.pkg_type == 'tar')):
         retval.update(self._get_java_instance_cmd(instance_info))
     elif (self.pkg_type == 'pex'):
-        retval.update(self.get_python_instance_cmd(instance_info))
+        retval.update(self._get_python_instance_cmd(instance_info))
     else:
         raise ValueError(('Unrecognized package type: %s' % self.pkg_type))
     return retval

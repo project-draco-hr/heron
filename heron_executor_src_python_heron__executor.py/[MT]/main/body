@@ -1,10 +1,32 @@
 def main():
-    if (len(sys.argv) != 33):
+    'Register exit handlers, initialize the executor and run it.'
+    expected = 33
+    if (len(sys.argv) != expected):
+        Log.error(('Expected %s arguments but received %s: %s' % (expected, len(sys.argv), sys.argv)))
         print_usage()
         sys.exit(1)
     shell_env = os.environ.copy()
     shell_env['PEX_ROOT'] = os.path.join(os.path.abspath('.'), '.pex')
     executor = HeronExecutor(sys.argv, shell_env)
-    executor.prepare_launch()
+
+    def signal_handler(signal_to_handle, frame):
+        Log.info('signal_handler invoked with signal %s', signal_to_handle)
+        sys.exit(signal_to_handle)
+
+    def setup(shardid):
+        log.configure(logfile=('heron-executor-%s.stdout' % shardid), with_time=True)
+        Log.info('Set up process group; executor becomes leader')
+        os.setpgrp()
+        Log.info('Register the SIGTERM signal handler')
+        signal.signal(signal.SIGTERM, signal_handler)
+        Log.info('Register the atexit clean up')
+        atexit.register(cleanup)
+
+    def cleanup():
+        'Handler to trigger when receiving the SIGTERM signal\n    Do cleanup inside this method, including:\n    1. Terminate all children processes\n    '
+        Log.info('Executor terminated; exiting all process in executor.')
+        os.killpg(0, signal.SIGTERM)
+    setup(executor.shard)
+    executor.initialize()
     executor.launch()
-    executor.monitor_processes()
+    executor.start_process_monitor()
