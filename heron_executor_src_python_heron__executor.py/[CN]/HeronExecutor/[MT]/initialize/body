@@ -1,0 +1,10 @@
+def initialize(self):
+    "\n    Initialize the environment. Done with a method call outside of the constructor for 2 reasons:\n    1. Unit tests probably won't want/need to do this\n    2. We don't initialize the logger (also something unit tests don't want) until after the\n    constructor\n    "
+    create_folders = ('mkdir -p %s' % self.log_dir)
+    chmod_binaries = ('chmod a+rx . && chmod a+x %s && chmod +x %s %s %s' % (self.log_dir, self.tmaster_binary, self.stmgr_binary, self.heron_shell_binary))
+    commands = [create_folders, chmod_binaries]
+    for command in commands:
+        if (self._run_blocking_process(command, True, self.shell_env) != 0):
+            Log.info(('Failed to run command: %s. Exiting' % command))
+            sys.exit(1)
+    log_pid_for_process(get_heron_executor_process_name(self.shard), os.getpid())

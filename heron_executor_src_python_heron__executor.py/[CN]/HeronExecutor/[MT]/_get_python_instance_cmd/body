@@ -1,4 +1,4 @@
-def get_python_instance_cmd(self, instance_info):
+def _get_python_instance_cmd(self, instance_info):
     retval = {}
     for (instance_id, component_name, global_task_id, component_index) in instance_info:
         Log.info(('Python instance %s component: %s' % (instance_id, component_name)))
