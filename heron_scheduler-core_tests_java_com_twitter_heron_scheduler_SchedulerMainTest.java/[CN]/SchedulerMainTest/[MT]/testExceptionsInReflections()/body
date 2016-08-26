@@ -2,6 +2,7 @@
   PowerMockito.doThrow(new ClassNotFoundException("")).when(ReflectionUtils.class,"newInstance",STATE_MANAGER_CLASS);
   Assert.assertFalse(schedulerMain.runScheduler());
   Mockito.verify(stateManager,Mockito.never()).initialize(Mockito.any(Config.class));
-  Mockito.verify(packing,Mockito.never()).initialize(Mockito.any(Config.class),Mockito.any(Config.class));
+  TopologyAPI.Topology mockTopology=PowerMockito.mock(TopologyAPI.Topology.class);
+  Mockito.verify(packing,Mockito.never()).initialize(Mockito.any(Config.class),Mockito.eq(mockTopology));
   Mockito.verify(scheduler,Mockito.never()).initialize(Mockito.any(Config.class),Mockito.any(Config.class));
 }

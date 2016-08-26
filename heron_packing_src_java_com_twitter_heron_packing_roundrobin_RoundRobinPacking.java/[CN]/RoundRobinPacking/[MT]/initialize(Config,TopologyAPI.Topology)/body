@@ -1,5 +1,5 @@
 {
-  this.topology=com.twitter.heron.spi.utils.Runtime.topology(runtime);
+  this.topology=inputTopology;
   this.instanceRamDefault=Context.instanceRam(config);
   this.instanceCpuDefault=Context.instanceCpu(config).doubleValue();
   this.instanceDiskDefault=Context.instanceDisk(config);

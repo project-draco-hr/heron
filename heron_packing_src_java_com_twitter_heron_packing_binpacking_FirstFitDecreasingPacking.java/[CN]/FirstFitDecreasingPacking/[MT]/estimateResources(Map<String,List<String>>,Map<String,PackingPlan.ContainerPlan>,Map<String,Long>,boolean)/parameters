@@ -1,0 +1,4 @@
+Map<String,List<String>> ffdAllocation
+Map<String,PackingPlan.ContainerPlan> containerPlanMap
+Map<String,Long> ramMap
+boolean scale
