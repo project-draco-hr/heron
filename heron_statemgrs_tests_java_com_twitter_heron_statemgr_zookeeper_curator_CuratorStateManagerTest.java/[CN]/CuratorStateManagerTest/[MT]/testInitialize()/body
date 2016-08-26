@@ -8,6 +8,6 @@
   Assert.assertTrue(spyStateManager.getConnectionString().equals(TUNNEL_STRING));
   Mockito.verify(mockClient).start();
   Mockito.verify(mockClient).blockUntilConnected(Mockito.anyInt(),Mockito.any(TimeUnit.class));
-  Mockito.verify(mockClient,Mockito.times(5)).createContainers(Mockito.anyString());
+  Mockito.verify(mockClient,Mockito.times(6)).createContainers(Mockito.anyString());
   Mockito.verify(spyStateManager).initTree();
 }
