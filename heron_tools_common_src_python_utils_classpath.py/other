@@ -1,0 +1,3 @@
+'classpath.py: util functions for verifying a java class path, mainly for heron-cli'
+import os
+from heron.common.src.python.utils.log import Log

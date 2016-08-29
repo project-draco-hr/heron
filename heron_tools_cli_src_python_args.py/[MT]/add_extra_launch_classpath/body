@@ -1,0 +1,4 @@
+def add_extra_launch_classpath(parser):
+    '\n  :param parser:\n  :return:\n  '
+    parser.add_argument('--extra-launch-classpath', metavar='(a string; additional JVM class path for launching topology)', default='')
+    return parser

@@ -12,3 +12,4 @@ import heron.tools.cli.src.python.execute as execute
 import heron.tools.cli.src.python.jars as jars
 import heron.tools.cli.src.python.opts as opts
 import heron.tools.common.src.python.utils.config as config
+import heron.tools.common.src.python.utils.classpath as classpath
