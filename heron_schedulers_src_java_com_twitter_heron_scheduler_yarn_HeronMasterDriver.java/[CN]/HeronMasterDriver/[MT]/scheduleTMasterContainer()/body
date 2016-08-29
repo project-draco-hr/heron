@@ -1,5 +1,4 @@
 {
   LOG.log(Level.INFO,"Scheduling container for TM: {0}",topologyName);
-  AllocatedEvaluator container=launchContainerForExecutor(new HeronWorker(TMASTER_CONTAINER_ID,1,TM_MEM_SIZE_MB));
-  return container != null;
+  launchContainerForExecutor(new HeronWorker(TMASTER_CONTAINER_ID,1,TM_MEM_SIZE_MB));
 }

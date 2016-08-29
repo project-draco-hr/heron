@@ -1,7 +1,5 @@
 {
-  boolean result=true;
   for (  HeronWorker worker : multiKeyWorkerMap.getHeronWorkers()) {
-    result&=restartWorker(worker.workerId);
+    restartWorker(worker.workerId);
   }
-  return result;
 }

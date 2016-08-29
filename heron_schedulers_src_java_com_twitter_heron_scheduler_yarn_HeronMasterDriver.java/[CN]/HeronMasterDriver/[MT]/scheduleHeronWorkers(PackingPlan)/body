@@ -4,10 +4,6 @@
     Resource reqResource=entry.getValue().resource;
     int mem=getMemInMBForExecutor(reqResource);
     int cores=getCpuForExecutor(reqResource);
-    AllocatedEvaluator container=launchContainerForExecutor(entry.getKey(),cores,mem);
-    if (container == null) {
-      return false;
-    }
+    launchContainerForExecutor(entry.getKey(),cores,mem);
   }
-  return true;
 }

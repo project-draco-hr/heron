@@ -6,7 +6,7 @@
     ContainerPlan containerPlan=packing.containers.get(id);
     if (containerPlan == null) {
       LOG.log(Level.WARNING,"There is no container for {0} in packing plan.",id);
-      return false;
+      return;
     }
     Resource resource=containerPlan.resource;
     worker=new HeronWorker(id,getCpuForExecutor(resource),getMemInMBForExecutor(resource));
@@ -16,6 +16,5 @@
     LOG.log(Level.INFO,"Shutting down container {0}",evaluator.getId());
     evaluator.close();
   }
-  AllocatedEvaluator container=launchContainerForExecutor(worker);
-  return container != null;
+  launchContainerForExecutor(worker);
 }

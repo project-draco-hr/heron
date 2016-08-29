@@ -2,10 +2,6 @@
   Future<AllocatedEvaluator> result=executor.submit(new Callable<AllocatedEvaluator>(){
     @Override public AllocatedEvaluator call() throws Exception {
       AllocatedEvaluator evaluator=allocateContainer(worker.workerId,worker.cores,worker.mem);
-      if (evaluator == null) {
-        LOG.log(Level.WARNING,"Could not allocate container for id {0}",worker.workerId);
-        return null;
-      }
       Configuration context=createContextConfig(worker.workerId);
       LOG.log(Level.INFO,"Activating container {0} for heron executor, id: {1}",new Object[]{evaluator.getId(),worker.workerId});
       evaluator.submitContext(context);
@@ -18,10 +14,9 @@
     return result.get();
   }
  catch (  InterruptedException e) {
-    LOG.log(Level.SEVERE,"Interrupted while waiting for container",e);
+    throw new ContainerAllocationException("Interrupted while waiting for container",e);
   }
 catch (  ExecutionException e) {
-    LOG.log(Level.SEVERE,"Error while waiting for container",e);
+    throw new ContainerAllocationException("Error while allocating container",e);
   }
-  return null;
 }
