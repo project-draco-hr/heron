@@ -1,0 +1,4 @@
+def test_concurrent_incr(self):
+    for i in range(100):
+        global_metrics.metricsContainer.get_value_and_reset()
+        self.concurrent_incr()
