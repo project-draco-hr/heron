@@ -1,0 +1,2 @@
+def incr(key, to_add=1):
+    metricsContainer.incr(key, to_add)
