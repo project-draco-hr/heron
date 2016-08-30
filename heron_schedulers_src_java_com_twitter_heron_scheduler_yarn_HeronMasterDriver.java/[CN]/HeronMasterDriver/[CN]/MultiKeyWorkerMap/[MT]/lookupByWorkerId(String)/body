@@ -6,5 +6,5 @@ synchronized (workerMap) {
   if (worker == null) {
     LOG.log(Level.WARNING,"Container for executor id: {0} not found.",workerId);
   }
-  return worker;
+  return Optional.fromNullable(worker);
 }
