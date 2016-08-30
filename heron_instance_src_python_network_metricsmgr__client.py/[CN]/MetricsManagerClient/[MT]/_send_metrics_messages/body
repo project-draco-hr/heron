@@ -5,3 +5,5 @@ def _send_metrics_messages(self):
             assert isinstance(message, metrics_pb2.MetricPublisherPublishMessage)
             Log.debug(('Sending metric message: %s' % str(message)))
             self.send_message(message)
+            self.gateway_metrics.update_sent_metrics_size(message.ByteSize())
+            self.gateway_metrics.update_sent_metrics(len(message.metrics), len(message.exceptions))

@@ -1,0 +1,4 @@
+def update_sent_metrics(self, metrics_count, exceptions_count):
+    self.update_count(self.SENT_METRICS_PKT_COUNT)
+    self.update_count(self.SENT_METRICS_COUNT, metrics_count)
+    self.update_count(self.SENT_EXCEPTION_COUNT, exceptions_count)

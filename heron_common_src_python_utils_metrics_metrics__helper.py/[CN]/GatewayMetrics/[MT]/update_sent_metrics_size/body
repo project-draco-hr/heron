@@ -1,0 +1,2 @@
+def update_sent_metrics_size(self, size):
+    self.update_count(self.SENT_METRICS_SIZE, size)

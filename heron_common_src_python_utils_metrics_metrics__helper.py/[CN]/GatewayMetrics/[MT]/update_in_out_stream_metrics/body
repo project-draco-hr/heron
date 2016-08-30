@@ -1,0 +1,5 @@
+def update_in_out_stream_metrics(self, in_size, out_size, in_expect_size, out_expect_size):
+    self.update_reduced_metric(self.IN_STREAM_QUEUE_SIZE, in_size)
+    self.update_reduced_metric(self.OUT_STREAM_QUEUE_SIZE, out_size)
+    self.update_reduced_metric(self.IN_STREAM_QUEUE_EXPECTED_CAPACITY, in_expect_size)
+    self.update_reduced_metric(self.OUT_STREAM_QUEUE_EXPECTED_CAPACITY, out_expect_size)

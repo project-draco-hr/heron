@@ -4,6 +4,9 @@ metrics_host
 port
 instance
 out_metrics
+in_stream
+out_stream
 sock_map
 socket_options
+gateway_metrics
 sys_config
