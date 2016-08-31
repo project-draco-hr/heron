@@ -1,7 +1,6 @@
 {
   Optional<HeronWorker> worker=multiKeyWorkerMap.lookupByWorkerId(workerId);
   if (!worker.isPresent()) {
-    LOG.log(Level.SEVERE,"Container for id: {0} not found.",workerId);
     return;
   }
   LOG.log(Level.INFO,"Submitting evaluator task for id: {0}",workerId);

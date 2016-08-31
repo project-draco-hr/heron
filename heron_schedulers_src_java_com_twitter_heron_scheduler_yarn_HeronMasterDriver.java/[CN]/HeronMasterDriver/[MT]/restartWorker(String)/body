@@ -2,7 +2,7 @@
   LOG.log(Level.INFO,"Find & restart container for id={0}",id);
   Optional<HeronWorker> worker=multiKeyWorkerMap.lookupByWorkerId(id);
   if (!worker.isPresent()) {
-    LOG.log(Level.WARNING,"Active container for {0} not found. Requesting a new one.",id);
+    LOG.log(Level.WARNING,"Requesting a new container for: {0}",id);
     ContainerPlan containerPlan=packing.containers.get(id);
     if (containerPlan == null) {
       throw new IllegalArgumentException(String.format("There is no container for %s in packing plan.",id));
