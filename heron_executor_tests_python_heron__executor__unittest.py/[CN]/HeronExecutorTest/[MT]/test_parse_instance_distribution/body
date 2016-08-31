@@ -1,3 +1,0 @@
-def test_parse_instance_distribution(self):
-    dist_found = self.executor_0.parse_instance_distribution('1:word:3:0:exclaim1:2:0:exclaim1:1:0')
-    self.assertEquals(self.dist_expected, dist_found)

@@ -1,0 +1,6 @@
+def update_packing_plan(self, new_packing_plan):
+    self.packing_plan = new_packing_plan
+    num_containers = len(self.packing_plan.container_plans)
+    self.stmgr_ids = stmgr_list(num_containers)
+    self.metricsmgr_ids = metricsmgr_list(num_containers)
+    self.heron_shell_ids = heron_shell_list(num_containers)

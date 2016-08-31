@@ -1,0 +1,4 @@
+def stop_state_manager_watches(self):
+    Log.info('Stopping state managers')
+    for state_manager in self.state_managers:
+        state_manager.stop()

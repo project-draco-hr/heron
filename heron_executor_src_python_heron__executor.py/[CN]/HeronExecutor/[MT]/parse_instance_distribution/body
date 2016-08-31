@@ -1,4 +1,0 @@
-def parse_instance_distribution(self, encoded_distribution):
-    f1 = map((lambda z: (int(z[0]), ':'.join(z[1:]))), map((lambda x: x.split(':')), encoded_distribution.split(',')))
-    f2 = map((lambda x: {x[0]: extract_triplets(x[1]), }), f1)
-    return reduce((lambda x, y: dict((x.items() + y.items()))), f2)

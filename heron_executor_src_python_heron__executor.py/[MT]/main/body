@@ -11,6 +11,7 @@ def main():
 
     def signal_handler(signal_to_handle, frame):
         Log.info('signal_handler invoked with signal %s', signal_to_handle)
+        executor.stop_state_manager_watches()
         sys.exit(signal_to_handle)
 
     def setup(shardid):
@@ -28,5 +29,5 @@ def main():
         os.killpg(0, signal.SIGTERM)
     setup(executor.shard)
     executor.initialize()
-    executor.launch()
+    executor.start_state_manager_watches()
     executor.start_process_monitor()

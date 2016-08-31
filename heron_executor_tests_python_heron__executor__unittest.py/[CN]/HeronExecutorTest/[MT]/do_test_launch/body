@@ -1,5 +1,5 @@
 def do_test_launch(self, executor, expected_processes):
-    executor.update_instance_distribution(self.dist_expected)
+    executor.update_packing_plan(self.packing_plan_expected)
     executor.launch()
     monitored_processes = executor.processes_to_monitor
     found_processes = map((lambda process_info: (process_info.pid, process_info.name, process_info.command_str)), executor.processes)
