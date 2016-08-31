@@ -1,0 +1,12 @@
+def test_normal(self):
+    global_metrics.incr('mycounter_a')
+    global_metrics.incr('mycounter_b', 3)
+    global_metrics.safe_incr('mycounter_c', 5)
+    counter = global_metrics.metricsContainer
+    d = counter.get_value_and_reset()
+    self.assertTrue(('mycounter_a' in d))
+    self.assertTrue(('mycounter_b' in d))
+    self.assertTrue(('mycounter_c' in d))
+    self.assertEqual(d['mycounter_a'], 1)
+    self.assertEqual(d['mycounter_b'], 3)
+    self.assertEqual(d['mycounter_c'], 5)
