@@ -1,0 +1,3 @@
+{
+  return config.getStringValue(HERON_UPLOADER_S3_URI);
+}

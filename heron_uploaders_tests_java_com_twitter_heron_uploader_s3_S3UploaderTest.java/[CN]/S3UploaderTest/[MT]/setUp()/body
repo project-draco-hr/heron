@@ -1,5 +1,7 @@
 {
   mockS3Client=mock(AmazonS3Client.class);
+  tempFile=File.createTempFile("temp-file-name",".tmp");
+  tempFile.deleteOnExit();
   configBuilder=Config.newBuilder().put(S3Context.HERON_UPLOADER_S3_BUCKET,"bucket").put(S3Context.HERON_UPLOADER_S3_ACCESS_KEY,"access_key").put(S3Context.HERON_UPLOADER_S3_SECRET_KEY,"secret_key").put(ConfigKeys.get("TOPOLOGY_NAME"),"test-topology").put(ConfigKeys.get("TOPOLOGY_PACKAGE_FILE"),"topology.tar.gz");
   uploader=new S3Uploader();
   uploader.initialize(configBuilder.build());

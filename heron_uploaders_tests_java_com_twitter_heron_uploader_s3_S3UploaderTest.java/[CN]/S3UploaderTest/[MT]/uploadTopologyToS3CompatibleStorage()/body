@@ -1,0 +1,14 @@
+{
+  Map<String,String> env=System.getenv();
+  String s3Url=env.get("S3_URL");
+  String accessKey=env.get("S3_ACCESS_KEY");
+  String secretKey=env.get("S3_SECRET_KEY");
+  if (s3Url == null || accessKey == null || secretKey == null) {
+    return;
+  }
+  Config.Builder s3Config=Config.newBuilder().put(S3Context.HERON_UPLOADER_S3_BUCKET,"testbucket").put(S3Context.HERON_UPLOADER_S3_ACCESS_KEY,accessKey).put(S3Context.HERON_UPLOADER_S3_SECRET_KEY,secretKey).put(S3Context.HERON_UPLOADER_S3_URI,s3Url).put(ConfigKeys.get("TOPOLOGY_NAME"),"test-topology").put(ConfigKeys.get("TOPOLOGY_PACKAGE_FILE"),tempFile.getAbsolutePath());
+  S3Uploader s3Uploader=new S3Uploader();
+  s3Uploader.initialize(s3Config.build());
+  String expectedUri=s3Url + "testbucket/test-topology/" + tempFile.getName();
+  assertEquals(new URI(expectedUri),s3Uploader.uploadPackage());
+}
