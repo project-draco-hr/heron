@@ -1,8 +1,8 @@
 {
   Map<String,Long> ramMap=new HashMap<>();
-  for (  ContainerPlan containerPlan : this.containers.values()) {
-    for (    InstancePlan instancePlan : containerPlan.instances.values()) {
-      ramMap.put(instancePlan.componentName,instancePlan.resource.ram);
+  for (  ContainerPlan containerPlan : this.getContainers().values()) {
+    for (    InstancePlan instancePlan : containerPlan.getInstances().values()) {
+      ramMap.put(instancePlan.getComponentName(),instancePlan.getResource().ram);
     }
   }
   StringBuilder ramMapBuilder=new StringBuilder();

@@ -7,10 +7,10 @@
   int numInstance=TopologyUtils.getTotalInstance(topology);
   Assert.assertEquals(2 * componentParallelism,numInstance);
   PackingPlan output=getRoundRobinPackingPlan(topology);
-  Assert.assertEquals(numContainers,output.containers.size());
-  for (  PackingPlan.ContainerPlan container : output.containers.values()) {
-    Assert.assertEquals(numInstance / numContainers,container.instances.size());
-    Assert.assertEquals(2,countCompoment("spout",container.instances));
-    Assert.assertEquals(2,countCompoment("bolt",container.instances));
+  Assert.assertEquals(numContainers,output.getContainers().size());
+  for (  PackingPlan.ContainerPlan container : output.getContainers().values()) {
+    Assert.assertEquals(numInstance / numContainers,container.getInstances().size());
+    Assert.assertEquals(2,countCompoment("spout",container.getInstances()));
+    Assert.assertEquals(2,countCompoment("bolt",container.getInstances()));
   }
 }

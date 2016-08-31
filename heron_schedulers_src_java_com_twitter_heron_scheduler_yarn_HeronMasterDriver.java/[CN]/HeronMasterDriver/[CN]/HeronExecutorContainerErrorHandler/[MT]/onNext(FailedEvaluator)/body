@@ -10,11 +10,11 @@
       launchContainerForExecutor(TMASTER_CONTAINER_ID,1,TM_MEM_SIZE_MB);
     }
  else {
-      if (packing.containers.get(executorId) == null) {
+      if (packing.getContainers().get(executorId) == null) {
         LOG.log(Level.SEVERE,"Missing container {0} in packing, skipping container request",executorId);
         return;
       }
-      Resource reqResource=packing.containers.get(executorId).resource;
+      Resource reqResource=packing.getContainers().get(executorId).getResource();
       launchContainerForExecutor(executorId,getCpuForExecutor(reqResource),getMemInMBForExecutor(reqResource));
     }
   }

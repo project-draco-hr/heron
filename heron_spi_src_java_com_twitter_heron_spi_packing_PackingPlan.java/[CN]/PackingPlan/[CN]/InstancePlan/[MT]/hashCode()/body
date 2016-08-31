@@ -1,6 +1,6 @@
 {
-  int result=id.hashCode();
-  result=31 * result + componentName.hashCode();
-  result=31 * result + resource.hashCode();
+  int result=getId().hashCode();
+  result=31 * result + getComponentName().hashCode();
+  result=31 * result + getResource().hashCode();
   return result;
 }

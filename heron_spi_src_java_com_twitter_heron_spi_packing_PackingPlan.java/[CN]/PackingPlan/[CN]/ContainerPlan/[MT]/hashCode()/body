@@ -1,6 +1,6 @@
 {
   int result=id.hashCode();
-  result=31 * result + instances.hashCode();
-  result=31 * result + resource.hashCode();
+  result=31 * result + getInstances().hashCode();
+  result=31 * result + getResource().hashCode();
   return result;
 }

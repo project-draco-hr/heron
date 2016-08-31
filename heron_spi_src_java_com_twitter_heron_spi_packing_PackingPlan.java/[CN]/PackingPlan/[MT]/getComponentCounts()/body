@@ -1,12 +1,12 @@
 {
   Map<String,Integer> componentCounts=new HashMap<>();
-  for (  ContainerPlan containerPlan : containers.values()) {
-    for (    InstancePlan instancePlan : containerPlan.instances.values()) {
+  for (  ContainerPlan containerPlan : getContainers().values()) {
+    for (    InstancePlan instancePlan : containerPlan.getInstances().values()) {
       Integer count=0;
-      if (componentCounts.containsKey(instancePlan.componentName)) {
-        count=componentCounts.get(instancePlan.componentName);
+      if (componentCounts.containsKey(instancePlan.getComponentName())) {
+        count=componentCounts.get(instancePlan.getComponentName());
       }
-      componentCounts.put(instancePlan.componentName,++count);
+      componentCounts.put(instancePlan.getComponentName(),++count);
     }
   }
   return componentCounts;

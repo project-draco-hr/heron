@@ -1,7 +1,7 @@
 {
   ObjectMapper mapper=new ObjectMapper();
   Resource containerResource=SchedulerUtils.getMaxRequiredResource(packing);
-  packing.resource.ram=containerResource.ram * (packing.containers.size() + 1);
+  packing.getResource().ram=containerResource.ram * (packing.getContainers().size() + 1);
   ArrayNode instances=mapper.createArrayNode();
   for (int i=0; i < Runtime.numContainers(runtime); i++) {
     ObjectNode instance=mapper.createObjectNode();

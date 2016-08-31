@@ -1,5 +1,5 @@
 {
-  if (packing == null || packing.containers.isEmpty()) {
+  if (packing == null || packing.getContainers().isEmpty()) {
     LOG.log(Level.SEVERE,"No container requested. Can't schedule");
     return false;
   }

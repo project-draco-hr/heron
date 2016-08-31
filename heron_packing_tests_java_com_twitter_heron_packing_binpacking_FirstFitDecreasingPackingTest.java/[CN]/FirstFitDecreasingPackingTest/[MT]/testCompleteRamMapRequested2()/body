@@ -10,17 +10,17 @@
   topologyConfig.setComponentRam(SPOUT_NAME,spoutRam);
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
-  Assert.assertEquals(packingPlanExplicitRamMap.containers.size(),2);
-  Assert.assertEquals((long)(Math.round(spoutParallelism * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * instanceCpuDefault)) + Math.round(boltParallelism * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * instanceCpuDefault)) + instanceCpuDefault),(long)packingPlanExplicitRamMap.resource.cpu);
-  Assert.assertEquals((spoutParallelism * spoutRam) + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * spoutRam)) + boltParallelism * boltRam + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * boltRam)) + instanceRamDefault,packingPlanExplicitRamMap.resource.ram);
-  Assert.assertEquals(spoutParallelism * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * instanceDiskDefault)) + boltParallelism * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * instanceDiskDefault)) + instanceDiskDefault,packingPlanExplicitRamMap.resource.disk);
-  for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.containers.values()) {
-    for (    PackingPlan.InstancePlan instancePlan : containerPlan.instances.values()) {
-      if (instancePlan.componentName.equals(BOLT_NAME)) {
-        Assert.assertEquals(boltRam,instancePlan.resource.ram);
+  Assert.assertEquals(packingPlanExplicitRamMap.getContainers().size(),2);
+  Assert.assertEquals((long)(Math.round(spoutParallelism * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * instanceCpuDefault)) + Math.round(boltParallelism * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * instanceCpuDefault)) + instanceCpuDefault),(long)packingPlanExplicitRamMap.getResource().cpu);
+  Assert.assertEquals((spoutParallelism * spoutRam) + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * spoutRam)) + boltParallelism * boltRam + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * boltRam)) + instanceRamDefault,packingPlanExplicitRamMap.getResource().ram);
+  Assert.assertEquals(spoutParallelism * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * instanceDiskDefault)) + boltParallelism * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * instanceDiskDefault)) + instanceDiskDefault,packingPlanExplicitRamMap.getResource().disk);
+  for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.getContainers().values()) {
+    for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances().values()) {
+      if (instancePlan.getComponentName().equals(BOLT_NAME)) {
+        Assert.assertEquals(boltRam,instancePlan.getResource().ram);
       }
-      if (instancePlan.componentName.equals(SPOUT_NAME)) {
-        Assert.assertEquals(spoutRam,instancePlan.resource.ram);
+      if (instancePlan.getComponentName().equals(SPOUT_NAME)) {
+        Assert.assertEquals(spoutRam,instancePlan.getResource().ram);
       }
     }
   }

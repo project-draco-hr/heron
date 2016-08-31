@@ -1,3 +1,3 @@
 {
-  return String.format("{plan-id: %s, containers-list: %s, plan-resource: %s}",id,containers.toString(),resource);
+  return String.format("{plan-id: %s, containers-list: %s, plan-resource: %s}",getId(),getContainers().toString(),getResource());
 }
