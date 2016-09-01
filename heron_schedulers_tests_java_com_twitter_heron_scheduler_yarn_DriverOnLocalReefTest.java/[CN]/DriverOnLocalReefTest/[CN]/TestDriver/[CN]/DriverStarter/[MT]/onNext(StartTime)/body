@@ -2,7 +2,7 @@
   try {
     counter=new CountDownLatch(2);
     driver.scheduleTMasterContainer();
-    Map<String,PackingPlan.ContainerPlan> containers=new HashMap<>();
+    Set<PackingPlan.ContainerPlan> containers=new HashSet<>();
     addContainer("1",1.0,512L,containers);
     PackingPlan packing=new PackingPlan("packingId",containers,null);
     driver.scheduleHeronWorkers(packing);

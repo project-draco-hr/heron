@@ -8,7 +8,7 @@
   Assert.assertEquals(2 * componentParallelism,numInstance);
   PackingPlan output=getRoundRobinPackingPlan(topology);
   Assert.assertEquals(numContainers,output.getContainers().size());
-  for (  PackingPlan.ContainerPlan container : output.getContainers().values()) {
+  for (  PackingPlan.ContainerPlan container : output.getContainers()) {
     Assert.assertEquals(numInstance / numContainers,container.getInstances().size());
     Assert.assertEquals(2,countCompoment("spout",container.getInstances()));
     Assert.assertEquals(2,countCompoment("bolt",container.getInstances()));

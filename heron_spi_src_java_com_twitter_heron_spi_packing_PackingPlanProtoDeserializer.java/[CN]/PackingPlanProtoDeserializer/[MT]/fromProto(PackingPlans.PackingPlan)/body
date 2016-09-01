@@ -1,7 +1,7 @@
 {
-  Map<String,PackingPlan.ContainerPlan> containers=new HashMap<>();
+  Set<PackingPlan.ContainerPlan> containers=new HashSet<>();
   for (  PackingPlans.ContainerPlan containerPlan : packingPlan.getContainerPlansList()) {
-    containers.put(containerPlan.getId(),convert(containerPlan));
+    containers.add(convert(containerPlan));
   }
   return new PackingPlan(packingPlan.getId(),containers,convert(packingPlan.getResource()));
 }

@@ -8,7 +8,7 @@
   Mockito.doReturn(adaptor).when(runtime).get(Keys.schedulerStateManagerAdaptor());
   Mockito.doReturn(topology).when(runtime).get(Keys.topologyDefinition());
   PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
-  Mockito.when(packingPlan.getContainers()).thenReturn(new HashMap<String,PackingPlan.ContainerPlan>());
+  Mockito.when(packingPlan.getContainers()).thenReturn(new HashSet<PackingPlan.ContainerPlan>());
   Mockito.when(packingPlan.getComponentRamDistribution()).thenReturn("ramdist");
   Mockito.when(packingPlan.getId()).thenReturn("packing_plan_id");
   Mockito.when(packingPlan.getResource()).thenReturn(new Resource(0,0,0));

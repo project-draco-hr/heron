@@ -3,5 +3,5 @@
     auroraCmd.add("--verbose");
   }
   auroraCmd.add("--batch-size");
-  auroraCmd.add("" + Integer.MAX_VALUE);
+  auroraCmd.add(Integer.toString(Integer.MAX_VALUE));
 }

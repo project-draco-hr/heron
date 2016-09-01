@@ -1,0 +1,5 @@
+{
+  this.id=id;
+  this.instances=ImmutableSet.copyOf(instances);
+  this.resource=resource;
+}

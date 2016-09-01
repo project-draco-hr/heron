@@ -1,6 +1,6 @@
 {
   int count=0;
-  for (  PackingPlan.InstancePlan pair : instances.values()) {
+  for (  PackingPlan.InstancePlan pair : instances) {
     if (component.equals(RoundRobinPacking.getComponentName(pair.getId()))) {
       count++;
     }

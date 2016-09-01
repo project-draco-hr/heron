@@ -8,7 +8,7 @@
   Configuration mockConfig=Mockito.mock(Configuration.class);
   Mockito.doReturn(mockConfig).when(spyDriver).createContextConfig("1");
   Mockito.doReturn(mockConfig).when(spyDriver).createContextConfig("2");
-  Map<String,PackingPlan.ContainerPlan> containers=new HashMap<>();
+  Set<PackingPlan.ContainerPlan> containers=new HashSet<>();
   addContainer("1",2.0,2048L,containers);
   addContainer("2",4.0,2050L,containers);
   PackingPlan packing=new PackingPlan("packingId",containers,null);

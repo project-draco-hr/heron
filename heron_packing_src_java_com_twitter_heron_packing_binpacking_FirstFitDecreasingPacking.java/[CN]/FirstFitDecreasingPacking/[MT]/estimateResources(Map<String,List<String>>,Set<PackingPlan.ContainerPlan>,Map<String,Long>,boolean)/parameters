@@ -1,4 +1,4 @@
 Map<String,List<String>> ffdAllocation
-Map<String,PackingPlan.ContainerPlan> containerPlanMap
+Set<PackingPlan.ContainerPlan> containerPlans
 Map<String,Long> ramMap
 boolean scale

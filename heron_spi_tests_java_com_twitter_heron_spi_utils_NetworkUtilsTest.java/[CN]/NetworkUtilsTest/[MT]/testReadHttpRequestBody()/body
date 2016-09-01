@@ -3,7 +3,7 @@
   InputStream is=Mockito.spy(new ByteArrayInputStream(expectedBytes));
   HttpExchange exchange=Mockito.mock(HttpExchange.class);
   Headers headers=Mockito.mock(Headers.class);
-  Mockito.doReturn("" + expectedBytes.length).when(headers).getFirst(Matchers.anyString());
+  Mockito.doReturn(Integer.toString(expectedBytes.length)).when(headers).getFirst(Matchers.anyString());
   Mockito.doReturn(headers).when(exchange).getRequestHeaders();
   Mockito.doReturn(is).when(exchange).getRequestBody();
   Assert.assertArrayEquals(expectedBytes,NetworkUtils.readHttpRequestBody(exchange));

@@ -19,9 +19,9 @@
   Assert.assertEquals(Math.round(totalInstances * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (totalInstances * instanceCpuDefault) + instanceCpuDefault),(long)packingPlanExplicitRamMap.getResource().cpu);
   Assert.assertEquals(spoutParallelism * spoutRam + boltParallelism * boltRam + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * spoutRam + boltParallelism * boltRam)) + instanceRamDefault,packingPlanExplicitRamMap.getResource().ram);
   Assert.assertEquals(totalInstances * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (totalInstances * instanceDiskDefault)) + instanceDiskDefault,packingPlanExplicitRamMap.getResource().disk);
-  for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.getContainers().values()) {
+  for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.getContainers()) {
     Assert.assertNotEquals(maxContainerRam,containerPlan.getResource().ram);
-    for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances().values()) {
+    for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
       if (instancePlan.getComponentName().equals(BOLT_NAME)) {
         Assert.assertEquals(boltRam,instancePlan.getResource().ram);
       }

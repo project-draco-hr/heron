@@ -3,11 +3,11 @@
   Optional<HeronWorker> worker=multiKeyWorkerMap.lookupByWorkerId(id);
   if (!worker.isPresent()) {
     LOG.log(Level.WARNING,"Requesting a new container for: {0}",id);
-    ContainerPlan containerPlan=packing.getContainers().get(id);
-    if (containerPlan == null) {
+    Optional<ContainerPlan> containerPlan=packing.getContainer(id);
+    if (!containerPlan.isPresent()) {
       throw new IllegalArgumentException(String.format("There is no container for %s in packing plan.",id));
     }
-    Resource resource=containerPlan.getResource();
+    Resource resource=containerPlan.get().getResource();
     worker=Optional.of(new HeronWorker(id,getCpuForExecutor(resource),getMemInMBForExecutor(resource)));
   }
  else {

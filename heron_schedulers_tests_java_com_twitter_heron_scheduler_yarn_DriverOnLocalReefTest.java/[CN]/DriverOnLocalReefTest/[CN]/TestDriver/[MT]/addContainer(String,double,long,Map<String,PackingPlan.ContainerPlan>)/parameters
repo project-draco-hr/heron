@@ -1,4 +1,0 @@
-String id
-double cpu
-long mem
-Map<String,PackingPlan.ContainerPlan> containers

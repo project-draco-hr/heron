@@ -1,7 +1,7 @@
 {
   Map<String,Integer> componentCounts=new HashMap<>();
-  for (  ContainerPlan containerPlan : getContainers().values()) {
-    for (    InstancePlan instancePlan : containerPlan.getInstances().values()) {
+  for (  ContainerPlan containerPlan : getContainers()) {
+    for (    InstancePlan instancePlan : containerPlan.getInstances()) {
       Integer count=0;
       if (componentCounts.containsKey(instancePlan.getComponentName())) {
         count=componentCounts.get(instancePlan.getComponentName());

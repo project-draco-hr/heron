@@ -10,7 +10,7 @@
       return null;
     }
   }
-  Map<String,PackingPlan.ContainerPlan> containerPlanMap=new HashMap<>();
+  Set<PackingPlan.ContainerPlan> containerPlans=new HashSet<>();
   Map<String,Long> ramMap=TopologyUtils.getComponentRamMapConfig(topology);
   List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
   int paddingPercentage=Integer.parseInt(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_PADDING_PERCENTAGE,Integer.toString(DEFAULT_CONTAINER_PADDING_PERCENTAGE)));
@@ -23,7 +23,7 @@
     long containerRam=0;
     long containerDiskInBytes=0;
     double containerCpu=0;
-    Map<String,PackingPlan.InstancePlan> instancePlanMap=new HashMap<>();
+    Set<PackingPlan.InstancePlan> instancePlans=new HashSet<>();
     for (    String instanceId : instanceList) {
       long instanceRam=0;
       if (ramMap.containsKey(getComponentName(instanceId))) {
@@ -39,14 +39,14 @@
       containerCpu+=instanceCpu;
       Resource resource=new Resource(instanceCpu,instanceRam,instanceDisk);
       PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,getComponentName(instanceId),resource);
-      instancePlanMap.put(instanceId,instancePlan);
+      instancePlans.add(instancePlan);
     }
     containerCpu+=(paddingPercentage * containerCpu) / 100;
     containerRam+=(paddingPercentage * containerRam) / 100;
     containerDiskInBytes+=(paddingPercentage * containerDiskInBytes) / 100;
     Resource resource=new Resource(Math.round(containerCpu),containerRam,containerDiskInBytes);
-    PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlanMap,resource);
-    containerPlanMap.put(containerId,containerPlan);
+    PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlans,resource);
+    containerPlans.add(containerPlan);
     topologyRam+=containerRam;
     topologyCpu+=Math.round(containerCpu);
     topologyDisk+=containerDiskInBytes;
@@ -55,6 +55,5 @@
   topologyDisk+=instanceDiskDefault;
   topologyCpu+=instanceCpuDefault;
   Resource resource=new Resource(topologyCpu,topologyRam,topologyDisk);
-  PackingPlan plan=new PackingPlan(topology.getId(),containerPlanMap,resource);
-  return plan;
+  return new PackingPlan(topology.getId(),containerPlans,resource);
 }

@@ -1,8 +1,7 @@
 {
   Map<String,List<String>> ffdAllocation=getFFDAllocation();
-  Map<String,PackingPlan.ContainerPlan> containerPlanMap=new HashMap<>();
+  Set<PackingPlan.ContainerPlan> containerPlans=new HashSet<>();
   Map<String,Long> ramMap=TopologyUtils.getComponentRamMapConfig(topology);
-  Resource resource=estimateResources(ffdAllocation,containerPlanMap,ramMap,false);
-  PackingPlan plan=new PackingPlan(topology.getId(),containerPlanMap,resource);
-  return plan;
+  Resource resource=estimateResources(ffdAllocation,containerPlans,ramMap,false);
+  return new PackingPlan(topology.getId(),containerPlans,resource);
 }

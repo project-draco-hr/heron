@@ -1,9 +1,9 @@
 {
   this.packing=topologyPacking;
-  for (  Entry<String,ContainerPlan> entry : topologyPacking.getContainers().entrySet()) {
-    Resource reqResource=entry.getValue().getResource();
+  for (  ContainerPlan containerPlan : topologyPacking.getContainers()) {
+    Resource reqResource=containerPlan.getResource();
     int mem=getMemInMBForExecutor(reqResource);
     int cores=getCpuForExecutor(reqResource);
-    launchContainerForExecutor(entry.getKey(),cores,mem);
+    launchContainerForExecutor(containerPlan.getId(),cores,mem);
   }
 }

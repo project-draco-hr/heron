@@ -1,5 +1,0 @@
-{
-  this.id=id;
-  this.instances=instances;
-  this.resource=resource;
-}
