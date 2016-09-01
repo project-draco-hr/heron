@@ -1,3 +1,3 @@
 {
-  driver.new HeronContainerAllocationHandler().onNext(evaluator);
+  driver.new ContainerAllocationHandler().onNext(evaluator);
 }

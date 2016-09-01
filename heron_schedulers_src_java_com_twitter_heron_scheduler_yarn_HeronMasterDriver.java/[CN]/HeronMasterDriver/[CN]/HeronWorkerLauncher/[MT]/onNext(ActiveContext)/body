@@ -1,0 +1,15 @@
+{
+  if (isTopologyKilled.get()) {
+    LOG.log(Level.WARNING,"Topology has been killed, close new context: {0}",context.getId());
+    context.close();
+    return;
+  }
+  String workerId=context.getId();
+  Optional<HeronWorker> worker=multiKeyWorkerMap.lookupByWorkerId(workerId);
+  if (!worker.isPresent()) {
+    context.close();
+    return;
+  }
+  worker.get().context=context;
+  submitHeronExecutorTask(workerId);
+}

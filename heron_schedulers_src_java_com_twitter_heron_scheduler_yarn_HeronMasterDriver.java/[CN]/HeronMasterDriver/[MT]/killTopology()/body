@@ -1,8 +1,8 @@
 {
   LOG.log(Level.INFO,"Kill topology: {0}",topologyName);
-  Map<String,ActiveContext> contexts=clearActiveContexts();
-  for (  Entry<String,ActiveContext> entry : contexts.entrySet()) {
-    LOG.log(Level.INFO,"Close context: {0}",entry.getKey());
-    entry.getValue().close();
+  isTopologyKilled.set(true);
+  for (  HeronWorker worker : multiKeyWorkerMap.getHeronWorkers()) {
+    LOG.log(Level.INFO,"Killing container {0} for executor {1}",new Object[]{worker.evaluator.getId(),worker.workerId});
+    worker.evaluator.close();
   }
 }

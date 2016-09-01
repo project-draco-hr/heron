@@ -1,0 +1,17 @@
+{
+  int numContainers=3;
+  AllocatedEvaluator[] mockEvaluators=new AllocatedEvaluator[numContainers];
+  for (int id=0; id < numContainers; id++) {
+    AllocatedEvaluator mockEvaluator=Mockito.mock(AllocatedEvaluator.class);
+    Mockito.when(mockEvaluator.getId()).thenReturn("container-" + id);
+    Mockito.doReturn(mockEvaluator).when(spyDriver).allocateContainer("" + id,id + 1,id + 1);
+    spyDriver.launchContainerForExecutor("" + id,id + 1,id + 1);
+    Mockito.verify(mockEvaluator,Mockito.timeout(1000).times(1)).submitContext(Mockito.any(Configuration.class));
+    mockEvaluators[id]=mockEvaluator;
+  }
+  spyDriver.restartTopology();
+  for (int id=0; id < numContainers; id++) {
+    Mockito.verify(mockEvaluators[id]).close();
+    Mockito.verify(mockEvaluators[id],Mockito.timeout(1000).times(2)).submitContext(Mockito.any(Configuration.class));
+  }
+}

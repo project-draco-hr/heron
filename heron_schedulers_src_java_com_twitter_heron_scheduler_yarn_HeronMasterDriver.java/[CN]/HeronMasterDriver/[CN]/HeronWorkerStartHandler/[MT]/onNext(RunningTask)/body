@@ -1,0 +1,3 @@
+{
+  LOG.log(Level.INFO,"Task, id:{0}, has started.",runningTask.getId());
+}

@@ -1,0 +1,9 @@
+{
+  Optional<HeronWorker> worker=multiKeyWorkerMap.lookupByWorkerId(workerId);
+  if (!worker.isPresent()) {
+    return;
+  }
+  LOG.log(Level.INFO,"Submitting evaluator task for id: {0}",workerId);
+  final Configuration taskConf=HeronTaskConfiguration.CONF.set(TaskConfiguration.TASK,HeronExecutorTask.class).set(TaskConfiguration.ON_CLOSE,HeronExecutorTask.HeronExecutorTaskTerminator.class).set(TaskConfiguration.IDENTIFIER,workerId).set(HeronTaskConfiguration.TOPOLOGY_NAME,topologyName).set(HeronTaskConfiguration.TOPOLOGY_JAR,topologyJar).set(HeronTaskConfiguration.TOPOLOGY_PACKAGE_NAME,topologyPackageName).set(HeronTaskConfiguration.HERON_CORE_PACKAGE_NAME,heronCorePackageName).set(HeronTaskConfiguration.ROLE,role).set(HeronTaskConfiguration.ENV,env).set(HeronTaskConfiguration.CLUSTER,cluster).set(HeronTaskConfiguration.PACKED_PLAN,getPackingAsString()).set(HeronTaskConfiguration.COMPONENT_RAM_MAP,getComponentRamMap()).set(HeronTaskConfiguration.CONTAINER_ID,workerId).set(HeronTaskConfiguration.VERBOSE,verboseMode).build();
+  worker.get().context.submitTask(taskConf);
+}

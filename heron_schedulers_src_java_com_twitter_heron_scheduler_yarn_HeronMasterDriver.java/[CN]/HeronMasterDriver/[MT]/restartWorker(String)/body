@@ -1,0 +1,19 @@
+{
+  LOG.log(Level.INFO,"Find & restart container for id={0}",id);
+  Optional<HeronWorker> worker=multiKeyWorkerMap.lookupByWorkerId(id);
+  if (!worker.isPresent()) {
+    LOG.log(Level.WARNING,"Requesting a new container for: {0}",id);
+    ContainerPlan containerPlan=packing.getContainers().get(id);
+    if (containerPlan == null) {
+      throw new IllegalArgumentException(String.format("There is no container for %s in packing plan.",id));
+    }
+    Resource resource=containerPlan.getResource();
+    worker=Optional.of(new HeronWorker(id,getCpuForExecutor(resource),getMemInMBForExecutor(resource)));
+  }
+ else {
+    AllocatedEvaluator evaluator=multiKeyWorkerMap.detachEvaluatorAndRemove(worker.get());
+    LOG.log(Level.INFO,"Shutting down container {0}",evaluator.getId());
+    evaluator.close();
+  }
+  launchContainerForExecutor(worker.get());
+}

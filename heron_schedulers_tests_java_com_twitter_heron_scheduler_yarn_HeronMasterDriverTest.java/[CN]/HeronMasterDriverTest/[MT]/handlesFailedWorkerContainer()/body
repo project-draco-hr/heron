@@ -9,6 +9,6 @@
   Mockito.verify(mockWorkerEvaluator,Mockito.timeout(1000).times(1)).submitContext(Mockito.any(Configuration.class));
   FailedEvaluator mockFailedContainer=Mockito.mock(FailedEvaluator.class);
   Mockito.when(mockFailedContainer.getId()).thenReturn("worker");
-  spyDriver.new HeronExecutorContainerErrorHandler().onNext(mockFailedContainer);
+  spyDriver.new FailedContainerHandler().onNext(mockFailedContainer);
   Mockito.verify(spyDriver,Mockito.timeout(1000).times(2)).allocateContainer("1",1,1024);
 }

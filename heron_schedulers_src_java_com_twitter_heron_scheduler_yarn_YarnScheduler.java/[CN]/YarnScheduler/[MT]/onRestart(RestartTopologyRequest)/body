@@ -1,10 +1,16 @@
 {
   int containerId=request.getContainerIndex();
-  if (containerId == -1) {
-    HeronMasterDriverProvider.getInstance().restartTopology();
-  }
+  try {
+    if (containerId == -1) {
+      HeronMasterDriverProvider.getInstance().restartTopology();
+    }
  else {
-    HeronMasterDriverProvider.getInstance().restartContainer(String.valueOf(containerId));
+      HeronMasterDriverProvider.getInstance().restartWorker(String.valueOf(containerId));
+    }
+    return true;
   }
-  return true;
+ catch (  HeronMasterDriver.ContainerAllocationException e) {
+    LOG.log(Level.ALL,"Failed to allocate containers after restart",e);
+    return false;
+  }
 }

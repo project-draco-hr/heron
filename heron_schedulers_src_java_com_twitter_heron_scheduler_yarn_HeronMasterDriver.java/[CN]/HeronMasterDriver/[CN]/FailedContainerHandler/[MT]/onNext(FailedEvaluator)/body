@@ -1,0 +1,16 @@
+{
+  LOG.log(Level.WARNING,"Container:{0} failed",evaluator.getId());
+  Optional<HeronWorker> worker=multiKeyWorkerMap.lookupByEvaluatorId(evaluator.getId());
+  if (!worker.isPresent()) {
+    LOG.log(Level.WARNING,"Unknown executor id for failed container: {0}, skip renew action",evaluator.getId());
+    return;
+  }
+  LOG.log(Level.INFO,"Trying to relaunch executor {0} running on failed container {1}",new Object[]{worker.get().workerId,evaluator.getId()});
+  multiKeyWorkerMap.detachEvaluatorAndRemove(worker.get());
+  try {
+    launchContainerForExecutor(worker.get());
+  }
+ catch (  ContainerAllocationException e) {
+    LOG.log(Level.SEVERE,"Failed to relaunch failed container: " + worker.get().workerId,e);
+  }
+}

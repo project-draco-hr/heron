@@ -1,0 +1,5 @@
+{
+synchronized (workerMap) {
+    return Optional.fromNullable(evaluatorWorkerMap.get(evaluatorId));
+  }
+}

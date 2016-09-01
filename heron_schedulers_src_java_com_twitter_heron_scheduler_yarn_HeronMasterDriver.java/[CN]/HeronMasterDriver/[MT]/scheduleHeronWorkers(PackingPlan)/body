@@ -3,13 +3,7 @@
   for (  Entry<String,ContainerPlan> entry : topologyPacking.getContainers().entrySet()) {
     Resource reqResource=entry.getValue().getResource();
     int mem=getMemInMBForExecutor(reqResource);
-    try {
-      launchContainerForExecutor(entry.getKey(),getCpuForExecutor(reqResource),mem);
-    }
- catch (    InterruptedException e) {
-      LOG.log(Level.SEVERE,"Container allocation for id:{0} failed. Attempting to close " + "currently allocated resources for {1}",new Object[]{entry.getKey(),topologyName});
-      killTopology();
-      throw new RuntimeException("Failed to allocate container for workers",e);
-    }
+    int cores=getCpuForExecutor(reqResource);
+    launchContainerForExecutor(entry.getKey(),cores,mem);
   }
 }

@@ -1,0 +1,7 @@
+{
+  worker.evaluator=evaluator;
+synchronized (workerMap) {
+    workerMap.put(worker.workerId,worker);
+    evaluatorWorkerMap.put(evaluator.getId(),worker);
+  }
+}

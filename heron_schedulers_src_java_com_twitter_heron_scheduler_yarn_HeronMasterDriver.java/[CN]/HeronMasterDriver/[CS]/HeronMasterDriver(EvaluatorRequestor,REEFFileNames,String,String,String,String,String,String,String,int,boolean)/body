@@ -11,5 +11,6 @@
   this.topologyJar=topologyJar;
   this.httpPort=httpPort;
   this.verboseMode=verboseMode;
+  this.multiKeyWorkerMap=new MultiKeyWorkerMap();
   HeronMasterDriverProvider.setInstance(this);
 }
