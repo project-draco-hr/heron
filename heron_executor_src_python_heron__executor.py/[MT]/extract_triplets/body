@@ -1,9 +1,0 @@
-def extract_triplets(s):
-    '\n  given a string s of the form "a:b:c:d:e:f...", extract triplets\n  [(\'a\', \'b\', \'c\'), (\'d\', \'e\', \'f\')]\n  '
-    t = s.split(':')
-    assert ((len(t) % 3) == 0)
-    result = []
-    while (len(t) > 0):
-        result.append((t[0], t[1], t[2]))
-        t = t[3:]
-    return result

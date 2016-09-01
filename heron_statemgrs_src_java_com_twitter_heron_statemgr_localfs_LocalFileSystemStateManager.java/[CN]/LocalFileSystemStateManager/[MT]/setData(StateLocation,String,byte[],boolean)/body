@@ -1,0 +1,3 @@
+{
+  return setData(getStatePath(location,topologyName),bytes,overwrite);
+}

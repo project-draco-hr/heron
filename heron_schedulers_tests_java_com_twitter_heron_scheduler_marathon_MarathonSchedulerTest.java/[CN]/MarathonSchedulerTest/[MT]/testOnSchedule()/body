@@ -5,7 +5,7 @@
   scheduler.initialize(Mockito.mock(Config.class),Mockito.mock(Config.class));
   Assert.assertFalse(scheduler.onSchedule(null));
   PackingPlan pplan=new PackingPlan(PACKING_PLAN_ID,new HashMap<String,PackingPlan.ContainerPlan>(),Mockito.mock(Resource.class));
-  Assert.assertTrue(pplan.containers.isEmpty());
+  Assert.assertTrue(pplan.getContainers().isEmpty());
   Assert.assertFalse(scheduler.onSchedule(pplan));
   Map<String,PackingPlan.ContainerPlan> containers=new HashMap<>();
   containers.put(CONTAINER_ID,Mockito.mock(PackingPlan.ContainerPlan.class));

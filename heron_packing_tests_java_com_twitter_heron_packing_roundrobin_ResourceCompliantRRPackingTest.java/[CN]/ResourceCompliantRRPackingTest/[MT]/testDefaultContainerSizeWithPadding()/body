@@ -9,8 +9,8 @@
   topologyConfig.setContainerPaddingPercentage(padding);
   TopologyAPI.Topology topology=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlan=getResourceCompliantRRPackingPlan(topology);
-  Assert.assertEquals(packingPlan.containers.size(),numContainers);
-  Assert.assertEquals((long)(Math.round(4 * instanceCpuDefault + padding / 100.0 * (4 * instanceCpuDefault)) + Math.round(3 * instanceCpuDefault + padding / 100.0 * (3 * instanceCpuDefault)) + instanceCpuDefault),(long)packingPlan.resource.cpu);
-  Assert.assertEquals((4 * instanceRamDefault) + (long)((padding / 100.0) * (4 * instanceRamDefault)) + 3 * instanceRamDefault + (long)((padding / 100.0) * (3 * instanceRamDefault)) + instanceRamDefault,packingPlan.resource.ram);
-  Assert.assertEquals(4 * instanceDiskDefault + (long)((padding / 100.0) * (4 * instanceDiskDefault)) + 3 * instanceDiskDefault + (long)((padding / 100.0) * (3 * instanceDiskDefault)) + instanceDiskDefault,packingPlan.resource.disk);
+  Assert.assertEquals(packingPlan.getContainers().size(),numContainers);
+  Assert.assertEquals((long)(Math.round(4 * instanceCpuDefault + padding / 100.0 * (4 * instanceCpuDefault)) + Math.round(3 * instanceCpuDefault + padding / 100.0 * (3 * instanceCpuDefault)) + instanceCpuDefault),(long)packingPlan.getResource().cpu);
+  Assert.assertEquals((4 * instanceRamDefault) + (long)((padding / 100.0) * (4 * instanceRamDefault)) + 3 * instanceRamDefault + (long)((padding / 100.0) * (3 * instanceRamDefault)) + instanceRamDefault,packingPlan.getResource().ram);
+  Assert.assertEquals(4 * instanceDiskDefault + (long)((padding / 100.0) * (4 * instanceDiskDefault)) + 3 * instanceDiskDefault + (long)((padding / 100.0) * (3 * instanceDiskDefault)) + instanceDiskDefault,packingPlan.getResource().disk);
 }

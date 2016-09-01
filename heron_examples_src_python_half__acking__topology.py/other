@@ -1,0 +1,15 @@
+'Example HalfAckingTopology'
+import sys
+from heron.pyheron.src.python import Grouping, TopologyBuilder, constants
+from heron.examples.src.python.spout import WordSpout
+from heron.examples.src.python.bolt import HalfAckBolt
+if (__name__ == '__main__'):
+    if (len(sys.argv) != 2):
+        print "Topology's name is not specified"
+        sys.exit(1)
+    builder = TopologyBuilder(name=sys.argv[1])
+    word_spout = builder.add_spout('word_spout', WordSpout, par=2)
+    half_ack_bolt = builder.add_bolt('half_ack_bolt', HalfAckBolt, par=2, inputs={word_spout: Grouping.fields('word'), }, config={constants.TOPOLOGY_TICK_TUPLE_FREQ_SECS: 10, })
+    topology_config = {constants.TOPOLOGY_ENABLE_ACKING: True, constants.TOPOLOGY_MAX_SPOUT_PENDING: 100000000, constants.TOPOLOGY_MESSAGE_TIMEOUT_SECS: 300, }
+    builder.set_config(topology_config)
+    builder.build_and_submit()

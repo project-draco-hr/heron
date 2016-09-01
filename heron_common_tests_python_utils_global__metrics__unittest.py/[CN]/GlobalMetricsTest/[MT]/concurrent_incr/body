@@ -1,0 +1,17 @@
+def concurrent_incr(self):
+
+    def incr_worker():
+        global_metrics.safe_incr('K')
+        global_metrics.safe_incr('K', 2)
+        global_metrics.safe_incr('K', 3)
+    threads = []
+    for i in range(10):
+        t = threading.Thread(target=incr_worker)
+        threads.append(t)
+        t.start()
+    for t in threads:
+        t.join()
+    counter = global_metrics.metricsContainer
+    d = counter.get_value_and_reset()
+    self.assertTrue(('K' in d))
+    self.assertEqual(d['K'], 60)

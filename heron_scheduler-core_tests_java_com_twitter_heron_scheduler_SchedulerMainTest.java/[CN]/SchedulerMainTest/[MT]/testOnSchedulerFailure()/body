@@ -3,7 +3,6 @@
   Mockito.doReturn(false).when(scheduler).onSchedule(Mockito.any(PackingPlan.class));
   Assert.assertFalse(schedulerMain.runScheduler());
   Mockito.verify(stateManager).close();
-  Mockito.verify(packing).close();
   Mockito.verify(scheduler).close();
   Mockito.verify(schedulerServer,Mockito.never()).start();
 }

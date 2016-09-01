@@ -1,24 +1,15 @@
 {
   Config config=Mockito.mock(Config.class);
   Mockito.when(config.getStringValue(ConfigKeys.get("STATE_MANAGER_CLASS"))).thenReturn(STATE_MANAGER_CLASS);
-  Mockito.when(config.getStringValue(ConfigKeys.get("PACKING_CLASS"))).thenReturn(PACKING_CLASS);
   Mockito.when(config.getStringValue(ConfigKeys.get("SCHEDULER_CLASS"))).thenReturn(SCHEDULER_CLASS);
-  String iTopologyName="topologyName";
   int iSchedulerServerPort=0;
   TopologyAPI.Topology topology=TopologyTests.createTopology(iTopologyName,new com.twitter.heron.api.Config(),new HashMap<String,Integer>(),new HashMap<String,Integer>());
-  String packingString="dummyPackingString";
   stateManager=Mockito.mock(IStateManager.class);
-  packing=Mockito.mock(IPacking.class);
   scheduler=Mockito.mock(IScheduler.class);
-  PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
-  Mockito.when(packing.pack()).thenReturn(packingPlan);
-  Mockito.when(packingPlan.getInstanceDistribution()).thenReturn(packingString);
-  Map<String,PackingPlan.ContainerPlan> containers=new HashMap<>();
-  containers.put("dummy",new PackingPlan.ContainerPlan("dummy",null,new Resource(1,1,1)));
-  Mockito.when(packingPlan.getContainers()).thenReturn(containers);
+  final SettableFuture<PackingPlans.PackingPlan> future=getTestPacking();
+  Mockito.when(stateManager.getPackingPlan(null,iTopologyName)).thenReturn(future);
   PowerMockito.spy(ReflectionUtils.class);
   PowerMockito.doReturn(stateManager).when(ReflectionUtils.class,"newInstance",STATE_MANAGER_CLASS);
-  PowerMockito.doReturn(packing).when(ReflectionUtils.class,"newInstance",PACKING_CLASS);
   PowerMockito.doReturn(scheduler).when(ReflectionUtils.class,"newInstance",SCHEDULER_CLASS);
   schedulerMain=Mockito.spy(new SchedulerMain(config,topology,iSchedulerServerPort,Mockito.mock(Properties.class)));
   schedulerServer=Mockito.mock(SchedulerServer.class);

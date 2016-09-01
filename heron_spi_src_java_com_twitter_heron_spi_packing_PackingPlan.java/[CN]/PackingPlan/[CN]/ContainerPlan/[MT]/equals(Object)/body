@@ -6,5 +6,5 @@
     return false;
   }
   ContainerPlan that=(ContainerPlan)o;
-  return id.equals(that.id) && instances.equals(that.instances) && resource.equals(that.resource);
+  return id.equals(that.id) && getInstances().equals(that.getInstances()) && getResource().equals(that.getResource());
 }

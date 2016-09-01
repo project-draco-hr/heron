@@ -7,6 +7,5 @@
   long containerRam=-1L * Constants.GB;
   topologyConfig.setContainerMaxRamHint(containerRam);
   TopologyAPI.Topology topology=getTopology(spoutParallelism,boltParallelism,topologyConfig);
-  PackingPlan packingPlan=getFirstFitDecreasingPackingPlan(topology);
-  Assert.assertNull(packingPlan);
+  getFirstFitDecreasingPackingPlan(topology);
 }

@@ -1,0 +1,3 @@
+def safe_incr(key, to_add=1):
+    with lock:
+        metricsContainer.incr(key, to_add)

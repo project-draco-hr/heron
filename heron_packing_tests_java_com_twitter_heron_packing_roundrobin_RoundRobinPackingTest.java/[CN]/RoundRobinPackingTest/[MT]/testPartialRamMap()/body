@@ -10,20 +10,20 @@
   topologyConfig.setComponentRam(BOLT_NAME,boltRam);
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getRoundRobinPackingPlan(topologyExplicitRamMap);
-  for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.containers.values()) {
-    Assert.assertEquals(containerRam,containerPlan.resource.ram);
+  for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.getContainers().values()) {
+    Assert.assertEquals(containerRam,containerPlan.getResource().ram);
     int boltCount=0;
-    int instancesCount=containerPlan.instances.size();
-    for (    PackingPlan.InstancePlan instancePlan : containerPlan.instances.values()) {
-      if (instancePlan.componentName.equals(BOLT_NAME)) {
-        Assert.assertEquals(boltRam,instancePlan.resource.ram);
+    int instancesCount=containerPlan.getInstances().size();
+    for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances().values()) {
+      if (instancePlan.getComponentName().equals(BOLT_NAME)) {
+        Assert.assertEquals(boltRam,instancePlan.getResource().ram);
         boltCount++;
       }
     }
     int spoutCount=instancesCount - boltCount;
-    for (    PackingPlan.InstancePlan instancePlan : containerPlan.instances.values()) {
-      if (instancePlan.componentName.equals(SPOUT_NAME)) {
-        Assert.assertEquals((containerRam - boltCount * boltRam - RoundRobinPacking.DEFAULT_RAM_PADDING_PER_CONTAINER) / spoutCount,instancePlan.resource.ram);
+    for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances().values()) {
+      if (instancePlan.getComponentName().equals(SPOUT_NAME)) {
+        Assert.assertEquals((containerRam - boltCount * boltRam - RoundRobinPacking.DEFAULT_RAM_PADDING_PER_CONTAINER) / spoutCount,instancePlan.getResource().ram);
       }
     }
   }

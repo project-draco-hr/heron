@@ -1,0 +1,7 @@
+' Singleton class which exposes a simple globally available counter for heron jobs.\n\nIt serves the same functionality as GlobalMetrics.java\n'
+import threading
+from .metrics import MultiCountMetric
+metricsContainer = MultiCountMetric()
+registered = False
+root_name = '__auto__'
+lock = threading.Lock()

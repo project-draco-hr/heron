@@ -12,5 +12,5 @@
   topologyConfig.setComponentRam(SPOUT_NAME,spoutRam);
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlan=getResourceCompliantRRPackingPlan(topologyExplicitRamMap);
-  Assert.assertEquals(packingPlan.containers.size(),7);
+  Assert.assertEquals(packingPlan.getContainers().size(),7);
 }

@@ -5,6 +5,6 @@
     return result;
   }
  else {
-    return deleteNode(getSchedulerLocationPath(topologyName));
+    return deleteNode(getStatePath(StateLocation.SCHEDULER_LOCATION,topologyName));
   }
 }

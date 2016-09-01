@@ -1,0 +1,12 @@
+{
+  if (!roundEnv.processingOver()) {
+    for (    TypeElement te : annotations) {
+      for (      Element elt : roundEnv.getElementsAnnotatedWith(te)) {
+        if (!elt.toString().startsWith("com.twitter.heron")) {
+          env.getMessager().printMessage(Kind.WARNING,String.format("%s extends from a class annotated with %s",elt,te),elt);
+        }
+      }
+    }
+  }
+  return true;
+}

@@ -1,0 +1,4 @@
+{
+  this.topology=inputTopology;
+  setPackingConfigs(config);
+}

@@ -39,10 +39,10 @@ def __init__(self, args, shell_env):
     self.scheduler_port = args[31]
     self.python_instance_binary = args[32]
     self.log_dir = self._load_logging_dir(self.heron_internals_config_file)
-    self.instance_distribution = {}
+    self.packing_plan = None
     self.stmgr_ids = []
     self.metricsmgr_ids = []
     self.heron_shell_ids = []
-    self.update_instance_distribution(self.parse_instance_distribution(args[5]))
     self.process_lock = threading.RLock()
     self.processes_to_monitor = {}
+    self.state_managers = []

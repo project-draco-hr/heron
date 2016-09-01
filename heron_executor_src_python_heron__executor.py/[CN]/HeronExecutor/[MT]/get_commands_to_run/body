@@ -1,4 +1,6 @@
 def get_commands_to_run(self):
+    if (len(self.packing_plan.container_plans) == 0):
+        return {}
     if (self.shard == 0):
         commands = self._get_tmaster_processes()
     else:

@@ -1,0 +1,19 @@
+def start_state_manager_watches(self):
+    '\n    Receive updates to the packing plan from the statemgrs and update processes as needed.\n    '
+    statemgr_config = StateMgrConfig()
+    statemgr_config.set_state_locations(self.__get_state_manager_locations())
+    self.state_managers = statemanagerfactory.get_all_state_managers(statemgr_config)
+
+    def on_packing_plan_watch(state_manager, new_packing_plan):
+        Log.info(('State watch triggered for packing plan change. New PackingPlan: %s' % str(new_packing_plan)))
+        if (self.packing_plan != new_packing_plan):
+            Log.info(('State watch triggered for PackingPlan update, PackingPlan change detected on shard %s, relaunching. Existing: %s, New: %s' % (self.shard, str(self.packing_plan), str(new_packing_plan))))
+            self.update_packing_plan(new_packing_plan)
+            Log.info('Updating executor processes')
+            self.launch()
+        else:
+            Log.info(('State watch triggered for PackingPlan update but PackingPlan not changed so not relaunching. Existing: %s, New: %s' % (str(self.packing_plan), str(new_packing_plan))))
+    for state_manager in self.state_managers:
+        onPackingPlanWatch = partial(on_packing_plan_watch, state_manager)
+        state_manager.get_packing_plan(self.topology_name, onPackingPlanWatch)
+        Log.info(('Registered state watch for packing plan changes with state manager %s.' % str(state_manager)))

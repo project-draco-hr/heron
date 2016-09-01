@@ -10,6 +10,11 @@ def run(command, parser, cl_args, unknown_args):
     if ((not jar_type) and (not tar_type) and (not pex_type)):
         Log.error('Unknown file type. Please use .tar or .tar.gz or .jar or .pex file')
         return False
+    if cl_args['extra_launch_classpath']:
+        valid_classpath = classpath.valid_java_classpath(cl_args['extra_launch_classpath'])
+        if (not valid_classpath):
+            Log.error('One of jar or directory in extra launch classpath does not exist')
+            return False
     tmp_dir = tempfile.mkdtemp()
     if cl_args['deploy_deactivated']:
         initial_state = topology_pb2.TopologyState.Name(topology_pb2.PAUSED)

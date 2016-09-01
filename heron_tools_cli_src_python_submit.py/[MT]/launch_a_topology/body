@@ -10,4 +10,5 @@ def launch_a_topology(cl_args, tmp_dir, topology_file, topology_defn_file):
     if (Log.getEffectiveLevel() == logging.DEBUG):
         args.append('--verbose')
     lib_jars = config.get_heron_libs((((jars.scheduler_jars() + jars.uploader_jars()) + jars.statemgr_jars()) + jars.packing_jars()))
-    execute.heron_class('com.twitter.heron.scheduler.SubmitterMain', lib_jars, extra_jars=[], args=args, java_defines=[])
+    extra_jars = cl_args['extra_launch_classpath'].split(':')
+    execute.heron_class(class_name='com.twitter.heron.scheduler.SubmitterMain', lib_jars=lib_jars, extra_jars=extra_jars, args=args, java_defines=[])

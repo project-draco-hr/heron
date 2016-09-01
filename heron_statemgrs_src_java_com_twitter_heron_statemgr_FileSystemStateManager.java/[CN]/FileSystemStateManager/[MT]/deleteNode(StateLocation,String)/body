@@ -1,0 +1,3 @@
+{
+  return deleteNode(getStatePath(location,topologyName));
+}

@@ -1,0 +1,12 @@
+{
+  this.topology=inputTopology;
+  this.numContainers=TopologyUtils.getNumContainers(topology);
+  this.instanceRamDefault=Context.instanceRam(config);
+  this.instanceCpuDefault=Context.instanceCpu(config).doubleValue();
+  this.instanceDiskDefault=Context.instanceDisk(config);
+  this.numAdjustments=0;
+  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
+  this.maxContainerRam=Long.parseLong(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_RAM_REQUESTED,Long.toString(instanceRamDefault * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER)));
+  this.maxContainerCpu=Double.parseDouble(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_CPU_REQUESTED,Double.toString(instanceCpuDefault * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER)));
+  this.maxContainerDisk=Long.parseLong(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_DISK_REQUESTED,Long.toString(instanceDiskDefault * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER)));
+}

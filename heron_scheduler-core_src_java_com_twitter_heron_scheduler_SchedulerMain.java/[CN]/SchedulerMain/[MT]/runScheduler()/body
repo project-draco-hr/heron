@@ -14,13 +14,15 @@
   try {
     statemgr.initialize(config);
     SchedulerStateManagerAdaptor adaptor=new SchedulerStateManagerAdaptor(statemgr,5000);
-    LauncherUtils launcherUtils=LauncherUtils.getInstance();
-    Config runtime=Config.newBuilder().putAll(launcherUtils.getPrimaryRuntime(topology,adaptor)).put(Keys.schedulerShutdown(),getShutdown()).put(Keys.SCHEDULER_PROPERTIES,properties).build();
-    PackingPlan packedPlan=launcherUtils.createPackingPlan(config,runtime);
-    if (packedPlan == null) {
-      LOG.severe("Failed to pack a valid PackingPlan. Check the config.");
+    PackingPlans.PackingPlan serializedPackingPlan=adaptor.getPackingPlan(topology.getName());
+    if (serializedPackingPlan == null) {
+      LOG.log(Level.SEVERE,"Failed to fetch PackingPlan for topology:{0} from the state manager",topology.getName());
       return false;
     }
+    LOG.log(Level.INFO,"Packing plan fetched from state: {0}",serializedPackingPlan);
+    PackingPlan packedPlan=new PackingPlanProtoDeserializer().fromProto(serializedPackingPlan);
+    LauncherUtils launcherUtils=LauncherUtils.getInstance();
+    Config runtime=Config.newBuilder().putAll(launcherUtils.getPrimaryRuntime(topology,adaptor)).put(Keys.schedulerShutdown(),getShutdown()).put(Keys.SCHEDULER_PROPERTIES,properties).build();
     Config ytruntime=launcherUtils.createConfigWithPackingDetails(runtime,packedPlan);
     scheduler=launcherUtils.getSchedulerInstance(config,ytruntime);
     if (scheduler == null) {

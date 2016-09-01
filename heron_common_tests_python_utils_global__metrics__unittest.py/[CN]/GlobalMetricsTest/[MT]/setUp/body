@@ -1,0 +1,4 @@
+def setUp(self):
+    self.metrics_collector = mock_generator.MockMetricsCollector()
+    global_metrics.init(self.metrics_collector, 10)
+    self.lock = threading.Lock()

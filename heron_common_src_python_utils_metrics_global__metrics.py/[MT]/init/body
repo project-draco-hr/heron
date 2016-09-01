@@ -1,0 +1,6 @@
+def init(metrics_collector, metrics_bucket):
+    with lock:
+        global registered
+        if (not registered):
+            metrics_collector.register_metric(root_name, metricsContainer, metrics_bucket)
+            registered = True
