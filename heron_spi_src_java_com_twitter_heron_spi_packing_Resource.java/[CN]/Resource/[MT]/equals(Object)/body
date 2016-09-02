@@ -1,7 +1,7 @@
 {
   if (obj instanceof Resource) {
     Resource r=(Resource)obj;
-    return (this.cpu == r.cpu) && (this.ram == r.ram) && (this.disk == r.disk);
+    return (this.getCpu() == r.getCpu()) && (this.getRam() == r.getRam()) && (this.getDisk() == r.getDisk());
   }
  else {
     return false;

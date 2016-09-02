@@ -16,17 +16,17 @@
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
   Assert.assertEquals(packingPlanExplicitRamMap.getContainers().size(),1);
-  Assert.assertEquals(Math.round(totalInstances * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (totalInstances * instanceCpuDefault) + instanceCpuDefault),(long)packingPlanExplicitRamMap.getResource().cpu);
-  Assert.assertEquals(spoutParallelism * spoutRam + boltParallelism * boltRam + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * spoutRam + boltParallelism * boltRam)) + instanceRamDefault,packingPlanExplicitRamMap.getResource().ram);
-  Assert.assertEquals(totalInstances * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (totalInstances * instanceDiskDefault)) + instanceDiskDefault,packingPlanExplicitRamMap.getResource().disk);
+  Assert.assertEquals(Math.round(totalInstances * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (totalInstances * instanceCpuDefault) + instanceCpuDefault),(long)packingPlanExplicitRamMap.getResource().getCpu());
+  Assert.assertEquals(spoutParallelism * spoutRam + boltParallelism * boltRam + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * spoutRam + boltParallelism * boltRam)) + instanceRamDefault,packingPlanExplicitRamMap.getResource().getRam());
+  Assert.assertEquals(totalInstances * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (totalInstances * instanceDiskDefault)) + instanceDiskDefault,packingPlanExplicitRamMap.getResource().getDisk());
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.getContainers()) {
-    Assert.assertNotEquals(maxContainerRam,containerPlan.getResource().ram);
+    Assert.assertNotEquals(maxContainerRam,containerPlan.getResource().getRam());
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
       if (instancePlan.getComponentName().equals(BOLT_NAME)) {
-        Assert.assertEquals(boltRam,instancePlan.getResource().ram);
+        Assert.assertEquals(boltRam,instancePlan.getResource().getRam());
       }
       if (instancePlan.getComponentName().equals(SPOUT_NAME)) {
-        Assert.assertEquals(spoutRam,instancePlan.getResource().ram);
+        Assert.assertEquals(spoutRam,instancePlan.getResource().getRam());
       }
     }
   }

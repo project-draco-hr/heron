@@ -11,13 +11,13 @@
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getResourceCompliantRRPackingPlan(topologyExplicitRamMap);
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.getContainers()) {
-    Assert.assertNotEquals(containerRam,containerPlan.getResource().ram);
+    Assert.assertNotEquals(containerRam,containerPlan.getResource().getRam());
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
       if (instancePlan.getComponentName().equals(BOLT_NAME)) {
-        Assert.assertEquals(boltRam,instancePlan.getResource().ram);
+        Assert.assertEquals(boltRam,instancePlan.getResource().getRam());
       }
       if (instancePlan.getComponentName().equals(SPOUT_NAME)) {
-        Assert.assertEquals(instanceRamDefault,instancePlan.getResource().ram);
+        Assert.assertEquals(instanceRamDefault,instancePlan.getResource().getRam());
       }
     }
   }

@@ -8,7 +8,7 @@
   TopologyAPI.Topology topologyNoExplicitResourcesConfig=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanNoExplicitResourcesConfig=getResourceCompliantRRPackingPlan(topologyNoExplicitResourcesConfig);
   Assert.assertEquals(packingPlanNoExplicitResourcesConfig.getContainers().size(),numContainers);
-  Assert.assertEquals((long)(Math.round(4 * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (4 * instanceCpuDefault)) + Math.round(3 * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (3 * instanceCpuDefault)) + instanceCpuDefault),(long)packingPlanNoExplicitResourcesConfig.getResource().cpu);
-  Assert.assertEquals((4 * instanceRamDefault) + (long)((DEFAULT_CONTAINER_PADDING / 100.0) * (4 * instanceRamDefault)) + 3 * instanceRamDefault + (long)((DEFAULT_CONTAINER_PADDING / 100.0) * (3 * instanceRamDefault)) + instanceRamDefault,packingPlanNoExplicitResourcesConfig.getResource().ram);
-  Assert.assertEquals(4 * instanceDiskDefault + (long)((DEFAULT_CONTAINER_PADDING / 100.0) * (4 * instanceDiskDefault)) + 3 * instanceDiskDefault + (long)((DEFAULT_CONTAINER_PADDING / 100.0) * (3 * instanceDiskDefault)) + instanceDiskDefault,packingPlanNoExplicitResourcesConfig.getResource().disk);
+  Assert.assertEquals((long)(Math.round(4 * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (4 * instanceCpuDefault)) + Math.round(3 * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (3 * instanceCpuDefault)) + instanceCpuDefault),(long)packingPlanNoExplicitResourcesConfig.getResource().getCpu());
+  Assert.assertEquals((4 * instanceRamDefault) + (long)((DEFAULT_CONTAINER_PADDING / 100.0) * (4 * instanceRamDefault)) + 3 * instanceRamDefault + (long)((DEFAULT_CONTAINER_PADDING / 100.0) * (3 * instanceRamDefault)) + instanceRamDefault,packingPlanNoExplicitResourcesConfig.getResource().getRam());
+  Assert.assertEquals(4 * instanceDiskDefault + (long)((DEFAULT_CONTAINER_PADDING / 100.0) * (4 * instanceDiskDefault)) + 3 * instanceDiskDefault + (long)((DEFAULT_CONTAINER_PADDING / 100.0) * (3 * instanceDiskDefault)) + instanceDiskDefault,packingPlanNoExplicitResourcesConfig.getResource().getDisk());
 }

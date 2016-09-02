@@ -12,20 +12,20 @@
   topologyConfig.setContainerCpuRequested(containerCpu);
   TopologyAPI.Topology topologyExplicitResourcesConfig=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitResourcesConfig=getRoundRobinPackingPlan(topologyExplicitResourcesConfig);
-  Assert.assertEquals(containerCpu * (numContainers + 1),packingPlanExplicitResourcesConfig.getResource().cpu,DELTA);
-  Assert.assertEquals((double)containerRam * numContainers,(double)packingPlanExplicitResourcesConfig.getResource().ram,spoutParallelism + boltParallelism);
-  Assert.assertEquals(containerDisk * (numContainers + 1),packingPlanExplicitResourcesConfig.getResource().disk);
+  Assert.assertEquals(containerCpu * (numContainers + 1),packingPlanExplicitResourcesConfig.getResource().getCpu(),DELTA);
+  Assert.assertEquals((double)containerRam * numContainers,(double)packingPlanExplicitResourcesConfig.getResource().getRam(),spoutParallelism + boltParallelism);
+  Assert.assertEquals(containerDisk * (numContainers + 1),packingPlanExplicitResourcesConfig.getResource().getDisk());
   Assert.assertEquals(numContainers,packingPlanExplicitResourcesConfig.getContainers().size());
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitResourcesConfig.getContainers()) {
-    Assert.assertEquals(containerCpu,containerPlan.getResource().cpu,DELTA);
-    Assert.assertEquals((double)containerRam,(double)containerPlan.getResource().ram,containerPlan.getInstances().size());
-    Assert.assertEquals(containerDisk,containerPlan.getResource().disk);
+    Assert.assertEquals(containerCpu,containerPlan.getResource().getCpu(),DELTA);
+    Assert.assertEquals((double)containerRam,(double)containerPlan.getResource().getRam(),containerPlan.getInstances().size());
+    Assert.assertEquals(containerDisk,containerPlan.getResource().getDisk());
     Set<Resource> resources=new HashSet<>();
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
       resources.add(instancePlan.getResource());
     }
     Assert.assertEquals(1,resources.size());
     int instancesCount=containerPlan.getInstances().size();
-    Assert.assertEquals((containerRam - RoundRobinPacking.DEFAULT_RAM_PADDING_PER_CONTAINER) / instancesCount,resources.iterator().next().ram);
+    Assert.assertEquals((containerRam - RoundRobinPacking.DEFAULT_RAM_PADDING_PER_CONTAINER) / instancesCount,resources.iterator().next().getRam());
   }
 }

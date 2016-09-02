@@ -1,4 +1,4 @@
 {
-  Long ram=resource.ram / MB;
+  Long ram=resource.getRam() / MB;
   return ram.intValue();
 }

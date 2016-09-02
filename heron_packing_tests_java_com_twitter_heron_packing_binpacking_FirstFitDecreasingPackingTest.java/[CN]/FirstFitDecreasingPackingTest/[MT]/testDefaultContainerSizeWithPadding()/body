@@ -9,9 +9,9 @@
   PackingPlan packingPlan=getFirstFitDecreasingPackingPlan(topology);
   Assert.assertEquals(packingPlan.getContainers().size(),2);
   long totalRam=(totalInstances + HERON_INTERNAL_CONTAINERS) * instanceRamDefault + ((long)(padding / 100.0 * totalInstances * instanceRamDefault));
-  Assert.assertEquals(packingPlan.getResource().ram,totalRam);
+  Assert.assertEquals(packingPlan.getResource().getRam(),totalRam);
   double totalCpu=Math.round(spoutParallelism * instanceCpuDefault + (padding / 100.0 * spoutParallelism * instanceCpuDefault)) + Math.round(boltParallelism * instanceCpuDefault + (padding / 100.0 * boltParallelism * instanceCpuDefault)) + instanceCpuDefault;
-  Assert.assertEquals((long)packingPlan.getResource().cpu,(long)totalCpu);
+  Assert.assertEquals((long)packingPlan.getResource().getCpu(),(long)totalCpu);
   long totalDisk=(totalInstances + HERON_INTERNAL_CONTAINERS) * instanceDiskDefault + (long)(padding / 100.0 * totalInstances * instanceDiskDefault);
-  Assert.assertEquals(packingPlan.getResource().disk,totalDisk);
+  Assert.assertEquals(packingPlan.getResource().getDisk(),totalDisk);
 }
