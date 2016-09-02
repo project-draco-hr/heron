@@ -1,0 +1,11 @@
+{
+  boolean ret=false;
+  try {
+    scheduler.initialize(config,runtime);
+    ret=scheduler.onUpdate(updateTopologyRequest);
+  }
+  finally {
+    SysUtils.closeIgnoringExceptions(scheduler);
+  }
+  return ret;
+}

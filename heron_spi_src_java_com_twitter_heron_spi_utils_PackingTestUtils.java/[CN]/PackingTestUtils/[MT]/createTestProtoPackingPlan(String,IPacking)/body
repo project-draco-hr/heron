@@ -1,0 +1,5 @@
+{
+  PackingPlan plan=createTestPackingPlan(topologyName,packing);
+  PackingPlanProtoSerializer serializer=new PackingPlanProtoSerializer();
+  return serializer.toProto(plan);
+}

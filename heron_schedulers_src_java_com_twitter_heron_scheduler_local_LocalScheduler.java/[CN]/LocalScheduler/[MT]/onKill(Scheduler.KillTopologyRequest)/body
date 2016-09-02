@@ -2,12 +2,14 @@
   String topologyName=LocalContext.topologyName(config);
   LOG.info("Command to kill topology: " + topologyName);
   isTopologyKilled=true;
-  for (  Process p : processToContainer.keySet()) {
-    int index=processToContainer.get(p);
-    LOG.info("Killing executor for container: " + index);
-    p.destroy();
-    LOG.info("Killed executor for container: " + index);
+synchronized (processToContainer) {
+    for (    Process p : processToContainer.keySet()) {
+      int index=processToContainer.get(p);
+      LOG.info("Killing executor for container: " + index);
+      p.destroy();
+      LOG.info("Killed executor for container: " + index);
+    }
+    processToContainer.clear();
   }
-  processToContainer.clear();
   return true;
 }

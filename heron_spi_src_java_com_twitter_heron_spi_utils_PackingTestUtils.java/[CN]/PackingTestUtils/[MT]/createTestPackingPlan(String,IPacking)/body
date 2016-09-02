@@ -1,0 +1,12 @@
+{
+  Map<String,Integer> spouts=new HashMap<>();
+  spouts.put("testSpout",2);
+  Map<String,Integer> bolts=new HashMap<>();
+  bolts.put("testBolt",3);
+  com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
+  topologyConfig.put(com.twitter.heron.api.Config.TOPOLOGY_STMGRS,1);
+  TopologyAPI.Topology topology=TopologyTests.createTopology(topologyName,topologyConfig,spouts,bolts);
+  Config config=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).putAll(ClusterDefaults.getDefaults()).build();
+  packing.initialize(config,topology);
+  return packing.pack();
+}

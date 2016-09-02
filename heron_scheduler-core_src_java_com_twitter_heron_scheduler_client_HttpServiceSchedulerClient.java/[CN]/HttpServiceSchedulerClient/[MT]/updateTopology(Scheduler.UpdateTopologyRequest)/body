@@ -1,0 +1,3 @@
+{
+  return requestSchedulerService(Command.UPDATE,updateTopologyRequest.toByteArray());
+}

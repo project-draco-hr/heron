@@ -1,0 +1,4 @@
+{
+  LOG.severe("Topology onUpdate not implemented by this scheduler.");
+  return false;
+}

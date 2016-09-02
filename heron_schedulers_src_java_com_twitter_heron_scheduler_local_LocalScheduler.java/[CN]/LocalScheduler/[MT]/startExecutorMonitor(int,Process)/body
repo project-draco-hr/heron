@@ -9,6 +9,10 @@
           LOG.info("Topology is killed. Not to start new executors.");
           return;
         }
+ else         if (!processToContainer.containsKey(containerExecutor)) {
+          LOG.log(Level.INFO,"Container {0} is killed. No need to relaunch.",container);
+          return;
+        }
         LOG.log(Level.INFO,"Trying to restart container {0}",container);
         startExecutor(processToContainer.remove(containerExecutor));
       }
