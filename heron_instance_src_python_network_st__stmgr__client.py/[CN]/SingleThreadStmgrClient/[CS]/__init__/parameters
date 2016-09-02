@@ -9,4 +9,3 @@ instance
 sock_map
 gateway_metrics
 socket_options
-sys_config

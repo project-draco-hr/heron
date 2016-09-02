@@ -1,0 +1,2 @@
+def get_sys_config():
+    return sys_config

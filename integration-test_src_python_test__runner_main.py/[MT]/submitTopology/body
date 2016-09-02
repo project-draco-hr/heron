@@ -1,7 +1,7 @@
 def submitTopology(heronCliPath, cluster, role, env, jarPath, classPath, pkgUri, args=None):
     ' Submit topology using heron-cli '
     logging.info('Submitting topology')
-    cmd = ('%s submit %s/%s/%s %s %s %s --verbose' % (heronCliPath, cluster, role, env, jarPath, classPath, args))
+    cmd = ('%s submit %s/%s/%s %s %s %s' % (heronCliPath, cluster, role, env, jarPath, classPath, args))
     if (pkgUri is not None):
         cmd = ("%s --config-property heron.package.core.uri='%s'" % (cmd, pkgUri))
     logging.info('Submitting command: %s', cmd)

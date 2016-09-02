@@ -1,5 +1,6 @@
 'mock_generator.py: module for creating mock objects for unittesting\n                      mainly for common/tests/python/utils'
 import random
+from mock import patch
 from heron.common.src.python.utils.metrics import MetricsCollector
 from heron.common.src.python.utils.misc import OutgoingTupleHelper, PhysicalPlanHelper, HeronCommunicator, PythonSerializer
 from heron.common.src.python.utils.topology import ICustomGrouping, ITaskHook

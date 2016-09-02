@@ -5,4 +5,3 @@ instance
 stream_port
 metrics_port
 topo_pex_file_path
-sys_config

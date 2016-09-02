@@ -1,0 +1,3 @@
+def set_sys_config(config):
+    global sys_config
+    sys_config = config

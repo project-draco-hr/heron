@@ -2,6 +2,7 @@
 import logging
 import traceback
 from abc import abstractmethod
+from heron.common.src.python.config import system_config
 from heron.common.src.python.utils.misc import OutgoingTupleHelper
 from heron.proto import tuple_pb2
 import heron.common.src.python.pex_loader as pex_loader

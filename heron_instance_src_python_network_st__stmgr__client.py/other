@@ -1,4 +1,5 @@
 'Stream Manager client for single-thread heron instance in python'
+from heron.common.src.python.config import system_config
 from heron.common.src.python.utils.log import Log
 from heron.common.src.python.utils.misc import PhysicalPlanHelper
 from heron.common.src.python.network import HeronClient, StatusCode

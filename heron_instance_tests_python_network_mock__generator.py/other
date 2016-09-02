@@ -6,3 +6,4 @@ from heron.instance.src.python.network import SingleThreadStmgrClient, MetricsMa
 import heron.common.src.python.constants as constants
 import heron.common.tests.python.mock_protobuf as mock_protobuf
 from mock import Mock
+from mock import patch

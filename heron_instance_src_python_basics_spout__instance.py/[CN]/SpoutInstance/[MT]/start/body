@@ -1,6 +1,6 @@
 def start(self):
     context = self.pplan_helper.context
-    self.spout_metrics.register_metrics(context, self.sys_config)
+    self.spout_metrics.register_metrics(context)
     self.spout_impl.initialize(config=context.get_cluster_config(), context=context)
     context.invoke_hook_prepare()
     interval = float(self.sys_config[constants.HERON_METRICS_EXPORT_INTERVAL_SEC])
