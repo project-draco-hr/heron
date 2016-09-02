@@ -1,0 +1,8 @@
+{
+  if (bUseTopicNameForPartitionPathId) {
+    return topic + "/partition_" + partition;
+  }
+ else {
+    return "partition_" + partition;
+  }
+}
