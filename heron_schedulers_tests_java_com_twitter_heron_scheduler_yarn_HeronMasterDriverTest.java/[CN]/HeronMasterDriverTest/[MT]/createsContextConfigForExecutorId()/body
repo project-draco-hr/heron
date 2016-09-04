@@ -1,5 +1,5 @@
 {
-  Configuration config=driver.createContextConfig("4");
+  Configuration config=driver.createContextConfig(4);
   boolean found=false;
   for (  NamedParameterNode<?> namedParameterNode : config.getNamedParameters()) {
     if (namedParameterNode.getName().equals(ContextIdentifier.class.getSimpleName())) {

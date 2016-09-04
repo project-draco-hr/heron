@@ -4,5 +4,5 @@
     LOG.info("The topology is killed. Ignore task fail event");
     return;
   }
-  submitHeronExecutorTask(failedTask.getId());
+  submitHeronExecutorTask(Integer.valueOf(failedTask.getId()));
 }

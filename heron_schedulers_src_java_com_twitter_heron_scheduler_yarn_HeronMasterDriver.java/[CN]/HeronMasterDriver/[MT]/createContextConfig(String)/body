@@ -1,3 +1,0 @@
-{
-  return ContextConfiguration.CONF.set(ContextConfiguration.IDENTIFIER,executorId).build();
-}

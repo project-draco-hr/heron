@@ -5,7 +5,7 @@
       HeronMasterDriverProvider.getInstance().restartTopology();
     }
  else {
-      HeronMasterDriverProvider.getInstance().restartWorker(String.valueOf(containerId));
+      HeronMasterDriverProvider.getInstance().restartWorker(containerId);
     }
     return true;
   }

@@ -1,5 +1,5 @@
 {
-  int result=id.hashCode();
+  int result=id;
   result=31 * result + getInstances().hashCode();
   result=31 * result + getResource().hashCode();
   return result;

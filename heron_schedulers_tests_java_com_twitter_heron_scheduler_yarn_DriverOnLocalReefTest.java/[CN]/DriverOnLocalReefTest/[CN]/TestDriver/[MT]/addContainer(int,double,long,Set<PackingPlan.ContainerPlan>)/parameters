@@ -1,0 +1,4 @@
+int id
+double cpu
+long mem
+Set<PackingPlan.ContainerPlan> containers

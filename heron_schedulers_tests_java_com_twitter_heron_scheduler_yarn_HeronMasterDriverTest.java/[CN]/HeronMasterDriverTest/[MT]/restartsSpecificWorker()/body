@@ -4,12 +4,12 @@
   for (int id=0; id < numContainers; id++) {
     AllocatedEvaluator mockEvaluator=Mockito.mock(AllocatedEvaluator.class);
     Mockito.when(mockEvaluator.getId()).thenReturn("container-" + id);
-    Mockito.doReturn(mockEvaluator).when(spyDriver).allocateContainer("" + id,id + 1,id + 1);
-    spyDriver.launchContainerForExecutor("" + id,id + 1,id + 1);
+    Mockito.doReturn(mockEvaluator).when(spyDriver).allocateContainer(id,id + 1,id + 1);
+    spyDriver.launchContainerForExecutor(id,id + 1,id + 1);
     Mockito.verify(mockEvaluator,Mockito.timeout(1000).times(1)).submitContext(Mockito.any(Configuration.class));
     mockEvaluators[id]=mockEvaluator;
   }
-  spyDriver.restartWorker("1");
+  spyDriver.restartWorker(1);
   Mockito.verify(mockEvaluators[1]).close();
   Mockito.verify(mockEvaluators[1],Mockito.timeout(1000).times(2)).submitContext(Mockito.any(Configuration.class));
   Mockito.verify(mockEvaluators[0],Mockito.never()).close();

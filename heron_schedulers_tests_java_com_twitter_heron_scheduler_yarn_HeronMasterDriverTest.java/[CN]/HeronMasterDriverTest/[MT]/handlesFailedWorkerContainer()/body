@@ -1,14 +1,14 @@
 {
   AllocatedEvaluator mockWorkerEvaluator=Mockito.mock(AllocatedEvaluator.class);
   Mockito.when(mockWorkerEvaluator.getId()).thenReturn("worker");
-  Mockito.doReturn(mockWorkerEvaluator).when(spyDriver).allocateContainer("1",1,1024);
+  Mockito.doReturn(mockWorkerEvaluator).when(spyDriver).allocateContainer(1,1,1024);
   Set<PackingPlan.ContainerPlan> containers=new HashSet<>();
-  addContainer("1",1.0,1024L,containers);
+  addContainer(1,1.0,1024L,containers);
   PackingPlan packing=new PackingPlan("packingId",containers,new Resource(1.5,2,3));
   spyDriver.scheduleHeronWorkers(packing);
   Mockito.verify(mockWorkerEvaluator,Mockito.timeout(1000).times(1)).submitContext(Mockito.any(Configuration.class));
   FailedEvaluator mockFailedContainer=Mockito.mock(FailedEvaluator.class);
   Mockito.when(mockFailedContainer.getId()).thenReturn("worker");
   spyDriver.new FailedContainerHandler().onNext(mockFailedContainer);
-  Mockito.verify(spyDriver,Mockito.timeout(1000).times(2)).allocateContainer("1",1,1024);
+  Mockito.verify(spyDriver,Mockito.timeout(1000).times(2)).allocateContainer(1,1,1024);
 }

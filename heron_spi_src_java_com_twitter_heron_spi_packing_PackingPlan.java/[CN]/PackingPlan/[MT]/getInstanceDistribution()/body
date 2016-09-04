@@ -1,7 +1,7 @@
 {
   StringBuilder[] containerBuilder=new StringBuilder[this.getContainers().size()];
   for (  PackingPlan.ContainerPlan container : this.getContainers()) {
-    int index=Integer.parseInt(container.id);
+    int index=container.id;
     containerBuilder[index - 1]=new StringBuilder();
     for (    PackingPlan.InstancePlan instance : container.getInstances()) {
       String[] tokens=instance.getId().split(":");

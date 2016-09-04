@@ -5,5 +5,5 @@
     return;
   }
   LOG.log(Level.WARNING,"Task should not complete, relaunching {0}",task.getId());
-  submitHeronExecutorTask(task.getId());
+  submitHeronExecutorTask(Integer.valueOf(task.getId()));
 }

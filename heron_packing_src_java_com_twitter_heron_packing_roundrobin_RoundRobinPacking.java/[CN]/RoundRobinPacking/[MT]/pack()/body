@@ -1,12 +1,12 @@
 {
-  Map<String,List<String>> roundRobinAllocation=getRoundRobinAllocation();
-  Map<String,Map<String,Long>> instancesRamMap=getInstancesRamMapInContainer(roundRobinAllocation);
+  Map<Integer,List<String>> roundRobinAllocation=getRoundRobinAllocation();
+  Map<Integer,Map<String,Long>> instancesRamMap=getInstancesRamMapInContainer(roundRobinAllocation);
   long containerDiskInBytes=getContainerDiskHint(roundRobinAllocation);
   double containerCpu=getContainerCpuHint(roundRobinAllocation);
   Set<PackingPlan.ContainerPlan> containerPlans=new HashSet<>();
   long topologyRam=0;
-  for (  Map.Entry<String,List<String>> entry : roundRobinAllocation.entrySet()) {
-    String containerId=entry.getKey();
+  for (  Map.Entry<Integer,List<String>> entry : roundRobinAllocation.entrySet()) {
+    int containerId=entry.getKey();
     List<String> instanceList=entry.getValue();
     Map<String,PackingPlan.InstancePlan> instancePlanMap=new HashMap<>();
     long containerRam=DEFAULT_RAM_PADDING_PER_CONTAINER;

@@ -2,7 +2,7 @@ def _get_instance_plans(self, packing_plan, container_id):
     "\n    For the given packing_plan, return the container plan with the given container_id. If protobufs\n    supported maps, we could just get the plan by id, but it doesn't so we have a collection of\n    containers to iterate over.\n    "
     this_container_plan = None
     for container_plan in packing_plan.container_plans:
-        if (container_plan.id == str(container_id)):
+        if (container_plan.id == container_id):
             this_container_plan = container_plan
     assert (this_container_plan is not None)
     return this_container_plan.instance_plans

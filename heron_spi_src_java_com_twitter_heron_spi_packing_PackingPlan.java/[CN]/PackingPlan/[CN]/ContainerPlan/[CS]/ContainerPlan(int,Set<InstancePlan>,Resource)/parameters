@@ -1,0 +1,3 @@
+int id
+Set<InstancePlan> instances
+Resource resource

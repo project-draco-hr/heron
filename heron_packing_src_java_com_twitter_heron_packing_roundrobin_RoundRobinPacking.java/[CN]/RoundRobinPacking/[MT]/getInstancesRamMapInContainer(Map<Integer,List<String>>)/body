@@ -1,0 +1,35 @@
+{
+  Map<String,Long> ramMap=TopologyUtils.getComponentRamMapConfig(topology);
+  Map<Integer,Map<String,Long>> instancesRamMapInContainer=new HashMap<>();
+  for (  Map.Entry<Integer,List<String>> entry : allocation.entrySet()) {
+    int containerId=entry.getKey();
+    Map<String,Long> ramInsideContainer=new HashMap<>();
+    instancesRamMapInContainer.put(containerId,ramInsideContainer);
+    List<String> instancesToBeAccounted=new ArrayList<>();
+    long usedRam=0;
+    for (    String instanceId : entry.getValue()) {
+      String componentName=getComponentName(instanceId);
+      if (ramMap.containsKey(componentName)) {
+        long ram=ramMap.get(componentName);
+        ramInsideContainer.put(instanceId,ram);
+        usedRam+=ram;
+      }
+ else {
+        instancesToBeAccounted.add(instanceId);
+      }
+    }
+    long containerRamHint=getContainerRamHint(allocation);
+    int instancesToAllocate=instancesToBeAccounted.size();
+    if (instancesToAllocate != 0) {
+      long individualInstanceRam=instanceRamDefault;
+      if (containerRamHint != Long.parseLong(NOT_SPECIFIED_NUMBER_VALUE)) {
+        long remainingRam=containerRamHint - DEFAULT_RAM_PADDING_PER_CONTAINER - usedRam;
+        individualInstanceRam=remainingRam / instancesToAllocate;
+      }
+      for (      String instanceId : instancesToBeAccounted) {
+        ramInsideContainer.put(instanceId,individualInstanceRam);
+      }
+    }
+  }
+  return instancesRamMapInContainer;
+}

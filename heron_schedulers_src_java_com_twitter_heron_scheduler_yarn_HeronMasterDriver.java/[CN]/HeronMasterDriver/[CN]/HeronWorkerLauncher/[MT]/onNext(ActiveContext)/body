@@ -4,7 +4,7 @@
     context.close();
     return;
   }
-  String workerId=context.getId();
+  int workerId=Integer.valueOf(context.getId());
   Optional<HeronWorker> worker=multiKeyWorkerMap.lookupByWorkerId(workerId);
   if (!worker.isPresent()) {
     context.close();

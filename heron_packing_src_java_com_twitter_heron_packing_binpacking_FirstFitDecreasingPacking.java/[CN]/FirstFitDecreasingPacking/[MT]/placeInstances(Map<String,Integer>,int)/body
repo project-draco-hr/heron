@@ -1,5 +1,5 @@
 {
-  Map<String,List<String>> allocation=new HashMap<>();
+  Map<Integer,List<String>> allocation=new HashMap<>();
   ArrayList<Container> containers=new ArrayList<>();
   ArrayList<RamRequirement> ramRequirements=getSortedRAMInstances(parallelismMap);
   int globalTaskIndex=1;
@@ -8,13 +8,13 @@
     int numInstance=parallelismMap.get(component);
     for (int j=0; j < numInstance; j++) {
       int containerId=placeFFDInstance(containers,ramRequirements.get(i).getRamRequirement(),instanceCpuDefault,instanceDiskDefault);
-      if (allocation.containsKey(getContainerId(containerId + numContainers))) {
-        allocation.get(getContainerId(containerId + numContainers)).add(getInstanceId(containerId + numContainers,component,globalTaskIndex,j));
+      if (allocation.containsKey(containerId + numContainers)) {
+        allocation.get(containerId + numContainers).add(getInstanceId(containerId + numContainers,component,globalTaskIndex,j));
       }
  else {
         ArrayList<String> instance=new ArrayList<>();
         instance.add(getInstanceId(containerId + numContainers,component,globalTaskIndex,j));
-        allocation.put(getContainerId(containerId + numContainers),instance);
+        allocation.put(containerId + numContainers,instance);
       }
       globalTaskIndex++;
     }
