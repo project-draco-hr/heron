@@ -5,4 +5,3 @@ def update_cpu_time(self):
         self.user_cpu_time.update(t.user)
     except Exception as e:
         Log.error(traceback.format_exc(e))
-        pass

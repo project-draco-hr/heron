@@ -1,7 +1,9 @@
 ' Python program related metrics.'
+import gc
 import psutil
 import traceback
-from .metrics import MultiCountMetric, AssignableMetrics
+from .metrics import AssignableMetrics
 from .metrics_helper import BaseMetricsHelper
+import heron.common.src.python.constants as constants
 from heron.common.src.python.config import system_config
 from heron.common.src.python.utils.log import Log

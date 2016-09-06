@@ -3,4 +3,3 @@ def update_fds(self):
         self.fd_nums.update(self.process.num_fds())
     except Exception as e:
         Log.error(traceback.format_exc(e))
-        pass
