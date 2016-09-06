@@ -1,0 +1,9 @@
+def __init__(self):
+    self.process = psutil.Process()
+    self.sys_cpu_time = AssignableMetrics(0)
+    self.user_cpu_time = AssignableMetrics(0)
+    self.threads = AssignableMetrics(0)
+    self.fd_nums = AssignableMetrics(0)
+    self.num_threads = AssignableMetrics([])
+    self.physical_memory = AssignableMetrics(0)
+    self.virtual_memory = AssignableMetrics(0)
