@@ -1,5 +1,5 @@
 REEFFileNames fileNames
-String heronExecutorId
+int heronExecutorId
 String cluster
 String role
 String topologyName

@@ -1,5 +1,5 @@
 {
-  this.heronExecutorId=Integer.valueOf(heronExecutorId);
+  this.heronExecutorId=heronExecutorId;
   this.cluster=cluster;
   this.role=role;
   this.topologyName=topologyName;
