@@ -11,9 +11,6 @@
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
   Assert.assertEquals(packingPlanExplicitRamMap.getContainers().size(),2);
-  Assert.assertEquals((long)(Math.round(spoutParallelism * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * instanceCpuDefault)) + Math.round(boltParallelism * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * instanceCpuDefault)) + instanceCpuDefault),(long)packingPlanExplicitRamMap.getResource().getCpu());
-  Assert.assertEquals((spoutParallelism * spoutRam) + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * spoutRam)) + boltParallelism * boltRam + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * boltRam)) + instanceRamDefault,packingPlanExplicitRamMap.getResource().getRam());
-  Assert.assertEquals(spoutParallelism * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * instanceDiskDefault)) + boltParallelism * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (boltParallelism * instanceDiskDefault)) + instanceDiskDefault,packingPlanExplicitRamMap.getResource().getDisk());
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.getContainers()) {
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
       if (instancePlan.getComponentName().equals(BOLT_NAME)) {

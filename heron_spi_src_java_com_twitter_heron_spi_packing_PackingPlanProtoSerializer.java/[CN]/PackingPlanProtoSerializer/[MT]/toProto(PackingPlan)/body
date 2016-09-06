@@ -1,5 +1,5 @@
 {
-  PackingPlans.PackingPlan.Builder builder=PackingPlans.PackingPlan.newBuilder().setId(packingPlan.getId()).setResource(builder(packingPlan.getResource()));
+  PackingPlans.PackingPlan.Builder builder=PackingPlans.PackingPlan.newBuilder().setId(packingPlan.getId());
   for (  PackingPlan.ContainerPlan containerPlan : packingPlan.getContainers()) {
     builder.addContainerPlans(builder(containerPlan));
   }

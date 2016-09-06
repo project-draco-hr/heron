@@ -1,10 +1,7 @@
 {
-  long topologyRam=0;
-  long topologyDisk=0;
-  double topologyCpu=0.0;
-  for (  Map.Entry<Integer,List<String>> entry : ffdAllocation.entrySet()) {
-    int containerId=entry.getKey();
-    List<String> instanceList=entry.getValue();
+  Set<PackingPlan.ContainerPlan> containerPlans=new HashSet<>();
+  for (  Integer containerId : ffdAllocation.keySet()) {
+    List<String> instanceList=ffdAllocation.get(containerId);
     long containerRam=0;
     long containerDiskInBytes=0;
     double containerCpu=0;
@@ -32,14 +29,6 @@
     Resource resource=new Resource(Math.round(containerCpu),containerRam,containerDiskInBytes);
     PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlans,resource);
     containerPlans.add(containerPlan);
-    topologyRam+=containerRam;
-    topologyCpu+=Math.round(containerCpu);
-    topologyDisk+=containerDiskInBytes;
   }
-  if (!scale) {
-    topologyRam+=instanceRamDefault;
-    topologyDisk+=instanceDiskDefault;
-    topologyCpu+=instanceCpuDefault;
-  }
-  return new Resource(topologyCpu,topologyRam,topologyDisk);
+  return containerPlans;
 }

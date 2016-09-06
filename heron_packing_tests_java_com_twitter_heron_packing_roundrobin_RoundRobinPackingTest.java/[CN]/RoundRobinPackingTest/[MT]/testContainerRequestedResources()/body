@@ -12,9 +12,6 @@
   topologyConfig.setContainerCpuRequested(containerCpu);
   TopologyAPI.Topology topologyExplicitResourcesConfig=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitResourcesConfig=getRoundRobinPackingPlan(topologyExplicitResourcesConfig);
-  Assert.assertEquals(containerCpu * (numContainers + 1),packingPlanExplicitResourcesConfig.getResource().getCpu(),DELTA);
-  Assert.assertEquals((double)containerRam * numContainers,(double)packingPlanExplicitResourcesConfig.getResource().getRam(),spoutParallelism + boltParallelism);
-  Assert.assertEquals(containerDisk * (numContainers + 1),packingPlanExplicitResourcesConfig.getResource().getDisk());
   Assert.assertEquals(numContainers,packingPlanExplicitResourcesConfig.getContainers().size());
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitResourcesConfig.getContainers()) {
     Assert.assertEquals(containerCpu,containerPlan.getResource().getCpu(),DELTA);

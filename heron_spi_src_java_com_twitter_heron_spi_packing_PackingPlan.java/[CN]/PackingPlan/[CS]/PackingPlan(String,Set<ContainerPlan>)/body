@@ -1,7 +1,6 @@
 {
   this.id=id;
   this.containers=ImmutableSet.copyOf(containers);
-  this.resource=resource;
   containersMap=new HashMap<>();
   for (  ContainerPlan containerPlan : containers) {
     containersMap.put(containerPlan.getId(),containerPlan);

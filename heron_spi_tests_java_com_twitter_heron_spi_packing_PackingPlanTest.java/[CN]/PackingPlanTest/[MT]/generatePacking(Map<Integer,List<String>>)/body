@@ -20,5 +20,5 @@
     PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlans,resource);
     containerPlans.add(containerPlan);
   }
-  return new PackingPlan("",containerPlans,resource);
+  return new PackingPlan("",containerPlans);
 }

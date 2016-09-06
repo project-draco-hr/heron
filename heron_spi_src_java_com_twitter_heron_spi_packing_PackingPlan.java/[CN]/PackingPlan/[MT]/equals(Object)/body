@@ -6,5 +6,5 @@
     return false;
   }
   PackingPlan that=(PackingPlan)o;
-  return getId().equals(that.getId()) && getContainers().equals(that.getContainers()) && getResource().equals(that.getResource());
+  return getId().equals(that.getId()) && getContainers().equals(that.getContainers());
 }

@@ -16,9 +16,6 @@
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
   Assert.assertEquals(packingPlanExplicitRamMap.getContainers().size(),1);
-  Assert.assertEquals(Math.round(totalInstances * instanceCpuDefault + DEFAULT_CONTAINER_PADDING / 100.0 * (totalInstances * instanceCpuDefault) + instanceCpuDefault),(long)packingPlanExplicitRamMap.getResource().getCpu());
-  Assert.assertEquals(spoutParallelism * spoutRam + boltParallelism * boltRam + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (spoutParallelism * spoutRam + boltParallelism * boltRam)) + instanceRamDefault,packingPlanExplicitRamMap.getResource().getRam());
-  Assert.assertEquals(totalInstances * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * (totalInstances * instanceDiskDefault)) + instanceDiskDefault,packingPlanExplicitRamMap.getResource().getDisk());
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.getContainers()) {
     Assert.assertNotEquals(maxContainerRam,containerPlan.getResource().getRam());
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {

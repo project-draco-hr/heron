@@ -3,11 +3,11 @@
   ArrayList<Container> containers=new ArrayList<>();
   ArrayList<RamRequirement> ramRequirements=getSortedRAMInstances(parallelismMap);
   int globalTaskIndex=1;
-  for (int i=0; i < ramRequirements.size(); i++) {
-    String component=ramRequirements.get(i).getComponentName();
+  for (  RamRequirement ramRequirement : ramRequirements) {
+    String component=ramRequirement.getComponentName();
     int numInstance=parallelismMap.get(component);
     for (int j=0; j < numInstance; j++) {
-      int containerId=placeFFDInstance(containers,ramRequirements.get(i).getRamRequirement(),instanceCpuDefault,instanceDiskDefault);
+      int containerId=placeFFDInstance(containers,ramRequirement.getRamRequirement(),instanceCpuDefault,instanceDiskDefault);
       if (allocation.containsKey(containerId + numContainers)) {
         allocation.get(containerId + numContainers).add(getInstanceId(containerId + numContainers,component,globalTaskIndex,j));
       }

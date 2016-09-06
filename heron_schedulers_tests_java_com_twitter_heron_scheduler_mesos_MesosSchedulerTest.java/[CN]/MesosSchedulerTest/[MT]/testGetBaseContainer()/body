@@ -6,7 +6,7 @@
   PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(0,new HashSet<PackingPlan.InstancePlan>(),containerResources);
   Set<PackingPlan.ContainerPlan> containerPlans=new HashSet<>();
   containerPlans.add(containerPlan);
-  PackingPlan packingPlan=new PackingPlan(TOPOLOGY_NAME,containerPlans,containerResources);
+  PackingPlan packingPlan=new PackingPlan(TOPOLOGY_NAME,containerPlans);
   BaseContainer container=scheduler.getBaseContainer(0,packingPlan);
   Assert.assertEquals(ROLE,container.runAsUser);
   Assert.assertEquals(CPU,container.cpu,0.01);

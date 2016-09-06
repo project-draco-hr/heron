@@ -1,4 +1,4 @@
-int containerIdx
+int containerId
 String componentName
-int instanceIdx
-int componentIdx
+int instanceId
+int componentId

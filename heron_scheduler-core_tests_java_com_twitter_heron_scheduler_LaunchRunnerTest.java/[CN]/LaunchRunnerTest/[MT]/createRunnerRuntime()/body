@@ -11,7 +11,6 @@
   Mockito.when(packingPlan.getContainers()).thenReturn(new HashSet<PackingPlan.ContainerPlan>());
   Mockito.when(packingPlan.getComponentRamDistribution()).thenReturn("ramdist");
   Mockito.when(packingPlan.getId()).thenReturn("packing_plan_id");
-  Mockito.when(packingPlan.getResource()).thenReturn(new Resource(0,0,0));
   Mockito.when(packing.pack()).thenReturn(packingPlan);
   Mockito.when(packingPlan.getInstanceDistribution()).thenReturn(MOCK_PACKING_STRING);
   LauncherUtils mockLauncherUtils=Mockito.mock(LauncherUtils.class);

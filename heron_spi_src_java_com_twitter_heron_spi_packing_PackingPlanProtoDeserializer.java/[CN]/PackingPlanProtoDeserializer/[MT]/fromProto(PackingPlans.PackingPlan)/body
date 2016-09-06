@@ -3,5 +3,5 @@
   for (  PackingPlans.ContainerPlan containerPlan : packingPlan.getContainerPlansList()) {
     containers.add(convert(containerPlan));
   }
-  return new PackingPlan(packingPlan.getId(),containers,convert(packingPlan.getResource()));
+  return new PackingPlan(packingPlan.getId(),containers);
 }

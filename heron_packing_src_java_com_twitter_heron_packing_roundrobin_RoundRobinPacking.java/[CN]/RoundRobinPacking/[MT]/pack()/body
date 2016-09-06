@@ -22,13 +22,8 @@
     Resource resource=new Resource(containerCpu,containerRam,containerDiskInBytes);
     PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,new HashSet<>(instancePlanMap.values()),resource);
     containerPlans.add(containerPlan);
-    topologyRam+=containerRam;
   }
-  int totalContainer=containerPlans.size() + 1;
-  long topologyDisk=totalContainer * containerDiskInBytes;
-  double topologyCpu=totalContainer * containerCpu;
-  Resource resource=new Resource(topologyCpu,topologyRam,topologyDisk);
-  PackingPlan plan=new PackingPlan(topology.getId(),containerPlans,resource);
+  PackingPlan plan=new PackingPlan(topology.getId(),containerPlans);
   if (!isValidPackingPlan(plan)) {
     return null;
   }

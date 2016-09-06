@@ -1,3 +1,2 @@
 String id
 Set<ContainerPlan> containers
-Resource resource

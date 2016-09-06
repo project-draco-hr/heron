@@ -1,3 +1,3 @@
 {
-  return String.format("%d:%s:%d:%d",containerIdx,componentName,instanceIdx,componentIdx);
+  return String.format("%d:%s:%d:%d",containerId,componentName,instanceId,componentId);
 }
