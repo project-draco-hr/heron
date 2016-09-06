@@ -33,7 +33,7 @@ def getComponentMetrics(self, tmaster, componentName, metricNames, instances, in
     metricResponse.ParseFromString(result.body)
     if (metricResponse.status.status == common_pb2.NOTOK):
         if metricResponse.status.HasField('message'):
-            Log.error(metricResponse.status.message)
+            Log.warn('Received response from Tmaster: %s', metricResponse.status.message)
     ret = {}
     ret['interval'] = metricResponse.interval
     ret['component'] = componentName
