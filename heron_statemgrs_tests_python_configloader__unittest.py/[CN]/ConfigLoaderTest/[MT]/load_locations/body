@@ -1,0 +1,3 @@
+def load_locations(self, cluster):
+    yaml_path = os.path.join(self.heron_dir, ('heron/config/src/yaml/conf/%s/statemgr.yaml' % cluster))
+    return configloader.load_state_manager_locations(cluster, yaml_path)

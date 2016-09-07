@@ -15,6 +15,7 @@ from functools import partial
 from heron.common.src.python.utils import log
 from heron.proto.packing_plan_pb2 import PackingPlan
 from heron.statemgrs.src.python import statemanagerfactory
+from heron.statemgrs.src.python import configloader
 from heron.statemgrs.src.python.config import Config as StateMgrConfig
 Log = log.Log
 if (__name__ == '__main__'):

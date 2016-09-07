@@ -1,0 +1,2 @@
+def test_load_state_manager_locations_marathon(self):
+    self.assertEquals([{'hostport': 'LOCALMODE', 'name': 'local', 'rootpath': '/user/fake/.herondata/repository/state/marathon', 'tunnelhost': 'localhost', 'type': 'file', }], self.load_locations('marathon'))

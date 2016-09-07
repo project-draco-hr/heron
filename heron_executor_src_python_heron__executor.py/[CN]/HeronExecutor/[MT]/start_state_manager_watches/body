@@ -1,7 +1,7 @@
 def start_state_manager_watches(self):
     '\n    Receive updates to the packing plan from the statemgrs and update processes as needed.\n    '
     statemgr_config = StateMgrConfig()
-    statemgr_config.set_state_locations(self.__get_state_manager_locations())
+    statemgr_config.set_state_locations(configloader.load_state_manager_locations(self.cluster))
     self.state_managers = statemanagerfactory.get_all_state_managers(statemgr_config)
 
     def on_packing_plan_watch(state_manager, new_packing_plan):

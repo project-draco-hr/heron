@@ -1,0 +1,12 @@
+' configloader.py '
+import os
+import re
+import sys
+import yaml
+if (__name__ == '__main__'):
+    ' helper main method used to verify config files, intended for manual verification only '
+    if (len(sys.argv) > 1):
+        locations = load_state_manager_locations('local', sys.argv[1])
+    else:
+        locations = load_state_manager_locations('local')
+    print ('locations: %s' % locations)

@@ -1,0 +1,2 @@
+def test_load_state_manager_locations_localzk(self):
+    self.assertEquals([{'hostport': '127.0.0.1:2181', 'name': 'zk', 'rootpath': '/heron', 'tunnelhost': 'reachable.tunnel.host', 'type': 'zookeeper', }], self.load_locations('localzk'))

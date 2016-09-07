@@ -1,0 +1,2 @@
+def test_load_state_manager_locations_yarn(self):
+    self.assertEquals([{'hostport': 'LOCALMODE', 'name': 'local', 'rootpath': '/user/fake/.herondata/repository/state/yarn', 'tunnelhost': 'localhost', 'type': 'file', }], self.load_locations('yarn'))
