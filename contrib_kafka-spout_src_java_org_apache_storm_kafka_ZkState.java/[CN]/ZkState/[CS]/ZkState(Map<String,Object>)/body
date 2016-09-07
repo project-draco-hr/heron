@@ -1,0 +1,9 @@
+{
+  try {
+    curator=newCurator(stateConf);
+    curator.start();
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

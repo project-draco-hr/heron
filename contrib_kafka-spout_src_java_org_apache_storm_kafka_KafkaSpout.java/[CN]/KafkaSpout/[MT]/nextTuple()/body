@@ -1,23 +1,23 @@
 {
-  List<PartitionManager> managers=_coordinator.getMyManagedPartitions();
+  List<PartitionManager> managers=coordinator.getMyManagedPartitions();
   for (int i=0; i < managers.size(); i++) {
     try {
-      _currPartitionIndex=_currPartitionIndex % managers.size();
-      EmitState state=managers.get(_currPartitionIndex).next(_collector);
-      if (state != EmitState.EMITTED_MORE_LEFT) {
-        _currPartitionIndex=(_currPartitionIndex + 1) % managers.size();
+      currPartitionIndex=currPartitionIndex % managers.size();
+      EmitState emitState=managers.get(currPartitionIndex).next(collector);
+      if (emitState != EmitState.EMITTED_MORE_LEFT) {
+        currPartitionIndex=(currPartitionIndex + 1) % managers.size();
       }
-      if (state != EmitState.NO_EMITTED) {
+      if (emitState != EmitState.NO_EMITTED) {
         break;
       }
     }
  catch (    FailedFetchException e) {
       LOG.warn("Fetch failed",e);
-      _coordinator.refresh();
+      coordinator.refresh();
     }
   }
-  long diffWithNow=System.currentTimeMillis() - _lastUpdateMs;
-  if (diffWithNow > _spoutConfig.stateUpdateIntervalMs || diffWithNow < 0) {
+  long diffWithNow=System.currentTimeMillis() - lastUpdateMs;
+  if (diffWithNow > spoutConfig.stateUpdateIntervalMs || diffWithNow < 0) {
     commit();
   }
 }

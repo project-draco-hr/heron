@@ -1,3 +1,0 @@
-{
-  assertEquals(Collections.singletonList(ImmutableMap.of("key","test")),scheme.deserializeKeyAndValue(wrapString("key"),wrapString("test")));
-}

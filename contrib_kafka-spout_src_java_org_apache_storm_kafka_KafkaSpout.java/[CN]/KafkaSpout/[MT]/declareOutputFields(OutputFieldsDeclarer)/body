@@ -1,8 +1,8 @@
 {
-  if (!Strings.isNullOrEmpty(_spoutConfig.outputStreamId)) {
-    declarer.declareStream(_spoutConfig.outputStreamId,_spoutConfig.scheme.getOutputFields());
+  if (!Strings.isNullOrEmpty(spoutConfig.outputStreamId)) {
+    declarer.declareStream(spoutConfig.outputStreamId,spoutConfig.scheme.getOutputFields());
   }
  else {
-    declarer.declare(_spoutConfig.scheme.getOutputFields());
+    declarer.declare(spoutConfig.scheme.getOutputFields());
   }
 }

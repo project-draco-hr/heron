@@ -1,8 +1,0 @@
-{
-  String s="foo";
-  byte[] bytes=s.getBytes(StandardCharsets.UTF_8);
-  String s1=StringScheme.deserializeString(bytes);
-  String s2=StringScheme.deserializeString(bytes);
-  assertEquals(s,s1);
-  assertEquals(s,s2);
-}

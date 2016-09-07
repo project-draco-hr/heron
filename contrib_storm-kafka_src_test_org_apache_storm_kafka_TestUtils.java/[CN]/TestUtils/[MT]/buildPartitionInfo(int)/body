@@ -1,3 +1,0 @@
-{
-  return buildPartitionInfo(numPartitions,9092);
-}

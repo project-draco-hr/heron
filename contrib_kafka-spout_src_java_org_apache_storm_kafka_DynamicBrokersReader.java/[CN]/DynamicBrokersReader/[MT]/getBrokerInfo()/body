@@ -2,7 +2,7 @@
   List<String> topics=getTopics();
   List<GlobalPartitionInformation> partitions=new ArrayList<GlobalPartitionInformation>();
   for (  String topic : topics) {
-    GlobalPartitionInformation globalPartitionInformation=new GlobalPartitionInformation(topic,this._isWildcardTopic);
+    GlobalPartitionInformation globalPartitionInformation=new GlobalPartitionInformation(topic,this.isWildcardTopic);
     try {
       int numPartitionsForTopic=getNumPartitions(topic);
       String brokerInfoPath=brokerPath();
@@ -10,7 +10,7 @@
         int leader=getLeaderFor(topic,partition);
         String path=brokerInfoPath + "/" + leader;
         try {
-          byte[] brokerData=_curator.getData().forPath(path);
+          byte[] brokerData=curator.getData().forPath(path);
           Broker hp=getBrokerHost(brokerData);
           globalPartitionInformation.addPartition(partition,hp);
         }

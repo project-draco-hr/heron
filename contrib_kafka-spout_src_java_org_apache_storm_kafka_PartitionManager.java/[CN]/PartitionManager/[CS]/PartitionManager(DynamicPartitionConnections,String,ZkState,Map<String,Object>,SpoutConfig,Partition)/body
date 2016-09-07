@@ -1,0 +1,59 @@
+{
+  this.partition=id;
+  this.connections=connections;
+  this.spoutConfig=spoutConfig;
+  this.topologyInstanceId=topologyInstanceId;
+  this.consumer=connections.register(id.host,id.topic,id.partition);
+  this.state=state;
+  this.stormConf=stormConf;
+  this.numberAcked=this.numberFailed=0;
+  try {
+    failedMsgRetryManager=(FailedMsgRetryManager)Class.forName(spoutConfig.failedMsgRetryManagerClass).newInstance();
+    failedMsgRetryManager.prepare(spoutConfig,stormConf);
+  }
+ catch (  ClassNotFoundException|InstantiationException|IllegalAccessException e) {
+    throw new IllegalArgumentException(String.format("Failed to create an instance of <%s> from: <%s>",FailedMsgRetryManager.class,spoutConfig.failedMsgRetryManagerClass),e);
+  }
+  String jsonTopologyId=null;
+  Long jsonOffset=null;
+  String path=committedPath();
+  try {
+    Map<Object,Object> json=state.readJSON(path);
+    LOG.info("Read partition information from: " + path + "  --> "+ json);
+    if (json != null) {
+      jsonTopologyId=(String)((Map<Object,Object>)json.get("topology")).get("id");
+      jsonOffset=(Long)json.get("offset");
+    }
+  }
+ catch (  Throwable e) {
+    LOG.warn("Error reading and/or parsing at ZkNode: " + path,e);
+  }
+  String topic=partition.topic;
+  Long currentOffset=KafkaUtils.getOffset(consumer,topic,id.partition,spoutConfig);
+  if (jsonTopologyId == null || jsonOffset == null) {
+    committedTo=currentOffset;
+    LOG.info("No partition information found, using configuration to determine offset");
+  }
+ else   if (!topologyInstanceId.equals(jsonTopologyId) && spoutConfig.ignoreZkOffsets) {
+    committedTo=KafkaUtils.getOffset(consumer,topic,id.partition,spoutConfig.startOffsetTime);
+    LOG.info("Topology change detected and ignore zookeeper offsets set to true, " + "using configuration to determine offset");
+  }
+ else {
+    committedTo=jsonOffset;
+    LOG.info("Read last commit offset from zookeeper: " + committedTo + "; old topology_id: "+ jsonTopologyId+ " - new topology_id: "+ topologyInstanceId);
+  }
+  if (currentOffset - committedTo > spoutConfig.maxOffsetBehind || committedTo <= 0) {
+    LOG.info("Last commit offset from zookeeper: " + committedTo);
+    Long lastCommittedOffset=committedTo;
+    committedTo=currentOffset;
+    LOG.info("Commit offset " + lastCommittedOffset + " is more than "+ spoutConfig.maxOffsetBehind+ " behind latest offset "+ currentOffset+ ", resetting to startOffsetTime="+ spoutConfig.startOffsetTime);
+  }
+  LOG.info("Starting Kafka " + consumer.host() + " "+ id+ " from offset "+ committedTo);
+  emittedToOffset=committedTo;
+  fetchAPILatencyMax=new CombinedMetric(new MaxMetric());
+  fetchAPILatencyMean=new ReducedMetric(new MeanReducer());
+  fetchAPICallCount=new CountMetric();
+  fetchAPIMessageCount=new CountMetric();
+  lostMessageCount=new CountMetric();
+  messageIneligibleForRetryCount=new CountMetric();
+}

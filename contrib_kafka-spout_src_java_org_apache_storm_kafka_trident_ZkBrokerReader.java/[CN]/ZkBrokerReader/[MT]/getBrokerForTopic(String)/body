@@ -1,7 +1,9 @@
 {
   refresh();
   for (  GlobalPartitionInformation partitionInformation : cachedBrokers) {
-    if (partitionInformation.topic.equals(topic))     return partitionInformation;
+    if (partitionInformation.getTopic().equals(topic)) {
+      return partitionInformation;
+    }
   }
   return null;
 }

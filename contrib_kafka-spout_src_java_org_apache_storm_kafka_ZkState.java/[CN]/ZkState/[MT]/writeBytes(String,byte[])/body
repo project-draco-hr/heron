@@ -1,10 +1,10 @@
 {
   try {
-    if (_curator.checkExists().forPath(path) == null) {
-      _curator.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path,bytes);
+    if (curator.checkExists().forPath(path) == null) {
+      curator.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path,bytes);
     }
  else {
-      _curator.setData().forPath(path,bytes);
+      curator.setData().forPath(path,bytes);
     }
   }
  catch (  Exception e) {

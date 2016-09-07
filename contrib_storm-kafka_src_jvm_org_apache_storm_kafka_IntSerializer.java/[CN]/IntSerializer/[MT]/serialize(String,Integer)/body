@@ -1,3 +1,0 @@
-{
-  return new byte[]{(byte)(val >>> 24),(byte)(val >>> 16),(byte)(val >>> 8),val.byteValue()};
-}

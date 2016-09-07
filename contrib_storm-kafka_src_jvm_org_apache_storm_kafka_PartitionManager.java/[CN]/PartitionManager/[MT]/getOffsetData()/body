@@ -1,3 +1,0 @@
-{
-  return new OffsetData(_emittedToOffset,lastCompletedOffset());
-}

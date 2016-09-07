@@ -1,3 +1,3 @@
 {
-  _connections=connections;
+  this.connections=connections;
 }

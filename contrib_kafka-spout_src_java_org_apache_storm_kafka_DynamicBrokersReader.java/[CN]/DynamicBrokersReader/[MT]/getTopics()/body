@@ -1,14 +1,14 @@
 {
   List<String> topics=new ArrayList<String>();
-  if (!_isWildcardTopic) {
-    topics.add(_topic);
+  if (!isWildcardTopic) {
+    topics.add(myTopic);
     return topics;
   }
  else {
     try {
-      List<String> children=_curator.getChildren().forPath(topicsPath());
+      List<String> children=curator.getChildren().forPath(topicsPath());
       for (      String t : children) {
-        if (t.matches(_topic)) {
+        if (t.matches(myTopic)) {
           LOG.info(String.format("Found matching topic %s",t));
           topics.add(t);
         }

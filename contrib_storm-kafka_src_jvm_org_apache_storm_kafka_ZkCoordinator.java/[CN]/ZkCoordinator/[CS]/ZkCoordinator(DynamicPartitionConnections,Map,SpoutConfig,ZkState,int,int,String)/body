@@ -1,3 +1,0 @@
-{
-  this(connections,stormConf,spoutConfig,state,taskIndex,totalTasks,topologyInstanceId,buildReader(stormConf,spoutConfig));
-}

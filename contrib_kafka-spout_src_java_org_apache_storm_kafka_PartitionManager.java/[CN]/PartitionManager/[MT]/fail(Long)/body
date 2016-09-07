@@ -1,21 +1,21 @@
 {
-  if (offset < _emittedToOffset - _spoutConfig.maxOffsetBehind) {
-    LOG.info("Skipping failed tuple at offset={}" + " because it's more than maxOffsetBehind={}" + " behind _emittedToOffset={} for {}",offset,_spoutConfig.maxOffsetBehind,_emittedToOffset,_partition);
+  if (offset < emittedToOffset - spoutConfig.maxOffsetBehind) {
+    LOG.info("Skipping failed tuple at offset={}" + " because it's more than maxOffsetBehind={}" + " behind emittedToOffset={} for {}",offset,spoutConfig.maxOffsetBehind,emittedToOffset,partition);
   }
  else {
-    LOG.debug("Failing at offset={} with _pending.size()={} pending and _emittedToOffset={} for {}",offset,_pending.size(),_emittedToOffset,_partition);
+    LOG.debug("Failing at offset={} with pending.size()={} and emittedToOffset={} for {}",offset,pending.size(),emittedToOffset,partition);
     numberFailed++;
-    if (numberAcked == 0 && numberFailed > _spoutConfig.maxOffsetBehind) {
+    if (numberAcked == 0 && numberFailed > spoutConfig.maxOffsetBehind) {
       throw new RuntimeException("Too many tuple failures");
     }
-    if (this._failedMsgRetryManager.retryFurther(offset)) {
-      this._failedMsgRetryManager.failed(offset);
+    if (this.failedMsgRetryManager.retryFurther(offset)) {
+      this.failedMsgRetryManager.failed(offset);
     }
  else {
       LOG.warn("Will not retry failed kafka offset {} further",offset);
-      _messageIneligibleForRetryCount.incr();
-      _pending.remove(offset);
-      this._failedMsgRetryManager.acked(offset);
+      messageIneligibleForRetryCount.incr();
+      pending.remove(offset);
+      this.failedMsgRetryManager.acked(offset);
     }
   }
 }

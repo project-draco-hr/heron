@@ -1,0 +1,7 @@
+DynamicPartitionConnections connections
+Map<String,Object> stormConf
+SpoutConfig spoutConfig
+ZkState state
+int taskIndex
+int totalTasks
+String topologyInstanceId

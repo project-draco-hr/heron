@@ -1,3 +1,0 @@
-{
-  return partitionMap.get(partitionId);
-}

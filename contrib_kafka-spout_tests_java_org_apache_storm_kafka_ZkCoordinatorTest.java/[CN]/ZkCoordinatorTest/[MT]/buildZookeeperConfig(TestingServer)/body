@@ -1,5 +1,5 @@
 {
-  Map conf=new HashMap();
+  Map<String,Object> conf=new HashMap<>();
   conf.put(Config.TRANSACTIONAL_ZOOKEEPER_PORT,server.getPort());
   conf.put(Config.TRANSACTIONAL_ZOOKEEPER_SERVERS,Arrays.asList("localhost"));
   conf.put(Config.STORM_ZOOKEEPER_SESSION_TIMEOUT,20000);

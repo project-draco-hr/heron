@@ -1,4 +1,4 @@
 {
-  _config=config;
-  _reader=brokerReader;
+  this.config=config;
+  this.reader=brokerReader;
 }
