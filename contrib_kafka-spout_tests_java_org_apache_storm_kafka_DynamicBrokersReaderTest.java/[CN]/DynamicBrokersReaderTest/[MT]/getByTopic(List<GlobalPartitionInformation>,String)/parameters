@@ -1,2 +1,2 @@
 List<GlobalPartitionInformation> partitions
-String topic
+String aTopic

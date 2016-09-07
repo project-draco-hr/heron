@@ -1,0 +1,3 @@
+{
+  return getSourceFiles(extraActionFile,Predicates.not(Predicates.or(Predicates.containsPattern("heron/storm.src.java"),Predicates.containsPattern("contrib"))));
+}

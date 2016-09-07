@@ -2,20 +2,17 @@
   CommandLineParser parser=new DefaultParser();
   Options options=new Options();
   options.addOption(Option.builder("f").required(true).hasArg().longOpt("extra_action_file").desc("bazel extra action protobuf file").build());
-  options.addOption(Option.builder("c").required(true).hasArg().longOpt("checkstyle_config_file").desc("checkstyle config file").build());
+  options.addOption(Option.builder("hc").required(true).hasArg().longOpt("heron_checkstyle_config_file").desc("checkstyle config file").build());
+  options.addOption(Option.builder("ac").required(true).hasArg().longOpt("apache_checkstyle_config_file").desc("checkstyle config file for imported source files").build());
   try {
     CommandLine line=parser.parse(options,args);
     String extraActionFile=line.getOptionValue("f");
-    String configFile=line.getOptionValue("c");
-    String[] sourceFiles=getSourceFiles(extraActionFile);
-    if (sourceFiles.length == 0) {
-      LOG.fine("No java files found by checkstyle");
-      return;
-    }
-    LOG.fine(sourceFiles.length + " java files found by checkstyle");
-    String[] checkstyleArgs=(String[])ArrayUtils.addAll(new String[]{"-c",configFile},sourceFiles);
-    LOG.fine("checkstyle args: " + Joiner.on(" ").join(checkstyleArgs));
-    com.puppycrawl.tools.checkstyle.Main.main(checkstyleArgs);
+    String configFile=line.getOptionValue("hc");
+    String apacheConfigFile=line.getOptionValue("ac");
+    String[] heronSourceFiles=getHeronSourceFiles(extraActionFile);
+    checkStyle(heronSourceFiles,configFile);
+    String[] apacheSourceFiles=getApacheSourceFiles(extraActionFile);
+    checkStyle(apacheSourceFiles,apacheConfigFile);
   }
  catch (  ParseException exp) {
     LOG.severe(String.format("Invalid input to %s: %s",CLASSNAME,exp.getMessage()));
