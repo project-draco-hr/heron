@@ -1,0 +1,5 @@
+{
+  RuntimeManagerRunner runner=newRuntimeManagerRunner(Command.SUBMIT);
+  Map<String,Integer> changes=runner.parseNewParallelismParam("");
+  Assert.assertEquals(0,changes.size());
+}

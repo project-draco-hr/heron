@@ -1,0 +1,10 @@
+{
+  RuntimeManagerRunner runner=newRuntimeManagerRunner(Command.SUBMIT);
+  try {
+    runner.parseNewParallelismParam("foo:1bar:2");
+  }
+ catch (  IllegalArgumentException e) {
+    Assert.assertEquals(e.getMessage(),"Invalid parallelism parameter found. Expected: " + "<component>:<parallelism>[,<component>:<parallelism>], Found: foo:1bar:2");
+    throw e;
+  }
+}

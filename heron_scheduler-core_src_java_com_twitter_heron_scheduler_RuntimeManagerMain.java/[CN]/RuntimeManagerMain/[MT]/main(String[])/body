@@ -30,6 +30,7 @@
   String releaseFile=cmd.getOptionValue("release_file");
   String topologyName=cmd.getOptionValue("topology_name");
   String commandOption=cmd.getOptionValue("command");
+  String componentParallelism=cmd.getOptionValue("component_parallelism");
   String containerId=Integer.toString(-1);
   if (cmd.hasOption("container_id")) {
     containerId=cmd.getOptionValue("container_id");
@@ -37,6 +38,9 @@
   Command command=Command.makeCommand(commandOption);
   Config.Builder defaultsConfig=Config.newBuilder().putAll(ClusterDefaults.getDefaults()).putAll(ClusterConfig.loadConfig(heronHome,configPath,releaseFile));
   Config.Builder commandLineConfig=Config.newBuilder().put(Keys.cluster(),cluster).put(Keys.role(),role).put(Keys.environ(),environ).put(Keys.verbose(),verbose).put(Keys.topologyContainerId(),containerId);
+  if (componentParallelism != null) {
+    commandLineConfig.put(RuntimeManagerRunner.NEW_COMPONENT_PARALLELISM_KEY,componentParallelism);
+  }
   Config.Builder topologyConfig=Config.newBuilder().put(Keys.topologyName(),topologyName);
   Config.Builder overrideConfig=Config.newBuilder().putAll(ClusterConfig.loadOverrideConfig(overrideConfigFile));
   Config config=Config.expand(Config.newBuilder().putAll(defaultsConfig.build()).putAll(overrideConfig.build()).putAll(commandLineConfig.build()).putAll(topologyConfig.build()).build());

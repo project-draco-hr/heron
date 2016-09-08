@@ -1,0 +1,14 @@
+{
+  Map<String,Integer> componentDeltas=new HashMap<>();
+  for (  String component : changeRequests.keySet()) {
+    if (!componentCounts.containsKey(component)) {
+      throw new IllegalArgumentException("Invalid component name in update request: " + component);
+    }
+    Integer newValue=changeRequests.get(component);
+    Integer delta=newValue - componentCounts.get(component);
+    if (delta != 0) {
+      componentDeltas.put(component,delta);
+    }
+  }
+  return componentDeltas;
+}

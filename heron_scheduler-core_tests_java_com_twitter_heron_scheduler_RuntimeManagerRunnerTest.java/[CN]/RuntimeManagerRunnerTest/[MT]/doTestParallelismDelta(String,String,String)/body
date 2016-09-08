@@ -1,0 +1,6 @@
+{
+  RuntimeManagerRunner runner=newRuntimeManagerRunner(Command.SUBMIT);
+  Map<String,Integer> initialCounts=runner.parseNewParallelismParam(initial);
+  Map<String,Integer> changeRequest=runner.parseNewParallelismParam(changes);
+  Assert.assertEquals(runner.parseNewParallelismParam(delta),runner.parallelismDelta(initialCounts,changeRequest));
+}

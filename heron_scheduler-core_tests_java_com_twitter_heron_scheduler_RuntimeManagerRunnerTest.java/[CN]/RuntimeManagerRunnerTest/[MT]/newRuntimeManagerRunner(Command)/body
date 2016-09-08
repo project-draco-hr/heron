@@ -1,0 +1,3 @@
+{
+  return newRuntimeManagerRunner(command,Mockito.mock(ISchedulerClient.class));
+}

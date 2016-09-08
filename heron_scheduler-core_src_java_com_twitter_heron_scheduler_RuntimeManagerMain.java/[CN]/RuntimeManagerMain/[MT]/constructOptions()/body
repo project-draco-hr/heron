@@ -5,6 +5,7 @@
   Option environment=Option.builder("e").desc("Environment under which the topology needs to run").longOpt("environment").hasArgs().argName("environment").required().build();
   Option topologyName=Option.builder("n").desc("Name of the topology").longOpt("topology_name").hasArgs().argName("topology name").required().build();
   Option heronHome=Option.builder("d").desc("Directory where heron is installed").longOpt("heron_home").hasArgs().argName("heron home dir").required().build();
+  Option componentParallelism=Option.builder("a").desc("Component parallelism to update: <name>:<value>,<name>:<value>,...").longOpt("component_parallelism").hasArgs().argName("component parallelism").build();
   Option configFile=Option.builder("p").desc("Path of the config files").longOpt("config_path").hasArgs().argName("config path").required().build();
   Option configOverrides=Option.builder("o").desc("Command line override config path").longOpt("override_config_file").hasArgs().argName("override config file").build();
   Option releaseFile=Option.builder("b").desc("Release file name").longOpt("release_file").hasArgs().argName("release information").build();
@@ -21,6 +22,7 @@
   options.addOption(command);
   options.addOption(heronHome);
   options.addOption(containerId);
+  options.addOption(componentParallelism);
   options.addOption(verbose);
   return options;
 }

@@ -1,0 +1,16 @@
+{
+  LOG.fine(String.format("updateTopologyHandler called for %s with %s",topologyName,newParallelism));
+  SchedulerStateManagerAdaptor manager=Runtime.schedulerStateManagerAdaptor(runtime);
+  TopologyAPI.Topology topology=manager.getTopology(topologyName);
+  Map<String,Integer> changeRequests=parseNewParallelismParam(newParallelism);
+  PackingPlans.PackingPlan currentPlan=manager.getPackingPlan(topologyName);
+  PackingPlans.PackingPlan proposedPlan=buildNewPackingPlan(currentPlan,changeRequests,topology);
+  Scheduler.UpdateTopologyRequest updateTopologyRequest=Scheduler.UpdateTopologyRequest.newBuilder().setCurrentPackingPlan(currentPlan).setProposedPackingPlan(proposedPlan).build();
+  LOG.info("Sending Updating topology request: " + updateTopologyRequest);
+  if (!schedulerClient.updateTopology(updateTopologyRequest)) {
+    LOG.log(Level.SEVERE,"Failed to update topology with Scheduler, updateTopologyRequest=" + updateTopologyRequest);
+    return false;
+  }
+  LOG.fine("Scheduler updated topology successfully.");
+  return true;
+}

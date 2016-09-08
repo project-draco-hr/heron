@@ -1,0 +1,18 @@
+{
+  ISchedulerClient client=Mockito.mock(ISchedulerClient.class);
+  SchedulerStateManagerAdaptor manager=mock(SchedulerStateManagerAdaptor.class);
+  RuntimeManagerRunner runner=newRuntimeManagerRunner(Command.UPDATE,client);
+  PowerMockito.mockStatic(Runtime.class);
+  PowerMockito.when(Runtime.schedulerStateManagerAdaptor(runtime)).thenReturn(manager);
+  RoundRobinPacking packing=new RoundRobinPacking();
+  String newParallelism="foo:3,bar:6";
+  PackingPlans.PackingPlan currentPlan=PackingTestUtils.testProtoPackingPlan(TOPOLOGY_NAME,packing);
+  PackingPlans.PackingPlan proposedPlan=PackingTestUtils.testProtoPackingPlan(TOPOLOGY_NAME,packing);
+  Map<String,Integer> changeRequests=runner.parseNewParallelismParam(newParallelism);
+  when(manager.getPackingPlan(eq(TOPOLOGY_NAME))).thenReturn(currentPlan);
+  doReturn(proposedPlan).when(runner).buildNewPackingPlan(eq(currentPlan),eq(changeRequests),any(TopologyAPI.Topology.class));
+  Scheduler.UpdateTopologyRequest updateTopologyRequest=Scheduler.UpdateTopologyRequest.newBuilder().setCurrentPackingPlan(currentPlan).setProposedPackingPlan(proposedPlan).build();
+  when(client.updateTopology(updateTopologyRequest)).thenReturn(true);
+  Assert.assertTrue(runner.updateTopologyHandler(TOPOLOGY_NAME,newParallelism));
+  verify(client,Mockito.times(1)).updateTopology(updateTopologyRequest);
+}

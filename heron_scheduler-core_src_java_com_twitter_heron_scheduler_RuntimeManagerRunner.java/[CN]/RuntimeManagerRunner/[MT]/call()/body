@@ -14,6 +14,9 @@ break;
 case KILL:
 result=killTopologyHandler(topologyName);
 break;
+case UPDATE:
+result=updateTopologyHandler(topologyName,config.getStringValue(NEW_COMPONENT_PARALLELISM_KEY));
+break;
 default :
 LOG.severe("Unknown command for topology: " + command);
 }
