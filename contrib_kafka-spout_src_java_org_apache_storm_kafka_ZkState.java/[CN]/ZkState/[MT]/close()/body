@@ -1,4 +1,4 @@
 {
-  _curator.close();
-  _curator=null;
+  curator.close();
+  curator=null;
 }

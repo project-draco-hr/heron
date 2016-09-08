@@ -1,54 +1,54 @@
 {
   long start=System.currentTimeMillis();
   Long offset;
-  offset=this._failedMsgRetryManager.nextFailedMessageToRetry();
-  final boolean processingNewTuples=(offset == null);
+  offset=this.failedMsgRetryManager.nextFailedMessageToRetry();
+  final boolean processingNewTuples=offset == null;
   if (processingNewTuples) {
-    offset=_emittedToOffset;
+    offset=emittedToOffset;
   }
   ByteBufferMessageSet msgs=null;
   try {
-    msgs=KafkaUtils.fetchMessages(_spoutConfig,_consumer,_partition,offset);
+    msgs=KafkaUtils.fetchMessages(spoutConfig,consumer,partition,offset);
   }
  catch (  TopicOffsetOutOfRangeException e) {
-    offset=KafkaUtils.getOffset(_consumer,_partition.topic,_partition.partition,kafka.api.OffsetRequest.EarliestTime());
+    offset=KafkaUtils.getOffset(consumer,partition.topic,partition.partition,kafka.api.OffsetRequest.EarliestTime());
     if (!processingNewTuples) {
-      Set<Long> omitted=this._failedMsgRetryManager.clearOffsetsBefore(offset);
+      Set<Long> omitted=this.failedMsgRetryManager.clearOffsetsBefore(offset);
       if (null != omitted) {
-        _lostMessageCount.incrBy(omitted.size());
+        lostMessageCount.incrBy(omitted.size());
       }
-      LOG.warn("Removing the failed offsets for {} that are out of range: {}",_partition,omitted);
+      LOG.warn("Removing the failed offsets for {} that are out of range: {}",partition,omitted);
     }
-    if (offset > _emittedToOffset) {
-      _lostMessageCount.incrBy(offset - _emittedToOffset);
-      _emittedToOffset=offset;
-      LOG.warn("{} Using new offset: {}",_partition,_emittedToOffset);
+    if (offset > emittedToOffset) {
+      lostMessageCount.incrBy(offset - emittedToOffset);
+      emittedToOffset=offset;
+      LOG.warn("{} Using new offset: {}",partition,emittedToOffset);
     }
     return;
   }
   long millis=System.currentTimeMillis() - start;
-  _fetchAPILatencyMax.update(millis);
-  _fetchAPILatencyMean.update(millis);
-  _fetchAPICallCount.incr();
+  fetchAPILatencyMax.update(millis);
+  fetchAPILatencyMean.update(millis);
+  fetchAPICallCount.incr();
   if (msgs != null) {
     int numMessages=0;
     for (    MessageAndOffset msg : msgs) {
-      final Long cur_offset=msg.offset();
-      if (cur_offset < offset) {
+      final Long curOffset=msg.offset();
+      if (curOffset < offset) {
         continue;
       }
-      if (processingNewTuples || this._failedMsgRetryManager.shouldReEmitMsg(cur_offset)) {
+      if (processingNewTuples || this.failedMsgRetryManager.shouldReEmitMsg(curOffset)) {
         numMessages+=1;
-        if (!_pending.containsKey(cur_offset)) {
-          _pending.put(cur_offset,System.currentTimeMillis());
+        if (!pending.containsKey(curOffset)) {
+          pending.put(curOffset,System.currentTimeMillis());
         }
-        _waitingToEmit.add(msg);
-        _emittedToOffset=Math.max(msg.nextOffset(),_emittedToOffset);
-        if (_failedMsgRetryManager.shouldReEmitMsg(cur_offset)) {
-          this._failedMsgRetryManager.retryStarted(cur_offset);
+        waitingToEmit.add(msg);
+        emittedToOffset=Math.max(msg.nextOffset(),emittedToOffset);
+        if (failedMsgRetryManager.shouldReEmitMsg(curOffset)) {
+          this.failedMsgRetryManager.retryStarted(curOffset);
         }
       }
     }
-    _fetchAPIMessageCount.incrBy(numMessages);
+    fetchAPIMessageCount.incrBy(numMessages);
   }
 }

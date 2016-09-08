@@ -1,0 +1,52 @@
+{
+  collector=aCollector;
+  String topologyInstanceId=context.getStormId();
+  Map<String,Object> stateConf=new HashMap<>(conf);
+  List<String> zkServers=spoutConfig.zkServers;
+  if (zkServers == null) {
+    zkServers=(List<String>)conf.get(Config.STORM_ZOOKEEPER_SERVERS);
+  }
+  Integer zkPort=spoutConfig.zkPort;
+  if (zkPort == null) {
+    zkPort=((Number)conf.get(Config.STORM_ZOOKEEPER_PORT)).intValue();
+  }
+  stateConf.put(Config.TRANSACTIONAL_ZOOKEEPER_SERVERS,zkServers);
+  stateConf.put(Config.TRANSACTIONAL_ZOOKEEPER_PORT,zkPort);
+  stateConf.put(Config.TRANSACTIONAL_ZOOKEEPER_ROOT,spoutConfig.zkRoot);
+  state=new ZkState(stateConf);
+  connections=new DynamicPartitionConnections(spoutConfig,KafkaUtils.makeBrokerReader(conf,spoutConfig));
+  int totalTasks=context.getComponentTasks(context.getThisComponentId()).size();
+  if (spoutConfig.hosts instanceof StaticHosts) {
+    coordinator=new StaticCoordinator(connections,conf,spoutConfig,state,context.getThisTaskIndex(),totalTasks,topologyInstanceId);
+  }
+ else {
+    coordinator=new ZkCoordinator(connections,conf,spoutConfig,state,context.getThisTaskIndex(),totalTasks,topologyInstanceId);
+  }
+  context.registerMetric("kafkaOffset",new IMetric(){
+    private KafkaUtils.KafkaOffsetMetric kafkaOffsetMetric=new KafkaUtils.KafkaOffsetMetric(connections);
+    @Override public Object getValueAndReset(){
+      List<PartitionManager> pms=coordinator.getMyManagedPartitions();
+      Set<Partition> latestPartitions=new HashSet<>();
+      for (      PartitionManager pm : pms) {
+        latestPartitions.add(pm.getPartition());
+      }
+      kafkaOffsetMetric.refreshPartitions(latestPartitions);
+      for (      PartitionManager pm : pms) {
+        kafkaOffsetMetric.setOffsetData(pm.getPartition(),pm.getOffsetData());
+      }
+      return kafkaOffsetMetric.getValueAndReset();
+    }
+  }
+,spoutConfig.metricsTimeBucketSizeInSecs);
+  context.registerMetric("kafkaPartition",new IMetric(){
+    @Override public Object getValueAndReset(){
+      List<PartitionManager> pms=coordinator.getMyManagedPartitions();
+      Map<String,Object> concatMetricsDataMaps=new HashMap<>();
+      for (      PartitionManager pm : pms) {
+        concatMetricsDataMaps.putAll(pm.getMetricsDataMap());
+      }
+      return concatMetricsDataMaps;
+    }
+  }
+,spoutConfig.metricsTimeBucketSizeInSecs);
+}

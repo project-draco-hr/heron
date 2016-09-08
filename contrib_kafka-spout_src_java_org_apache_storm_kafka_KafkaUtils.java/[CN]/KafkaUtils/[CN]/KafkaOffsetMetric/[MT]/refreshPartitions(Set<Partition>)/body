@@ -1,8 +1,8 @@
 {
-  _partitions=partitions;
-  Iterator<Partition> it=_partitionToOffset.keySet().iterator();
+  partitions=newPartitions;
+  Iterator<Partition> it=partitionToOffset.keySet().iterator();
   while (it.hasNext()) {
-    if (!partitions.contains(it.next())) {
+    if (!newPartitions.contains(it.next())) {
       it.remove();
     }
   }

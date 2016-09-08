@@ -1,6 +1,6 @@
 {
-  _lastUpdateMs=System.currentTimeMillis();
-  for (  PartitionManager manager : _coordinator.getMyManagedPartitions()) {
+  lastUpdateMs=System.currentTimeMillis();
+  for (  PartitionManager manager : coordinator.getMyManagedPartitions()) {
     manager.commit();
   }
 }

@@ -1,8 +1,8 @@
 {
-  if (_pending.isEmpty()) {
-    return _emittedToOffset;
+  if (pending.isEmpty()) {
+    return emittedToOffset;
   }
  else {
-    return _pending.firstKey();
+    return pending.firstKey();
   }
 }

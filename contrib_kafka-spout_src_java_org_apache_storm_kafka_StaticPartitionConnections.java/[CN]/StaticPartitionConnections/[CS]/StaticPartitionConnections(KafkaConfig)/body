@@ -1,5 +1,5 @@
 {
-  _config=conf;
+  config=conf;
   if (!(conf.hosts instanceof StaticHosts)) {
     throw new RuntimeException("Must configure with static hosts");
   }

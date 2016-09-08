@@ -1,0 +1,4 @@
+Map<String,Object> conf
+String zkStr
+String zkPath
+String topic

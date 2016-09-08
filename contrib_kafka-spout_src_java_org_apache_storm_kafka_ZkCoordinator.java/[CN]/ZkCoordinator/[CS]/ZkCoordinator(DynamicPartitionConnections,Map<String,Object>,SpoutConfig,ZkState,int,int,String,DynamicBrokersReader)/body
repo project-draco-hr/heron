@@ -1,0 +1,12 @@
+{
+  this.spoutConfig=spoutConfig;
+  this.connections=connections;
+  this.taskIndex=taskIndex;
+  this.totalTasks=totalTasks;
+  this.topologyInstanceId=topologyInstanceId;
+  this.stormConf=stormConf;
+  this.state=state;
+  ZkHosts brokerConf=(ZkHosts)spoutConfig.hosts;
+  this.refreshFreqMs=brokerConf.refreshFreqSecs * 1000;
+  this.reader=reader;
+}

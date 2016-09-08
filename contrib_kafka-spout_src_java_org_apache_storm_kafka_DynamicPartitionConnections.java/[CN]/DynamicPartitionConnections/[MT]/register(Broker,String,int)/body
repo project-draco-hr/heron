@@ -1,8 +1,8 @@
 {
-  if (!_connections.containsKey(host)) {
-    _connections.put(host,new ConnectionInfo(new SimpleConsumer(host.host,host.port,_config.socketTimeoutMs,_config.bufferSizeBytes,_config.clientId)));
+  if (!connections.containsKey(host)) {
+    connections.put(host,new ConnectionInfo(new SimpleConsumer(host.host,host.port,config.socketTimeoutMs,config.bufferSizeBytes,config.clientId)));
   }
-  ConnectionInfo info=_connections.get(host);
+  ConnectionInfo info=connections.get(host);
   info.partitions.add(getHashKey(topic,partition));
   return info.consumer;
 }

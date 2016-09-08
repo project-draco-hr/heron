@@ -1,5 +1,5 @@
 {
-  writePartitionId(id,topic);
-  writeLeader(id,leader,topic);
+  writePartitionId(id,aTopic);
+  writeLeader(id,leader,aTopic);
   writeLeaderDetails(leader,host,port);
 }
