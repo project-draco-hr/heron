@@ -1,2 +1,0 @@
-Map<Integer,List<String>> ffdAllocation
-Map<String,Long> ramMap

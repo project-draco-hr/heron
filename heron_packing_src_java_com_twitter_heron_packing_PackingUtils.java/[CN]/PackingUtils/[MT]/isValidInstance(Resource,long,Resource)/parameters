@@ -1,0 +1,3 @@
+Resource instanceResources
+long minInstanceRam
+Resource maxContainerResources

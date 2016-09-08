@@ -1,0 +1,6 @@
+String topologyName
+Config topologyConfig
+String spoutName
+String boltName
+int spoutParallelism
+int boltParallelism

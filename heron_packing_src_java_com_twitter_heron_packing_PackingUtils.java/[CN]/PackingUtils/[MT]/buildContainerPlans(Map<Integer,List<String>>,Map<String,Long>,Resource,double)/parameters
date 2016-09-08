@@ -1,0 +1,4 @@
+Map<Integer,List<String>> containerInstances
+Map<String,Long> ramMap
+Resource instanceDefaults
+double paddingPercentage

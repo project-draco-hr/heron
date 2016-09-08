@@ -1,10 +1,6 @@
 {
-  this.instanceRamDefault=Context.instanceRam(config);
-  this.instanceCpuDefault=Context.instanceCpu(config).doubleValue();
-  this.instanceDiskDefault=Context.instanceDisk(config);
   List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
-  this.maxContainerRam=Long.parseLong(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_MAX_RAM_HINT,Long.toString(instanceRamDefault * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER)));
-  this.maxContainerCpu=Double.parseDouble(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_MAX_CPU_HINT,Double.toString(instanceCpuDefault * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER)));
-  this.maxContainerDisk=Long.parseLong(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_MAX_DISK_HINT,Long.toString(instanceDiskDefault * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER)));
-  this.paddingPercentage=Integer.parseInt(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_PADDING_PERCENTAGE,Integer.toString(DEFAULT_CONTAINER_PADDING_PERCENTAGE)));
+  this.defaultInstanceResources=new Resource(Context.instanceCpu(config),Context.instanceRam(config),Context.instanceDisk(config));
+  this.maxContainerResources=new Resource(TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_MAX_CPU_HINT,this.defaultInstanceResources.getCpu() * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER),TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_MAX_RAM_HINT,this.defaultInstanceResources.getRam() * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER),TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_MAX_DISK_HINT,this.defaultInstanceResources.getDisk() * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER));
+  this.paddingPercentage=TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_PADDING_PERCENTAGE,DEFAULT_CONTAINER_PADDING_PERCENTAGE);
 }

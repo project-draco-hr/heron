@@ -2,9 +2,11 @@
   int numContainers=2;
   int spoutParallelism=4;
   int boltParallelism=3;
+  Integer totalInstances=spoutParallelism + boltParallelism;
   com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
   topologyConfig.put(com.twitter.heron.api.Config.TOPOLOGY_STMGRS,numContainers);
   TopologyAPI.Topology topologyNoExplicitResourcesConfig=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanNoExplicitResourcesConfig=getRoundRobinPackingPlan(topologyNoExplicitResourcesConfig);
   Assert.assertEquals(numContainers,packingPlanNoExplicitResourcesConfig.getContainers().size());
+  Assert.assertEquals(totalInstances,packingPlanNoExplicitResourcesConfig.getInstanceCount());
 }

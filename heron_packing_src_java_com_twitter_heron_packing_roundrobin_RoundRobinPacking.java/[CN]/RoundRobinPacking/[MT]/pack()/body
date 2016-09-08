@@ -15,7 +15,7 @@
       long instanceDisk=instanceDiskDefault;
       double instanceCpu=instanceCpuDefault;
       Resource resource=new Resource(instanceCpu,instanceRam,instanceDisk);
-      PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,getComponentName(instanceId),resource);
+      PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,PackingUtils.getComponentName(instanceId),resource);
       instancePlanMap.put(instanceId,instancePlan);
       containerRam+=instanceRam;
     }

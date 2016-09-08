@@ -1,0 +1,3 @@
+PackingPlan.ContainerPlan containerPlan
+String componentName
+int expectedCount

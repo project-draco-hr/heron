@@ -1,6 +1,0 @@
-{
-  if (containers.get(containerId - 1).add(ramRequirement,cpuRequirement,diskRequirement)) {
-    return true;
-  }
-  return false;
-}

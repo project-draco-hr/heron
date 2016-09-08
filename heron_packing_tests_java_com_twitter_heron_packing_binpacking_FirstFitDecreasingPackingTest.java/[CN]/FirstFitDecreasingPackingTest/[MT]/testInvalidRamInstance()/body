@@ -1,6 +1,7 @@
 {
   int spoutParallelism=4;
   int boltParallelism=3;
+  Integer totalInstances=spoutParallelism + boltParallelism;
   com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
   long maxContainerRam=10L * Constants.GB;
   long boltRam=0L * Constants.GB;
@@ -8,4 +9,5 @@
   topologyConfig.setComponentRam(BOLT_NAME,boltRam);
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
+  Assert.assertEquals(totalInstances,packingPlanExplicitRamMap.getInstanceCount());
 }

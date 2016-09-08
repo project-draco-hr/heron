@@ -8,6 +8,7 @@
   Assert.assertEquals(2 * componentParallelism,numInstance);
   PackingPlan output=getResourceCompliantRRPackingPlan(topology);
   Assert.assertEquals(numContainers,output.getContainers().size());
+  Assert.assertEquals((Integer)numInstance,output.getInstanceCount());
   for (  PackingPlan.ContainerPlan container : output.getContainers()) {
     Assert.assertEquals(numInstance / numContainers,container.getInstances().size());
     Assert.assertEquals(2,countComponent("spout",container.getInstances()));

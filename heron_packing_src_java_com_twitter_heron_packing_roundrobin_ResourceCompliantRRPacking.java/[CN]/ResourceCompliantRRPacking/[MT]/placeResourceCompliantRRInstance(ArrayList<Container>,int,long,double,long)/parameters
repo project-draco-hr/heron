@@ -1,5 +1,0 @@
-ArrayList<Container> containers
-int containerId
-long ramRequirement
-double cpuRequirement
-long diskRequirement

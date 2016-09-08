@@ -1,0 +1,3 @@
+{
+  return Long.parseLong(getConfigWithDefault(config,key,Long.toString(defaultValue)));
+}

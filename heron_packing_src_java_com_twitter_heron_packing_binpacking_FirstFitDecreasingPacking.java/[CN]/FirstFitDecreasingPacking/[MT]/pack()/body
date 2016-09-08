@@ -1,5 +1,6 @@
 {
   Map<Integer,List<String>> ffdAllocation=getFFDAllocation();
   Map<String,Long> ramMap=TopologyUtils.getComponentRamMapConfig(topology);
-  return new PackingPlan(topology.getId(),buildContainerPlans(ffdAllocation,ramMap));
+  Set<PackingPlan.ContainerPlan> containerPlans=PackingUtils.buildContainerPlans(ffdAllocation,ramMap,this.defaultInstanceResources,this.paddingPercentage);
+  return new PackingPlan(topology.getId(),containerPlans);
 }

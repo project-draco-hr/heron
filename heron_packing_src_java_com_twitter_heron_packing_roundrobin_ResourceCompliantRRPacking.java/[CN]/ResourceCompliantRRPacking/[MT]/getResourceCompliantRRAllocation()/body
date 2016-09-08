@@ -20,12 +20,13 @@
     long ramRequirement=ramRequirements.get(componentIndex).getRamRequirement();
     int numInstance=parallelismMap.get(component);
     for (int i=0; i < numInstance; ++i) {
-      if (placeResourceCompliantRRInstance(containers,containerId,ramRequirement,instanceCpuDefault,instanceDiskDefault)) {
-        allocation.get(containerId).add(getInstanceId(containerId,component,globalTaskIndex,i));
+      Resource instanceResource=this.defaultInstanceResources.cloneWithRam(ramRequirement);
+      if (placeResourceCompliantRRInstance(containers,containerId,instanceResource)) {
+        allocation.get(containerId).add(PackingUtils.getInstanceId(containerId,component,globalTaskIndex,i));
       }
  else {
         List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
-        increasenumContainers();
+        increaseNumContainers();
         LOG.info(String.format("Increasing the number of containers to " + this.numContainers + " and attempting packing again."));
         return null;
       }

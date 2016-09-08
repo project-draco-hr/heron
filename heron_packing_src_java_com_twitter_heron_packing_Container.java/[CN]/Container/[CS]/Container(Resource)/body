@@ -1,0 +1,8 @@
+{
+  this.usedRam=0;
+  this.usedCpuCores=0;
+  this.usedDisk=0;
+  this.maxRam=resource.getRam();
+  this.maxCpuCores=resource.getCpu();
+  this.maxDisk=resource.getDisk();
+}

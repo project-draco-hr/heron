@@ -1,0 +1,9 @@
+{
+  int count=0;
+  for (  PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
+    if (componentName.equals(PackingUtils.getComponentName(instancePlan.getId()))) {
+      count++;
+    }
+  }
+  Assert.assertEquals(expectedCount,count);
+}

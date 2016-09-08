@@ -1,0 +1,21 @@
+{
+  boolean boltFound=false;
+  boolean spoutFound=false;
+  for (  PackingPlan.ContainerPlan containerPlan : containerPlans) {
+    if (notExpectedContainerRam != null) {
+      Assert.assertNotEquals(notExpectedContainerRam,(Long)containerPlan.getResource().getRam());
+    }
+    for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
+      if (instancePlan.getComponentName().equals(boltName)) {
+        Assert.assertEquals(expectedBoltRam,instancePlan.getResource().getRam());
+        boltFound=true;
+      }
+      if (instancePlan.getComponentName().equals(spoutName)) {
+        Assert.assertEquals(expectedSpoutRam,instancePlan.getResource().getRam());
+        spoutFound=true;
+      }
+    }
+  }
+  Assert.assertTrue("Bolt not found in any of the container plans: " + boltName,boltFound);
+  Assert.assertTrue("Spout not found in any of the container plans: " + spoutName,spoutFound);
+}

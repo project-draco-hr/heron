@@ -1,0 +1,11 @@
+{
+  if (this.hasSpace(resource.getRam(),resource.getCpu(),resource.getDisk())) {
+    usedRam+=resource.getRam();
+    usedCpuCores+=resource.getCpu();
+    usedDisk+=resource.getDisk();
+    return true;
+  }
+ else {
+    return false;
+  }
+}

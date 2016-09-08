@@ -1,49 +1,18 @@
 {
   int adjustments=this.numAdjustments;
-  Map<Integer,List<String>> resourceCompliantRRAllocation=getResourceCompliantRRAllocation();
-  while (resourceCompliantRRAllocation == null) {
+  Map<Integer,List<String>> containerInstances=getResourceCompliantRRAllocation();
+  while (containerInstances == null) {
     if (this.numAdjustments > adjustments) {
       adjustments++;
-      resourceCompliantRRAllocation=getResourceCompliantRRAllocation();
+      containerInstances=getResourceCompliantRRAllocation();
     }
  else {
       return null;
     }
   }
-  Set<PackingPlan.ContainerPlan> containerPlans=new HashSet<>();
   Map<String,Long> ramMap=TopologyUtils.getComponentRamMapConfig(topology);
   List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
   int paddingPercentage=Integer.parseInt(TopologyUtils.getConfigWithDefault(topologyConfig,com.twitter.heron.api.Config.TOPOLOGY_CONTAINER_PADDING_PERCENTAGE,Integer.toString(DEFAULT_CONTAINER_PADDING_PERCENTAGE)));
-  for (  Map.Entry<Integer,List<String>> entry : resourceCompliantRRAllocation.entrySet()) {
-    int containerId=entry.getKey();
-    List<String> instanceList=entry.getValue();
-    long containerRam=0;
-    long containerDiskInBytes=0;
-    double containerCpu=0;
-    Set<PackingPlan.InstancePlan> instancePlans=new HashSet<>();
-    for (    String instanceId : instanceList) {
-      long instanceRam=0;
-      if (ramMap.containsKey(getComponentName(instanceId))) {
-        instanceRam=ramMap.get(getComponentName(instanceId));
-      }
- else {
-        instanceRam=instanceRamDefault;
-      }
-      containerRam+=instanceRam;
-      long instanceDisk=instanceDiskDefault;
-      containerDiskInBytes+=instanceDisk;
-      double instanceCpu=instanceCpuDefault;
-      containerCpu+=instanceCpu;
-      Resource resource=new Resource(instanceCpu,instanceRam,instanceDisk);
-      PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,getComponentName(instanceId),resource);
-      instancePlans.add(instancePlan);
-    }
-    containerCpu+=(paddingPercentage * containerCpu) / 100;
-    containerRam+=(paddingPercentage * containerRam) / 100;
-    containerDiskInBytes+=(paddingPercentage * containerDiskInBytes) / 100;
-    Resource resource=new Resource(Math.round(containerCpu),containerRam,containerDiskInBytes);
-    PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlans,resource);
-    containerPlans.add(containerPlan);
-  }
+  Set<PackingPlan.ContainerPlan> containerPlans=PackingUtils.buildContainerPlans(containerInstances,ramMap,this.defaultInstanceResources,paddingPercentage);
   return new PackingPlan(topology.getId(),containerPlans);
 }

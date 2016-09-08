@@ -1,0 +1,6 @@
+Set<PackingPlan.ContainerPlan> containerPlans
+String boltName
+String spoutName
+long expectedBoltRam
+long expectedSpoutRam
+Long notExpectedContainerRam

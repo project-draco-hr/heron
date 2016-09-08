@@ -7,13 +7,14 @@
     String component=ramRequirement.getComponentName();
     int numInstance=parallelismMap.get(component);
     for (int j=0; j < numInstance; j++) {
-      int containerId=placeFFDInstance(containers,ramRequirement.getRamRequirement(),instanceCpuDefault,instanceDiskDefault);
+      Resource instanceResource=this.defaultInstanceResources.cloneWithRam(ramRequirement.getRamRequirement());
+      int containerId=placeFFDInstance(containers,instanceResource);
       if (allocation.containsKey(containerId + numContainers)) {
-        allocation.get(containerId + numContainers).add(getInstanceId(containerId + numContainers,component,globalTaskIndex,j));
+        allocation.get(containerId + numContainers).add(PackingUtils.getInstanceId(containerId + numContainers,component,globalTaskIndex,j));
       }
  else {
         ArrayList<String> instance=new ArrayList<>();
-        instance.add(getInstanceId(containerId + numContainers,component,globalTaskIndex,j));
+        instance.add(PackingUtils.getInstanceId(containerId + numContainers,component,globalTaskIndex,j));
         allocation.put(containerId + numContainers,instance);
       }
       globalTaskIndex++;

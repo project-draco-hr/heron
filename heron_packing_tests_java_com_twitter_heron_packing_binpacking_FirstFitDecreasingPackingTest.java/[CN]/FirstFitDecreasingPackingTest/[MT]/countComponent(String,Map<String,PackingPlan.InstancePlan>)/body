@@ -1,9 +1,0 @@
-{
-  int count=0;
-  for (  PackingPlan.InstancePlan pair : instances.values()) {
-    if (component.equals(FirstFitDecreasingPacking.getComponentName(pair.getId()))) {
-      count++;
-    }
-  }
-  return count;
-}

@@ -1,0 +1,7 @@
+{
+  Map<String,Integer> spouts=new HashMap<>();
+  spouts.put(spoutName,spoutParallelism);
+  Map<String,Integer> bolts=new HashMap<>();
+  bolts.put(boltName,boltParallelism);
+  return TopologyTests.createTopology(topologyName,topologyConfig,spouts,bolts);
+}

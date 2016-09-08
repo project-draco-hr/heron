@@ -1,8 +1,0 @@
-{
-  this.usedRam=0;
-  this.usedCpuCores=0;
-  this.usedDisk=0;
-  this.maxRam=maxRam;
-  this.maxCpuCores=maxCpuCores;
-  this.maxDisk=maxDisk;
-}

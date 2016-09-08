@@ -3,7 +3,7 @@
   Map<String,Long> ramMap=TopologyUtils.getComponentRamMapConfig(topology);
   for (  String component : parallelismMap.keySet()) {
     if (ramMap.containsKey(component)) {
-      if (!isValidInstance(new Resource(instanceCpuDefault,ramMap.get(component),instanceDiskDefault))) {
+      if (!PackingUtils.isValidInstance(this.defaultInstanceResources.cloneWithRam(ramMap.get(component)),MIN_RAM_PER_INSTANCE,maxContainerResources)) {
         throw new RuntimeException("The topology configuration does not have " + "valid resource requirements. Please make sure that the instance resource " + "requirements do not exceed the maximum per-container resources.");
       }
  else {
@@ -11,11 +11,11 @@
       }
     }
  else {
-      if (!isValidInstance(new Resource(instanceCpuDefault,instanceRamDefault,instanceDiskDefault))) {
+      if (!PackingUtils.isValidInstance(this.defaultInstanceResources,MIN_RAM_PER_INSTANCE,maxContainerResources)) {
         throw new RuntimeException("The topology configuration does not have " + "valid resource requirements. Please make sure that the instance resource " + "requirements do not exceed the maximum per-container resources.");
       }
  else {
-        ramRequirements.add(new RamRequirement(component,instanceRamDefault));
+        ramRequirements.add(new RamRequirement(component,this.defaultInstanceResources.getRam()));
       }
     }
   }

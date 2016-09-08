@@ -2,7 +2,7 @@
   List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
   Map<String,Long> ramMap=new HashMap<>();
   Set<String> componentNames=getComponentParallelism(topology).keySet();
-  String ramMapStr=getConfigWithDefault(topologyConfig,Config.TOPOLOGY_COMPONENT_RAMMAP,null);
+  String ramMapStr=getConfigWithDefault(topologyConfig,Config.TOPOLOGY_COMPONENT_RAMMAP,(String)null);
   if (ramMapStr != null) {
     String[] ramMapTokens=ramMapStr.split(",");
     for (    String token : ramMapTokens) {

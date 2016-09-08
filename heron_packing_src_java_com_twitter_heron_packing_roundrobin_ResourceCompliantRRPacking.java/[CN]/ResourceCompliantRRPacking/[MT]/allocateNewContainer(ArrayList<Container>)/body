@@ -1,4 +1,4 @@
 {
-  containers.add(new Container(maxContainerRam,maxContainerCpu,maxContainerDisk));
+  containers.add(new Container(this.maxContainerResources));
   return containers.size();
 }

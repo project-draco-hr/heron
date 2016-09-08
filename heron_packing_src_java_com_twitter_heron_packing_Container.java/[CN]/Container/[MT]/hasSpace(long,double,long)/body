@@ -1,6 +1,3 @@
 {
-  if (usedRam + ram <= maxRam && usedCpuCores + cpuCores <= maxCpuCores && usedDisk + disk <= maxDisk) {
-    return true;
-  }
-  return false;
+  return usedRam + ram <= maxRam && usedCpuCores + cpuCores <= maxCpuCores && usedDisk + disk <= maxDisk;
 }
