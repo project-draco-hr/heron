@@ -1,0 +1,2 @@
+Set<PackingPlan.ContainerPlan> currentContainers
+Set<PackingPlan.ContainerPlan> proposedContainers

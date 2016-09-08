@@ -1,0 +1,18 @@
+{
+  Set<Integer> currentContainerIds=toIdSet(currentContainers);
+  Set<Integer> proposedContainerIds=toIdSet(proposedContainers);
+  Set<PackingPlan.ContainerPlan> toAdd=new HashSet<>();
+  for (  PackingPlan.ContainerPlan proposedContainerPlan : proposedContainers) {
+    if (!currentContainerIds.contains(proposedContainerPlan.getId())) {
+      toAdd.add(proposedContainerPlan);
+    }
+  }
+  this.containersToAdd=Collections.unmodifiableSet(toAdd);
+  Set<PackingPlan.ContainerPlan> toRemove=new HashSet<>();
+  for (  PackingPlan.ContainerPlan currentContainerPlan : currentContainers) {
+    if (!proposedContainerIds.contains(currentContainerPlan.getId())) {
+      toRemove.add(currentContainerPlan);
+    }
+  }
+  this.containersToRemove=Collections.unmodifiableSet(toRemove);
+}

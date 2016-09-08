@@ -1,0 +1,5 @@
+{
+  TopologyAPI.Topology updatedTopology=stateManager.getTopology(topologyName);
+  Map<String,Integer> proposedComponentCounts=proposedPackingPlan.getComponentCounts();
+  return mergeTopology(updatedTopology,proposedComponentCounts);
+}

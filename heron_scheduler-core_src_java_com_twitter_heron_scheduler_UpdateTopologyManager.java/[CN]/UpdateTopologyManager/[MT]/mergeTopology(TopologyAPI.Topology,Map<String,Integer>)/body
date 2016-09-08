@@ -1,0 +1,21 @@
+{
+  TopologyAPI.Topology.Builder builder=TopologyAPI.Topology.newBuilder().mergeFrom(topology);
+  for (  String componentName : proposedComponentCounts.keySet()) {
+    Integer parallelism=proposedComponentCounts.get(componentName);
+    boolean updated=false;
+    for (    TopologyAPI.Bolt.Builder boltBuilder : builder.getBoltsBuilderList()) {
+      if (updateComponent(boltBuilder.getCompBuilder(),componentName,parallelism)) {
+        updated=true;
+        break;
+      }
+    }
+    if (!updated) {
+      for (      TopologyAPI.Spout.Builder spoutBuilder : builder.getSpoutsBuilderList()) {
+        if (updateComponent(spoutBuilder.getCompBuilder(),componentName,parallelism)) {
+          break;
+        }
+      }
+    }
+  }
+  return builder.build();
+}

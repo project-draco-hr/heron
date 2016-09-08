@@ -1,0 +1,17 @@
+{
+  PackingPlanProtoSerializer serializer=new PackingPlanProtoSerializer();
+  PackingPlan currentPacking=new PackingPlan("current",currentContainerPlan);
+  PackingPlan proposedPacking=new PackingPlan("proposed",proposedContainerPlan);
+  PackingPlans.PackingPlan currentProtoPlan=serializer.toProto(currentPacking);
+  PackingPlans.PackingPlan proposedProtoPlan=serializer.toProto(proposedPacking);
+  SchedulerStateManagerAdaptor mockStateMgr=Mockito.mock(SchedulerStateManagerAdaptor.class);
+  Config mockRuntime=Mockito.mock(Config.class);
+  Mockito.when(mockRuntime.get(Keys.schedulerStateManagerAdaptor())).thenReturn(mockStateMgr);
+  IScalable mockScheduler=Mockito.mock(IScalable.class);
+  UpdateTopologyManager updateManager=new UpdateTopologyManager(mockRuntime,Optional.of(mockScheduler));
+  UpdateTopologyManager spyUpdateManager=Mockito.spy(updateManager);
+  Mockito.doReturn(null).when(spyUpdateManager).getUpdatedTopology(null,proposedPacking,mockStateMgr);
+  spyUpdateManager.updateTopology(currentProtoPlan,proposedProtoPlan);
+  Mockito.verify(mockScheduler).addContainers(expectedContainersToAdd);
+  Mockito.verify(mockScheduler).removeContainers(expectedContainersToRemove);
+}

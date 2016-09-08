@@ -1,0 +1,7 @@
+{
+  Set<Integer> currentContainerMap=new HashSet<>();
+  for (  PackingPlan.ContainerPlan container : containers) {
+    currentContainerMap.add(container.getId());
+  }
+  return currentContainerMap;
+}

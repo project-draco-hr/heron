@@ -1,0 +1,22 @@
+{
+  for (  String boltName : expectedBolts.keySet()) {
+    String foundParallelism=null;
+    for (    TopologyAPI.Bolt bolt : topology.getBoltsList()) {
+      foundParallelism=getParallelism(bolt.getComp(),boltName);
+      if (foundParallelism != null) {
+        break;
+      }
+    }
+    Assert.assertEquals(Integer.toString(expectedBolts.get(boltName)),foundParallelism);
+  }
+  for (  String spoutName : expectedSouts.keySet()) {
+    String foundParallelism=null;
+    for (    TopologyAPI.Spout spout : topology.getSpoutsList()) {
+      foundParallelism=getParallelism(spout.getComp(),spoutName);
+      if (foundParallelism != null) {
+        break;
+      }
+    }
+    Assert.assertEquals(Integer.toString(expectedSouts.get(spoutName)),foundParallelism);
+  }
+}

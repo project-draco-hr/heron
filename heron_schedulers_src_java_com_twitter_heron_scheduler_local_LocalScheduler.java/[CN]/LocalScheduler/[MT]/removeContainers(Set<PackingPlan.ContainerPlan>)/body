@@ -1,0 +1,21 @@
+{
+  LOG.log(Level.INFO,"Kill {0} of {1} containers",new Object[]{containersToRemove.size(),processToContainer.size()});
+synchronized (processToContainer) {
+    Map<Integer,Process> containerToProcessMap=new HashMap<>();
+    for (    Map.Entry<Process,Integer> entry : processToContainer.entrySet()) {
+      containerToProcessMap.put(entry.getValue(),entry.getKey());
+    }
+    for (    PackingPlan.ContainerPlan containerToRemove : containersToRemove) {
+      int containerId=containerToRemove.getId();
+      Process process=containerToProcessMap.get(containerId);
+      if (process == null) {
+        LOG.log(Level.WARNING,"Container for id:{0} not found.",containerId);
+        continue;
+      }
+      LOG.info("Killing executor for container: " + containerId);
+      processToContainer.remove(process);
+      process.destroy();
+      LOG.info("Killed executor for container: " + containerId);
+    }
+  }
+}

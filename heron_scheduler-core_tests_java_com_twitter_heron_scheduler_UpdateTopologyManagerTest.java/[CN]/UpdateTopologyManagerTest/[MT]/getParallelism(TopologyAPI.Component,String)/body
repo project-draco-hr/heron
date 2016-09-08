@@ -1,0 +1,10 @@
+{
+  if (component.getName().equals(componentName)) {
+    for (    TopologyAPI.Config.KeyValue keyValue : component.getConfig().getKvsList()) {
+      if (keyValue.getKey().equals(com.twitter.heron.api.Config.TOPOLOGY_COMPONENT_PARALLELISM)) {
+        return keyValue.getValue();
+      }
+    }
+  }
+  return null;
+}

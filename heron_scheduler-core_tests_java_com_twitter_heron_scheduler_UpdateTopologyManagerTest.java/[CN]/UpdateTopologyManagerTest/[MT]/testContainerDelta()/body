@@ -1,0 +1,6 @@
+{
+  ContainerDelta result=new ContainerDelta(currentContainerPlan,proposedContainerPlan);
+  Assert.assertNotNull(result);
+  Assert.assertEquals(expectedContainersToAdd,result.getContainersToAdd());
+  Assert.assertEquals(expectedContainersToRemove,result.getContainersToRemove());
+}

@@ -1,4 +1,5 @@
 {
   this.config=mConfig;
   this.runtime=mRuntime;
+  this.updateTopologyManager=new UpdateTopologyManager(runtime,Optional.<IScalable>of(this));
 }

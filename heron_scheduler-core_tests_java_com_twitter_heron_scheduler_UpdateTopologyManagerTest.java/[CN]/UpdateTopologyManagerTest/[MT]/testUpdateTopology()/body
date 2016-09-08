@@ -1,0 +1,22 @@
+{
+  Map<String,Integer> bolts=new HashMap<>();
+  bolts.put("bolt1",1);
+  bolts.put("bolt7",7);
+  Map<String,Integer> spouts=new HashMap<>();
+  spouts.put("spout3",3);
+  spouts.put("spout5",5);
+  TopologyAPI.Topology topology=TopologyTests.createTopology("test",new com.twitter.heron.api.Config(),spouts,bolts);
+  assertParallelism(topology,spouts,bolts);
+  Map<String,Integer> boltUpdates=new HashMap<>();
+  boltUpdates.put("bolt1",3);
+  boltUpdates.put("bolt7",2);
+  Map<String,Integer> spoutUpdates=new HashMap<>();
+  spoutUpdates.put("spout3",8);
+  Map<String,Integer> updates=new HashMap<>();
+  updates.putAll(boltUpdates);
+  updates.putAll(spoutUpdates);
+  topology=UpdateTopologyManager.mergeTopology(topology,updates);
+  bolts.putAll(boltUpdates);
+  spouts.putAll(spoutUpdates);
+  assertParallelism(topology,spouts,bolts);
+}

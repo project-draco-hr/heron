@@ -1,0 +1,3 @@
+{
+  LOG.fine(String.format(format,values));
+}

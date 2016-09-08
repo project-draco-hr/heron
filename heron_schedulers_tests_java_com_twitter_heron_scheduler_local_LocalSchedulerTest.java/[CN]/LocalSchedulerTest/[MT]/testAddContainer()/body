@@ -1,0 +1,25 @@
+{
+  Mockito.when(runtime.getLongValue(Keys.numContainers())).thenReturn(2L);
+  scheduler.initialize(config,runtime);
+  Mockito.doNothing().when(scheduler).startExecutorMonitor(Mockito.anyInt(),Mockito.any(Process.class));
+  Process mockProcessTM=Mockito.mock(Process.class);
+  Mockito.doReturn(mockProcessTM).when(scheduler).startExecutorProcess(0);
+  Process mockProcessWorker1=Mockito.mock(Process.class);
+  Mockito.doReturn(mockProcessWorker1).when(scheduler).startExecutorProcess(1);
+  PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
+  Assert.assertTrue(scheduler.onSchedule(packingPlan));
+  Mockito.verify(scheduler,Mockito.times(NUM_CONTAINER)).startExecutor(Mockito.anyInt());
+  Process mockProcessWorker2=Mockito.mock(Process.class);
+  Mockito.doReturn(mockProcessWorker2).when(scheduler).startExecutorProcess(2);
+  Set<PackingPlan.ContainerPlan> containers=new HashSet<>();
+  Set<PackingPlan.ContainerPlan> spyContainers=Mockito.spy(containers);
+  Mockito.doReturn(1).when(spyContainers).size();
+  scheduler.addContainers(spyContainers);
+  Mockito.verify(scheduler).startExecutor(NUM_CONTAINER);
+  Process mockProcess=Mockito.mock(Process.class);
+  Mockito.doReturn(mockProcess).when(scheduler).startExecutorProcess(Mockito.anyInt());
+  Mockito.doReturn(2).when(spyContainers).size();
+  scheduler.addContainers(spyContainers);
+  Mockito.verify(scheduler).startExecutor(NUM_CONTAINER + 1);
+  Mockito.verify(scheduler).startExecutor(NUM_CONTAINER + 2);
+}

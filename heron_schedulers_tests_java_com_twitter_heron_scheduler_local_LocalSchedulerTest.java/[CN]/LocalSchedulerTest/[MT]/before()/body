@@ -1,8 +1,8 @@
 {
   scheduler=Mockito.spy(LocalScheduler.class);
-  Config config=Mockito.mock(Config.class);
+  config=Mockito.mock(Config.class);
   Mockito.when(config.getStringValue(ConfigKeys.get("TOPOLOGY_NAME"))).thenReturn(TOPOLOGY_NAME);
-  Config runtime=Mockito.mock(Config.class);
-  Mockito.when(runtime.getLongValue(Keys.numContainers())).thenReturn(NUM_CONTAINER);
+  runtime=Mockito.mock(Config.class);
+  Mockito.when(runtime.getLongValue(Keys.numContainers())).thenReturn(NUM_CONTAINER * 1L);
   scheduler.initialize(config,runtime);
 }

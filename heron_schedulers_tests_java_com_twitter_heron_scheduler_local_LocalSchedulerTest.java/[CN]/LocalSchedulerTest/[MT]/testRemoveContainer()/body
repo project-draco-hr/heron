@@ -1,0 +1,35 @@
+{
+  final int LOCAL_NUM_CONTAINER=6;
+  Mockito.when(runtime.getLongValue(Keys.numContainers())).thenReturn(LOCAL_NUM_CONTAINER * 1L);
+  scheduler.initialize(config,runtime);
+  Mockito.doNothing().when(scheduler).startExecutorMonitor(Mockito.anyInt(),Mockito.any(Process.class));
+  Process[] processes=new Process[LOCAL_NUM_CONTAINER];
+  Set<PackingPlan.ContainerPlan> existingContainers=new HashSet<>();
+  for (int i=0; i < LOCAL_NUM_CONTAINER; i++) {
+    processes[i]=Mockito.mock(Process.class);
+    Mockito.doReturn(processes[i]).when(scheduler).startExecutorProcess(i);
+    existingContainers.add(PackingTestUtils.testContainerPlan(i));
+  }
+  PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
+  Assert.assertTrue(scheduler.onSchedule(packingPlan));
+  Assert.assertEquals(LOCAL_NUM_CONTAINER,scheduler.getProcessToContainer().size());
+  Mockito.verify(scheduler,Mockito.times(LOCAL_NUM_CONTAINER)).startExecutor(Mockito.anyInt());
+  Set<PackingPlan.ContainerPlan> containersToRemove=new HashSet<>();
+  PackingPlan.ContainerPlan containerToRemove=PackingTestUtils.testContainerPlan(LOCAL_NUM_CONTAINER - 1);
+  containersToRemove.add(containerToRemove);
+  scheduler.removeContainers(containersToRemove);
+  existingContainers.remove(containerToRemove);
+  Assert.assertEquals(existingContainers.size(),scheduler.getProcessToContainer().size());
+  Mockito.verify(processes[LOCAL_NUM_CONTAINER - 1]).destroy();
+  Mockito.verify(scheduler,Mockito.times(LOCAL_NUM_CONTAINER)).startExecutor(Mockito.anyInt());
+  containersToRemove.clear();
+  containersToRemove.add(PackingTestUtils.testContainerPlan(1));
+  containersToRemove.add(PackingTestUtils.testContainerPlan(2));
+  scheduler.removeContainers(containersToRemove);
+  existingContainers.remove(PackingTestUtils.testContainerPlan(1));
+  existingContainers.remove(PackingTestUtils.testContainerPlan(2));
+  Assert.assertEquals(existingContainers.size(),scheduler.getProcessToContainer().size());
+  Mockito.verify(processes[1]).destroy();
+  Mockito.verify(processes[2]).destroy();
+  Mockito.verify(scheduler,Mockito.times(LOCAL_NUM_CONTAINER)).startExecutor(Mockito.anyInt());
+}
