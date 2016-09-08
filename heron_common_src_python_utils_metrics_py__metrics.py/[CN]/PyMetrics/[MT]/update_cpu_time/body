@@ -1,0 +1,7 @@
+def update_cpu_time(self):
+    try:
+        t = self.process.cpu_times()
+        self.sys_cpu_time.update(t.system)
+        self.user_cpu_time.update(t.user)
+    except Exception as e:
+        Log.error(traceback.format_exc(e))

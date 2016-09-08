@@ -1,0 +1,2 @@
+def __init__(self, init_val):
+    self.value = init_val

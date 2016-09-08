@@ -1,0 +1,7 @@
+def update_memory_usage(self):
+    try:
+        m = self.process.memory_info()
+        self.physical_memory.update(m.rss)
+        self.virtual_memory.update(m.vms)
+    except Exception as e:
+        Log.error(traceback.format_exc(e))

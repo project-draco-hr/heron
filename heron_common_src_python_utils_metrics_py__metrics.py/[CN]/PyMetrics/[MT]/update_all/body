@@ -1,0 +1,6 @@
+def update_all(self):
+    self.update_cpu_time()
+    self.update_threads_time()
+    self.update_fds()
+    self.update_memory_usage()
+    self.update_gc_stat()

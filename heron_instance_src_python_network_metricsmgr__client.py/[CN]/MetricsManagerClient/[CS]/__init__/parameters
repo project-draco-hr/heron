@@ -9,3 +9,4 @@ out_stream
 sock_map
 socket_options
 gateway_metrics
+py_metrics

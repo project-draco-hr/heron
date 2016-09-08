@@ -1,11 +1,13 @@
-def __init__(self, looper, metrics_host, port, instance, out_metrics, in_stream, out_stream, sock_map, socket_options, gateway_metrics):
+def __init__(self, looper, metrics_host, port, instance, out_metrics, in_stream, out_stream, sock_map, socket_options, gateway_metrics, py_metrics):
     HeronClient.__init__(self, looper, metrics_host, port, sock_map, socket_options)
     self.instance = instance
     self.out_queue = out_metrics
     self.in_stream = in_stream
     self.out_stream = out_stream
     self.gateway_metrics = gateway_metrics
+    self.py_metrics = py_metrics
     self.sys_config = system_config.get_sys_config()
     self._add_metrics_client_tasks()
     Log.debug('start updating in and out stream metrics')
     self._update_in_out_stream_metrics_tasks()
+    self._update_py_metrics()
