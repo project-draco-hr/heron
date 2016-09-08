@@ -1,7 +1,4 @@
 {
-  this.jobName=jobName;
-  this.cluster=cluster;
-  this.role=role;
-  this.env=env;
   this.isVerbose=isVerbose;
+  this.jobSpec=String.format("%s/%s/%s/%s",cluster,role,env,jobName);
 }

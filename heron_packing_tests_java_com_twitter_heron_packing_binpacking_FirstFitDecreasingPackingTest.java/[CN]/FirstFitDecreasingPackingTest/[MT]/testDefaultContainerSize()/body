@@ -1,10 +1,5 @@
 {
-  int spoutParallelism=4;
-  int boltParallelism=3;
-  Integer totalInstances=spoutParallelism + boltParallelism;
-  com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
-  TopologyAPI.Topology topology=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlan=getFirstFitDecreasingPackingPlan(topology);
-  Assert.assertEquals(packingPlan.getContainers().size(),2);
+  Assert.assertEquals(2,packingPlan.getContainers().size());
   Assert.assertEquals(totalInstances,packingPlan.getInstanceCount());
 }

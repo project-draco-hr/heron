@@ -4,7 +4,6 @@
     auroraCmd.add("--bind");
     auroraCmd.add(String.format("%s=%s",binding.getKey(),binding.getValue()));
   }
-  String jobSpec=String.format("%s/%s/%s/%s",cluster,role,env,jobName);
   auroraCmd.add(jobSpec);
   auroraCmd.add(auroraFilename);
   if (isVerbose) {

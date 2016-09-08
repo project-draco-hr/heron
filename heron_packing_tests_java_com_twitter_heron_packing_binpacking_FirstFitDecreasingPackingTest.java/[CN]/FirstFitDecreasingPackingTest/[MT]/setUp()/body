@@ -1,0 +1,9 @@
+{
+  this.spoutParallelism=4;
+  this.boltParallelism=3;
+  this.totalInstances=this.spoutParallelism + this.boltParallelism;
+  this.topologyConfig=new com.twitter.heron.api.Config();
+  this.topology=getTopology(spoutParallelism,boltParallelism,topologyConfig);
+  Config config=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).putAll(ClusterDefaults.getDefaults()).build();
+  this.instanceDefaultResources=new Resource(Context.instanceCpu(config),Context.instanceRam(config),Context.instanceDisk(config));
+}

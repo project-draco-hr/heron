@@ -1,11 +1,7 @@
 {
   int numContainers=2;
-  int spoutParallelism=4;
-  int boltParallelism=3;
-  com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
-  topologyConfig.put(com.twitter.heron.api.Config.TOPOLOGY_STMGRS,numContainers);
   long containerRam=-1L * Constants.GB;
+  topologyConfig.put(com.twitter.heron.api.Config.TOPOLOGY_STMGRS,numContainers);
   topologyConfig.setContainerMaxRamHint(containerRam);
-  TopologyAPI.Topology topology=getTopology(spoutParallelism,boltParallelism,topologyConfig);
-  getFirstFitDecreasingPackingPlan(topology);
+  getFirstFitDecreasingPackingPlan(getTopology(spoutParallelism,boltParallelism,topologyConfig));
 }

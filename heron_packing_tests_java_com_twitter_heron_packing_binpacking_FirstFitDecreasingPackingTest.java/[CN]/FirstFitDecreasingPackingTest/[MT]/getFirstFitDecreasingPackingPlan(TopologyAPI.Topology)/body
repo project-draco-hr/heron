@@ -1,8 +1,5 @@
 {
   Config config=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).putAll(ClusterDefaults.getDefaults()).build();
-  this.instanceRamDefault=Context.instanceRam(config);
-  this.instanceCpuDefault=Context.instanceCpu(config);
-  this.instanceDiskDefault=Context.instanceDisk(config);
   FirstFitDecreasingPacking packing=new FirstFitDecreasingPacking();
   packing.initialize(config,topology);
   return packing.pack();

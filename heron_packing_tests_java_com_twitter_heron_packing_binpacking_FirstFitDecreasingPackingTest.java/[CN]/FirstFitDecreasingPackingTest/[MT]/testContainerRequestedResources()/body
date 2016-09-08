@@ -1,8 +1,4 @@
 {
-  int spoutParallelism=4;
-  int boltParallelism=3;
-  int totalInstances=spoutParallelism + boltParallelism;
-  com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
   long containerRam=10L * Constants.GB;
   long containerDisk=20L * Constants.GB;
   float containerCpu=30;
@@ -11,17 +7,17 @@
   topologyConfig.setContainerMaxCpuHint(containerCpu);
   TopologyAPI.Topology topologyExplicitResourcesConfig=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitResourcesConfig=getFirstFitDecreasingPackingPlan(topologyExplicitResourcesConfig);
-  Assert.assertEquals(packingPlanExplicitResourcesConfig.getContainers().size(),1);
-  Assert.assertEquals((Integer)totalInstances,packingPlanExplicitResourcesConfig.getInstanceCount());
+  Assert.assertEquals(1,packingPlanExplicitResourcesConfig.getContainers().size());
+  Assert.assertEquals(totalInstances,packingPlanExplicitResourcesConfig.getInstanceCount());
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitResourcesConfig.getContainers()) {
-    Assert.assertEquals(Math.round(totalInstances * instanceCpuDefault + (DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceCpuDefault)),(long)containerPlan.getResource().getCpu());
-    Assert.assertEquals(totalInstances * instanceRamDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceRamDefault),containerPlan.getResource().getRam());
-    Assert.assertEquals(totalInstances * instanceDiskDefault + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceDiskDefault),containerPlan.getResource().getDisk());
+    Assert.assertEquals(Math.round(totalInstances * instanceDefaultResources.getCpu() + (DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceDefaultResources.getCpu())),(long)containerPlan.getResource().getCpu());
+    Assert.assertEquals(totalInstances * instanceDefaultResources.getRam() + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceDefaultResources.getRam()),containerPlan.getResource().getRam());
+    Assert.assertEquals(totalInstances * instanceDefaultResources.getDisk() + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceDefaultResources.getDisk()),containerPlan.getResource().getDisk());
     Set<Resource> resources=new HashSet<>();
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
       resources.add(instancePlan.getResource());
     }
     Assert.assertEquals(1,resources.size());
-    Assert.assertEquals(instanceRamDefault,resources.iterator().next().getRam());
+    Assert.assertEquals(instanceDefaultResources.getRam(),resources.iterator().next().getRam());
   }
 }
