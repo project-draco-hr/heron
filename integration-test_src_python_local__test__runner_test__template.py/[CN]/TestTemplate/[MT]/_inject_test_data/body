@@ -1,0 +1,2 @@
+def _inject_test_data(self):
+    os.rename('temp.txt', self.params['readFile'])

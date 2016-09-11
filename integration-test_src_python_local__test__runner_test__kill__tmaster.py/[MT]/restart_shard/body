@@ -1,0 +1,7 @@
+def restart_shard(heron_cli_path, test_cluster, topology_name, shard_num):
+    ' restart tmaster '
+    splitcmd = [heron_cli_path, 'restart', '--verbose', test_cluster, topology_name, str(shard_num)]
+    logging.info('Killing TMaster: %s', splitcmd)
+    if (subprocess.call(splitcmd) != 0):
+        raise RuntimeError('Unable to kill TMaster')
+    logging.info('Killed TMaster')

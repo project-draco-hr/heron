@@ -1,0 +1,2 @@
+def execute_test_case(self):
+    restart_shard(self.params['cliPath'], self.params['cluster'], self.params['topologyName'], TMASTER_SHARD)

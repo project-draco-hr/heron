@@ -1,0 +1,2 @@
+def execute_test_case(self):
+    self.kill_strmgr()

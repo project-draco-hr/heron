@@ -1,0 +1,4 @@
+def kill_metricsmgr(self):
+    logging.info('Executing kill metrics manager')
+    metricsmgr_pid = self.get_pid(('%s-%d' % (HERON_METRICSMGR, NON_TMASTER_SHARD)), self.params['workingDirectory'])
+    self.kill_process(metricsmgr_pid)

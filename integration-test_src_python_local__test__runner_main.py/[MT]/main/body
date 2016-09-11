@@ -3,22 +3,22 @@ def main():
     root = logging.getLogger()
     root.setLevel(logging.DEBUG)
     conf_file = DEFAULT_TEST_CONF_FILE
-    confString = pkgutil.get_data(__name__, conf_file)
+    conf_string = pkgutil.get_data(__name__, conf_file)
     decoder = json.JSONDecoder(strict=False)
-    conf = decoder.decode(confString)
-    heronRepoDirectory = os.getcwd()
+    conf = decoder.decode(conf_string)
+    heron_repo_directory = os.getcwd()
     args = dict()
-    homeDirectory = os.path.expanduser('~')
+    home_directory = os.path.expanduser('~')
     args['cluster'] = conf['cluster']
     args['topologyName'] = conf['topology']['topologyName']
     args['topologyClassPath'] = conf['topology']['topologyClassPath']
-    args['workingDirectory'] = os.path.join(homeDirectory, '.herondata', 'topologies', conf['cluster'], getpass.getuser(), args['topologyName'])
+    args['workingDirectory'] = os.path.join(home_directory, '.herondata', 'topologies', conf['cluster'], getpass.getuser(), args['topologyName'])
     args['cliPath'] = os.path.expanduser(conf['heronCliPath'])
     args['outputFile'] = os.path.join(args['workingDirectory'], conf['topology']['outputFile'])
     args['readFile'] = os.path.join(args['workingDirectory'], conf['topology']['readFile'])
-    args['testJarPath'] = os.path.join(heronRepoDirectory, conf['testJarPath'])
+    args['testJarPath'] = os.path.join(heron_repo_directory, conf['testJarPath'])
     start_time = time.time()
-    (successes, failures) = runAllTests(args)
+    (successes, failures) = run_all_tests(args)
     elapsed_time = (time.time() - start_time)
     total = (len(failures) + len(successes))
     if (not failures):

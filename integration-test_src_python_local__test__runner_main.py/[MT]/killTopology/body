@@ -1,7 +1,0 @@
-def killTopology(heronCliPath, testCluster, topologyName):
-    ' Kill a topology using heron-cli '
-    splitcmd = [('%s' % heronCliPath), 'kill', '--verbose', ('%s' % testCluster), ('%s' % topologyName)]
-    logging.info('Killing topology: %s', splitcmd)
-    if (subprocess.call(splitcmd) != 0):
-        raise RuntimeError(('Unable to kill the topology: %s' % topologyName))
-    logging.info('Successfully killed topology %s', topologyName)

@@ -1,0 +1,4 @@
+def kill_strmgr(self):
+    logging.info('Executing kill stream manager')
+    stmgr_pid = self.get_pid(('%s-%d' % (STMGR, NON_TMASTER_SHARD)), self.params['workingDirectory'])
+    self.kill_process(stmgr_pid)

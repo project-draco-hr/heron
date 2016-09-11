@@ -1,0 +1,7 @@
+def _submit_topology(heron_cli_path, test_cluster, test_jar_path, topology_class_path, topology_name, input_file, output_file):
+    ' Submit topology using heron-cli '
+    splitcmd = [heron_cli_path, 'submit', '--verbose', '--', test_cluster, test_jar_path, topology_class_path, topology_name, input_file, output_file, str(len(TEST_INPUT))]
+    logging.info('Submitting topology: %s', splitcmd)
+    p = subprocess.Popen(splitcmd)
+    p.wait()
+    logging.info('Submitted topology %s', topology_name)

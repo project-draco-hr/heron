@@ -1,0 +1,13 @@
+def run_all_tests(args):
+    ' Run the test for each topology specified in the conf file '
+    successes = []
+    failures = []
+    for testclass in TEST_CLASSES:
+        testname = testclass.__name__
+        logging.info('==== Starting test %s of %s: %s ====', ((len(successes) + len(failures)) + 1), len(TEST_CLASSES), testname)
+        template = testclass(testname, args)
+        if template.run_test():
+            successes += [testname]
+        else:
+            failures += [testname]
+    return (successes, failures)

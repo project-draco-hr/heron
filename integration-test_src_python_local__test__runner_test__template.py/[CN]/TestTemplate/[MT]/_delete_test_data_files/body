@@ -1,0 +1,3 @@
+def _delete_test_data_files(self):
+    _safe_delete_file(self.params['readFile'])
+    _safe_delete_file(self.params['outputFile'])

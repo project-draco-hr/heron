@@ -1,0 +1,19 @@
+def run_test(self):
+    ' Runs the test template '
+    try:
+        self.submit_topology()
+        _block_until_topology_running()
+        self._prepare_test_data()
+        _sleep('to allow time for startup', 30)
+        self.execute_test_case()
+        _block_until_topology_running()
+        self._inject_test_data()
+        _sleep('before checking for results', 30)
+        if (not self.pre_check_results()):
+            self.cleanup_test()
+            return False
+    except Exception as e:
+        logging.error('Test failed, attempting to clean up: %s', e)
+        self.cleanup_test()
+        return False
+    return self._check_results()

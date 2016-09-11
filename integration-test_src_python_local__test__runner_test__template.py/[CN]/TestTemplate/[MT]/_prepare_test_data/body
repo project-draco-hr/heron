@@ -1,0 +1,9 @@
+def _prepare_test_data(self):
+    self._delete_test_data_files()
+    try:
+        with open('temp.txt', 'w') as f:
+            for line in TEST_INPUT:
+                f.write(line)
+    except Exception as e:
+        logging.error('Failed to write to temp.txt file: %s', str(e))
+        return False

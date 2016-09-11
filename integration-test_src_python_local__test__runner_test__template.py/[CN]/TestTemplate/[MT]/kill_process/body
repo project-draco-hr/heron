@@ -1,0 +1,15 @@
+def kill_process(self, process_number):
+    ' kills process by running unix command kill '
+    if (process_number < 1):
+        raise RuntimeError(('Not attempting to kill process id < 1 passed to kill_process: %d' % process_number))
+    logging.info('Killing process number %s', process_number)
+    try:
+        os.kill(int(process_number), signal.SIGTERM)
+    except OSError as ex:
+        if ('No such process' in str(ex)):
+            logging.info(str(ex))
+        else:
+            raise RuntimeError(('Unable to kill process %s' % process_number))
+    except Exception:
+        raise RuntimeError(('Unable to kill process %s' % process_number))
+    logging.info('Killed process number %s', process_number)

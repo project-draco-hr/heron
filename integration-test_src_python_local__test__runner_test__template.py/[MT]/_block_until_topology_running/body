@@ -1,0 +1,4 @@
+def _block_until_topology_running():
+    process_list = _get_processes()
+    while (not _process_exists(process_list, HERON_STMGR_CMD)):
+        process_list = _get_processes()

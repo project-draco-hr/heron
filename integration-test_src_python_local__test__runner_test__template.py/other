@@ -1,0 +1,19 @@
+' test_template.py '
+import logging
+import os
+import time
+import signal
+import subprocess
+from collections import namedtuple
+TEST_INPUT = ['1\n', '2\n', '3\n', '4\n', '5\n', '6\n', '7\n', '8\n', '9\n', '10\n', '11\n', '12\n']
+RETRY_COUNT = 5
+RETRY_INTERVAL = 30
+NON_TMASTER_SHARD = 1
+STMGR = 'stmgr'
+HERON_BIN = 'bin'
+HERON_CORE = 'heron-core'
+HERON_METRICSMGR = 'metricsmgr'
+HERON_SANDBOX_HOME = '.'
+HERON_STMGR = 'heron-stmgr'
+HERON_STMGR_CMD = os.path.join(HERON_SANDBOX_HOME, HERON_CORE, HERON_BIN, HERON_STMGR)
+ProcessTuple = namedtuple('ProcessTuple', 'pid cmd')

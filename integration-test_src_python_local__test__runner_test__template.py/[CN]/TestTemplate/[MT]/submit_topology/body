@@ -1,0 +1,6 @@
+def submit_topology(self):
+    try:
+        _submit_topology(self.params['cliPath'], self.params['cluster'], self.params['testJarPath'], self.params['topologyClassPath'], self.params['topologyName'], self.params['readFile'], self.params['outputFile'])
+    except Exception as e:
+        logging.error('Failed to submit %s topology: %s', self.params['topologyName'], str(e))
+        return False

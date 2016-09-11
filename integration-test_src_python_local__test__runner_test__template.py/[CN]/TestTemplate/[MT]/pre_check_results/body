@@ -1,0 +1,2 @@
+def pre_check_results(self):
+    return True
