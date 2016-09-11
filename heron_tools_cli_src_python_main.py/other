@@ -15,6 +15,7 @@ import heron.tools.cli.src.python.deactivate as deactivate
 import heron.tools.cli.src.python.kill as kill
 import heron.tools.cli.src.python.restart as restart
 import heron.tools.cli.src.python.submit as submit
+import heron.tools.cli.src.python.update as update
 import heron.tools.cli.src.python.version as version
 Log = log.Log
 HELP_EPILOG = 'Getting more help:\n  heron help <command> Prints help and options for <command>\n\nFor detailed documentation, go to http://heronstreaming.io'
