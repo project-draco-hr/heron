@@ -2,7 +2,7 @@ def load_state_manager_locations(cluster, state_manager_config_file='heron-conf/
     ' Reads configs to determine which state manager to use and converts them to state manager\n  locations. Handles a subset of config wildcard substitution supported in the substitute method in\n  com.twitter.heron.spi.common.Misc.java'
     with open(state_manager_config_file, 'r') as stream:
         config = yaml.load(stream)
-    home_dir = os.getenv('HOME')
+    home_dir = os.path.expanduser('~')
     wildcards = {'~': home_dir, '${HOME}': home_dir, '${CLUSTER}': cluster, }
     if os.getenv('JAVA_HOME'):
         wildcards['${JAVA_HOME}'] = os.getenv('JAVA_HOME')
