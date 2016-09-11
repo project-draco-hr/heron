@@ -1,5 +1,4 @@
 {
-  topologyConfig.setContainerPaddingPercentage(0);
   long maxContainerRam=10L * Constants.GB;
   long boltRam=4L * Constants.GB;
   topologyConfig.setContainerMaxRamHint(maxContainerRam);
@@ -9,5 +8,12 @@
   Assert.assertEquals(2,packingPlanExplicitRamMap.getContainers().size());
   Assert.assertEquals(totalInstances,packingPlanExplicitRamMap.getInstanceCount());
   AssertPacking.assertContainers(packingPlanExplicitRamMap.getContainers(),BOLT_NAME,SPOUT_NAME,boltRam,instanceDefaultResources.getRam(),null);
-  AssertPacking.assertContainerRam(packingPlanExplicitRamMap.getContainers(),maxContainerRam);
+  int numScalingInstances=3;
+  Map<String,Integer> componentChanges=new HashMap<>();
+  componentChanges.put(BOLT_NAME,numScalingInstances);
+  PackingPlan newPackingPlan=getFirstFitDecreasingPackingPlanRepack(topologyExplicitRamMap,packingPlanExplicitRamMap,componentChanges);
+  Assert.assertEquals(4,newPackingPlan.getContainers().size());
+  Assert.assertEquals((Integer)(totalInstances + numScalingInstances),newPackingPlan.getInstanceCount());
+  AssertPacking.assertContainers(newPackingPlan.getContainers(),BOLT_NAME,SPOUT_NAME,boltRam,instanceDefaultResources.getRam(),null);
+  AssertPacking.assertContainerRam(newPackingPlan.getContainers(),maxContainerRam);
 }

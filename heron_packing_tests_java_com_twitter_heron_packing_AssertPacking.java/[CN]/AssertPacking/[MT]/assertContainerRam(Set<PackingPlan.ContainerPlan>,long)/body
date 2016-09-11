@@ -1,0 +1,9 @@
+{
+  for (  PackingPlan.ContainerPlan containerPlan : containerPlans) {
+    long containerRam=0;
+    for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
+      containerRam+=instancePlan.getResource().getRam();
+    }
+    Assert.assertTrue(containerRam <= maxRamforResources);
+  }
+}

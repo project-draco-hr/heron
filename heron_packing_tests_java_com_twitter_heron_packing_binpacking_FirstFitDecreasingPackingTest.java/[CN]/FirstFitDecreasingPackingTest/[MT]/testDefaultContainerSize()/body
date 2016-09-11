@@ -2,4 +2,5 @@
   PackingPlan packingPlan=getFirstFitDecreasingPackingPlan(topology);
   Assert.assertEquals(2,packingPlan.getContainers().size());
   Assert.assertEquals(totalInstances,packingPlan.getInstanceCount());
+  AssertPacking.assertContainerRam(packingPlan.getContainers(),4 * instanceDefaultResources.getRam());
 }

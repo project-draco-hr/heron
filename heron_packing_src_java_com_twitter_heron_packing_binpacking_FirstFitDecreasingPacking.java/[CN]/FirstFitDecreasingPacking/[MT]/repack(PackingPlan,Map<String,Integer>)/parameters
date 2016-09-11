@@ -1,0 +1,2 @@
+PackingPlan currentPackingPlan
+Map<String,Integer> componentChanges

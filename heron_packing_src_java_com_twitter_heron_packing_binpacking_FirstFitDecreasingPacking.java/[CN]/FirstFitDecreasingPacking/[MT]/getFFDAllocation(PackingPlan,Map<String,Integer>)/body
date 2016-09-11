@@ -1,0 +1,4 @@
+{
+  int numContainers=currentPackingPlan.getContainers().size();
+  return assignInstancestoContainers(componentChanges,numContainers);
+}

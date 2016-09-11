@@ -1,4 +1,4 @@
 {
   Map<String,Integer> parallelismMap=TopologyUtils.getComponentParallelism(topology);
-  return placeInstances(parallelismMap,0);
+  return assignInstancestoContainers(parallelismMap,0);
 }

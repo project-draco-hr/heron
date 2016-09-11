@@ -9,13 +9,13 @@
     for (int j=0; j < numInstance; j++) {
       Resource instanceResource=this.defaultInstanceResources.cloneWithRam(ramRequirement.getRamRequirement());
       int containerId=placeFFDInstance(containers,instanceResource);
-      if (allocation.containsKey(containerId + numContainers)) {
-        allocation.get(containerId + numContainers).add(PackingUtils.getInstanceId(containerId + numContainers,component,globalTaskIndex,j));
+      if (allocation.containsKey(containerId + startNumContainers)) {
+        allocation.get(containerId + startNumContainers).add(PackingUtils.getInstanceId(containerId + startNumContainers,component,globalTaskIndex,j));
       }
  else {
         ArrayList<String> instance=new ArrayList<>();
-        instance.add(PackingUtils.getInstanceId(containerId + numContainers,component,globalTaskIndex,j));
-        allocation.put(containerId + numContainers,instance);
+        instance.add(PackingUtils.getInstanceId(containerId + startNumContainers,component,globalTaskIndex,j));
+        allocation.put(containerId + startNumContainers,instance);
       }
       globalTaskIndex++;
     }

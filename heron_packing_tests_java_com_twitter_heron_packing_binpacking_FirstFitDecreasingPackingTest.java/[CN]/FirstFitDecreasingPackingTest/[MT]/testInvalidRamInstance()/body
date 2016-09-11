@@ -1,9 +1,11 @@
 {
   long maxContainerRam=10L * Constants.GB;
+  int defaultNumInstancesperContainer=4;
   long boltRam=0L * Constants.GB;
   topologyConfig.setContainerMaxRamHint(maxContainerRam);
   topologyConfig.setComponentRam(BOLT_NAME,boltRam);
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
   Assert.assertEquals(totalInstances,packingPlanExplicitRamMap.getInstanceCount());
+  AssertPacking.assertContainerRam(packingPlanExplicitRamMap.getContainers(),defaultNumInstancesperContainer * instanceDefaultResources.getRam());
 }

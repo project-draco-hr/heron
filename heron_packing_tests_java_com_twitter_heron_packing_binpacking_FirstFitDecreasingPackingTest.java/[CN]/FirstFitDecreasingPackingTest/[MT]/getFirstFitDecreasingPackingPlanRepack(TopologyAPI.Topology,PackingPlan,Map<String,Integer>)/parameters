@@ -1,0 +1,3 @@
+TopologyAPI.Topology topology
+PackingPlan currentPackingPlan
+Map<String,Integer> componentChanges

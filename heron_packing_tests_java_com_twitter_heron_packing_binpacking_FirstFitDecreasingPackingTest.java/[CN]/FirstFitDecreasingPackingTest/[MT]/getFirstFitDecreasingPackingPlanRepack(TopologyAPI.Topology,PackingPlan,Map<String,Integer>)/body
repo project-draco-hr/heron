@@ -1,0 +1,6 @@
+{
+  Config config=Config.newBuilder().put(Keys.topologyId(),topology.getId()).put(Keys.topologyName(),topology.getName()).putAll(ClusterDefaults.getDefaults()).build();
+  FirstFitDecreasingPacking packing=new FirstFitDecreasingPacking();
+  packing.initialize(config,topology);
+  return packing.repack(currentPackingPlan,componentChanges);
+}

@@ -14,4 +14,5 @@
   Assert.assertEquals(1,packingPlanExplicitRamMap.getContainers().size());
   Assert.assertEquals(totalInstances,packingPlanExplicitRamMap.getInstanceCount());
   AssertPacking.assertContainers(packingPlanExplicitRamMap.getContainers(),BOLT_NAME,SPOUT_NAME,boltRam,spoutRam,maxContainerRam);
+  AssertPacking.assertContainerRam(packingPlanExplicitRamMap.getContainers(),maxContainerRam);
 }
