@@ -1,0 +1,2 @@
+String extraActionFile
+Predicate<CharSequence> predicate
