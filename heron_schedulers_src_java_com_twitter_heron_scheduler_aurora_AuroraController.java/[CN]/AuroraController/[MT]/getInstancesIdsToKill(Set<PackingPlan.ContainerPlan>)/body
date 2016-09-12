@@ -1,0 +1,10 @@
+{
+  StringBuilder ids=new StringBuilder();
+  for (  PackingPlan.ContainerPlan containerPlan : containersToRemove) {
+    if (ids.length() > 0) {
+      ids.append(",");
+    }
+    ids.append(containerPlan.getId());
+  }
+  return ids.toString();
+}

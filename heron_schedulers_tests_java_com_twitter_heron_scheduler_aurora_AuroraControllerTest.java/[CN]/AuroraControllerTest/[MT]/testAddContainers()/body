@@ -1,0 +1,7 @@
+{
+  Integer containersToAdd=3;
+  List<String> expectedCommand=asList("aurora job add --wait-until RUNNING %s/0 %s",JOB_SPEC,containersToAdd.toString());
+  Mockito.doReturn(true).when(controller).runProcess(Matchers.anyListOf(String.class));
+  controller.addContainers(containersToAdd);
+  Mockito.verify(controller).runProcess(Mockito.eq(expectedCommand));
+}
