@@ -1,8 +1,8 @@
 def valid_path(path):
     '\n  Check if an entry in the class path exists as either a directory or a file\n  '
     if path.endswith('*'):
-        Log.debug('Checking classpath entry suffix as directory: %s', path[(-1)])
-        if os.path.isdir(path[(-1)]):
+        Log.debug('Checking classpath entry suffix as directory: %s', path[:(-1)])
+        if os.path.isdir(path[:(-1)]):
             return True
         return False
     Log.debug('Checking classpath entry as directory: %s', path)
