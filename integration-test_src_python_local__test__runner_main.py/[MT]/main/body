@@ -14,6 +14,8 @@ def main():
     args['topologyClassPath'] = conf['topology']['topologyClassPath']
     args['workingDirectory'] = os.path.join(home_directory, '.herondata', 'topologies', conf['cluster'], getpass.getuser(), args['topologyName'])
     args['cliPath'] = os.path.expanduser(conf['heronCliPath'])
+    args['trackerPath'] = os.path.expanduser(conf['heronTrackerPath'])
+    args['trackerPort'] = _random_port()
     args['outputFile'] = os.path.join(args['workingDirectory'], conf['topology']['outputFile'])
     args['readFile'] = os.path.join(args['workingDirectory'], conf['topology']['readFile'])
     args['testJarPath'] = os.path.join(heron_repo_directory, conf['testJarPath'])

@@ -1,0 +1,6 @@
+def scale_up(heron_cli_path, test_cluster, topology_name):
+    splitcmd = [heron_cli_path, 'update', '--verbose', test_cluster, topology_name, '--component-parallelism=paused-local-spout:2', '--component-parallelism=identity-bolt:2']
+    logging.info('Increasing number of component instances: %s', splitcmd)
+    if (subprocess.call(splitcmd) != 0):
+        raise RuntimeError('Unable to update topology')
+    logging.info('Increased number of component instances')

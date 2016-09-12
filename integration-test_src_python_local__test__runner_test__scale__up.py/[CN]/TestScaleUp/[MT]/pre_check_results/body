@@ -1,0 +1,14 @@
+def pre_check_results(self):
+    url = (('http://localhost:%s/topologies/physicalplan?' % self.params['trackerPort']) + 'cluster=local&environ=default&topology=IntegrationTest_LocalReadWriteTopology')
+    response = urllib.urlopen(url)
+    physical_plan_json = json.loads(response.read())
+    expected_instance_count = 5
+    if ('result' not in physical_plan_json):
+        logging.error('Could not find result json in physical plan request to tracker: %s', url)
+        return False
+    instances = physical_plan_json['result']['instances']
+    instance_count = len(instances)
+    if (instance_count != expected_instance_count):
+        logging.error('Found %s instances but expected %s: %s', instance_count, expected_instance_count, instances)
+        return False
+    return True

@@ -5,13 +5,16 @@ import logging
 import os
 import pkgutil
 import time
+import socket
+import subprocess
 import sys
 from collections import namedtuple
 import test_kill_metricsmgr
 import test_kill_stmgr
 import test_kill_stmgr_metricsmgr
 import test_kill_tmaster
-TEST_CLASSES = [test_kill_tmaster.TestKillTMaster, test_kill_stmgr.TestKillStmgr, test_kill_metricsmgr.TestKillMetricsMgr, test_kill_stmgr_metricsmgr.TestKillStmgrMetricsMgr]
+import test_scale_up
+TEST_CLASSES = [test_kill_tmaster.TestKillTMaster, test_kill_stmgr.TestKillStmgr, test_kill_metricsmgr.TestKillMetricsMgr, test_kill_stmgr_metricsmgr.TestKillStmgrMetricsMgr, test_scale_up.TestScaleUp]
 DEFAULT_TEST_CONF_FILE = 'resources/test.conf'
 ProcessTuple = namedtuple('ProcessTuple', 'pid cmd')
 if (__name__ == '__main__'):

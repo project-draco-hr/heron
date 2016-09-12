@@ -1,0 +1,6 @@
+def _start_tracker(tracker_path, tracker_port):
+    splitcmd = [tracker_path, '--verbose', ('--port=%s' % tracker_port)]
+    logging.info('Starting heron tracker: %s', splitcmd)
+    popen = subprocess.Popen(splitcmd)
+    logging.info('Successfully started heron tracker on port %s', tracker_port)
+    return popen

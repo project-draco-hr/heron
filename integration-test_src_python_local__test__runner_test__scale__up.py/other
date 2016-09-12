@@ -1,0 +1,6 @@
+'test_scale_up.py'
+import json
+import logging
+import subprocess
+import urllib
+import test_template
