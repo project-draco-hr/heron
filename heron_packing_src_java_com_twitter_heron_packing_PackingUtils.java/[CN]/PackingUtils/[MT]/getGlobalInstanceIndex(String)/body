@@ -1,0 +1,3 @@
+{
+  return Integer.parseInt(instanceId.split(":")[2]);
+}

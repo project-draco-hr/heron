@@ -19,8 +19,7 @@
       containerDiskInBytes+=instanceDisk;
       double instanceCpu=instanceDefaults.getCpu();
       containerCpu+=instanceCpu;
-      Resource resource=new Resource(instanceCpu,instanceRam,instanceDisk);
-      PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,getComponentName(instanceId),resource);
+      PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,getComponentName(instanceId),new Resource(instanceCpu,instanceRam,instanceDisk));
       instancePlans.add(instancePlan);
     }
     containerCpu+=(paddingPercentage * containerCpu) / 100;
