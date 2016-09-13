@@ -3,6 +3,7 @@ def _check_results(self):
     expected_result = ''
     actual_result = ''
     retries_left = RETRY_COUNT
+    _sleep(('before trying to check results for test %s' % self.testname), RETRY_INTERVAL)
     while (retries_left > 0):
         retries_left -= 1
         try:
@@ -12,23 +13,28 @@ def _check_results(self):
                 actual_result = g.read()
         except Exception as e:
             logging.error('Failed to read expected or actual results from file for test %s: %s', self.testname, e)
-            self.cleanup_test()
-            return False
-        if (expected_result == actual_result):
+            if (retries_left == 0):
+                self.cleanup_test()
+                return False
+        expected_sorted = sorted(expected_result.split('\n'))
+        actual_sorted = sorted(actual_result.split('\n'))
+        if (expected_sorted == actual_sorted):
             break
         if (retries_left > 0):
             expected_result = ''
             actual_result = ''
+            expected_sorted = []
+            actual_sorted = []
             logging.info(('Failed to get expected results for test %s (attempt %s/%s), ' + 'retrying after %s seconds'), self.testname, (RETRY_COUNT - retries_left), RETRY_COUNT, RETRY_INTERVAL)
             time.sleep(RETRY_INTERVAL)
     self.cleanup_test()
-    if (actual_result == expected_result):
+    if (actual_sorted == expected_sorted):
         logging.info('Actual result matched expected result for test %s', self.testname)
-        logging.info(('Actual result ---------- \n' + actual_result))
-        logging.info(('Expected result ---------- \n' + expected_result))
+        logging.info('Actual result ---------- \n%s', actual_sorted)
+        logging.info('Expected result ---------- \n%s', expected_sorted)
         return True
     else:
         logging.error('Actual result did not match expected result for test %s', self.testname)
-        logging.info(('Actual result ---------- \n' + actual_result))
-        logging.info(('Expected result ---------- \n' + expected_result))
+        logging.info('Actual result ---------- \n%s', actual_sorted)
+        logging.info('Expected result ---------- \n%s', expected_sorted)
         return False

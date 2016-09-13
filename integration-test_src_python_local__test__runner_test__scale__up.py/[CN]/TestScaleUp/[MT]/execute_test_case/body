@@ -1,2 +1,4 @@
 def execute_test_case(self):
     scale_up(self.params['cliPath'], self.params['cluster'], self.params['topologyName'])
+    self.expected_container_count += 1
+    self.expected_instance_count += 2

@@ -1,0 +1,4 @@
+def _block_until_stmgr_running(expected_stmgrs):
+    process_list = _get_processes()
+    while (not _processes_exists(process_list, HERON_STMGR_CMD, expected_stmgrs)):
+        process_list = _get_processes()

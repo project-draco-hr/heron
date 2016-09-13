@@ -1,0 +1,21 @@
+def _block_until_topology_running(self, min_instances):
+    retries_left = RETRY_COUNT
+    _sleep(('before trying to fetch pplan for test %s' % self.testname), RETRY_INTERVAL)
+    while (retries_left > 0):
+        retries_left -= 1
+        packing_plan = self._get_tracker_pplan()
+        if packing_plan:
+            instances_found = len(packing_plan['instances'])
+            if (instances_found >= min_instances):
+                logging.info('Successfully fetched pplan from tracker for test %s after %s attempts.', self.testname, (RETRY_COUNT - retries_left))
+                return packing_plan
+            elif (retries_left == 0):
+                logging.error(('Got pplan from tracker for test %s but the number of instances found (%d) was ' + 'less than min expected (%s).'), self.testname, instances_found, min_instances)
+                self.cleanup_test()
+                return None
+        if (retries_left > 0):
+            _sleep(('before trying again to fetch pplan for test %s (attempt %s/%s)' % (self.testname, (RETRY_COUNT - retries_left), RETRY_COUNT)), RETRY_INTERVAL)
+        else:
+            logging.error('Failed to get pplan from tracker for test %s after %s attempts.', self.testname, RETRY_COUNT)
+            self.cleanup_test()
+            return None

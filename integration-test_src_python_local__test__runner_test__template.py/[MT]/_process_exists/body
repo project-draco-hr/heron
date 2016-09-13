@@ -1,6 +1,0 @@
-def _process_exists(process_list, process_cmd):
-    ' check if a process is running '
-    for process in process_list:
-        if (process_cmd in process.cmd):
-            return True
-    return False
