@@ -10,6 +10,7 @@
   while (!file.exists()) {
   }
   try {
+    LOG.info("Creating reader for input data from file " + file.getAbsolutePath());
     br=new BufferedReader(new FileReader(file),1024 * 1024);
   }
  catch (  IOException e) {

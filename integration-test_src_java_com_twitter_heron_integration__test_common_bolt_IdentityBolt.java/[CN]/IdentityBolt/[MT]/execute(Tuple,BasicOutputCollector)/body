@@ -1,3 +1,11 @@
 {
+  StringBuilder sb=new StringBuilder();
+  for (  Object o : input.getValues()) {
+    if (sb.length() > 0) {
+      sb.append(",");
+    }
+    sb.append(o.toString());
+  }
+  LOG.info("Receiving and emitting tuple values: " + sb.toString());
   collector.emit(input.getValues());
 }

@@ -5,6 +5,7 @@
   try {
     String currentLine;
     if ((currentLine=br.readLine()) != null) {
+      LOG.info("Emitting tuple from input data file: " + currentLine);
       collector.emit(new Values(currentLine),"MESSAGE_ID");
     }
   }

@@ -1,6 +1,7 @@
 {
   try {
     String data=tuple.getString(0);
+    LOG.info("Write tuple date to output file: " + data);
     bw.write(data);
     bw.newLine();
   }

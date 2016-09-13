@@ -1,7 +1,9 @@
 {
+  LOG.info("Preparing to write tuples to file: " + localFilePath);
   try {
     File outputFile=new File(localFilePath);
     if (!outputFile.exists()) {
+      LOG.info("Creating new file to write tuples to: " + localFilePath);
       outputFile.createNewFile();
     }
     bw=new BufferedWriter(new FileWriter(outputFile.getAbsoluteFile(),true),1024 * 1024);
