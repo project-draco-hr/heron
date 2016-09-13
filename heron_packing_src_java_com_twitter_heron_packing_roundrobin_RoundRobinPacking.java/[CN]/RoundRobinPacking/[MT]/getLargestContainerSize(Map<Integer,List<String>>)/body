@@ -1,9 +1,0 @@
-{
-  int max=0;
-  for (  List<String> instances : allocation.values()) {
-    if (instances.size() > max) {
-      max=instances.size();
-    }
-  }
-  return max;
-}

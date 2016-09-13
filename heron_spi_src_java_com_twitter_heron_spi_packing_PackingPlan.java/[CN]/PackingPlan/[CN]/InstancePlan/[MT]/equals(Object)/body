@@ -6,5 +6,5 @@
     return false;
   }
   InstancePlan that=(InstancePlan)o;
-  return getId().equals(that.getId()) && getComponentName().equals(that.getComponentName()) && getResource().equals(that.getResource());
+  return getComponentName().equals(that.getComponentName()) && getTaskId() == that.getTaskId() && getComponentIndex() == that.getComponentIndex() && getResource().equals(that.getResource());
 }

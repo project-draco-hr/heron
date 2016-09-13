@@ -1,5 +1,5 @@
 {
-  Map<Integer,List<String>> allocation=new HashMap<>();
+  Map<Integer,List<InstanceId>> allocation=new HashMap<>();
   ArrayList<Container> containers=new ArrayList<>();
   ArrayList<RamRequirement> ramRequirements=getRAMInstances();
   int totalInstance=TopologyUtils.getTotalInstance(topology);
@@ -7,7 +7,7 @@
     throw new RuntimeException("More containers allocated than instances." + numContainers + " allocated to host "+ totalInstance+ " instances.");
   }
   for (int i=1; i <= numContainers; ++i) {
-    allocation.put(i,new ArrayList<String>());
+    allocation.put(i,new ArrayList<InstanceId>());
   }
   for (int i=0; i <= numContainers - 1; i++) {
     allocateNewContainer(containers);
@@ -22,12 +22,11 @@
     for (int i=0; i < numInstance; ++i) {
       Resource instanceResource=this.defaultInstanceResources.cloneWithRam(ramRequirement);
       if (placeResourceCompliantRRInstance(containers,containerId,instanceResource)) {
-        allocation.get(containerId).add(PackingUtils.getInstanceId(containerId,component,globalTaskIndex,i));
+        allocation.get(containerId).add(new InstanceId(component,globalTaskIndex,i));
       }
  else {
-        List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
         increaseNumContainers();
-        LOG.info(String.format("Increasing the number of containers to " + this.numContainers + " and attempting packing again."));
+        LOG.info(String.format("Increasing the number of containers to " + "%s and attempting packing again.",this.numContainers));
         return null;
       }
       containerId=(containerId == numContainers) ? 1 : containerId + 1;

@@ -3,7 +3,7 @@
   int maxInstanceIndex=0;
   for (  PackingPlan.ContainerPlan containerPlan : currentPackingPlan.getContainers()) {
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
-      maxInstanceIndex=Math.max(maxInstanceIndex,PackingUtils.getGlobalInstanceIndex(instancePlan.getId()));
+      maxInstanceIndex=Math.max(maxInstanceIndex,instancePlan.getTaskId());
     }
   }
   return assignInstancesToContainers(componentChanges,numContainers + 1,maxInstanceIndex + 1);

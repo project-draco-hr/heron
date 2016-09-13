@@ -1,3 +1,0 @@
-{
-  return instanceId.split(":")[1];
-}

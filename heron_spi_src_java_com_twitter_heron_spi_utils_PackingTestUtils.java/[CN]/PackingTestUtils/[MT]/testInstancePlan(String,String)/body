@@ -1,4 +1,0 @@
-{
-  Resource resource=new Resource(1.5,2,3);
-  return new PackingPlan.InstancePlan(id,componentName,resource);
-}

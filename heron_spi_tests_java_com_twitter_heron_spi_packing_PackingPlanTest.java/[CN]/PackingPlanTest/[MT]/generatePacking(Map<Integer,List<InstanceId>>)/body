@@ -1,0 +1,22 @@
+{
+  Resource resource=new Resource(1.0,1 * Constants.GB,10 * Constants.GB);
+  Set<PackingPlan.ContainerPlan> containerPlans=new HashSet<>();
+  for (  int containerId : basePacking.keySet()) {
+    List<InstanceId> instanceList=basePacking.get(containerId);
+    Set<PackingPlan.InstancePlan> instancePlans=new HashSet<>();
+    for (    InstanceId instanceId : instanceList) {
+      String componentName=instanceId.getComponentName();
+      Resource instanceResource;
+      if ("bolt".equals(componentName)) {
+        instanceResource=new Resource(1.0,2 * Constants.GB,10 * Constants.GB);
+      }
+ else {
+        instanceResource=new Resource(1.0,3 * Constants.GB,10 * Constants.GB);
+      }
+      instancePlans.add(new PackingPlan.InstancePlan(instanceId,instanceResource));
+    }
+    PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlans,resource);
+    containerPlans.add(containerPlan);
+  }
+  return new PackingPlan("",containerPlans);
+}

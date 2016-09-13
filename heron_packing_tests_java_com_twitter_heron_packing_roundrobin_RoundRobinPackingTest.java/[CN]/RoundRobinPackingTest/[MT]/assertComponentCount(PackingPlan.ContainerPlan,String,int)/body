@@ -1,7 +1,7 @@
 {
   int count=0;
   for (  PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
-    if (componentName.equals(PackingUtils.getComponentName(instancePlan.getId()))) {
+    if (componentName.equals(instancePlan.getComponentName())) {
       count++;
     }
   }

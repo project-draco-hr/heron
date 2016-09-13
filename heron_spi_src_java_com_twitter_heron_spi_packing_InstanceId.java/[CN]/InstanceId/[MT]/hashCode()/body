@@ -1,0 +1,6 @@
+{
+  int result=componentName.hashCode();
+  result=31 * result + taskId;
+  result=31 * result + componentIndex;
+  return result;
+}

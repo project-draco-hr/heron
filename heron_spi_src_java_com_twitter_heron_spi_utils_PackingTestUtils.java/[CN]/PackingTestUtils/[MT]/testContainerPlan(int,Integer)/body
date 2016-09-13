@@ -1,10 +1,9 @@
 {
   Resource resource=new Resource(7.5,6,9);
   Set<PackingPlan.InstancePlan> instancePlans=new HashSet<>();
-  for (  int index : instanceIndices) {
-    String instanceId="instance-" + index;
-    String componentName="componentName-" + index;
-    instancePlans.add(testInstancePlan(instanceId,componentName));
+  for (  int instanceIndex : instanceIndices) {
+    String componentName="componentName-" + instanceIndex;
+    instancePlans.add(testInstancePlan(componentName,instanceIndex));
   }
   return new PackingPlan.ContainerPlan(containerId,instancePlans,resource);
 }

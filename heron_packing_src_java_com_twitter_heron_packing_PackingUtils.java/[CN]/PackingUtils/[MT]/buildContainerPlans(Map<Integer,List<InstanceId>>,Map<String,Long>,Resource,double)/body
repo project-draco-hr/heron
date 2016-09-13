@@ -1,0 +1,32 @@
+{
+  Set<PackingPlan.ContainerPlan> containerPlans=new HashSet<>();
+  for (  Integer containerId : containerInstances.keySet()) {
+    List<InstanceId> instanceList=containerInstances.get(containerId);
+    long containerRam=0;
+    long containerDiskInBytes=0;
+    double containerCpu=0;
+    Set<PackingPlan.InstancePlan> instancePlans=new HashSet<>();
+    for (    InstanceId instanceId : instanceList) {
+      long instanceRam=0;
+      if (ramMap.containsKey(instanceId.getComponentName())) {
+        instanceRam=ramMap.get(instanceId.getComponentName());
+      }
+ else {
+        instanceRam=instanceDefaults.getRam();
+      }
+      containerRam+=instanceRam;
+      long instanceDisk=instanceDefaults.getDisk();
+      containerDiskInBytes+=instanceDisk;
+      double instanceCpu=instanceDefaults.getCpu();
+      containerCpu+=instanceCpu;
+      instancePlans.add(new PackingPlan.InstancePlan(instanceId,new Resource(instanceCpu,instanceRam,instanceDisk)));
+    }
+    containerCpu+=(paddingPercentage * containerCpu) / 100;
+    containerRam+=(paddingPercentage * containerRam) / 100;
+    containerDiskInBytes+=(paddingPercentage * containerDiskInBytes) / 100;
+    Resource resource=new Resource(Math.round(containerCpu),containerRam,containerDiskInBytes);
+    PackingPlan.ContainerPlan containerPlan=new PackingPlan.ContainerPlan(containerId,instancePlans,resource);
+    containerPlans.add(containerPlan);
+  }
+  return containerPlans;
+}

@@ -1,6 +1,6 @@
 {
   int adjustments=this.numAdjustments;
-  Map<Integer,List<String>> containerInstances=getResourceCompliantRRAllocation();
+  Map<Integer,List<InstanceId>> containerInstances=getResourceCompliantRRAllocation();
   while (containerInstances == null) {
     if (this.numAdjustments > adjustments) {
       adjustments++;

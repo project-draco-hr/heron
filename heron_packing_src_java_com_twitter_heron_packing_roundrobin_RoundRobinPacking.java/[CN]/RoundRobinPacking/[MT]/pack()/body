@@ -1,22 +1,19 @@
 {
-  Map<Integer,List<String>> roundRobinAllocation=getRoundRobinAllocation();
-  Map<Integer,Map<String,Long>> instancesRamMap=getInstancesRamMapInContainer(roundRobinAllocation);
+  Map<Integer,List<InstanceId>> roundRobinAllocation=getRoundRobinAllocation();
+  Map<Integer,Map<InstanceId,Long>> instancesRamMap=getInstancesRamMapInContainer(roundRobinAllocation);
   long containerDiskInBytes=getContainerDiskHint(roundRobinAllocation);
   double containerCpu=getContainerCpuHint(roundRobinAllocation);
   Set<PackingPlan.ContainerPlan> containerPlans=new HashSet<>();
-  long topologyRam=0;
-  for (  Map.Entry<Integer,List<String>> entry : roundRobinAllocation.entrySet()) {
-    int containerId=entry.getKey();
-    List<String> instanceList=entry.getValue();
-    Map<String,PackingPlan.InstancePlan> instancePlanMap=new HashMap<>();
+  for (  int containerId : roundRobinAllocation.keySet()) {
+    List<InstanceId> instanceList=roundRobinAllocation.get(containerId);
+    Map<InstanceId,PackingPlan.InstancePlan> instancePlanMap=new HashMap<>();
     long containerRam=DEFAULT_RAM_PADDING_PER_CONTAINER;
-    for (    String instanceId : instanceList) {
+    for (    InstanceId instanceId : instanceList) {
       long instanceRam=instancesRamMap.get(containerId).get(instanceId);
       long instanceDisk=instanceDiskDefault;
       double instanceCpu=instanceCpuDefault;
       Resource resource=new Resource(instanceCpu,instanceRam,instanceDisk);
-      PackingPlan.InstancePlan instancePlan=new PackingPlan.InstancePlan(instanceId,PackingUtils.getComponentName(instanceId),resource);
-      instancePlanMap.put(instanceId,instancePlan);
+      instancePlanMap.put(instanceId,new PackingPlan.InstancePlan(instanceId,resource));
       containerRam+=instanceRam;
     }
     Resource resource=new Resource(containerCpu,containerRam,containerDiskInBytes);

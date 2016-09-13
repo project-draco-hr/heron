@@ -1,0 +1,6 @@
+{
+  this.componentName=instanceId.getComponentName();
+  this.taskId=instanceId.getTaskId();
+  this.componentIndex=instanceId.getComponentIndex();
+  this.resource=resource;
+}
