@@ -12,7 +12,6 @@
   Mockito.when(packingPlan.getComponentRamDistribution()).thenReturn("ramdist");
   Mockito.when(packingPlan.getId()).thenReturn("packing_plan_id");
   Mockito.when(packing.pack()).thenReturn(packingPlan);
-  Mockito.when(packingPlan.getInstanceDistribution()).thenReturn(MOCK_PACKING_STRING);
   LauncherUtils mockLauncherUtils=Mockito.mock(LauncherUtils.class);
   Mockito.when(mockLauncherUtils.createPackingPlan(Mockito.any(Config.class),Mockito.any(Config.class))).thenReturn(packingPlan);
   PowerMockito.spy(LauncherUtils.class);

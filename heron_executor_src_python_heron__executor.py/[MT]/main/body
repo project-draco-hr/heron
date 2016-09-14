@@ -1,6 +1,6 @@
 def main():
     'Register exit handlers, initialize the executor and run it.'
-    expected = 33
+    expected = 32
     if (len(sys.argv) != expected):
         Log.error(('Expected %s arguments but received %s: %s' % (expected, len(sys.argv), sys.argv)))
         print_usage()

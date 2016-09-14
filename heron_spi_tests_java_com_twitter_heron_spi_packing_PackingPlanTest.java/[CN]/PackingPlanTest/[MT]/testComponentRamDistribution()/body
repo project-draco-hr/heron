@@ -1,0 +1,7 @@
+{
+  Map<Integer,List<InstanceId>> packing=new HashMap<>();
+  packing.put(1,Arrays.asList(new InstanceId("spout",1,0),new InstanceId("bolt",3,0)));
+  PackingPlan packingPlan=generatePacking(packing);
+  String ramDistStr=packingPlan.getComponentRamDistribution();
+  Assert.assertEquals("spout:3221225472,bolt:2147483648",ramDistStr);
+}

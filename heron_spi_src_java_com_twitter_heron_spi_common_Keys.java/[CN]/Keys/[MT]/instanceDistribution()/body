@@ -1,3 +1,0 @@
-{
-  return ConfigKeys.get("INSTANCE_DISTRIBUTION");
-}

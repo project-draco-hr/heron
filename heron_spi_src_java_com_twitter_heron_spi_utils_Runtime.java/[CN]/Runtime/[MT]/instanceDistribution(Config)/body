@@ -1,3 +1,0 @@
-{
-  return runtime.getStringValue(Keys.instanceDistribution());
-}

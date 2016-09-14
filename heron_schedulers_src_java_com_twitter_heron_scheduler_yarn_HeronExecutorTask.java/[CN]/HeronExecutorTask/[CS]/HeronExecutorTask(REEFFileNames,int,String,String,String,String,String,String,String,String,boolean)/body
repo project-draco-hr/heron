@@ -7,7 +7,6 @@
   this.heronCorePackageName=heronCorePackageName;
   this.env=env;
   this.topologyJar=topologyJar;
-  this.packedPlan=packedPlan;
   this.componentRamMap=componentRamMap;
   this.verboseMode=verboseMode;
   reefFileNames=fileNames;

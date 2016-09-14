@@ -6,7 +6,7 @@
   for (int i=0; i < SchedulerUtils.PORTS_REQUIRED_FOR_EXECUTOR; i++) {
     freePorts.add(SysUtils.getFreePort());
   }
-  Config runtime=Config.newBuilder().put(Keys.instanceDistribution(),packedPlan).put(Keys.componentRamMap(),componentRamMap).put(Keys.topologyDefinition(),topology).build();
+  Config runtime=Config.newBuilder().put(Keys.componentRamMap(),componentRamMap).put(Keys.topologyDefinition(),topology).build();
   String[] executorCmd=SchedulerUtils.executorCommand(config,runtime,heronExecutorId,freePorts);
   LOG.info("Executor command line: " + Arrays.toString(executorCmd));
   return executorCmd;
