@@ -1,0 +1,5 @@
+{
+  this.componentName=componentName;
+  this.taskId=taskId;
+  this.componentIndex=componentIndex;
+}

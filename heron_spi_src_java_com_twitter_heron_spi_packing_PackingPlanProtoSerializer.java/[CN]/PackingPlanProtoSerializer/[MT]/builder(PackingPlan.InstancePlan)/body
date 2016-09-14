@@ -1,3 +1,3 @@
 {
-  return PackingPlans.InstancePlan.newBuilder().setId(instancePlan.getId()).setComponentName(instancePlan.getComponentName()).setResource(builder(instancePlan.getResource()));
+  return PackingPlans.InstancePlan.newBuilder().setComponentName(instancePlan.getComponentName()).setTaskId(instancePlan.getTaskId()).setComponentIndex(instancePlan.getComponentIndex()).setResource(builder(instancePlan.getResource()));
 }

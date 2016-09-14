@@ -1,15 +1,20 @@
 def run_test(self):
     ' Runs the test template '
     try:
-        self.submit_topology()
-        _block_until_topology_running()
         self._prepare_test_data()
-        _sleep('to allow time for startup', 30)
+        self.submit_topology()
+        _block_until_stmgr_running(self.get_expected_container_count())
+        if (not self._block_until_topology_running(self.get_expected_min_instance_count())):
+            self.cleanup_test()
+            return False
         self.execute_test_case()
-        _block_until_topology_running()
+        _block_until_stmgr_running(self.get_expected_container_count())
+        physical_plan_json = self._block_until_topology_running(self.get_expected_min_instance_count())
+        if (not physical_plan_json):
+            self.cleanup_test()
+            return False
         self._inject_test_data()
-        _sleep('before checking for results', 30)
-        if (not self.pre_check_results()):
+        if (not self.pre_check_results(physical_plan_json)):
             self.cleanup_test()
             return False
     except Exception as e:

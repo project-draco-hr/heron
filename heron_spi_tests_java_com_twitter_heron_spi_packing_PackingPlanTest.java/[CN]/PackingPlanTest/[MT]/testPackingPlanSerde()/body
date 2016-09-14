@@ -1,7 +1,7 @@
 {
-  Map<Integer,List<String>> packing=new HashMap<>();
-  packing.put(1,Arrays.asList("1:spout:1:0","1:bolt:3:0"));
-  packing.put(2,Arrays.asList("2:spout:2:1"));
+  Map<Integer,List<InstanceId>> packing=new HashMap<>();
+  packing.put(1,Arrays.asList(new InstanceId("spout",1,0),new InstanceId("bolt",3,0)));
+  packing.put(2,Arrays.asList(new InstanceId("spout",2,1)));
   PackingPlan packingPlan=generatePacking(packing);
   PackingPlanProtoSerializer serializer=new PackingPlanProtoSerializer();
   PackingPlanProtoDeserializer deserializer=new PackingPlanProtoDeserializer();

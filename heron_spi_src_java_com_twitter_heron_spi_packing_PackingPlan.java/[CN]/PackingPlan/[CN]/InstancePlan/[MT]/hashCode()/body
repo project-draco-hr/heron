@@ -1,6 +1,7 @@
 {
-  int result=getId().hashCode();
-  result=31 * result + getComponentName().hashCode();
+  int result=getComponentName().hashCode();
+  result=31 * result + ((Integer)getTaskId()).hashCode();
+  result=31 * result + ((Integer)getComponentIndex()).hashCode();
   result=31 * result + getResource().hashCode();
   return result;
 }

@@ -1,0 +1,7 @@
+def _processes_exists(process_list, process_cmd, min_processes):
+    ' check if a process is running '
+    proccess_count = 0
+    for process in process_list:
+        if (process_cmd in process.cmd):
+            proccess_count += 1
+    return (proccess_count >= min_processes)

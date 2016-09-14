@@ -1,12 +1,12 @@
 {
-  Map<Integer,List<String>> packing=new HashMap<>();
-  packing.put(1,Arrays.asList("1:spout:1:0","1:bolt:3:0"));
+  Map<Integer,List<InstanceId>> packing=new HashMap<>();
+  packing.put(1,Arrays.asList(new InstanceId("spout",1,0),new InstanceId("bolt",3,0)));
   String expectedStr0="1:spout:1:0:bolt:3:0";
   String expectedStr1="1:bolt:3:0:spout:1:0";
   PackingPlan packingPlan=generatePacking(packing);
   String packingStr=packingPlan.getInstanceDistribution();
   Assert.assertTrue(packingStr.equals(expectedStr0) || packingStr.equals(expectedStr1));
-  packing.put(2,Arrays.asList("2:spout:2:1"));
+  packing.put(2,Arrays.asList(new InstanceId("spout",2,1)));
   packingPlan=generatePacking(packing);
   packingStr=packingPlan.getInstanceDistribution();
   for (  String component : packingStr.split(",")) {

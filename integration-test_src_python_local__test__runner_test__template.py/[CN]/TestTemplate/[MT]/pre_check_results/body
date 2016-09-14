@@ -1,2 +1,2 @@
-def pre_check_results(self):
+def pre_check_results(self, physical_plan_json):
     return True

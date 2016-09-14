@@ -1,0 +1,10 @@
+{
+  if (this == o) {
+    return true;
+  }
+  if (o == null || getClass() != o.getClass()) {
+    return false;
+  }
+  InstanceId that=(InstanceId)o;
+  return taskId != that.taskId && componentIndex == that.componentIndex && componentName.equals(that.componentName);
+}
