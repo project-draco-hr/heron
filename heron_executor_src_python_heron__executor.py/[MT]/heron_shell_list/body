@@ -1,2 +1,0 @@
-def heron_shell_list(count):
-    return id_list('heron-shell-', 0, count)

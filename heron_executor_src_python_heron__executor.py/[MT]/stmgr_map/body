@@ -1,0 +1,2 @@
+def stmgr_map(container_plans):
+    return id_map('stmgr', container_plans)

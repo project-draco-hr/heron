@@ -1,0 +1,2 @@
+def metricsmgr_map(container_plans):
+    return id_map('metricsmgr', container_plans, True)

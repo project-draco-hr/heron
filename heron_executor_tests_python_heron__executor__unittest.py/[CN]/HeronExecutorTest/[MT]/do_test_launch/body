@@ -4,6 +4,8 @@ def do_test_launch(self, executor, expected_processes):
     monitored_processes = executor.processes_to_monitor
     found_processes = map((lambda process_info: (process_info.pid, process_info.name, process_info.command_str)), executor.processes)
     found_monitored = map((lambda (pid, process_info): (pid, process_info.name, process_info.command_str)), monitored_processes.items())
+    found_processes.sort(key=(lambda tuple: tuple[0]))
+    found_monitored.sort(key=(lambda tuple: tuple[0]))
     print ('do_test_commands - found_processes: %s found_monitored: %s' % (found_processes, found_monitored))
     self.assertEquals(found_processes, found_monitored)
     print ('do_test_commands - expected_processes: %s monitored_processes: %s' % (expected_processes, monitored_processes))

@@ -3,4 +3,5 @@ def setUp(self):
     self.maxDiff = None
     self.executor_0 = MockExecutor(self.get_args(0))
     self.executor_1 = MockExecutor(self.get_args(1))
-    self.packing_plan_expected = self.build_packing_plan({1: [('word', '3', '0'), ('exclaim1', '2', '0'), ('exclaim1', '1', '0')], })
+    self.executor_7 = MockExecutor(self.get_args(7))
+    self.packing_plan_expected = self.build_packing_plan({1: [('word', '3', '0'), ('exclaim1', '2', '0'), ('exclaim1', '1', '0')], 7: [('word', '11', '0'), ('exclaim1', '210', '0')], })

@@ -1,0 +1,2 @@
+def heron_shell_map(container_plans):
+    return id_map('heron-shell', container_plans, True)

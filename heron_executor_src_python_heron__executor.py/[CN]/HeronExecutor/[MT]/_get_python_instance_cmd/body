@@ -2,6 +2,6 @@ def _get_python_instance_cmd(self, instance_info):
     retval = {}
     for (instance_id, component_name, global_task_id, component_index) in instance_info:
         Log.info(('Python instance %s component: %s' % (instance_id, component_name)))
-        instance_cmd = [self.python_instance_binary, self.topology_name, self.topology_id, instance_id, component_name, str(global_task_id), str(component_index), self.stmgr_ids[(self.shard - 1)], self.master_port, self.metricsmgr_port, self.heron_internals_config_file, self.topology_bin_file]
+        instance_cmd = [self.python_instance_binary, self.topology_name, self.topology_id, instance_id, component_name, str(global_task_id), str(component_index), self.stmgr_ids[self.shard], self.master_port, self.metricsmgr_port, self.heron_internals_config_file, self.topology_bin_file]
         retval[instance_id] = instance_cmd
     return retval

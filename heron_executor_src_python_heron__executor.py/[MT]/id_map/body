@@ -1,0 +1,7 @@
+def id_map(prefix, container_plans, add_zero_id=False):
+    ids = {}
+    if add_zero_id:
+        ids[0] = ('%s-0' % prefix)
+    for container_plan in container_plans:
+        ids[container_plan.id] = ('%s-%d' % (prefix, container_plan.id))
+    return ids

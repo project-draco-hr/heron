@@ -1,2 +1,0 @@
-def stmgr_list(count):
-    return id_list('stmgr-', 1, count)

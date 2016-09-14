@@ -1,6 +1,6 @@
 def test_update_packing_plan(self):
     self.executor_0.update_packing_plan(self.packing_plan_expected)
     self.assertEquals(self.packing_plan_expected, self.executor_0.packing_plan)
-    self.assertEquals(['stmgr-1'], self.executor_0.stmgr_ids)
-    self.assertEquals(['metricsmgr-0', 'metricsmgr-1'], self.executor_0.metricsmgr_ids)
-    self.assertEquals(['heron-shell-0', 'heron-shell-1'], self.executor_0.heron_shell_ids)
+    self.assertEquals({1: 'stmgr-1', 7: 'stmgr-7', }, self.executor_0.stmgr_ids)
+    self.assertEquals({0: 'metricsmgr-0', 1: 'metricsmgr-1', 7: 'metricsmgr-7', }, self.executor_0.metricsmgr_ids)
+    self.assertEquals({0: 'heron-shell-0', 1: 'heron-shell-1', 7: 'heron-shell-7', }, self.executor_0.heron_shell_ids)

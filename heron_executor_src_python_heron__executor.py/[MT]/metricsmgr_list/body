@@ -1,2 +1,0 @@
-def metricsmgr_list(count):
-    return id_list('metricsmgr-', 0, count)

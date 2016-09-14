@@ -40,9 +40,9 @@ def __init__(self, args, shell_env):
     self.python_instance_binary = args[31]
     self.log_dir = self._load_logging_dir(self.heron_internals_config_file)
     self.packing_plan = None
-    self.stmgr_ids = []
-    self.metricsmgr_ids = []
-    self.heron_shell_ids = []
+    self.stmgr_ids = {}
+    self.metricsmgr_ids = {}
+    self.heron_shell_ids = {}
     self.process_lock = threading.RLock()
     self.processes_to_monitor = {}
     self.state_managers = []

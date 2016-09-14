@@ -9,8 +9,8 @@ def _get_streaming_processes(self):
         component_name = instance_plan.component_name
         instance_id = ('container_%s_%s_%d' % (str(self.shard), component_name, global_task_id))
         instance_info.append((instance_id, component_name, global_task_id, component_index))
-    stmgr_cmd = [self.stmgr_binary, self.topology_name, self.topology_id, self.topology_defn_file, self.zknode, self.zkroot, self.stmgr_ids[(self.shard - 1)], ','.join(map((lambda x: x[0]), instance_info)), self.master_port, self.metricsmgr_port, self.shell_port, self.heron_internals_config_file]
-    retval[self.stmgr_ids[(self.shard - 1)]] = stmgr_cmd
+    stmgr_cmd = [self.stmgr_binary, self.topology_name, self.topology_id, self.topology_defn_file, self.zknode, self.zkroot, self.stmgr_ids[self.shard], ','.join(map((lambda x: x[0]), instance_info)), self.master_port, self.metricsmgr_port, self.shell_port, self.heron_internals_config_file]
+    retval[self.stmgr_ids[self.shard]] = stmgr_cmd
     retval[self.metricsmgr_ids[self.shard]] = self._get_metricsmgr_cmd(self.metricsmgr_ids[self.shard], self.metrics_sinks_config_file, self.metricsmgr_port)
     if ((self.pkg_type == 'jar') or (self.pkg_type == 'tar')):
         retval.update(self._get_java_instance_cmd(instance_info))
