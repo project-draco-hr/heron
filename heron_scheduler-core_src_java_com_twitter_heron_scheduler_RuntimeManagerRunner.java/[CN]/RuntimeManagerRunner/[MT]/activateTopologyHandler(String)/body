@@ -1,3 +1,3 @@
 {
-  return TMasterUtils.transitionTopologyState(topologyName,"activate",Runtime.schedulerStateManagerAdaptor(runtime),TopologyAPI.TopologyState.PAUSED,TopologyAPI.TopologyState.RUNNING);
+  return TMasterUtils.transitionTopologyState(topologyName,"activat",Runtime.schedulerStateManagerAdaptor(runtime),TopologyAPI.TopologyState.PAUSED,TopologyAPI.TopologyState.RUNNING);
 }
