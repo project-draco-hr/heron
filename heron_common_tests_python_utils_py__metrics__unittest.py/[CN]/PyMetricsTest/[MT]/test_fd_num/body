@@ -1,0 +1,3 @@
+def test_fd_num(self):
+    self.py_metrics.update_fds()
+    self.assertEqual(self.py_metrics.fd_nums.get_value_and_reset(), 3)

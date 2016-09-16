@@ -1,0 +1,11 @@
+def setUp(self):
+    metrics_collector = mock_generator.MockMetricsCollector()
+    with patch('heron.common.src.python.config.system_config.get_sys_config', side_effect=(lambda : {constants.HERON_METRICS_EXPORT_INTERVAL_SEC: 10, })):
+        self.py_metrics = PyMetrics(metrics_collector)
+    self.py_metrics.process = Mock()
+    self.py_metrics.process.cpu_times = Mock(return_value=Cputime(system=23, user=29))
+    t1 = Thread(id=100, user_time=3, system_time=5)
+    t2 = Thread(id=500, user_time=7, system_time=11)
+    self.py_metrics.process.threads = Mock(return_value=[t1, t2])
+    self.py_metrics.process.num_fds = Mock(return_value=3)
+    self.py_metrics.process.memory_info = Mock(return_value=Mem(rss=13, vms=19))

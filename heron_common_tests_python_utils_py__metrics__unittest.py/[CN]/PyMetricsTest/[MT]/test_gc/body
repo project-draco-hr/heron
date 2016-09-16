@@ -1,0 +1,10 @@
+def test_gc(self):
+    with patch('gc.get_count', side_effect=(lambda : (1, 2, 3))):
+        with patch('gc.get_threshold', side_effect=(lambda : (4, 5, 6))):
+            self.py_metrics.update_gc_stat()
+    self.assertEqual(self.py_metrics.g1_count.get_value_and_reset(), 1)
+    self.assertEqual(self.py_metrics.g2_count.get_value_and_reset(), 2)
+    self.assertEqual(self.py_metrics.g3_count.get_value_and_reset(), 3)
+    self.assertEqual(self.py_metrics.g1_threshold.get_value_and_reset(), 4)
+    self.assertEqual(self.py_metrics.g2_threshold.get_value_and_reset(), 5)
+    self.assertEqual(self.py_metrics.g3_threshold.get_value_and_reset(), 6)

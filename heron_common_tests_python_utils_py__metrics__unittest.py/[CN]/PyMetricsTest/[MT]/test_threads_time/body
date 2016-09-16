@@ -1,0 +1,5 @@
+def test_threads_time(self):
+    self.py_metrics.update_threads_time()
+    tmap = self.py_metrics.threads.get_value_and_reset()
+    self.assertEqual(tmap[100], (3, 5))
+    self.assertEqual(tmap[500], (7, 11))

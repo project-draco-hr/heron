@@ -1,0 +1,4 @@
+def test_mem(self):
+    self.py_metrics.update_memory_usage()
+    self.assertEqual(self.py_metrics.physical_memory.get_value_and_reset(), 13)
+    self.assertEqual(self.py_metrics.virtual_memory.get_value_and_reset(), 19)

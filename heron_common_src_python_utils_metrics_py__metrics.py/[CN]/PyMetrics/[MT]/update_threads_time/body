@@ -1,6 +1,6 @@
 def update_threads_time(self):
     try:
-        tt = self.process.threads()
-        self.threads.update([(t.id, t.user_time, t.system_time) for t in tt])
+        for t in self.process.threads():
+            self.threads.update(t.id, (t.user_time, t.system_time))
     except Exception as e:
         Log.error(traceback.format_exc(e))

@@ -1,0 +1,4 @@
+def test_cpu_times(self):
+    self.py_metrics.update_cpu_time()
+    self.assertEqual(self.py_metrics.sys_cpu_time.get_value_and_reset(), 23)
+    self.assertEqual(self.py_metrics.user_cpu_time.get_value_and_reset(), 29)

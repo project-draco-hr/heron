@@ -5,8 +5,8 @@ def update_gc_stat(self):
         self.g1_count.update(c1)
         self.g2_count.update(c2)
         self.g3_count.update(c3)
-        self.t1_count.update(t1)
-        self.t2_count.update(t2)
-        self.t3_count.update(t3)
+        self.g1_threshold.update(t1)
+        self.g2_threshold.update(t2)
+        self.g3_threshold.update(t3)
     except Exception as e:
         Log.error(traceback.format_exc(e))
