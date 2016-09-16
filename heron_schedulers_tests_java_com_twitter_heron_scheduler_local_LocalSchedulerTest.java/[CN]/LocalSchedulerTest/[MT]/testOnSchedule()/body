@@ -1,13 +1,23 @@
 {
   Mockito.doNothing().when(scheduler).startExecutorMonitor(Mockito.anyInt(),Mockito.any(Process.class));
-  Process mockProcess=Mockito.mock(Process.class);
-  Mockito.doReturn(mockProcess).when(scheduler).startExecutorProcess(Mockito.anyInt());
+  Process[] mockProcesses=new Process[4];
+  for (int i=0; i < 4; i++) {
+    mockProcesses[i]=Mockito.mock(Process.class);
+    Mockito.doReturn(mockProcesses[i]).when(scheduler).startExecutorProcess(i);
+  }
   PackingPlan packingPlan=Mockito.mock(PackingPlan.class);
+  Set<PackingPlan.ContainerPlan> containers=new HashSet<>();
+  containers.add(PackingTestUtils.testContainerPlan(1));
+  containers.add(PackingTestUtils.testContainerPlan(3));
+  Mockito.when(packingPlan.getContainers()).thenReturn(containers);
   Assert.assertTrue(scheduler.onSchedule(packingPlan));
-  Assert.assertTrue(scheduler.getProcessToContainer().size() > 0);
-  for (int i=0; i < NUM_CONTAINER; i++) {
+  verifyIdsOfLaunchedContainers(0,1,3);
+  for (int i=0; i < 4; i++) {
+    if (i == 2) {
+      continue;
+    }
     Mockito.verify(scheduler).startExecutor(i);
     Mockito.verify(scheduler).startExecutorProcess(i);
-    Mockito.verify(scheduler).startExecutorMonitor(i,mockProcess);
+    Mockito.verify(scheduler).startExecutorMonitor(i,mockProcesses[i]);
   }
 }

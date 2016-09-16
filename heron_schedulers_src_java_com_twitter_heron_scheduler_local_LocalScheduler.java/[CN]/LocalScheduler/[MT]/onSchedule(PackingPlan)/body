@@ -1,10 +1,10 @@
 {
-  long numContainers=Runtime.numContainers(runtime);
   LOG.info("Starting to deploy topology: " + LocalContext.topologyName(config));
-  LOG.info("# of containers: " + numContainers);
 synchronized (processToContainer) {
-    for (int i=0; i < numContainers; i++) {
-      startExecutor(i);
+    LOG.info("Starting executor for TMaster");
+    startExecutor(0);
+    for (    PackingPlan.ContainerPlan container : packing.getContainers()) {
+      startExecutor(container.getId());
     }
   }
   LOG.info("Executor for each container have been started.");

@@ -1,8 +1,10 @@
 {
 synchronized (processToContainer) {
-    int activeContainerCount=processToContainer.size();
-    for (int i=0; i < containers.size(); i++) {
-      startExecutor(activeContainerCount + i);
+    for (    PackingPlan.ContainerPlan container : containers) {
+      if (processToContainer.containsKey(container.getId())) {
+        throw new RuntimeException(String.format("Found active container for %s, " + "cannot launch a duplicate container.",container.getId()));
+      }
+      startExecutor(container.getId());
     }
   }
 }

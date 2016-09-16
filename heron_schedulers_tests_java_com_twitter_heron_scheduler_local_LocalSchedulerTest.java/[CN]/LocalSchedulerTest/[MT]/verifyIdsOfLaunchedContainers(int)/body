@@ -1,0 +1,7 @@
+{
+  HashSet<Integer> containerIdsLaunched=new HashSet<>(scheduler.getProcessToContainer().values());
+  Assert.assertEquals(ids.length,containerIdsLaunched.size());
+  for (int i=0; i < ids.length; i++) {
+    Assert.assertTrue(containerIdsLaunched.contains(ids[i]));
+  }
+}
