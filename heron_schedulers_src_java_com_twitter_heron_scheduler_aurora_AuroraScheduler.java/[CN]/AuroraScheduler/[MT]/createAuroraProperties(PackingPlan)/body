@@ -1,7 +1,9 @@
 {
   Map<String,String> auroraProperties=new HashMap<>();
   TopologyAPI.Topology topology=Runtime.topology(runtime);
-  Resource containerResource=SchedulerUtils.getMaxRequiredResource(packing);
+  PackingPlan updatedPackingPlan=packing.cloneWithHomogeneousScheduledResource();
+  SchedulerUtils.persistUpdatedPackingPlan(topology.getName(),updatedPackingPlan,Runtime.schedulerStateManagerAdaptor(runtime));
+  Resource containerResource=updatedPackingPlan.getContainers().iterator().next().getRequiredResource();
   auroraProperties.put("SANDBOX_EXECUTOR_BINARY",Context.executorSandboxBinary(config));
   auroraProperties.put("TOPOLOGY_NAME",topology.getName());
   auroraProperties.put("TOPOLOGY_ID",topology.getId());

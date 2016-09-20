@@ -1,5 +1,8 @@
 {
-  PackingPlans.ContainerPlan.Builder builder=PackingPlans.ContainerPlan.newBuilder().setId(containerPlan.getId()).setResource(builder(containerPlan.getResource()));
+  PackingPlans.ContainerPlan.Builder builder=PackingPlans.ContainerPlan.newBuilder().setId(containerPlan.getId()).setRequiredResource(builder(containerPlan.getRequiredResource()));
+  if (containerPlan.getScheduledResource().isPresent()) {
+    builder.setScheduledResource(builder(containerPlan.getScheduledResource().get()));
+  }
   for (  PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
     builder.addInstancePlans(builder(instancePlan));
   }

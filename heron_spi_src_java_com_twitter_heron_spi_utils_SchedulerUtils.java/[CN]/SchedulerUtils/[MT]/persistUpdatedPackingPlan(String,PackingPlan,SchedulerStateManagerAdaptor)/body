@@ -1,0 +1,8 @@
+{
+  LOG.log(Level.INFO,"Updating scheduled-resource in packing plan: {0}",topologyName);
+  PackingPlanProtoSerializer serializer=new PackingPlanProtoSerializer();
+  boolean result=stateManager.setPackingPlan(serializer.toProto(updatedPackingPlan),topologyName);
+  if (!result) {
+    throw new RuntimeException(String.format("Failed to save %s's packing plan",topologyName));
+  }
+}

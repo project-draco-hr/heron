@@ -16,9 +16,9 @@
   Assert.assertEquals(numContainers,packingPlanExplicitResourcesConfig.getContainers().size());
   Assert.assertEquals(totalInstances,packingPlanExplicitResourcesConfig.getInstanceCount());
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitResourcesConfig.getContainers()) {
-    Assert.assertEquals(containerCpu,containerPlan.getResource().getCpu(),DELTA);
-    Assert.assertEquals((double)containerRam,(double)containerPlan.getResource().getRam(),containerPlan.getInstances().size());
-    Assert.assertEquals(containerDisk,containerPlan.getResource().getDisk());
+    Assert.assertEquals(containerCpu,containerPlan.getRequiredResource().getCpu(),DELTA);
+    Assert.assertEquals((double)containerRam,(double)containerPlan.getRequiredResource().getRam(),containerPlan.getInstances().size());
+    Assert.assertEquals(containerDisk,containerPlan.getRequiredResource().getDisk());
     Set<Resource> resources=new HashSet<>();
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
       resources.add(instancePlan.getResource());

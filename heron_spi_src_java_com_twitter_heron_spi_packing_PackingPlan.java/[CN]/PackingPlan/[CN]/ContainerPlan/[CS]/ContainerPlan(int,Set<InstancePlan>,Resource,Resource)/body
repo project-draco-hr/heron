@@ -1,0 +1,6 @@
+{
+  this.id=id;
+  this.instances=ImmutableSet.copyOf(instances);
+  this.requiredResource=requiredResource;
+  this.scheduledResource=Optional.fromNullable(scheduledResource);
+}

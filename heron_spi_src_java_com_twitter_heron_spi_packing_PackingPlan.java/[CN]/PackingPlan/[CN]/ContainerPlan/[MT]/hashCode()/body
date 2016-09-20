@@ -1,6 +1,9 @@
 {
   int result=id;
   result=31 * result + getInstances().hashCode();
-  result=31 * result + getResource().hashCode();
+  result=31 * result + getRequiredResource().hashCode();
+  if (scheduledResource.isPresent()) {
+    result=31 * result + getScheduledResource().get().hashCode();
+  }
   return result;
 }

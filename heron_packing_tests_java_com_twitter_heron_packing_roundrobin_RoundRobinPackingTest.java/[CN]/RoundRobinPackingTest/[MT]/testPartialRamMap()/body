@@ -13,7 +13,7 @@
   PackingPlan packingPlanExplicitRamMap=getRoundRobinPackingPlan(topologyExplicitRamMap);
   Assert.assertEquals(totalInstances,packingPlanExplicitRamMap.getInstanceCount());
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitRamMap.getContainers()) {
-    Assert.assertEquals(containerRam,containerPlan.getResource().getRam());
+    Assert.assertEquals(containerRam,containerPlan.getRequiredResource().getRam());
     int boltCount=0;
     int instancesCount=containerPlan.getInstances().size();
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {

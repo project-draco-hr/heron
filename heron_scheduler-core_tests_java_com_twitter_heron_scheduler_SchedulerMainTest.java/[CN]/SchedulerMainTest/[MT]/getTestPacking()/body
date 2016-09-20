@@ -1,10 +1,6 @@
 {
-  Set<PackingPlan.InstancePlan> instances=new HashSet<>();
-  instances.add(new PackingPlan.InstancePlan(new InstanceId("dummy",1,1),new Resource(1,1,1)));
-  Set<PackingPlan.ContainerPlan> containers=new HashSet<>();
-  containers.add(new PackingPlan.ContainerPlan(1,instances,new Resource(1,1,1)));
-  PackingPlan packingPlan=new PackingPlan("packing-id",containers);
+  PackingPlans.PackingPlan packingPlan=PackingTestUtils.testProtoPackingPlan("testTopology",new RoundRobinPacking());
   final SettableFuture<PackingPlans.PackingPlan> future=SettableFuture.create();
-  future.set(new PackingPlanProtoSerializer().toProto(packingPlan));
+  future.set(packingPlan);
   return future;
 }

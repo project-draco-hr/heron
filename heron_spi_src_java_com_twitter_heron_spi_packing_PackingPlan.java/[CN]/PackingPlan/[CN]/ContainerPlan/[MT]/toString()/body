@@ -1,3 +1,7 @@
 {
-  return String.format("{container-id: %s, instances-list: %s, container-resource: %s}",id,getInstances().toString(),getResource());
+  String str=String.format("{container-id: %s, instances-list: %s, required-resource: %s",id,getInstances().toString(),getRequiredResource());
+  if (scheduledResource.isPresent()) {
+    str=String.format("%s, scheduled-resource: %s",str,getScheduledResource().get());
+  }
+  return str + "}";
 }

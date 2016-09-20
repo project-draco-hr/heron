@@ -1,7 +1,7 @@
 {
   this.packing=topologyPacking;
   for (  ContainerPlan containerPlan : topologyPacking.getContainers()) {
-    Resource reqResource=containerPlan.getResource();
+    Resource reqResource=containerPlan.getRequiredResource();
     int mem=getMemInMBForExecutor(reqResource);
     int cores=getCpuForExecutor(reqResource);
     launchContainerForExecutor(containerPlan.getId(),cores,mem);

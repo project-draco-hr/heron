@@ -3,5 +3,5 @@
   for (  PackingPlans.InstancePlan instancePlan : containerPlan.getInstancePlansList()) {
     instances.add(convert(instancePlan));
   }
-  return new PackingPlan.ContainerPlan(containerPlan.getId(),instances,convert(containerPlan.getResource()));
+  return new PackingPlan.ContainerPlan(containerPlan.getId(),instances,convert(containerPlan.getRequiredResource()),convert(containerPlan.getScheduledResource()));
 }

@@ -1,9 +1,14 @@
 {
-  Resource resource=new Resource(7.5,6,9);
+  double cpu=1.5;
+  long ram=Constants.GB;
   Set<PackingPlan.InstancePlan> instancePlans=new HashSet<>();
   for (  int instanceIndex : instanceIndices) {
     String componentName="componentName-" + instanceIndex;
-    instancePlans.add(testInstancePlan(componentName,instanceIndex));
+    PackingPlan.InstancePlan instance=testInstancePlan(componentName,instanceIndex);
+    instancePlans.add(instance);
+    cpu+=instance.getResource().getCpu();
+    ram+=instance.getResource().getRam();
   }
+  Resource resource=new Resource(cpu,ram,ram);
   return new PackingPlan.ContainerPlan(containerId,instancePlans,resource);
 }

@@ -1,3 +1,7 @@
 {
-  return new Resource(resource.getCpu(),resource.getRam(),resource.getDisk());
+  Resource result=null;
+  if (resource != null && resource.isInitialized()) {
+    result=new Resource(resource.getCpu(),resource.getRam(),resource.getDisk());
+  }
+  return result;
 }

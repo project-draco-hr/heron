@@ -1,6 +1,8 @@
 {
   ObjectMapper mapper=new ObjectMapper();
-  Resource containerResource=SchedulerUtils.getMaxRequiredResource(packing);
+  PackingPlan updatedPackingPlan=packing.cloneWithHomogeneousScheduledResource();
+  SchedulerUtils.persistUpdatedPackingPlan(Runtime.topologyName(runtime),updatedPackingPlan,Runtime.schedulerStateManagerAdaptor(runtime));
+  Resource containerResource=updatedPackingPlan.getContainers().iterator().next().getRequiredResource();
   ArrayNode instances=mapper.createArrayNode();
   for (int i=0; i < Runtime.numContainers(runtime); i++) {
     ObjectNode instance=mapper.createObjectNode();
