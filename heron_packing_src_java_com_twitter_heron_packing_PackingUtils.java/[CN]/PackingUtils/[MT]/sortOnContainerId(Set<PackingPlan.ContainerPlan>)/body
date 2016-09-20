@@ -1,0 +1,13 @@
+{
+  ArrayList<Integer> containerIds=new ArrayList<>();
+  PackingPlan.ContainerPlan[] currentContainers=new PackingPlan.ContainerPlan[containers.size()];
+  for (  PackingPlan.ContainerPlan container : containers) {
+    containerIds.add(container.getId());
+  }
+  Collections.sort(containerIds);
+  for (  PackingPlan.ContainerPlan container : containers) {
+    int position=containerIds.indexOf(container.getId());
+    currentContainers[position]=container;
+  }
+  return currentContainers;
+}

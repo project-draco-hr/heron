@@ -1,3 +1,0 @@
-{
-  return usedRam + ram <= maxRam && usedCpuCores + cpuCores <= maxCpuCores && usedDisk + disk <= maxDisk;
-}

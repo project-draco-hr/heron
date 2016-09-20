@@ -1,0 +1,8 @@
+TopologyAPI.Topology topology
+Map<String,Integer> componentChanges
+long boltRam
+int boltParallelism
+long spoutRam
+int spoutParallelism
+int numContainersBeforeRepack
+int totalInstancesExpected

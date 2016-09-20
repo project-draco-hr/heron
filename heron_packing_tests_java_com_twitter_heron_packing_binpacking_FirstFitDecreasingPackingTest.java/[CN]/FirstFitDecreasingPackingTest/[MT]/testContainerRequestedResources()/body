@@ -9,6 +9,8 @@
   PackingPlan packingPlanExplicitResourcesConfig=getFirstFitDecreasingPackingPlan(topologyExplicitResourcesConfig);
   Assert.assertEquals(1,packingPlanExplicitResourcesConfig.getContainers().size());
   Assert.assertEquals(totalInstances,packingPlanExplicitResourcesConfig.getInstanceCount());
+  AssertPacking.assertNumInstances(packingPlanExplicitResourcesConfig.getContainers(),BOLT_NAME,3);
+  AssertPacking.assertNumInstances(packingPlanExplicitResourcesConfig.getContainers(),SPOUT_NAME,4);
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitResourcesConfig.getContainers()) {
     Assert.assertEquals(Math.round(totalInstances * instanceDefaultResources.getCpu() + (DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceDefaultResources.getCpu())),(long)containerPlan.getRequiredResource().getCpu());
     Assert.assertEquals(totalInstances * instanceDefaultResources.getRam() + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceDefaultResources.getRam()),containerPlan.getRequiredResource().getRam());

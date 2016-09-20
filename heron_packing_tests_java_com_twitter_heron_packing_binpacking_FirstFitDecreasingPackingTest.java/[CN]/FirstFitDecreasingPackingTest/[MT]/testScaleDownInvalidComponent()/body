@@ -1,0 +1,6 @@
+{
+  Map<String,Integer> componentChanges=new HashMap<>();
+  componentChanges.put("SPOUT_FAKE",-10);
+  int numContainersBeforeRepack=2;
+  doDefaultScalingTest(componentChanges,numContainersBeforeRepack);
+}

@@ -7,4 +7,6 @@
   Assert.assertEquals(2,packingPlan.getContainers().size());
   Assert.assertEquals(totalInstances,packingPlan.getInstanceCount());
   AssertPacking.assertContainerRam(packingPlan.getContainers(),defaultNumInstancesperContainer * instanceDefaultResources.getRam());
+  AssertPacking.assertNumInstances(packingPlan.getContainers(),BOLT_NAME,3);
+  AssertPacking.assertNumInstances(packingPlan.getContainers(),SPOUT_NAME,4);
 }

@@ -7,5 +7,7 @@
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
   Assert.assertEquals(totalInstances,packingPlanExplicitRamMap.getInstanceCount());
+  AssertPacking.assertNumInstances(packingPlanExplicitRamMap.getContainers(),BOLT_NAME,3);
+  AssertPacking.assertNumInstances(packingPlanExplicitRamMap.getContainers(),SPOUT_NAME,4);
   AssertPacking.assertContainerRam(packingPlanExplicitRamMap.getContainers(),defaultNumInstancesperContainer * instanceDefaultResources.getRam());
 }

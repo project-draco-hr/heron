@@ -1,3 +1,0 @@
-Map<String,Integer> parallelismMap
-int firstContainerIndex
-int firstTaskIndex

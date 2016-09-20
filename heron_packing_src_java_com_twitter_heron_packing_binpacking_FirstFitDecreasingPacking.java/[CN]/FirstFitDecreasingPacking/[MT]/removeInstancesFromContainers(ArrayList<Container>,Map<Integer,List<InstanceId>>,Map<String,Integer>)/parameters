@@ -1,0 +1,3 @@
+ArrayList<Container> containers
+Map<Integer,List<InstanceId>> allocation
+Map<String,Integer> componentsToScaleDown

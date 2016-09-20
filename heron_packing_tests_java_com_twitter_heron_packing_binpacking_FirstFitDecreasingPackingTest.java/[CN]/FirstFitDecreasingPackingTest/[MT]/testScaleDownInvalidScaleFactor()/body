@@ -1,0 +1,7 @@
+{
+  int spoutScalingDown=-5;
+  Map<String,Integer> componentChanges=new HashMap<>();
+  componentChanges.put(SPOUT_NAME,spoutScalingDown);
+  int numContainersBeforeRepack=2;
+  doDefaultScalingTest(componentChanges,numContainersBeforeRepack);
+}

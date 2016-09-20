@@ -1,0 +1,13 @@
+{
+  ArrayList<RamRequirement> ramRequirements=getSortedRAMInstances(componentsToScaleDown);
+  for (  RamRequirement ramRequirement : ramRequirements) {
+    String component=ramRequirement.getComponentName();
+    int numInstancesToRemove=-componentsToScaleDown.get(component);
+    for (int j=0; j < numInstancesToRemove; j++) {
+      Pair<Integer,InstanceId> idPair=removeFFDInstance(containers,component);
+      List<InstanceId> instances=allocation.get(idPair.first);
+      instances.remove(idPair.second);
+      allocation.put(idPair.first,instances);
+    }
+  }
+}

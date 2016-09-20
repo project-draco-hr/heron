@@ -1,4 +1,6 @@
 {
   Map<String,Integer> parallelismMap=TopologyUtils.getComponentParallelism(topology);
-  return assignInstancesToContainers(parallelismMap,1,1);
+  HashMap<Integer,List<InstanceId>> allocation=new HashMap<>();
+  assignInstancesToContainers(new ArrayList<Container>(),allocation,parallelismMap,1);
+  return allocation;
 }

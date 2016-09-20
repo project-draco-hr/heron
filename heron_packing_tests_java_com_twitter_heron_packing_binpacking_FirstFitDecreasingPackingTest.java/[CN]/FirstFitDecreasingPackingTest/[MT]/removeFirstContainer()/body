@@ -1,0 +1,13 @@
+{
+  int defaultNumInstancesperContainer=4;
+  int spoutScalingDown=-4;
+  Map<String,Integer> componentChanges=new HashMap<>();
+  componentChanges.put(SPOUT_NAME,spoutScalingDown);
+  int numContainersBeforeRepack=2;
+  PackingPlan newPackingPlan=doDefaultScalingTest(componentChanges,numContainersBeforeRepack);
+  Assert.assertEquals(1,newPackingPlan.getContainers().size());
+  Assert.assertEquals((Integer)(totalInstances + spoutScalingDown),newPackingPlan.getInstanceCount());
+  AssertPacking.assertNumInstances(newPackingPlan.getContainers(),BOLT_NAME,3);
+  AssertPacking.assertNumInstances(newPackingPlan.getContainers(),SPOUT_NAME,0);
+  AssertPacking.assertContainerRam(newPackingPlan.getContainers(),defaultNumInstancesperContainer * instanceDefaultResources.getRam());
+}

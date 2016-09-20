@@ -1,0 +1,11 @@
+{
+  Map<Integer,List<InstanceId>> allocation=new HashMap<Integer,List<InstanceId>>();
+  for (  PackingPlan.ContainerPlan containerPlan : currentPackingPlan.getContainers()) {
+    ArrayList<InstanceId> instances=new ArrayList<InstanceId>();
+    for (    PackingPlan.InstancePlan instance : containerPlan.getInstances()) {
+      instances.add(new InstanceId(instance.getComponentName(),instance.getTaskId(),instance.getComponentIndex()));
+    }
+    allocation.put(containerPlan.getId(),instances);
+  }
+  return allocation;
+}

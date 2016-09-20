@@ -1,0 +1,4 @@
+{
+  Resource usedResources=this.getTotalUsedResources();
+  return usedResources.getRam() + resource.getRam() <= this.capacity.getRam() && usedResources.getCpu() + resource.getCpu() <= this.capacity.getCpu() && usedResources.getDisk() + resource.getDisk() <= this.capacity.getDisk();
+}

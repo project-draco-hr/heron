@@ -1,3 +1,0 @@
-{
-  return containers.get(containerId - 1).add(resource);
-}

@@ -1,0 +1,12 @@
+{
+  long usedRam=0;
+  double usedCpuCores=0;
+  long usedDisk=0;
+  for (  PackingPlan.InstancePlan instancePlan : this.instances) {
+    Resource resource=instancePlan.getResource();
+    usedRam+=resource.getRam();
+    usedCpuCores+=resource.getCpu();
+    usedDisk+=resource.getDisk();
+  }
+  return new Resource(usedCpuCores,usedRam,usedDisk);
+}

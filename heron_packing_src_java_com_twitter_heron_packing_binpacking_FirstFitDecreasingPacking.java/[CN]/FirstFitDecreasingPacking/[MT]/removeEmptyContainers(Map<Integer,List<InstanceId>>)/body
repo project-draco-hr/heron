@@ -1,0 +1,9 @@
+{
+  Iterator<Integer> containerIds=allocation.keySet().iterator();
+  while (containerIds.hasNext()) {
+    Integer containerId=containerIds.next();
+    if (allocation.get(containerId).isEmpty()) {
+      containerIds.remove();
+    }
+  }
+}

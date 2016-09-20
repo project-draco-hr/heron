@@ -1,0 +1,9 @@
+{
+  Optional<PackingPlan.InstancePlan> instancePlan=getAnyInstanceOfComponent(component);
+  if (instancePlan.isPresent()) {
+    PackingPlan.InstancePlan plan=instancePlan.get();
+    this.instances.remove(plan);
+    return instancePlan;
+  }
+  return Optional.absent();
+}

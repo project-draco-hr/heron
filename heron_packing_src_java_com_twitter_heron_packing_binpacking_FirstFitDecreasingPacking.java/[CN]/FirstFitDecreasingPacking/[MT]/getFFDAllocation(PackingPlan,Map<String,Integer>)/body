@@ -1,10 +1,20 @@
 {
-  int numContainers=currentPackingPlan.getContainers().size();
+  Map<String,Integer> componentsToScaleDown=getComponentsToScaleDown(componentChanges);
+  Map<String,Integer> componentsToScaleUp=getComponentsToScaleUp(componentChanges);
+  ArrayList<Container> containers=getContainers(currentPackingPlan);
+  Map<Integer,List<InstanceId>> allocation=getAllocation(currentPackingPlan);
   int maxInstanceIndex=0;
   for (  PackingPlan.ContainerPlan containerPlan : currentPackingPlan.getContainers()) {
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
       maxInstanceIndex=Math.max(maxInstanceIndex,instancePlan.getTaskId());
     }
   }
-  return assignInstancesToContainers(componentChanges,numContainers + 1,maxInstanceIndex + 1);
+  if (!componentsToScaleDown.isEmpty()) {
+    removeInstancesFromContainers(containers,allocation,componentsToScaleDown);
+  }
+  if (!componentsToScaleUp.isEmpty()) {
+    assignInstancesToContainers(containers,allocation,componentsToScaleUp,maxInstanceIndex + 1);
+  }
+  removeEmptyContainers(allocation);
+  return allocation;
 }

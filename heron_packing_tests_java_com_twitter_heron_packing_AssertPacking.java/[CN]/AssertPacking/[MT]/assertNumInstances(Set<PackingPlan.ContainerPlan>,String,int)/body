@@ -1,0 +1,11 @@
+{
+  int instancesFound=0;
+  for (  PackingPlan.ContainerPlan containerPlan : containerPlans) {
+    for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
+      if (instancePlan.getComponentName().equals(component)) {
+        instancesFound++;
+      }
+    }
+  }
+  Assert.assertEquals(numInstances,instancesFound);
+}

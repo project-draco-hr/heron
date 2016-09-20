@@ -1,0 +1,10 @@
+{
+  PackingPlan packingPlan=getFirstFitDecreasingPackingPlan(topology);
+  Assert.assertEquals(numContainersBeforeRepack,packingPlan.getContainers().size());
+  Assert.assertEquals(totalInstancesExpected,(int)packingPlan.getInstanceCount());
+  AssertPacking.assertContainers(packingPlan.getContainers(),BOLT_NAME,SPOUT_NAME,boltRam,spoutRam,null);
+  AssertPacking.assertNumInstances(packingPlan.getContainers(),BOLT_NAME,boltParallelism);
+  AssertPacking.assertNumInstances(packingPlan.getContainers(),SPOUT_NAME,spoutParallelism);
+  PackingPlan newPackingPlan=getFirstFitDecreasingPackingPlanRepack(topology,packingPlan,componentChanges);
+  return newPackingPlan;
+}

@@ -1,0 +1,14 @@
+{
+  boolean removed=false;
+  int containerId=0;
+  for (int i=0; i < containers.size() && !removed; i++) {
+    Optional<PackingPlan.InstancePlan> instancePlan=containers.get(i).removeAnyInstanceOfComponent(component);
+    if (instancePlan.isPresent()) {
+      removed=true;
+      containerId=i + 1;
+      PackingPlan.InstancePlan plan=instancePlan.get();
+      return new Pair<Integer,InstanceId>(containerId,new InstanceId(plan.getComponentName(),plan.getTaskId(),plan.getComponentIndex()));
+    }
+  }
+  throw new RuntimeException("Cannot remove instance." + " No more instances of component " + component + " exist"+ " in the containers.");
+}

@@ -7,6 +7,8 @@
   PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
   Assert.assertEquals(2,packingPlanExplicitRamMap.getContainers().size());
   Assert.assertEquals(totalInstances,packingPlanExplicitRamMap.getInstanceCount());
+  AssertPacking.assertNumInstances(packingPlanExplicitRamMap.getContainers(),BOLT_NAME,3);
+  AssertPacking.assertNumInstances(packingPlanExplicitRamMap.getContainers(),SPOUT_NAME,4);
   AssertPacking.assertContainers(packingPlanExplicitRamMap.getContainers(),BOLT_NAME,SPOUT_NAME,boltRam,instanceDefaultResources.getRam(),maxContainerRam);
   AssertPacking.assertContainerRam(packingPlanExplicitRamMap.getContainers(),maxContainerRam);
 }

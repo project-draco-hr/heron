@@ -4,15 +4,12 @@
   topologyConfig.setContainerMaxRamHint(maxContainerRam);
   topologyConfig.setComponentRam(BOLT_NAME,boltRam);
   TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
-  PackingPlan packingPlanExplicitRamMap=getFirstFitDecreasingPackingPlan(topologyExplicitRamMap);
-  Assert.assertEquals(2,packingPlanExplicitRamMap.getContainers().size());
-  Assert.assertEquals(totalInstances,packingPlanExplicitRamMap.getInstanceCount());
-  AssertPacking.assertContainers(packingPlanExplicitRamMap.getContainers(),BOLT_NAME,SPOUT_NAME,boltRam,instanceDefaultResources.getRam(),null);
   int numScalingInstances=3;
   Map<String,Integer> componentChanges=new HashMap<>();
   componentChanges.put(BOLT_NAME,numScalingInstances);
-  PackingPlan newPackingPlan=getFirstFitDecreasingPackingPlanRepack(topologyExplicitRamMap,packingPlanExplicitRamMap,componentChanges);
-  Assert.assertEquals(4,newPackingPlan.getContainers().size());
+  int numContainersBeforeRepack=2;
+  PackingPlan newPackingPlan=doScalingTest(topologyExplicitRamMap,componentChanges,boltRam,boltParallelism,instanceDefaultResources.getRam(),spoutParallelism,numContainersBeforeRepack,totalInstances);
+  Assert.assertEquals(3,newPackingPlan.getContainers().size());
   Assert.assertEquals((Integer)(totalInstances + numScalingInstances),newPackingPlan.getInstanceCount());
   AssertPacking.assertContainers(newPackingPlan.getContainers(),BOLT_NAME,SPOUT_NAME,boltRam,instanceDefaultResources.getRam(),null);
   AssertPacking.assertContainerRam(newPackingPlan.getContainers(),maxContainerRam);

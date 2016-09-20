@@ -1,0 +1,9 @@
+{
+  if (this.hasSpace(instancePlan.getResource())) {
+    this.instances.add(instancePlan);
+    return true;
+  }
+ else {
+    return false;
+  }
+}

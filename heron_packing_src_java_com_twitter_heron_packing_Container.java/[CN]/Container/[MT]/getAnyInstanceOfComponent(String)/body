@@ -1,0 +1,8 @@
+{
+  for (  PackingPlan.InstancePlan instancePlan : this.instances) {
+    if (instancePlan.getComponentName().equals(component)) {
+      return Optional.of(instancePlan);
+    }
+  }
+  return Optional.absent();
+}

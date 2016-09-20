@@ -1,0 +1,7 @@
+{
+  Set<PackingPlan.ContainerPlan> containerPlan=new HashSet<>();
+  for (  int containerId : containerIds) {
+    containerPlan.add(PackingTestUtils.testContainerPlan(containerId,instanceIds));
+  }
+  return containerPlan;
+}

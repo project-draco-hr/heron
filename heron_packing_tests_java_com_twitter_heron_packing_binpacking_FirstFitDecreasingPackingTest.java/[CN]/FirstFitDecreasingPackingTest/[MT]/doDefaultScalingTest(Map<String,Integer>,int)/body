@@ -1,0 +1,4 @@
+{
+  PackingPlan newPackingPlan=doScalingTest(topology,componentChanges,instanceDefaultResources.getRam(),boltParallelism,instanceDefaultResources.getRam(),spoutParallelism,numContainersBeforeRepack,totalInstances);
+  return newPackingPlan;
+}

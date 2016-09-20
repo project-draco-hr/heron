@@ -6,5 +6,5 @@
     return false;
   }
   InstanceId that=(InstanceId)o;
-  return taskId != that.taskId && componentIndex == that.componentIndex && componentName.equals(that.componentName);
+  return taskId == that.taskId && componentIndex == that.componentIndex && componentName.equals(that.componentName);
 }
