@@ -1,6 +1,7 @@
 {
   Scheduler.SchedulerLocation location=Scheduler.SchedulerLocation.newBuilder().setHttpEndpoint("host:1").setTopologyName(TOPOLOGY_NAME).build();
   PowerMockito.spy(FileUtils.class);
+  PowerMockito.doReturn(true).when(FileUtils.class,"isFileExists",Matchers.anyString());
   PowerMockito.doReturn(location.toByteArray()).when(FileUtils.class,"readFromFile",Matchers.anyString());
   Scheduler.SchedulerLocation locationFetched=manager.getSchedulerLocation(null,TOPOLOGY_NAME).get();
   Assert.assertEquals(location,locationFetched);
