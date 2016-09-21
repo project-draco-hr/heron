@@ -1,5 +1,5 @@
 String topologyName
-String topologyStateControlCommand
+TMasterCommand topologyStateControlCommand
 SchedulerStateManagerAdaptor statemgr
 TopologyAPI.TopologyState startState
 TopologyAPI.TopologyState expectedState
