@@ -1,0 +1,4 @@
+{
+  LOG.log(Level.SEVERE,String.format("Failed to handle %s request",exchange.getRequestURI()),e);
+  sendResponse(exchange,false);
+}

@@ -1,7 +1,7 @@
 {
   byte[] requestBody=NetworkUtils.readHttpRequestBody(exchange);
   Scheduler.RestartTopologyRequest restartTopologyRequest=Scheduler.RestartTopologyRequest.newBuilder().mergeFrom(requestBody).build();
-  boolean isRestartSuccessfully=scheduler.onRestart(restartTopologyRequest);
-  Scheduler.SchedulerResponse response=SchedulerUtils.constructSchedulerResponse(isRestartSuccessfully);
-  NetworkUtils.sendHttpResponse(exchange,response.toByteArray());
+  if (!scheduler.onRestart(restartTopologyRequest)) {
+    throw new RuntimeException("Failed to process restartTopologyRequest");
+  }
 }

@@ -1,4 +1,5 @@
 {
   schedulerServer.stop(0);
+  scheduler.close();
   executorService.shutdownNow();
 }

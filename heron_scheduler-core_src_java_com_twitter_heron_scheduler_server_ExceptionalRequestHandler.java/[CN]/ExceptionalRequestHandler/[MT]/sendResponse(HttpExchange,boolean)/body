@@ -1,0 +1,4 @@
+{
+  Scheduler.SchedulerResponse response=SchedulerUtils.constructSchedulerResponse(success);
+  NetworkUtils.sendHttpResponse(exchange,response.toByteArray());
+}

@@ -1,7 +1,7 @@
 {
-  this.runtime=runtime;
+  this.scheduler=scheduler;
   this.schedulerServer=createServer(port,executorService);
-  this.schedulerServer.createContext(KILL_REQUEST_CONTEXT,new KillRequestHandler(runtime,scheduler));
-  this.schedulerServer.createContext(RESTART_REQUEST_CONTEXT,new RestartRequestHandler(runtime,scheduler));
-  this.schedulerServer.createContext(UPDATE_REQUEST_CONTEXT,new UpdateRequestHandler(runtime,scheduler));
+  this.schedulerServer.createContext(KILL_REQUEST_CONTEXT,new ExceptionalRequestHandler(new KillRequestHandler(scheduler),runtime,scheduler));
+  this.schedulerServer.createContext(RESTART_REQUEST_CONTEXT,new ExceptionalRequestHandler(new RestartRequestHandler(scheduler),runtime,scheduler));
+  this.schedulerServer.createContext(UPDATE_REQUEST_CONTEXT,new ExceptionalRequestHandler(new UpdateRequestHandler(scheduler),runtime,scheduler));
 }

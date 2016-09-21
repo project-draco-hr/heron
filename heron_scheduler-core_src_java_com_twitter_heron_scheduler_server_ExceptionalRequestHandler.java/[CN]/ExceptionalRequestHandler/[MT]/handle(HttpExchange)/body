@@ -1,0 +1,19 @@
+{
+  try {
+    delegate.handle(exchange);
+    sendResponse(exchange,true);
+  }
+ catch (  TerminateSchedulerException e) {
+    sendResponse(exchange,true);
+    LOG.info("Request handler issuing a terminate request to scheduler");
+    try {
+      scheduler.close();
+    }
+  finally {
+      Runtime.schedulerShutdown(runtime).terminate();
+    }
+  }
+catch (  Exception e) {
+    handleFailure(exchange,e);
+  }
+}

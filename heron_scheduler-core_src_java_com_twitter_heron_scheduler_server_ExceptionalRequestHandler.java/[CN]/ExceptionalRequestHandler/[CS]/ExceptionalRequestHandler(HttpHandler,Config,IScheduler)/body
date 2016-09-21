@@ -1,0 +1,5 @@
+{
+  this.delegate=delegate;
+  this.runtime=runtime;
+  this.scheduler=scheduler;
+}
