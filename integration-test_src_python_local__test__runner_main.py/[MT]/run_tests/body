@@ -1,14 +1,14 @@
-def run_all_tests(args):
+def run_tests(test_classes, args):
     ' Run the test for each topology specified in the conf file '
     successes = []
     failures = []
     tracker_process = _start_tracker(args['trackerPath'], args['trackerPort'])
     try:
         try:
-            for testclass in TEST_CLASSES:
-                testname = testclass.__name__
-                logging.info('==== Starting test %s of %s: %s ====', ((len(successes) + len(failures)) + 1), len(TEST_CLASSES), testname)
-                template = testclass(testname, args)
+            for test_class in test_classes:
+                testname = test_class.__name__
+                logging.info('==== Starting test %s of %s: %s ====', ((len(successes) + len(failures)) + 1), len(test_classes), testname)
+                template = test_class(testname, args)
                 if template.run_test():
                     successes += [testname]
                 else:

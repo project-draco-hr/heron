@@ -1,0 +1,3 @@
+def usage():
+    logging.info('Usage: python %s [<test_module>.<testname>]', sys.argv[0])
+    sys.exit(1)

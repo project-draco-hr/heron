@@ -19,8 +19,16 @@ def main():
     args['outputFile'] = os.path.join(args['workingDirectory'], conf['topology']['outputFile'])
     args['readFile'] = os.path.join(args['workingDirectory'], conf['topology']['readFile'])
     args['testJarPath'] = os.path.join(heron_repo_directory, conf['testJarPath'])
+    test_classes = TEST_CLASSES
+    if (len(sys.argv) > 1):
+        first_arg = sys.argv[1]
+        class_name = first_arg.split('.')
+        if ((first_arg == '-h') or (len(class_name) < 2)):
+            usage()
+        import importlib
+        test_classes = [getattr(importlib.import_module(class_name[0]), class_name[1])]
     start_time = time.time()
-    (successes, failures) = run_all_tests(args)
+    (successes, failures) = run_tests(test_classes, args)
     elapsed_time = (time.time() - start_time)
     total = (len(failures) + len(successes))
     if (not failures):
