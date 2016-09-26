@@ -1,0 +1,3 @@
+{
+  return cfg.getStringValue(HERON_SCHEDULER_YARN_QUEUE,"default");
+}
