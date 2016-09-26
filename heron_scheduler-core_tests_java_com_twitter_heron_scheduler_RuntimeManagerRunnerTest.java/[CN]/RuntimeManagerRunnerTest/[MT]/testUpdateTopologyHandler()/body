@@ -5,7 +5,7 @@
   PowerMockito.mockStatic(Runtime.class);
   PowerMockito.when(Runtime.schedulerStateManagerAdaptor(runtime)).thenReturn(manager);
   RoundRobinPacking packing=new RoundRobinPacking();
-  String newParallelism="foo:3,bar:6";
+  String newParallelism="testSpout:1,testBolt:4";
   PackingPlans.PackingPlan currentPlan=PackingTestUtils.testProtoPackingPlan(TOPOLOGY_NAME,packing);
   PackingPlans.PackingPlan proposedPlan=PackingTestUtils.testProtoPackingPlan(TOPOLOGY_NAME,packing);
   Map<String,Integer> changeRequests=runner.parseNewParallelismParam(newParallelism);
