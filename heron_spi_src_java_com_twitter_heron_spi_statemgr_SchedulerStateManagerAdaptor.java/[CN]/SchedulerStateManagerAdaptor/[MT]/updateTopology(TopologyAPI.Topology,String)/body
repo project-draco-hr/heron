@@ -1,0 +1,6 @@
+{
+  if (getTopology(topologyName) != null) {
+    deleteTopology(topologyName);
+  }
+  return setTopology(topology,topologyName);
+}

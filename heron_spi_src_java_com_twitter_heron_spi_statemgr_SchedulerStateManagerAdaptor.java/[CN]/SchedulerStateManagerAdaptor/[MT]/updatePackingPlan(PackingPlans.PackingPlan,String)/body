@@ -1,0 +1,6 @@
+{
+  if (getPackingPlan(topologyName) != null) {
+    deletePackingPlan(topologyName);
+  }
+  return setPackingPlan(packingPlan,topologyName);
+}
