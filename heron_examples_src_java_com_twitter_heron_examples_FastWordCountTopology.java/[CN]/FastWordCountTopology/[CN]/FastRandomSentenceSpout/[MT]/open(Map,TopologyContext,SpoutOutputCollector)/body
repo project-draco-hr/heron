@@ -1,0 +1,4 @@
+{
+  this.collector=spoutCollector;
+  rand=ThreadLocalRandom.current();
+}

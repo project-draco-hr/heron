@@ -1,4 +1,5 @@
 {
   registerOnMessage(StreamManager.NewInstanceAssignmentMessage.newBuilder());
   registerOnMessage(StreamManager.TupleMessage.newBuilder());
+  registerOnMessage(HeronTuples.HeronTupleSet2.newBuilder());
 }

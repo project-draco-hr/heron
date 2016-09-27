@@ -1,0 +1,4 @@
+{
+  nextTupleLatency.update(latency);
+  nextTupleCount.incr();
+}

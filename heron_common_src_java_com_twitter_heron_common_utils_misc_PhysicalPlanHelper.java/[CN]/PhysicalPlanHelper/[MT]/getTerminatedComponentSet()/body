@@ -1,0 +1,40 @@
+{
+  Map<String,TopologyAPI.Bolt> bolts=new HashMap<>();
+  Map<String,TopologyAPI.Spout> spouts=new HashMap<>();
+  Map<String,HashSet<String>> prev=new HashMap<>();
+  for (  TopologyAPI.Spout spout : pplan.getTopology().getSpoutsList()) {
+    String name=spout.getComp().getName();
+    spouts.put(name,spout);
+  }
+  for (  TopologyAPI.Bolt bolt : pplan.getTopology().getBoltsList()) {
+    String name=bolt.getComp().getName();
+    bolts.put(name,bolt);
+    for (    TopologyAPI.InputStream inputStream : bolt.getInputsList()) {
+      String parent=inputStream.getStream().getComponentName();
+      if (prev.containsKey(name)) {
+        prev.get(name).add(parent);
+      }
+ else {
+        HashSet<String> parents=new HashSet<String>();
+        parents.add(parent);
+        prev.put(name,parents);
+      }
+    }
+  }
+  HashSet<String> terminals=new HashSet<>();
+  HashSet<String> nonTerminals=new HashSet<>();
+  for (  HashSet<String> set : prev.values()) {
+    nonTerminals.addAll(set);
+  }
+  for (  String bolt : prev.keySet()) {
+    if (!nonTerminals.contains(bolt)) {
+      terminals.add(bolt);
+    }
+  }
+  for (  String spout : spouts.keySet()) {
+    if (!nonTerminals.contains(spout)) {
+      terminals.add(spout);
+    }
+  }
+  return terminals;
+}

@@ -1,0 +1,7 @@
+TopologyContext context
+TopologyAPI.StreamId stream
+long tupleKey
+List<HeronTuples.RootId> roots
+List<Object> values
+long creationTime
+boolean isCheckRequired

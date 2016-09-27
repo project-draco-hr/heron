@@ -1,9 +1,4 @@
 {
-  executeCount.scope(streamId).incr();
-  executeLatency.scope(streamId).update(latency);
-  executeTimeNs.scope(streamId).incrBy(latency);
-  String globalStreamId=new StringBuilder(sourceComponent).append("/").append(streamId).toString();
-  executeCount.scope(globalStreamId).incr();
-  executeLatency.scope(globalStreamId).update(latency);
-  executeTimeNs.scope(globalStreamId).incrBy(latency);
+  executeCount.incr();
+  executeLatency.update(latency);
 }

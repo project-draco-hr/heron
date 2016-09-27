@@ -1,4 +1,4 @@
 {
-  failCount.scope(streamId).incr();
-  failLatency.scope(streamId).update(latency);
+  failCount.incr();
+  failLatency.update(latency);
 }

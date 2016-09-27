@@ -1,0 +1,13 @@
+{
+  ackCount=new MultiCountMetric();
+  processLatency=new MultiReducedMetric<>(new MeanReducer());
+  failLatency=new MultiReducedMetric<>(new MeanReducer());
+  failCount=new MultiCountMetric();
+  executeCount=new MultiCountMetric();
+  executeLatency=new MultiReducedMetric<>(new MeanReducer());
+  executeTimeNs=new MultiCountMetric();
+  emitCount=new MultiCountMetric();
+  outQueueFullCount=new CountMetric();
+  deserializationTimeNs=new MultiCountMetric();
+  serializationTimeNs=new MultiCountMetric();
+}

@@ -1,24 +1,21 @@
 {
   int maxSpoutPending=TypeUtils.getInteger(config.get(Config.TOPOLOGY_MAX_SPOUT_PENDING));
   long totalTuplesEmitted=collector.getTotalTuplesEmitted();
-  long totalDataEmittedInBytesBeforeCycle=collector.getTotalDataEmittedInBytes();
   long instanceEmitBatchTime=systemConfig.getInstanceEmitBatchTimeMs() * Constants.MILLISECONDS_TO_NANOSECONDS;
-  long instanceEmitBatchSize=systemConfig.getInstanceEmitBatchSizeBytes();
   long startOfCycle=System.nanoTime();
-  while ((ackEnabled && (maxSpoutPending > collector.numInFlight())) || !ackEnabled) {
-    long startTime=System.nanoTime();
+  long currentTime=startOfCycle;
+  while (!ackEnabled || (ackEnabled && (maxSpoutPending > collector.numInFlight()))) {
     spout.nextTuple();
-    long latency=System.nanoTime() - startTime;
+    long startTime=currentTime;
+    currentTime=System.nanoTime();
+    long latency=currentTime - startTime;
     spoutMetrics.nextTuple(latency);
     long newTotalTuplesEmitted=collector.getTotalTuplesEmitted();
     if (newTotalTuplesEmitted == totalTuplesEmitted) {
       break;
     }
     totalTuplesEmitted=newTotalTuplesEmitted;
-    if (System.nanoTime() - startOfCycle - instanceEmitBatchTime > 0) {
-      break;
-    }
-    if (collector.getTotalDataEmittedInBytes() - totalDataEmittedInBytesBeforeCycle > instanceEmitBatchSize) {
+    if (currentTime - startOfCycle - instanceEmitBatchTime > 0) {
       break;
     }
   }

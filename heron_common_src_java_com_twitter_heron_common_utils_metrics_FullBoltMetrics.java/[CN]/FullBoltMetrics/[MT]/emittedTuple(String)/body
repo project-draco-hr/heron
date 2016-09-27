@@ -1,0 +1,3 @@
+{
+  emitCount.scope(streamId).incr();
+}

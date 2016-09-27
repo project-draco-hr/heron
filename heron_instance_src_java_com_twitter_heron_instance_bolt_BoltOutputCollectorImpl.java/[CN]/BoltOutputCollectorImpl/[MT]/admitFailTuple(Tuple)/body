@@ -1,7 +1,8 @@
 {
-  if (tuple instanceof TupleImpl) {
-    TupleImpl tuplImpl=(TupleImpl)tuple;
-    if (ackEnabled) {
+  long latency=0;
+  if (ackEnabled) {
+    if (tuple instanceof TupleImpl) {
+      TupleImpl tuplImpl=(TupleImpl)tuple;
       HeronTuples.AckTuple.Builder bldr=HeronTuples.AckTuple.newBuilder();
       bldr.setAckedtuple(tuplImpl.getTupleKey());
       long tupleSizeInBytes=0;
@@ -10,9 +11,9 @@
         tupleSizeInBytes+=rt.getSerializedSize();
       }
       outputter.addFailTuple(bldr,tupleSizeInBytes);
+      latency=System.nanoTime() - tuplImpl.getCreationTime();
     }
-    long latency=System.nanoTime() - tuplImpl.getCreationTime();
-    helper.getTopologyContext().invokeHookBoltFail(tuple,latency);
-    boltMetrics.failedTuple(tuple.getSourceStreamId(),tuple.getSourceComponent(),latency);
   }
+  helper.getTopologyContext().invokeHookBoltFail(tuple,latency);
+  boltMetrics.failedTuple(tuple.getSourceStreamId(),tuple.getSourceComponent(),latency);
 }

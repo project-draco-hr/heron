@@ -1,0 +1,4 @@
+{
+  String sentence=CHOICES[rand.nextInt(CHOICES.length)];
+  collector.emit(new Values(sentence),sentence);
+}

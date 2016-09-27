@@ -1,0 +1,21 @@
+{
+  HeronTuples.HeronTupleSet.Builder toFeed=HeronTuples.HeronTupleSet.newBuilder();
+  if (set.hasControl()) {
+    toFeed.setControl(set.getControl());
+  }
+ else {
+    HeronTuples.HeronDataTupleSet.Builder builder=HeronTuples.HeronDataTupleSet.newBuilder();
+    builder.setStream(set.getData().getStream());
+    try {
+      for (      ByteString bs : set.getData().getTuplesList()) {
+        builder.addTuples(HeronTuples.HeronDataTuple.parseFrom(bs));
+      }
+    }
+ catch (    InvalidProtocolBufferException e) {
+      LOG.log(Level.SEVERE,"Failed to parse protobuf",e);
+    }
+    toFeed.setData(builder);
+  }
+  HeronTuples.HeronTupleSet s=toFeed.build();
+  inStreamQueue.offer(s);
+}

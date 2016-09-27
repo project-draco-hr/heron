@@ -1,3 +1,2 @@
 {
-  serializationTimeNs.scope(streamId).incrBy(latency);
 }

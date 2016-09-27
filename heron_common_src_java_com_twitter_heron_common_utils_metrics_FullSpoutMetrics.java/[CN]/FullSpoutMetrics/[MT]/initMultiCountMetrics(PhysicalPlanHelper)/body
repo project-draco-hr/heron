@@ -1,0 +1,10 @@
+{
+  List<TopologyAPI.OutputStream> outputs=helper.getMySpout().getOutputsList();
+  for (  TopologyAPI.OutputStream outputStream : outputs) {
+    String streamId=outputStream.getStream().getId();
+    ackCount.scope(streamId);
+    failCount.scope(streamId);
+    timeoutCount.scope(streamId);
+    emitCount.scope(streamId);
+  }
+}

@@ -1,12 +1,3 @@
 {
-  this.context=context;
-  this.stream=stream;
-  this.tupleKey=tupleKey;
-  this.roots=roots;
-  this.values=values;
-  this.creationTime=System.nanoTime();
-  Fields schema=context.getComponentOutputFields(stream.getComponentName(),stream.getId());
-  if (values.size() != schema.size()) {
-    throw new IllegalArgumentException("Tuple created with wrong number of fields. " + "Expected " + schema.size() + " fields but got "+ values.size()+ " fields");
-  }
+  this(context,stream,tupleKey,roots,values,System.nanoTime(),true);
 }

@@ -1,8 +1,6 @@
 {
-  long startOfCycle=System.nanoTime();
-  long totalDataEmittedInBytesBeforeCycle=collector.getTotalDataEmittedInBytes();
   long instanceExecuteBatchTime=systemConfig.getInstanceExecuteBatchTimeMs() * Constants.MILLISECONDS_TO_NANOSECONDS;
-  long instanceExecuteBatchSize=systemConfig.getInstanceExecuteBatchSizeBytes();
+  long startOfCycle=System.nanoTime();
   while (!inQueue.isEmpty()) {
     HeronTuples.HeronTupleSet tuples=inQueue.poll();
     TopologyContextImpl topologyContext=helper.getTopologyContext();
@@ -10,13 +8,22 @@
       throw new RuntimeException("Bolt cannot get acks/fails from other components");
     }
     TopologyAPI.StreamId stream=tuples.getData().getStream();
+    int nValues=topologyContext.getComponentOutputFields(stream.getComponentName(),stream.getId()).size();
+    long currentTime=startOfCycle;
     for (    HeronTuples.HeronDataTuple dataTuple : tuples.getData().getTuplesList()) {
-      handleDataTuple(dataTuple,topologyContext,stream);
+      List<Object> values=new ArrayList<>(nValues);
+      for (int i=0; i < nValues; i++) {
+        values.add(serializer.deserialize(dataTuple.getValues(i).toByteArray()));
+      }
+      TupleImpl t=new TupleImpl(topologyContext,stream,dataTuple.getKey(),dataTuple.getRootsList(),values,currentTime,false);
+      bolt.execute(t);
+      long startTime=currentTime;
+      currentTime=System.nanoTime();
+      long executeLatency=currentTime - startTime;
+      topologyContext.invokeHookBoltExecute(t,executeLatency);
+      boltMetrics.executeTuple(stream.getId(),stream.getComponentName(),executeLatency);
     }
-    if (System.nanoTime() - startOfCycle - instanceExecuteBatchTime > 0) {
-      break;
-    }
-    if (collector.getTotalDataEmittedInBytes() - totalDataEmittedInBytesBeforeCycle > instanceExecuteBatchSize) {
+    if (currentTime - startOfCycle - instanceExecuteBatchTime > 0) {
       break;
     }
   }

@@ -60,4 +60,6 @@
       }
     }
   }
+  HashSet<String> terminals=getTerminatedComponentSet();
+  this.isTerminatedComponent=terminals.contains(myComponent);
 }

@@ -1,12 +1,11 @@
 {
   if (isStreamMgrReadyReceiveTuples()) {
-    if (getOutstandingPackets() == 0) {
+    if (getOutstandingPackets() <= 0) {
       while (!outStreamQueue.isEmpty()) {
         HeronTuples.HeronTupleSet tupleSet=outStreamQueue.poll();
-        StreamManager.TupleMessage msg=StreamManager.TupleMessage.newBuilder().setSet(tupleSet).build();
         gatewayMetrics.updateSentPacketsCount(1);
-        gatewayMetrics.updateSentPacketsSize(msg.getSerializedSize());
-        sendMessage(msg);
+        gatewayMetrics.updateSentPacketsSize(tupleSet.getSerializedSize());
+        sendMessage(tupleSet);
       }
     }
     if (!outStreamQueue.isEmpty()) {
