@@ -1,0 +1,3 @@
+{
+  return cfg.getIntegerValue(YARN_SCHEDULER_DRIVER_MEMORY_MB,1024);
+}
