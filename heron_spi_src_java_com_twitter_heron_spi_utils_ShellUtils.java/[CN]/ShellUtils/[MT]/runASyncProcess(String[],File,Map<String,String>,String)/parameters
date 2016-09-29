@@ -1,4 +1,0 @@
-String[] command
-File workingDirectory
-Map<String,String> envs
-String logFileUuid

@@ -4,9 +4,9 @@
   this.connectionString=Context.stateManagerConnectionString(newConfig);
   this.isSchedulerService=Context.schedulerService(newConfig);
   this.tunnelProcesses=new ArrayList<>();
-  boolean isTunnelWhenNeeded=ZkContext.isTunnelNeeded(newConfig);
-  if (isTunnelWhenNeeded) {
-    Pair<String,List<Process>> tunneledResults=setupZkTunnel();
+  NetworkUtils.TunnelConfig tunnelConfig=NetworkUtils.TunnelConfig.build(config,NetworkUtils.HeronSystem.STATE_MANAGER);
+  if (tunnelConfig.isTunnelNeeded()) {
+    Pair<String,List<Process>> tunneledResults=setupZkTunnel(tunnelConfig);
     String newConnectionString=tunneledResults.first;
     if (newConnectionString.isEmpty()) {
       throw new IllegalArgumentException("Bad connectionString: " + connectionString);

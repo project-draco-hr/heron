@@ -1,4 +1,4 @@
 InetSocketAddress endpoint
-int timeout
+int timeoutMs
 int retryCount
 int retryIntervalMs

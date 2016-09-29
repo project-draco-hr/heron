@@ -1,0 +1,6 @@
+String topologyName
+TMasterCommand topologyStateControlCommand
+SchedulerStateManagerAdaptor statemgr
+TopologyAPI.TopologyState startState
+TopologyAPI.TopologyState expectedState
+NetworkUtils.TunnelConfig tunnelConfig

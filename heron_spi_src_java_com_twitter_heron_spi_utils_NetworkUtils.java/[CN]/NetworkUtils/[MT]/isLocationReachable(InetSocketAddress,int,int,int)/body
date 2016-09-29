@@ -2,7 +2,7 @@
   int retryLeft=retryCount;
   while (retryLeft > 0) {
     try (Socket s=new Socket()){
-      s.connect(endpoint,timeout);
+      s.connect(endpoint,timeoutMs);
       return true;
     }
  catch (    IOException e) {

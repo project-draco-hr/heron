@@ -1,3 +1,0 @@
-{
-  return config.getIntegerValue(TUNNEL_VERIFY_COUNT,10);
-}

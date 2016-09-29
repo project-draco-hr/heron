@@ -1,3 +1,0 @@
-{
-  return config.getBooleanValue(IS_TUNNEL_NEEDED,false);
-}

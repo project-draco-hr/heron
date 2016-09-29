@@ -1,0 +1,14 @@
+{
+  try {
+    if (proxy != null) {
+      return (HttpURLConnection)endpoint.openConnection(proxy);
+    }
+ else {
+      return (HttpURLConnection)endpoint.openConnection();
+    }
+  }
+ catch (  IOException e) {
+    LOG.log(Level.SEVERE,"Failed to connect to http endpoint " + endpoint,e);
+    return null;
+  }
+}

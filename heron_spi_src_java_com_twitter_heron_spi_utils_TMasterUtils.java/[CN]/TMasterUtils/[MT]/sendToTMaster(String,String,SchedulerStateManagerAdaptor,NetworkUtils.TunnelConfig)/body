@@ -1,0 +1,18 @@
+{
+  LOG.fine("Fetching TMaster location for topology: " + topologyName);
+  TopologyMaster.TMasterLocation location=stateManager.getTMasterLocation(topologyName);
+  if (location == null) {
+    LOG.severe("Failed to fetch TMaster Location for topology: " + topologyName);
+    return false;
+  }
+  LOG.fine("Fetched TMaster location for topology: " + topologyName);
+  String url=String.format("http://%s:%d/%s?topologyid=%s",location.getHost(),location.getControllerPort(),command,location.getTopologyId());
+  try {
+    URL endpoint=new URL(url);
+    LOG.fine("HTTP URL for TMaster: " + endpoint);
+    return sendGetRequest(endpoint,command,tunnelConfig);
+  }
+ catch (  MalformedURLException e) {
+    throw new RuntimeException("Invalid URL for tmaster endpoint: " + url,e);
+  }
+}

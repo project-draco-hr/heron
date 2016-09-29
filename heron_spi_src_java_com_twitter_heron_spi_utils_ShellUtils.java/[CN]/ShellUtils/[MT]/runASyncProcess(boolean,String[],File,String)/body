@@ -1,3 +1,0 @@
-{
-  return runASyncProcess(command,workingDirectory,new HashMap<String,String>(),logFileUuid);
-}

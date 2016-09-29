@@ -1,0 +1,3 @@
+{
+  return establishSSHTunnelIfNeeded(endpoint,tunnelConfig.getTunnelHost(),tunnelType,tunnelConfig.getTimeoutMs(),tunnelConfig.getRetryCount(),tunnelConfig.getRetryIntervalMs(),tunnelConfig.getVerifyCount());
+}

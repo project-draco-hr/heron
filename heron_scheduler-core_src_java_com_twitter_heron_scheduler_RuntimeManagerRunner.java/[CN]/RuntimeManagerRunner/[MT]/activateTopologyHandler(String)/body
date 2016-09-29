@@ -1,3 +1,4 @@
 {
-  return TMasterUtils.transitionTopologyState(topologyName,TMasterUtils.TMasterCommand.ACTIVATE,Runtime.schedulerStateManagerAdaptor(runtime),TopologyAPI.TopologyState.PAUSED,TopologyAPI.TopologyState.RUNNING);
+  NetworkUtils.TunnelConfig tunnelConfig=NetworkUtils.TunnelConfig.build(config,NetworkUtils.HeronSystem.SCHEDULER);
+  return TMasterUtils.transitionTopologyState(topologyName,TMasterUtils.TMasterCommand.ACTIVATE,Runtime.schedulerStateManagerAdaptor(runtime),TopologyAPI.TopologyState.PAUSED,TopologyAPI.TopologyState.RUNNING,tunnelConfig);
 }

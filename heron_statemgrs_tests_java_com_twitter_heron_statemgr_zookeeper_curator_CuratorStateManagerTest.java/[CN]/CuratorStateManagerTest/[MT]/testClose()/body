@@ -7,7 +7,7 @@
   tunnelProcesses.add(mockProcess1);
   tunnelProcesses.add(mockProcess2);
   Mockito.doReturn(mockClient).when(spyStateManager).getCuratorClient();
-  Mockito.doReturn(new Pair<>(TUNNEL_STRING,tunnelProcesses)).when(spyStateManager).setupZkTunnel();
+  Mockito.doReturn(new Pair<>(TUNNEL_STRING,tunnelProcesses)).when(spyStateManager).setupZkTunnel(Mockito.any(NetworkUtils.TunnelConfig.class));
   Mockito.doReturn(true).when(mockClient).blockUntilConnected(Mockito.anyInt(),Mockito.any(TimeUnit.class));
   spyStateManager.initialize(tunnelingConfig);
   spyStateManager.close();

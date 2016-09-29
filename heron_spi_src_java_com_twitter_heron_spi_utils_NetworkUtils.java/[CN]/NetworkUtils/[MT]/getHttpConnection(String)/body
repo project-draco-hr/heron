@@ -1,11 +1,9 @@
 {
   try {
-    URL url=new URL(endpoint);
-    HttpURLConnection connection=(HttpURLConnection)url.openConnection();
-    return connection;
+    return getHttpConnection(new URL(endpoint),null);
   }
- catch (  IOException e) {
-    LOG.log(Level.SEVERE,"Failed to connect to scheduler http endpoint: {0}",endpoint);
+ catch (  MalformedURLException e) {
+    LOG.log(Level.SEVERE,"Invalid URL received: " + endpoint,e);
     return null;
   }
 }

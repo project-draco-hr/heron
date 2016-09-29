@@ -1,6 +1,0 @@
-{
-  if (destHost == null || destHost.isEmpty() || "localhost".equals(destHost) || "127.0.0.1".equals(destHost)) {
-    throw new RuntimeException("Trying to open tunnel to localhost.");
-  }
-  return ShellUtils.runASyncProcess(verbose,new String[]{"ssh",String.format("-NL%d:%s:%d",tunnelPort,destHost,destPort),tunnelHost},new File("."));
-}

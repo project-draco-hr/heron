@@ -1,0 +1,7 @@
+InetSocketAddress endpoint
+String tunnelHost
+TunnelType tunnelType
+int timeoutMs
+int retryCount
+int retryIntervalMs
+int verifyCount

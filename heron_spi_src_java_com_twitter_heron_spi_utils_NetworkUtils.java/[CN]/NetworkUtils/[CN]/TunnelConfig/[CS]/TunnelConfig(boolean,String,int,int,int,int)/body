@@ -1,0 +1,8 @@
+{
+  this.isTunnelNeeded=isTunnelNeeded;
+  this.tunnelHost=tunnelHost;
+  this.timeoutMs=timeoutMs;
+  this.retryCount=retryCount;
+  this.retryIntervalMs=retryIntervalMs;
+  this.verifyCount=verifyCount;
+}

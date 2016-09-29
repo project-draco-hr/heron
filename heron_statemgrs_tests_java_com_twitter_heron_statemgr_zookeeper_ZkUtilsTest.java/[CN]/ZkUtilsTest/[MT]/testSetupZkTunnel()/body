@@ -14,12 +14,13 @@
   String connectionString=String.format("%s:%d, %s:%d,  %s:%d   ",host0,port0,host1,port1,host2,port2);
   Config config=Mockito.mock(Config.class);
   Mockito.when(config.getStringValue(ConfigKeys.get("STATEMGR_CONNECTION_STRING"))).thenReturn(connectionString);
+  NetworkUtils.TunnelConfig tunnelConfig=NetworkUtils.TunnelConfig.build(config,NetworkUtils.HeronSystem.STATE_MANAGER);
   Process process=Mockito.mock(Process.class);
   PowerMockito.spy(NetworkUtils.class);
-  PowerMockito.doReturn(new Pair<InetSocketAddress,Process>(address0,process)).when(NetworkUtils.class,"establishSSHTunnelIfNeeded",Mockito.eq(address0),Mockito.anyString(),Mockito.anyInt(),Mockito.anyInt(),Mockito.anyInt(),Mockito.anyInt(),Mockito.anyBoolean());
-  PowerMockito.doReturn(new Pair<InetSocketAddress,Process>(address1,process)).when(NetworkUtils.class,"establishSSHTunnelIfNeeded",Mockito.eq(address1),Mockito.anyString(),Mockito.anyInt(),Mockito.anyInt(),Mockito.anyInt(),Mockito.anyInt(),Mockito.anyBoolean());
-  PowerMockito.doReturn(new Pair<InetSocketAddress,Process>(tunnelAddress,process)).when(NetworkUtils.class,"establishSSHTunnelIfNeeded",Mockito.eq(address2),Mockito.anyString(),Mockito.anyInt(),Mockito.anyInt(),Mockito.anyInt(),Mockito.anyInt(),Mockito.anyBoolean());
-  Pair<String,List<Process>> ret=ZkUtils.setupZkTunnel(config);
+  PowerMockito.doReturn(new Pair<>(address0,process)).when(NetworkUtils.class,"establishSSHTunnelIfNeeded",eq(address0),anyString(),any(NetworkUtils.TunnelType.class),anyInt(),anyInt(),anyInt(),anyInt());
+  PowerMockito.doReturn(new Pair<>(address1,process)).when(NetworkUtils.class,"establishSSHTunnelIfNeeded",eq(address1),anyString(),any(NetworkUtils.TunnelType.class),anyInt(),anyInt(),anyInt(),anyInt());
+  PowerMockito.doReturn(new Pair<>(tunnelAddress,process)).when(NetworkUtils.class,"establishSSHTunnelIfNeeded",eq(address2),anyString(),any(NetworkUtils.TunnelType.class),anyInt(),anyInt(),anyInt(),anyInt());
+  Pair<String,List<Process>> ret=ZkUtils.setupZkTunnel(config,tunnelConfig);
   String expectedConnectionString=String.format("%s,%s,%s",address0.toString(),address1.toString(),tunnelAddress.toString());
   Assert.assertEquals(expectedConnectionString,ret.first);
   Assert.assertEquals(3,ret.second.size());

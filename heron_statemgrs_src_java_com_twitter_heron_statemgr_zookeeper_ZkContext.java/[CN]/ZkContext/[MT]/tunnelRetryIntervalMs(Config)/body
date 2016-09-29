@@ -1,3 +1,0 @@
-{
-  return config.getIntegerValue(TUNNEL_RETRY_INTERVAL_MS,1000);
-}

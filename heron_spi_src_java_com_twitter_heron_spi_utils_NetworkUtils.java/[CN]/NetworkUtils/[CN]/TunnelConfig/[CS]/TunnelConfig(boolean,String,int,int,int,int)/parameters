@@ -1,0 +1,6 @@
+boolean isTunnelNeeded
+String tunnelHost
+int timeoutMs
+int retryCount
+int retryIntervalMs
+int verifyCount

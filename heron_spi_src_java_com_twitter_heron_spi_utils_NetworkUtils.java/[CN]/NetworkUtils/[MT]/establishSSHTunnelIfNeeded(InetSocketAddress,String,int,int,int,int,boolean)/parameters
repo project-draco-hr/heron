@@ -1,7 +1,0 @@
-InetSocketAddress endpoint
-String tunnelHost
-int timeout
-int retryCount
-int retryIntervalMs
-int verifyCount
-boolean isVerbose

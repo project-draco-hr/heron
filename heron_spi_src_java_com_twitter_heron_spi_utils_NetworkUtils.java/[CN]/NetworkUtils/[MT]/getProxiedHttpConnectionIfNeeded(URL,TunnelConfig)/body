@@ -1,0 +1,14 @@
+{
+  int endpointPort=endpoint.getPort() > 0 ? endpoint.getPort() : endpoint.getDefaultPort();
+  if (tunnelConfig != null && tunnelConfig.isTunnelNeeded()) {
+    InetSocketAddress socketEndpoint=new InetSocketAddress(endpoint.getHost(),endpointPort);
+    Pair<InetSocketAddress,Process> tunnelInfo=establishSSHTunnelIfNeeded(socketEndpoint,tunnelConfig,TunnelType.SOCKS_PROXY);
+    InetSocketAddress proxyEndpoint=tunnelInfo.first;
+    if (socketEndpoint != proxyEndpoint) {
+      Proxy proxy=new Proxy(Proxy.Type.SOCKS,new InetSocketAddress(proxyEndpoint.getHostName(),proxyEndpoint.getPort()));
+      LOG.fine(String.format("setting up proxy. endpoint=%s proxy=%s",socketEndpoint,proxy));
+      return getHttpConnection(endpoint,proxy);
+    }
+  }
+  return getHttpConnection(endpoint,null);
+}

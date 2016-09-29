@@ -1,0 +1,3 @@
+{
+  return new TunnelConfig(config.getBooleanValue(getConfigKey(IS_TUNNEL_NEEDED,heronSystem),false),config.getStringValue(getConfigKey(TUNNEL_HOST,heronSystem),"no.tunnel.host.specified"),config.getIntegerValue(getConfigKey(TUNNEL_CONNECTION_TIMEOUT_MS,heronSystem),1000),config.getIntegerValue(getConfigKey(TUNNEL_CONNECTION_RETRY_COUNT,heronSystem),2),config.getIntegerValue(getConfigKey(TUNNEL_RETRY_INTERVAL_MS,heronSystem),1000),config.getIntegerValue(getConfigKey(TUNNEL_VERIFY_COUNT,heronSystem),10));
+}

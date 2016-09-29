@@ -1,2 +1,2 @@
 def test_load_state_manager_locations_aurora(self):
-    self.assertEquals([{'hostport': 'LOCALMODE', 'name': 'local', 'rootpath': '/vagrant/.herondata/repository/state/aurora', 'tunnelhost': 'localhost', 'type': 'file', }], self.load_locations('aurora'))
+    self.assertEquals([{'hostport': 'LOCALMODE', 'name': 'local', 'rootpath': '/vagrant/.herondata/repository/state/aurora', 'tunnelhost': 'my.tunnel.host', 'type': 'file', }], self.load_locations('aurora'))
