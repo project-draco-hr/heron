@@ -9,6 +9,6 @@
   topologyConfig.setContainerRamRequested(containerRam);
   TopologyAPI.Topology topology=getTopology(spoutParallelism,boltParallelism,topologyConfig);
   PackingPlan packingPlan=getResourceCompliantRRPackingPlan(topology);
-  Assert.assertEquals(packingPlan.getContainers().size(),4);
+  Assert.assertEquals(packingPlan.getContainers().size(),7);
   Assert.assertEquals(totalInstances,packingPlan.getInstanceCount());
 }

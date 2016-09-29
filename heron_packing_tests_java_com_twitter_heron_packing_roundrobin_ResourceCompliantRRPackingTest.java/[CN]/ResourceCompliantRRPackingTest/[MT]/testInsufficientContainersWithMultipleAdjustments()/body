@@ -5,7 +5,7 @@
   Integer totalInstances=spoutParallelism + boltParallelism;
   com.twitter.heron.api.Config topologyConfig=new com.twitter.heron.api.Config();
   topologyConfig.put(com.twitter.heron.api.Config.TOPOLOGY_STMGRS,numContainers);
-  long containerRam=2L * Constants.GB;
+  long containerRam=3L * Constants.GB;
   long boltRam=1L * Constants.GB;
   long spoutRam=2L * Constants.GB;
   topologyConfig.setContainerRamRequested(containerRam);

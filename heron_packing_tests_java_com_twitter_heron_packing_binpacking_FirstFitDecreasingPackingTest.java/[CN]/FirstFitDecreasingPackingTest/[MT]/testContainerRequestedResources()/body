@@ -12,9 +12,9 @@
   AssertPacking.assertNumInstances(packingPlanExplicitResourcesConfig.getContainers(),BOLT_NAME,3);
   AssertPacking.assertNumInstances(packingPlanExplicitResourcesConfig.getContainers(),SPOUT_NAME,4);
   for (  PackingPlan.ContainerPlan containerPlan : packingPlanExplicitResourcesConfig.getContainers()) {
-    Assert.assertEquals(Math.round(totalInstances * instanceDefaultResources.getCpu() + (DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceDefaultResources.getCpu())),(long)containerPlan.getRequiredResource().getCpu());
-    Assert.assertEquals(totalInstances * instanceDefaultResources.getRam() + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceDefaultResources.getRam()),containerPlan.getRequiredResource().getRam());
-    Assert.assertEquals(totalInstances * instanceDefaultResources.getDisk() + (long)(DEFAULT_CONTAINER_PADDING / 100.0 * totalInstances * instanceDefaultResources.getDisk()),containerPlan.getRequiredResource().getDisk());
+    Assert.assertEquals(Math.round(PackingUtils.increaseBy(totalInstances * instanceDefaultResources.getCpu(),DEFAULT_CONTAINER_PADDING)),(long)containerPlan.getRequiredResource().getCpu());
+    Assert.assertEquals(PackingUtils.increaseBy(totalInstances * instanceDefaultResources.getRam(),DEFAULT_CONTAINER_PADDING),containerPlan.getRequiredResource().getRam());
+    Assert.assertEquals(PackingUtils.increaseBy(totalInstances * instanceDefaultResources.getDisk(),DEFAULT_CONTAINER_PADDING),containerPlan.getRequiredResource().getDisk());
     Set<Resource> resources=new HashSet<>();
     for (    PackingPlan.InstancePlan instancePlan : containerPlan.getInstances()) {
       resources.add(instancePlan.getResource());

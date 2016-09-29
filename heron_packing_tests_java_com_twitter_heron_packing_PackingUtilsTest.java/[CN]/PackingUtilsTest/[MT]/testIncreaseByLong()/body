@@ -1,0 +1,6 @@
+{
+  long value=1024;
+  int padding=1;
+  long expectedResult=1034;
+  Assert.assertEquals(expectedResult,PackingUtils.increaseBy(value,padding));
+}

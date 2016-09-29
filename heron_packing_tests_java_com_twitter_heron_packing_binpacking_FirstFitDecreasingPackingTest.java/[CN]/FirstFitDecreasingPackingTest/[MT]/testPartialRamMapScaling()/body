@@ -9,8 +9,7 @@
   componentChanges.put(BOLT_NAME,numScalingInstances);
   int numContainersBeforeRepack=2;
   PackingPlan newPackingPlan=doScalingTest(topologyExplicitRamMap,componentChanges,boltRam,boltParallelism,instanceDefaultResources.getRam(),spoutParallelism,numContainersBeforeRepack,totalInstances);
-  Assert.assertEquals(3,newPackingPlan.getContainers().size());
+  Assert.assertEquals(4,newPackingPlan.getContainers().size());
   Assert.assertEquals((Integer)(totalInstances + numScalingInstances),newPackingPlan.getInstanceCount());
   AssertPacking.assertContainers(newPackingPlan.getContainers(),BOLT_NAME,SPOUT_NAME,boltRam,instanceDefaultResources.getRam(),null);
-  AssertPacking.assertContainerRam(newPackingPlan.getContainers(),maxContainerRam);
 }

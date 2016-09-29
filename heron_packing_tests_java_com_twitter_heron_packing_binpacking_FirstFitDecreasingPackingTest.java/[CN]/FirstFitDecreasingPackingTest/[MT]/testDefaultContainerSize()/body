@@ -1,8 +1,10 @@
 {
+  int defaultNumInstancesperContainer=4;
   PackingPlan packingPlan=getFirstFitDecreasingPackingPlan(topology);
   Assert.assertEquals(2,packingPlan.getContainers().size());
   Assert.assertEquals(totalInstances,packingPlan.getInstanceCount());
-  AssertPacking.assertContainerRam(packingPlan.getContainers(),4 * instanceDefaultResources.getRam());
+  long defaultRam=PackingUtils.increaseBy(defaultNumInstancesperContainer * instanceDefaultResources.getRam(),DEFAULT_CONTAINER_PADDING);
+  AssertPacking.assertContainerRam(packingPlan.getContainers(),defaultRam);
   AssertPacking.assertNumInstances(packingPlan.getContainers(),BOLT_NAME,3);
   AssertPacking.assertNumInstances(packingPlan.getContainers(),SPOUT_NAME,4);
 }

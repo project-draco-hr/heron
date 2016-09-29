@@ -1,0 +1,26 @@
+{
+  int paddingPercentage=50;
+  topologyConfig.setContainerPaddingPercentage(paddingPercentage);
+  long boltRam=4L * Constants.GB;
+  long maxContainerRam=10L * Constants.GB;
+  topologyConfig.setComponentRam(BOLT_NAME,boltRam);
+  topologyConfig.setContainerMaxRamHint(maxContainerRam);
+  TopologyAPI.Topology topologyExplicitRamMap=getTopology(spoutParallelism,boltParallelism,topologyConfig);
+  int numScalingInstances=3;
+  Map<String,Integer> componentChanges=new HashMap<>();
+  componentChanges.put(BOLT_NAME,numScalingInstances);
+  int numContainersBeforeRepack=3;
+  PackingPlan newPackingPlan=doScalingTest(topologyExplicitRamMap,componentChanges,boltRam,boltParallelism,instanceDefaultResources.getRam(),spoutParallelism,numContainersBeforeRepack,totalInstances);
+  Assert.assertEquals(6,newPackingPlan.getContainers().size());
+  Assert.assertEquals((Integer)(totalInstances + numScalingInstances),newPackingPlan.getInstanceCount());
+  AssertPacking.assertContainers(newPackingPlan.getContainers(),BOLT_NAME,SPOUT_NAME,boltRam,instanceDefaultResources.getRam(),null);
+  for (  PackingPlan.ContainerPlan containerPlan : newPackingPlan.getContainers()) {
+    if (containerPlan.getInstances().size() == 1) {
+      Assert.assertEquals(PackingUtils.increaseBy(boltRam,paddingPercentage),containerPlan.getRequiredResource().getRam());
+    }
+    if (containerPlan.getInstances().size() == 3) {
+      long resourceRam=boltRam + 2 * instanceDefaultResources.getRam();
+      Assert.assertEquals(PackingUtils.increaseBy(resourceRam,paddingPercentage),containerPlan.getRequiredResource().getRam());
+    }
+  }
+}

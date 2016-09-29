@@ -1,4 +1,5 @@
 {
   this.capacity=capacity;
   this.instances=new HashSet<PackingPlan.InstancePlan>();
+  this.paddingPercentage=paddingPercentage;
 }

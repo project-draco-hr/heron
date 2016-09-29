@@ -11,5 +11,4 @@
   Assert.assertEquals((Integer)(totalInstances + spoutScalingDown + boltScalingUp),newPackingPlan.getInstanceCount());
   AssertPacking.assertNumInstances(newPackingPlan.getContainers(),BOLT_NAME,9);
   AssertPacking.assertNumInstances(newPackingPlan.getContainers(),SPOUT_NAME,0);
-  AssertPacking.assertContainerRam(newPackingPlan.getContainers(),defaultNumInstancesperContainer * instanceDefaultResources.getRam());
 }

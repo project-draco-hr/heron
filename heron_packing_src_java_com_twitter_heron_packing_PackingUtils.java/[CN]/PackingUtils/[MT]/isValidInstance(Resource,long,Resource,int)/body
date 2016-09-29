@@ -1,0 +1,22 @@
+{
+  if (instanceResources.getRam() < minInstanceRam) {
+    LOG.severe(String.format("Instance requires %d MB ram which is less than the minimum %d MB ram per instance",instanceResources.getRam(),minInstanceRam / Constants.MB));
+    return false;
+  }
+  long instanceRam=PackingUtils.increaseBy(instanceResources.getRam(),paddingPercentage);
+  if (instanceRam > maxContainerResources.getRam()) {
+    LOG.severe(String.format("This instance requires containers of at least %d MB ram. The current max container" + "size is %d MB",instanceRam,maxContainerResources.getRam()));
+    return false;
+  }
+  double instanceCpu=Math.round(PackingUtils.increaseBy(instanceResources.getCpu(),paddingPercentage));
+  if (instanceCpu > maxContainerResources.getCpu()) {
+    LOG.severe(String.format("This instance requires containers with at least %s cpu cores. The current max container" + "size is %s cores",instanceCpu > maxContainerResources.getCpu(),maxContainerResources.getCpu()));
+    return false;
+  }
+  long instanceDisk=PackingUtils.increaseBy(instanceResources.getDisk(),paddingPercentage);
+  if (instanceDisk > maxContainerResources.getDisk()) {
+    LOG.severe(String.format("This instance requires containers of at least %d MB disk. The current max container" + "size is %d MB",instanceDisk,maxContainerResources.getDisk()));
+    return false;
+  }
+  return true;
+}

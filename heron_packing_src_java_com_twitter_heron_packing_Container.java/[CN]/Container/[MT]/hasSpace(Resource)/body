@@ -1,4 +1,7 @@
 {
   Resource usedResources=this.getTotalUsedResources();
-  return usedResources.getRam() + resource.getRam() <= this.capacity.getRam() && usedResources.getCpu() + resource.getCpu() <= this.capacity.getCpu() && usedResources.getDisk() + resource.getDisk() <= this.capacity.getDisk();
+  long newRam=usedResources.getRam() + resource.getRam();
+  double newCpu=usedResources.getCpu() + resource.getCpu();
+  long newDisk=usedResources.getDisk() + resource.getDisk();
+  return PackingUtils.increaseBy(newRam,paddingPercentage) <= this.capacity.getRam() && Math.round(PackingUtils.increaseBy(newCpu,paddingPercentage)) <= this.capacity.getCpu() && PackingUtils.increaseBy(newDisk,paddingPercentage) <= this.capacity.getDisk();
 }

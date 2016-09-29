@@ -1,3 +1,4 @@
 Resource instanceResources
 long minInstanceRam
 Resource maxContainerResources
+int paddingPercentage

@@ -1,6 +1,9 @@
 {
   List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
   this.defaultInstanceResources=new Resource(Context.instanceCpu(config),Context.instanceRam(config),Context.instanceDisk(config));
-  this.maxContainerResources=new Resource(TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_MAX_CPU_HINT,this.defaultInstanceResources.getCpu() * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER),TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_MAX_RAM_HINT,this.defaultInstanceResources.getRam() * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER),TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_MAX_DISK_HINT,this.defaultInstanceResources.getDisk() * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER));
   this.paddingPercentage=TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_PADDING_PERCENTAGE,DEFAULT_CONTAINER_PADDING_PERCENTAGE);
+  double defaultCpu=this.defaultInstanceResources.getCpu() * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER;
+  long defaultRam=this.defaultInstanceResources.getRam() * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER;
+  long defaultDisk=this.defaultInstanceResources.getDisk() * DEFAULT_NUMBER_INSTANCES_PER_CONTAINER;
+  this.maxContainerResources=new Resource(TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_MAX_CPU_HINT,(double)Math.round(PackingUtils.increaseBy(defaultCpu,paddingPercentage))),TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_MAX_RAM_HINT,PackingUtils.increaseBy(defaultRam,paddingPercentage)),TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_CONTAINER_MAX_DISK_HINT,PackingUtils.increaseBy(defaultDisk,paddingPercentage)));
 }

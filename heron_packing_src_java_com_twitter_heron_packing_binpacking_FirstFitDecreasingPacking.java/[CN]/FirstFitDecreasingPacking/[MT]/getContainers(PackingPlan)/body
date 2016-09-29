@@ -1,8 +1,9 @@
 {
   ArrayList<Container> containers=new ArrayList<>();
   PackingPlan.ContainerPlan[] currentContainers=PackingUtils.sortOnContainerId(currentPackingPlan.getContainers());
+  Resource capacity=currentPackingPlan.getMaxContainerResources();
   for (int i=0; i < currentContainers.length; i++) {
-    int containerId=allocateNewContainer(containers);
+    int containerId=allocateNewContainer(containers,capacity);
     for (    PackingPlan.InstancePlan instancePlan : currentContainers[i].getInstances()) {
       containers.get(containerId - 1).add(instancePlan);
     }

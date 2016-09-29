@@ -6,5 +6,6 @@
   AssertPacking.assertNumInstances(packingPlan.getContainers(),BOLT_NAME,boltParallelism);
   AssertPacking.assertNumInstances(packingPlan.getContainers(),SPOUT_NAME,spoutParallelism);
   PackingPlan newPackingPlan=getFirstFitDecreasingPackingPlanRepack(topology,packingPlan,componentChanges);
+  AssertPacking.assertContainerRam(newPackingPlan.getContainers(),packingPlan.getMaxContainerResources().getRam());
   return newPackingPlan;
 }
