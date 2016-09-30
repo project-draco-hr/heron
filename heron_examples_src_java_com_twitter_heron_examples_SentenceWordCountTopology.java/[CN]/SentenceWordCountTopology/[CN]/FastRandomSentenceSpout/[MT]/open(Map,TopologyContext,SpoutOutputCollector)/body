@@ -1,0 +1,12 @@
+{
+  RandomString randomString=new RandomString(WORD_LENGTH);
+  for (int i=0; i < ARRAY_LENGTH; i++) {
+    StringBuilder sb=new StringBuilder(randomString.nextString());
+    for (int j=1; j < SENTENCE_LENGTH; j++) {
+      sb.append(" ");
+      sb.append(randomString.nextString());
+    }
+    sentences[i]=sb.toString();
+  }
+  collector=spoutOutputCollector;
+}
