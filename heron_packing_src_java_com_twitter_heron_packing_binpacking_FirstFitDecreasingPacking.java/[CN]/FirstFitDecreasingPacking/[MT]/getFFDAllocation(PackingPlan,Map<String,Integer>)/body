@@ -1,6 +1,6 @@
 {
-  Map<String,Integer> componentsToScaleDown=getComponentsToScaleDown(componentChanges);
-  Map<String,Integer> componentsToScaleUp=getComponentsToScaleUp(componentChanges);
+  Map<String,Integer> componentsToScaleDown=PackingUtils.getComponentsToScaleDown(componentChanges);
+  Map<String,Integer> componentsToScaleUp=PackingUtils.getComponentsToScaleUp(componentChanges);
   ArrayList<Container> containers=getContainers(currentPackingPlan);
   Map<Integer,List<InstanceId>> allocation=getAllocation(currentPackingPlan);
   int maxInstanceIndex=0;

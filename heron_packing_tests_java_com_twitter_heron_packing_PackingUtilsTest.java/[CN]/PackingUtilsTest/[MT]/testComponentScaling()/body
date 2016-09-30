@@ -1,0 +1,13 @@
+{
+  Map<String,Integer> componentChanges=new HashMap<>();
+  componentChanges.put("spout",-2);
+  componentChanges.put("bolt1",2);
+  componentChanges.put("bolt2",-1);
+  Map<String,Integer> componentToScaleUp=PackingUtils.getComponentsToScaleUp(componentChanges);
+  Assert.assertEquals(1,componentToScaleUp.size());
+  Assert.assertEquals(2,(int)componentToScaleUp.get("bolt1"));
+  Map<String,Integer> componentToScaleDown=PackingUtils.getComponentsToScaleDown(componentChanges);
+  Assert.assertEquals(2,componentToScaleDown.size());
+  Assert.assertEquals(-2,(int)componentToScaleDown.get("spout"));
+  Assert.assertEquals(-1,(int)componentToScaleDown.get("bolt2"));
+}

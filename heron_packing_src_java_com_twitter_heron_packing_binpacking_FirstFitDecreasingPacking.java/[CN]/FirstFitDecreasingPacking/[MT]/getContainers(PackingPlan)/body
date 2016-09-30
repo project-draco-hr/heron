@@ -3,7 +3,7 @@
   PackingPlan.ContainerPlan[] currentContainers=PackingUtils.sortOnContainerId(currentPackingPlan.getContainers());
   Resource capacity=currentPackingPlan.getMaxContainerResources();
   for (int i=0; i < currentContainers.length; i++) {
-    int containerId=allocateNewContainer(containers,capacity);
+    int containerId=PackingUtils.allocateNewContainer(containers,capacity,this.paddingPercentage);
     for (    PackingPlan.InstancePlan instancePlan : currentContainers[i].getInstances()) {
       containers.get(containerId - 1).add(instancePlan);
     }

@@ -8,7 +8,7 @@
     }
   }
   if (!placed) {
-    containerId=allocateNewContainer(containers);
+    containerId=PackingUtils.allocateNewContainer(containers,maxContainerResources,this.paddingPercentage);
     containers.get(containerId - 1).add(instancePlan);
   }
   return containerId;

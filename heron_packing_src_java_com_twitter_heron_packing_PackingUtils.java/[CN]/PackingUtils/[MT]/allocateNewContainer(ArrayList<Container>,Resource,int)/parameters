@@ -1,2 +1,3 @@
 ArrayList<Container> containers
 Resource capacity
+int paddingPercentage

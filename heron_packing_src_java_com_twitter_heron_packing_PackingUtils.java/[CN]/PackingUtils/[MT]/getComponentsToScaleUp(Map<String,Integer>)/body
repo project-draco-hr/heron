@@ -1,0 +1,10 @@
+{
+  Map<String,Integer> componentsToScaleUp=new HashMap<String,Integer>();
+  for (  String component : componentChanges.keySet()) {
+    int parallelismChange=componentChanges.get(component);
+    if (parallelismChange > 0) {
+      componentsToScaleUp.put(component,parallelismChange);
+    }
+  }
+  return componentsToScaleUp;
+}

@@ -1,9 +1,0 @@
-{
-  Map<String,Integer> componentsToScaleDown=new HashMap<String,Integer>();
-  for (  Map.Entry<String,Integer> entry : componentChanges.entrySet()) {
-    if (entry.getValue() < 0) {
-      componentsToScaleDown.put(entry.getKey(),entry.getValue());
-    }
-  }
-  return componentsToScaleDown;
-}
