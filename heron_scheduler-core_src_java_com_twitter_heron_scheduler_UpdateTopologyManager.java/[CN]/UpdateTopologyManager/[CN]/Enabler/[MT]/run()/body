@@ -1,0 +1,23 @@
+{
+  PhysicalPlans.PhysicalPlan physicalPlan=stateManager.getPhysicalPlan(topologyName);
+  if (physicalPlan != null) {
+    logInfo("Received packing plan for topology %s. " + "Reactivating topology after scaling event",topologyName);
+    NetworkUtils.TunnelConfig tunnelConfig=NetworkUtils.TunnelConfig.build(config,NetworkUtils.HeronSystem.SCHEDULER);
+    boolean reactivated=TMasterUtils.transitionTopologyState(topologyName,TMasterUtils.TMasterCommand.ACTIVATE,stateManager,TopologyAPI.TopologyState.PAUSED,TopologyAPI.TopologyState.RUNNING,tunnelConfig);
+    cancel();
+    if (removableContainerCount < 1) {
+      assertTrue(reactivated,"Topology reactivation failed for topology %s after topology update",topologyName);
+    }
+ else {
+      assertTrue(reactivated,"Topology reactivation failed for topology %s after topology " + "update but before releasing %d no longer used containers",topologyName,removableContainerCount);
+    }
+    return;
+  }
+ else {
+    logInfo("Received null packing plan for topology %s.",topologyName);
+  }
+  if (System.currentTimeMillis() > this.timeoutTime) {
+    LOG.warning(String.format("New packing plan not received within configured timeout for " + "topology %s. Not reactivating",topologyName));
+    cancel();
+  }
+}

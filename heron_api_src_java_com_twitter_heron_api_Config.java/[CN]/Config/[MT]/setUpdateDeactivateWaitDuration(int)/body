@@ -1,0 +1,3 @@
+{
+  put(Config.TOPOLOGY_UPDATE_DEACTIVATE_WAIT_SECS,Integer.toString(seconds));
+}

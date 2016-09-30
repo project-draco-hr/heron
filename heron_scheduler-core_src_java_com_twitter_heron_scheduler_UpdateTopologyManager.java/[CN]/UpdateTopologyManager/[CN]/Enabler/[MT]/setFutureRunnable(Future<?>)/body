@@ -1,0 +1,6 @@
+{
+  this.futureRunnable=futureRunnable;
+  if (this.cancelled) {
+    cancel();
+  }
+}

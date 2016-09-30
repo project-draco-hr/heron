@@ -1,0 +1,8 @@
+{
+  this.config=config;
+  this.runtime=runtime;
+  this.scalableScheduler=scalableScheduler;
+  this.deserializer=new PackingPlanProtoDeserializer();
+  this.reactivateExecutorService=new ScheduledThreadPoolExecutor(1);
+  this.reactivateExecutorService.setMaximumPoolSize(1);
+}

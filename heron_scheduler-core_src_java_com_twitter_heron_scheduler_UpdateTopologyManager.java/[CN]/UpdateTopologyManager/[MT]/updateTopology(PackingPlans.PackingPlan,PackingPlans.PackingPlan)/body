@@ -9,14 +9,22 @@
   String message=String.format("Topology change requires %s new containers and removing %s " + "existing containers, but the scheduler does not support scaling, aborting. " + "Existing packing plan: %s, proposed packing plan: %s",newContainerCount,removableContainerCount,existingPackingPlan,proposedPackingPlan);
   assertTrue(newContainerCount + removableContainerCount == 0 || scalableScheduler.isPresent(),message);
   SchedulerStateManagerAdaptor stateManager=Runtime.schedulerStateManagerAdaptor(runtime);
+  TopologyAPI.Topology topology=stateManager.getTopology(topologyName);
+  boolean initiallyRunning=topology.getState() == TopologyAPI.TopologyState.RUNNING;
   TopologyAPI.Topology updatedTopology=getUpdatedTopology(topologyName,proposedPackingPlan,stateManager);
-  if (newContainerCount > 0) {
+  if (initiallyRunning) {
+    deactivateTopology(stateManager,updatedTopology);
+  }
+  if (newContainerCount > 0 && scalableScheduler.isPresent()) {
     scalableScheduler.get().addContainers(containerDelta.getContainersToAdd());
   }
   logFine("Update new Topology: %s",stateManager.updateTopology(updatedTopology,topologyName));
   logFine("Update new PackingPlan: %s",stateManager.updatePackingPlan(proposedProtoPackingPlan,topologyName));
   logFine("Deleted Physical Plan: %s",stateManager.deletePhysicalPlan(topologyName));
-  if (removableContainerCount > 0) {
+  if (initiallyRunning) {
+    reactivateTopology(stateManager,updatedTopology,removableContainerCount);
+  }
+  if (removableContainerCount > 0 && scalableScheduler.isPresent()) {
     scalableScheduler.get().removeContainers(containerDelta.getContainersToRemove());
   }
 }

@@ -1,0 +1,7 @@
+{
+  this.cancelled=true;
+  if (this.futureRunnable != null && !this.futureRunnable.isCancelled()) {
+    logInfo("Cancelling Topology reactivation task for topology %s",topologyName);
+    this.futureRunnable.cancel(true);
+  }
+}

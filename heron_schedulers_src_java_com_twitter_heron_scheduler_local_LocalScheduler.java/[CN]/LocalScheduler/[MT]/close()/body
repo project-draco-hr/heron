@@ -1,4 +1,7 @@
 {
   monitorService.shutdownNow();
   processToContainer.clear();
+  if (updateTopologyManager != null) {
+    updateTopologyManager.close();
+  }
 }

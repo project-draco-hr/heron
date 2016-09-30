@@ -1,0 +1,6 @@
+{
+  this.stateManager=stateManager;
+  this.removableContainerCount=removableContainerCount;
+  this.topologyName=topology.getName();
+  this.timeoutTime=System.currentTimeMillis() + timeoutSeconds * 1000;
+}

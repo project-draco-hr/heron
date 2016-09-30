@@ -1,5 +1,6 @@
 {
   LocalScheduler localScheduler=new LocalScheduler();
+  localScheduler.initialize(Mockito.mock(Config.class),Mockito.mock(Config.class));
   ExecutorService monitorService=localScheduler.getMonitorService();
   Assert.assertFalse(monitorService.isShutdown());
   Assert.assertEquals(0,localScheduler.getProcessToContainer().size());

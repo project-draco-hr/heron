@@ -5,7 +5,7 @@
   Map<String,Integer> spouts=new HashMap<>();
   spouts.put("spout3",3);
   spouts.put("spout5",5);
-  TopologyAPI.Topology topology=TopologyTests.createTopology("test",new com.twitter.heron.api.Config(),spouts,bolts);
+  TopologyAPI.Topology topology=TopologyTests.createTopology(TOPOLOGY_NAME,new com.twitter.heron.api.Config(),spouts,bolts);
   assertParallelism(topology,spouts,bolts);
   Map<String,Integer> boltUpdates=new HashMap<>();
   boltUpdates.put("bolt1",3);

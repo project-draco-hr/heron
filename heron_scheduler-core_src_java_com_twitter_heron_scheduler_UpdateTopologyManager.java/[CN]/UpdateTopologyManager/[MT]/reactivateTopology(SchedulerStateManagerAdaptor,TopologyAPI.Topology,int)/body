@@ -1,0 +1,18 @@
+{
+  List<TopologyAPI.Config.KeyValue> topologyConfig=topology.getTopologyConfig().getKvsList();
+  long waitSeconds=TopologyUtils.getConfigWithDefault(topologyConfig,TOPOLOGY_UPDATE_REACTIVATE_WAIT_SECS,10 * 60L);
+  long delaySeconds=10;
+  logInfo("Waiting for packing plan to be set before re-activating topology %s. " + "Will wait up to %s seconds for packing plan to be reset",topology.getName(),waitSeconds);
+  Enabler enabler=new Enabler(stateManager,topology,waitSeconds,removableContainerCount);
+  Future<?> future=this.reactivateExecutorService.scheduleWithFixedDelay(enabler,0,delaySeconds,TimeUnit.SECONDS);
+  enabler.setFutureRunnable(future);
+  try {
+    future.get(waitSeconds,TimeUnit.SECONDS);
+  }
+ catch (  CancellationException e) {
+    LOG.fine("Task to re-enable was cancelled.");
+  }
+catch (  TimeoutException e) {
+    throw new ExecutionException("Timeout waiting for topology to be enabled.",e);
+  }
+}

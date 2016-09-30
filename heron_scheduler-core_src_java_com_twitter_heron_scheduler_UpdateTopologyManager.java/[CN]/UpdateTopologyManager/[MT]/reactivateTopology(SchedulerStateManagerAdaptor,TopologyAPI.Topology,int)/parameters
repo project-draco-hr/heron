@@ -1,0 +1,3 @@
+SchedulerStateManagerAdaptor stateManager
+TopologyAPI.Topology topology
+int removableContainerCount
